@@ -20,12 +20,9 @@ func set_best_card_count(new_best_card_count: int) -> void:
 func set_enemy_name(new_enemy_name: String) -> void:
 	enemy_name = new_enemy_name
 	
-func is_mobile() -> bool:
-	return OS.has_feature("web_android") or OS.has_feature("web_ios")
-	
-func is_web() -> bool:
-	return OS.has_feature("web")
-	
-func _ready():
-	print(is_mobile())
-	print(is_web())
+func is_mobile_browser() -> bool:
+	if OS.has_feature("HTML5"):
+		return JavaScriptBridge.eval("""
+			(() => /iphone|ipad|android|mobile/.test(navigator.userAgent.toLowerCase()))()
+		""", true)
+	return OS.get_name() in ["Android", "iOS"]

@@ -23,3 +23,5 @@ res://Scripts/Shaders/WhiteBlink.gdshader
 res://Scripts/Scene.gd
 res://Scripts/RestartButton.gd
 res://Scripts/Health.gd
+res://Scripts/LastCardsPlayedContainer.gd
+res://Scripts/DebugText.gd

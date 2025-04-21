@@ -1,4 +1,5 @@
 extends Node
+class_name Enemy
 
 @export var enemy_name: String = ""
 @onready var background = get_node("/root/Background")

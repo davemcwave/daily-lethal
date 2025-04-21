@@ -1,3 +1,4 @@
+Panel
 TextureButton
 CanvasLayer
 ColorRect
@@ -11,5 +12,3 @@ ScrollContainer
 Control
 CollisionShape2D
 Area2D
-Panel
-GridContainer

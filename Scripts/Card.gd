@@ -16,6 +16,7 @@ var grabbed: bool = false
 @onready var energy = scene.get_node("Energy")
 @onready var play_text = scene.get_node("PlayText")
 @onready var background = get_node("/root/Background")
+@onready var last_cards_played_container: GridContainer = scene.get_node("LastCardsPlayedContainer")
 var grab_position = Vector2.ZERO
 
 func _ready():
@@ -40,9 +41,9 @@ func grab() -> void:
 	grabbed = true
 	grab_position = position
 	
-	if background.is_web():
+	if not background.is_mobile_browser():
 		card_preview.hide()
-	elif background.is_mobile():
+	elif background.is_mobile_browser():
 		card_preview.show()
 	
 	if energy.has_enough_energy(energy_cost):
@@ -62,11 +63,15 @@ func drop() -> void:
 		#if get_parent() is Hand:
 			#get_parent().reset_view()
 
+func get_background_color() -> Color:
+	return $IconPanel.get_theme_stylebox("panel").bg_color
+	
 func play():
 	if energy.has_enough_energy(energy_cost):
 		energy.use_energy(energy_cost)
 		card_effect.apply()
 		scene.increment_card_count()
+		last_cards_played_container.add_card(self)
 		queue_free()
 	else:
 		set_position(grab_position)
@@ -79,14 +84,17 @@ func _process(delta):
 
 func get_energy_cost() -> int:
 	return energy_cost
+
+func get_icon_texture() -> Texture2D:
+	return $IconPanel/Icon.get_texture()
 	
 func _on_mouse_entered():
-	if background.is_web():
+	if not background.is_mobile_browser():
 		card_preview.show()
 		card_preview.set_title(card_name)
 		card_preview.set_description(card_description)
-		card_preview.set_icon_texture($IconPanel/Icon.get_texture())
-
+		card_preview.set_icon_texture(get_icon_texture())
 
 func _on_mouse_exited():
-	card_preview.hide()
+	if not background.is_mobile_browser():
+		card_preview.hide()
