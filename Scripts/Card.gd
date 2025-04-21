@@ -18,33 +18,30 @@ var grabbed: bool = false
 @onready var background = get_node("/root/Background")
 @onready var last_cards_played_container: GridContainer = scene.get_node("LastCardsPlayedContainer")
 var grab_position = Vector2.ZERO
+var grabbed_timestamp = null
+var last_mouse_position = null
 
 func _ready():
 	$DamageCardEffect.set_target(enemy)
 	$EnergyPanel/Energy.set_text("[center]%d[/center]" % energy_cost)
 	
 func _on_gui_input(event):
-	#if event is InputEventScreenTouch:
-		#if event.pressed:
-			#grab()
-		#else:
-			#drop()
 	if event.is_action_pressed("select"):
 		grab()
 	elif event.is_action_released("select"):
 		drop()
-
-	#elif event is InputEventScreenDrag and card_preview.visible and background.is_mobile():
-		#card_preview.hide()
 		
+	if event is InputEventMouseMotion and event.relative.length() > 5 and card_preview.visible:
+		print("Mouse moved: ", event.relative)
+		card_preview.hide()
+	elif event is InputEventScreenDrag and event.relative.length() > 5 and card_preview.visible:
+		card_preview.hide()
 func grab() -> void:
 	grabbed = true
+	grabbed_timestamp = Time.get_ticks_msec()
 	grab_position = position
 	
-	if not background.is_mobile_browser():
-		card_preview.hide()
-	elif background.is_mobile_browser():
-		card_preview.show()
+	card_preview.show()
 	
 	if energy.has_enough_energy(energy_cost):
 		play_text.set_text(PLAY_CARD_TEXT)
@@ -54,6 +51,7 @@ func grab() -> void:
 	
 func drop() -> void:
 	grabbed = false
+	card_preview.hide()
 	
 	if card_play_area != null and card_play_area.has_card() and card_play_area.get_card() == self:
 		play()
@@ -89,12 +87,10 @@ func get_icon_texture() -> Texture2D:
 	return $IconPanel/Icon.get_texture()
 	
 func _on_mouse_entered():
-	if not background.is_mobile_browser():
-		card_preview.show()
-		card_preview.set_title(card_name)
-		card_preview.set_description(card_description)
-		card_preview.set_icon_texture(get_icon_texture())
+	card_preview.show()
+	card_preview.set_title(card_name)
+	card_preview.set_description(card_description)
+	card_preview.set_icon_texture(get_icon_texture())
 
 func _on_mouse_exited():
-	if not background.is_mobile_browser():
-		card_preview.hide()
+	card_preview.hide()
