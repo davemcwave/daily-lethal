@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpfcppbnd0ui3"
-path="res://.godot/imported/monster.png-2ff8c30656e77f5e81a07c5569cb5371.ctex"
+uid="uid://denge4oiopoas"
+path="res://.godot/imported/heart-white.png-330fe712d45ef54e61ff88a437ce5631.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/monster.png"
-dest_files=["res://.godot/imported/monster.png-2ff8c30656e77f5e81a07c5569cb5371.ctex"]
+source_file="res://Assets/Textures/heart-white.png"
+dest_files=["res://.godot/imported/heart-white.png-330fe712d45ef54e61ff88a437ce5631.ctex"]
 
 [params]
 

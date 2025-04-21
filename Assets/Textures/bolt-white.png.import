@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpahkn0vimbr2"
-path="res://.godot/imported/white-circle.svg-3d1a77f873710e26d11eefc31f2d0bd6.ctex"
+uid="uid://cycsn52sbrwbu"
+path="res://.godot/imported/bolt-white.png-53245d6eabc0652b974193bbaef3386e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/white-circle.svg"
-dest_files=["res://.godot/imported/white-circle.svg-3d1a77f873710e26d11eefc31f2d0bd6.ctex"]
+source_file="res://Assets/Textures/bolt-white.png"
+dest_files=["res://.godot/imported/bolt-white.png-53245d6eabc0652b974193bbaef3386e.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

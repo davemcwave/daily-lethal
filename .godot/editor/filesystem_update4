@@ -9,3 +9,17 @@ res://Scripts/DamageCardEffect.gd
 res://Scripts/Enemy.gd
 res://Scripts/Hand.gd
 res://Scripts/CardPreview.gd
+res://Scenes/Background.tscn
+res://Scripts/Background.gd
+res://Scenes/SlashCard.tscn
+res://Scenes/Card.tscn
+res://Scenes/EndGameScreen.tscn
+res://Scenes/EndGameScreen.scn
+res://Scripts/EndGameScreen.gd
+res://Scripts/Energy.gd
+res://Scenes/LoseScreen.scn
+res://Scripts/LoseScreen.gd
+res://Scripts/Shaders/WhiteBlink.gdshader
+res://Scripts/Scene.gd
+res://Scripts/RestartButton.gd
+res://Scripts/Health.gd

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://r3xcr0hxtfpb"
-path="res://.godot/imported/sword-cartoon.png-699f1bdb2ee984649544abeafac526f5.ctex"
+uid="uid://mb8alxq7nqxs"
+path="res://.godot/imported/skull (4).png-ad7368fd5ed323aa23fe4e8946a05f15.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/sword-cartoon.png"
-dest_files=["res://.godot/imported/sword-cartoon.png-699f1bdb2ee984649544abeafac526f5.ctex"]
+source_file="res://Assets/Textures/skull (4).png"
+dest_files=["res://.godot/imported/skull (4).png-ad7368fd5ed323aa23fe4e8946a05f15.ctex"]
 
 [params]
 
