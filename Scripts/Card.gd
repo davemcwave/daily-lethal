@@ -23,10 +23,16 @@ func _ready():
 	$EnergyPanel/Energy.set_text("[center]%d[/center]" % energy_cost)
 	
 func _on_gui_input(event):
-	if (event.is_action_pressed("select") or event is InputEventScreenTouch) and event.is_pressed():
+	if event is InputEventScreenTouch:
+		if event.pressed:
+			grab()
+		else:
+			drop()
+	elif event.is_action_pressed("select"):
 		grab()
-	elif (event.is_action_released("select") or event is InputEventScreenTouch) and not event.is_pressed():
+	elif event.is_action_released("select"):
 		drop()
+
 	#elif event is InputEventScreenDrag and card_preview.visible and background.is_mobile():
 		#card_preview.hide()
 		
@@ -60,6 +66,7 @@ func play():
 	if energy.has_enough_energy(energy_cost):
 		energy.use_energy(energy_cost)
 		card_effect.apply()
+		scene.increment_card_count()
 		queue_free()
 	else:
 		set_position(grab_position)
