@@ -1,0 +1,11 @@
+res://Scenes/Scene0.scn
+res://Scripts/TinyCard.gd
+res://Scripts/Card.gd
+res://Scripts/CardPlayArea.gd
+res://Scripts/CardEffect.gd
+res://Scenes/CardEffect.tscn
+res://Scenes/DamageCardEffect.tscn
+res://Scripts/DamageCardEffect.gd
+res://Scripts/Enemy.gd
+res://Scripts/Hand.gd
+res://Scripts/CardPreview.gd
