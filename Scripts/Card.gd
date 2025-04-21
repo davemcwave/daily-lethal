@@ -27,8 +27,8 @@ func _on_gui_input(event):
 		grab()
 	elif (event.is_action_released("select") or event is InputEventScreenTouch) and not event.is_pressed():
 		drop()
-	elif event is InputEventScreenDrag and card_preview.visible and background.is_mobile():
-		card_preview.hide()
+	#elif event is InputEventScreenDrag and card_preview.visible and background.is_mobile():
+		#card_preview.hide()
 		
 func grab() -> void:
 	grabbed = true
