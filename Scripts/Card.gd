@@ -23,11 +23,11 @@ func _ready():
 	$EnergyPanel/Energy.set_text("[center]%d[/center]" % energy_cost)
 	
 func _on_gui_input(event):
-	if event is InputEventScreenTouch:
-		if event.pressed:
-			grab()
-		else:
-			drop()
+	#if event is InputEventScreenTouch:
+		#if event.pressed:
+			#grab()
+		#else:
+			#drop()
 	if event.is_action_pressed("select"):
 		grab()
 	elif event.is_action_released("select"):
