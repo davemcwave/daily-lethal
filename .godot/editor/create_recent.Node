@@ -1,11 +1,11 @@
 Panel
+VBoxContainer
 TextureButton
 CanvasLayer
 ColorRect
 TextureRect
 HBoxContainer
 Button
-VBoxContainer
 Node2D
 Node
 ScrollContainer

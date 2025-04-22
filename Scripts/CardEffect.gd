@@ -1,6 +1,8 @@
 extends Node2D
 class_name CardEffect
 
+signal finished
+
 var effect_name = ""
 var effect_description = ""
 

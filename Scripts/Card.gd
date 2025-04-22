@@ -22,7 +22,9 @@ var grabbed_timestamp = null
 var last_mouse_position = null
 
 func _ready():
-	$DamageCardEffect.set_target(enemy)
+	$TitlePanel/Title.set_text("[center]%s[/center]" % card_name)
+	$CardEffect.set_target(enemy)
+	$DescriptionPanel/Title.set_text("[center]%s[/center]" % card_description)
 	$EnergyPanel/Energy.set_text("[center]%d[/center]" % energy_cost)
 	
 func _on_gui_input(event):
@@ -36,12 +38,20 @@ func _on_gui_input(event):
 		card_preview.hide()
 	elif event is InputEventScreenDrag and event.relative.length() > 5 and card_preview.visible:
 		card_preview.hide()
+		
+func show_card_preview() -> void:
+	# Card preview data
+	card_preview.set_title(card_name)
+	card_preview.set_description(card_description)
+	card_preview.set_icon_texture(get_icon_texture())
+	card_preview.show()
+	
 func grab() -> void:
 	grabbed = true
 	grabbed_timestamp = Time.get_ticks_msec()
 	grab_position = position
 	
-	card_preview.show()
+	show_card_preview()
 	
 	if energy.has_enough_energy(energy_cost):
 		play_text.set_text(PLAY_CARD_TEXT)
@@ -73,8 +83,6 @@ func play():
 		queue_free()
 	else:
 		set_position(grab_position)
-		
-	scene.check_game_over()
 	
 func _process(delta):
 	if grabbed:
@@ -85,12 +93,3 @@ func get_energy_cost() -> int:
 
 func get_icon_texture() -> Texture2D:
 	return $IconPanel/Icon.get_texture()
-	
-func _on_mouse_entered():
-	card_preview.show()
-	card_preview.set_title(card_name)
-	card_preview.set_description(card_description)
-	card_preview.set_icon_texture(get_icon_texture())
-
-func _on_mouse_exited():
-	card_preview.hide()

@@ -1,12 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://br37bnoigcm1m"]
+[gd_scene load_steps=12 format=3 uid="uid://dsgm1x4omybdo"]
 
-[ext_resource type="Script" uid="uid://47336gfxoooa" path="res://Scripts/Card.gd" id="1_ulyau"]
-[ext_resource type="FontFile" uid="uid://dwo8xle1kx2ha" path="res://Assets/Fonts/Quicksand/static/Quicksand-Medium.ttf" id="2_vuj4x"]
-[ext_resource type="FontFile" uid="uid://biw8kuuj8rwa8" path="res://Assets/Fonts/Quicksand/static/Quicksand-Bold.ttf" id="3_fk6pf"]
-[ext_resource type="Texture2D" uid="uid://docga0ex3fj5p" path="res://Assets/Textures/sword.png" id="4_3sr5s"]
-[ext_resource type="PackedScene" uid="uid://bc8ow5rkiriex" path="res://Scenes/DamageCardEffect.tscn" id="5_q2acm"]
+[ext_resource type="Script" uid="uid://dl1g551qy11lj" path="res://Scripts/WoundCard.gd" id="1_1rrdu"]
+[ext_resource type="FontFile" uid="uid://dwo8xle1kx2ha" path="res://Assets/Fonts/Quicksand/static/Quicksand-Medium.ttf" id="2_gao5v"]
+[ext_resource type="FontFile" uid="uid://biw8kuuj8rwa8" path="res://Assets/Fonts/Quicksand/static/Quicksand-Bold.ttf" id="3_jdv06"]
+[ext_resource type="Texture2D" uid="uid://cycsn52sbrwbu" path="res://Assets/Textures/bolt-white.png" id="4_2v8lu"]
+[ext_resource type="Texture2D" uid="uid://75jmn2m6axnt" path="res://Assets/Textures/knife.png" id="5_llmei"]
+[ext_resource type="PackedScene" uid="uid://dx0ua8253l417" path="res://Scenes/DebuffCardEffect.scn" id="6_f3hay"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qfa7s"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xh8xc"]
 bg_color = Color(0.433266, 0.433266, 0.433266, 1)
 border_width_left = 2
 border_width_top = 2
@@ -18,7 +19,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5uxdr"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wwg4t"]
 bg_color = Color(0.169245, 0.169245, 0.169245, 1)
 border_width_left = 2
 border_width_top = 2
@@ -33,7 +34,7 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0631c"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_igbnr"]
 bg_color = Color(0.169245, 0.169245, 0.169245, 1)
 border_width_left = 2
 border_width_right = 2
@@ -43,17 +44,17 @@ border_color = Color(0, 0, 0, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5uxdr"]
 size = Vector2(110, 149)
 
-[node name="Card" type="Panel" node_paths=PackedStringArray("card_effect")]
+[node name="WoundCard" type="Panel" node_paths=PackedStringArray("card_effect")]
 custom_minimum_size = Vector2(120, 160)
-offset_left = 8.0
+offset_left = 67.0
 offset_top = 456.0
-offset_right = 128.0
+offset_right = 187.0
 offset_bottom = 616.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_qfa7s")
-script = ExtResource("1_ulyau")
-card_effect = NodePath("DamageCardEffect")
+theme_override_styles/panel = SubResource("StyleBoxFlat_xh8xc")
+script = ExtResource("1_1rrdu")
+card_effect = NodePath("CardEffect")
+card_name = "Wound"
+card_description = "Inflicts 1 Vulnerable"
 
 [node name="TitlePanel" type="Panel" parent="."]
 layout_mode = 1
@@ -65,24 +66,66 @@ offset_right = -7.0
 offset_bottom = 32.0
 grow_horizontal = 2
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_5uxdr")
+theme_override_styles/panel = SubResource("StyleBoxFlat_wwg4t")
 
 [node name="Title" type="RichTextLabel" parent="TitlePanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 26.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_fonts/normal_font = ExtResource("2_vuj4x")
-theme_override_fonts/bold_font = ExtResource("3_fk6pf")
+theme_override_fonts/normal_font = ExtResource("2_gao5v")
+theme_override_fonts/bold_font = ExtResource("3_jdv06")
 theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
 text = "[center]Slash[/center]"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="EnergyPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 7.0
+offset_top = 8.0
+offset_right = -87.0
+offset_bottom = 32.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wwg4t")
+
+[node name="Energy" type="RichTextLabel" parent="EnergyPanel"]
+clip_contents = false
+layout_mode = 2
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 12.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("2_gao5v")
+theme_override_fonts/bold_font = ExtResource("3_jdv06")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[center]2[/center]"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="EnergyPanel"]
+layout_mode = 2
+offset_left = 10.0
+offset_top = 7.0
+offset_right = 22.0
+offset_bottom = 19.0
+texture = ExtResource("4_2v8lu")
+expand_mode = 1
 
 [node name="IconPanel" type="Panel" parent="."]
 layout_mode = 1
@@ -105,14 +148,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -38.0
-offset_right = 40.0
-offset_bottom = 38.0
+offset_left = -26.0
+offset_top = -24.5
+offset_right = 26.0
+offset_bottom = 24.5
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("4_3sr5s")
+texture = ExtResource("5_llmei")
 expand_mode = 1
 
 [node name="DescriptionPanel" type="Panel" parent="."]
@@ -125,7 +168,7 @@ offset_right = -7.0
 offset_bottom = 152.0
 grow_horizontal = 2
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_0631c")
+theme_override_styles/panel = SubResource("StyleBoxFlat_igbnr")
 
 [node name="Title" type="RichTextLabel" parent="DescriptionPanel"]
 layout_mode = 1
@@ -136,8 +179,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_fonts/normal_font = ExtResource("2_vuj4x")
-theme_override_fonts/bold_font = ExtResource("3_fk6pf")
+theme_override_fonts/normal_font = ExtResource("2_gao5v")
+theme_override_fonts/bold_font = ExtResource("3_jdv06")
 theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
 text = "[center]Deal 2 damage[/center]"
@@ -151,9 +194,7 @@ position = Vector2(14, 14)
 position = Vector2(45, 64.5)
 shape = SubResource("RectangleShape2D_5uxdr")
 
-[node name="DamageCardEffect" parent="." instance=ExtResource("5_q2acm")]
-damage_amount = 2
+[node name="CardEffect" parent="." instance=ExtResource("6_f3hay")]
+debuff_scene = "uid://bxx6caxnpjl87"
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

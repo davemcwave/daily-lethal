@@ -3,6 +3,9 @@ extends TextureRect
 @export var energy_amount: int = 5
 const TEXT_TEMPLATE = "[center][b]%d[/b][/center]"
 
+func _ready():
+	update_energy_text()
+	
 func has_enough_energy(cost: int) -> bool:
 	return cost <= energy_amount
 
@@ -11,5 +14,8 @@ func get_energy_amount() -> int:
 	
 func use_energy(cost: int) -> void:
 	energy_amount -= cost
+
+	update_energy_text()
 	
+func update_energy_text() -> void:
 	$EnergyAmountText.set_text(TEXT_TEMPLATE % energy_amount)
