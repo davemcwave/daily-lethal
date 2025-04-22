@@ -2,11 +2,19 @@ extends CardEffect
 
 @export_file("*.scn") var debuff_scene
 @export var target: Node = null
-var debuff = null
+var debuff: Debuff = null
+
+func _ready() -> void:
+	debuff = load(debuff_scene).instantiate()
+
+func get_effect_name() -> String:
+	return debuff.get_debuff_name()
+	
+func get_effect_description() -> String:
+	return debuff.get_debuff_description()
 	
 func set_target(new_target) -> void:
 	target = new_target
 	
 func apply() -> void:
-	debuff = load(debuff_scene).instantiate()
 	target.add_debuff(debuff)

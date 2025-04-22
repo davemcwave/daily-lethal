@@ -44,7 +44,7 @@ border_color = Color(0, 0, 0, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5uxdr"]
 size = Vector2(110, 149)
 
-[node name="WoundCard" type="Panel" node_paths=PackedStringArray("card_effect")]
+[node name="WoundCard" type="Panel" node_paths=PackedStringArray("card_effects")]
 custom_minimum_size = Vector2(120, 160)
 offset_left = 67.0
 offset_top = 456.0
@@ -52,7 +52,7 @@ offset_right = 187.0
 offset_bottom = 616.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_xh8xc")
 script = ExtResource("1_1rrdu")
-card_effect = NodePath("CardEffect")
+card_effects = [NodePath("CardEffect")]
 card_name = "Wound"
 card_description = "Inflicts 1 Vulnerable"
 
@@ -194,7 +194,8 @@ position = Vector2(14, 14)
 position = Vector2(45, 64.5)
 shape = SubResource("RectangleShape2D_5uxdr")
 
-[node name="CardEffect" parent="." instance=ExtResource("6_f3hay")]
+[node name="CardEffect" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_f3hay")]
 debuff_scene = "uid://bxx6caxnpjl87"
+target = NodePath(".")
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]

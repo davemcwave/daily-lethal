@@ -22,3 +22,7 @@ res://Scripts/Energy.gd
 res://Scripts/CardEffect.gd
 res://Scenes/EndGameScreen.scn
 res://Scripts/EndGameScreen.gd
+res://Scenes/WoundCard.tscn
+res://Scripts/ExtraDescriptionPanel.gd
+res://Scripts/ExtraDescriptions.gd
+res://Scenes/ExtraDescriptionPanel.scn

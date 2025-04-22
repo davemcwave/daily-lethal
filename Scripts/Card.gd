@@ -7,7 +7,7 @@ const LOW_ENERGY_CARD_TEXT = "[center][b][pulse freq=2.0 color=#ffffff40 ease=-2
 var grabbed: bool = false
 @onready var scene = get_tree().get_root().get_node("Scene")
 @onready var card_play_area = scene.get_node("CardPlayArea")
-@export var card_effect: CardEffect = null
+@export var card_effects: Array[CardEffect] = []
 @export var card_name: String = "Slash"
 @export var energy_cost: int = 1
 @export var card_description: String = "Deal 2 damage"
@@ -38,12 +38,28 @@ func _on_gui_input(event):
 		card_preview.hide()
 	elif event is InputEventScreenDrag and event.relative.length() > 5 and card_preview.visible:
 		card_preview.hide()
-		
+
+func get_card_effects() -> Array:
+	return card_effects
+
 func show_card_preview() -> void:
 	# Card preview data
+	
+	card_preview.clear_extra_descriptions()
 	card_preview.set_title(card_name)
+	
+	for card_effect: CardEffect in card_effects:
+		if card_effect.get_effect_description().is_empty():
+			continue
+			
+		var card_effect_name: String = "[font_size=10][b]%s:[/b][/font_size]" % card_effect.get_effect_name()
+		var card_effect_description: String = "[font_size=10]%s[/font_size]" % card_effect.get_effect_description()
+		var extra_description: String = "%s %s" % [card_effect_name, card_effect_description]
+		card_preview.add_extra_description(extra_description)
+		
 	card_preview.set_description(card_description)
 	card_preview.set_icon_texture(get_icon_texture())
+	card_preview.set_energy_cost(energy_cost)
 	card_preview.show()
 	
 func grab() -> void:
@@ -77,7 +93,10 @@ func get_background_color() -> Color:
 func play():
 	if energy.has_enough_energy(energy_cost):
 		energy.use_energy(energy_cost)
-		card_effect.apply()
+		
+		for card_effect in card_effects:
+			card_effect.apply()
+			
 		scene.increment_card_count()
 		last_cards_played_container.add_card(self)
 		queue_free()

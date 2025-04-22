@@ -3,8 +3,8 @@ class_name CardEffect
 
 signal finished
 
-var effect_name = ""
-var effect_description = ""
+@export var effect_name = ""
+@export var effect_description = ""
 
 func set_effect_name(new_effect_name: String) -> void:
 	effect_name = new_effect_name
