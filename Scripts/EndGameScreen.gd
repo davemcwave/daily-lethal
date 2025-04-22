@@ -30,4 +30,6 @@ func _on_share_button_pressed():
 	await get_tree().create_timer(1.5).timeout
 	$ShareButton.set_disabled(false)
 	$ShareButton.set_text("SHARE")
-	
+
+func _on_get_tomorrow_button_pressed():
+	OS.shell_open("https://playlethal.beehiiv.com/subscribe")
