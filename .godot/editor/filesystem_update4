@@ -20,3 +20,5 @@ res://Scripts/CardPreview.gd
 res://Scripts/LastCardsPlayedContainer.gd
 res://Scripts/Energy.gd
 res://Scripts/CardEffect.gd
+res://Scenes/EndGameScreen.scn
+res://Scripts/EndGameScreen.gd
