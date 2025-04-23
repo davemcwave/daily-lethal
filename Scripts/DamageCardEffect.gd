@@ -3,6 +3,9 @@ extends CardEffect
 @export var damage_amount: int = 1
 @export var target: Node = null
 
+func _ready() -> void:
+	target = get_tree().get_root().get_node("Scene/Enemy")
+	
 func set_damage_amount(new_damage_amount: int) -> void:
 	damage_amount = new_damage_amount
 	

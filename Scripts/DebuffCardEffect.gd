@@ -6,6 +6,7 @@ var debuff: Debuff = null
 
 func _ready() -> void:
 	debuff = load(debuff_scene).instantiate()
+	target = get_tree().get_root().get_node("Scene/Enemy")
 
 func get_effect_name() -> String:
 	return debuff.get_debuff_name()

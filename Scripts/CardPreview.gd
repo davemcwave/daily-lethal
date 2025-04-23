@@ -16,5 +16,8 @@ func set_energy_cost(energy_cost: int) -> void:
 func set_icon_texture(new_texture: Texture2D) -> void:
 	$IconPanel/Icon.set_texture(new_texture)
 	
+func set_background_color(color: Color) -> void:
+	$IconPanel.get_theme_stylebox("panel").bg_color = color
+	
 func add_extra_description(new_text: String) -> void:
 	$ExtraDescriptions.add_description(new_text)

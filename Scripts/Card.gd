@@ -1,6 +1,8 @@
 extends Panel
 class_name Card
 
+signal played
+
 const PLAY_CARD_TEXT = "[center][b][pulse freq=2.0 color=#ffffff40 ease=-2.0]PLAY CARD![/pulse][/b][/center]"
 const LOW_ENERGY_CARD_TEXT = "[center][b][pulse freq=2.0 color=#ffffff40 ease=-2.0]LOW ENERGY[/pulse][/b][/center]"
 
@@ -11,21 +13,28 @@ var grabbed: bool = false
 @export var card_name: String = "Slash"
 @export var energy_cost: int = 1
 @export var card_description: String = "Deal 2 damage"
+@export var remember_last_card_effects: bool = true
 @onready var enemy = scene.get_node("Enemy")
 @onready var card_preview = scene.get_node("CanvasLayer/CardPreview")
 @onready var energy = scene.get_node("Energy")
 @onready var play_text = scene.get_node("PlayText")
 @onready var background = get_node("/root/Background")
 @onready var last_cards_played_container: GridContainer = scene.get_node("LastCardsPlayedContainer")
+@onready var original_z_index = z_index
+@onready var buffs_container: BuffsContainer = scene.get_node("BuffsContainer")
 var grab_position = Vector2.ZERO
 var grabbed_timestamp = null
 var last_mouse_position = null
+var playing: bool = false
+
 
 func _ready():
 	$TitlePanel/Title.set_text("[center]%s[/center]" % card_name)
-	$CardEffect.set_target(enemy)
+	#$CardEffect.set_target(enemy)
 	$DescriptionPanel/Title.set_text("[center]%s[/center]" % card_description)
 	$EnergyPanel/Energy.set_text("[center]%d[/center]" % energy_cost)
+	
+	#connect("played", scene._on_card_played.bind(self))
 	
 func _on_gui_input(event):
 	if event.is_action_pressed("select"):
@@ -57,15 +66,23 @@ func show_card_preview() -> void:
 		var extra_description: String = "%s %s" % [card_effect_name, card_effect_description]
 		card_preview.add_extra_description(extra_description)
 		
+	card_preview.set_background_color(get_background_color())
 	card_preview.set_description(card_description)
 	card_preview.set_icon_texture(get_icon_texture())
 	card_preview.set_energy_cost(energy_cost)
 	card_preview.show()
 	
+func bring_to_front() -> void:
+	z_index = RenderingServer.CANVAS_ITEM_Z_MAX
+
+func reset_z_index() -> void:
+	z_index = original_z_index
+
 func grab() -> void:
 	grabbed = true
 	grabbed_timestamp = Time.get_ticks_msec()
 	grab_position = position
+	bring_to_front()
 	
 	show_card_preview()
 	
@@ -83,6 +100,7 @@ func drop() -> void:
 		play()
 	else:
 		set_position(grab_position)
+		reset_z_index()
 		
 		#if get_parent() is Hand:
 			#get_parent().reset_view()
@@ -90,17 +108,27 @@ func drop() -> void:
 func get_background_color() -> Color:
 	return $IconPanel.get_theme_stylebox("panel").bg_color
 	
+func is_playing() -> bool:
+	return playing
+	
 func play():
 	if energy.has_enough_energy(energy_cost):
+		playing = true
 		energy.use_energy(energy_cost)
 		
 		for card_effect in card_effects:
 			card_effect.apply()
-			
+		
 		scene.increment_card_count()
 		last_cards_played_container.add_card(self)
+		
+		if remember_last_card_effects:
+			scene.set_last_card_effects(self)
+			buffs_container.activate_on_play_buffs()
+		
 		queue_free()
 	else:
+		playing = false
 		set_position(grab_position)
 	
 func _process(delta):

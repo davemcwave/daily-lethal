@@ -3,6 +3,10 @@ class_name Debuff
 
 @export var debuff_name: String = "Debuff"
 @export var debuff_description: String = "Debuffs the target."
+
+enum ActivationType {OnHurt, OnAttack}
+@export var activation_type: ActivationType
+
 var target: Enemy = null
 
 func set_target(new_target: Enemy) -> void:
@@ -23,6 +27,9 @@ func get_debuff_description() -> String:
 func get_target() -> Enemy:
 	return target
 	
+func is_activated_on_hurt() -> bool:
+	return activation_type == ActivationType.OnHurt
+	
 # TO BE OVERWRITTEN
-func apply() -> void:
+func activate() -> void:
 	pass

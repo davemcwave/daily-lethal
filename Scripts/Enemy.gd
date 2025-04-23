@@ -7,19 +7,22 @@ signal just_hurt(amount: int)
 @onready var scene = get_tree().get_root().get_node("Scene")
 @onready var background = get_node("/root/Background")
 @onready var initial_icon_position: Vector2 = $EnemyIcon.position
-var health = 10
+@export var health = 10
 var dead: bool = false
-var debuffs: Array[Debuff] = []
+var debuff_activate_queue: Array = []
 
 func _ready():
 	background.set_enemy_name(enemy_name)
 	$EnemyHealthBar.max_value = health
 	$EnemyHealthBar.value = health
+	update_health_bar()
 
+func add_to_debuff_activate_queue(debuff: Debuff) -> void:
+	debuff_activate_queue.append(debuff_activate_queue)
+	
 func add_debuff(new_debuff: Debuff) -> void:
 	add_child(new_debuff)
 	new_debuff.set_target(self)
-	new_debuff.apply()
 	$DebuffContainer.add_debuff(new_debuff)
 	
 func blink_white() -> void:
@@ -27,22 +30,34 @@ func blink_white() -> void:
 	await get_tree().create_timer(0.1).timeout
 	$EnemyIcon.get_material().set_shader_parameter("blink_strength", 0.0)
 	
-func hurt(hurt_amount: int, emit_just_hurt_signal: bool = true) -> void:
+func get_debuffs() -> Array:
+	return $DebuffContainer.get_debuffs()
+
+func activate_on_hurt_debuffs() -> void:
+	for debuff: Debuff in get_debuffs():
+		if debuff.is_activated_on_hurt():
+			await get_tree().create_timer(0.25).timeout
+			debuff.activate()
+			
+func hurt(hurt_amount: int, hurt_from_card: bool = true) -> void:
 	health -= hurt_amount
 	
-	if emit_just_hurt_signal:
-		emit_signal("just_hurt", hurt_amount)
+	if hurt_from_card:
+		activate_on_hurt_debuffs()
+		
 	shake_briefly()
 	blink_white()
 	
 	if health <= 0:
 		die()
 	
+	update_health_bar()
+	scene.check_game_over()
+	
+func update_health_bar() -> void:
 	$EnemyHealthBar.value = health
 	$EnemyHealthBar/HealthText.set_text("[center][b]%d/%d[/b][/center]" % [health, $EnemyHealthBar.max_value])
 
-	scene.check_game_over()
-	
 func shake_briefly():
 	$EnemyIcon.position = initial_icon_position
 	var tween = get_tree().create_tween()

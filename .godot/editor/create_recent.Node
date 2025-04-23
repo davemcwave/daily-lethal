@@ -1,5 +1,6 @@
-VBoxContainer
 Panel
+GridContainer
+VBoxContainer
 TextureButton
 CanvasLayer
 ColorRect
@@ -11,4 +12,3 @@ Node
 ScrollContainer
 Control
 CollisionShape2D
-Area2D
