@@ -91,12 +91,18 @@ func grab() -> void:
 	else:
 		play_text.set_text(LOW_ENERGY_CARD_TEXT)
 	#move_to_front()
-	
+func can_play() -> bool:
+	return card_play_area != null \
+		and card_play_area.has_card() \
+		and card_play_area.get_card() == self \
+		and not enemy.is_animating() \
+		and not buffs_container.is_animating()
+		
 func drop() -> void:
 	grabbed = false
 	card_preview.hide()
 	
-	if card_play_area != null and card_play_area.has_card() and card_play_area.get_card() == self:
+	if can_play():
 		play()
 	else:
 		set_position(grab_position)
@@ -113,13 +119,13 @@ func is_playing() -> bool:
 	
 func play():
 	if energy.has_enough_energy(energy_cost):
+		scene.increment_card_count()
 		playing = true
 		energy.use_energy(energy_cost)
 		
 		for card_effect in card_effects:
 			card_effect.apply()
 		
-		scene.increment_card_count()
 		last_cards_played_container.add_card(self)
 		
 		if remember_last_card_effects:
