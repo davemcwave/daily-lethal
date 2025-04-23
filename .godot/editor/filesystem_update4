@@ -26,3 +26,10 @@ res://Scripts/NewAttemptPanel.gd
 res://Configs/2025-04-23.json
 res://Scripts/TutorialPanel.gd
 res://Scenes/EndGameScreen.scn
+res://Scenes/SurgeCard.scn
+res://Scripts/SurgeCard.gd
+res://Scenes/GainEnergyCardEffect.scn
+res://Scripts/GainEnergyCardEffects.gd
+res://Scripts/Energy.gd
+res://Scenes/PoundCard.scn
+res://Scripts/PoundCard.gd

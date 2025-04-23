@@ -1,6 +1,8 @@
 extends TextureRect
+class_name Energy
 
 @export var energy_amount: int = 5
+@onready var original_color: Color = self_modulate
 const TEXT_TEMPLATE = "[center][b]%d[/b][/center]"
 
 func _ready():
@@ -11,9 +13,20 @@ func has_enough_energy(cost: int) -> bool:
 
 func get_energy_amount() -> int:
 	return energy_amount
+
+func blink() -> void:
+	self_modulate = Color.WHITE
+	await get_tree().create_timer(0.1).timeout
+	self_modulate = original_color
+	
+func add_energy(additional_energy_amount: int) -> void:
+	energy_amount += additional_energy_amount
+	blink()
+	update_energy_text()
 	
 func use_energy(cost: int) -> void:
 	energy_amount -= cost
+	blink()
 
 	update_energy_text()
 	

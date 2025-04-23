@@ -12,13 +12,15 @@ var dead: bool = false
 var debuff_activate_queue: Array = []
 
 func _ready():
-	background.set_enemy_name(enemy_name)
+	set_enemy_name(enemy_name)
 	$EnemyHealthBar.max_value = health
 	$EnemyHealthBar.value = health
 	update_health_bar()
 
 func set_enemy_name(new_enemy_name: String) -> void:
-	enemy_name = enemy_name
+	enemy_name = new_enemy_name
+	background.set_enemy_name(new_enemy_name)
+	$EnemyNamePanel/EnemyName.set_text("[center][b]%s[/b][/center]" % enemy_name)
 	
 func set_health(new_health: int) -> void:
 	health = new_health
