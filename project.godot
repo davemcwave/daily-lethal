@@ -14,7 +14,7 @@ config/name="Daily Lethal"
 run/main_scene="uid://bu6lgt3xfx2rr"
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/show_image=false
-config/icon="res://icon.svg"
+config/icon="res://Assets/Textures/lethal.ico"
 
 [autoload]
 
