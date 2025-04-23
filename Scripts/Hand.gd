@@ -1,7 +1,7 @@
 extends Node2D
 class_name Hand
 
-const STARTING_INDEX_POSITION = Vector2(8.0, 456.0)
+const STARTING_INDEX_POSITION = Vector2(8.0, 400.0)
 const X_POSITION_GAP = 30.0
 @onready var energy = get_tree().get_root().get_node("Scene/Energy")
 @onready var deck = get_tree().get_root().get_node("Scene/Deck")

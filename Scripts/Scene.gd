@@ -5,13 +5,27 @@ extends Control
 @onready var background = get_node("/root/Background")
 @onready var deck: Deck = get_node("Deck")
 @export var starting_card_amount: int = 3
+@export var solution: Array[String] = []
 var card_count: int = 0
 var last_card_effects: Array[CardEffect] = []
+var attempt: Array[String] = []
 
 func _ready():
-	background.add_attempt()
+	#background.add_attempt()
 	
 	call_deferred("draw_starting_cards")
+	
+func add_to_attempt(card_name: String) -> void:
+	attempt.append(card_name)
+
+func get_solution() -> Array[String]:
+	return solution
+	
+func save_attempt() -> void:
+	background.add_attempt(attempt)
+	
+func get_attempt() -> Array[String]:
+	return attempt
 	
 func set_last_card_effects(card: Card) -> void:
 	last_card_effects = []

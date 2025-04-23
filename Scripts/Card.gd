@@ -126,6 +126,7 @@ func play():
 			scene.set_last_card_effects(self)
 			buffs_container.activate_on_play_buffs()
 		
+		scene.add_to_attempt(card_name)
 		queue_free()
 	else:
 		playing = false

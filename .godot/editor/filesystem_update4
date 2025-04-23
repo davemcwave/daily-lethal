@@ -50,3 +50,6 @@ res://Scenes/BuffCardEffect.scn
 res://Scripts/BuffCardEffect.gd
 res://Scripts/BuffsContainer.gd
 res://Scenes/RepeatBuffCardEffect.scn
+res://Scripts/RestartButton.gd
+res://Scripts/AttemptsGridContainer.gd
+res://Scripts/Background.gd
