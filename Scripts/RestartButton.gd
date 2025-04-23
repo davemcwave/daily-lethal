@@ -2,4 +2,5 @@ extends TextureButton
 
 
 func _on_pressed():
-	get_tree().reload_current_scene()
+	get_parent().get_node("BG").show()
+	get_parent().get_node("NewAttemptPanel").show()

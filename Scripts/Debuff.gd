@@ -8,9 +8,13 @@ enum ActivationType {OnHurt, OnAttack}
 @export var activation_type: ActivationType
 
 var target: Enemy = null
+var debuff_panel: DebuffPanel = null
 
 func set_target(new_target: Enemy) -> void:
 	target = new_target
+	
+func set_debuff_panel(new_debuff_panel: DebuffPanel) -> void:
+	debuff_panel = new_debuff_panel
 	
 func set_debuff_name(new_debuff_name: String) -> void:
 	debuff_name = new_debuff_name

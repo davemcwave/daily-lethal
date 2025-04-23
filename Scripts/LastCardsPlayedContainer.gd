@@ -9,7 +9,7 @@ func add_card(card: Card) -> void:
 	card_panel_icon.set_texture(card.get_icon_texture())
 	card_panel.get_theme_stylebox("panel").bg_color = card.get_background_color() 
 	index += 1
-	index = index % 3
+	index = index % get_child_count()
 	
 	
 func rotate_children():

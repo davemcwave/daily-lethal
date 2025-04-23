@@ -17,6 +17,15 @@ func _ready():
 	$EnemyHealthBar.value = health
 	update_health_bar()
 
+func set_enemy_name(new_enemy_name: String) -> void:
+	enemy_name = enemy_name
+	
+func set_health(new_health: int) -> void:
+	health = new_health
+	
+func set_enemy_icon_texture(new_texture: Texture2D) -> void:
+	$EnemyIcon.set_texture(new_texture)
+	
 func add_to_debuff_activate_queue(debuff: Debuff) -> void:
 	debuff_activate_queue.append(debuff_activate_queue)
 	
@@ -39,8 +48,18 @@ func activate_on_hurt_debuffs() -> void:
 			await get_tree().create_timer(0.25).timeout
 			debuff.activate()
 			
+func create_damage_label(hurt_amount: int) -> void:
+	var damage_label: RichTextLabel = load("res://Scenes/DamageLabel.scn").instantiate()
+	damage_label.set_damage(hurt_amount)
+	add_child(damage_label)
+	damage_label.global_position = $DamageLabelSpawn.global_position
+	damage_label.float_up()
+	
+	
 func hurt(hurt_amount: int, hurt_from_card: bool = true) -> void:
 	health -= hurt_amount
+	
+	create_damage_label(hurt_amount)
 	
 	if hurt_from_card:
 		activate_on_hurt_debuffs()

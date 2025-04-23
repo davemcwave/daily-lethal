@@ -11,6 +11,10 @@ enum ActivationType {OnCardPlay, OnAttack}
 
 @export var uses_amount: int = 1
 
+var buff_panel: BuffPanel = null
+
+func set_buff_panel(new_buff_panel: BuffPanel) -> void:
+	buff_panel = new_buff_panel
 	
 func set_buff_name(new_buff_name: String) -> void:
 	buff_name = new_buff_name
@@ -30,6 +34,7 @@ func is_activated_on_card_play() -> bool:
 # TO BE OVERWRITTEN
 func activate() -> void:
 	uses_amount -= 1
+	buff_panel.blink()
 	
 func exceeded_uses() -> bool:
 	return uses_amount <= 0

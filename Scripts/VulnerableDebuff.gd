@@ -5,4 +5,4 @@ extends Debuff
 
 func activate() -> void:
 	target.hurt(1, false)
-	
+	debuff_panel.blink()
