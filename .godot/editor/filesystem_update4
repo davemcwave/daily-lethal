@@ -24,3 +24,4 @@ res://Scripts/StartNewAttemptDialog.gd
 res://Scripts/RestartButton.gd
 res://Scripts/NewAttemptPanel.gd
 res://Configs/2025-04-23.json
+res://Scripts/TutorialPanel.gd
