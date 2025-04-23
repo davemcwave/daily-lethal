@@ -20,3 +20,8 @@ res://Scripts/BuffCardEffect.gd
 res://Scripts/Debuff.gd
 res://Scripts/Enemy.gd
 res://Scripts/BuffsContainer.gd
+res://Scripts/Energy.gd
+res://Scripts/GainEnergyCardEffects.gd
+res://Scripts/PoundCard.gd
+res://Scripts/SurgeCard.gd
+res://Scripts/Background.gd

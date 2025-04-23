@@ -17,7 +17,7 @@ func _ready():
 	
 	$VBoxContainer/AttemptText.set_text("[center][b]IN [color=green]%d[/color] ATTEMPT%s[/b][/center]" % [background.attempts, attempt_plural.to_upper()])
 	$VBoxContainer/BestAttemptText.set_text("[center][b]WITH [color=gold]%d[/color] CARDS PLAYED \nON LAST ATTEMPT[/b][/center]" % background.best_card_count)
-	
+	$EnemyIcon.set_texture(background.get_enemy_texture())
 
 func _on_play_again_button_pressed():
 	background.clear()

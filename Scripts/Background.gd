@@ -3,11 +3,18 @@ extends Node2D
 var attempts = 0
 var best_card_count: int = 0
 var enemy_name: String = ""
+var enemy_texture: Texture2D = null
 
 func clear() -> void:
 	attempts = 0
 	best_card_count = 0
 
+func set_enemy_texture(new_enemy_texture: Texture2D) -> void:
+	enemy_texture = new_enemy_texture
+	
+func get_enemy_texture() -> Texture2D:
+	return enemy_texture
+	
 func add_attempt() -> void:
 	attempts += 1
 	

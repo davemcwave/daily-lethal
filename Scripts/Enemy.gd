@@ -17,6 +17,8 @@ func _ready():
 	$EnemyHealthBar.max_value = health
 	$EnemyHealthBar.value = health
 	update_health_bar()
+	
+	background.set_enemy_texture($EnemyIcon.get_texture())
 
 func set_enemy_name(new_enemy_name: String) -> void:
 	enemy_name = new_enemy_name
