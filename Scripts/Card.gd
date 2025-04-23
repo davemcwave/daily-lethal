@@ -96,7 +96,8 @@ func can_play() -> bool:
 		and card_play_area.has_card() \
 		and card_play_area.get_card() == self \
 		and not enemy.is_animating() \
-		and not buffs_container.is_animating()
+		and not buffs_container.is_animating() \
+		and energy.has_enough_energy(energy_cost)
 		
 func drop() -> void:
 	grabbed = false
@@ -105,6 +106,7 @@ func drop() -> void:
 	if can_play():
 		play()
 	else:
+		playing = false
 		set_position(grab_position)
 		reset_z_index()
 		
@@ -118,24 +120,21 @@ func is_playing() -> bool:
 	return playing
 	
 func play():
-	if energy.has_enough_energy(energy_cost):
-		scene.increment_card_count()
-		playing = true
-		energy.use_energy(energy_cost)
-		
-		for card_effect in card_effects:
-			card_effect.apply()
-		
-		last_cards_played_container.add_card(self)
-		
-		if remember_last_card_effects:
-			scene.set_last_card_effects(self)
-			buffs_container.activate_on_play_buffs()
-		
-		queue_free()
-	else:
-		playing = false
-		set_position(grab_position)
+
+	scene.increment_card_count()
+	playing = true
+	energy.use_energy(energy_cost)
+	
+	for card_effect in card_effects:
+		card_effect.apply()
+	
+	last_cards_played_container.add_card(self)
+	
+	if remember_last_card_effects:
+		scene.set_last_card_effects(self)
+		buffs_container.activate_on_play_buffs()
+	
+	queue_free()
 	
 func _process(delta):
 	if grabbed:
