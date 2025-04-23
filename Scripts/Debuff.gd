@@ -10,6 +10,9 @@ enum ActivationType {OnHurt, OnAttack}
 var target: Enemy = null
 var debuff_panel: DebuffPanel = null
 
+func _ready() -> void:
+	add_to_group("Debuffs")
+
 func set_target(new_target: Enemy) -> void:
 	target = new_target
 	

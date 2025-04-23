@@ -9,6 +9,7 @@ signal just_hurt(amount: int)
 @onready var initial_icon_position: Vector2 = $EnemyIcon.position
 @export var health = 10
 var dead: bool = false
+var animating: bool = false
 var debuff_activate_queue: Array = []
 
 func _ready():
@@ -44,11 +45,16 @@ func blink_white() -> void:
 func get_debuffs() -> Array:
 	return $DebuffContainer.get_debuffs()
 
+func is_animating() -> bool:
+	return animating
+	
 func activate_on_hurt_debuffs() -> void:
+	animating = true
 	for debuff: Debuff in get_debuffs():
 		if debuff.is_activated_on_hurt():
 			await get_tree().create_timer(0.25).timeout
 			debuff.activate()
+	animating = false
 			
 func create_damage_label(hurt_amount: int) -> void:
 	var damage_label: RichTextLabel = load("res://Scenes/DamageLabel.scn").instantiate()
