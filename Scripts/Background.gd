@@ -1,18 +1,15 @@
 extends Node2D
 
+var attempts = 0
 var best_card_count: int = 0
 var enemy_name: String = ""
-var attempts = []
 
-func get_attempts() -> Array:
-	return attempts
-	
 func clear() -> void:
 	attempts = 0
 	best_card_count = 0
 
-func add_attempt(attempt: Array[String]) -> void:
-	attempts.append(attempt)
+func add_attempt() -> void:
+	attempts += 1
 	
 	#if len(new_attempt) > best_card_count:
 		#set_best_card_count(len(new_attempt))

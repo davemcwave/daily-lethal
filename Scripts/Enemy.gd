@@ -52,7 +52,7 @@ func hurt(hurt_amount: int, hurt_from_card: bool = true) -> void:
 		die()
 	
 	update_health_bar()
-	#scene.check_game_over()
+	scene.check_game_over()
 	
 func update_health_bar() -> void:
 	$EnemyHealthBar.value = health
