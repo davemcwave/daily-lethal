@@ -6,5 +6,5 @@ func _on_button_confirm_pressed():
 
 
 func _on_button_exit_pressed():
-	get_parent().get_node("BG").hide()
+	get_parent().get_parent().get_node("BG").hide()
 	hide()

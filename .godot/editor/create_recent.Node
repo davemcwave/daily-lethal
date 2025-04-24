@@ -1,3 +1,4 @@
+VBoxContainer
 CollisionShape2D
 Area2D
 Panel
@@ -11,5 +12,3 @@ AcceptDialog
 PopupPanel
 Node2D
 Control
-VBoxContainer
-TextureButton

@@ -12,3 +12,4 @@ res://Scenes/Card.scn
 res://Scenes/BuffPanel.scn
 res://Scenes/DebuffPanel.scn
 res://Scenes/RepeatBuff.scn
+res://Scripts/NewAttemptPanel.gd
