@@ -8,3 +8,7 @@ res://Scripts/DiscardPanel.gd
 res://Scripts/DiscardPileView.gd
 res://Scripts/RestartButton.gd
 res://Scenes/EndGameScreen.scn
+res://Scenes/Card.scn
+res://Scenes/BuffPanel.scn
+res://Scenes/DebuffPanel.scn
+res://Scenes/RepeatBuff.scn

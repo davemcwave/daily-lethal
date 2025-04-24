@@ -14,7 +14,7 @@ config/name="Play Lethal"
 run/main_scene="uid://bu6lgt3xfx2rr"
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/show_image=false
-config/icon="uid://cwycvvndl842b"
+config/icon="uid://iq3ggtrrqtb3"
 
 [autoload]
 

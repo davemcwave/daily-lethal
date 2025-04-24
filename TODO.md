@@ -9,3 +9,5 @@
 - [ ] bring in draw mechanic but let player see deck with other cards
 - [x] tooltips on buffs and debuffs and history
 - [ ] boss mechanics
+    - thorns
+    - 
