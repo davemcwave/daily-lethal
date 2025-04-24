@@ -2,8 +2,15 @@ extends Panel
 class_name BuffPanel
 
 @onready var buff_preview: BuffPreview = get_tree().get_root().get_node("Scene/CanvasLayer/BuffPreview")
-var buff: Buff
+@export_file("*.scn") var buff_scene
+@export var buff: Buff
 
+func _ready():
+	if buff_scene != null:
+		set_buff(load(buff_scene).instantiate())
+	elif buff != null:
+		set_buff(buff)
+		
 func blink() -> void:
 	var original_color: Color = get_theme_stylebox("panel").bg_color
 	get_theme_stylebox("panel").bg_color = Color.WHITE
@@ -11,8 +18,10 @@ func blink() -> void:
 	get_theme_stylebox("panel").bg_color = original_color
 	
 func set_buff(new_buff: Buff) -> void:
-	add_child(new_buff)
 	buff = new_buff
+	
+	if buff.get_parent() != self:
+		add_child(new_buff)
 	
 	buff.set_buff_panel(self)
 	
