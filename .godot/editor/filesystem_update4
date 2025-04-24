@@ -1,5 +1,6 @@
 res://Scenes/Scene0.scn
 res://Scripts/Shaders/WhiteBlink.gdshader
+<<<<<<< HEAD
 res://Scripts/Buff.gd
 res://Scripts/BuffPanel.gd
 res://Scripts/BuffPreview.gd
@@ -18,3 +19,5 @@ res://Scenes/RetaliateBuff.scn
 res://Scripts/RetaliateBuff.gd
 res://Scripts/Buff.gd
 res://Scripts/Enemy.gd
+=======
+>>>>>>> c825872 (stuff)
