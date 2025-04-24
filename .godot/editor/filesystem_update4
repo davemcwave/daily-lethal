@@ -1,15 +1,5 @@
 res://Scenes/Scene0.scn
 res://Scripts/Shaders/WhiteBlink.gdshader
+res://Scripts/Buff.gd
 res://Scripts/BuffPanel.gd
-res://Scripts/BuffPreview.gd
-res://Scripts/Card.gd
-res://Scripts/DebuffPanel.gd
-res://Scripts/DiscardPanel.gd
-res://Scripts/DiscardPileView.gd
-res://Scripts/RestartButton.gd
-res://Scenes/EndGameScreen.scn
-res://Scenes/Card.scn
-res://Scenes/BuffPanel.scn
-res://Scenes/DebuffPanel.scn
-res://Scenes/RepeatBuff.scn
-res://Scripts/NewAttemptPanel.gd
+res://Scripts/Enemy.gd
