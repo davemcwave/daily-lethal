@@ -7,4 +7,5 @@
 - [ ] last card was attack
 - [ ] double the hand
 - [ ] bring in draw mechanic but let player see deck with other cards
-- [ ] tooltips on buffs and debuffs and history
+- [x] tooltips on buffs and debuffs and history
+- [ ] boss mechanics
