@@ -1,0 +1,10 @@
+- [ ] "Eye for an eye" card that does damage but player takes damage
+- [ ] "return to hand"
+- [ ] "next card costs no energy"
+- [ ] "damage done this turn" 
+- [ ] "# of cards in hand"
+- [ ] energy remaining - [] dmg based on energy remaining 
+- [ ] last card was attack
+- [ ] double the hand
+- [ ] bring in draw mechanic but let player see deck with other cards
+- [ ] tooltips on buffs and debuffs and history
