@@ -1,6 +1,7 @@
 extends Panel
 class_name BuffPanel
 
+@onready var buff_preview: BuffPreview = get_tree().get_root().get_node("Scene/CanvasLayer/BuffPreview")
 var buff: Buff
 
 func blink() -> void:
@@ -20,3 +21,12 @@ func update_text() -> void:
 	
 func get_buff() -> Buff:
 	return buff
+
+
+func _on_gui_input(event):
+	if event.is_action_pressed("select"):
+		buff_preview.set_text(buff.get_buff_name(), buff.get_buff_description())
+		buff_preview.set_color(get_theme_stylebox("panel").bg_color)
+		buff_preview.show()
+	elif event.is_action_released("select"):
+		buff_preview.hide()

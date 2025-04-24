@@ -25,3 +25,10 @@ res://Scripts/GainEnergyCardEffects.gd
 res://Scripts/PoundCard.gd
 res://Scripts/SurgeCard.gd
 res://Scripts/Background.gd
+res://Scripts/DiscardPanel.gd
+res://Scenes/Card.scn
+res://Scripts/RestartButton.gd
+res://Scripts/BuffPreview.gd
+res://Scripts/BuffPanel.gd
+res://Scripts/DebuffPanel.gd
+res://Scripts/DiscardPileView.gd

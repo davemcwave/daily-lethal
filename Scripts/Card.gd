@@ -19,27 +19,50 @@ var grabbed: bool = false
 @onready var energy = scene.get_node("Energy")
 @onready var play_text = scene.get_node("PlayText")
 @onready var background = get_node("/root/Background")
-@onready var last_cards_played_container: GridContainer = scene.get_node("LastCardsPlayedContainer")
+#@onready var last_cards_played_container: GridContainer = scene.get_node("LastCardsPlayedContainer")
 @onready var original_z_index = z_index
 @onready var buffs_container: BuffsContainer = scene.get_node("BuffsContainer")
+@onready var discard_panel: DiscardPanel = scene.get_node("DiscardPanel")
+@onready var discard_pile_view = scene.get_node("CanvasLayer/DiscardPileView")
 var grab_position = Vector2.ZERO
 var grabbed_timestamp = null
 var last_mouse_position = null
 var playing: bool = false
+var discarded: bool = false
 
 
 func _ready():
+	calculate_pivot_offset()
 	$TitlePanel/Title.set_text("[center]%s[/center]" % card_name)
 	#$CardEffect.set_target(enemy)
 	$DescriptionPanel/Title.set_text("[center]%s[/center]" % card_description)
 	$EnergyPanel/Energy.set_text("[center]%d[/center]" % energy_cost)
 	
 	#connect("played", scene._on_card_played.bind(self))
+
+func set_discarded(new_discarded: bool) -> void:
+		
+	discarded = new_discarded
 	
+		
+func reduce_saturation() -> void:
+	modulate = Color(0.4, 0.4, 0.4, 1.0)
+	
+func normalize_saturation() -> void:
+	modulate = Color(1.0, 1.0, 1.0, 1.0)
+	
+func calculate_pivot_offset() -> void:
+	pivot_offset = size / 2
+
 func _on_gui_input(event):
+	
 	if event.is_action_pressed("select"):
-		grab()
-	elif event.is_action_released("select"):
+		if discarded:
+			discard_pile_view.populate_cards()
+			discard_pile_view.show()
+		else:
+			grab()
+	elif event.is_action_released("select") and not discarded:
 		drop()
 		
 	if event is InputEventMouseMotion and event.relative.length() > 5 and card_preview.visible:
@@ -128,13 +151,14 @@ func play():
 	for card_effect in card_effects:
 		card_effect.apply()
 	
-	last_cards_played_container.add_card(self)
+	#last_cards_played_container.add_card(self)
 	
 	if remember_last_card_effects:
 		scene.set_last_card_effects(self)
 		buffs_container.activate_on_play_buffs()
 	
-	queue_free()
+	set_discarded(true)
+	discard_panel.add_card(self)
 	
 func _process(delta):
 	if grabbed:
