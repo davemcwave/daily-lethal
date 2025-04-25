@@ -30,6 +30,12 @@ func draw_starting_cards() -> void:
 		
 func increment_card_count() -> void:
 	card_count += 1
+
+func disable_all_cards() -> void:
+	for card: Card in get_tree().get_nodes_in_group("Cards"):
+		if not card.is_discarded():
+			card.set_discarded(true)
+			card.reduce_saturation()
 	
 func check_game_over() -> void:
 	if enemy.is_dead(): # or not hand.has_playable_cards():
@@ -37,5 +43,6 @@ func check_game_over() -> void:
 		await get_tree().create_timer(0.75).timeout
 		get_tree().change_scene_to_file("res://Scenes/EndGameScreen.scn")
 	elif health.is_dead():
-		await get_tree().create_timer(0.75).timeout
-		get_tree().change_scene_to_file("res://Scenes/LoseScreen.scn")
+		disable_all_cards()
+		await get_tree().create_timer(1.0).timeout
+		$CanvasLayer/DeadPanel.appear()

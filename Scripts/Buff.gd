@@ -7,13 +7,17 @@ signal activated
 @export var buff_name: String = "Buff"
 @export var buff_description: String = "Buffs the player"
 
-enum ActivationType {OnCardPlay, OnAttack, OnHurt}
+enum ActivationType {OnCardPlay, OnAttack, OnHit, OnHurt}
 @export var activation_type: ActivationType
 
 @export var uses_amount: int = 1
 @export var unlimited_uses: bool = false
 
 var buff_panel: BuffPanel = null
+@export var target: Node = null
+
+func set_target(new_target: Node) -> void:
+	target = new_target
 
 func set_buff_panel(new_buff_panel: BuffPanel) -> void:
 	buff_panel = new_buff_panel
@@ -30,16 +34,22 @@ func get_buff_name() -> String:
 func get_buff_description() -> String:
 	return buff_description
 	
+func is_activated_on_target_hit() -> bool:
+	return activation_type == ActivationType.OnHit
+	
 func is_activated_on_card_play() -> bool:
 	return activation_type == ActivationType.OnCardPlay
 
 func is_activated_on_target_hurt() -> bool:
 	return activation_type == ActivationType.OnHurt
+	
 # TO BE OVERWRITTEN
 func activate() -> void:
 	if not is_unlimited_uses():
 		uses_amount -= 1
+	
 	buff_panel.blink()
+	emit_signal("activated")
 
 func is_unlimited_uses() -> bool:
 	return unlimited_uses

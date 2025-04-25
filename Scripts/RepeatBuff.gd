@@ -10,5 +10,4 @@ func activate() -> void:
 		card_effect.apply()
 	
 	super.activate()
-	emit_signal("activated")
 	

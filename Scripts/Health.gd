@@ -1,8 +1,11 @@
 extends TextureRect
 
 @export var health: int = 5
+@onready var scene = get_tree().get_root().get_node("Scene")
+@onready var buffs_container: BuffsContainer = scene.get_node("BuffsContainer")
 @onready var original_color: Color = self_modulate
 var dead: bool = false
+var block: bool = false
 
 func _ready():
 	update_text()
@@ -18,20 +21,27 @@ func blink() -> void:
 	self_modulate = Color.WHITE
 	await get_tree().create_timer(0.1).timeout
 	self_modulate = original_color
-	
+
 func set_health(new_health: int) -> void:
 	health = new_health
 	update_text()
 	
 func hurt(amount: int) -> void:
-	health -= amount
 	
-	create_damage_label(amount)
+	if buffs_container.has_block_buff():
+		create_damage_label(0)
+		buffs_container.remove_block_buff()
+	else:
+		health = max(health-amount,0)
+		create_damage_label(amount)
 	
-	if health <= 0:
-		dead = true
+		if health <= 0:
+			dead = true
+			
+		update_text()
+		scene.check_game_over()
 		
-	update_text()
+		buffs_container.activate_on_hurt_buffs()
 		
 func is_dead() -> bool:
 	return dead
