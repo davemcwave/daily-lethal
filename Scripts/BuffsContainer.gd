@@ -57,7 +57,7 @@ func activate_on_hurt_buffs() -> void:
 	animating = true
 	for buff_panel: BuffPanel in get_children():
 		var buff: Buff = buff_panel.get_buff()
-		if buff.is_activated_on_target_hurt():
+		if is_instance_valid(buff) and buff != null and buff.is_activated_on_target_hurt():
 			await get_tree().create_timer(0.25).timeout
 			buff.activate()
 	animating = false

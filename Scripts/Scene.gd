@@ -38,11 +38,11 @@ func disable_all_cards() -> void:
 			card.reduce_saturation()
 	
 func check_game_over() -> void:
-	if enemy.is_dead(): # or not hand.has_playable_cards():
-		background.set_best_card_count(card_count)
-		await get_tree().create_timer(0.75).timeout
-		get_tree().change_scene_to_file("res://Scenes/EndGameScreen.scn")
-	elif health.is_dead():
+	if health.is_dead():
 		disable_all_cards()
 		await get_tree().create_timer(1.0).timeout
 		$CanvasLayer/DeadPanel.appear()
+	elif enemy.is_dead(): # or not hand.has_playable_cards():
+		background.set_best_card_count(card_count)
+		await get_tree().create_timer(0.75).timeout
+		get_tree().change_scene_to_file("res://Scenes/EndGameScreen.scn")
