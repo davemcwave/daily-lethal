@@ -1,7 +1,14 @@
 extends Buff
+class_name RetaliateBuff
 
 @onready var scene = get_tree().get_root().get_node("Scene")
-@onready var enemy: Enemy = scene.get_node("Enemy")
+@export var target: Node = null
+
+func set_target(new_target: Node) -> void:
+	target = new_target
+	
 func activate() -> void:
-	enemy.hurt(1)
+	super.activate()
+	target.hurt(1)
+	
 	

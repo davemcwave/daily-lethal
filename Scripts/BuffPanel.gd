@@ -25,6 +25,8 @@ func set_buff(new_buff: Buff) -> void:
 	
 	buff.set_buff_panel(self)
 	
+	update_text()
+	
 func update_text() -> void:
 	$BuffText.set_text("[center][b]%s[/b][/center]" % buff.get_buff_name())
 	
