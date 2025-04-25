@@ -84,15 +84,16 @@ func show_card_preview() -> void:
 	card_preview.clear_extra_descriptions()
 	card_preview.set_title(card_name)
 	
+	var card_effect_names: Array[String] = []
 	for card_effect: CardEffect in card_effects:
-		if card_effect.get_effect_description().is_empty():
+		var card_effect_name: String = "[center][b]%s:[/b][/center]" % card_effect.get_effect_name()
+		if card_effect.get_effect_description().is_empty() or card_effect_names.has(card_effect_name):
 			continue
 			
-		var card_effect_name: String = "[center][b]%s:[/b][/center]" % card_effect.get_effect_name()
 		var card_effect_description: String = "[center]%s[/center]" % card_effect.get_effect_description()
 		var extra_description: String = "%s %s" % [card_effect_name, card_effect_description]
 		card_preview.add_extra_description(extra_description)
-		
+		card_effect_names.append(card_effect_name)
 	card_preview.set_background_color(get_background_color())
 	card_preview.set_description(card_description)
 	card_preview.set_icon_texture(get_icon_texture())

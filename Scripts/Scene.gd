@@ -44,16 +44,34 @@ func disable_all_cards() -> void:
 func is_checking_for_game_over() -> bool:
 	return checking_for_game_over
 	
+
+
 func check_game_over() -> void:
+	# Prevent overlapping checks and ignore if game already over
+	if checking_for_game_over or game_over:
+		return
 	checking_for_game_over = true
-	if health.is_dead() and not game_over:
+
+	# Snapshot current health and enemy state
+	var p_dead = health.is_dead()
+	var e_dead = enemy.is_dead()
+
+	if p_dead:
 		game_over = true
 		disable_all_cards()
+		# Show death panel after delay
 		await get_tree().create_timer(1.0).timeout
 		$CanvasLayer/DeadPanel.appear()
-	elif enemy.is_dead() and not game_over: # or not hand.has_playable_cards():
+
+	elif e_dead:
 		game_over = true
 		background.set_best_card_count(card_count)
+		# Brief pause before win screen
 		await get_tree().create_timer(0.75).timeout
-		get_tree().change_scene_to_file("res://Scenes/EndGameScreen.scn")
+		# If player also died in the meantime, show death instead
+		if health.is_dead():
+			$CanvasLayer/DeadPanel.appear()
+		else:
+			get_tree().change_scene_to_file("res://Scenes/EndGameScreen.scn")
+
 	checking_for_game_over = false

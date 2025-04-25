@@ -4,18 +4,23 @@ class_name BuffPanel
 @onready var buff_preview: BuffPreview = get_tree().get_root().get_node("Scene/CanvasLayer/BuffPreview")
 @export_file("*.scn") var buff_scene
 @export var buff: Buff
+var _blinking: bool = false
+var _base_modulate: Color
 
 func _ready():
+	_base_modulate = modulate
 	if buff_scene != null:
 		set_buff(load(buff_scene).instantiate())
 	elif buff != null:
 		set_buff(buff)
-		
+
 func blink() -> void:
-	var original_color: Color = get_theme_stylebox("panel").bg_color
-	get_theme_stylebox("panel").bg_color = Color.WHITE
+	# don’t read modulate at runtime, you already know your normal
+	modulate = Color(1,1,1)      # blink red
 	await get_tree().create_timer(0.1).timeout
-	get_theme_stylebox("panel").bg_color = original_color
+	modulate = _base_modulate
+
+
 	
 func set_buff(new_buff: Buff) -> void:
 	buff = new_buff
