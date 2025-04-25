@@ -1,5 +1,7 @@
 extends Control
 
+signal checked_for_game_over
+
 @onready var enemy = get_node("Enemy")
 @onready var health = get_node("Health")
 @onready var background = get_node("/root/Background")
@@ -7,6 +9,8 @@ extends Control
 @export var starting_card_amount: int = 3
 var card_count: int = 0
 var last_card_effects: Array[CardEffect] = []
+var checking_for_game_over: bool = false
+var game_over: bool = false
 
 func _ready():
 	background.add_attempt()
@@ -36,13 +40,20 @@ func disable_all_cards() -> void:
 		if not card.is_discarded():
 			card.set_discarded(true)
 			card.reduce_saturation()
+
+func is_checking_for_game_over() -> bool:
+	return checking_for_game_over
 	
 func check_game_over() -> void:
-	if health.is_dead():
+	checking_for_game_over = true
+	if health.is_dead() and not game_over:
+		game_over = true
 		disable_all_cards()
 		await get_tree().create_timer(1.0).timeout
 		$CanvasLayer/DeadPanel.appear()
-	elif enemy.is_dead(): # or not hand.has_playable_cards():
+	elif enemy.is_dead() and not game_over: # or not hand.has_playable_cards():
+		game_over = true
 		background.set_best_card_count(card_count)
 		await get_tree().create_timer(0.75).timeout
 		get_tree().change_scene_to_file("res://Scenes/EndGameScreen.scn")
+	checking_for_game_over = false

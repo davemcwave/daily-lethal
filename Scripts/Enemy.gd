@@ -96,6 +96,8 @@ func hurt(hurt_amount: int, hurt_from_card: bool = true) -> void:
 		die()
 	
 	update_health_bar()
+	
+	await get_tree().create_timer(0.5).timeout
 	scene.check_game_over()
 	
 func update_health_bar() -> void:

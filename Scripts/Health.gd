@@ -39,6 +39,7 @@ func hurt(amount: int) -> void:
 			dead = true
 			
 		update_text()
+		
 		scene.check_game_over()
 		
 		buffs_container.activate_on_hurt_buffs()
