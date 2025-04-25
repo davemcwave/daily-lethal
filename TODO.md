@@ -2,12 +2,14 @@
 - [ ] "return to hand"
 - [ ] "next card costs no energy"
 - [ ] "damage done this turn" 
-- [ ] "# of cards in hand"
-- [ ] energy remaining - [] dmg based on energy remaining 
+- [ ] "# of cards in hand" - spend all mana
+- [ ] energy remaining - dmg based on energy remaining 
 - [ ] last card was attack
 - [ ] double the hand
 - [ ] bring in draw mechanic but let player see deck with other cards
 - [x] tooltips on buffs and debuffs and history
-- [ ] boss mechanics
-    - thorns
-    - 
+- [x] boss mechanics
+    - [x] thorns
+- [ ] boomerange mechanic
+- [ ] double the strength of attack card
+- [x] game restarts when player dies

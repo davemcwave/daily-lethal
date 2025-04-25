@@ -14,6 +14,7 @@ var grabbed: bool = false
 @export var energy_cost: int = 1
 @export var card_description: String = "Deal 2 damage"
 @export var remember_last_card_effects: bool = true
+@export var card_effect_delay: float = 0.0
 @onready var enemy = scene.get_node("Enemy")
 @onready var card_preview = scene.get_node("CanvasLayer/CardPreview")
 @onready var energy = scene.get_node("Energy")
@@ -38,12 +39,15 @@ func _ready():
 	$DescriptionPanel/Title.set_text("[center]%s[/center]" % card_description)
 	$EnergyPanel/Energy.set_text("[center]%d[/center]" % energy_cost)
 	
+	add_to_group("Cards")
 	#connect("played", scene._on_card_played.bind(self))
 
 func set_discarded(new_discarded: bool) -> void:
 		
 	discarded = new_discarded
-	
+
+func is_discarded() -> bool:
+	return discarded
 		
 func reduce_saturation() -> void:
 	modulate = Color(0.4, 0.4, 0.4, 1.0)
@@ -84,8 +88,8 @@ func show_card_preview() -> void:
 		if card_effect.get_effect_description().is_empty():
 			continue
 			
-		var card_effect_name: String = "[font_size=10][b]%s:[/b][/font_size]" % card_effect.get_effect_name()
-		var card_effect_description: String = "[font_size=10]%s[/font_size]" % card_effect.get_effect_description()
+		var card_effect_name: String = "[center][b]%s:[/b][/center]" % card_effect.get_effect_name()
+		var card_effect_description: String = "[center]%s[/center]" % card_effect.get_effect_description()
 		var extra_description: String = "%s %s" % [card_effect_name, card_effect_description]
 		card_preview.add_extra_description(extra_description)
 		
@@ -143,12 +147,14 @@ func is_playing() -> bool:
 	return playing
 	
 func play():
-
 	scene.increment_card_count()
 	playing = true
+	
 	energy.use_energy(energy_cost)
 	
 	for card_effect in card_effects:
+		if card_effect_delay > 0.0:
+			await get_tree().create_timer(card_effect_delay).timeout
 		card_effect.apply()
 	
 	#last_cards_played_container.add_card(self)

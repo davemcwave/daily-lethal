@@ -49,6 +49,20 @@ func get_debuffs() -> Array:
 
 func is_animating() -> bool:
 	return animating
+
+func get_buffs() -> Array[Buff]:
+	var buffs: Array[Buff] = []
+	for buff_panel: BuffPanel in $EnemyBuffsContainer.get_children():
+		buffs.append(buff_panel.get_buff())
+	return buffs
+	
+func activate_on_hurt_buffs() -> void:
+	animating = true
+	for buff: Buff in get_buffs():
+		if buff.is_activated_on_target_hurt():
+			await get_tree().create_timer(0.25).timeout
+			buff.activate()
+	animating = false
 	
 func activate_on_hurt_debuffs() -> void:
 	animating = true
@@ -72,6 +86,7 @@ func hurt(hurt_amount: int, hurt_from_card: bool = true) -> void:
 	create_damage_label(hurt_amount)
 	
 	if hurt_from_card:
+		activate_on_hurt_buffs()
 		activate_on_hurt_debuffs()
 		
 	shake_briefly()
