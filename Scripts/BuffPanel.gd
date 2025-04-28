@@ -28,6 +28,7 @@ func set_buff(new_buff: Buff) -> void:
 	if buff.get_parent() != self:
 		add_child(new_buff)
 	
+	#modulate = buff.get_color()
 	buff.set_buff_panel(self)
 	
 	update_text()

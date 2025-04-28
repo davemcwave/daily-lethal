@@ -23,4 +23,5 @@ func get_effect_description() -> String:
 	return buff.get_buff_description()
 	
 func apply() -> void:
+	#buff.set_color(get_parent().get_node("IconPanel").get_theme_stylebox("panel").bg_color)
 	buffs_container.add_buff(buff)

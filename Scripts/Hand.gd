@@ -31,6 +31,9 @@ func get_right_most_card() -> Card:
 func add_card(card: Card) -> void:
 	add_child(card)
 	
+	# wait one idle frame so all Controls and Node2Ds have real global positions
+	await get_tree().process_frame
+	
 	var new_global_position = STARTING_INDEX_POSITION
 	
 	if get_child_count() > 1:

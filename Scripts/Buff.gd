@@ -16,9 +16,18 @@ enum ActivationType {OnCardPlay, OnAttack, OnHit, OnHurt}
 var buff_panel: BuffPanel = null
 @export var target: Node = null
 
+@export var color: Color = Color.WHITE
+
 func set_target(new_target: Node) -> void:
 	target = new_target
 
+func set_color(new_color: Color) -> void:
+	#print("%s set to %s" % [name, str(new_color)])
+	color = new_color
+	
+func get_color() -> Color:
+	return color
+	
 func set_buff_panel(new_buff_panel: BuffPanel) -> void:
 	buff_panel = new_buff_panel
 	
