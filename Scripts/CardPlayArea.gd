@@ -7,7 +7,7 @@ var card: Card = null
 @onready var play_text: RichTextLabel = $"../PlayText"
 
 func _on_area_2d_area_entered(area):
-	if area.get_parent() is Card:
+	if area.get_parent() is Card and card == null:
 		self_modulate = CARD_HOVERED_COLOR
 		card = area.get_parent()
 		play_text.show()
