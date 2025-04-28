@@ -25,7 +25,7 @@ func set_text(new_text: String) -> void:
 func _on_gui_input(event):
 	if event.is_action_pressed("select"):
 		buff_preview.set_text(debuff.get_debuff_name(), debuff.get_debuff_description())
-		buff_preview.set_color(get_theme_stylebox("panel").bg_color)
+		buff_preview.set_color(modulate)
 		buff_preview.show()
 	elif event.is_action_released("select"):
 		buff_preview.hide()

@@ -4,12 +4,22 @@
 - [ ] "damage done this turn" 
 - [ ] "# of cards in hand" - spend all mana
 - [ ] energy remaining - dmg based on energy remaining 
+- [ ] do damage relative to how many cards have been played *****
 - [ ] last card was attack
 - [ ] double the hand
-- [ ] bring in draw mechanic but let player see deck with other cards
+- [x] bring in draw mechanic 
+    - [ ] but let player see deck with other cards
 - [x] tooltips on buffs and debuffs and history
 - [x] boss mechanics
     - [x] thorns
 - [ ] boomerange mechanic
 - [ ] double the strength of attack card
 - [x] game restarts when player dies
+- [ ] copy last card played
+- [ ] "momentum" buff where you get +1, +2, +3 bonuses on attack if you keep attacking
+- [ ] "refresh" buff where next card you play goes to the bottom of your deck
+- [ ] Deal damage relative to how much damage you've received
+- [ ] Heal mechanic
+- [ ] vampire lifesteal mechanic/buff
+- [ ] attack card that gets cheaper every turn
+- [ ] the next card drawn costs no energy
