@@ -165,6 +165,7 @@ func play():
 		card_effect.apply()
 	
 	buffs_container.activate_on_play_buffs()
+	scene.set_last_card_effects(self)
 	
 	set_discarded(true)
 	discard_panel.add_card(self)

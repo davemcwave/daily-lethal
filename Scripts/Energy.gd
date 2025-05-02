@@ -27,8 +27,7 @@ func add_energy(additional_energy_amount: int) -> void:
 	
 func use_energy(cost: int) -> void:
 	if buffs_container.has_free_buff():
-		#buffs_container.remove_free_buff()
-		pass
+		buffs_container.remove_free_buff()
 	else:
 		energy_amount -= cost
 		
