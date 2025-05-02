@@ -7,7 +7,7 @@ signal activated
 @export var buff_name: String = "Buff"
 @export var buff_description: String = "Buffs the player"
 
-enum ActivationType {OnCardPlay, OnAttack, OnHit, OnHurt}
+enum ActivationType {OnCardPlay, OnAttack, OnHit, OnHurt, ManuallyHandled}
 @export var activation_type: ActivationType
 
 @export var uses_amount: int = 1
@@ -52,6 +52,9 @@ func is_activated_on_card_play() -> bool:
 func is_activated_on_target_hurt() -> bool:
 	return activation_type == ActivationType.OnHurt
 	
+func is_activated_manually() -> bool:
+	return activation_type == ActivationType.ManuallyHandled
+	
 # TO BE OVERWRITTEN
 func activate() -> void:
 	if not is_unlimited_uses():
@@ -64,4 +67,5 @@ func is_unlimited_uses() -> bool:
 	return unlimited_uses
 	
 func exceeded_uses() -> bool:
+	#print("Exceeded uses | not is_unlimited_uses(): %s,  uses_amount <= 0: %s, uses_amount: %s" % [str(not is_unlimited_uses()),  str(uses_amount <= 0), str(uses_amount)])
 	return not is_unlimited_uses() and uses_amount <= 0

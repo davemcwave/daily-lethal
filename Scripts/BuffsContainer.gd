@@ -68,6 +68,7 @@ func activate_on_play_buffs() -> void:
 		var buff: Buff = buff_panel.get_buff()
 		if buff.is_activated_on_card_play():
 			buff.activate()
+			#await get_tree().create_timer(0.25).timeout
 			await buff.activated
 			if buff.exceeded_uses():
 				buff_panel.queue_free()

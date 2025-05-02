@@ -13,7 +13,6 @@ var grabbed: bool = false
 @export var card_name: String = "Slash"
 @export var energy_cost: int = 1
 @export var card_description: String = "Deal 2 damage"
-@export var remember_last_card_effects: bool = true
 @export var card_effect_delay: float = 0.0
 @onready var enemy = scene.get_node("Enemy")
 @onready var card_preview = scene.get_node("CanvasLayer/CardPreview")
@@ -120,6 +119,13 @@ func grab() -> void:
 		play_text.set_text(LOW_ENERGY_CARD_TEXT)
 	#move_to_front()
 func can_play() -> bool:
+	print(card_play_area != null,
+		card_play_area.has_card(),
+		card_play_area.get_card(),
+		not enemy.is_animating(),
+		not buffs_container.is_animating(),
+		energy.has_enough_energy(energy_cost)
+	)
 	return card_play_area != null \
 		and card_play_area.has_card() \
 		and card_play_area.get_card() == self \
@@ -158,11 +164,8 @@ func play():
 			await get_tree().create_timer(card_effect_delay).timeout
 		card_effect.apply()
 	
-	#last_cards_played_container.add_card(self)
-	
-	if remember_last_card_effects:
-		scene.set_last_card_effects(self)
-		buffs_container.activate_on_play_buffs()
+	buffs_container.activate_on_play_buffs()
+	scene.set_last_card_effects(self)
 	
 	set_discarded(true)
 	discard_panel.add_card(self)

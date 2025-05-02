@@ -10,9 +10,9 @@ var block: bool = false
 func _ready():
 	update_text()
 
-func create_damage_label(hurt_amount: int) -> void:
+func create_damage_label(hurt_amount: int, damage_message: String = "") -> void:
 	var damage_label: RichTextLabel = load("res://Scenes/DamageLabel.scn").instantiate()
-	damage_label.set_damage(hurt_amount)
+	damage_label.set_damage(hurt_amount, damage_message)
 	add_child(damage_label)
 	damage_label.global_position = global_position
 	damage_label.float_up(25.0)
@@ -29,7 +29,7 @@ func set_health(new_health: int) -> void:
 func hurt(amount: int) -> void:
 	
 	if buffs_container.has_block_buff():
-		create_damage_label(0)
+		create_damage_label(0, "BLOCKED!")
 		buffs_container.remove_block_buff()
 	else:
 		health = max(health-amount,0)

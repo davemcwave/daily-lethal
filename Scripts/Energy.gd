@@ -25,8 +25,8 @@ func add_energy(additional_energy_amount: int) -> void:
 	blink()
 	update_energy_text()
 	
-func use_energy(cost: int) -> void:
-	if buffs_container.has_free_buff():
+func use_energy(cost: int, use_free_buff: bool = true) -> void:
+	if buffs_container.has_free_buff() and use_free_buff:
 		buffs_container.remove_free_buff()
 	else:
 		energy_amount -= cost

@@ -1,8 +1,8 @@
 extends RichTextLabel
 	
-func set_damage(amount: int) -> void:
-	if amount == 0:
-		set_text("[center][b]BLOCKED![/b][/center]")
+func set_damage(amount: int, damage_message: String = "") -> void:
+	if not damage_message.is_empty():
+		set_text("[center][b]%s[/b][/center]" % damage_message)
 	else:
 		set_text("[center][b]-%d[/b][/center]" % amount)
 	
