@@ -27,6 +27,9 @@ func get_right_most_card() -> Card:
 			right_most_x_value = card.global_position.x
 			right_most_card = card
 	return right_most_card
+	
+func get_cards() -> Array[Node]:
+	return get_children()
 
 func add_card(card: Card) -> void:
 	add_child(card)
@@ -39,7 +42,7 @@ func add_card(card: Card) -> void:
 	if get_child_count() > 1:
 		var right_most_card: Card = get_right_most_card()
 		
-		new_global_position = Vector2(right_most_card.global_position.x + X_POSITION_GAP, right_most_card.global_position.y)
+		new_global_position = Vector2(right_most_card.global_position.x + X_POSITION_GAP, STARTING_INDEX_POSITION.y + randf_range(-5, 5))
 	
 	var tween = get_tree().create_tween()
 	card.global_position = deck.global_position

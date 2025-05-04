@@ -13,6 +13,12 @@ func set_damage_amount(new_damage_amount: int) -> void:
 func get_damage_amount() -> int:
 	return damage_amount
 	
+func increase_damage_amount(damage_increase_amount: int) -> void:
+	damage_amount += damage_increase_amount
+	
+	var card: Card = get_parent()
+	card.update_description_panel()
+	
 func set_target(new_target) -> void:
 	target = new_target
 	
