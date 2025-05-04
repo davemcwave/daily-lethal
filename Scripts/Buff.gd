@@ -7,7 +7,7 @@ signal activated
 @export var buff_name: String = "Buff"
 @export var buff_description: String = "Buffs the player"
 
-enum ActivationType {OnCardPlay, OnAttack, OnHit, OnHurt, ManuallyHandled}
+enum ActivationType {OnCardPlay, OnAttack, OnHit, OnHurt, ManuallyHandled, OnCardDiscarded}
 @export var activation_type: ActivationType
 
 @export var uses_amount: int = 1
@@ -17,6 +17,9 @@ var buff_panel: BuffPanel = null
 @export var target: Node = null
 
 @export var color: Color = Color.WHITE
+
+# True if this type of buff can only be played once per turn
+@export var activated_once_per_turn: bool = false
 
 func set_target(new_target: Node) -> void:
 	target = new_target
@@ -55,6 +58,15 @@ func is_activated_on_target_hurt() -> bool:
 func is_activated_manually() -> bool:
 	return activation_type == ActivationType.ManuallyHandled
 	
+func is_activated_on_card_discarded() -> bool:
+	return activation_type == ActivationType.OnCardDiscarded
+
+func can_be_activated_more_than_once_per_turn() -> bool:
+	return not activated_once_per_turn
+
+func can_be_activated_only_once_per_turn() -> bool:
+	return activated_once_per_turn
+
 # TO BE OVERWRITTEN
 func activate() -> void:
 	if not is_unlimited_uses():

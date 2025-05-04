@@ -1,6 +1,8 @@
 extends TextureRect
 class_name DiscardPanel
 
+@onready var buffs_container: BuffsContainer = get_tree().get_root().get_node("Scene/BuffsContainer")
+
 func get_cards() -> Array[Card]:
 	var cards: Array[Card] = []
 	for child in get_children():
@@ -21,7 +23,12 @@ func add_card(new_card: Card) -> void:
 	tween.parallel().tween_property(new_card, "global_position:x", global_position.x + randf_range(-5, 20), 0.75).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	tween.parallel().tween_property(new_card, "global_position:y", global_position.y + randf_range(-10, 10), 0.75).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 	tween.parallel().tween_property(new_card, "scale", Vector2.ONE*0.75, 0.75).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+	
+	buffs_container.activate_on_discard_buffs()
 	#await tween.finished
 	#if get_child_count() > 0 and $DiscardCenterText.visible:
 		#$DiscardCenterText.hide()
 		#$DiscardOutsideText.show()
+		
+func get_last_card() -> Card:
+	return get_children().back()

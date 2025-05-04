@@ -35,7 +35,8 @@ func _ready():
 	calculate_pivot_offset()
 	$TitlePanel/Title.set_text("[center]%s[/center]" % card_name)
 	#$CardEffect.set_target(enemy)
-	$DescriptionPanel/Title.set_text("[center]%s[/center]" % card_description)
+	set_description(card_description)
+	
 	$EnergyPanel/Energy.set_text("[center]%d[/center]" % energy_cost)
 	
 	add_to_group("Cards")
@@ -179,3 +180,10 @@ func get_energy_cost() -> int:
 
 func get_icon_texture() -> Texture2D:
 	return $IconPanel/Icon.get_texture()
+	
+func set_description(new_description: String) -> void:
+	card_description = new_description
+	update_description_panel()
+	
+func update_description_panel() -> void:
+	$DescriptionPanel/Title.set_text("[center]%s[/center]" % card_description)

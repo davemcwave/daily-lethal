@@ -73,3 +73,18 @@ func activate_on_play_buffs() -> void:
 			if buff.exceeded_uses():
 				buff_panel.queue_free()
 	animating = false
+	
+func activate_on_discard_buffs() -> void:
+	var buffs_activated = [] # Track if 2 of the same type of buff can be applied on the same turn
+	animating = true
+	for buff_panel: BuffPanel in get_children():
+		var buff: Buff = buff_panel.get_buff()
+		if buff.is_activated_on_card_discarded() and (buff.can_be_activated_only_once_per_turn() and not buffs_activated.has(buff.get_buff_name())):
+			buffs_activated.append(buff.get_buff_name())
+			buff.activate()
+			#await get_tree().create_timer(0.25).timeout
+			await buff.activated
+			if buff.exceeded_uses():
+				buff_panel.queue_free()
+	animating = false
+	
