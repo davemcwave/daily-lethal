@@ -73,3 +73,16 @@ func activate_on_play_buffs() -> void:
 			if buff.exceeded_uses():
 				buff_panel.queue_free()
 	animating = false
+	
+func activate_on_discard_buffs() -> void:
+	animating = true
+	for buff_panel: BuffPanel in get_children():
+		var buff: Buff = buff_panel.get_buff()
+		if buff.is_activated_on_card_discarded():
+			buff.activate()
+			#await get_tree().create_timer(0.25).timeout
+			await buff.activated
+			if buff.exceeded_uses():
+				buff_panel.queue_free()
+	animating = false
+	

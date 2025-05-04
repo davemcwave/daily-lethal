@@ -7,7 +7,7 @@ signal activated
 @export var buff_name: String = "Buff"
 @export var buff_description: String = "Buffs the player"
 
-enum ActivationType {OnCardPlay, OnAttack, OnHit, OnHurt, ManuallyHandled}
+enum ActivationType {OnCardPlay, OnAttack, OnHit, OnHurt, ManuallyHandled, OnCardDiscarded}
 @export var activation_type: ActivationType
 
 @export var uses_amount: int = 1
@@ -54,6 +54,9 @@ func is_activated_on_target_hurt() -> bool:
 	
 func is_activated_manually() -> bool:
 	return activation_type == ActivationType.ManuallyHandled
+	
+func is_activated_on_card_discarded() -> bool:
+	return activation_type == ActivationType.OnCardDiscarded
 	
 # TO BE OVERWRITTEN
 func activate() -> void:
