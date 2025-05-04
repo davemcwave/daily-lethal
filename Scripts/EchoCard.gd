@@ -13,7 +13,7 @@ func play() -> void:
 			await get_tree().create_timer(card_effect_delay).timeout
 		card_effect.apply()
 	
-	#scene.set_last_card_effects(self)
+	scene.set_last_card_effects(self)
 	
 	set_discarded(true)
 	discard_panel.add_card(self)
