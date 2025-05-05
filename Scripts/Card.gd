@@ -39,6 +39,7 @@ func _ready():
 	
 	$EnergyPanel/Energy.set_text("[center]%d[/center]" % energy_cost)
 	
+	$IconPanel/Icon.material = load("res://Resources/WobbleMaterial.res")
 	add_to_group("Cards")
 	#connect("played", scene._on_card_played.bind(self))
 

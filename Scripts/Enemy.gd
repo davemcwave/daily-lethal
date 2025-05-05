@@ -11,6 +11,8 @@ signal just_hurt(amount: int)
 var dead: bool = false
 var animating: bool = false
 var debuff_activate_queue: Array = []
+@onready var blink_shader: Shader = load("res://Scripts/Shaders/WhiteBlink.gdshader")
+@onready var wobble_shader: Shader = load("res://Scripts/Shaders/Wobble.gdshader")
 
 func _ready():
 	set_enemy_name(enemy_name)
@@ -19,7 +21,8 @@ func _ready():
 	update_health_bar()
 	
 	background.set_enemy_texture($EnemyIcon.get_texture())
-
+	$EnemyIcon.material.shader = wobble_shader
+	
 func set_enemy_name(new_enemy_name: String) -> void:
 	enemy_name = new_enemy_name
 	background.set_enemy_name(new_enemy_name)
@@ -40,10 +43,13 @@ func add_debuff(new_debuff: Debuff) -> void:
 	$DebuffContainer.add_debuff(new_debuff)
 	
 func blink_white() -> void:
+	$EnemyIcon.material.shader = blink_shader
 	$EnemyIcon.get_material().set_shader_parameter("blink_strength", 1.0)
+	
 	await get_tree().create_timer(0.1).timeout
 	$EnemyIcon.get_material().set_shader_parameter("blink_strength", 0.0)
-	
+	$EnemyIcon.material.shader = wobble_shader
+
 func get_debuffs() -> Array:
 	return $DebuffContainer.get_debuffs()
 
