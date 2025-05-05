@@ -11,3 +11,4 @@ func apply() -> void:
 		for card_effect: CardEffect in card.get_card_effects():
 			if card_effect is DamageCardEffect:
 				card_effect.increase_damage_amount(damage_increase_amount)
+				await get_tree().create_timer(0.05).timeout

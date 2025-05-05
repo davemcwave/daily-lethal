@@ -19,6 +19,9 @@ func increase_damage_amount(damage_increase_amount: int) -> void:
 	var card: Card = get_parent()
 	card.update_description_panel()
 	
+	if not card.is_bouncing():
+		card.bounce()
+	
 func set_target(new_target) -> void:
 	target = new_target
 	

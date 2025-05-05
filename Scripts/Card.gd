@@ -29,7 +29,7 @@ var grabbed_timestamp = null
 var last_mouse_position = null
 var playing: bool = false
 var discarded: bool = false
-
+var bouncing: bool = false
 
 func _ready():
 	calculate_pivot_offset()
@@ -185,6 +185,17 @@ func get_icon_texture() -> Texture2D:
 func set_description(new_description: String) -> void:
 	card_description = new_description
 	update_description_panel()
+
+func bounce() -> void:
+	bouncing = true
+	var tween = get_tree().create_tween()
+	var original_scale: Vector2 = scale
+	scale *= 1.5
+	tween.tween_property(self, "scale", original_scale, 0.25).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+	bouncing = false
 	
+func is_bouncing() -> bool:
+	return bouncing
+
 func update_description_panel() -> void:
 	$DescriptionPanel/Title.set_text("[center]%s[/center]" % card_description)

@@ -34,6 +34,9 @@ func draw_starting_cards() -> void:
 		
 func increment_card_count() -> void:
 	card_count += 1
+	
+func get_card_count() -> int:
+	return card_count
 
 func disable_all_cards() -> void:
 	for card: Card in get_tree().get_nodes_in_group("Cards"):
