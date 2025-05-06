@@ -7,7 +7,7 @@ const PLAY_CARD_TEXT = "[center][b][pulse freq=2.0 color=#ffffff40 ease=-2.0]PLA
 const LOW_ENERGY_CARD_TEXT = "[center][b][pulse freq=2.0 color=#ffffff40 ease=-2.0]LOW ENERGY[/pulse][/b][/center]"
 
 var grabbed: bool = false
-@onready var scene = get_tree().get_root().get_node("Scene")
+@onready var scene: Scene = get_tree().get_root().get_node("Scene")
 @onready var card_play_area = scene.get_node("CardPlayArea")
 @export var card_effects: Array[CardEffect] = []
 @export var card_name: String = "Slash"
@@ -189,8 +189,8 @@ func set_description(new_description: String) -> void:
 func bounce() -> void:
 	bouncing = true
 	var tween = get_tree().create_tween()
-	var original_scale: Vector2 = scale
-	scale *= 1.5
+	var original_scale = Vector2.ONE
+	scale = Vector2(1.5, 1.5)
 	tween.tween_property(self, "scale", original_scale, 0.25).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 	bouncing = false
 	

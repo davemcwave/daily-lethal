@@ -1,6 +1,8 @@
 extends Control
+class_name Scene
 
 signal checked_for_game_over
+signal card_count_incremented
 
 @onready var enemy = get_node("Enemy")
 @onready var health = get_node("Health")
@@ -34,6 +36,7 @@ func draw_starting_cards() -> void:
 		
 func increment_card_count() -> void:
 	card_count += 1
+	emit_signal("card_count_incremented")
 	
 func get_card_count() -> int:
 	return card_count
