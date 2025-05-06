@@ -6,7 +6,7 @@ func _ready():
 	scene.connect("card_count_incremented", func(): $CardEffect.increase_damage_amount(1))
 
 func update_description_panel() -> void:
-	card_description = "[center]%s[/center]" % ("Deal [color=red]{damage_amount}[/color] damage ([color=red]{damage_amount}[/color] cards played) damage".format({"damage_amount": get_card_effects()[0].get_damage_amount()}))
+	card_description = "[center]%s[/center]" % ("Deal [color=red]{damage_amount}[/color] damage (+1 damage per card played)".format({"damage_amount": get_card_effects()[0].get_damage_amount()}))
 	$DescriptionPanel/Title.set_text(card_description)
 
 func play():
