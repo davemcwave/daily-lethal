@@ -1,3 +1,5 @@
 .godot/
 .DS_Store
 Videos/
+Exports/
+*.zip

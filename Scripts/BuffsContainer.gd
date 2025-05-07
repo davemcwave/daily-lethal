@@ -30,7 +30,13 @@ func remove_block_buff() -> void:
 	
 func has_free_buff() -> bool:
 	for buff_panel: BuffPanel in get_children():
+		if not is_instance_valid(buff_panel):
+			continue
+			
 		var buff: Buff = buff_panel.get_buff()
+		if not is_instance_valid(buff):
+			continue
+		
 		if buff is FreeBuff:
 			return true
 			

@@ -26,6 +26,8 @@ func set_buff(new_buff: Buff) -> void:
 	buff = new_buff
 	
 	if buff.get_parent() != self:
+		if new_buff.get_parent() != null: 
+			new_buff.get_parent().remove_child(new_buff)
 		add_child(new_buff)
 	
 	#modulate = buff.get_color()
