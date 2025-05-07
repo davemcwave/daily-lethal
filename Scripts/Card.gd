@@ -121,13 +121,6 @@ func grab() -> void:
 		play_text.set_text(LOW_ENERGY_CARD_TEXT)
 	#move_to_front()
 func can_play() -> bool:
-	print(card_play_area != null,
-		card_play_area.has_card(),
-		card_play_area.get_card(),
-		not enemy.is_animating(),
-		not buffs_container.is_animating(),
-		energy.has_enough_energy(energy_cost)
-	)
 	return card_play_area != null \
 		and card_play_area.has_card() \
 		and card_play_area.get_card() == self \
