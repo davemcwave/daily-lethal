@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lethal Puzzle Archive</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #111;
+      color: #fff;
+      padding: 2rem;
+      margin: 0;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    a.puzzle-link {
+      display: flex;
+      align-items: center;
+      background: #222;
+      color: #0ff;
+      text-decoration: none;
+      padding: 1rem;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+
+    a.puzzle-link:hover {
+      background: #333;
+    }
+
+    .icon {
+      width: 64px;
+      height: 64px;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Lethal Puzzle Archive</h1>
+  <div class="grid">
+    <a class="puzzle-link" href="https://playlethal.fun/2025-05-05">
+      <img src="Assets/Textures/leech2.png" alt="Leech" class="icon" />
+      May 5, 2025
+    </a>
+    <a class="puzzle-link" href="https://playlethal.fun/2025-05-04">
+      <img src="Assets/Textures/ww-removebg-preview.png" alt="Werewolf" class="icon" />
+      May 4, 2025
+    </a>
+    <a class="puzzle-link" href="https://playlethal.fun/2025-05-02">
+      <img src="Assets/Textures/skeleton.png" alt="Skeleton" class="icon" />
+      May 2, 2025
+    </a>
+    <a class="puzzle-link" href="https://playlethal.fun/2025-04-25">
+      <img src="Assets/Textures/thorn-root-256x256.png" alt="Thornroot" class="icon" />
+      April 25, 2025
+    </a>
+    <a class="puzzle-link" href="https://playlethal.fun/2025-04-24">
+      <img src="Assets/Textures/sea-monster.png" alt="SeaMonster" class="icon" />
+      April 24, 2025
+    </a>
+    <a class="puzzle-link" href="https://playlethal.fun/2025-04-23">
+      <img src="Assets/Textures/robot.png" alt="Robot" class="icon" />
+      April 23, 2025
+    </a>
+    <!-- Add more entries here -->
+  </div>
+</body>
+</html>
