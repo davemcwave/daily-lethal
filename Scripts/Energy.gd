@@ -19,6 +19,10 @@ func blink() -> void:
 	self_modulate = Color.WHITE
 	await get_tree().create_timer(0.1).timeout
 	self_modulate = original_color
+
+func set_energy(new_energy: int) -> void:
+	energy_amount = new_energy
+	update_energy_text()
 	
 func add_energy(additional_energy_amount: int) -> void:
 	energy_amount += additional_energy_amount

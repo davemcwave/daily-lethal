@@ -8,16 +8,37 @@ signal card_count_incremented
 @onready var health = get_node("Health")
 @onready var background = get_node("/root/Background")
 @onready var deck: Deck = get_node("Deck")
-@export var starting_card_amount: int = 3
+@export_file("*.scn") var puzzle_scene
+var starting_card_amount: int = 3
 var card_count: int = 0
 var last_card_effects: Array[CardEffect] = []
 var checking_for_game_over: bool = false
 var game_over: bool = false
+var puzzle: Puzzle = null
 
 func _ready():
+	set_puzzle(load(puzzle_scene).instantiate())
+	
 	background.add_attempt()
 	
 	call_deferred("draw_starting_cards")
+
+func set_puzzle(new_puzzle: Puzzle) -> void:
+	puzzle = new_puzzle
+	
+	$"/root/Background".set_puzzle_date(puzzle.get_puzzle_date())
+	$Enemy.set_health(puzzle.get_enemy_health())
+	$Enemy.set_enemy_name(puzzle.get_enemy_name())
+	$Enemy.set_enemy_icon_texture(puzzle.get_enemy_icon_texture())
+	$"/root/Background".set_enemy_texture(puzzle.get_enemy_icon_texture())
+	for card_scene in puzzle.get_card_scenes():
+		var card: Card = card_scene.instantiate()
+		$Deck.add_child(card)
+		card.hide()
+		
+	$Health.set_health(puzzle.get_player_health())
+	$Energy.set_energy(puzzle.get_player_energy())
+	starting_card_amount = puzzle.get_initial_draw_amount() if puzzle.get_initial_draw_amount() > 0 else $Deck.get_child_count() 
 	
 func set_last_card_effects(card: Card) -> void:
 	last_card_effects = []

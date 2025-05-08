@@ -11,7 +11,7 @@ func _ready():
 			'enemy_name': background.enemy_name, 
 			'attempt_plural': attempt_plural,
 			'attempt_count': background.attempts, 
-			'best_card_count': background.best_card_count
+			'best_card_count': background.best_card_count,
 		}
 	)
 	

@@ -4,11 +4,15 @@ var attempts = 0
 var best_card_count: int = 0
 var enemy_name: String = ""
 var enemy_texture: Texture2D = null
+var puzzle_date: String = ""
 
 func clear() -> void:
 	attempts = 0
 	best_card_count = 0
 
+func set_puzzle_date(new_puzzle_date: String) -> void:
+	puzzle_date = new_puzzle_date
+	
 func set_enemy_texture(new_enemy_texture: Texture2D) -> void:
 	enemy_texture = new_enemy_texture
 	

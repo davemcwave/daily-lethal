@@ -30,6 +30,9 @@ func set_enemy_name(new_enemy_name: String) -> void:
 	
 func set_health(new_health: int) -> void:
 	health = new_health
+	$EnemyHealthBar.max_value = health
+	$EnemyHealthBar.value = health
+	update_health_bar()
 	
 func set_enemy_icon_texture(new_texture: Texture2D) -> void:
 	$EnemyIcon.set_texture(new_texture)
