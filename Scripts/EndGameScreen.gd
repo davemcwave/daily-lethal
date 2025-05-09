@@ -25,11 +25,13 @@ func _on_play_again_button_pressed():
 
 func _on_share_button_pressed():
 	DisplayServer.clipboard_set(share_text)
-	$ShareButton.set_text("COPIED!")
+	$ShareButton/TextureRect.hide()
+	$ShareButton.set_text("   COPIED!")
 	$ShareButton.set_disabled(true)
 	await get_tree().create_timer(1.5).timeout
 	$ShareButton.set_disabled(false)
-	$ShareButton.set_text("SHARE")
+	$ShareButton.set_text("   SHARE")
+	$ShareButton/TextureRect.show()
 
 func _on_get_tomorrow_button_pressed():
 	OS.shell_open("https://playlethal.beehiiv.com/subscribe")
