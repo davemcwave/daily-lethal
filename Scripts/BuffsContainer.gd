@@ -76,7 +76,7 @@ func activate_on_play_buffs() -> void:
 			buff.activate()
 			#await get_tree().create_timer(0.25).timeout
 			await buff.activated
-			if buff.exceeded_uses():
+			if buff.exceeded_uses() and is_instance_valid(buff_panel) and buff_panel != null:
 				buff_panel.queue_free()
 	animating = false
 	
