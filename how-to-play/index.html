@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Play - Daily Lethal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #1f2c30;
+      color: #fff;
+      font-family: 'Quicksand', sans-serif;
+      margin: 0;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(40, 55, 61, 0.95);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .content-row {
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+
+    .text {
+      flex: 1 1 300px;
+    }
+
+    .card-img {
+      flex: 0 0 200px;
+    }
+
+    .card-img img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-top: 0;
+      text-align: center;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+    }
+
+    a.back {
+      display: inline-block;
+      margin-top: 2rem;
+      text-decoration: none;
+      color: #3abff8;
+      font-weight: bold;
+    }
+
+    a.back:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LW9PLMBBGT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LW9PLMBBGT');
+</script>
+<body>
+  <div class="container">
+    <h1>How to Play</h1>
+    <div class="content-row">
+      <div class="text">
+        <p>
+          In <strong>Daily Lethal</strong>, your goal is simple: defeat the enemy in just <strong>1 turn</strong>.
+        </p>
+        <ul>
+          <li>You'll be dealt a few cards with different effects.</li>
+          <li>Drag and drop them in the right order to bring the enemy's HP to zero.</li>
+          <li>Each card costs energy — spend it wisely.</li>
+          <li>Some cards apply debuffs like <em>Vulnerable</em> or effects that play the next card twice.</li>
+          <li>Share with your friends how quickly you defeated the enemy!</li>
+        </ul>
+        <p>New puzzle every week. Come back and have fun!</p>
+        <a href="/" class="back">← Back to Home</a>
+      </div>
+      <div class="card-img">
+        <img src="example-card.png" alt="Example Card" />
+      </div>
+    </div>
+  </div>
+</body>
+</html>
