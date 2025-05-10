@@ -2,11 +2,11 @@ extends Panel
 class_name Card
 
 signal played
+signal bounced
 
 const PLAY_CARD_TEXT = "[center][b][pulse freq=2.0 color=#ffffff40 ease=-2.0]PLAY CARD![/pulse][/b][/center]"
 const LOW_ENERGY_CARD_TEXT = "[center][b][pulse freq=2.0 color=#ffffff40 ease=-2.0]LOW ENERGY[/pulse][/b][/center]"
 
-var grabbed: bool = false
 @onready var scene: Scene = get_tree().get_root().get_node("Scene")
 @onready var card_play_area = scene.get_node("CardPlayArea")
 @export var card_effects: Array[CardEffect] = []
@@ -27,9 +27,20 @@ var grabbed: bool = false
 var grab_position = Vector2.ZERO
 var grabbed_timestamp = null
 var last_mouse_position = null
-var playing: bool = false
-var discarded: bool = false
-var bouncing: bool = false
+#var playing: bool = false
+#var discarded: bool = false
+#var bouncing: bool = false
+#var grabbed: bool = false
+
+enum State {
+	InHand,
+	Playing,
+	Discarding,
+	Discarded,
+	Bouncing,
+	Grabbed
+}
+var state = State.InHand
 
 func _ready():
 	calculate_pivot_offset()
@@ -43,12 +54,11 @@ func _ready():
 	add_to_group("Cards")
 	#connect("played", scene._on_card_played.bind(self))
 
-func set_discarded(new_discarded: bool) -> void:
-		
-	discarded = new_discarded
-
+func set_state(new_state: State) -> void:
+	state = new_state
+	
 func is_discarded() -> bool:
-	return discarded
+	return state == State.Discarded
 		
 func reduce_saturation() -> void:
 	modulate = Color(0.4, 0.4, 0.4, 1.0)
@@ -59,15 +69,19 @@ func normalize_saturation() -> void:
 func calculate_pivot_offset() -> void:
 	pivot_offset = size / 2
 
+func is_grabbed() -> bool:
+	return state == State.Grabbed
+	
 func _on_gui_input(event):
 	
 	if event.is_action_pressed("select"):
-		if discarded:
-			discard_pile_view.populate_cards()
-			discard_pile_view.show()
+		if is_discarded():
+			if not discard_pile_view.visible:
+				discard_pile_view.populate_cards()
+				discard_pile_view.show()
 		else:
 			grab()
-	elif event.is_action_released("select") and not discarded:
+	elif event.is_action_released("select") and is_grabbed():
 		drop()
 		
 	if event is InputEventMouseMotion and event.relative.length() > 5 and card_preview.visible:
@@ -108,7 +122,7 @@ func reset_z_index() -> void:
 	z_index = original_z_index
 
 func grab() -> void:
-	grabbed = true
+	set_state(State.Grabbed)
 	grabbed_timestamp = Time.get_ticks_msec()
 	grab_position = position
 	bring_to_front()
@@ -129,13 +143,12 @@ func can_play() -> bool:
 		and energy.has_enough_energy(energy_cost)
 		
 func drop() -> void:
-	grabbed = false
 	card_preview.hide()
 	
 	if can_play():
 		play()
 	else:
-		playing = false
+		set_state(State.InHand)
 		set_position(grab_position)
 		reset_z_index()
 		
@@ -146,11 +159,11 @@ func get_background_color() -> Color:
 	return $IconPanel.get_theme_stylebox("panel").bg_color
 	
 func is_playing() -> bool:
-	return playing
+	return state == State.Playing
 	
 func play():
 	scene.increment_card_count()
-	playing = true
+	set_state(State.Playing)
 	
 	energy.use_energy(energy_cost)
 	
@@ -162,11 +175,11 @@ func play():
 	buffs_container.activate_on_play_buffs()
 	scene.set_last_card_effects(self)
 	
-	set_discarded(true)
+	set_state(State.Discarded)
 	discard_panel.add_card(self)
 	
 func _process(delta):
-	if grabbed:
+	if state == State.Grabbed:
 		global_position = get_global_mouse_position() - size/2
 
 func get_energy_cost() -> int:
@@ -180,15 +193,16 @@ func set_description(new_description: String) -> void:
 	update_description_panel()
 
 func bounce() -> void:
-	bouncing = true
+	var previous_state_before_bouncing: State = state
+	set_state(State.Bouncing)
 	var tween = get_tree().create_tween()
 	var original_scale = Vector2.ONE
 	scale = Vector2(1.5, 1.5)
 	tween.tween_property(self, "scale", original_scale, 0.25).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
-	bouncing = false
-	
-func is_bouncing() -> bool:
-	return bouncing
+	set_state(previous_state_before_bouncing)
 
+func is_bouncing() -> bool:
+	return state == State.Bouncing
+	
 func update_description_panel() -> void:
 	$DescriptionPanel/Title.set_text("[center]%s[/center]" % card_description)

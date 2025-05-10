@@ -15,15 +15,6 @@ func has_playable_cards() -> bool:
 			return true
 	return false
 	
-func get_right_most_card() -> Card:
-	var right_most_card: Card = null
-	var right_most_x_value: float = -INF
-	for card: Card in get_children():
-		if card.global_position.x > right_most_x_value and not card.is_playing():
-			right_most_x_value = card.global_position.x
-			right_most_card = card
-	return right_most_card
-	
 func get_cards() -> Array[Node]:
 	return get_children()
 

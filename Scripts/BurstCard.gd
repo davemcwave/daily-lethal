@@ -10,7 +10,7 @@ func update_description_panel() -> void:
 	$DescriptionPanel/Title.set_text(card_description)
 
 func play():
-	playing = true
+	set_state(State.Playing)
 	
 	energy.use_energy(energy_cost)
 	
@@ -24,5 +24,5 @@ func play():
 	
 	scene.increment_card_count()
 	
-	set_discarded(true)
+	set_state(State.Discarded)
 	discard_panel.add_card(self)

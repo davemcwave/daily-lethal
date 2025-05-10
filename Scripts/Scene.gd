@@ -65,7 +65,7 @@ func get_card_count() -> int:
 func disable_all_cards() -> void:
 	for card: Card in get_tree().get_nodes_in_group("Cards"):
 		if not card.is_discarded():
-			card.set_discarded(true)
+			card.set_state(Card.State.Discarded)
 			card.reduce_saturation()
 
 func is_checking_for_game_over() -> bool:

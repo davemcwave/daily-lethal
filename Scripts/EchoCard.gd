@@ -2,7 +2,7 @@ extends Card
 
 func play() -> void:
 	scene.increment_card_count()
-	playing = true
+	set_state(State.Playing)
 	
 	energy.use_energy(energy_cost)
 	
@@ -15,5 +15,5 @@ func play() -> void:
 	
 	scene.set_last_card_effects(self)
 	
-	set_discarded(true)
+	set_state(State.Discarded)
 	discard_panel.add_card(self)
