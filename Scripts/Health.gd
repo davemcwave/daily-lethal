@@ -4,6 +4,7 @@ extends TextureRect
 @onready var scene = get_tree().get_root().get_node("Scene")
 @onready var buffs_container: BuffsContainer = scene.get_node("BuffsContainer")
 @onready var original_color: Color = self_modulate
+@onready var center_description: CenterDescription = get_tree().get_root().get_node("Scene/CanvasLayer/CenterDescription")
 var dead: bool = false
 var block: bool = false
 
@@ -49,3 +50,12 @@ func is_dead() -> bool:
 	
 func update_text() -> void:
 	$HealthAmountText.set_text("[center][b]%d[/b][/center]" % health)
+
+
+func _on_gui_input(event):
+	if event.is_action_pressed("select"):
+		center_description.set_text("Health", "If this goes to 0, you lose")
+		center_description.set_color(self_modulate)
+		center_description.show()
+	elif event.is_action_released("select"):
+		center_description.hide()

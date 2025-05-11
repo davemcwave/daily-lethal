@@ -1,7 +1,7 @@
 extends Panel
 class_name DebuffPanel
 
-@onready var buff_preview: BuffPreview = get_tree().get_root().get_node("Scene/CanvasLayer/BuffPreview")
+@onready var center_description: CenterDescription = get_tree().get_root().get_node("Scene/CanvasLayer/CenterDescription")
 var debuff: Debuff
 
 func blink() -> void:
@@ -24,8 +24,8 @@ func set_text(new_text: String) -> void:
 
 func _on_gui_input(event):
 	if event.is_action_pressed("select"):
-		buff_preview.set_text(debuff.get_debuff_name(), debuff.get_debuff_description())
-		buff_preview.set_color(modulate)
-		buff_preview.show()
+		center_description.set_text(debuff.get_debuff_name(), debuff.get_debuff_description())
+		center_description.set_color(modulate)
+		center_description.show()
 	elif event.is_action_released("select"):
-		buff_preview.hide()
+		center_description.hide()

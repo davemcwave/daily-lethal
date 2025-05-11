@@ -1,5 +1,5 @@
 extends Panel
-class_name BuffPreview
+class_name CenterDescription
 
 func set_text(title: String, description: String) -> void:
 	$PreviewText.set_text("[center][b]%s: [/b] %s[/center]" % [title, description])

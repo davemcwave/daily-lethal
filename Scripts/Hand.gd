@@ -18,6 +18,13 @@ func has_playable_cards() -> bool:
 func get_cards() -> Array[Node]:
 	return get_children()
 
+func get_card_with_id(id: int) -> Card:
+	for card: Card in get_cards():
+		if card.get_id() == id:
+			return card
+			
+	return null
+	
 func add_card(card: Card) -> void:
 	card.hide()
 	add_child(card)
@@ -26,8 +33,8 @@ func add_card(card: Card) -> void:
 	
 	#var new_global_position = STARTING_INDEX_POSITION
 	
-	var tween = get_tree().create_tween()
-	card.scale = Vector2.ONE*0.1
+	#var tween = get_tree().create_tween()
+	#card.scale = Vector2.ONE*0.1
 	card.show()
-	#tween.parallel().tween_property(card, "global_position", end_global_position, 0.25).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
-	tween.parallel().tween_property(card, "scale", Vector2.ONE, 0.25).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+	#tween.parallel().tween_property(card, "scale", Vector2.ONE, 0.25).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+	card.bounce()

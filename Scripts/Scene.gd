@@ -17,11 +17,16 @@ var game_over: bool = false
 var puzzle: Puzzle = null
 
 func _ready():
-	set_puzzle(load(puzzle_scene).instantiate())
+	if not background.get_puzzle_scene().is_empty():
+		set_puzzle(load(background.get_puzzle_scene()).instantiate())
+	else:
+		set_puzzle(load(puzzle_scene).instantiate())
 	
 	background.add_attempt()
 	
 	call_deferred("draw_starting_cards")
+
+
 
 func set_puzzle(new_puzzle: Puzzle) -> void:
 	puzzle = new_puzzle

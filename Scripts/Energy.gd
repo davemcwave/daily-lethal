@@ -5,6 +5,7 @@ class_name Energy
 @onready var buffs_container: BuffsContainer = get_tree().get_root().get_node("Scene/BuffsContainer")
 @onready var original_color: Color = self_modulate
 const TEXT_TEMPLATE = "[center][b]%d[/b][/center]"
+@onready var center_description: CenterDescription = get_tree().get_root().get_node("Scene/CanvasLayer/CenterDescription")
 
 func _ready():
 	update_energy_text()
@@ -41,3 +42,12 @@ func use_energy(cost: int, use_free_buff: bool = true) -> void:
 	
 func update_energy_text() -> void:
 	$EnergyAmountText.set_text(TEXT_TEMPLATE % energy_amount)
+
+
+func _on_gui_input(event):
+	if event.is_action_pressed("select"):
+		center_description.set_text("Energy", "Amount to spend on cards, each card has its own energy cost")
+		center_description.set_color(self_modulate)
+		center_description.show()
+	elif event.is_action_released("select"):
+		center_description.hide()

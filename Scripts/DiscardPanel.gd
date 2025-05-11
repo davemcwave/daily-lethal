@@ -13,7 +13,10 @@ func get_cards() -> Array[Card]:
 func add_card(new_card: Card) -> void:
 	var new_card_original_postion: Vector2 = new_card.global_position
 	new_card.get_parent().remove_child(new_card)
+	new_card.z_index = 0
+	new_card.z_as_relative = true
 	add_child(new_card)
+	#queue_redraw()
 	new_card.calculate_pivot_offset()
 	new_card.reduce_saturation()
 	new_card.global_position = new_card_original_postion
@@ -29,6 +32,17 @@ func add_card(new_card: Card) -> void:
 	#if get_child_count() > 0 and $DiscardCenterText.visible:
 		#$DiscardCenterText.hide()
 		#$DiscardOutsideText.show()
+	print_order()
+		
+func print_order() -> void:
+	var card_index: int = 0
+	for child in get_children():
+		if not (child is Card):
+			continue
+		
+		var card: Card = child
+		print("%d: %s" % [card_index, card.card_name])
+		card_index += 1
 		
 func get_last_card() -> Card:
 	return get_children().back()
