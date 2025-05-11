@@ -2,11 +2,13 @@ extends Panel
 class_name Card
 
 signal played
+signal bounced
+signal changed_state(state)
+signal marked_for_discard(marked: bool)
 
 const PLAY_CARD_TEXT = "[center][b][pulse freq=2.0 color=#ffffff40 ease=-2.0]PLAY CARD![/pulse][/b][/center]"
 const LOW_ENERGY_CARD_TEXT = "[center][b][pulse freq=2.0 color=#ffffff40 ease=-2.0]LOW ENERGY[/pulse][/b][/center]"
 
-var grabbed: bool = false
 @onready var scene: Scene = get_tree().get_root().get_node("Scene")
 @onready var card_play_area = scene.get_node("CardPlayArea")
 @export var card_effects: Array[CardEffect] = []
@@ -17,6 +19,8 @@ var grabbed: bool = false
 @onready var enemy = scene.get_node("Enemy")
 @onready var card_preview = scene.get_node("CanvasLayer/CardPreview")
 @onready var energy = scene.get_node("Energy")
+@onready var cards_played: CardsPlayed = scene.get_node("CardsPlayed")
+
 @onready var play_text = scene.get_node("PlayText")
 @onready var background = get_node("/root/Background")
 #@onready var last_cards_played_container: GridContainer = scene.get_node("LastCardsPlayedContainer")
@@ -27,11 +31,22 @@ var grabbed: bool = false
 var grab_position = Vector2.ZERO
 var grabbed_timestamp = null
 var last_mouse_position = null
-var playing: bool = false
-var discarded: bool = false
-var bouncing: bool = false
+var can_show_discarding_button: bool = true
+var id
+
+enum State {
+	InHand,
+	Playing,
+	Discarding,
+	Discarded,
+	Bouncing,
+	Grabbed
+}
+@export var state = State.InHand
 
 func _ready():
+	id = get_instance_id()
+	
 	calculate_pivot_offset()
 	$TitlePanel/Title.set_text("[center]%s[/center]" % card_name)
 	#$CardEffect.set_target(enemy)
@@ -43,13 +58,32 @@ func _ready():
 	add_to_group("Cards")
 	#connect("played", scene._on_card_played.bind(self))
 
-func set_discarded(new_discarded: bool) -> void:
+func get_id() -> int:
+	return id
+	
+func set_id(new_id: int) -> void:
+	id = new_id
+	
+func set_state(new_state: State) -> void:
+	if new_state == state:
+		return
 		
-	discarded = new_discarded
+	state = new_state
+	
+	emit_signal("changed_state", state)
 
+func set_can_show_discarding_button(new_can_show_discarding_button: bool) -> void:
+	can_show_discarding_button = new_can_show_discarding_button
+
+func card_can_show_discarding_button() -> bool:
+	return can_show_discarding_button
+	
 func is_discarded() -> bool:
-	return discarded
+	return state == State.Discarded
 		
+func is_discarding() -> bool:
+	return state == State.Discarding
+	
 func reduce_saturation() -> void:
 	modulate = Color(0.4, 0.4, 0.4, 1.0)
 	
@@ -59,15 +93,40 @@ func normalize_saturation() -> void:
 func calculate_pivot_offset() -> void:
 	pivot_offset = size / 2
 
+func is_grabbed() -> bool:
+	return state == State.Grabbed
+
+func is_marked_for_discard() -> bool:
+	for child in get_children():
+		if child is DiscardingButton:
+			return true
+	return false
+	
+func show_discarding_button() -> void:
+	var discarding_button: Button = load("res://Scenes/DiscardingButton.scn").instantiate()
+	add_child(discarding_button)
+	discarding_button.connect("pressed",self._on_discarding_button_pressed.bind(discarding_button))
+	emit_signal("marked_for_discard", true)
+
+func _on_discarding_button_pressed(discarding_button: DiscardingButton) -> void:
+	discarding_button.hide()
+	discarding_button.queue_free()
+	
+	emit_signal("marked_for_discard", false)
+
 func _on_gui_input(event):
 	
 	if event.is_action_pressed("select"):
-		if discarded:
-			discard_pile_view.populate_cards()
-			discard_pile_view.show()
+		if is_discarded():
+			if not discard_pile_view.visible:
+				discard_pile_view.populate_cards()
+				discard_pile_view.show()
+		elif is_discarding():
+			if card_can_show_discarding_button():
+				show_discarding_button()
 		else:
 			grab()
-	elif event.is_action_released("select") and not discarded:
+	elif event.is_action_released("select") and is_grabbed():
 		drop()
 		
 	if event is InputEventMouseMotion and event.relative.length() > 5 and card_preview.visible:
@@ -108,7 +167,7 @@ func reset_z_index() -> void:
 	z_index = original_z_index
 
 func grab() -> void:
-	grabbed = true
+	set_state(State.Grabbed)
 	grabbed_timestamp = Time.get_ticks_msec()
 	grab_position = position
 	bring_to_front()
@@ -129,13 +188,12 @@ func can_play() -> bool:
 		and energy.has_enough_energy(energy_cost)
 		
 func drop() -> void:
-	grabbed = false
 	card_preview.hide()
 	
 	if can_play():
 		play()
 	else:
-		playing = false
+		set_state(State.InHand)
 		set_position(grab_position)
 		reset_z_index()
 		
@@ -146,11 +204,11 @@ func get_background_color() -> Color:
 	return $IconPanel.get_theme_stylebox("panel").bg_color
 	
 func is_playing() -> bool:
-	return playing
+	return state == State.Playing
 	
 func play():
 	scene.increment_card_count()
-	playing = true
+	set_state(State.Playing)
 	
 	energy.use_energy(energy_cost)
 	
@@ -158,15 +216,20 @@ func play():
 		if card_effect_delay > 0.0:
 			await get_tree().create_timer(card_effect_delay).timeout
 		card_effect.apply()
+		if card_effect.does_require_player_input():
+			await card_effect.player_input_finished
 	
 	buffs_container.activate_on_play_buffs()
 	scene.set_last_card_effects(self)
 	
-	set_discarded(true)
+	discard()
+
+func discard() -> void:
+	set_state(State.Discarded)
 	discard_panel.add_card(self)
 	
 func _process(delta):
-	if grabbed:
+	if state == State.Grabbed:
 		global_position = get_global_mouse_position() - size/2
 
 func get_energy_cost() -> int:
@@ -179,16 +242,32 @@ func set_description(new_description: String) -> void:
 	card_description = new_description
 	update_description_panel()
 
-func bounce() -> void:
-	bouncing = true
+func bounce(use_current_scale: bool = false) -> void:
+	#var previous_state_before_bouncing: State = state
+	#set_state(State.Bouncing)
+	#var tween = get_tree().create_tween()
+	#var original_scale = Vector2.ONE
+	#scale = Vector2(1.5, 1.5)
+	#tween.tween_property(self, "scale", original_scale, 0.25).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+	#set_state(previous_state_before_bouncing)
+	var end_scale = scale if use_current_scale else Vector2.ONE
+	scale = Vector2.ONE*0.1
 	var tween = get_tree().create_tween()
-	var original_scale = Vector2.ONE
+	tween.tween_property(self, "scale", end_scale, 0.25).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+
+func inflate(use_current_scale: bool = false) -> void:
+	var original_scale = scale if use_current_scale else Vector2.ONE
 	scale = Vector2(1.5, 1.5)
+	var tween = get_tree().create_tween()
 	tween.tween_property(self, "scale", original_scale, 0.25).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
-	bouncing = false
+	
+
+#func _input(event) -> void:
+	#if event.is_action_pressed("ui_accept"):
+		#bounce()
 	
 func is_bouncing() -> bool:
-	return bouncing
-
+	return state == State.Bouncing
+	
 func update_description_panel() -> void:
 	$DescriptionPanel/Title.set_text("[center]%s[/center]" % card_description)

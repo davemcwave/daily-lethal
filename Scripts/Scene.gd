@@ -17,11 +17,16 @@ var game_over: bool = false
 var puzzle: Puzzle = null
 
 func _ready():
-	set_puzzle(load(puzzle_scene).instantiate())
+	if not background.get_puzzle_scene().is_empty():
+		set_puzzle(load(background.get_puzzle_scene()).instantiate())
+	else:
+		set_puzzle(load(puzzle_scene).instantiate())
 	
 	background.add_attempt()
 	
 	call_deferred("draw_starting_cards")
+
+
 
 func set_puzzle(new_puzzle: Puzzle) -> void:
 	puzzle = new_puzzle
@@ -65,7 +70,7 @@ func get_card_count() -> int:
 func disable_all_cards() -> void:
 	for card: Card in get_tree().get_nodes_in_group("Cards"):
 		if not card.is_discarded():
-			card.set_discarded(true)
+			card.set_state(Card.State.Discarded)
 			card.reduce_saturation()
 
 func is_checking_for_game_over() -> bool:

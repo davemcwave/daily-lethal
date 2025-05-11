@@ -5,9 +5,10 @@ const CARD_NORMAL_COLOR = Color.WHITE
 
 var card: Card = null
 @onready var play_text: RichTextLabel = $"../PlayText"
+@export var useable: bool = true
 
 func _on_area_2d_area_entered(area):
-	if area.get_parent() is Card and card == null:
+	if area.get_parent() is Card and card == null and useable:
 		self_modulate = CARD_HOVERED_COLOR
 		card = area.get_parent()
 		play_text.show()
@@ -17,6 +18,12 @@ func _on_area_2d_area_exited(area):
 	card = null
 	play_text.hide()
 	
+func is_useable() -> bool:
+	return useable
+	
+func set_useable(new_useable: bool) -> void:
+	useable = new_useable
+
 func has_card():
 	return card != null
 	

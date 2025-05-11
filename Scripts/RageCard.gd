@@ -2,15 +2,13 @@ extends Card
 
 func play():
 	scene.increment_card_count()
-	playing = true
-	
+	set_state(State.Playing)
 	energy.use_energy(energy_cost)
 	
 	buffs_container.activate_on_play_buffs()
 	scene.set_last_card_effects(self)
 	
-	set_discarded(true)
-	discard_panel.add_card(self)
+	discard()
 	
 	for card_effect in card_effects:
 		if card_effect_delay > 0.0:

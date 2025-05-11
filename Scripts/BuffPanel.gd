@@ -1,7 +1,7 @@
 extends Panel
 class_name BuffPanel
 
-@onready var buff_preview: BuffPreview = get_tree().get_root().get_node("Scene/CanvasLayer/BuffPreview")
+@onready var center_description: CenterDescription = get_tree().get_root().get_node("Scene/CanvasLayer/CenterDescription")
 @export_file("*.scn") var buff_scene
 @export var buff: Buff
 var _blinking: bool = false
@@ -44,8 +44,8 @@ func get_buff() -> Buff:
 
 func _on_gui_input(event):
 	if event.is_action_pressed("select"):
-		buff_preview.set_text(buff.get_buff_name(), buff.get_buff_description())
-		buff_preview.set_color(modulate)
-		buff_preview.show()
+		center_description.set_text(buff.get_buff_name(), buff.get_buff_description())
+		center_description.set_color(modulate)
+		center_description.show()
 	elif event.is_action_released("select"):
-		buff_preview.hide()
+		center_description.hide()

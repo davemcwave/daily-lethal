@@ -9,7 +9,7 @@ func activate() -> void:
 	var last_discarded_card: Card = discard_panel.get_last_card().duplicate(DUPLICATE_USE_INSTANTIATION)
 	#last_discarded_card.set_global_position(discard_panel.get_last_card().get_global_position())
 	discard_panel.get_last_card().queue_free()
-	last_discarded_card.set_discarded(false)
+	last_discarded_card.set_state(Card.State.InHand)
 	last_discarded_card.normalize_saturation()
 	last_discarded_card.set_rotation(0)
 	hand.add_card(last_discarded_card)

@@ -15,18 +15,16 @@ func has_playable_cards() -> bool:
 			return true
 	return false
 	
-func get_right_most_card() -> Card:
-	var right_most_card: Card = null
-	var right_most_x_value: float = -INF
-	for card: Card in get_children():
-		if card.global_position.x > right_most_x_value and not card.is_playing():
-			right_most_x_value = card.global_position.x
-			right_most_card = card
-	return right_most_card
-	
 func get_cards() -> Array[Node]:
 	return get_children()
 
+func get_card_with_id(id: int) -> Card:
+	for card: Card in get_cards():
+		if card.get_id() == id:
+			return card
+			
+	return null
+	
 func add_card(card: Card) -> void:
 	card.hide()
 	add_child(card)
@@ -35,8 +33,8 @@ func add_card(card: Card) -> void:
 	
 	#var new_global_position = STARTING_INDEX_POSITION
 	
-	var tween = get_tree().create_tween()
-	card.scale = Vector2.ONE*0.1
+	#var tween = get_tree().create_tween()
+	#card.scale = Vector2.ONE*0.1
 	card.show()
-	#tween.parallel().tween_property(card, "global_position", end_global_position, 0.25).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
-	tween.parallel().tween_property(card, "scale", Vector2.ONE, 0.25).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+	#tween.parallel().tween_property(card, "scale", Vector2.ONE, 0.25).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+	card.bounce()
