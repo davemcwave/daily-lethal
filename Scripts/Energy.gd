@@ -11,7 +11,10 @@ func _ready():
 	update_energy_text()
 	
 func has_enough_energy(cost: int) -> bool:
-	return cost <= energy_amount or buffs_container.has_free_buff()
+	return cost <= energy_amount \
+		or buffs_container.has_free_buff() \
+		or buffs_container.get_discounted_cost(cost) <= energy_amount
+
 
 func get_energy_amount() -> int:
 	return energy_amount
@@ -33,6 +36,11 @@ func add_energy(additional_energy_amount: int) -> void:
 func use_energy(cost: int, use_free_buff: bool = true) -> void:
 	if buffs_container.has_free_buff() and use_free_buff:
 		buffs_container.remove_free_buff()
+	elif buffs_container.has_discount_buff():
+		var discount_buff: DiscountBuff = buffs_container.get_discount_buff()
+		var discount_amount: int = discount_buff.get_discount_amount()
+		energy_amount -= (cost - discount_amount)
+		buffs_container.remove_discount_buff()
 	else:
 		energy_amount -= cost
 		

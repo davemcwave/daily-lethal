@@ -52,7 +52,7 @@ func _ready():
 	#$CardEffect.set_target(enemy)
 	set_description(card_description)
 	
-	$EnergyPanel/Energy.set_text("[center]%d[/center]" % energy_cost)
+	set_energy_text(energy_cost)
 	
 	$IconPanel/Icon.material = load("res://Resources/WobbleMaterial.res")
 	add_to_group("Cards")
@@ -178,7 +178,21 @@ func grab() -> void:
 		play_text.set_text(PLAY_CARD_TEXT)
 	else:
 		play_text.set_text(LOW_ENERGY_CARD_TEXT)
-	#move_to_front()
+
+func refresh_energy_text() -> void:
+	if buffs_container.has_discount_buff():
+		var discounted_cost: int = buffs_container.get_discounted_cost(energy_cost)
+		set_energy_text(discounted_cost, "307aff")
+	else:
+		set_energy_text(energy_cost)
+		
+func set_energy_text(energy_cost: int, color_hex: String = "") -> void:
+	if not color_hex.is_empty():
+		$EnergyPanel/Energy.set_text("[center][color=#%s]%d[/color][/center]" % [color_hex, energy_cost])
+		$EnergyPanel/Icon.self_modulate = Color(color_hex)
+	else:
+		$EnergyPanel/Energy.set_text("[center]%d[/center]" % energy_cost)
+		$EnergyPanel/Icon.self_modulate = Color.WHITE
 func can_play() -> bool:
 	return card_play_area != null \
 		and card_play_area.has_card() \
@@ -196,7 +210,8 @@ func drop() -> void:
 		set_state(State.InHand)
 		set_position(grab_position)
 		reset_z_index()
-		
+		#
+	#set_energy_text(energy_cost)
 		#if get_parent() is Hand:
 			#get_parent().reset_view()
 

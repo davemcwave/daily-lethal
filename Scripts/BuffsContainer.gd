@@ -21,12 +21,58 @@ func has_block_buff() -> bool:
 			
 	return false
 	
+func has_discount_buff() -> bool:
+	
+	for buff_panel: BuffPanel in get_children():
+		var buff: Buff = buff_panel.get_buff()
+		if is_instance_valid(buff) and buff != null:
+			if buff is DiscountBuff:
+				return true
+			
+	return false
+	
+func get_discount_buff() -> DiscountBuff:
+	
+	for buff_panel: BuffPanel in get_children():
+		var buff: Buff = buff_panel.get_buff()
+		if is_instance_valid(buff) and buff != null:
+			if buff is DiscountBuff:
+				return buff
+			
+	return null
+	
+	
 func remove_block_buff() -> void:
 	for buff_panel: BuffPanel in get_children():
 		var buff: Buff = buff_panel.get_buff()
 		if buff is BlockBuff:
 			buff_panel.queue_free()
 			return
+
+func remove_discount_buff() -> void:
+	for buff_panel: BuffPanel in get_children():
+		var buff: Buff = buff_panel.get_buff()
+		if buff is DiscountBuff:
+			buff_panel.queue_free()
+			return
+
+func get_discounted_cost(cost: int) -> int:
+	for buff_panel: BuffPanel in get_children():
+		if not is_instance_valid(buff_panel):
+			continue
+			
+		var buff: Buff = buff_panel.get_buff()
+		if not is_instance_valid(buff):
+			continue
+		
+		if buff is DiscountBuff:
+			var discounted_cost: int = max(0, cost-buff.get_discount_amount())
+			print("discounted_cost: %d" % discounted_cost)
+			return discounted_cost
+			
+	return cost
+
+	
 	
 func has_free_buff() -> bool:
 	for buff_panel: BuffPanel in get_children():

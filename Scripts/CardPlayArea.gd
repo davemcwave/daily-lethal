@@ -12,9 +12,12 @@ func _on_area_2d_area_entered(area):
 		self_modulate = CARD_HOVERED_COLOR
 		card = area.get_parent()
 		play_text.show()
+		card.refresh_energy_text()
 		
 func _on_area_2d_area_exited(area):
 	self_modulate = CARD_NORMAL_COLOR
+	if card != null:
+		card.set_energy_text(card.get_energy_cost())
 	card = null
 	play_text.hide()
 	
