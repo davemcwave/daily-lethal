@@ -27,5 +27,6 @@ func has_seen_intro() -> bool:
 	if lethal_intro_seen == null:
 		return false
 	return lethal_intro_seen
+	
 func set_intro_seen():
 	JavaScriptBridge.eval("localStorage.setItem('lethal_intro_seen', 'true')", true)

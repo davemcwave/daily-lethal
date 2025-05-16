@@ -1,7 +1,11 @@
 extends Node
 class_name Puzzle
 
+@export_group("Puzzle")
 @export var puzzle_date: String = "2025-01-09"
+@export_file("*.scn") var next_puzzle_scene
+@export var is_current_puzzle: bool = false
+
 @export_group("Enemy")
 @export var enemy_health: int = 10
 @export var enemy_name: String = "Bad Guy"
@@ -27,6 +31,9 @@ func get_enemy_health() -> int:
 
 func get_initial_draw_amount() -> int:
 	return initial_draw_amount
+
+func get_is_current_puzzle() -> bool:
+	return is_current_puzzle
 	
 func get_enemy_name() -> String:
 	return enemy_name
@@ -48,3 +55,6 @@ func get_player_energy() -> int:
 
 func get_enemy_buff_target() -> String:
 	return enemy_buff_target
+	
+func get_next_puzzle_scene() -> String:
+	return next_puzzle_scene

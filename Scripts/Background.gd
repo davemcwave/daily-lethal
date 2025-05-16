@@ -6,13 +6,27 @@ var enemy_name: String = ""
 var enemy_texture: Texture2D = null
 var puzzle_date: String = ""
 var puzzle_scene: String = ""
+var next_puzzle_scene: String = ""
+var is_current_puzzle: bool = false
 
 func clear() -> void:
 	attempts = 0
 	best_card_count = 0
+
+func set_is_current_puzzle(new_is_current_puzzle: bool) -> void:
+	is_current_puzzle = new_is_current_puzzle
+	
+func get_is_current_puzzle() -> bool:
+	return is_current_puzzle
 	
 func set_puzzle_scene(new_puzzle_scene: String) -> void:
 	puzzle_scene = new_puzzle_scene
+	
+func set_next_puzzle_scene(new_next_puzzle_scene: String) -> void:
+	next_puzzle_scene = new_next_puzzle_scene
+
+func get_next_puzzle_scene() -> String:
+	return next_puzzle_scene
 	
 func get_puzzle_scene() -> String:
 	return puzzle_scene

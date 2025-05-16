@@ -51,6 +51,11 @@ func set_puzzle(new_puzzle: Puzzle) -> void:
 	$Energy.set_energy(puzzle.get_player_energy())
 	starting_card_amount = puzzle.get_initial_draw_amount() if puzzle.get_initial_draw_amount() > 0 else $Deck.get_child_count() 
 	
+	if not puzzle.get_is_current_puzzle():
+		get_node("/root/Background").set_next_puzzle_scene(puzzle.get_next_puzzle_scene())
+	
+	get_node("/root/Background").set_is_current_puzzle(puzzle.get_is_current_puzzle())
+	
 func set_last_card_effects(card: Card) -> void:
 	last_card_effects = []
 	for card_effect: CardEffect in card.get_card_effects():

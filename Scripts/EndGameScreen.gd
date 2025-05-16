@@ -34,4 +34,10 @@ func _on_share_button_pressed():
 	$ShareButton/TextureRect.show()
 
 func _on_get_tomorrow_button_pressed():
-	OS.shell_open("https://playlethal.beehiiv.com/subscribe")
+	background.clear()
+	
+	if background.get_is_current_puzzle():
+		OS.shell_open("https://playlethal.beehiiv.com/subscribe")
+	else:
+		get_node("/root/Background").set_puzzle_scene(background.get_next_puzzle_scene())
+		get_tree().change_scene_to_file("res://Scenes/Scene0.scn")
