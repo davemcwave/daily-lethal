@@ -33,6 +33,7 @@ func play() -> void:
 	
 	scene.increment_card_count()
 	
+	await get_tree().create_timer(0.1).timeout # So that the panel can be freed from use_energy
 	buffs_container.activate_on_play_buffs()
 	scene.set_last_card_effects(self)
 	
