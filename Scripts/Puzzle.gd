@@ -6,6 +6,9 @@ class_name Puzzle
 @export var enemy_health: int = 10
 @export var enemy_name: String = "Bad Guy"
 @export var enemy_icon_texture: Texture2D = null
+@export_enum("Player", "Enemy") var enemy_buff_target: String = "Player"
+
+@export var enemy_buffs: Array[Buff]
 
 @export_group("Player")
 @export var player_health: int = 3
@@ -16,6 +19,8 @@ class_name Puzzle
 
 @export var initial_draw_amount: int = -1
 
+func get_enemy_buffs() -> Array[Buff]:
+	return enemy_buffs
 
 func get_enemy_health() -> int:
 	return enemy_health
@@ -40,3 +45,6 @@ func get_player_health() -> int:
 	
 func get_player_energy() -> int:
 	return player_energy
+
+func get_enemy_buff_target() -> String:
+	return enemy_buff_target

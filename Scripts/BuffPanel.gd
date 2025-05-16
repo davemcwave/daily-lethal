@@ -33,6 +33,9 @@ func set_buff(new_buff: Buff) -> void:
 	#modulate = buff.get_color()
 	buff.set_buff_panel(self)
 	
+	if buff.is_unlimited_uses():
+		$UnlimitedPanel.show()
+	
 	update_text()
 	
 func update_text() -> void:

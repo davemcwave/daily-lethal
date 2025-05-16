@@ -36,6 +36,12 @@ func set_puzzle(new_puzzle: Puzzle) -> void:
 	$Enemy.set_enemy_name(puzzle.get_enemy_name())
 	$Enemy.set_enemy_icon_texture(puzzle.get_enemy_icon_texture())
 	$"/root/Background".set_enemy_texture(puzzle.get_enemy_icon_texture())
+	for enemy_buff: Buff in puzzle.get_enemy_buffs():
+		var buff_panel: BuffPanel = load("res://Scenes/BuffPanel.scn").instantiate()
+		$Enemy/EnemyBuffsContainer.add_child(buff_panel)
+		buff_panel.set_buff(enemy_buff)
+		var target = $Health if puzzle.get_enemy_buff_target() == 'Player' else $Enemy
+		enemy_buff.set_target(target)
 	for card_scene in puzzle.get_card_scenes():
 		var card: Card = card_scene.instantiate()
 		$Deck.add_child(card)
