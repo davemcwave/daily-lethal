@@ -12,6 +12,7 @@ signal card_count_incremented
 var starting_card_amount: int = 3
 var card_count: int = 0
 var last_card_effects: Array[CardEffect] = []
+var last_card_scene_file_path: String = ""
 var checking_for_game_over: bool = false
 var game_over: bool = false
 var puzzle: Puzzle = null
@@ -55,8 +56,12 @@ func set_puzzle(new_puzzle: Puzzle) -> void:
 		get_node("/root/Background").set_next_puzzle_scene(puzzle.get_next_puzzle_scene())
 	
 	get_node("/root/Background").set_is_current_puzzle(puzzle.get_is_current_puzzle())
+
+func get_last_card_scene_file_path() -> String:
+	return last_card_scene_file_path
 	
 func set_last_card_effects(card: Card) -> void:
+	last_card_scene_file_path = card.get_scene_file_path()
 	last_card_effects = []
 	for card_effect: CardEffect in card.get_card_effects():
 		var new_card_effect: CardEffect = card_effect.duplicate(DUPLICATE_USE_INSTANTIATION)
@@ -70,7 +75,7 @@ func draw_starting_cards() -> void:
 	var can_draw_cards: bool = deck.can_draw_cards(starting_card_amount)
 	if can_draw_cards:
 		deck.draw_cards(starting_card_amount)
-		
+
 func increment_card_count() -> void:
 	card_count += 1
 	emit_signal("card_count_incremented")
