@@ -273,8 +273,10 @@ func bounce(use_current_scale: bool = false) -> void:
 func inflate(use_current_scale: bool = false) -> void:
 	var original_scale = scale if use_current_scale else Vector2.ONE
 	scale = Vector2(1.5, 1.5)
-	var tween = get_tree().create_tween()
-	tween.tween_property(self, "scale", original_scale, 0.25).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+	
+	if is_inside_tree():
+		var tween = get_tree().create_tween()
+		tween.tween_property(self, "scale", original_scale, 0.25).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 	
 
 #func _input(event) -> void:

@@ -1,7 +1,7 @@
 extends Node2D
 class_name CardEffect
 
-signal finished
+signal applied
 signal player_input_finished
 
 @export var effect_name = ""
@@ -25,4 +25,4 @@ func get_effect_description() -> String:
 	
 # TO BE OVERWRITTEN
 func apply() -> void:
-	pass
+	emit_signal("applied")

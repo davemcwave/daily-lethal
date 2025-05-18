@@ -119,6 +119,7 @@ func activate_on_play_buffs() -> void:
 	for buff_panel: BuffPanel in get_children():
 		var buff: Buff = buff_panel.get_buff()
 		if buff.is_activated_on_card_play():
+			print("activating buff: %s" % buff.get_buff_name())
 			buff.activate()
 			#await get_tree().create_timer(0.25).timeout
 			await buff.activated

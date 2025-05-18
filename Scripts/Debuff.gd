@@ -3,6 +3,7 @@ class_name Debuff
 
 @export var debuff_name: String = "Debuff"
 @export var debuff_description: String = "Debuffs the target."
+@export var unlimited_uses: bool = true
 
 enum ActivationType {OnHurt, OnAttack}
 @export var activation_type: ActivationType
@@ -33,6 +34,12 @@ func get_debuff_description() -> String:
 	
 func get_target() -> Enemy:
 	return target
+	
+func set_unlimited_uses(new_unlimited_uses: bool) -> void:
+	unlimited_uses = new_unlimited_uses
+	
+func is_unlimited_uses() -> bool:
+	return unlimited_uses
 	
 func is_activated_on_hurt() -> bool:
 	return activation_type == ActivationType.OnHurt

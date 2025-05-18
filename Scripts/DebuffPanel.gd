@@ -5,16 +5,18 @@ class_name DebuffPanel
 var debuff: Debuff
 
 func blink() -> void:
-	var original_color: Color = get_theme_stylebox("panel").bg_color
-	get_theme_stylebox("panel").bg_color = Color.WHITE
+	modulate = Color.WHITE
 	await get_tree().create_timer(0.1).timeout
-	get_theme_stylebox("panel").bg_color = original_color
+	modulate = Color('b72e31')
 	
 	
 func set_debuff(new_debuff: Debuff) -> void:
 	debuff = new_debuff
 	
 	debuff.set_debuff_panel(self)
+	
+	if debuff.is_unlimited_uses():
+		$UnlimitedPanel.show()
 	
 func get_debuff() -> Debuff:
 	return debuff

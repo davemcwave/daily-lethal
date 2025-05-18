@@ -9,7 +9,22 @@ func get_cards() -> Array[Card]:
 		if child is Card:
 			cards.append(child)
 	return cards
+
+func take_cards(amount: int = 1) -> Array[Card]:
+	if get_cards().size() <= 0:
+		return []
+		
+	var cards_taken: Array[Card] = []
+	var cards: Array[Card] = get_cards()
+	cards.reverse()
 	
+	for i in range(min(cards.size(), amount)):
+		var card: Card = cards[i]
+		remove_child(card)
+		cards_taken.append(card)
+		
+	return cards_taken
+
 func add_card(new_card: Card) -> void:
 	var new_card_original_postion: Vector2 = new_card.global_position
 	new_card.get_parent().remove_child(new_card)

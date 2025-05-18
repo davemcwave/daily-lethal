@@ -11,9 +11,12 @@ func _ready():
 	cards_played.connect("cards_played_modified", self._on_cards_played_cards_played_modified)
 
 func _on_cards_played_cards_played_modified(cards_played_count: int) -> void:
+	if not is_inside_tree():
+		return
+		
 	set_description(TEXT % cards_played.get_cards_played_count())
 	
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.025).timeout
 	inflate(true)
 
 
