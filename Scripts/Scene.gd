@@ -13,6 +13,7 @@ var starting_card_amount: int = 3
 var card_count: int = 0
 var last_card_effects: Array[CardEffect] = []
 var last_card_scene_file_path: String = ""
+var last_card_backup: Card = null
 var checking_for_game_over: bool = false
 var game_over: bool = false
 var puzzle: Puzzle = null
@@ -59,8 +60,12 @@ func set_puzzle(new_puzzle: Puzzle) -> void:
 
 func get_last_card_scene_file_path() -> String:
 	return last_card_scene_file_path
+
+func get_last_card_backup() -> Card:
+	return last_card_backup
 	
 func set_last_card_effects(card: Card) -> void:
+	last_card_backup = card.duplicate(DUPLICATE_USE_INSTANTIATION)
 	last_card_scene_file_path = card.get_scene_file_path()
 	last_card_effects = []
 	for card_effect: CardEffect in card.get_card_effects():
