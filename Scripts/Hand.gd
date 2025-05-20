@@ -28,6 +28,7 @@ func get_card_with_id(id: int) -> Card:
 func add_card(card: Card) -> void:
 	card.hide()
 	add_child(card)
+	
 	# wait one idle frame so all Controls and Node2Ds have real global positions
 	#await get_tree().process_frame
 	

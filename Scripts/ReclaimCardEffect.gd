@@ -23,3 +23,4 @@ func apply() -> void:
 		new_card.normalize_saturation()
 		new_card.set_rotation(0)
 		hand.add_card(new_card)
+		hand.move_child(new_card, i)

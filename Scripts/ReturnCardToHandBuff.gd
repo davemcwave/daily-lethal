@@ -13,5 +13,6 @@ func activate() -> void:
 	last_discarded_card.normalize_saturation()
 	last_discarded_card.set_rotation(0)
 	hand.add_card(last_discarded_card)
+	#hand.move_child(last_discarded_card, hand.get_cards().size())
 	super.activate()
 	

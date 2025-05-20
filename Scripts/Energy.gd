@@ -39,7 +39,7 @@ func use_energy(cost: int, use_free_buff: bool = true) -> void:
 	elif buffs_container.has_discount_buff():
 		var discount_buff: DiscountBuff = buffs_container.get_discount_buff()
 		var discount_amount: int = discount_buff.get_discount_amount()
-		energy_amount -= (cost - discount_amount)
+		energy_amount = energy_amount - max(cost - discount_amount, 0)
 		buffs_container.remove_discount_buff()
 	else:
 		energy_amount -= cost

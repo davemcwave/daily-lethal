@@ -185,7 +185,12 @@ func refresh_energy_text() -> void:
 		set_energy_text(discounted_cost, "307aff")
 	else:
 		set_energy_text(energy_cost)
-		
+
+func set_energy_cost(new_energy_cost: int) -> void:
+	energy_cost = new_energy_cost
+	
+	set_energy_text(energy_cost)
+	
 func set_energy_text(energy_cost: int, color_hex: String = "") -> void:
 	if not color_hex.is_empty():
 		$EnergyPanel/Energy.set_text("[center][color=#%s]%d[/color][/center]" % [color_hex, energy_cost])
