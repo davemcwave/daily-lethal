@@ -116,14 +116,17 @@ func activate_on_hurt_buffs() -> void:
 	
 func activate_on_play_buffs() -> void:
 	animating = true
-	for buff_panel: BuffPanel in get_children():
+	for buff_panel in get_children():
+		if not is_instance_valid(buff_panel) or buff_panel == null and not buff_panel.is_inside_tree():
+			continue
+			
 		var buff: Buff = buff_panel.get_buff()
 		if buff.is_activated_on_card_play():
 			print("activating buff: %s" % buff.get_buff_name())
 			buff.activate()
 			#await get_tree().create_timer(0.25).timeout
 			await buff.activated
-			if buff.exceeded_uses() and is_instance_valid(buff_panel) and buff_panel != null:
+			if buff.exceeded_uses() and is_instance_valid(buff_panel) and buff_panel != null and buff_panel.is_inside_tree():
 				buff_panel.queue_free()
 	animating = false
 	
