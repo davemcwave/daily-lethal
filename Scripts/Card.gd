@@ -274,6 +274,11 @@ func bounce(use_current_scale: bool = false) -> void:
 	scale = Vector2.ONE*0.1
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "scale", end_scale, 0.25).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+	
+func shrink(duration: float = 0.25) -> void:
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "modulate:a", 0, duration).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_IN)
+	tween.tween_property(self, "scale", Vector2.ZERO, duration).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_IN)
 
 func inflate(use_current_scale: bool = false) -> void:
 	var original_scale = scale if use_current_scale else Vector2.ONE
