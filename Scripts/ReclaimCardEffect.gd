@@ -5,6 +5,13 @@ extends CardEffect
 @onready var hand: Hand = scene.get_node("Hand")
 @onready var discard_panel: DiscardPanel = scene.get_node("DiscardPanel")
 
+enum ReclaimDirection {
+	Top,
+	Bottom
+}
+
+@export var reclaim_direction: ReclaimDirection = ReclaimDirection.Top
+
 func set_card_amount(new_card_amount: int) -> void:
 	card_amount = new_card_amount
 	
@@ -13,7 +20,9 @@ func get_card_amount() -> int:
 	
 func apply() -> void:
 	var cards: Array[Card] = discard_panel.get_cards()
-	cards.reverse()
+	
+	if reclaim_direction == ReclaimDirection.Bottom:
+		cards.reverse()
 	
 	for i in range(min(cards.size(), card_amount)):
 		var card: Card = cards[i]
