@@ -39,5 +39,8 @@ func _on_get_tomorrow_button_pressed():
 	if background.get_is_current_puzzle():
 		OS.shell_open("https://playlethal.beehiiv.com/subscribe")
 	else:
-		get_node("/root/Background").set_puzzle_scene(background.get_next_puzzle_scene())
-		get_tree().change_scene_to_file("res://Scenes/Scene0.scn")
+		var next_puzzle: Puzzle = load(background.get_next_puzzle_scene()).instantiate()
+		var next_puzzle_date: String = next_puzzle.get_puzzle_date()
+		OS.shell_open("https://playlethal.fun/%s" % next_puzzle_date)
+		#get_node("/root/Background").set_puzzle_scene()
+		#get_tree().change_scene_to_file("res://Scenes/Scene0.scn")
