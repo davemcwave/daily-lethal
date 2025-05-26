@@ -47,8 +47,47 @@
       margin-right: 1rem;
       flex-shrink: 0;
     }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .difficulty-label {
+      font-size: 0.75rem;
+      font-weight: bold;
+      padding: 2px 6px;
+      margin-top: 4px;
+      border-radius: 4px;
+      width: fit-content;
+      text-transform: uppercase;
+    }
+
+    .very-easy {
+      background-color: #66bb6a;
+      color: white;
+    }
+
+    .easy {
+      background-color: #aeea00;
+      color: black;
+    }
+
+    .medium {
+      background-color: #ffc107;
+      color: black;
+    }
+
+    .hard {
+      background-color: #ff7043;
+      color: white;
+    }
+
+    .very-hard {
+      background-color: #d32f2f;
+      color: white;
+    }
   </style>
-</head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW9PLMBBGT"></script>
 <script>
@@ -58,58 +97,94 @@
 
   gtag('config', 'G-LW9PLMBBGT');
 </script>
+</head>
 <body>
   <h1>Lethal Puzzle Archive</h1>
   <div class="grid">
     <a class="puzzle-link" href="/2025-05-25">
       <img src="../Assets/Textures/flame-imp.png" alt="flame-imp" class="icon" />
-      May 25, 2025
+      <div class="info">
+        May 25, 2025
+        <span class="difficulty-label very-hard">Very Hard</span>
+      </div>
     </a>
     <a class="puzzle-link" href="/2025-05-20">
       <img src="../Assets/Textures/ogre.png" alt="ogre" class="icon" />
-      May 20, 2025
+      <div class="info">
+        May 20, 2025
+        <span class="difficulty-label hard">Hard</span>
+      </div>
     </a>
     <a class="puzzle-link" href="/2025-05-17">
       <img src="../Assets/Textures/minotaur.png" alt="minotaur" class="icon" />
-      May 17, 2025
+      <div class="info">
+        May 17, 2025
+        <span class="difficulty-label very-hard">Very Hard</span>
+      </div>
     </a>
     <a class="puzzle-link" href="/2025-05-15">
       <img src="../Assets/Textures/goblin.png" alt="goblin" class="icon" />
-      May 15, 2025
+      <div class="info">
+        May 15, 2025
+        <span class="difficulty-label medium">Medium</span>
+      </div>
     </a>
     <a class="puzzle-link" href="/2025-05-13">
       <img src="../Assets/Textures/kraken.png" alt="kraken" class="icon" />
-      May 13, 2025
+      <div class="info">
+        May 13, 2025
+        <span class="difficulty-label very-hard">Very Hard</span>
+      </div>
     </a>
-  <a class="puzzle-link" href="/2025-05-10">
-    <img src="../Assets/Textures/gelatinous-cube.png" alt="gelatinous-cube" class="icon" />
-    May 10, 2025
-  </a>
+    <a class="puzzle-link" href="/2025-05-10">
+      <img src="../Assets/Textures/gelatinous-cube.png" alt="gelatinous-cube" class="icon" />
+      <div class="info">
+        May 10, 2025
+        <span class="difficulty-label very-hard">Very Hard</span>
+      </div>
+    </a>
     <a class="puzzle-link" href="/2025-05-05">
       <img src="../Assets/Textures/leech2.png" alt="Leech" class="icon" />
-      May 5, 2025
+      <div class="info">
+        May 5, 2025
+        <span class="difficulty-label hard">Hard</span>
+      </div>
     </a>
     <a class="puzzle-link" href="/2025-05-04">
       <img src="../Assets/Textures/ww-removebg-preview.png" alt="Werewolf" class="icon" />
-      May 4, 2025
+      <div class="info">
+        May 4, 2025
+        <span class="difficulty-label medium">Medium</span>
+      </div>
     </a>
     <a class="puzzle-link" href="/2025-05-02">
       <img src="../Assets/Textures/skeleton.png" alt="Skeleton" class="icon" />
-      May 2, 2025
+      <div class="info">
+        May 2, 2025
+        <span class="difficulty-label easy">Easy</span>
+      </div>
     </a>
     <a class="puzzle-link" href="/2025-04-25">
       <img src="../Assets/Textures/thorn-root-256x256.png" alt="Thornroot" class="icon" />
-      April 25, 2025
+      <div class="info">
+        April 25, 2025
+        <span class="difficulty-label easy">Easy</span>
+      </div>
     </a>
     <a class="puzzle-link" href="/2025-04-24">
       <img src="../Assets/Textures/sea-monster.png" alt="SeaMonster" class="icon" />
-      April 24, 2025
+      <div class="info">
+        April 24, 2025
+        <span class="difficulty-label easy">Easy</span>
+      </div>
     </a>
     <a class="puzzle-link" href="/2025-04-23">
       <img src="../Assets/Textures/robot.png" alt="Robot" class="icon" />
-      April 23, 2025   
-   </a>
-    <!-- Add more entries here -->
+      <div class="info">
+        April 23, 2025
+        <span class="difficulty-label very-easy">Very Easy</span>
+      </div>
+    </a>
   </div>
 </body>
 </html>
