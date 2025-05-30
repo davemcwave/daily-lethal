@@ -13,6 +13,8 @@ enum ActivationType {OnCardPlay, OnAttack, OnHit, OnHurt, ManuallyHandled, OnCar
 @export var uses_amount: int = 1
 @export var unlimited_uses: bool = false
 
+@export var wait_for_activated_signal: bool = true
+
 var buff_panel: BuffPanel = null
 @export var target: Node = null
 

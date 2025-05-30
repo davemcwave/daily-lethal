@@ -1,5 +1,5 @@
 extends Card
-
+#
 func play() -> void:
 	scene.increment_card_count()
 	set_state(State.Playing)

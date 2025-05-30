@@ -53,6 +53,8 @@ func remove_discount_buff() -> void:
 	for buff_panel: BuffPanel in get_children():
 		var buff: Buff = buff_panel.get_buff()
 		if buff is DiscountBuff:
+			buff.activate()
+			await buff.activated
 			buff_panel.queue_free()
 			return
 
@@ -115,6 +117,7 @@ func activate_on_hurt_buffs() -> void:
 	animating = false
 	
 func activate_on_play_buffs() -> void:
+	var buffs_activated = [] # Track if 2 of the same type of buff can be applied on the same turn
 	animating = true
 	for buff_panel in get_children():
 		if not is_instance_valid(buff_panel) or buff_panel == null and not buff_panel.is_inside_tree():
@@ -122,10 +125,17 @@ func activate_on_play_buffs() -> void:
 			
 		var buff: Buff = buff_panel.get_buff()
 		if buff.is_activated_on_card_play():
+			if buff.can_be_activated_only_once_per_turn() and buffs_activated.has(buff.get_buff_name()):
+				continue
+				
+			buffs_activated.append(buff.get_buff_name())
 			print("activating buff: %s" % buff.get_buff_name())
 			buff.activate()
 			#await get_tree().create_timer(0.25).timeout
-			await buff.activated
+			if buff.wait_for_activated_signal:
+				await buff.activated
+				
+			print("%s activated!" % buff.get_buff_name())
 			if buff.exceeded_uses() and is_instance_valid(buff_panel) and buff_panel != null and buff_panel.is_inside_tree():
 				buff_panel.queue_free()
 	animating = false
