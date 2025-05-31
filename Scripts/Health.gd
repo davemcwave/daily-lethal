@@ -1,7 +1,8 @@
 extends TextureRect
+class_name Health
 
 @export var health: int = 5
-@onready var scene = get_tree().get_root().get_node("Scene")
+@onready var scene: Scene = get_tree().get_root().get_node("Scene")
 @onready var buffs_container: BuffsContainer = scene.get_node("BuffsContainer")
 @onready var original_color: Color = self_modulate
 @onready var center_description: CenterDescription = get_tree().get_root().get_node("Scene/CanvasLayer/CenterDescription")
@@ -26,6 +27,9 @@ func blink() -> void:
 func set_health(new_health: int) -> void:
 	health = new_health
 	update_text()
+	
+func get_health() -> int:
+	return health
 	
 func hurt(amount: int) -> void:
 	

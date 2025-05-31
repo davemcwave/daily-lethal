@@ -89,6 +89,21 @@ func has_free_buff() -> bool:
 			return true
 			
 	return false
+	
+func has_blood_buff() -> bool:
+	for buff_panel: BuffPanel in get_children():
+		if not is_instance_valid(buff_panel):
+			continue
+			
+		var buff: Buff = buff_panel.get_buff()
+		if not is_instance_valid(buff):
+			continue
+		
+		if buff is BloodBuff:
+			return true
+			
+	return false
+	
 
 func remove_free_buff() -> void:
 	for buff_panel: BuffPanel in get_children():

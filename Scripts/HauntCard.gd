@@ -4,7 +4,7 @@ func play() -> void:
 	scene.increment_card_count()
 	set_state(State.Playing)
 	
-	energy.use_energy(energy_cost)
+	pay_cost(energy_cost)
 	scene.set_last_card_effects(self)
 	buffs_container.activate_on_play_buffs()
 	

@@ -18,7 +18,7 @@ func discard() -> void:
 func play():
 	set_state(State.Playing)
 	
-	energy.use_energy(energy_cost)
+	pay_cost(energy_cost)
 	
 	for card_effect in card_effects:
 		if card_effect_delay > 0.0:
