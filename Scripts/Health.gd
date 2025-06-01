@@ -27,6 +27,9 @@ func blink() -> void:
 func set_health(new_health: int) -> void:
 	health = new_health
 	update_text()
+
+func add_health(add_health_amount: int) -> void:
+	set_health(health + add_health_amount)
 	
 func get_health() -> int:
 	return health
