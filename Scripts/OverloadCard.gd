@@ -24,7 +24,7 @@ func play() -> void:
 	
 	set_state(State.Playing)
 	
-	energy.use_energy(energy_cost)
+	pay_cost(energy_cost)
 	
 	
 	for card_effect in card_effects:

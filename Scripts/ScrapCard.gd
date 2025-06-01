@@ -5,7 +5,7 @@ func play() -> void:
 	scene.increment_card_count()
 	set_state(State.Playing)
 	
-	energy.use_energy(energy_cost)
+	pay_cost(energy_cost)
 	discard()
 	
 	for card_effect in card_effects:

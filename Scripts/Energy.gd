@@ -6,7 +6,7 @@ class_name Energy
 @onready var original_color: Color = self_modulate
 const TEXT_TEMPLATE = "[center][b]%d[/b][/center]"
 @onready var center_description: CenterDescription = get_tree().get_root().get_node("Scene/CanvasLayer/CenterDescription")
-
+@onready var health: Health 
 func _ready():
 	update_energy_text()
 	
@@ -33,16 +33,8 @@ func add_energy(additional_energy_amount: int) -> void:
 	blink()
 	update_energy_text()
 	
-func use_energy(cost: int, use_free_buff: bool = true) -> void:
-	if buffs_container.has_free_buff() and use_free_buff:
-		buffs_container.remove_free_buff()
-	elif buffs_container.has_discount_buff():
-		var discount_buff: DiscountBuff = buffs_container.get_discount_buff()
-		var discount_amount: int = discount_buff.get_discount_amount()
-		energy_amount = energy_amount - max(cost - discount_amount, 0)
-		buffs_container.remove_discount_buff()
-	else:
-		energy_amount -= cost
+func use_energy(cost: int) -> void:	
+	energy_amount -= cost
 		
 	blink()
 

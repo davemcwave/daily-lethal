@@ -24,7 +24,7 @@
 - [ ] vampire lifesteal mechanic/buff
 - [ ] attack card that gets cheaper every turn
 - [ ] the next card drawn costs no energy
-- [ ] Consume - next card is trashed. pair with Free
+- [x] Consume - next card is trashed. pair with Free
 - [ ] "Spark" - another card gets +1 whenever spark is played
 - [ ] "Resurrect" - put discard cards into hand
 - [ ] only do damage if discard is empty
@@ -40,6 +40,7 @@
 - [ ] make permanent vs 1 time use for vulnerable debuff
 - [ ] Cards that have a special effect if you discard them using another card instead of playing them normally
 - [ ] words that enemies say
+- [ ] Make desktop version wider and better than mobile experience
 
 
 

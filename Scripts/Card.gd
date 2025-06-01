@@ -18,7 +18,9 @@ const LOW_ENERGY_CARD_TEXT = "[center][b][pulse freq=2.0 color=#ffffff40 ease=-2
 @export var card_effect_delay: float = 0.0
 @onready var enemy = scene.get_node("Enemy")
 @onready var card_preview = scene.get_node("CanvasLayer/CardPreview")
-@onready var energy = scene.get_node("Energy")
+@onready var energy: Energy = scene.get_node("Energy")
+@onready var health: Health = scene.get_node("Health")
+
 @onready var cards_played: CardsPlayed = scene.get_node("CardsPlayed")
 
 @onready var play_text = scene.get_node("PlayText")
@@ -40,7 +42,8 @@ enum State {
 	Discarding,
 	Discarded,
 	Bouncing,
-	Grabbed
+	Grabbed,
+	Disabled
 }
 @export var state = State.InHand
 
@@ -174,7 +177,7 @@ func grab() -> void:
 	
 	show_card_preview()
 	
-	if energy.has_enough_energy(energy_cost):
+	if can_pay_cost(energy_cost):
 		play_text.set_text(PLAY_CARD_TEXT)
 	else:
 		play_text.set_text(LOW_ENERGY_CARD_TEXT)
@@ -204,7 +207,7 @@ func can_play() -> bool:
 		and card_play_area.get_card() == self \
 		and not enemy.is_animating() \
 		and not buffs_container.is_animating() \
-		and energy.has_enough_energy(energy_cost)
+		and can_pay_cost(energy_cost)
 		
 func drop() -> void:
 	card_preview.hide()
@@ -225,12 +228,31 @@ func get_background_color() -> Color:
 	
 func is_playing() -> bool:
 	return state == State.Playing
+
+func can_pay_cost(cost: int) -> bool:
+	return (
+		buffs_container.has_blood_buff() and health.get_health() >= cost
+	) \
+	or energy.has_enough_energy(cost)
+	
+func pay_cost(cost: int, use_free_buff: bool = true) -> void:
+	if buffs_container.has_free_buff() and use_free_buff:
+		buffs_container.remove_free_buff()
+	elif buffs_container.has_blood_buff():
+		health.hurt(cost)
+	elif buffs_container.has_discount_buff():
+		var discount_buff: DiscountBuff = buffs_container.get_discount_buff()
+		var discount_amount: int = discount_buff.get_discount_amount()
+		energy.set_energy(energy.get_energy_amount() - max(cost - discount_amount, 0))
+		buffs_container.remove_discount_buff()
+	else:
+		energy.use_energy(energy_cost)
 	
 func play():
 	scene.increment_card_count()
 	set_state(State.Playing)
 	
-	energy.use_energy(energy_cost)
+	pay_cost(energy_cost)
 	
 	for card_effect in card_effects:
 		if card_effect_delay > 0.0:
