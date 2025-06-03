@@ -50,7 +50,8 @@ func hurt(amount: int) -> void:
 		
 		scene.check_game_over()
 		
-		buffs_container.activate_on_hurt_buffs()
+		if amount > 0:
+			buffs_container.activate_on_hurt_buffs()
 		
 func is_dead() -> bool:
 	return dead

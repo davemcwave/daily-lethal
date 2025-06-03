@@ -94,7 +94,7 @@ func hurt(hurt_amount: int, hurt_from_card: bool = true) -> void:
 	
 	create_damage_label(hurt_amount)
 	
-	if hurt_from_card:
+	if hurt_from_card and hurt_amount > 0:
 		activate_on_hurt_buffs()
 		activate_on_hurt_debuffs()
 		

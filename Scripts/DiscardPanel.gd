@@ -9,6 +9,9 @@ func get_cards() -> Array[Card]:
 		if child is Card:
 			cards.append(child)
 	return cards
+	
+func is_empty() -> bool:
+	return get_cards().size() == 0
 
 func take_cards(amount: int = 1) -> Array[Card]:
 	if get_cards().size() <= 0:

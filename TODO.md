@@ -23,10 +23,10 @@
 - [ ] Heal mechanic
 - [ ] vampire lifesteal mechanic/buff
 - [ ] attack card that gets cheaper every turn
-- [ ] the next card drawn costs no energy
+- [x] the next card drawn costs no energy
 - [x] Consume - next card is trashed. pair with Free
 - [ ] "Spark" - another card gets +1 whenever spark is played
-- [ ] "Resurrect" - put discard cards into hand
+- [x] "Resurrect" - put discard cards into hand
 - [ ] only do damage if discard is empty
 - [ ] CHOICE - do A or do B
 - [ ] "Change the cost of all the cards in your hand to 2" permanently
@@ -41,7 +41,9 @@
 - [ ] Cards that have a special effect if you discard them using another card instead of playing them normally
 - [ ] words that enemies say
 - [ ] Make desktop version wider and better than mobile experience
-
+- [ ] Trophy system: Best solution, Beat the dev
+- [ ] Streak system: 10 day win streak
+- [ ] Undo button?
 
 
 

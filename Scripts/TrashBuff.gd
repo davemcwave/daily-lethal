@@ -8,6 +8,7 @@ func activate() -> void:
 	var card: Card = discard_pile.get_last_card()
 	card.shrink(0.15)
 	await get_tree().create_timer(0.15).timeout
-	card.queue_free()
+	if is_instance_valid(card):
+		card.queue_free()
 	super.activate()
 	
