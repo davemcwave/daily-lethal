@@ -141,6 +141,9 @@ func _on_gui_input(event):
 func get_card_effects() -> Array:
 	return card_effects
 
+func get_card_name() -> String:
+	return card_name
+	
 func show_card_preview() -> void:
 	# Card preview data
 	

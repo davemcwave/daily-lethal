@@ -44,11 +44,23 @@ func set_puzzle(new_puzzle: Puzzle) -> void:
 		buff_panel.set_buff(enemy_buff)
 		var target = $Health if puzzle.get_enemy_buff_target() == 'Player' else $Enemy
 		enemy_buff.set_target(target)
+		
+	if puzzle.do_randomize_cards():
+		puzzle.clear_card_scenes()
+		var card_scenes: Array[Resource] = get_all_card_scenes()
+		card_scenes.shuffle()
+		var random_card_scenes: Array[Resource] = []
+		var random_card_count: int = puzzle.get_random_card_count()
+		for i in random_card_count:
+			var random_index = randi() % card_scenes.size()
+			random_card_scenes.append(card_scenes[random_index])
+		puzzle.set_card_scenes(random_card_scenes)
+		
 	for card_scene in puzzle.get_card_scenes():
 		var card: Card = card_scene.instantiate()
 		$Deck.add_child(card)
 		card.hide()
-		
+	
 	$Health.set_health(puzzle.get_player_health())
 	$Energy.set_energy(puzzle.get_player_energy())
 	starting_card_amount = puzzle.get_initial_draw_amount() if puzzle.get_initial_draw_amount() > 0 else $Deck.get_child_count() 
@@ -58,6 +70,21 @@ func set_puzzle(new_puzzle: Puzzle) -> void:
 	
 	get_node("/root/Background").set_is_current_puzzle(puzzle.get_is_current_puzzle())
 
+func get_all_card_scenes() -> Array[Resource]:
+	var card_scenes: Array[Resource] = []
+	var dir = DirAccess.open("res://Scenes/")
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if file_name.ends_with("Card.scn") and not dir.current_is_dir() and file_name != "Card.scn":
+				var scene_path = "res://Scenes/" + file_name
+				var packed_scene = load(scene_path)
+				card_scenes.append(packed_scene)
+			file_name = dir.get_next()
+		dir.list_dir_end()
+	return card_scenes
+	
 func get_last_card_scene_file_path() -> String:
 	return last_card_scene_file_path
 

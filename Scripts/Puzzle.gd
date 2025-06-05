@@ -5,6 +5,8 @@ class_name Puzzle
 @export var puzzle_date: String = "2025-01-09"
 @export_file("*.scn") var next_puzzle_scene
 @export var is_current_puzzle: bool = false
+@export var randomize_cards: bool = false
+@export var random_card_count: int = 6
 
 @export_group("Enemy")
 @export var enemy_health: int = 10
@@ -22,6 +24,12 @@ class_name Puzzle
 @export var card_scenes: Array[Resource]
 
 @export var initial_draw_amount: int = -1
+
+func do_randomize_cards() -> bool:
+	return randomize_cards
+	
+func get_random_card_count() -> int:
+	return random_card_count
 
 func get_enemy_buffs() -> Array[Buff]:
 	return enemy_buffs
@@ -43,6 +51,15 @@ func get_enemy_icon_texture() -> Texture2D:
 
 func get_card_scenes() -> Array[Resource]:
 	return card_scenes
+	
+func clear_card_scenes() -> void:
+	card_scenes.clear()
+
+func set_card_scenes(new_card_scenes: Array[Resource]) -> void:
+	card_scenes = new_card_scenes
+	
+func add_card_scene(new_card_scene: Resource) -> void:
+	card_scenes.append(new_card_scene)
 
 func get_puzzle_date() -> String:
 	return puzzle_date
