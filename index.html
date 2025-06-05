@@ -128,6 +128,53 @@
       height: 20px;
       filter: invert(1); /* makes icon white */
     }
+    
+    .nav-icons {
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      font-size: 1.4rem;
+    }
+
+    .nav-icons a {
+      color: #88e2ff;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+    }
+
+    .nav-icons a:hover {
+      transform: scale(1.2);
+    }
+
+    .nav-bar {
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.0rem; /* tighter spacing */
+      text-align: center;
+    }
+
+    .nav-bar a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #88e2ff;
+      text-decoration: none;
+      font-size: 0.8rem; /* slightly smaller text */
+      transition: transform 0.2s ease;
+      flex: none; /* allow icons to shrink tighter */
+      padding: 0 0.25rem;
+    }
+
+    .nav-icon {
+      font-size: 1.5rem; /* slightly smaller icon */
+    }
+
+    .nav-bar a:hover {
+      transform: scale(1.05);
+    }
+
 
 
   </style>
@@ -154,10 +201,23 @@
         Join us on Discord
     </a>
 
-    <div class="nav-links">
-      <a href="/how-to-play">How to Play</a>
-      <a href="https://playlethal.beehiiv.com/subscribe">📬 Subscribe</a>
-    </div>    
+    <div class="nav-bar">
+      <a href="/how-to-play">
+        <span class="nav-icon">📖</span>
+        <span class="nav-label">How to Play</span>
+      </a>
+      <a href="https://playlethal.beehiiv.com/subscribe">
+        <span class="nav-icon">📬</span>
+        <span class="nav-label">Subscribe</span>
+      </a>
+      <a href="https://ko-fi.com/davemcwavegames" target="_blank">
+        <span class="nav-icon">☕</span>
+        <span class="nav-label">Support</span>
+      </a>
+    </div>
+    
+    
+    
   </div>
 </body>
 </html>
