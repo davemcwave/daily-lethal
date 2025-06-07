@@ -234,7 +234,7 @@ func is_playing() -> bool:
 
 func can_pay_cost(cost: int) -> bool:
 	return (
-		buffs_container.has_blood_buff() and health.get_health() >= cost
+		buffs_container.has_blood_buff() and (health.get_health() >= cost or buffs_container.has_block_buff())
 	) \
 	or energy.has_enough_energy(cost)
 	

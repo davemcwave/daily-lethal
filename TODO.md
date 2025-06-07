@@ -27,7 +27,7 @@
 - [x] Consume - next card is trashed. pair with Free
 - [ ] "Spark" - another card gets +1 whenever spark is played
 - [x] "Resurrect" - put discard cards into hand
-- [ ] only do damage if discard is empty
+- [x] only do damage if discard is empty
 - [ ] CHOICE - do A or do B
 - [ ] "Change the cost of all the cards in your hand to 2" permanently
 - [ ] sustain an effect (good or bad) while card is in your hand, goes away when removed from hand

@@ -7,6 +7,6 @@ func _ready() -> void:
 	set_buff_description("Shields the target from next %d attack%s" % [uses_amount, "s" if uses_amount > 1 else ""])
 
 func activate() -> void:
-	target.set_block(true)
+	#target.set_block(true)
 	super.activate()
 	
