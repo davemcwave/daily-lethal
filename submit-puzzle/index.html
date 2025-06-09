@@ -41,6 +41,11 @@
       color: #bbb;
       font-size: 0.85rem;
     }
+    .description {
+      font-size: 0.9rem;
+      color: #bbb;
+      margin-top: 0.2rem;
+    }
     button {
       width: 100%;
       padding: 14px;
@@ -104,13 +109,15 @@
       <input type="hidden" name="selected_cards" id="finalCards" />
 
       <label>Email Address or Discord Username</label>
-      <input type="text" name="contact_info" placeholder="We’ll only use this if we need to troubleshoot your puzzle or ask a quick question." />
+      <input type="text" name="contact_info" placeholder="mcwavegames@gmail.com" />
+      <div class="description">Used to verify puzzle author and troubleshoot puzzle with you</div>
 
       <label>Your Name</label>
-      <input type="text" name="credit_name" placeholder="This is the name shown next to your puzzle to credit you as the author." />
+      <input type="text" name="credit_name" placeholder="mcwavegames" />
+      <div class="description">Used to give you credit as the puzzle author</div>
 
-      <label>Optional Bluesky Link</label>
-      <input type="text" name="bluesky_link" placeholder="Include this if you want players to follow or contact you on Bluesky." />
+      <label>Optional Bluesky Handle</label>
+      <input type="text" name="bluesky_link" placeholder="@mcwavegames.bsky.social" />
 
       <button type="submit">📤 Submit Puzzle</button>
     </form>
