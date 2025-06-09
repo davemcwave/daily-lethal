@@ -36,6 +36,7 @@
       border: none;
       margin-top: 5px;
       font-size: 0.9rem;
+      box-sizing: border-box;
     }
     input::placeholder {
       color: #bbb;
@@ -48,7 +49,7 @@
     }
     button {
       width: 100%;
-      padding: 14px;
+      padding: 16px;
       border-radius: 8px;
       background-color: #ffd700;
       color: black;
@@ -57,14 +58,16 @@
       margin-top: 1.5rem;
       cursor: pointer;
       border: none;
-      transition: background 0.2s ease;
+      text-align: center;
+      box-sizing: border-box;
+      display: block;
     }
     button:hover {
       background-color: #ffec80;
     }
     .card-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      grid-template-columns: repeat(5, 1fr);
       gap: 1rem;
       margin: 1rem 0;
     }
@@ -92,19 +95,19 @@
       color: #88e2ff;
       margin-top: 1rem;
     }
-    @media (max-width: 600px) {
-        .card-grid {
-            display: flex;
-            overflow-x: auto;
-            gap: 1rem;
-            padding-bottom: 1rem;
-        }
-        .card-img-large {
-            flex: 0 0 auto;
-            width: 140px;
-        }
-    }
 
+    @media (max-width: 600px) {
+      .card-grid {
+        display: flex;
+        overflow-x: auto;
+        gap: 1rem;
+        padding-bottom: 1rem;
+      }
+      .card-img-large {
+        flex: 0 0 auto;
+        width: 140px;
+      }
+    }
   </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW9PLMBBGT"></script>
