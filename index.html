@@ -30,8 +30,6 @@
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-
-      /* Tiled background card pattern */
       background-image: 
         linear-gradient(rgba(31, 44, 48, 0.94), rgba(31, 44, 48, 0.94)), 
         url('bg.png');
@@ -86,21 +84,6 @@
       background-color: #60ccfb;
     }
 
-    .nav-links {
-      margin-top: 1.5rem;
-      font-size: 0.9rem;
-    }
-
-    .nav-links a {
-      color: #88e2ff;
-      text-decoration: none;
-      margin: 0 0.8rem;
-    }
-
-    .nav-links a:hover {
-      text-decoration: underline;
-    }
-
     .discord-button {
       display: flex;
       align-items: center;
@@ -126,32 +109,14 @@
     .discord-icon {
       width: 20px;
       height: 20px;
-      filter: invert(1); /* makes icon white */
-    }
-    
-    .nav-icons {
-      margin-top: 1.5rem;
-      display: flex;
-      justify-content: center;
-      gap: 1.2rem;
-      font-size: 1.4rem;
-    }
-
-    .nav-icons a {
-      color: #88e2ff;
-      text-decoration: none;
-      transition: transform 0.2s ease;
-    }
-
-    .nav-icons a:hover {
-      transform: scale(1.2);
+      filter: invert(1);
     }
 
     .nav-bar {
       margin-top: 1.5rem;
       display: flex;
       justify-content: center;
-      gap: 1.0rem; /* tighter spacing */
+      gap: 1.0rem;
       text-align: center;
     }
 
@@ -161,63 +126,86 @@
       align-items: center;
       color: #88e2ff;
       text-decoration: none;
-      font-size: 0.8rem; /* slightly smaller text */
+      font-size: 0.8rem;
       transition: transform 0.2s ease;
-      flex: none; /* allow icons to shrink tighter */
       padding: 0 0.25rem;
     }
 
     .nav-icon {
-      font-size: 1.5rem; /* slightly smaller icon */
+      font-size: 1.5rem;
     }
 
     .nav-bar a:hover {
       transform: scale(1.05);
     }
 
+    .submit-float {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: #ffce4e;
+      color: black;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      text-decoration: none;
+      box-shadow: 0 0 8px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease;
+    }
 
+    .submit-float:hover {
+      transform: scale(1.08);
+      background: #ffe680;
+    }
 
+    .wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+    }
   </style>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LW9PLMBBGT"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-LW9PLMBBGT');
-</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW9PLMBBGT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LW9PLMBBGT');
+  </script>
 </head>
 <body>
-  <div class="container">
+  <div class="wrapper">
+    <div class="container">
+      <h1>🃏 Play Lethal</h1>
+      <p>Win in 1 turn. Can you find lethal?</p>
 
-    <h1>🃏 Play Lethal</h1>
-    <p>Win in 1 turn. Can you find lethal?</p>
-
-    <a href="/today" class="button">Play Today's Puzzle</a>
-    <a href="/archive" class="button">View Archive</a>
-    <a href="https://discord.gg/2sev8HA9sd" class="discord-button" target="_blank" rel="noopener">
+      <a href="/today" class="button">Play Today's Puzzle</a>
+      <a href="/archive" class="button">View Archive</a>
+      <a href="https://discord.gg/2sev8HA9sd" class="discord-button" target="_blank" rel="noopener">
         <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" alt="Discord" class="discord-icon" />
         Join us on Discord
-    </a>
+      </a>
+      <a href="/submit-puzzle" class="button" style="background-color: #ffce4e; color: black;">
+        🎯 Submit a Puzzle
+      </a>
 
-    <div class="nav-bar">
-      <a href="/how-to-play">
-        <span class="nav-icon">📖</span>
-        <span class="nav-label">How to Play</span>
-      </a>
-      <a href="https://playlethal.beehiiv.com/subscribe">
-        <span class="nav-icon">📬</span>
-        <span class="nav-label">Subscribe</span>
-      </a>
-      <a href="https://ko-fi.com/davemcwavegames" target="_blank">
-        <span class="nav-icon">☕</span>
-        <span class="nav-label">Support</span>
-      </a>
+      <div class="nav-bar">
+        <a href="/how-to-play">
+          <span class="nav-icon">📖</span>
+          <span class="nav-label">How to Play</span>
+        </a>
+        <a href="https://playlethal.beehiiv.com/subscribe">
+          <span class="nav-icon">📬</span>
+          <span class="nav-label">Subscribe</span>
+        </a>
+        <a href="https://ko-fi.com/davemcwavegames" target="_blank">
+          <span class="nav-icon">☕</span>
+          <span class="nav-label">Support</span>
+        </a>
+      </div>
     </div>
-    
-    
-    
   </div>
 </body>
 </html>

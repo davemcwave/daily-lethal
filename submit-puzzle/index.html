@@ -13,7 +13,7 @@
       padding: 2rem;
     }
     .container {
-      max-width: 600px;
+      max-width: 900px;
       margin: auto;
       background: #28373d;
       padding: 2rem;
@@ -50,34 +50,38 @@
       width: 100%;
       padding: 14px;
       border-radius: 8px;
-      background-color: #3abff8;
+      background-color: #ffd700;
       color: black;
       font-weight: bold;
       font-size: 1.1rem;
       margin-top: 1.5rem;
       cursor: pointer;
       border: none;
+      transition: background 0.2s ease;
     }
     button:hover {
-      background-color: #60ccfb;
+      background-color: #ffec80;
     }
-    .card-carousel {
-      overflow-x: auto;
-      white-space: nowrap;
-      margin-bottom: 1rem;
-      padding-bottom: 10px;
-      -webkit-overflow-scrolling: touch;
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
     }
     .card-img-large {
-      height: 180px;
-      margin: 0 8px;
+      width: 100%;
       border-radius: 8px;
       cursor: pointer;
-      border: 3px solid transparent;
-      display: inline-block;
+      border: 4px solid transparent;
+      background: #fff;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card-img-large:hover {
+      transform: scale(1.02);
     }
     .card-img-large.selected {
-      border-color: #88e2ff;
+      border-color: #ffd700;
+      box-shadow: 0 0 12px 4px rgba(255, 215, 0, 0.8);
     }
     .selected-cards {
       background: #273a40;
@@ -86,7 +90,7 @@
       text-align: center;
       font-weight: bold;
       color: #88e2ff;
-      margin-bottom: 1rem;
+      margin-top: 1rem;
     }
   </style>
 <!-- Google tag (gtag.js) -->
@@ -95,14 +99,13 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-LW9PLMBBGT');
 </script>
 </head>
 <body>
   <div class="container">
     <h1>Submit Your Lethal Puzzle</h1>
-    <div class="card-carousel" id="cardGallery"></div>
+    <div class="card-grid" id="cardGallery"></div>
     <div class="selected-cards" id="selectedCardsText"></div>
 
     <form action="https://formsubmit.co/mcwavegames@gmail.com" method="POST" onsubmit="return finalizeBeforeSubmit()">
@@ -129,7 +132,7 @@
 
     async function fetchCardList() {
       try {
-        const response = await fetch('card-list.json');
+        const response = await fetch('../card-list.json');
         const cardFiles = await response.json();
 
         cardFiles.forEach(card => {
