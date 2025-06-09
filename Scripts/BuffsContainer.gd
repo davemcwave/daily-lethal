@@ -111,6 +111,14 @@ func remove_free_buff() -> void:
 		if buff is FreeBuff:
 			buff_panel.queue_free()
 			return
+			
+func remove_blood_buff() -> void:
+	for buff_panel: BuffPanel in get_children():
+		var buff: Buff = buff_panel.get_buff()
+		if buff is BloodBuff:
+			buff_panel.queue_free()
+			return
+	
 	
 func activate_on_hit_buffs() -> void:
 	animating = true

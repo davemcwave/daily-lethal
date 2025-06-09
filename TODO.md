@@ -20,7 +20,7 @@
 - [ ] "momentum" buff where you get +1, +2, +3 bonuses on attack if you keep attacking
 - [ ] "refresh" buff where next card you play goes to the bottom of your deck
 - [ ] Deal damage relative to how much damage you've received
-- [ ] Heal mechanic
+- [x] Heal mechanic
 - [ ] vampire lifesteal mechanic/buff
 - [ ] attack card that gets cheaper every turn
 - [x] the next card drawn costs no energy

@@ -10,6 +10,9 @@ func get_cards() -> Array[Card]:
 			cards.append(child)
 	return cards
 	
+func get_card_count() -> int:
+	return get_cards().size()
+	
 func is_empty() -> bool:
 	return get_cards().size() == 0
 

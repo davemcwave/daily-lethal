@@ -243,6 +243,7 @@ func pay_cost(cost: int, use_free_buff: bool = true) -> void:
 		buffs_container.remove_free_buff()
 	elif buffs_container.has_blood_buff():
 		health.hurt(cost)
+		buffs_container.remove_blood_buff()
 	elif buffs_container.has_discount_buff():
 		var discount_buff: DiscountBuff = buffs_container.get_discount_buff()
 		var discount_amount: int = discount_buff.get_discount_amount()

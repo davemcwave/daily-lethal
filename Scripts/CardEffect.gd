@@ -7,6 +7,7 @@ signal player_input_finished
 @export var effect_name = ""
 @export var effect_description = ""
 @export var requires_player_input: bool = false
+@onready var scene: Scene = get_tree().get_root().get_node("Scene")
 
 func set_effect_name(new_effect_name: String) -> void:
 	effect_name = new_effect_name
