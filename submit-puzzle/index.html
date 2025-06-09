@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Submit Puzzle - Lethal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: #1f2c30;
+      color: white;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #28373d;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+    h1 {
+      text-align: center;
+      color: #88e2ff;
+    }
+    label {
+      margin-top: 1rem;
+      display: block;
+      font-size: 1rem;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      margin-top: 5px;
+      font-size: 0.9rem;
+    }
+    input::placeholder {
+      color: #bbb;
+      font-size: 0.85rem;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      border-radius: 8px;
+      background-color: #3abff8;
+      color: black;
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+      cursor: pointer;
+      border: none;
+    }
+    button:hover {
+      background-color: #60ccfb;
+    }
+    .card-carousel {
+      overflow-x: auto;
+      white-space: nowrap;
+      margin-bottom: 1rem;
+      padding-bottom: 10px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .card-img-large {
+      height: 180px;
+      margin: 0 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 3px solid transparent;
+      display: inline-block;
+    }
+    .card-img-large.selected {
+      border-color: #88e2ff;
+    }
+    .selected-cards {
+      background: #273a40;
+      padding: 0.75rem;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: bold;
+      color: #88e2ff;
+      margin-bottom: 1rem;
+    }
+  </style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LW9PLMBBGT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LW9PLMBBGT');
+</script>
+</head>
+<body>
+  <div class="container">
+    <h1>Submit Your Lethal Puzzle</h1>
+    <div class="card-carousel" id="cardGallery"></div>
+    <div class="selected-cards" id="selectedCardsText"></div>
+
+    <form action="https://formsubmit.co/mcwavegames@gmail.com" method="POST" onsubmit="return finalizeBeforeSubmit()">
+      <input type="hidden" name="selected_cards" id="finalCards" />
+
+      <label>Email Address or Discord Username</label>
+      <input type="text" name="contact_info" placeholder="We’ll only use this if we need to troubleshoot your puzzle or ask a quick question." />
+
+      <label>Your Name</label>
+      <input type="text" name="credit_name" placeholder="This is the name shown next to your puzzle to credit you as the author." />
+
+      <label>Optional Bluesky Link</label>
+      <input type="text" name="bluesky_link" placeholder="Include this if you want players to follow or contact you on Bluesky." />
+
+      <button type="submit">📤 Submit Puzzle</button>
+    </form>
+  </div>
+
+  <script>
+    const cardGallery = document.getElementById('cardGallery');
+    const selectedCards = [];
+
+    async function fetchCardList() {
+      try {
+        const response = await fetch('card-list.json');
+        const cardFiles = await response.json();
+
+        cardFiles.forEach(card => {
+          const img = document.createElement('img');
+          img.src = `/Assets/Textures/card-screenshots/${card}`;
+          img.alt = card;
+          img.className = 'card-img-large';
+          img.setAttribute('data-name', card);
+
+          img.addEventListener('click', () => {
+            const cardName = img.getAttribute('data-name');
+            if (img.classList.contains('selected')) {
+              img.classList.remove('selected');
+              const index = selectedCards.indexOf(cardName);
+              if (index > -1) selectedCards.splice(index, 1);
+            } else {
+              if (selectedCards.length < 7) {
+                img.classList.add('selected');
+                selectedCards.push(cardName);
+              }
+            }
+            updateCardText();
+          });
+
+          cardGallery.appendChild(img);
+        });
+      } catch (error) {
+        console.error('Could not load card list:', error);
+      }
+    }
+
+    function formatName(filename) {
+      return filename.replace('-card.PNG', '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    }
+
+    function updateCardText() {
+      const formatted = selectedCards.map(name => formatName(name));
+      document.getElementById('selectedCardsText').textContent = formatted.join(', ');
+      document.getElementById('finalCards').value = selectedCards.join(', ');
+    }
+
+    function finalizeBeforeSubmit() {
+      if (selectedCards.length > 0) {
+        document.getElementById('finalCards').value = selectedCards.join(', ');
+      }
+      return true;
+    }
+
+    fetchCardList();
+  </script>
+</body>
+</html>

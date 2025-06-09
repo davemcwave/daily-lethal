@@ -3,7 +3,7 @@ extends CardEffect
 @export_enum("Discard Pile", "Hand", "Self") var trash_from_location: String = "Discard Pile"
 @export var card_amount: int = 1
 @export_enum("Top", "Bottom") var discard_pile_trash_direction: String = "Top"
-@onready var scene: Scene = get_tree().get_root().get_node("Scene")
+#@onready var scene: Scene = get_tree().get_root().get_node("Scene")
 @onready var hand: Hand = scene.get_node("Hand")
 @onready var discard_panel: DiscardPanel = scene.get_node("DiscardPanel")
 
