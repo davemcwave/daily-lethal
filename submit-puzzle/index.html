@@ -163,6 +163,15 @@
 
     <form action="https://formsubmit.co/mcwavegames@gmail.com" method="POST" onsubmit="return finalizeBeforeSubmit()">
       <input type="hidden" name="selected_cards" id="finalCards" />
+      
+      <label>Player HP</label>
+      <input type="number" name="player_hp" placeholder="e.g. 10" />
+
+      <label>Player Energy</label>
+      <input type="number" name="player_energy" placeholder="e.g. 3" />
+
+      <label>Enemy HP</label>
+      <input type="number" name="enemy_hp" placeholder="e.g. 20" />
 
       <label>Email Address or Discord Username</label>
       <input type="text" name="contact_info" placeholder="mcwavegames@gmail.com" />
@@ -174,15 +183,6 @@
 
       <label>Optional Bluesky Handle</label>
       <input type="text" name="bluesky_link" placeholder="@mcwavegames.bsky.social" />
-
-      <label>Player HP</label>
-      <input type="number" name="player_hp" placeholder="e.g. 10" />
-
-      <label>Player Energy</label>
-      <input type="number" name="player_energy" placeholder="e.g. 3" />
-
-      <label>Enemy HP</label>
-      <input type="number" name="enemy_hp" placeholder="e.g. 20" />
 
       <button type="submit">📤 Submit Puzzle</button>
     </form>
