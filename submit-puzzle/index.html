@@ -71,20 +71,58 @@
       gap: 1rem;
       margin: 1rem 0;
     }
+    .card-wrapper {
+      position: relative;
+    }
     .card-img-large {
       width: 100%;
       border-radius: 8px;
-      cursor: pointer;
       border: 4px solid transparent;
       background: #fff;
       transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
-    .card-img-large:hover {
-      transform: scale(1.02);
-    }
     .card-img-large.selected {
       border-color: #ffd700;
       box-shadow: 0 0 12px 4px rgba(255, 215, 0, 0.8);
+    }
+    .card-controls {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      right: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .card-controls button {
+      width: 28px;
+      height: 28px;
+      background: #ffd700;
+      color: black;
+      border: none;
+      border-radius: 50%;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      transition: transform 0.1s ease;
+    }
+
+    .card-controls button:hover {
+      transform: scale(1.1);
+    }
+    .card-count {
+      background: #ffd700;
+      color: black;
+      padding: 2px 6px;
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: 0.8rem;
+      text-align: center;
     }
     .selected-cards {
       background: #273a40;
@@ -95,7 +133,6 @@
       color: #88e2ff;
       margin-top: 1rem;
     }
-
     @media (max-width: 600px) {
       .card-grid {
         display: flex;
@@ -109,19 +146,18 @@
       }
     }
   </style>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LW9PLMBBGT"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-LW9PLMBBGT');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW9PLMBBGT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LW9PLMBBGT');
+  </script>
 </head>
 <body>
   <div class="container">
     <h1>Submit Your Lethal Puzzle</h1>
-    <p style="text-align: center; font-size: 1rem; color: #bbb; margin-bottom: 1rem;">Press cards to add them to your puzzle (up to 7).</p>
+    <p style="text-align: center; font-size: 1rem; color: #bbb; margin-bottom: 1rem;">Press + to add or - to remove cards (up to 7 total).</p>
     <div class="card-grid" id="cardGallery"></div>
     <div class="selected-cards" id="selectedCardsText"></div>
 
@@ -139,6 +175,15 @@
       <label>Optional Bluesky Handle</label>
       <input type="text" name="bluesky_link" placeholder="@mcwavegames.bsky.social" />
 
+      <label>Player HP</label>
+      <input type="number" name="player_hp" placeholder="e.g. 10" />
+
+      <label>Player Energy</label>
+      <input type="number" name="player_energy" placeholder="e.g. 3" />
+
+      <label>Enemy HP</label>
+      <input type="number" name="enemy_hp" placeholder="e.g. 20" />
+
       <button type="submit">📤 Submit Puzzle</button>
     </form>
   </div>
@@ -153,32 +198,68 @@
         const cardFiles = await response.json();
 
         cardFiles.forEach(card => {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'card-wrapper';
+
           const img = document.createElement('img');
           img.src = `/Assets/Textures/card-screenshots/${card}`;
           img.alt = card;
           img.className = 'card-img-large';
           img.setAttribute('data-name', card);
 
-          img.addEventListener('click', () => {
-            const cardName = img.getAttribute('data-name');
-            if (img.classList.contains('selected')) {
-              img.classList.remove('selected');
-              const index = selectedCards.indexOf(cardName);
-              if (index > -1) selectedCards.splice(index, 1);
-            } else {
-              if (selectedCards.length < 7) {
-                img.classList.add('selected');
-                selectedCards.push(cardName);
-              }
+          const controls = document.createElement('div');
+          controls.className = 'card-controls';
+
+          const plus = document.createElement('button');
+          plus.textContent = '+';
+
+          const countDisplay = document.createElement('div');
+          countDisplay.className = 'card-count';
+
+          plus.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (selectedCards.length < 7) {
+              selectedCards.push(card);
+              updateCardText();
+              updateCardCount(card, countDisplay);
+              img.classList.add('selected');
             }
-            updateCardText();
           });
 
-          cardGallery.appendChild(img);
+          const minus = document.createElement('button');
+          minus.textContent = '-';
+          minus.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const index = selectedCards.lastIndexOf(card);
+            if (index > -1) {
+              selectedCards.splice(index, 1);
+              updateCardText();
+              updateCardCount(card, countDisplay);
+              if (!selectedCards.includes(card)) {
+                img.classList.remove('selected');
+              }
+            }
+          });
+
+          controls.appendChild(plus);
+          controls.appendChild(countDisplay);
+          controls.appendChild(minus);
+
+          wrapper.appendChild(img);
+          wrapper.appendChild(controls);
+          // countDisplay removed for minimal UI
+          cardGallery.appendChild(wrapper);
+
+          updateCardCount(card, countDisplay);
         });
       } catch (error) {
         console.error('Could not load card list:', error);
       }
+    }
+
+    function updateCardCount(card, display) {
+      const count = selectedCards.filter(name => name === card).length;
+      display.textContent = count > 0 ? count : '0';
     }
 
     function formatName(filename) {
@@ -192,9 +273,7 @@
     }
 
     function finalizeBeforeSubmit() {
-      if (selectedCards.length > 0) {
-        document.getElementById('finalCards').value = selectedCards.join(', ');
-      }
+      document.getElementById('finalCards').value = selectedCards.join(', ');
       return true;
     }
 
