@@ -153,6 +153,15 @@
     gtag('js', new Date());
     gtag('config', 'G-LW9PLMBBGT');
   </script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LW9PLMBBGT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LW9PLMBBGT');
+</script>
 </head>
 <body>
   <div class="container">
@@ -173,6 +182,10 @@
       <label>Enemy HP</label>
       <input type="number" name="enemy_hp" placeholder="e.g. 20" />
 
+      <label>Optional Enemy Name or Inspirations</label>
+      <input type="text" name="enemy_info" placeholder="Godzilla / A Monster That Looks Like A Giant Lizard" />
+      <div class="description">This is so I know what to draw for the enemy icon</div>
+
       <label>Email Address or Discord Username</label>
       <input type="text" name="contact_info" placeholder="mcwavegames@gmail.com" />
       <div class="description">Used to verify puzzle author and troubleshoot puzzle with you</div>
@@ -181,8 +194,8 @@
       <input type="text" name="credit_name" placeholder="mcwavegames" />
       <div class="description">Used to give you credit as the puzzle author</div>
 
-      <label>Optional Bluesky Handle</label>
-      <input type="text" name="bluesky_link" placeholder="@mcwavegames.bsky.social" />
+      <label>Optional Social Handle or Link</label>
+      <input type="text" name="social" placeholder="@mcwavegames.bsky.social" />
 
       <button type="submit">📤 Submit Puzzle</button>
     </form>
