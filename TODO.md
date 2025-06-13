@@ -43,7 +43,12 @@
 - [ ] Make desktop version wider and better than mobile experience
 - [ ] Trophy system: Best solution, Beat the dev
 - [ ] Streak system: 10 day win streak
-- [ ] Undo button?
+- [ ] Undo button
+- [ ] be able to rearrange cards
+- [ ] links dont open new tab
+- [ ] testable puzzle environment
+- [ ] mouse hover to view cards
+
 
 
 
