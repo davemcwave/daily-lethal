@@ -17,9 +17,12 @@ var last_card_backup: Card = null
 var checking_for_game_over: bool = false
 var game_over: bool = false
 var puzzle: Puzzle = null
+@onready var url_capturer: URLCapturer = $URLCapturer
 
 func _ready():
-	if not background.get_puzzle_scene().is_empty():
+	if url_capturer.has_puzzle_date():
+		set_puzzle(load(get_puzzle_scene_that_starts_with(url_capturer.get_puzzle_date())).instantiate())
+	elif not background.get_puzzle_scene().is_empty():
 		set_puzzle(load(background.get_puzzle_scene()).instantiate())
 	else:
 		set_puzzle(load(puzzle_scene).instantiate())
@@ -28,8 +31,29 @@ func _ready():
 	
 	call_deferred("draw_starting_cards")
 
+func get_puzzle_scene_that_starts_with(puzzle_name_prefix: String) -> String:
+	for puzzle_scene in get_files_in_folder("res://Scenes/Puzzles"):
+		var puzzle_name: String = puzzle_scene.split("/")[-1].split(".scn")[0]
+		if puzzle_name.begins_with(puzzle_name_prefix):
+			return puzzle_scene
+	return ""
 
+func get_files_in_folder(path: String) -> Array:
+	var files := []
+	var dir := DirAccess.open(path)
+	if dir == null:
+		print("Failed to open folder:", path)
+		return files
 
+	dir.list_dir_begin()
+	var item := dir.get_next()
+	while item != "":
+		if not dir.current_is_dir():
+			files.append(path.path_join(item))
+		item = dir.get_next()
+	dir.list_dir_end()
+
+	return files
 func set_puzzle(new_puzzle: Puzzle) -> void:
 	puzzle = new_puzzle
 	
