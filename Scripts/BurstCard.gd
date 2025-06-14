@@ -28,6 +28,6 @@ func play():
 	buffs_container.activate_on_play_buffs()
 	scene.set_last_card_effects(self)
 	
-	discard()
 	scene.increment_card_count()
+	discard()
 	
