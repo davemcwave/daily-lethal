@@ -45,9 +45,10 @@
 - [ ] Streak system: 10 day win streak
 - [ ] Undo button
 - [ ] be able to rearrange cards
-- [ ] links dont open new tab
+- [ ] dont open links opinen new tab
 - [ ] testable puzzle environment
 - [ ] mouse hover to view cards
+- [ ] make sure burst, overload, and any card counting mechanics work as intended
 
 
 

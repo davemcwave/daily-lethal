@@ -40,9 +40,9 @@ func add_card(card: Card) -> void:
 	#tween.parallel().tween_property(card, "scale", Vector2.ONE, 0.25).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
 	card.bounce()
 
-func _input(event):
-	if event.is_action_pressed("test"):
-		print("### CARDS ###")
-		for card: Card in get_cards():
-			print("card_name: %s, card_index: %d" % [card.get_card_name(), card.z_index])
+#func _input(event):
+	#if event.is_action_pressed("test"):
+		#print("### CARDS ###")
+		#for card: Card in get_cards():
+			#print("card_name: %s, card_index: %d" % [card.get_card_name(), card.z_index])
 			
