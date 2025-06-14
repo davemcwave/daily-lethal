@@ -41,6 +41,8 @@ func _on_get_tomorrow_button_pressed():
 	else:
 		var next_puzzle: Puzzle = load(background.get_next_puzzle_scene()).instantiate()
 		var next_puzzle_date: String = next_puzzle.get_puzzle_date()
-		OS.shell_open("https://playlethal.fun/%s" % next_puzzle_date)
-		#get_node("/root/Background").set_puzzle_scene()
-		#get_tree().change_scene_to_file("res://Scenes/Scene0.scn")
+		#OS.shell_open("https://playlethal.fun/%s" % next_puzzle_date)
+		open_window_in_same_tab("https://playlethal.fun/%s" % next_puzzle_date)
+		
+func open_window_in_same_tab(url: String) -> void:
+	JavaScriptBridge.eval("window.location.href = '%s';" % url)

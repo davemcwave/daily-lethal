@@ -60,7 +60,24 @@ func _ready():
 	$IconPanel/Icon.material = load("res://Resources/WobbleMaterial.res")
 	add_to_group("Cards")
 	#connect("played", scene._on_card_played.bind(self))
+	
+	if is_playing_on_desktop():
+		connect("mouse_entered", _on_mouse_entered)
+		connect("mouse_exited", _on_mouse_exited)
 
+func no_cards_grabbed() -> bool:
+	for card: Card in get_tree().get_nodes_in_group("Cards"):
+		if card.is_grabbed():
+			return false
+	return true
+	
+func _on_mouse_entered() -> void:
+	if no_cards_grabbed() and not is_discarded():
+		self.show_card_preview()
+	
+func _on_mouse_exited() -> void:
+	card_preview.hide()
+	
 func get_id() -> int:
 	return id
 	
@@ -116,6 +133,18 @@ func _on_discarding_button_pressed(discarding_button: DiscardingButton) -> void:
 	discarding_button.queue_free()
 	
 	emit_signal("marked_for_discard", false)
+	
+func is_playing_on_desktop() -> bool:
+	return is_playing_on_desktop_browser() or is_playing_on_desktop_not_browser()
+	
+func is_playing_on_desktop_not_browser() -> bool:
+	return OS.has_feature("linux") or OS.has_feature("macos")  or OS.has_feature("windows") 
+	
+func is_playing_on_desktop_browser() -> bool:
+	return OS.has_feature("web_linuxbsd") or OS.has_feature("web_macos")  or OS.has_feature("web_windows") 
+	
+func is_playing_on_mobile_browser() -> bool:
+	return OS.has_feature("web_android") or OS.has_feature("web_ios")
 
 func _on_gui_input(event):
 	
@@ -132,10 +161,11 @@ func _on_gui_input(event):
 	elif event.is_action_released("select") and is_grabbed():
 		drop()
 		
-	if event is InputEventMouseMotion and event.relative.length() > 5 and card_preview.visible:
-		print("Mouse moved: ", event.relative)
-		card_preview.hide()
-	elif event is InputEventScreenDrag and event.relative.length() > 5 and card_preview.visible:
+	#if is_playing_on_desktop_browser():
+		#if is_grabbed() and event is InputEventMouseMotion and event.relative.length() > 5 and card_preview.visible:
+		#print("Mouse moved: ", event.relative)
+		#card_preview.hide()
+	if is_playing_on_mobile_browser() and is_grabbed() and event is InputEventScreenDrag and event.relative.length() > 5 and card_preview.visible:
 		card_preview.hide()
 
 func get_card_effects() -> Array:
@@ -143,7 +173,7 @@ func get_card_effects() -> Array:
 
 func get_card_name() -> String:
 	return card_name
-	
+
 func show_card_preview() -> void:
 	# Card preview data
 	
@@ -178,7 +208,10 @@ func grab() -> void:
 	grab_position = position
 	bring_to_front()
 	
-	show_card_preview()
+	if is_playing_on_mobile_browser():
+		show_card_preview()
+	elif is_playing_on_desktop():
+		card_preview.hide()
 	
 	if can_pay_cost(energy_cost):
 		play_text.set_text(PLAY_CARD_TEXT)
@@ -271,6 +304,10 @@ func play():
 	discard()
 
 func discard() -> void:
+	if is_playing_on_desktop():
+		disconnect("mouse_entered", self.show_card_preview)
+		disconnect("mouse_exited", card_preview.hide)
+		
 	set_state(State.Discarded)
 	discard_panel.add_card(self)
 	
@@ -317,7 +354,7 @@ func inflate(use_current_scale: bool = false) -> void:
 
 #func _input(event) -> void:
 	#if event.is_action_pressed("ui_accept"):
-		#bounce()
+		#print(OS.has_feature())
 	
 func is_bouncing() -> bool:
 	return state == State.Bouncing
