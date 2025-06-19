@@ -6,6 +6,7 @@ func play() -> void:
 	set_state(State.Playing)
 	
 	pay_cost(energy_cost)
+	scene.set_last_card_effects(self)
 	discard()
 	
 	for card_effect in card_effects:
@@ -16,5 +17,4 @@ func play() -> void:
 			await card_effect.player_input_finished
 	
 	buffs_container.activate_on_play_buffs()
-	scene.set_last_card_effects(self)
 	
