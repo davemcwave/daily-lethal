@@ -49,6 +49,7 @@
 - [ ] testable puzzle environment
 - [x] mouse hover to view cards
 - [x] make sure burst, overload, and any card counting mechanics work as intended
+- [ ] be able to check off the puzzles you've already completed
 
 
 

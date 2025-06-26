@@ -1,7 +1,11 @@
 extends TextureRect
 class_name DiscardPanel
 
+signal updated
+
 @onready var buffs_container: BuffsContainer = get_tree().get_root().get_node("Scene/BuffsContainer")
+@onready var discard_count_text: RichTextLabel = $DiscardCount/Text
+@onready var center_description: CenterDescription = get_tree().get_root().get_node("Scene/CanvasLayer/CenterDescription")
 
 func get_cards() -> Array[Card]:
 	var cards: Array[Card] = []
@@ -29,7 +33,12 @@ func take_cards(amount: int = 1) -> Array[Card]:
 		remove_child(card)
 		cards_taken.append(card)
 		
+	update_discard_count()
+		
 	return cards_taken
+
+func update_discard_count() -> void:
+	discard_count_text.set_text("[right][b]%d[/b][/right]" % get_card_count())
 
 func add_card(new_card: Card) -> void:
 	var new_card_original_postion: Vector2 = new_card.global_position
@@ -53,7 +62,8 @@ func add_card(new_card: Card) -> void:
 	#if get_child_count() > 0 and $DiscardCenterText.visible:
 		#$DiscardCenterText.hide()
 		#$DiscardOutsideText.show()
-	print_order()
+	#print_order()
+	update_discard_count()
 		
 func print_order() -> void:
 	var card_index: int = 0
@@ -67,3 +77,12 @@ func print_order() -> void:
 		
 func get_last_card() -> Card:
 	return get_children().back()
+
+
+func _on_discard_count_gui_input(event):
+	if event.is_action_pressed("select"):
+		center_description.set_text("Discard Pile", "Contains discarded cards")
+		center_description.set_color(Color.DIM_GRAY)
+		center_description.show()
+	elif event.is_action_released("select"):
+		center_description.hide()

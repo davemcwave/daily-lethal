@@ -30,6 +30,7 @@ func set_health(new_health: int) -> void:
 
 func add_health(add_health_amount: int) -> void:
 	set_health(health + add_health_amount)
+	create_damage_label(0, "+%d" % add_health_amount)
 	
 func get_health() -> int:
 	return health

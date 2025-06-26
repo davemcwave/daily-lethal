@@ -23,9 +23,20 @@ var buff_panel: BuffPanel = null
 # True if this type of buff can only be played once per turn
 @export var activated_once_per_turn: bool = false
 
+enum OnPlayActivationCategory {OnPlayAttackCard}
+@export var on_play_activation_category = OnPlayActivationCategory.OnPlayAttackCard
+
+@export var freed_manually: bool = false
+
+func is_freed_manually() -> bool:
+	return freed_manually
+	
 func set_target(new_target: Node) -> void:
 	target = new_target
 
+func get_on_play_activation_category() -> OnPlayActivationCategory:
+	return on_play_activation_category
+	
 func set_color(new_color: Color) -> void:
 	#print("%s set to %s" % [name, str(new_color)])
 	color = new_color

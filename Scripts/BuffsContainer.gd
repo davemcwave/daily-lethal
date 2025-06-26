@@ -119,7 +119,6 @@ func remove_blood_buff() -> void:
 			buff_panel.queue_free()
 			return
 	
-	
 func activate_on_hit_buffs() -> void:
 	animating = true
 	for buff_panel: BuffPanel in get_children():
@@ -159,7 +158,7 @@ func activate_on_play_buffs() -> void:
 				await buff.activated
 				
 			print("%s activated!" % buff.get_buff_name())
-			if buff.exceeded_uses() and is_instance_valid(buff_panel) and buff_panel != null and buff_panel.is_inside_tree():
+			if buff.exceeded_uses() and is_instance_valid(buff_panel) and buff_panel != null and buff_panel.is_inside_tree() and not buff.is_freed_manually():
 				buff_panel.queue_free()
 	animating = false
 	

@@ -9,6 +9,6 @@ func set_damage_increase_amount(new_damage_increase_amount: int) -> void:
 func apply() -> void:
 	for card: Card in hand.get_cards():
 		for card_effect: CardEffect in card.get_card_effects():
-			if card_effect is DamageCardEffect:
+			if card_effect is DamageCardEffect and card_effect.can_increase_damage_amount():
 				card_effect.increase_damage_amount(damage_increase_amount)
 				await get_tree().create_timer(0.05).timeout

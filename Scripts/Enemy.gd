@@ -5,6 +5,7 @@ signal just_hurt(amount: int)
 
 @export var enemy_name: String = ""
 @onready var scene = get_tree().get_root().get_node("Scene")
+@onready var buffs_container: BuffsContainer = scene.get_node("BuffsContainer")
 @onready var background = get_node("/root/Background")
 @onready var initial_icon_position: Vector2 = $EnemyIcon.position
 @export var health = 10

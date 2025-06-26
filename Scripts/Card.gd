@@ -304,9 +304,11 @@ func play():
 	discard()
 
 func discard() -> void:
-	if is_playing_on_desktop() and has_connections("mouse_entered") and has_connections("mouse_exited"):
-		disconnect("mouse_entered", self.show_card_preview)
-		disconnect("mouse_exited", card_preview.hide)
+	if is_playing_on_desktop():
+		if is_connected("mouse_entered", self.show_card_preview):
+			disconnect("mouse_entered", self.show_card_preview)
+		if is_connected("mouse_exited", card_preview.hide):
+			disconnect("mouse_exited", card_preview.hide)
 		
 	set_state(State.Discarded)
 	discard_panel.add_card(self)

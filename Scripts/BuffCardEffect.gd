@@ -3,7 +3,6 @@ class_name BuffCardEffect
 
 @export_file("*.scn") var buff_scene
 var buff: Buff = null
-var buffs_container: BuffsContainer
 @export_enum("Player", "Enemy") var buff_auto_target: String
 
 

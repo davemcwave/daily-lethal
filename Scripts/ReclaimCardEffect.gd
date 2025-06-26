@@ -33,3 +33,7 @@ func apply() -> void:
 		new_card.set_rotation(0)
 		hand.add_card(new_card)
 		hand.move_child(new_card, i)
+	await get_tree().create_timer(0.1).timeout
+	print("discard_panel size: %d" % discard_panel.get_cards().size())
+	
+	discard_panel.update_discard_count()
