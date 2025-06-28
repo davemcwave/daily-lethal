@@ -38,6 +38,7 @@ func take_cards(amount: int = 1) -> Array[Card]:
 	return cards_taken
 
 func update_discard_count() -> void:
+	await get_tree().create_timer(0.05).timeout
 	discard_count_text.set_text("[right][b]%d[/b][/right]" % get_card_count())
 
 func add_card(new_card: Card) -> void:

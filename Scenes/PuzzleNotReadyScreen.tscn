@@ -1,0 +1,131 @@
+[gd_scene load_steps=11 format=3 uid="uid://cu850qn23dq4l"]
+
+[ext_resource type="Script" uid="uid://da7cf3vg7l286" path="res://Scripts/PuzzleNotReadyScreen.gd" id="1_n0qrt"]
+[ext_resource type="Texture2D" uid="uid://dp57kw80gb4ks" path="res://bg.png" id="1_wt43d"]
+[ext_resource type="FontFile" uid="uid://dwo8xle1kx2ha" path="res://Assets/Fonts/Quicksand/static/Quicksand-Medium.ttf" id="2_pb3bn"]
+[ext_resource type="FontFile" uid="uid://biw8kuuj8rwa8" path="res://Assets/Fonts/Quicksand/static/Quicksand-Bold.ttf" id="3_1k3mi"]
+[ext_resource type="Material" uid="uid://da4t47a4d0fda" path="res://Resources/WobbleMaterial.res" id="4_1k3mi"]
+[ext_resource type="Texture2D" uid="uid://iq3ggtrrqtb3" path="res://Assets/Textures/leetha-512x512.png" id="4_pb3bn"]
+[ext_resource type="Texture2D" uid="uid://cha22ueuqxhw2" path="res://Assets/Textures/cardswhite.png" id="7_be8xu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_be8xu"]
+bg_color = Color(0.571777, 0.741499, 0.961383, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_63abb"]
+bg_color = Color(0.0610525, 0.204989, 0.377187, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ds3w3"]
+bg_color = Color(0.2028, 0.46254, 0.78, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="PuzzleNotReadyScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n0qrt")
+
+[node name="BGRepeat" type="TextureRect" parent="."]
+self_modulate = Color(1, 1, 1, 0.0823529)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 3054.0
+offset_bottom = 5216.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.105193, 0.105193)
+texture = ExtResource("1_wt43d")
+stretch_mode = 1
+
+[node name="Message" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 40.0
+offset_top = 72.0
+offset_right = -32.0
+offset_bottom = 138.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_pb3bn")
+theme_override_fonts/bold_font = ExtResource("3_1k3mi")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[center][b][shake rate=5.0 level=2 connected=2]Lethal puzzle not available yet Check back in after midnight UTC[/shake][/b][/center]."
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = ExtResource("4_1k3mi")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = -84.0
+offset_right = 84.0
+offset_bottom = 84.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_pb3bn")
+expand_mode = 1
+
+[node name="GetTomorrowButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -264.0
+offset_top = -64.0
+offset_right = -88.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_1k3mi")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/hover = SubResource("StyleBoxFlat_be8xu")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_63abb")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ds3w3")
+text = "    Subscribe"
+
+[node name="TextureRect3" type="TextureRect" parent="GetTomorrowButton"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 8.0
+offset_top = 16.0
+offset_right = 32.0
+offset_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource("7_be8xu")
+expand_mode = 1

@@ -120,6 +120,20 @@
 <body>
   <h1>Lethal Puzzle Archive</h1>
   <div class="grid">
+
+     <div class="grid-item">
+      <a class="puzzle-link" href="/2025-06-28">
+        <img src="../Assets/Textures/Stirge.png" alt="Stirge" class="icon" />
+        <div class="info">
+          <div class="enemy-name">Stirge</div>
+          <div class="date">June 28, 2025</div>
+          <span class="difficulty-label medium">Medium</span>
+        </div>
+      </a>
+      <div class="author">
+        <a href="https://bsky.app/profile/mcwavegames.bsky.social">@mcwavegames</a>
+      </div>
+    </div>
     
       <div class="grid-item">
       <a class="puzzle-link" href="/2025-06-26">
@@ -486,5 +500,33 @@
     </div>
 
   </div>
+  <script>
+  // Get today's date in Eastern Time (UTC-4)
+  const nowUtc = new Date();
+
+  // Normalize today's date to YYYY-MM-DD
+  const yyyy = nowUtc.getFullYear();
+  const mm = String(nowUtc.getMonth() + 1).padStart(2, '0');
+  const dd = String(nowUtc.getDate()).padStart(2, '0');
+  const todayStr = `${yyyy}-${mm}-${dd}`;
+
+  // Loop through all grid items
+  document.querySelectorAll('.grid-item').forEach(item => {
+    const link = item.querySelector('a.puzzle-link');
+    if (!link) return;
+
+    // Extract the puzzle date from the URL path (e.g. /2025-06-26)
+    const match = link.getAttribute('href').match(/\/(\d{4}-\d{2}-\d{2})/);
+    if (!match) return;
+
+    const puzzleDate = match[1]; // e.g. "2025-06-26"
+
+    // Compare dates
+    if (puzzleDate > todayStr) {
+      item.style.display = 'none'; // Hide future puzzles
+    }
+  });
+</script>
+
 </body>
 </html>

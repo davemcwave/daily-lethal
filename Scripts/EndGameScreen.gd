@@ -3,7 +3,6 @@ extends Control
 var share_text_template = "💀 I defeated the {enemy_name} in {attempt_count} attempt{attempt_plural}!\n🃏 My solution: {best_card_count} cards\nPlay today’s puzzle 👉 https://playlethal.fun" # https://playlethal.fun"
 var share_text = ""
 @onready var background = get_node("/root/Background")
-
 func _ready():
 	var attempt_plural: String = '' if background.attempts <= 1 else 's'
 	share_text = share_text_template.format(
@@ -36,13 +35,14 @@ func _on_share_button_pressed():
 func _on_get_tomorrow_button_pressed():
 	background.clear()
 	
-	if background.get_is_current_puzzle():
+	if background.get_next_puzzle_scene() == null:
 		OS.shell_open("https://playlethal.beehiiv.com/subscribe")
 	else:
 		var next_puzzle: Puzzle = load(background.get_next_puzzle_scene()).instantiate()
 		var next_puzzle_date: String = next_puzzle.get_puzzle_date()
-		#OS.shell_open("https://playlethal.fun/%s" % next_puzzle_date)
-		open_window_in_same_tab("https://playlethal.fun/%s" % next_puzzle_date)
-		
+		var base_url = JavaScriptBridge.eval("window.location.origin", true)
+		var next_url = "%s/%s" % [base_url, next_puzzle_date]
+		open_window_in_same_tab(next_url)
+
 func open_window_in_same_tab(url: String) -> void:
 	JavaScriptBridge.eval("window.location.href = '%s';" % url)
