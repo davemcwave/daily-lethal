@@ -120,12 +120,22 @@ func remove_blood_buff() -> void:
 			return
 	
 func activate_on_hit_buffs() -> void:
+	var buffs_activated = [] # Track if 2 of the same type of buff can be applied on the same turn
 	animating = true
 	for buff_panel: BuffPanel in get_children():
+		if not is_instance_valid(buff_panel) or buff_panel == null and not buff_panel.is_inside_tree():
+			continue
+			
 		var buff: Buff = buff_panel.get_buff()
 		if buff.is_activated_on_target_hit():
-			await get_tree().create_timer(0.25).timeout
+			if buff.can_be_activated_only_once_per_turn() and buffs_activated.has(buff.get_buff_name()):
+				continue
+				
+			buffs_activated.append(buff.get_buff_name())
+			#await get_tree().create_timer(0.25).timeout
 			buff.activate()
+		if buff.exceeded_uses() and is_instance_valid(buff_panel) and buff_panel != null and buff_panel.is_inside_tree() and not buff.is_freed_manually():
+			buff_panel.queue_free()
 	animating = false
 	
 	
