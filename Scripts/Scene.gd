@@ -25,6 +25,10 @@ func _ready():
 	if override_puzzle_date:
 		var current_puzzle: Puzzle = load(puzzle_scene).instantiate()
 		set_puzzle(current_puzzle)
+	elif url_capturer.is_test_puzzle():
+		var new_puzzle: Puzzle = load(puzzle_scene).instantiate()
+		new_puzzle.set_test_puzzle(true)
+		set_puzzle(new_puzzle)
 	elif url_capturer.has_today():
 		var latest_releaseable_puzzle: Puzzle = load(get_latest_releasable_puzzle()).instantiate()
 		set_puzzle(latest_releaseable_puzzle)
@@ -104,8 +108,6 @@ func get_now_timestamp():
 	
 	return now
 	
-
-
 func get_puzzle_scene_that_starts_with(puzzle_name_prefix: String) -> String:
 	for puzzle_scene in get_files_in_folder("res://Scenes/Puzzles"):
 		var puzzle_name: String = puzzle_scene.split("/")[-1].split(".scn")[0]
@@ -143,10 +145,15 @@ func get_files_in_folder(path: String) -> Array:
 	return files
 func set_puzzle(new_puzzle: Puzzle) -> void:
 	puzzle = new_puzzle
+	#var debug_text = ""
+	#for card_scene in new_puzzle.get_card_scenes():
+		#debug_text += card_scene.resource_path + ", " 
+	#$URLCapturer.set_text("[center][b]%s[/b][/center]" % debug_text)
+	
 	
 	$"/root/Background".set_puzzle_date(puzzle.get_puzzle_date())
-	$Enemy.set_health(puzzle.get_enemy_health())
-	$Enemy.set_enemy_name(puzzle.get_enemy_name())
+	$Enemy.set_health($URLCapturer.get_energy_health_from_test_puzzle() if puzzle.is_test_puzzle() else puzzle.get_enemy_health())
+	$Enemy.set_enemy_name($URLCapturer.get_enemy_name_from_test_puzzle() if puzzle.is_test_puzzle() else puzzle.get_enemy_name())
 	$Enemy.set_enemy_icon_texture(puzzle.get_enemy_icon_texture())
 	$"/root/Background".set_enemy_texture(puzzle.get_enemy_icon_texture())
 	for enemy_buff: Buff in puzzle.get_enemy_buffs():
@@ -155,7 +162,7 @@ func set_puzzle(new_puzzle: Puzzle) -> void:
 		buff_panel.set_buff(enemy_buff)
 		var target = $Health if puzzle.get_enemy_buff_target() == 'Player' else $Enemy
 		enemy_buff.set_target(target)
-		
+	
 	if puzzle.do_randomize_cards():
 		puzzle.clear_card_scenes()
 		var card_scenes: Array[Resource] = get_all_card_scenes()
@@ -166,14 +173,17 @@ func set_puzzle(new_puzzle: Puzzle) -> void:
 			var random_index = randi() % card_scenes.size()
 			random_card_scenes.append(card_scenes[random_index])
 		puzzle.set_card_scenes(random_card_scenes)
-		
-	for card_scene in puzzle.get_card_scenes():
+	
+	var card_scenes = url_capturer.get_cards_from_test_puzzle() if puzzle.is_test_puzzle() else puzzle.get_card_scenes()
+	for card_scene in card_scenes:
 		var card: Card = card_scene.instantiate()
 		$Deck.add_child(card)
+		#$URLCapturer.set_text("[center][b]%s[/b][/center]" % card.name)
+		#await get_tree().create_timer(2.5).timeout
 		card.hide()
 	
-	$Health.set_health(puzzle.get_player_health())
-	$Energy.set_energy(puzzle.get_player_energy())
+	$Health.set_health($URLCapturer.get_player_health_from_test_puzzle() if puzzle.is_test_puzzle() else puzzle.get_player_health())
+	$Energy.set_energy($URLCapturer.get_player_energy_from_test_puzzle() if puzzle.is_test_puzzle() else puzzle.get_player_energy())
 	starting_card_amount = puzzle.get_initial_draw_amount() if puzzle.get_initial_draw_amount() > 0 else $Deck.get_child_count() 
 	
 	get_node("/root/Background").set_next_puzzle_scene(puzzle.get_next_puzzle_scene())

@@ -1,0 +1,204 @@
+[gd_scene load_steps=13 format=3 uid="uid://djpma1pto7hx7"]
+
+[ext_resource type="Script" uid="uid://b5y0kvbawb6lb" path="res://Scripts/CardPreview.gd" id="1_3v80l"]
+[ext_resource type="FontFile" uid="uid://dwo8xle1kx2ha" path="res://Assets/Fonts/Quicksand/static/Quicksand-Medium.ttf" id="2_72r5v"]
+[ext_resource type="FontFile" uid="uid://biw8kuuj8rwa8" path="res://Assets/Fonts/Quicksand/static/Quicksand-Bold.ttf" id="3_fgrna"]
+[ext_resource type="Material" uid="uid://da4t47a4d0fda" path="res://Resources/WobbleMaterial.res" id="4_l0cqn"]
+[ext_resource type="Texture2D" uid="uid://docga0ex3fj5p" path="res://Assets/Textures/sword.png" id="5_1ng8j"]
+[ext_resource type="Texture2D" uid="uid://cycsn52sbrwbu" path="res://Assets/Textures/bolt-white.png" id="6_y6le3"]
+[ext_resource type="Script" uid="uid://dtm24yroeoe3y" path="res://Scripts/ExtraDescriptions.gd" id="7_2c5vv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ff5h1"]
+bg_color = Color(0.433266, 0.433266, 0.433266, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iasge"]
+bg_color = Color(0.169245, 0.169245, 0.169245, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3hw04"]
+bg_color = Color(0.548094, 0.00210453, 0.154114, 1)
+border_width_left = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g3n18"]
+bg_color = Color(0.169245, 0.169245, 0.169245, 1)
+border_width_left = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mxnlw"]
+bg_color = Color(0.169245, 0.169245, 0.169245, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[node name="CardPreview" type="Panel"]
+visible = false
+custom_minimum_size = Vector2(120, 160)
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 122.0
+offset_bottom = 161.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ff5h1")
+script = ExtResource("1_3v80l")
+
+[node name="TitlePanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 7.0
+offset_top = 8.0
+offset_right = -7.0
+offset_bottom = 35.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_iasge")
+
+[node name="Title" type="RichTextLabel" parent="TitlePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("2_72r5v")
+theme_override_fonts/bold_font = ExtResource("3_fgrna")
+theme_override_font_sizes/normal_font_size = 14
+bbcode_enabled = true
+text = "[center]Slash[/center]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="IconPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 35.0
+offset_right = -7.0
+offset_bottom = -49.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3hw04")
+
+[node name="Icon" type="TextureRect" parent="IconPanel"]
+material = ExtResource("4_l0cqn")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.5
+offset_top = -30.0
+offset_right = 31.5
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_1ng8j")
+expand_mode = 1
+
+[node name="DescriptionPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 7.0
+offset_top = 111.0
+offset_right = -7.0
+offset_bottom = 153.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g3n18")
+
+[node name="Title" type="RichTextLabel" parent="DescriptionPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_right = -5.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("2_72r5v")
+theme_override_fonts/bold_font = ExtResource("3_fgrna")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[center]Deal 2 damage[/center]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnergyPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 7.0
+offset_top = 8.0
+offset_right = -83.0
+offset_bottom = 35.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mxnlw")
+
+[node name="Energy" type="RichTextLabel" parent="EnergyPanel"]
+clip_contents = false
+layout_mode = 2
+offset_left = 6.0
+offset_top = 3.0
+offset_right = 15.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("2_72r5v")
+theme_override_fonts/bold_font = ExtResource("3_fgrna")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]2[/center]"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="EnergyPanel"]
+layout_mode = 2
+offset_left = 14.0
+offset_top = 7.0
+offset_right = 27.0
+offset_bottom = 21.0
+texture = ExtResource("6_y6le3")
+expand_mode = 1
+
+[node name="ExtraDescriptions" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 181.0
+offset_right = 269.0
+offset_bottom = 272.0
+script = ExtResource("7_2c5vv")

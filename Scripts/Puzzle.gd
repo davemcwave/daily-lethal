@@ -24,6 +24,14 @@ class_name Puzzle
 
 @export var initial_draw_amount: int = -1
 
+var test_puzzle: bool = false
+
+func set_test_puzzle(new_test_puzzle: bool) -> void:
+	test_puzzle = new_test_puzzle 
+	
+func is_test_puzzle() -> bool:
+	return test_puzzle
+	
 func do_randomize_cards() -> bool:
 	return randomize_cards
 	

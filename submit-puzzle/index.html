@@ -197,6 +197,7 @@
       <label>Optional Social Handle or Link</label>
       <input type="text" name="social" placeholder="@mcwavegames.bsky.social" />
 
+      <button type="button" onclick="testPuzzle()">🧪 Test Puzzle</button>
       <button type="submit">📤 Submit Puzzle</button>
     </form>
   </div>
@@ -269,6 +270,32 @@
         console.error('Could not load card list:', error);
       }
     }
+
+    function testPuzzle() {
+      if (selectedCards.length === 0) {
+        alert("Please select cards to test.");
+        return;
+      }
+
+      const cardString = selectedCards.join(',');
+      const safeString = encodeURIComponent(cardString);
+      const base64 = btoa(safeString);
+
+      const playerHp = document.querySelector('input[name="player_hp"]').value;
+      const playerEnergy = document.querySelector('input[name="player_energy"]').value;
+      const enemyHp = document.querySelector('input[name="enemy_hp"]').value;
+
+      if (!playerHp || !playerEnergy || !enemyHp) {
+        alert("Please fill out Player HP, Player Energy, and Enemy HP before testing.");
+        return;
+      }
+
+      const testUrl = `/test-puzzle?cards=${base64}&php=${playerHp}&pnrg=${playerEnergy}&ehp=${enemyHp}`;
+      window.open(testUrl, '_blank');
+    }
+
+
+
 
     function updateCardCount(card, display) {
       const count = selectedCards.filter(name => name === card).length;
