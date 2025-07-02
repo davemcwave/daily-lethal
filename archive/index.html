@@ -529,13 +529,11 @@
 
   </div>
   <script>
-  // Get today's date in Eastern Time (UTC-4)
-  const nowUtc = new Date();
+  const now = new Date();
+  const yyyy = now.getUTCFullYear();
+  const mm = String(now.getUTCMonth() + 1).padStart(2, '0');
+  const dd = String(now.getUTCDate()).padStart(2, '0');
 
-  // Normalize today's date to YYYY-MM-DD
-  const yyyy = nowUtc.getFullYear();
-  const mm = String(nowUtc.getMonth() + 1).padStart(2, '0');
-  const dd = String(nowUtc.getDate()).padStart(2, '0');
   const todayStr = `${yyyy}-${mm}-${dd}`;
 
   // Loop through all grid items
