@@ -172,7 +172,8 @@
 
     <form action="https://formsubmit.co/mcwavegames@gmail.com" method="POST" onsubmit="return finalizeBeforeSubmit()">
       <input type="hidden" name="selected_cards" id="finalCards" />
-      
+      <input type="hidden" name="test_url" id="testUrlField" />
+
       <label>Player HP</label>
       <input type="number" name="player_hp" placeholder="e.g. 10" required />
 
@@ -291,6 +292,7 @@
       }
 
       const testUrl = `/test-puzzle?cards=${base64}&php=${playerHp}&pnrg=${playerEnergy}&ehp=${enemyHp}`;
+      document.getElementById('testUrlField').value = testUrl;
       window.open(testUrl, '_blank');
     }
 
