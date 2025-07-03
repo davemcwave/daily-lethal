@@ -58,7 +58,7 @@ func add_card(new_card: Card) -> void:
 	tween.parallel().tween_property(new_card, "global_position:y", global_position.y + randf_range(-10, 10), 0.75).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 	tween.parallel().tween_property(new_card, "scale", Vector2.ONE*0.75, 0.75).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 	
-	buffs_container.activate_on_discard_buffs()
+	buffs_container.activate_buffs(Buff.ActivationType.OnCardDiscarded)
 	#await tween.finished
 	#if get_child_count() > 0 and $DiscardCenterText.visible:
 		#$DiscardCenterText.hide()
@@ -77,7 +77,7 @@ func print_order() -> void:
 		card_index += 1
 		
 func get_last_card() -> Card:
-	return get_children().back()
+	return get_cards().back()
 
 
 func _on_discard_count_gui_input(event):

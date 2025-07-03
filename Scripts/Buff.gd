@@ -58,6 +58,9 @@ func get_buff_name() -> String:
 	
 func get_buff_description() -> String:
 	return buff_description
+
+func get_activation_type() -> ActivationType:
+	return activation_type
 	
 func is_activated_on_target_hit() -> bool:
 	return activation_type == ActivationType.OnHit

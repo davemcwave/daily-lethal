@@ -20,24 +20,17 @@ func _on_cards_played_cards_played_modified(cards_played_count: int) -> void:
 	inflate(true)
 
 
-func play() -> void:
-	
+func play():
+	buffs_container.clear_buffs_added_or_removed_this_turn()
+
 	set_state(State.Playing)
 	
 	pay_cost(energy_cost)
 	
-	
-	for card_effect in card_effects:
-		if card_effect_delay > 0.0:
-			await get_tree().create_timer(card_effect_delay).timeout
-		card_effect.apply()
-		if card_effect.does_require_player_input():
-			await card_effect.player_input_finished
-	
-	scene.increment_card_count()
-	
-	await get_tree().create_timer(0.1).timeout # So that the panel can be freed from use_energy
-	buffs_container.activate_on_play_buffs()
+	await apply_card_effects()
 	scene.set_last_card_effects(self)
+	await get_tree().create_timer(0.1).timeout # So that the panel can be freed from use_energy
+	await buffs_container.activate_buffs(Buff.ActivationType.OnCardPlay)
+	scene.increment_card_count()
 	
 	discard()

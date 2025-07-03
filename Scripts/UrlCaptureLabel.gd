@@ -20,7 +20,7 @@ func has_today() -> bool:
 	return puzzle_date == "today"
 	
 func is_test_puzzle() -> bool:
-	return "/test-puzzle/" in path_name 
+	return path_name != null and "/test-puzzle/" in path_name 
 
 func get_player_energy_from_test_puzzle() -> int:
 	return int(search.split("&pnrg=")[-1].split("&")[0])

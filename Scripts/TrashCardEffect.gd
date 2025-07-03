@@ -42,11 +42,12 @@ func apply() -> void:
 		pass # @TODO
 		
 	elif trash_from_location == "Self":
-		await get_tree().create_timer(0.5).timeout
-		var card: Card = get_parent()
-		card.shrink(0.15)
-		await get_tree().create_timer(0.15).timeout
-		card.queue_free()
+		if get_parent() is Card:
+			await get_tree().create_timer(0.5).timeout
+			var card: Card = get_parent()
+			card.shrink(0.15)
+			await get_tree().create_timer(0.15).timeout
+			card.queue_free()
 	discard_panel.update_discard_count()
 		
 	emit_signal("applied")

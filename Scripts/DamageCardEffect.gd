@@ -36,6 +36,6 @@ func set_target(new_target) -> void:
 	target = new_target
 	
 func apply() -> void:
-	buffs_container.activate_on_hit_buffs()
+	buffs_container.activate_buffs(Buff.ActivationType.OnHit)
 	
 	target.hurt(damage_amount)

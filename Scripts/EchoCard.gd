@@ -1,17 +1,15 @@
 extends Card
 
-func play() -> void:
+func play():
+	buffs_container.clear_buffs_added_or_removed_this_turn()
 	scene.increment_card_count()
 	set_state(State.Playing)
 	
 	pay_cost(energy_cost)
 	
-	buffs_container.activate_on_play_buffs()
+	await buffs_container.activate_buffs(Buff.ActivationType.OnCardPlay)
 	
-	for card_effect: CardEffect in card_effects:
-		if card_effect_delay > 0.0:
-			await get_tree().create_timer(card_effect_delay).timeout
-		card_effect.apply()
+	await apply_card_effects()
 	
 	scene.set_last_card_effects(self)
 	

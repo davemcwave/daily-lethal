@@ -284,23 +284,24 @@ func pay_cost(cost: int, use_free_buff: bool = true) -> void:
 		buffs_container.remove_discount_buff()
 	else:
 		energy.use_energy(energy_cost)
-	
-func play():
-	scene.increment_card_count()
-	set_state(State.Playing)
-	
-	pay_cost(energy_cost)
-	
+
+func apply_card_effects() -> bool:
 	for card_effect in card_effects:
 		if card_effect_delay > 0.0:
 			await get_tree().create_timer(card_effect_delay).timeout
 		card_effect.apply()
 		if card_effect.does_require_player_input():
 			await card_effect.player_input_finished
-	
-	buffs_container.activate_on_play_buffs()
+	return true
+
+func play():
+	buffs_container.clear_buffs_added_or_removed_this_turn()
+	scene.increment_card_count()
+	set_state(State.Playing)
+	pay_cost(energy_cost)
+	await apply_card_effects()
 	scene.set_last_card_effects(self)
-	
+	await buffs_container.activate_buffs(Buff.ActivationType.OnCardPlay)
 	discard()
 
 func discard() -> void:
