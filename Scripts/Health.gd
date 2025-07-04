@@ -37,7 +37,7 @@ func get_health() -> int:
 	
 func hurt(amount: int) -> void:
 	
-	if buffs_container.has_block_buff():
+	if buffs_container.has_block_buff() and not buffs_container.has_blocked_already_this_turn():
 		create_damage_label(0, "BLOCKED!")
 		buffs_container.remove_block_buff()
 	else:

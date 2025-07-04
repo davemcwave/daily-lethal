@@ -22,7 +22,8 @@ func clear_buffs_added_or_removed_this_turn() -> void:
 func clear_buffs_added_this_turn() -> void:
 	buffs_added_this_turn.clear()
 	
-func add_buff_removed_this_turn(new_buff: String) -> void:
+func add_buff_removed_this_turn(new_buff: String) -> void:	
+	print("Removing %s" % new_buff)
 	buffs_removed_this_turn.append(new_buff)
 	
 func clear_buffs_removed_this_turn() -> void:
@@ -36,6 +37,14 @@ func has_block_buff() -> bool:
 			if buff is BlockBuff:
 				return true
 			
+	return false
+	
+func has_blocked_already_this_turn() -> bool:
+	print("buffs_removed_this_turn")
+	print(buffs_removed_this_turn)
+	for buff: String in buffs_removed_this_turn:
+		if buff == "Block":
+			return true
 	return false
 	
 func has_discount_buff() -> bool:
@@ -142,7 +151,7 @@ func activate_buffs(buff_activation_type: Buff.ActivationType) -> bool:
 	# Track if 2 of the same type of buff can be applied on the same turn
 	# Also keep track of those buffs that were removed during this turn but 
 	# outside of the of this function.
-	var buffs_activated = buffs_removed_this_turn
+	var buffs_activated = buffs_removed_this_turn.duplicate(true)
 	
 	animating = true
 	for buff_panel in get_children():
