@@ -39,7 +39,7 @@ func hurt(amount: int) -> void:
 	
 	if buffs_container.has_block_buff():
 		create_damage_label(0, "BLOCKED!")
-		#buffs_container.remove_block_buff()
+		buffs_container.remove_block_buff()
 	else:
 		health = max(health-amount,0)
 		create_damage_label(amount)
