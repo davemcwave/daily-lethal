@@ -28,9 +28,8 @@ func increase_damage_amount(damage_increase_amount: int) -> void:
 	var card: Card = get_parent()
 	card.update_description_panel()
 	
-	#if not card.is_bouncing():
 	await get_tree().create_timer(0.1).timeout
-	card.inflate(false)
+	await card.inflate(false if not card.is_discarded() else true)
 	
 func set_target(new_target) -> void:
 	target = new_target

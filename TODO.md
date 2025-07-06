@@ -1,33 +1,15 @@
 - [ ] "Eye for an eye" card that does damage but player takes damage
-- [x] "return to hand"
-- [x] "next card costs no energy"
-    - [x] mix 2 card effects.
-- [x] "damage done this turn" 
 - [ ] "# of cards in hand" - spend all mana
-- [x] energy remaining - dmg based on energy remaining 
-- [x] do damage relative to how many cards have been played *****
 - [ ] last card was attack
 - [ ] double the hand
-- [x] bring in draw mechanic 
-    - [ ] but let player see deck with other cards
-- [x] tooltips on buffs and debuffs and history
-- [x] boss mechanics
-    - [x] thorns
 - [ ] boomerange mechanic
 - [ ] double the strength of attack card
-- [x] game restarts when player dies
-- [x] copy last card played
 - [ ] "momentum" buff where you get +1, +2, +3 bonuses on attack if you keep attacking
 - [ ] "refresh" buff where next card you play goes to the bottom of your deck
 - [ ] Deal damage relative to how much damage you've received
-- [x] Heal mechanic
 - [ ] vampire lifesteal mechanic/buff
 - [ ] attack card that gets cheaper every turn
-- [x] the next card drawn costs no energy
-- [x] Consume - next card is trashed. pair with Free
 - [ ] "Spark" - another card gets +1 whenever spark is played
-- [x] "Resurrect" - put discard cards into hand
-- [x] only do damage if discard is empty
 - [ ] CHOICE - do A or do B
 - [ ] "Change the cost of all the cards in your hand to 2" permanently
 - [ ] sustain an effect (good or bad) while card is in your hand, goes away when removed from hand
@@ -45,11 +27,18 @@
 - [ ] Streak system: 10 day win streak
 - [ ] Undo button
 - [ ] be able to rearrange cards
-- [x] dont open links opinen new tab
 - [ ] testable puzzle environment
-- [x] mouse hover to view cards
-- [x] make sure burst, overload, and any card counting mechanics work as intended
-- [ ] be able to check off the puzzles you've already completed
+
+## Priority
+- [x] Burst's active procs while in discard.
+- [ ] Let players rearrange cards in hand.
+- [ ] Check off puzzles right after completion, allow player's to check them off too.
+- [ ] Sandcastle's cards:
+    * Rebirth (Phoenix Image) (Cost: 3) (Type: Effect [Purple]) - Repeat the card at the bottom of your discard pile twice, trash that card.
+    * Refund (Dollar with Circular Arrow Emoji) (Cost: 1) (Type: Effect [Purple]) - Gain energy equal to the energy cost of the top of the discard pile.
+    * Momentum (Bar Grap Increase Image) (Cost: 2) (Type: Effect [Purple]) - Inflict one vulnerable each time you play a damage card.
+    * Finisher (Checkered Flag Image) (Cost: 1) (Type: Damage [Red]) - Deal 6 damage if you have no other cards, otherwise deal 0.
+
 
 
 

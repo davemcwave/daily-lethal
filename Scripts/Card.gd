@@ -368,13 +368,16 @@ func shrink(duration: float = 0.25) -> void:
 	tween.tween_property(self, "modulate:a", 0, duration).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_IN)
 	tween.tween_property(self, "scale", Vector2.ZERO, duration).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_IN)
 
-func inflate(use_current_scale: bool = false) -> void:
+func inflate(use_current_scale: bool = false) -> bool:
 	var original_scale = scale if use_current_scale else Vector2.ONE
 	scale = Vector2(1.5, 1.5)
 	
 	if is_inside_tree():
 		var tween = get_tree().create_tween()
 		tween.tween_property(self, "scale", original_scale, 0.25).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+		await tween.finished
+		
+	return true
 	
 
 #func _input(event) -> void:
