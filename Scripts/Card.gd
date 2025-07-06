@@ -8,6 +8,7 @@ signal marked_for_discard(marked: bool)
 
 const PLAY_CARD_TEXT = "[center][b][pulse freq=2.0 color=#ffffff40 ease=-2.0]PLAY CARD![/pulse][/b][/center]"
 const LOW_ENERGY_CARD_TEXT = "[center][b][pulse freq=2.0 color=#ffffff40 ease=-2.0]LOW ENERGY[/pulse][/b][/center]"
+#const LOW_HEALTH_CARD_TEXT = "[center][b][pulse freq=2.0 color=#ffffff40 ease=-2.0]LOW ENERGY[/pulse][/b][/center]"
 
 @onready var scene: Scene = get_tree().get_root().get_node("Scene")
 @onready var card_play_area = scene.get_node("CardPlayArea")
@@ -30,6 +31,9 @@ const LOW_ENERGY_CARD_TEXT = "[center][b][pulse freq=2.0 color=#ffffff40 ease=-2
 @onready var buffs_container: BuffsContainer = scene.get_node("BuffsContainer")
 @onready var discard_panel: DiscardPanel = scene.get_node("DiscardPanel")
 @onready var discard_pile_view = scene.get_node("CanvasLayer/DiscardPileView")
+@onready var energy_texture: Texture2D = preload("res://Assets/Textures/bolt-white.png")
+@onready var health_texture: Texture2D = preload("res://Assets/Textures/heart-white.png")
+
 var grab_position = Vector2.ZERO
 var grabbed_timestamp = null
 var last_mouse_position = null
@@ -224,6 +228,17 @@ func refresh_energy_text() -> void:
 		set_energy_text(discounted_cost, "307aff")
 	else:
 		set_energy_text(energy_cost)
+		
+	if buffs_container.has_blood_buff():
+		set_energy_icon(health_texture)
+		$EnergyPanel/Icon.set_position(Vector2(11.0, 7.0))
+	else:
+		set_energy_icon(energy_texture)
+		$EnergyPanel/Icon.set_position(Vector2(10.0, 7.0))
+
+func set_energy_icon(icon_texture: Texture2D) -> void:
+	$EnergyPanel/Icon.set_texture(icon_texture)
+	
 
 func set_energy_cost(new_energy_cost: int) -> void:
 	energy_cost = new_energy_cost
@@ -265,23 +280,30 @@ func get_background_color() -> Color:
 func is_playing() -> bool:
 	return state == State.Playing
 
+func has_blood_buff_and_can_pay_cost(cost: int) -> bool:
+	return buffs_container.has_blood_buff() and health.has_enough_health(cost)
+	
 func can_pay_cost(cost: int) -> bool:
-	return (
-		buffs_container.has_blood_buff() and (health.get_health() >= cost or buffs_container.has_block_buff())
-	) \
-	or energy.has_enough_energy(cost)
+	return has_blood_buff_and_can_pay_cost(cost) \
+		or energy.has_enough_energy(cost)
 	
 func pay_cost(cost: int, use_free_buff: bool = true) -> void:
 	if buffs_container.has_free_buff() and use_free_buff:
 		buffs_container.remove_free_buff()
+	elif buffs_container.has_discount_buff():
+		var discounted_cost: int = buffs_container.get_discounted_cost(cost)
+		
+		if buffs_container.has_blood_buff():
+			health.hurt(discounted_cost)
+			buffs_container.remove_blood_buff()
+		else:
+			energy.use_energy(discounted_cost)
+			
+		buffs_container.remove_discount_buff()
+		
 	elif buffs_container.has_blood_buff():
 		health.hurt(cost)
 		buffs_container.remove_blood_buff()
-	elif buffs_container.has_discount_buff():
-		var discount_buff: DiscountBuff = buffs_container.get_discount_buff()
-		var discount_amount: int = discount_buff.get_discount_amount()
-		energy.set_energy(energy.get_energy_amount() - max(cost - discount_amount, 0))
-		buffs_container.remove_discount_buff()
 	else:
 		energy.use_energy(energy_cost)
 

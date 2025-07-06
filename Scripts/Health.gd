@@ -34,7 +34,13 @@ func add_health(add_health_amount: int) -> void:
 	
 func get_health() -> int:
 	return health
-	
+
+func has_enough_health(cost: int) -> bool:
+	return cost <= health \
+		or buffs_container.has_block_buff() \
+		or buffs_container.has_free_buff() \
+		or buffs_container.get_discounted_cost(cost) <= health
+
 func hurt(amount: int) -> void:
 	
 	if buffs_container.has_block_buff():
@@ -42,7 +48,8 @@ func hurt(amount: int) -> void:
 		buffs_container.remove_block_buff()
 	else:
 		health = max(health-amount,0)
-		create_damage_label(amount)
+		blink()
+		#create_damage_label(amount)
 	
 		if health <= 0:
 			dead = true

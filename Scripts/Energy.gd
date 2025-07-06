@@ -33,7 +33,7 @@ func add_energy(additional_energy_amount: int) -> void:
 	blink()
 	update_energy_text()
 	
-func use_energy(cost: int) -> void:	
+func use_energy(cost: int) -> void:
 	energy_amount -= cost
 		
 	blink()

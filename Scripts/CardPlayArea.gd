@@ -18,6 +18,7 @@ func _on_area_2d_area_exited(area):
 	self_modulate = CARD_NORMAL_COLOR
 	if card != null:
 		card.set_energy_text(card.get_energy_cost())
+		card.set_energy_icon(card.energy_texture)
 	card = null
 	play_text.hide()
 	
