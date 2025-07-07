@@ -212,6 +212,9 @@ func show_card_preview() -> void:
 func bring_to_front() -> void:
 	z_index = RenderingServer.CANVAS_ITEM_Z_MAX
 
+func set_original_z_index(new_original_z_index: int) -> void:
+	original_z_index = new_original_z_index
+	
 func reset_z_index() -> void:
 	z_index = original_z_index
 

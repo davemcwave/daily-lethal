@@ -46,6 +46,8 @@ func reorder_cards_by_x_position():
 		var child = sorted_children[i]
 		move_child(child, i)
 		child.z_index = i
+		child.set_original_z_index(child.z_index)
+		
 
 func _sort_by_x(a, b):
 	return a.global_position.x < b.global_position.x
