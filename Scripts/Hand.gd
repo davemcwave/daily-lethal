@@ -77,6 +77,8 @@ func add_card(card: Card) -> void:
 	card.show()
 	#tween.parallel().tween_property(card, "scale", Vector2.ONE, 0.25).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
 	card.bounce()
+	
+	
 
 #func _input(event):
 	#if event.is_action_pressed("test"):
