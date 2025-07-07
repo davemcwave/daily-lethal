@@ -21,9 +21,9 @@ const LOW_ENERGY_CARD_TEXT = "[center][b][pulse freq=2.0 color=#ffffff40 ease=-2
 @onready var card_preview = scene.get_node("CanvasLayer/CardPreview")
 @onready var energy: Energy = scene.get_node("Energy")
 @onready var health: Health = scene.get_node("Health")
-
+@onready var original_position
 @onready var cards_played: CardsPlayed = scene.get_node("CardsPlayed")
-
+@onready var hand: Hand = scene.get_node('Hand')
 @onready var play_text = scene.get_node("PlayText")
 @onready var background = get_node("/root/Background")
 #@onready var last_cards_played_container: GridContainer = scene.get_node("LastCardsPlayedContainer")
@@ -35,6 +35,7 @@ const LOW_ENERGY_CARD_TEXT = "[center][b][pulse freq=2.0 color=#ffffff40 ease=-2
 @onready var health_texture: Texture2D = preload("res://Assets/Textures/heart-white.png")
 
 var grab_position = Vector2.ZERO
+var grab_offset = Vector2.ZERO
 var grabbed_timestamp = null
 var last_mouse_position = null
 var can_show_discarding_button: bool = true
@@ -50,6 +51,8 @@ enum State {
 	Disabled
 }
 @export var state = State.InHand
+
+var reordering: bool = false
 
 func _ready():
 	id = get_instance_id()
@@ -68,12 +71,18 @@ func _ready():
 	if is_playing_on_desktop():
 		connect("mouse_entered", _on_mouse_entered)
 		connect("mouse_exited", _on_mouse_exited)
-
+	
 func no_cards_grabbed() -> bool:
 	for card: Card in get_tree().get_nodes_in_group("Cards"):
 		if card.is_grabbed():
 			return false
 	return true
+
+func set_reordering(new_reordering: bool) -> void:
+	reordering = new_reordering
+	
+func is_reordering() -> bool:
+	return reordering
 	
 func _on_mouse_entered() -> void:
 	if no_cards_grabbed() and not is_discarded():
@@ -211,6 +220,7 @@ func grab() -> void:
 	grabbed_timestamp = Time.get_ticks_msec()
 	grab_position = position
 	bring_to_front()
+	grab_offset = get_global_mouse_position() - global_position	
 	
 	if is_playing_on_mobile_browser():
 		show_card_preview()
@@ -221,6 +231,12 @@ func grab() -> void:
 		play_text.set_text(PLAY_CARD_TEXT)
 	else:
 		play_text.set_text(LOW_ENERGY_CARD_TEXT)
+		
+	#if is_reordering():
+		#show_card_contents(false)
+
+func show_card_contents(do_show: bool) -> void:
+	$IconPanel/Icon.set_visible(do_show)
 
 func refresh_energy_text() -> void:
 	if buffs_container.has_discount_buff():
@@ -263,12 +279,20 @@ func can_play() -> bool:
 func drop() -> void:
 	card_preview.hide()
 	
+	show_card_contents(true)
+	
 	if can_play():
 		play()
 	else:
 		set_state(State.InHand)
-		set_position(grab_position)
-		reset_z_index()
+		
+		if is_reordering():
+			hand.queue_sort()
+		else:
+			set_position(grab_position)
+			reset_z_index()
+		
+		
 		#
 	#set_energy_text(energy_cost)
 		#if get_parent() is Hand:
@@ -338,7 +362,10 @@ func discard() -> void:
 	
 func _process(delta):
 	if state == State.Grabbed:
-		global_position = get_global_mouse_position() - size/2
+		global_position = get_global_mouse_position() - grab_offset
+		if reordering:
+			global_position.y = hand.global_position.y - 10
+			hand.reorder_cards_by_x_position()
 
 func get_energy_cost() -> int:
 	return energy_cost

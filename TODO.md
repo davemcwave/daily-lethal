@@ -31,7 +31,7 @@
 
 ## Priority
 - [x] Burst's active procs while in discard.
-- [ ] Let players rearrange cards in hand.
+- [x] Let players rearrange cards in hand.
 - [ ] Check off puzzles right after completion, allow player's to check them off too.
 - [ ] Sandcastle's cards:
     * Rebirth (Phoenix Image) (Cost: 3) (Type: Effect [Purple]) - Repeat the card at the bottom of your discard pile twice, trash that card.
