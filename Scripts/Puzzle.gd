@@ -51,6 +51,9 @@ func get_previous_puzzle_scene():
 func get_initial_draw_amount() -> int:
 	return initial_draw_amount
 	
+func set_initial_draw_amount(new_initial_draw_amount: int) -> void:
+	initial_draw_amount = new_initial_draw_amount
+	
 func get_enemy_name() -> String:
 	return enemy_name
 	

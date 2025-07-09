@@ -199,6 +199,9 @@ func set_puzzle(new_puzzle: Puzzle) -> void:
 	
 	if puzzle.get_previous_puzzle_scene() == null:
 		previous_puzzle_button.hide()
+		
+	if puzzle.is_test_puzzle():
+		puzzle.set_initial_draw_amount(-1)
 
 func get_all_card_scenes() -> Array[Resource]:
 	var card_scenes: Array[Resource] = []
