@@ -27,6 +27,9 @@ func get_puzzle_scene() -> String:
 func set_puzzle_date(new_puzzle_date: String) -> void:
 	puzzle_date = new_puzzle_date
 	
+func get_puzzle_date() -> String:
+	return puzzle_date
+	
 func set_enemy_texture(new_enemy_texture: Texture2D) -> void:
 	enemy_texture = new_enemy_texture
 	
@@ -41,3 +44,16 @@ func set_best_card_count(new_best_card_count: int) -> void:
 	
 func set_enemy_name(new_enemy_name: String) -> void:
 	enemy_name = new_enemy_name
+	
+func mark_puzzle_completed(puzzle_date: String):
+	var js_code := """
+		(function() {
+			const key = 'lethal_completed_puzzles';
+			const date = '%s';
+			const stored = localStorage.getItem(key);
+			const current = stored ? new Set(JSON.parse(stored)) : new Set();
+			current.add(date);
+			localStorage.setItem(key, JSON.stringify([...current]));
+		})();
+	""" % puzzle_date
+	JavaScriptBridge.eval(js_code, true)

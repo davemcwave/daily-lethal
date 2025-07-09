@@ -4,9 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Lethal Puzzle Archive</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet" />
   <style>
     body {
-      font-family: system-ui, sans-serif;
+      font-family: 'Quicksand', sans-serif;
       background: #111;
       color: #fff;
       padding: 2rem;
@@ -29,7 +30,9 @@
     .grid-item {
       background: #222;
       border-radius: 8px;
+      position: relative;
       transition: background 0.2s;
+      overflow: hidden;
     }
     .grid-item:hover {
       background: #333;
@@ -97,9 +100,76 @@
     .author a:hover {
       text-decoration: underline;
     }
+
+    .completed::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 255, 0, 0.08);
+  z-index: 0;
+  pointer-events: none;
+}
+
+    /* Removed ::after checkmark for clarity */
+
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem 0 1rem;
+      font-size: 0.75rem;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    .checkbox-container input[type="checkbox"] {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  background-color: #333;
+  border: 2px solid #888;
+  border-radius: 6px;
+  position: relative;
+  cursor: pointer;
+}
+
+.checkbox-container input[type="checkbox"]:checked {
+  background-color: #4caf50;
+  border-color: #4caf50;
+}
+
+.checkbox-container input[type="checkbox"]:checked::after {
+  content: '✔️';
+  color: rgb(0, 0, 0);
+  position: absolute;
+  left: 2px;
+  top: 1px;
+  font-size: 16px;
+}
+.home-button {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  background: #222;
+  color: #fff;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: background 0.2s, color 0.2s;
+  z-index: 1000;
+}
+.home-button:hover {
+  background: #0ff;
+  color: #111;
+}
+
   </style>
 
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW9PLMBBGT"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -118,10 +188,12 @@
 </script>
 </head>
 <body>
+  <a href="/" class="home-button">⬅ Home</a>
   <h1>Lethal Puzzle Archive</h1>
   <div class="grid">
-    
-     <div class="grid-item">
+
+
+    <div class="grid-item">
       <a class="puzzle-link" href="/2025-07-10">
         <img src="../Assets/Textures/hell-hound.png" alt="hell-hound" class="icon" />
         <div class="info">
@@ -582,33 +654,71 @@
         <a href="https://bsky.app/profile/mcwavegames.bsky.social">@mcwavegames</a>
       </div>
     </div>
+  </div>  </div>
 
-  </div>
   <script>
-  const now = new Date();
-  const yyyy = now.getUTCFullYear();
-  const mm = String(now.getUTCMonth() + 1).padStart(2, '0');
-  const dd = String(now.getUTCDate()).padStart(2, '0');
+    const CHECKED_KEY = 'lethal_completed_puzzles';
 
-  const todayStr = `${yyyy}-${mm}-${dd}`;
-
-  // Loop through all grid items
-  document.querySelectorAll('.grid-item').forEach(item => {
-    const link = item.querySelector('a.puzzle-link');
-    if (!link) return;
-
-    // Extract the puzzle date from the URL path (e.g. /2025-06-26)
-    const match = link.getAttribute('href').match(/\/(\d{4}-\d{2}-\d{2})/);
-    if (!match) return;
-
-    const puzzleDate = match[1]; // e.g. "2025-06-26"
-
-    // Compare dates
-    if (puzzleDate > todayStr) {
-      item.style.display = 'none'; // Hide future puzzles
+    function getCompletedSet() {
+      return new Set(JSON.parse(localStorage.getItem(CHECKED_KEY) || '[]'));
     }
-  });
-</script>
 
+    function saveCompletedSet(set) {
+      localStorage.setItem(CHECKED_KEY, JSON.stringify([...set]));
+    }
+
+    const completedSet = getCompletedSet();
+
+    const now = new Date();
+    const yyyy = now.getUTCFullYear();
+    const mm = String(now.getUTCMonth() + 1).padStart(2, '0');
+    const dd = String(now.getUTCDate()).padStart(2, '0');
+    const todayStr = `${yyyy}-${mm}-${dd}`;
+
+    document.querySelectorAll('.grid-item').forEach(item => {
+      const link = item.querySelector('a.puzzle-link');
+      if (!link) return;
+
+      const match = link.getAttribute('href').match(/\/(\d{4}-\d{2}-\d{2})/);
+      if (!match) return;
+
+      const date = match[1];
+
+      if (date > todayStr) {
+        item.style.display = 'none';
+        return;
+      }
+
+      const checkboxContainer = document.createElement('div');
+      checkboxContainer.className = 'checkbox-container';
+
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.className = 'completion-checkbox';
+
+      const label = document.createElement('label');
+      label.textContent = 'Completed';
+
+      checkboxContainer.appendChild(checkbox);
+      checkboxContainer.appendChild(label);
+      item.appendChild(checkboxContainer);
+
+      if (completedSet.has(date)) {
+        checkbox.checked = true;
+        item.classList.add('completed');
+      }
+
+      checkbox.addEventListener('change', () => {
+        if (checkbox.checked) {
+          completedSet.add(date);
+          item.classList.add('completed');
+        } else {
+          completedSet.delete(date);
+          item.classList.remove('completed');
+        }
+        saveCompletedSet(completedSet);
+      });
+    });
+  </script>
 </body>
 </html>

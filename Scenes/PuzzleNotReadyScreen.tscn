@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cu850qn23dq4l"]
+[gd_scene load_steps=16 format=3 uid="uid://cu850qn23dq4l"]
 
 [ext_resource type="Script" uid="uid://da7cf3vg7l286" path="res://Scripts/PuzzleNotReadyScreen.gd" id="1_n0qrt"]
 [ext_resource type="Texture2D" uid="uid://dp57kw80gb4ks" path="res://bg.png" id="1_wt43d"]
@@ -7,6 +7,8 @@
 [ext_resource type="Material" uid="uid://da4t47a4d0fda" path="res://Resources/WobbleMaterial.res" id="4_1k3mi"]
 [ext_resource type="Texture2D" uid="uid://iq3ggtrrqtb3" path="res://Assets/Textures/leetha-512x512.png" id="4_pb3bn"]
 [ext_resource type="Texture2D" uid="uid://cha22ueuqxhw2" path="res://Assets/Textures/cardswhite.png" id="7_be8xu"]
+[ext_resource type="Texture2D" uid="uid://brnlgbccy74r3" path="res://Assets/Textures/house-white.png" id="8_63abb"]
+[ext_resource type="Script" uid="uid://bqau7kcga2bnu" path="res://Scripts/HomeButton.gd" id="8_ds3w3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_be8xu"]
 bg_color = Color(0.571777, 0.741499, 0.961383, 1)
@@ -31,6 +33,27 @@ corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kp6lr"]
+bg_color = Color(0.873298, 0.873298, 0.873298, 0.137255)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_klkfu"]
+bg_color = Color(0.374139, 0.37414, 0.374139, 0.137255)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fqvq2"]
+bg_color = Color(0.6, 0.6, 0.6, 0.137255)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="PuzzleNotReadyScreen" type="Control"]
 layout_mode = 3
@@ -140,4 +163,38 @@ offset_bottom = 616.0
 theme_override_fonts/font = ExtResource("3_1k3mi")
 text = "Get Notified of New Puzzles"
 
+[node name="HomeButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -336.0
+offset_top = 16.0
+offset_right = -281.0
+offset_bottom = 71.0
+grow_horizontal = 0
+theme_override_styles/hover = SubResource("StyleBoxFlat_kp6lr")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_klkfu")
+theme_override_styles/normal = SubResource("StyleBoxFlat_fqvq2")
+script = ExtResource("8_ds3w3")
+
+[node name="TextureRect" type="TextureRect" parent="HomeButton"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -18.0
+offset_right = 18.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_63abb")
+expand_mode = 1
+flip_h = true
+
 [connection signal="pressed" from="SubscribeButton" to="." method="_on_subscribe_button_pressed"]
+[connection signal="pressed" from="HomeButton" to="HomeButton" method="_on_pressed"]
