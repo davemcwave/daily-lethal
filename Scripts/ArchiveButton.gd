@@ -2,4 +2,8 @@ extends Button
 
 
 func _on_pressed():
-	OS.shell_open("https://playlethal.fun/archive")
+	var base_url = JavaScriptBridge.eval("window.location.origin", true)
+	open_window_in_same_tab(base_url + "/archive")
+		
+func open_window_in_same_tab(url: String) -> void:
+	JavaScriptBridge.eval("window.location.href = '%s';" % url)

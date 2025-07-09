@@ -19,6 +19,8 @@ var checking_for_game_over: bool = false
 var game_over: bool = false
 var puzzle: Puzzle = null
 @onready var url_capturer: URLCapturer = $URLCapturer
+@onready var next_puzzle_button = $NextPreviousPuzzleButtonContainer/NextPuzzleButton
+@onready var previous_puzzle_button = $NextPreviousPuzzleButtonContainer/PreviousPuzzleButton
 
 func _ready():
 	#print("Latest Releasable Puzzle: %s" % get_latest_releasable_puzzle(get_files_in_folder("res://Scenes/Puzzles")))
@@ -143,6 +145,10 @@ func get_files_in_folder(path: String) -> Array:
 	dir.list_dir_end()
 
 	return files
+	
+func get_puzzle() -> Puzzle:
+	return puzzle
+	
 func set_puzzle(new_puzzle: Puzzle) -> void:
 	puzzle = new_puzzle
 	#var debug_text = ""
@@ -187,6 +193,12 @@ func set_puzzle(new_puzzle: Puzzle) -> void:
 	starting_card_amount = puzzle.get_initial_draw_amount() if puzzle.get_initial_draw_amount() > 0 else $Deck.get_child_count() 
 	
 	get_node("/root/Background").set_next_puzzle_scene(puzzle.get_next_puzzle_scene())
+	
+	if puzzle.get_next_puzzle_scene() == null:
+		next_puzzle_button.hide()
+	
+	if puzzle.get_previous_puzzle_scene() == null:
+		previous_puzzle_button.hide()
 
 func get_all_card_scenes() -> Array[Resource]:
 	var card_scenes: Array[Resource] = []

@@ -3,6 +3,7 @@ class_name Puzzle
 
 @export_group("Puzzle")
 @export var puzzle_date: String = "2025-01-09"
+@export_file("*.scn") var previous_puzzle_scene
 @export_file("*.scn") var next_puzzle_scene
 @export var randomize_cards: bool = false
 @export var random_card_count: int = 6
@@ -43,6 +44,9 @@ func get_enemy_buffs() -> Array[Buff]:
 
 func get_enemy_health() -> int:
 	return enemy_health
+	
+func get_previous_puzzle_scene():
+	return previous_puzzle_scene
 
 func get_initial_draw_amount() -> int:
 	return initial_draw_amount
