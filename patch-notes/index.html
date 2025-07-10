@@ -64,6 +64,26 @@
       background: #555;
       cursor: not-allowed;
     }
+
+    .home-button {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      background: #222;
+      color: #fff;
+      font-weight: bold;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      transition: background 0.2s, color 0.2s;
+      z-index: 1000;
+    }
+    .home-button:hover {
+      background: #0ff;
+      color: #111;
+    }
   </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW9PLMBBGT"></script>
@@ -76,9 +96,20 @@
 </script>
 </head>
 <body>
+  <a href="/" class="home-button">🏠 Home</a>
+
   <h1>Lethal Patch Notes</h1>
 
   <div id="patch-container">
+    <div class="patch-entry">
+      <h2>2025.07.09</h2>
+      <ul>
+        <li>Added subscribe page after finishing puzzle</li>
+        <li>Modified end game screen to have discord button</li>
+        <li>Added play again and archive pages to end game screen</li>
+      </ul>
+    </div>
+
     <div class="patch-entry">
       <h2>2025.07.08</h2>
       <ul>

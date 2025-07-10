@@ -145,6 +145,26 @@
         width: 140px;
       }
     }
+
+    .home-button {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      background: #222;
+      color: #fff;
+      font-weight: bold;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      transition: background 0.2s, color 0.2s;
+      z-index: 1000;
+    }
+    .home-button:hover {
+      background: #0ff;
+      color: #111;
+    }
   </style>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW9PLMBBGT"></script>
   <script>
@@ -164,6 +184,8 @@
 </script>
 </head>
 <body>
+  <a href="/" class="home-button">🏠 Home</a>
+
   <div class="container">
     <h1>Submit Your Lethal Puzzle</h1>
     <p style="text-align: center; font-size: 1rem; color: #bbb; margin-bottom: 1rem;">Press + to add or - to remove cards (up to 7 total).</p>

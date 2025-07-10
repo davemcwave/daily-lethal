@@ -48,3 +48,7 @@ func _on_get_tomorrow_button_pressed():
 
 func open_window_in_same_tab(url: String) -> void:
 	JavaScriptBridge.eval("window.location.href = '%s';" % url)
+
+
+func _on_no_thanks_button_pressed() -> void:
+	$Overlay.queue_free()

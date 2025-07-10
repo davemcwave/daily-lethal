@@ -19,6 +19,7 @@ config/icon="uid://iq3ggtrrqtb3"
 [autoload]
 
 Background="*res://Scenes/Background.scn"
+EmailHandler="*res://Scenes/EmailHandler.scn"
 
 [display]
 
