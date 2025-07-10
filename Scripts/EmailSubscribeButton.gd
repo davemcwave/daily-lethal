@@ -12,6 +12,7 @@ func _ready() -> void:
 	else:
 		mark_subscribe_prompt_shown()
 		email_handler.connect("request_completed", self.on_email_handler_request_completed)
+		email_text_input.grab_focus()
 
 func has_subscribe_prompt_been_shown() -> bool:
 	var result = JavaScriptBridge.eval("localStorage.getItem('subscribePromptShown')", true)
