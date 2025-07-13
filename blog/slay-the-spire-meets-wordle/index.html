@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Language" content="en" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Slay the Spire Meets Wordle – A Daily Browser Game Logic Puzzle</title>
+  <meta name="description" content="Lethal is a daily browser-based logic puzzle. If you enjoy strategy card games like Wordle or Slay the Spire, this free brain teaser is for you." />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: #111;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+    .hero {
+      background: linear-gradient(135deg, #1a1a1a, #222);
+      padding: 3rem 2rem;
+      text-align: center;
+      border-bottom: 1px solid #333;
+    }
+    
+    .hero h1 {
+      color: #88e2ff;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    .hero p {
+      color: #ccc;
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .play-button {
+        display: inline-block;
+        margin-top: 1.5rem;
+        background-color: #88e2ff;
+        color: #111;
+        padding: 0.75rem 1.5rem;
+        font-weight: bold;
+        font-size: 1rem;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background 0.2s ease;
+        }
+    .play-button:hover {
+        background-color: #66d0ff;
+    }
+
+    article {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    h2 {
+      color: #88e2ff;
+      margin-top: 2rem;
+    }
+    a {
+      color: #88e2ff;
+    }
+    img {
+      display: block;
+      max-width: 100%;
+      margin: 2rem auto;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <h1>Slay the Spire Meets Wordle</h1>
+    <p>A browser-based puzzle card game – free to play, no downloads, just a hand of cards to play and an enemy to beat.</p>
+    <a href="https://playlethal.fun" class="play-button">Play Lethal Now</a>
+  </section>
+
+  <article>
+    <p><strong>Lethal</strong> is a free daily browser game where you win in one turn — a logic puzzle in the form of a strategy card game.</p>
+
+    <p>If you like games <strong>like Wordle</strong> or <strong>Slay the Spire</strong>, it fits right between them. No randomness. No downloads. Just one enemy, one hand of cards, and one clean solution.</p>
+
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <img src="../../Assets/Textures/game-screenshots/lethal-game-capture-standard.png" alt="Lethal card puzzle screenshot" style="width: 45%; max-width: 300px; height: auto;" />
+        <img src="../../Assets/Textures/game-screenshots/lethal-game-capture-card-zoom.png" alt="Lethal card puzzle screenshot" style="width: 45%; max-width: 300px; height: auto;" />
+    </div>
+    <h2>Why I Made It</h2>
+
+    <p>Most strategy card games take time. Most digital card games are deckbuilders. I love those genres. But I wanted a fast format — a brain teaser puzzle you can solve in a few minutes, but still feel clever doing it.</p>
+
+    <p>Lethal gives you that "perfect turn" feeling you get from the end of a long play through of Slay the Spire, but in a smaller daily logic puzzle. It runs in your browser, no sign-up needed - so you can get to the puzzle immediately whenever you want and wherever you are. You play over 30+ puzzles right now, which means 30+ enemies to beat!</p>
+    <p style="text-align:center; margin-top: 1rem;">A few of the enemies you'll face:</p>
+    <div style="
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    ">
+      <a href="https://playlethal.fun/2025-05-29" target="_blank">
+        <img src="../../Assets/Textures/kobold.png" alt="Lethal enemy 1" style="width: 100%; border-radius: 8px;" />
+      </a>
+      <a href="https://playlethal.fun/2025-06-03" target="_blank">
+        <img src="../../Assets/Textures/mimic.png" alt="Lethal enemy 1" style="width: 100%; border-radius: 8px;" />
+      </a>
+      <a href="https://playlethal.fun/2025-06-17" target="_blank">
+        <img src="../../Assets/Textures/animated-armor.png" alt="Lethal enemy 1" style="width: 100%; border-radius: 8px;" />
+      </a>
+      <a href="https://playlethal.fun/2025-07-10" target="_blank">
+        <img src="../../Assets/Textures/hell-hound.png" alt="Lethal enemy 1" style="width: 100%; border-radius: 8px;" />
+      </a>
+      <a href="https://playlethal.fun/2025-05-10" target="_blank">
+        <img src="../../Assets/Textures/gelatinous-cube.png" alt="Lethal enemy 1" style="width: 100%; border-radius: 8px;" />
+      </a>
+    </div>
+    
+      
+    <h2>Designed to Be Solved</h2>
+
+    <p>Every puzzle is hand-built and tested by different puzzle authors. You're given all cards up front and it’s your job to figure out the right sequence to win.</p>
+
+    <p>If you like free, constant puzzles that test strategy and reward careful planning, this is the game for you.</p>
+
+    <p style="text-align:center; margin-top: 1rem;">Some of the cards you'll use:</p>
+    <div style="
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    ">
+    <img src="../../Assets/Textures/card-screenshots/burst-card.PNG" alt="Card 1" style="width: 100%; border-radius: 8px;" />
+    <img src="../../Assets/Textures/card-screenshots/fang-card.PNG" alt="Card 1" style="width: 100%; border-radius: 8px;" />
+    <img src="../../Assets/Textures/card-screenshots/gift-card.PNG" alt="Card 1" style="width: 100%; border-radius: 8px;" />
+    <img src="../../Assets/Textures/card-screenshots/echo-card.PNG" alt="Card 1" style="width: 100%; border-radius: 8px;" />
+    <img src="../../Assets/Textures/card-screenshots/rebound-card.PNG" alt="Card 1" style="width: 100%; border-radius: 8px;" />
+    <img src="../../Assets/Textures/card-screenshots/flurry-card.PNG" alt="Card 1" style="width: 100%; border-radius: 8px;" />
+    <img src="../../Assets/Textures/card-screenshots/shovel-card.PNG" alt="Card 1" style="width: 100%; border-radius: 8px;" />
+    <img src="../../Assets/Textures/card-screenshots/revive-card.PNG" alt="Card 1" style="width: 100%; border-radius: 8px;" />
+    <img src="../../Assets/Textures/card-screenshots/slash-card.PNG" alt="Card 1" style="width: 100%; border-radius: 8px;" />
+    <img src="../../Assets/Textures/card-screenshots/thunderbolt-card.PNG" alt="Card 1" style="width: 100%; border-radius: 8px;" />
+    <img src="../../Assets/Textures/card-screenshots/shield-card.PNG" alt="Card 1" style="width: 100%; border-radius: 8px;" />
+    <img src="../../Assets/Textures/card-screenshots/surge-card.PNG" alt="Card 1" style="width: 100%; border-radius: 8px;" />
+    <img src="../../Assets/Textures/card-screenshots/haunt-card.PNG" alt="Card 1" style="width: 100%; border-radius: 8px;" />
+    <img src="../../Assets/Textures/card-screenshots/lunge-card.PNG" alt="Card 1" style="width: 100%; border-radius: 8px;" />
+    <img src="../../Assets/Textures/card-screenshots/mend-card.PNG" alt="Card 1" style="width: 100%; border-radius: 8px;" />
+
+    </div>
+
+    <h2>Try Today’s Puzzle</h2>
+
+    <p><a href="https://playlethal.fun/today"><strong>Play Lethal now - free daily browser game</strong></a></p>
+
+    <p>It’s a short hit of strategy – a card logic puzzle made for fans of brain teasers, card battlers, and daily puzzle gameplay.</p>
+  </article>
+</body>
+</html>
