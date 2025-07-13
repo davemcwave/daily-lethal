@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta http-equiv="Content-Language" content="en">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lethal Blog</title>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet" />
   <style>
     body {
       font-family: 'Quicksand', sans-serif;
@@ -16,7 +15,7 @@
     }
     h1 {
       text-align: center;
-      color: #88e2ff;
+      color: #bcecff;
       margin-bottom: 2rem;
     }
     .post-list {
@@ -24,22 +23,29 @@
       margin: auto;
     }
     .post {
+      display: block;
       background: #222;
       padding: 1.5rem;
       border-radius: 12px;
       margin-bottom: 1.5rem;
       transition: background 0.2s;
+      text-decoration: none;
     }
     .post:hover {
       background: #2a2a2a;
     }
-    .post a {
+    .post-title {
       color: #88e2ff;
-      text-decoration: none;
       font-size: 1.3rem;
       font-weight: bold;
+      margin: 0;
     }
-    .post p {
+    .date {
+      font-size: 0.9rem;
+      color: #aaa;
+      margin-top: 0.25rem;
+    }
+    .excerpt {
       margin-top: 0.5rem;
       font-size: 1rem;
       color: #ccc;
@@ -48,25 +54,12 @@
 </head>
 <body>
   <h1>Lethal Blog</h1>
-  <div class="post-list" id="post-list"></div>
-
-  <script>
-    fetch('/blog/posts.json')
-      .then(res => res.json())
-      .then(posts => {
-        const container = document.getElementById('post-list');
-        posts.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-        posts.forEach(post => {
-          const div = document.createElement('div');
-          div.className = 'post';
-          div.innerHTML = `
-            <a href="/blog/viewer.html?slug=${post.slug}">${post.title}</a>
-            <p>${post.excerpt}</p>
-          `;
-          container.appendChild(div);
-        });
-      });
-  </script>
+  <div class="post-list">
+    <a href="/blog/slay-the-spire-meets-wordle" class="post">
+      <div class="post-title">Slay the Spire Meets Wordle</div>
+      <div class="date">Posted July 12, 2025</div>
+      <div class="excerpt">A daily browser strategy game that blends puzzle logic with card-based combat.</div>
+    </a>
+  </div>
 </body>
 </html>
