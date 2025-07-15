@@ -23,6 +23,8 @@ var puzzle: Puzzle = null
 @onready var previous_puzzle_button = $NextPreviousPuzzleButtonContainer/PreviousPuzzleButton
 
 func _ready():
+	print("Window Size")
+	print(DisplayServer.window_get_size())
 	#print("Latest Releasable Puzzle: %s" % get_latest_releasable_puzzle(get_files_in_folder("res://Scenes/Puzzles")))
 	if override_puzzle_date:
 		var current_puzzle: Puzzle = load(puzzle_scene).instantiate()
@@ -59,7 +61,11 @@ func _ready():
 	background.add_attempt()
 	
 	call_deferred("draw_starting_cards")
-	
+		#
+#func _input(event):
+	#if event.is_action_pressed("test"):
+		#get_viewport_rect().size.x += 5
+
 func get_latest_releasable_puzzle() -> String:
 	var path_list: Array = get_files_in_folder("res://Scenes/Puzzles")
 	var latest_path := ""

@@ -35,6 +35,14 @@ func set_target(new_target) -> void:
 	target = new_target
 	
 func apply() -> void:
-	buffs_container.activate_buffs(Buff.ActivationType.OnHit)
+	if buffs_container.has_modify_attack_buff():
+		var modify_attack_buff: ModifyAttackBuff = buffs_container.get_modify_attack_buff()
+		var modified_damage_amount: int = modify_attack_buff.modify_attack(damage_amount)
+		buffs_container.activate_buff(modify_attack_buff)
+		target.hurt(modified_damage_amount)
+	else:
+		target.hurt(damage_amount)
+		
+	var buffs_activated: Array = await buffs_container.activate_buffs(Buff.ActivationType.OnHit)
 	
-	target.hurt(damage_amount)
+	

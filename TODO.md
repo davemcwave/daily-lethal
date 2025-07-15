@@ -40,9 +40,8 @@
     * Refund (Dollar with Circular Arrow Emoji) (Cost: 1) (Type: Effect [Purple]) - Gain energy equal to the energy cost of the top of the discard pile.
     * Momentum (Bar Grap Increase Image) (Cost: 2) (Type: Effect [Purple]) - Inflict one vulnerable each time you play a damage card.
     * Finisher (Checkered Flag Image) (Cost: 1) (Type: Damage [Red]) - Deal 6 damage if you have no other cards, otherwise deal 0.
-- Puzzle submissions (in order)
-    * @stenography 7/9
-    * Sandcastle 7/9
+    * Critical (Exclamation Mark Image) (Cost: 1) (Type: Effect) - The next time you deal damage you deal double damage
+
 
 
 

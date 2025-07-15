@@ -137,8 +137,73 @@ func remove_blood_buff() -> void:
 			add_buff_removed_this_turn(buff.get_buff_name())
 			buff_panel.queue_free()
 			return
+			
+func has_modify_attack_buff() -> bool:
+	for buff_panel: BuffPanel in get_children():
+		if not is_instance_valid(buff_panel):
+			continue
+			
+		var buff: Buff = buff_panel.get_buff()
+		if not is_instance_valid(buff):
+			continue
+		
+		if buff is ModifyAttackBuff:
+			return true
+			
+	return false
 
-func activate_buffs(buff_activation_type: Buff.ActivationType) -> bool:
+func activate_buff(target_buff: Buff) -> void:
+	for buff_panel: BuffPanel in get_children():
+		if not is_instance_valid(buff_panel):
+			continue
+			
+		var buff: Buff = buff_panel.get_buff()
+		if not is_instance_valid(buff):
+			continue
+		
+		if buff == target_buff:
+			buff.activate()
+			buff_panel.queue_free()
+			return
+	
+func get_modify_attack_buff():
+	for buff_panel: BuffPanel in get_children():
+		if not is_instance_valid(buff_panel):
+			continue
+			
+		var buff: Buff = buff_panel.get_buff()
+		if not is_instance_valid(buff):
+			continue
+		
+		if buff is ModifyAttackBuff:
+			return buff
+			
+	return null
+	
+	
+func remove_buff_by_name(buff_name: String) -> void:
+	for buff_panel: BuffPanel in get_children():
+		var buff: Buff = buff_panel.get_buff()
+		if buff.get_buff_name() == buff_name:
+			buff_panel.queue_free()
+			return
+	
+	
+	
+
+func get_buffs(buff_activation_type: Buff.ActivationType) -> Array:
+	var buffs: Array = []
+	for buff_panel in get_children():
+		if not is_instance_valid(buff_panel) or buff_panel == null and not buff_panel.is_inside_tree():
+			continue
+			
+		var buff: Buff = buff_panel.get_buff()
+		if buff.get_activation_type() == buff_activation_type:
+			buffs.append(buff)
+			
+	return buffs
+
+func activate_buffs(buff_activation_type: Buff.ActivationType) -> Array:
 	# Track if 2 of the same type of buff can be applied on the same turn
 	# Also keep track of those buffs that were removed during this turn but 
 	# outside of the of this function.
@@ -168,5 +233,5 @@ func activate_buffs(buff_activation_type: Buff.ActivationType) -> bool:
 			if buff.exceeded_uses() and is_instance_valid(buff_panel) and buff_panel != null and buff_panel.is_inside_tree() and not buff.is_freed_manually():
 				buff_panel.queue_free()
 	animating = false
-	return true
+	return buffs_activated
 	
