@@ -6,7 +6,7 @@ class_name DiscardPileBasedDamageCardEffect
 func apply() -> void:
 	var discarded_card_count: int = discard_pile.get_card_count()
 	set_damage_amount(discarded_card_count)
-	target.hurt(damage_amount)
+	deal_damage(damage_amount)
 
 func get_damage_amount() -> int:
 	return discard_pile.get_card_count()
