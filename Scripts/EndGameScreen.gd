@@ -22,7 +22,11 @@ func _ready():
 
 func _on_play_again_button_pressed():
 	background.clear()
-	get_tree().change_scene_to_file("res://Scenes/Scene0.scn")
+	
+	if JavaScriptBridge.eval("localStorage.getItem('device_type')", true) == "desktop":
+		get_tree().change_scene_to_file("res://Scenes/Scene0Desktop.scn")
+	else:
+		get_tree().change_scene_to_file("res://Scenes/Scene0.scn")
 
 func _on_share_button_pressed():
 	DisplayServer.clipboard_set(share_text)
@@ -43,7 +47,9 @@ func _on_get_tomorrow_button_pressed():
 		var next_puzzle: Puzzle = load(background.get_next_puzzle_scene()).instantiate()
 		var next_puzzle_date: String = next_puzzle.get_puzzle_date()
 		var base_url = JavaScriptBridge.eval("window.location.origin", true)
-		var next_url = "%s/%s" % [base_url, next_puzzle_date]
+		var device_type = JavaScriptBridge.eval("localStorage.getItem('device_type')", true)
+		var desktop = "/desktop" if device_type == "desktop" else ""
+		var next_url = "%s%s/%s" % [base_url, desktop, next_puzzle_date]
 		open_window_in_same_tab(next_url)
 
 func open_window_in_same_tab(url: String) -> void:

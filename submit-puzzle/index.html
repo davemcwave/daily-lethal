@@ -318,10 +318,14 @@
         return;
       }
 
-      const testUrl = `/test-puzzle?cards=${base64}&php=${playerHp}&pnrg=${playerEnergy}&ehp=${enemyHp}`;
+      const deviceType = localStorage.getItem('device_type');
+      const basePath = (deviceType === 'desktop') ? '/desktop/test-puzzle' : '/test-puzzle';
+      const testUrl = `${basePath}?cards=${base64}&php=${playerHp}&pnrg=${playerEnergy}&ehp=${enemyHp}`;
+
       document.getElementById('testUrlField').value = testUrl;
       window.open(testUrl, '_blank');
     }
+
 
 
 

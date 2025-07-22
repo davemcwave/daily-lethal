@@ -30,7 +30,7 @@ func set_buff(new_buff: Buff) -> void:
 			new_buff.get_parent().remove_child(new_buff)
 		add_child(new_buff)
 	
-	#modulate = buff.get_color()
+	modulate = buff.get_color()
 	buff.set_buff_panel(self)
 	
 	if buff.is_unlimited_uses():

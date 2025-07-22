@@ -1,0 +1,80 @@
+extends Control
+class_name CurvedHBoxContainer
+
+const STARTING_INDEX_POSITION = Vector2(8.0, 425.0)
+const X_POSITION_GAP = 30.0
+@onready var energy = get_tree().get_root().get_node("Scene/Energy")
+@onready var deck = get_tree().get_root().get_node("Scene/Deck")
+#@onready var original_separation: int = get("theme_override_constants/separation")
+enum State {
+	Normal,
+	Reordering
+}
+var state = State.Normal
+@onready var vertical_offset: float = 100
+var anchor_point = Vector2.ZERO 
+
+func _draw():
+	draw_circle(anchor_point, 10, Color.DARK_RED)
+
+func _process(_delta):
+	anchor_point = size / 2
+	anchor_point.y += vertical_offset
+	queue_redraw()
+
+func has_playable_cards() -> bool:
+	var energy_left: int = energy.get_energy_amount()
+	
+	for card: Card in get_children():
+		if card.get_energy_cost() <= energy_left:
+			return true
+	return false
+
+func set_state(new_state: State) -> void:
+	state = new_state
+	
+	match state:
+		State.Reordering:
+			set_cards_to_reordering(true)
+		State.Normal:
+			set_cards_to_reordering(false)
+			
+func set_cards_to_reordering(reorder: bool) -> void:
+	for card in get_cards():
+		card.set_reordering(reorder)
+		
+func reorder_cards_by_x_position():
+	var sorted_children = get_cards()
+
+	# Sort by global x-position
+	sorted_children.sort_custom(_sort_by_x)
+	
+	print(sorted_children)
+
+	# Move each child to the end and update z_index
+	for i in range(sorted_children.size()):
+		var child = sorted_children[i]
+		move_child(child, i)
+		child.z_index = i
+		child.set_original_z_index(child.z_index)
+		
+
+func _sort_by_x(a, b):
+	return a.global_position.x < b.global_position.x
+
+
+func get_cards() -> Array[Node]:
+	return get_children()
+
+func get_card_with_id(id: int) -> Card:
+	for card: Card in get_cards():
+		if card.get_id() == id:
+			return card
+			
+	return null
+	
+func add_card(card: Card) -> void:
+	card.hide()
+	add_child(card)
+	card.show()
+	card.bounce()

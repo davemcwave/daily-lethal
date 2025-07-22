@@ -4,7 +4,7 @@ class_name BuffCardEffect
 @export_file("*.scn") var buff_scene
 var buff: Buff = null
 @export_enum("Player", "Enemy") var buff_auto_target: String
-
+var buff_color: Color = Color.WHITE
 
 func _ready() -> void:
 	buff = load(buff_scene).instantiate()
@@ -21,7 +21,11 @@ func get_effect_name() -> String:
 func get_effect_description() -> String:
 	return buff.get_buff_description()
 	
+func set_buff_color(new_buff_color: Color) -> void:
+	buff_color = new_buff_color
+	
 func apply() -> void:
+	#buff.set_color(buff_color)
 	buffs_container.add_buff(buff)
 	#await get_tree().create_timer(0.01).timeout
 	emit_signal("applied")

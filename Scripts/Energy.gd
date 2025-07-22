@@ -1,10 +1,10 @@
 extends TextureRect
 class_name Energy
 
+@export_enum("left", "right", "center") var manual_justification: String = "center"
 @export var energy_amount: int = 5
 @onready var buffs_container: BuffsContainer = get_tree().get_root().get_node("Scene/BuffsContainer")
 @onready var original_color: Color = self_modulate
-const TEXT_TEMPLATE = "[center][b]%d[/b][/center]"
 @onready var center_description: CenterDescription = get_tree().get_root().get_node("Scene/CanvasLayer/CenterDescription")
 @onready var health: Health 
 func _ready():
@@ -40,8 +40,19 @@ func use_energy(cost: int) -> void:
 
 	update_energy_text()
 	
+func get_text_template() -> String:
+	match manual_justification:
+		"center": 
+			return "[center][b]%d[/b][/center]"
+		"left": 
+			return "[left][b]%d[/b][/left]"
+		"right": 
+			return "[right][b]%d[/b][/right]"
+		_:
+			return "[center][b]%d[/b][/center]"
+	
 func update_energy_text() -> void:
-	$EnergyAmountText.set_text(TEXT_TEMPLATE % energy_amount)
+	$EnergyAmountText.set_text(get_text_template() % energy_amount)
 
 
 func _on_gui_input(event):

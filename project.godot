@@ -26,6 +26,7 @@ EmailHandler="*res://Scenes/EmailHandler.scn"
 window/size/viewport_width=360
 window/size/viewport_height=640
 window/stretch/mode="canvas_items"
+window/main_scene="uid://bptsg5npxvovs"
 
 [input]
 

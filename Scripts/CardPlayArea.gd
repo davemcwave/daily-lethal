@@ -1,11 +1,14 @@
 extends TextureRect
 
-const CARD_HOVERED_COLOR = Color('1bc46d')
-const CARD_NORMAL_COLOR = Color.WHITE
+@export var CARD_HOVERED_COLOR = Color('1bc46d')
+@export var CARD_NORMAL_COLOR = Color('00000042')
 
 var card: Card = null
 @onready var play_text: RichTextLabel = $"../PlayText"
 @export var useable: bool = true
+
+func _ready():
+	self_modulate = CARD_NORMAL_COLOR
 
 func _on_area_2d_area_entered(area):
 	if area.get_parent() is Card and card == null and useable:

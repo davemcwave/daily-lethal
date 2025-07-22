@@ -1,6 +1,7 @@
 extends TextureRect
 class_name Health
 
+@export_enum("left", "right", "center") var manual_justification: String = "center"
 @export var health: int = 5
 @onready var scene: Scene = get_tree().get_root().get_node("Scene")
 @onready var buffs_container: BuffsContainer = scene.get_node("BuffsContainer")
@@ -64,8 +65,19 @@ func hurt(amount: int) -> void:
 func is_dead() -> bool:
 	return dead
 	
+func get_text_template() -> String:
+	match manual_justification:
+		"center": 
+			return "[center][b]%d[/b][/center]"
+		"left": 
+			return "[left][b]%d[/b][/left]"
+		"right": 
+			return "[right][b]%d[/b][/right]"
+		_:
+			return "[center][b]%d[/b][/center]"
+	
 func update_text() -> void:
-	$HealthAmountText.set_text("[center][b]%d[/b][/center]" % health)
+	$HealthAmountText.set_text(get_text_template() % health)
 
 
 func _on_gui_input(event):
