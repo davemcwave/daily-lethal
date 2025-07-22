@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://boc2b6up0071n"
-path="res://.godot/imported/index.apple-touch-icon.png-dfc1a79cc9f77dfc9f2f52b84fc56b05.ctex"
+uid="uid://ds0cspvbqu2h8"
+path="res://.godot/imported/dotted-line.png-3885865c2c3e3a70cf5c3a2b2131ab3f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://2025-05-04/index.apple-touch-icon.png"
-dest_files=["res://.godot/imported/index.apple-touch-icon.png-dfc1a79cc9f77dfc9f2f52b84fc56b05.ctex"]
+source_file="res://Assets/Textures/dotted-line.png"
+dest_files=["res://.godot/imported/dotted-line.png-3885865c2c3e3a70cf5c3a2b2131ab3f.ctex"]
 
 [params]
 

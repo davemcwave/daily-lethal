@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="768"
+   width="1920"
    height="26.8125"
-   viewBox="0 0 203.19744 7.094051"
+   viewBox="0 0 507.9936 7.094051"
    version="1.1"
    id="svg5"
    inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
@@ -25,9 +25,9 @@
      showgrid="false"
      units="px"
      width="256px"
-     inkscape:zoom="1.0469406"
-     inkscape:cx="395.43789"
-     inkscape:cy="110.79902"
+     inkscape:zoom="0.5234703"
+     inkscape:cx="475.67169"
+     inkscape:cy="-168.10887"
      inkscape:window-width="1920"
      inkscape:window-height="1017"
      inkscape:window-x="-8"
@@ -53,10 +53,10 @@
      inkscape:groupmode="layer"
      id="layer1">
     <path
-       style="fill:none;stroke:#ffffff;stroke-width:1.32289998;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:3.96869993, 1.32289998;stroke-dashoffset:0;stroke-opacity:1"
-       d="m -0.25920621,3.5470256 c 67.90554621,0 135.81082621,0 203.71584621,0"
+       style="fill:none;stroke:#ffffff;stroke-width:2.11381;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:6.34142, 2.11381;stroke-dashoffset:0;stroke-opacity:1"
+       d="m -0.25920621,3.5470256 c 173.37330621,0 346.74593621,0 520.11789621,0"
        id="path1138"
        inkscape:path-effect="#path-effect1140"
-       inkscape:original-d="m -0.25920621,3.5470256 c 67.90554621,2.64e-4 135.81082621,2.64e-4 203.71584621,0" />
+       inkscape:original-d="m -0.25920621,3.5470256 c 173.37330621,2.64e-4 346.74593621,2.64e-4 520.11789621,0" />
   </g>
 </svg>
