@@ -16,6 +16,9 @@ func _ready() -> void:
 	else:
 		target = get_tree().get_root().get_node("Scene/Health")
 
+func get_effect_short_description() -> String:
+	return "Deal %d damage" % damage_amount
+
 func set_damage_amount(new_damage_amount: int) -> void:
 	damage_amount = new_damage_amount
 	

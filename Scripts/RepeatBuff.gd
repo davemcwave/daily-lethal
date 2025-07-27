@@ -1,6 +1,6 @@
 extends Buff
 
-@onready var scene = get_tree().get_root().get_node("Scene")
+@onready var scene: Scene = get_tree().get_root().get_node("Scene")
 
 func activate() -> void:
 	await get_tree().create_timer(0.25).timeout

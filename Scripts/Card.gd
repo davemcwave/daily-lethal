@@ -187,6 +187,9 @@ func get_card_effects() -> Array:
 func get_card_name() -> String:
 	return card_name
 
+func get_card_description() -> String:
+	return card_description
+	
 func show_card_preview() -> void:
 	# Card preview data
 	
@@ -334,6 +337,16 @@ func pay_cost(cost: int, use_free_buff: bool = true) -> void:
 	else:
 		energy.use_energy(energy_cost)
 
+func get_damage_card_effects() -> Array:
+	var damage_card_effects = []
+	for card_effect: CardEffect in card_effects:
+		if card_effect is DamageCardEffect:
+			damage_card_effects.append(card_effect)
+	return damage_card_effects
+
+func get_first_damage_card_effect() -> DamageCardEffect:
+	return get_damage_card_effects().front()
+	
 func apply_card_effects() -> bool:
 	for card_effect in card_effects:
 		if card_effect_delay > 0.0:

@@ -9,6 +9,7 @@ signal just_hurt(amount: int)
 @onready var background = get_node("/root/Background")
 @onready var initial_icon_position: Vector2 = $EnemyIcon.position
 @export var health = 10
+@export var enemy_name_font_size = -1
 var dead: bool = false
 var animating: bool = false
 var debuff_activate_queue: Array = []
@@ -29,6 +30,10 @@ func set_enemy_name(new_enemy_name: String) -> void:
 	background.set_enemy_name(new_enemy_name)
 	$EnemyNamePanel/EnemyName.set_text("[center][b]%s[/b][/center]" % enemy_name)
 	
+	if len(enemy_name) >= 19:
+		var current_enemy_name_font_size: int = $EnemyNamePanel/EnemyName.get("theme_override_font_sizes/bold_font_size") if enemy_name_font_size <= 0 else enemy_name_font_size 
+		$EnemyNamePanel/EnemyName.set("theme_override_font_sizes/bold_font_size",enemy_name_font_size)
+		
 func set_health(new_health: int) -> void:
 	health = new_health
 	$EnemyHealthBar.max_value = health
