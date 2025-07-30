@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends BoxContainer
 
 func add_debuff(debuff: Debuff) -> void:
 	var debuff_panel: Panel = load("res://Scenes/DebuffPanel.scn").instantiate()
