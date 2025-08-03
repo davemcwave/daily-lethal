@@ -6,7 +6,8 @@ func play():
 	set_state(State.Playing)
 	await apply_card_effects()
 	pay_cost(energy_cost)
-	scene.set_last_card_effects(self)
+	#scene.set_last_card_effects(self)
+	scene.set_last_card_effects_directly(self, [$PlayerChooseEffectCardEffect, ])
 	await buffs_container.activate_buffs(Buff.ActivationType.OnCardPlay)
 	discard()
 

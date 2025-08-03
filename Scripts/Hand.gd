@@ -66,16 +66,7 @@ func get_card_with_id(id: int) -> Card:
 func add_card(card: Card) -> void:
 	card.hide()
 	add_child(card)
-	
-	# wait one idle frame so all Controls and Node2Ds have real global positions
-	#await get_tree().process_frame
-	
-	#var new_global_position = STARTING_INDEX_POSITION
-	
-	#var tween = get_tree().create_tween()
-	#card.scale = Vector2.ONE*0.1
 	card.show()
-	#tween.parallel().tween_property(card, "scale", Vector2.ONE, 0.25).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
 	card.bounce()
 	
 	

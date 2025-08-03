@@ -238,15 +238,25 @@ func set_last_card_effects(card: Card) -> void:
 		var new_card_effect: CardEffect = card_effect.duplicate(DUPLICATE_USE_INSTANTIATION)
 		last_card_effects.append(new_card_effect)
 		add_child(new_card_effect)
+
+func set_last_card_effects_directly(card: Card, new_last_card_effects: Array) -> void:
+	last_card_backup = card.duplicate(DUPLICATE_USE_INSTANTIATION)
+	last_card_scene_file_path = card.get_scene_file_path()
+	last_card_effects = []
+	for card_effect: CardEffect in new_last_card_effects:
+		var new_card_effect: CardEffect = card_effect.duplicate(DUPLICATE_USE_INSTANTIATION)
+		last_card_effects.append(new_card_effect)
+		add_child(new_card_effect)
 	
 func get_last_card_effects() -> Array[CardEffect]:
 	return last_card_effects
 	
-func draw_starting_cards() -> void:
+func draw_starting_cards() -> Array[Card]:
 	var can_draw_cards: bool = deck.can_draw_cards(starting_card_amount)
 	if can_draw_cards:
-		deck.draw_cards(starting_card_amount)
-
+		return await deck.draw_cards(starting_card_amount)
+	return []
+	
 func increment_card_count() -> void:
 	card_count += 1
 	emit_signal("card_count_incremented")

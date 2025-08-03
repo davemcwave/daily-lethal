@@ -33,6 +33,7 @@ const LOW_ENERGY_CARD_TEXT = "[center][b][pulse freq=2.0 color=#ffffff40 ease=-2
 @onready var discard_pile_view = scene.get_node("CanvasLayer/DiscardPileView")
 @onready var energy_texture: Texture2D = preload("res://Assets/Textures/bolt-white.png")
 @onready var health_texture: Texture2D = preload("res://Assets/Textures/heart-white.png")
+@onready var audio_handler: AudioHandler = get_node("/root/AudioHandler")
 
 var grab_position = Vector2.ZERO
 var grab_offset = Vector2.ZERO
@@ -222,6 +223,7 @@ func reset_z_index() -> void:
 	z_index = original_z_index
 
 func grab() -> void:
+	audio_handler.play_sfx("GrabSFX", 0.9)
 	set_state(State.Grabbed)
 	grabbed_timestamp = Time.get_ticks_msec()
 	grab_position = position
@@ -288,8 +290,10 @@ func drop() -> void:
 	show_card_contents(true)
 	
 	if can_play():
+		audio_handler.play_sfx("PlaySFX")
 		play()
 	else:
+		audio_handler.play_sfx("GrabSFX", 0.75)
 		set_state(State.InHand)
 		
 		if is_reordering():
@@ -357,6 +361,8 @@ func apply_card_effects() -> bool:
 	return true
 
 func play():
+	audio_handler.play_sfx("PlaySFX")
+	audio_handler.increase_pitch_scale("PlaySFX", 0.25)
 	buffs_container.clear_buffs_added_or_removed_this_turn()
 	scene.increment_card_count()
 	set_state(State.Playing)
