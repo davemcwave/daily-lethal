@@ -15,6 +15,7 @@ var card_count: int = 0
 var last_card_effects: Array[CardEffect] = []
 var last_card_scene_file_path: String = ""
 var last_card_backup: Card = null
+var last_card_played: Card = null
 var checking_for_game_over: bool = false
 var game_over: bool = false
 var puzzle: Puzzle = null
@@ -230,7 +231,14 @@ func get_last_card_scene_file_path() -> String:
 func get_last_card_backup() -> Card:
 	return last_card_backup
 	
+func set_last_card_played(card: Card) -> void:
+	last_card_played = card
+	
+func get_last_card_played():
+	return last_card_played
+		
 func set_last_card_effects(card: Card) -> void:
+	last_card_played = card
 	last_card_backup = card.duplicate(DUPLICATE_USE_INSTANTIATION)
 	last_card_scene_file_path = card.get_scene_file_path()
 	last_card_effects = []

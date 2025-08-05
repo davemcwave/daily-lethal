@@ -28,6 +28,9 @@ func add_buff_removed_this_turn(new_buff: String) -> void:
 func clear_buffs_removed_this_turn() -> void:
 	buffs_removed_this_turn.clear()
 
+func has_buff_been_removed_this_turn(buff_name: String) -> bool:
+	return buffs_removed_this_turn.has(buff_name)
+
 func has_block_buff() -> bool:
 	
 	for buff_panel: BuffPanel in get_children():
@@ -202,6 +205,7 @@ func get_buffs(buff_activation_type: Buff.ActivationType) -> Array:
 			buffs.append(buff)
 			
 	return buffs
+	
 
 func activate_buffs(buff_activation_type: Buff.ActivationType) -> Array:
 	print("activate buffs | %s" % str(buff_activation_type))
