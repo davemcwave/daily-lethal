@@ -77,7 +77,11 @@ func print_order() -> void:
 		card_index += 1
 		
 func get_last_card() -> Card:
-	return get_cards().back()
+	var cards = get_cards()
+	if len(cards) <= 0:
+		return null
+		
+	return cards.back()
 
 
 func _on_discard_count_gui_input(event):
