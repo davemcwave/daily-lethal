@@ -8,7 +8,6 @@ func activate() -> void:
 	await get_tree().create_timer(0.5).timeout
 	if discard_panel.get_card_count() <= 0:
 		emit_signal("activated")
-		return
 	else:
 		var last_discarded_card: Card = discard_panel.get_last_card().duplicate(DUPLICATE_USE_INSTANTIATION)
 		discard_panel.get_last_card().queue_free()

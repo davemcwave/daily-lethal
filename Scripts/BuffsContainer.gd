@@ -204,11 +204,13 @@ func get_buffs(buff_activation_type: Buff.ActivationType) -> Array:
 	return buffs
 
 func activate_buffs(buff_activation_type: Buff.ActivationType) -> Array:
+	print("activate buffs | %s" % str(buff_activation_type))
 	# Track if 2 of the same type of buff can be applied on the same turn
 	# Also keep track of those buffs that were removed during this turn but 
 	# outside of the of this function.
 	var buffs_activated = buffs_removed_this_turn
 	
+	print("------ animating is true")
 	animating = true
 	for buff_panel in get_children():
 		if not is_instance_valid(buff_panel) or buff_panel == null and not buff_panel.is_inside_tree():
@@ -233,5 +235,6 @@ func activate_buffs(buff_activation_type: Buff.ActivationType) -> Array:
 			if buff.exceeded_uses() and is_instance_valid(buff_panel) and buff_panel != null and buff_panel.is_inside_tree() and not buff.is_freed_manually():
 				buff_panel.queue_free()
 	animating = false
+	print("animating is false ------")
 	return buffs_activated
 	

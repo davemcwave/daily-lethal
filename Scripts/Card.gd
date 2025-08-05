@@ -277,6 +277,13 @@ func set_energy_text(energy_cost: int, color_hex: String = "") -> void:
 		$EnergyPanel/Energy.set_text("[center]%d[/center]" % energy_cost)
 		$EnergyPanel/Icon.self_modulate = Color.WHITE
 func can_play() -> bool:
+	print(card_play_area != null,
+		 card_play_area.has_card(),
+		 card_play_area.get_card() == self ,
+		 not enemy.is_animating(),
+		 not buffs_container.is_animating(),
+		 can_pay_cost(energy_cost))
+		
 	return card_play_area != null \
 		and card_play_area.has_card() \
 		and card_play_area.get_card() == self \

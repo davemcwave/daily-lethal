@@ -6,7 +6,8 @@ extends Buff
 func activate() -> void:
 	await get_tree().create_timer(0.5).timeout
 	var card: Card = discard_pile.get_last_card()
-	if not is_instance_valid(card):
+	if not is_instance_valid(card) or card == null or discard_pile.get_card_count() <= 0:
+		emit_signal("activated")
 		return
 		
 	card.shrink(0.15)
