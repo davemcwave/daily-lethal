@@ -35,7 +35,8 @@
 - [x] Check off puzzles right after completion, allow player's to check them off too.
 - [ ] Make a desktop version with a wider screen.
 - [x] Previous and Next card puzzles after finishing.
-- [ ] Sandcastle's cards:
+
+## Cards
     * Rebirth (Phoenix Image) (Cost: 3) (Type: Effect [Purple]) - Repeat the card at the bottom of your discard pile twice, trash that card.
     * Refund (Dollar with Circular Arrow Emoji) (Cost: 1) (Type: Effect [Purple]) - Gain energy equal to the energy cost of the top of the discard pile.
     * Momentum (Bar Grap Increase Image) (Cost: 2) (Type: Effect [Purple]) - Inflict one vulnerable each time you play a damage card.
