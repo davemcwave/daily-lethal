@@ -6,7 +6,14 @@ class_name DamageCardEffect
 @export_enum("Player", "Enemy") var target_name: String = "Enemy"
 @export var increase_damage_multiplier: int = 1
 @export var increase_damage_effect: bool = true
+@export var modifiable: bool = true
 
+func is_modifiable() -> bool:
+	return modifiable
+	
+func set_modifiable(new_modifiable: bool) -> void:
+	modifiable = new_modifiable
+	
 func can_increase_damage_amount() -> bool:
 	return increase_damage_effect
 	
@@ -38,7 +45,7 @@ func set_target(new_target) -> void:
 	target = new_target
 
 func deal_damage(damage_amount: int) ->  void:
-	if buffs_container.has_modify_attack_buff():
+	if buffs_container.has_modify_attack_buff() and modifiable:
 		var modify_attack_buff: ModifyAttackBuff = buffs_container.get_modify_attack_buff()
 		var modified_damage_amount: int = modify_attack_buff.modify_attack(damage_amount)
 		buffs_container.activate_buff(modify_attack_buff)
