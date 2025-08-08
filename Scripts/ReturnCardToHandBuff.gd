@@ -6,8 +6,11 @@ extends Buff
 
 func activate() -> void:
 	await get_tree().create_timer(0.5).timeout
-	if discard_panel.get_card_count() <= 0:
-		emit_signal("activated")
+	
+	var card = scene.get_last_card_played()
+	
+	if card == null or not is_instance_valid(card) or discard_panel.get_card_count() <= 0:
+		super.activate()
 		return
 	else:
 		var last_discarded_card: Card = discard_panel.get_last_card().duplicate(DUPLICATE_USE_INSTANTIATION)
