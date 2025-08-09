@@ -1,35 +1,104 @@
 [
-    "bargain-card.PNG",
-    "burst-card.PNG",
-    "echo-card.PNG",
-    "emptyfist-card.PNG",
-    "fang-card.PNG",
-    "flurry-card.PNG",
-    "gift-card.PNG",
-    "haunt-card.PNG",
-    "heartbeat-card.PNG",
-    "ignite-card.PNG",
-    "inspiration-card.PNG",
-    "lunge-card.PNG",
-    "martyr-card.PNG",
-    "mend-card.PNG",
-    "overload-card.PNG",
-    "potion-card.PNG",
-    "pound-card.PNG",
-    "rage-card.PNG",
-    "rebound-card.PNG",
-    "revive-card.PNG",
-    "scrap-card.PNG",
-    "shield-card.PNG",
-    "shovel-card.PNG",
-    "slash-card.PNG",
-    "snipe-card.PNG",
-    "spark-card.PNG",
-    "surge-card.PNG",
-    "thunderbolt-card.PNG",
-    "trace-card.PNG",
-    "tribute-card.PNG",
-    "target-card.PNG",
-    "wound-card.PNG"
-  ]
-  
+  {
+    "name": "bargain-card.PNG"
+  },
+  {
+    "name": "burst-card.PNG"
+  },
+  {
+    "name": "echo-card.PNG"
+  },
+  {
+    "name": "emptyfist-card.PNG"
+  },
+  {
+    "name": "exchange-card.PNG",
+    "date_added": "2025-08-09"
+  },
+  {
+    "name": "fang-card.PNG"
+  },
+  {
+    "name": "flurry-card.PNG"
+  },
+  {
+    "name": "gift-card.PNG"
+  },
+  {
+    "name": "haunt-card.PNG"
+  },
+  {
+    "name": "heartbeat-card.PNG"
+  },
+  {
+    "name": "ignite-card.PNG",
+    "date_added": "2025-08-08"
+  },
+  {
+    "name": "inspiration-card.PNG"
+  },
+  {
+    "name": "lunge-card.PNG"
+  },
+  {
+    "name": "martyr-card.PNG"
+  },
+  {
+    "name": "mend-card.PNG"
+  },
+  {
+    "name": "overload-card.PNG"
+  },
+  {
+    "name": "potion-card.PNG"
+  },
+  {
+    "name": "pound-card.PNG"
+  },
+  {
+    "name": "rage-card.PNG"
+  },
+  {
+    "name": "rebound-card.PNG"
+  },
+  {
+    "name": "revive-card.PNG"
+  },
+  {
+    "name": "scrap-card.PNG"
+  },
+  {
+    "name": "shield-card.PNG"
+  },
+  {
+    "name": "shovel-card.PNG"
+  },
+  {
+    "name": "slash-card.PNG"
+  },
+  {
+    "name": "snipe-card.PNG"
+  },
+  {
+    "name": "spark-card.PNG",
+    "date_added": "2025-08-08"
+  },
+  {
+    "name": "surge-card.PNG"
+  },
+  {
+    "name": "thunderbolt-card.PNG"
+  },
+  {
+    "name": "trace-card.PNG"
+  },
+  {
+    "name": "tribute-card.PNG"
+  },
+  {
+    "name": "target-card.PNG"
+  },
+  {
+    "name": "wound-card.PNG"
+  }
+]

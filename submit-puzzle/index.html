@@ -85,6 +85,29 @@
       border-color: #ffd700;
       box-shadow: 0 0 12px 4px rgba(255, 215, 0, 0.8);
     }
+
+    /* Blinking animation for the "NEW!" label */
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    /* Position the "NEW!" label in the top-right corner */
+    .new-card-tag {
+      position: absolute;
+      top: -10px;  /* Adjust position from the top */
+      right: 35px;  /* Position it from the right edge */
+      background-color: #ff4f4f;
+      color: white;
+      padding: 5px 10px;
+      font-weight: bold;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      z-index: 10; /* Ensure it stays on top */
+      animation: blink 1.5s infinite; /* Apply the blinking effect */
+    }
+
     .card-controls {
       position: absolute;
       bottom: 8px;
@@ -111,7 +134,6 @@
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
       transition: transform 0.1s ease;
     }
-
     .card-controls button:hover {
       transform: scale(1.1);
     }
@@ -166,13 +188,6 @@
       color: #111;
     }
   </style>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW9PLMBBGT"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-LW9PLMBBGT');
-  </script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW9PLMBBGT"></script>
 <script>
@@ -194,37 +209,27 @@
 
     <form action="https://formspree.io/f/myzjqgvw" method="POST" onsubmit="return finalizeBeforeSubmit()" accept-charset="UTF-8">
       <input type="hidden" name="selected_cards" id="finalCards" />
-
       <label>Solution Order (Card Names in Order)</label>
       <input type="text" name="solution_order" placeholder="e.g. Lunge, Rebound, Rage" required />
       <div class="description">List the exact order the cards should be played in. This helps validate and reproduce your solution.</div>
-
       <input type="hidden" name="test_url" id="testUrlField" />
-
       <label>Player HP</label>
       <input type="number" name="player_hp" placeholder="e.g. 10" required />
-
       <label>Player Energy</label>
       <input type="number" name="player_energy" placeholder="e.g. 3" required />
-
       <label>Enemy HP</label>
       <input type="number" name="enemy_hp" placeholder="e.g. 20" required />
-
       <label>Optional Enemy Name or Inspirations</label>
       <input type="text" name="enemy_info" placeholder="Godzilla / A Monster That Looks Like A Giant Lizard" />
       <div class="description">This is so I know what to draw for the enemy icon</div>
-
       <label>Email Address or Discord Username</label>
       <input type="text" name="contact_info" placeholder="mcwavegames@gmail.com" required />
       <div class="description">Used to verify puzzle author and troubleshoot puzzle with you</div>
-
       <label>Your Name</label>
       <input type="text" name="credit_name" placeholder="mcwavegames" />
       <div class="description">Used to give you credit as the puzzle author</div>
-
       <label>Optional Social Handle or Link</label>
       <input type="text" name="social" placeholder="@mcwavegames.bsky.social" />
-
       <button type="button" onclick="testPuzzle()">🧪 Test Puzzle</button>
       <button type="submit">📤 Submit Puzzle</button>
     </form>
@@ -239,15 +244,34 @@
         const response = await fetch('../card-list.json');
         const cardFiles = await response.json();
 
+        const oneWeekAgo = new Date();
+        oneWeekAgo.setDate(oneWeekAgo.getDate() - 7); // Calculate 7 days ago
+
         cardFiles.forEach(card => {
+          // Skip cards with no name field or with null/undefined name
+          if (!card.name) {
+            console.warn('Card name is missing:', card); // Debug log
+            return;
+          }
+
+          const cardDate = card.date_added ? new Date(card.date_added) : null;
+
           const wrapper = document.createElement('div');
           wrapper.className = 'card-wrapper';
 
           const img = document.createElement('img');
-          img.src = `/Assets/Textures/card-screenshots/${card}`;
-          img.alt = card;
+          img.src = `/Assets/Textures/card-screenshots/${card.name}`;
+          img.alt = card.name;
           img.className = 'card-img-large';
-          img.setAttribute('data-name', card);
+          img.setAttribute('data-name', card.name);
+
+          // Add "NEW!" tag if there's a valid date_added and it's within the last week
+          if (cardDate && cardDate >= oneWeekAgo) {
+            const newCardTag = document.createElement('div');
+            newCardTag.className = 'new-card-tag';
+            newCardTag.textContent = 'NEW CARD!';
+            wrapper.appendChild(newCardTag);
+          }
 
           const controls = document.createElement('div');
           controls.className = 'card-controls';
@@ -261,9 +285,9 @@
           plus.addEventListener('click', (e) => {
             e.stopPropagation();
             if (selectedCards.length < 7) {
-              selectedCards.push(card);
+              selectedCards.push(card.name);
               updateCardText();
-              updateCardCount(card, countDisplay);
+              updateCardCount(card.name, countDisplay);
               img.classList.add('selected');
             }
           });
@@ -272,12 +296,12 @@
           minus.textContent = '-';
           minus.addEventListener('click', (e) => {
             e.stopPropagation();
-            const index = selectedCards.lastIndexOf(card);
+            const index = selectedCards.lastIndexOf(card.name);
             if (index > -1) {
               selectedCards.splice(index, 1);
               updateCardText();
-              updateCardCount(card, countDisplay);
-              if (!selectedCards.includes(card)) {
+              updateCardCount(card.name, countDisplay);
+              if (!selectedCards.includes(card.name)) {
                 img.classList.remove('selected');
               }
             }
@@ -289,17 +313,16 @@
 
           wrapper.appendChild(img);
           wrapper.appendChild(controls);
-          // countDisplay removed for minimal UI
           cardGallery.appendChild(wrapper);
 
-          updateCardCount(card, countDisplay);
+          updateCardCount(card.name, countDisplay);
         });
       } catch (error) {
         console.error('Could not load card list:', error);
       }
     }
 
-    function testPuzzle() {
+     function testPuzzle() {
       if (selectedCards.length === 0) {
         alert("Please select cards to test.");
         return;
@@ -328,26 +351,14 @@
 
 
 
-
-
     function updateCardCount(card, display) {
       const count = selectedCards.filter(name => name === card).length;
       display.textContent = count > 0 ? count : '0';
     }
 
-    function formatName(filename) {
-      return filename.replace('-card.PNG', '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-    }
-
     function updateCardText() {
-      const formatted = selectedCards.map(name => formatName(name));
+      const formatted = selectedCards.map(name => name.replace('-card.PNG', '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()));
       document.getElementById('selectedCardsText').textContent = formatted.join(', ');
-      document.getElementById('finalCards').value = selectedCards.join(', ');
-    }
-
-    function finalizeBeforeSubmit() {
-      document.getElementById('finalCards').value = selectedCards.join(', ');
-      return true;
     }
 
     fetchCardList();
