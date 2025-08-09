@@ -349,8 +349,6 @@
       window.open(testUrl, '_blank');
     }
 
-
-
     function updateCardCount(card, display) {
       const count = selectedCards.filter(name => name === card).length;
       display.textContent = count > 0 ? count : '0';
@@ -359,6 +357,11 @@
     function updateCardText() {
       const formatted = selectedCards.map(name => name.replace('-card.PNG', '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()));
       document.getElementById('selectedCardsText').textContent = formatted.join(', ');
+    }
+      
+    function finalizeBeforeSubmit() {
+      document.getElementById('finalCards').value = selectedCards.join(', ');
+      return true;
     }
 
     fetchCardList();
