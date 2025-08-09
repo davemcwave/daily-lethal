@@ -280,8 +280,6 @@ func disable_all_cards() -> void:
 
 func is_checking_for_game_over() -> bool:
 	return checking_for_game_over
-	
-
 
 func check_game_over() -> void:
 	# Prevent overlapping checks and ignore if game already over

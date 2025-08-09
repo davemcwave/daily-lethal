@@ -36,6 +36,9 @@ func set_cards_to_reordering(reorder: bool) -> void:
 func reorder_cards_by_x_position():
 	var sorted_children = get_cards()
 
+	# Wait for the next idle frame to ensure positions are updated
+	await get_tree().process_frame
+	
 	# Sort by global x-position
 	sorted_children.sort_custom(_sort_by_x)
 	
