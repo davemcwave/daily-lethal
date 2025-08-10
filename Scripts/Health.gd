@@ -27,6 +27,11 @@ func blink() -> void:
 
 func set_health(new_health: int) -> void:
 	health = new_health
+	
+	if health <= 0:
+		dead = true
+		scene.check_game_over()
+		
 	update_text()
 
 func add_health(add_health_amount: int) -> void:

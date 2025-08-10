@@ -168,7 +168,21 @@ func activate_buff(target_buff: Buff) -> void:
 			buff.activate()
 			buff_panel.queue_free()
 			return
+			
+func get_modify_attack_buffs() -> Array:
+	var modify_attack_buffs = []
+	for buff_panel: BuffPanel in get_children():
+		if not is_instance_valid(buff_panel):
+			continue
+			
+		var buff: Buff = buff_panel.get_buff()
+		if not is_instance_valid(buff):
+			continue
+		
+		if buff is ModifyAttackBuff:
+			modify_attack_buffs.append(buff)
 	
+	return modify_attack_buffs
 func get_modify_attack_buff():
 	for buff_panel: BuffPanel in get_children():
 		if not is_instance_valid(buff_panel):
@@ -208,7 +222,7 @@ func get_buffs(buff_activation_type: Buff.ActivationType) -> Array:
 	
 
 func activate_buffs(buff_activation_type: Buff.ActivationType) -> Array:
-	print("activate buffs | %s" % str(buff_activation_type))
+	print("activate buffs | %s" % str(Buff.ActivationType.keys()[buff_activation_type]))
 	# Track if 2 of the same type of buff can be applied on the same turn
 	# Also keep track of those buffs that were removed during this turn but 
 	# outside of the of this function.
