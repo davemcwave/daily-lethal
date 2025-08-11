@@ -2,7 +2,7 @@ extends Buff
 
 @onready var scene: Scene = get_tree().get_root().get_node("Scene")
 
-func activate() -> void:
+func activate() -> bool:
 	await get_tree().create_timer(0.25).timeout
 	var card_effects: Array[CardEffect] = scene.get_last_card_effects()
 
@@ -14,5 +14,5 @@ func activate() -> void:
 			await card_effect.player_input_finished
 			print("%s found player input" % card_effect.name)
 
-	super.activate()
+	return super.activate()
 	

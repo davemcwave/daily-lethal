@@ -4,6 +4,7 @@ class_name BuffsContainer
 var animating: bool = false
 var buffs_added_this_turn: Array = []
 var buffs_removed_this_turn: Array = []
+var buff_extra_info: Dictionary = {}
 
 func is_animating() -> bool:
 	return animating
@@ -161,6 +162,7 @@ func activate_buff(target_buff: Buff) -> void:
 			continue
 			
 		var buff: Buff = buff_panel.get_buff()
+			
 		if not is_instance_valid(buff):
 			continue
 		
@@ -204,9 +206,6 @@ func remove_buff_by_name(buff_name: String) -> void:
 		if buff.get_buff_name() == buff_name:
 			buff_panel.queue_free()
 			return
-	
-	
-	
 
 func get_buffs(buff_activation_type: Buff.ActivationType) -> Array:
 	var buffs: Array = []
@@ -219,15 +218,25 @@ func get_buffs(buff_activation_type: Buff.ActivationType) -> Array:
 			buffs.append(buff)
 			
 	return buffs
-	
 
-func activate_buffs(buff_activation_type: Buff.ActivationType) -> Array:
+func set_buff_extra_info(new_buff_extra_info: Dictionary) -> void:
+	buff_extra_info = new_buff_extra_info
+
+func merge_buff_extra_info(new_buff_extra_info: Dictionary) -> void:
+	buff_extra_info.merge(new_buff_extra_info, true)
+
+func get_buff_extra_info() -> Dictionary:
+	return buff_extra_info
+
+func activate_buffs(buff_activation_type: Buff.ActivationType, extra_info: Dictionary = {}) -> Array:
+	merge_buff_extra_info(extra_info)
+	
 	print("activate buffs | %s" % str(Buff.ActivationType.keys()[buff_activation_type]))
 	# Track if 2 of the same type of buff can be applied on the same turn
 	# Also keep track of those buffs that were removed during this turn but 
 	# outside of the of this function.
 	var buffs_activated = buffs_removed_this_turn
-	
+	var buff_objects_activated = []
 	print("------ animating is true")
 	animating = true
 	for buff_panel in get_children():
@@ -243,16 +252,15 @@ func activate_buffs(buff_activation_type: Buff.ActivationType) -> Array:
 				continue
 				
 			buffs_activated.append(buff.get_buff_name())
+			buff_objects_activated.append(buff.duplicate())
+			
 			print("activating buff: %s" % buff.get_buff_name())
-			buff.activate()
-			#await get_tree().create_timer(0.25).timeout
-			if buff.wait_for_activated_signal:
-				await buff.activated
+			await buff.activate()
 				
 			print("%s activated!" % buff.get_buff_name())
 			if buff.exceeded_uses() and is_instance_valid(buff_panel) and buff_panel != null and buff_panel.is_inside_tree() and not buff.is_freed_manually():
 				buff_panel.queue_free()
 	animating = false
 	print("animating is false ------")
-	return buffs_activated
+	return buff_objects_activated
 	

@@ -27,6 +27,13 @@ enum OnPlayActivationCategory {OnPlayAttackCard}
 @export var on_play_activation_category = OnPlayActivationCategory.OnPlayAttackCard
 
 @export var freed_manually: bool = false
+@export var deal_damage: bool = true
+
+func can_deal_damage() -> bool:
+	return deal_damage
+	
+func set_deal_damage(new_deal_damage: bool) -> void:
+	deal_damage = new_deal_damage
 
 func is_freed_manually() -> bool:
 	return freed_manually
@@ -84,12 +91,13 @@ func can_be_activated_only_once_per_turn() -> bool:
 	return activated_once_per_turn
 
 # TO BE OVERWRITTEN
-func activate() -> void:
+func activate() -> bool:
 	if not is_unlimited_uses():
 		uses_amount -= 1
 	
 	buff_panel.blink()
 	emit_signal("activated")
+	return true
 
 func is_unlimited_uses() -> bool:
 	return unlimited_uses

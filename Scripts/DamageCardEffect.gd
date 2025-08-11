@@ -45,25 +45,19 @@ func set_target(new_target) -> void:
 	target = new_target
 
 func deal_damage(damage_amount: int) ->  void:
-	if buffs_container.has_modify_attack_buff() and modifiable:
-		var modified_damage_amount: int = damage_amount
-		var apply_damage: bool = true
-		for modify_attack_buff: ModifyAttackBuff in buffs_container.get_modify_attack_buffs():
-			modified_damage_amount = modify_attack_buff.modify_attack(modified_damage_amount)
-			buffs_container.activate_buff(modify_attack_buff)
-			if not modify_attack_buff.can_apply_damage():
-				apply_damage = false
-				
-		# Some ModifyAttackBuffs might want to do something else that isn't applying damage. 
-		# e.g. Poison
-		if apply_damage:
-			target.hurt(modified_damage_amount)
-	else:
-		target.hurt(damage_amount)
+	target.hurt(damage_amount)
 	
-	var buffs_activated: Array = await buffs_container.activate_buffs(Buff.ActivationType.OnHit)
-
-		
 func apply() -> void:
-	deal_damage(damage_amount)	
+	var on_attack_buffs: Array = await buffs_container.activate_buffs(Buff.ActivationType.OnAttack, {'current_damage_amount': damage_amount})
+	var modified_damage_amount = damage_amount
+	for on_attack_buff: Buff in on_attack_buffs:
+		if on_attack_buff is ModifyAttackBuff:
+			modified_damage_amount = on_attack_buff.modify_attack(modified_damage_amount)
+	
+	if modified_damage_amount != damage_amount:
+		deal_damage(modified_damage_amount)
+	else:
+		deal_damage(damage_amount)
+		
+	var on_hit_buff: Array = await buffs_container.activate_buffs(Buff.ActivationType.OnHit)
 	

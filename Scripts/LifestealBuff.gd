@@ -5,7 +5,7 @@ class_name LifestealBuff
 @onready var hand = scene.get_node("Hand")
 @onready var health: Health = scene.get_node("Health")
 
-func activate() -> void:
+func activate() -> bool:
 	await get_tree().create_timer(0.25).timeout
 	var last_card_effects: Array[CardEffect] = scene.get_last_card_effects()
 	var did_lifesteal: bool = false
@@ -19,7 +19,6 @@ func activate() -> void:
 		did_lifesteal = true
 		
 	
-	if did_lifesteal:
-		super.activate()
-		queue_free()
+	#if did_lifesteal:
+	return super.activate()
 	
