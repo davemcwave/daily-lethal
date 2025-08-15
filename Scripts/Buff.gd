@@ -22,6 +22,7 @@ var buff_panel: BuffPanel = null
 
 # True if this type of buff can only be played once per turn
 @export var activated_once_per_turn: bool = false
+@export var single_turn_repeat: bool = false
 
 enum OnPlayActivationCategory {OnPlayAttackCard}
 @export var on_play_activation_category = OnPlayActivationCategory.OnPlayAttackCard
@@ -31,6 +32,12 @@ enum OnPlayActivationCategory {OnPlayAttackCard}
 
 func can_deal_damage() -> bool:
 	return deal_damage
+
+func can_single_turn_repeat() -> bool:
+	return single_turn_repeat
+
+func set_single_turn_repeat(new_single_turn_repeat: bool) -> void:
+	single_turn_repeat = new_single_turn_repeat
 	
 func set_deal_damage(new_deal_damage: bool) -> void:
 	deal_damage = new_deal_damage

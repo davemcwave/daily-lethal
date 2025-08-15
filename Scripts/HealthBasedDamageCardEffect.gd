@@ -6,7 +6,7 @@ class_name HealthBasedDamageCardEffect
 func apply() -> void:
 	var hp: int = health.get_health()
 	set_damage_amount(hp)
-	deal_damage(damage_amount)
+	super.apply()
 	
 func get_damage_amount() -> int:
 	return health.get_health()

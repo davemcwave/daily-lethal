@@ -18,19 +18,21 @@ func apply() -> void:
 	match condition_type:
 		ConditionType.EqualTo:
 			if energy_amount != comparison_value:
-				deal_damage(if_false_damage_amount)
+				set_damage_amount(if_false_damage_amount)
 			else:
-				deal_damage(damage_amount)
+				set_damage_amount(damage_amount)
 		ConditionType.LessThan:
 			if energy_amount >= comparison_value:
-				deal_damage(if_false_damage_amount)
+				set_damage_amount(if_false_damage_amount)
 			else:
-				deal_damage(damage_amount)
+				set_damage_amount(damage_amount)
 		ConditionType.GreaterThan:
 			if energy_amount <= comparison_value:
-				deal_damage(if_false_damage_amount)
+				set_damage_amount(if_false_damage_amount)
 			else:
-				deal_damage(damage_amount)
+				set_damage_amount(damage_amount)
 		_:
-				deal_damage(damage_amount)
+				set_damage_amount(damage_amount)
+	
+	super.apply()
 		

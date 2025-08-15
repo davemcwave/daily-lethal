@@ -5,6 +5,13 @@ var animating: bool = false
 var buffs_added_this_turn: Array = []
 var buffs_removed_this_turn: Array = []
 var buff_extra_info: Dictionary = {}
+var repeating: bool = false
+
+func set_repeating(new_repeating: bool) -> void:
+	repeating = new_repeating
+	
+func is_repeating() -> bool:
+	return repeating
 
 func is_animating() -> bool:
 	return animating
@@ -247,10 +254,12 @@ func activate_buffs(buff_activation_type: Buff.ActivationType, extra_info: Dicti
 		if buff.get_activation_type() == buff_activation_type:
 				
 			var buff_instance_id = buff.get_instance_id()
-			
-			if buff.can_be_activated_only_once_per_turn() and (buffs_activated.has(buff.get_buff_name()) or buffs_added_this_turn.has(buff_instance_id)):
+			var buff_is_repeating: bool = is_repeating() and buff.can_single_turn_repeat()
+			if !buff_is_repeating and buff.can_be_activated_only_once_per_turn() and (buffs_activated.has(buff.get_buff_name()) or buffs_added_this_turn.has(buff_instance_id)):
 				continue
-				
+			
+			set_repeating(false)
+			
 			buffs_activated.append(buff.get_buff_name())
 			buff_objects_activated.append(buff.duplicate())
 			

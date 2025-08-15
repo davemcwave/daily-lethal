@@ -5,7 +5,9 @@ class_name DamageIfDiscardEmptyCardEffect
 
 func apply() -> void:
 	if discard_panel.is_empty():
-		deal_damage(damage_amount)
+		set_damage_amount(damage_amount)
 	else:
-		deal_damage(0)
+		set_damage_amount(0)
+		
+	super.apply()
 		
