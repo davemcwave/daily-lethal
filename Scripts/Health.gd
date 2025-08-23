@@ -7,8 +7,12 @@ class_name Health
 @onready var buffs_container: BuffsContainer = scene.get_node("BuffsContainer")
 @onready var original_color: Color = self_modulate
 @onready var center_description: CenterDescription = get_tree().get_root().get_node("Scene/CanvasLayer/CenterDescription")
+@onready var audio_handler = get_node("/root/AudioHandler")
+@export var health_amount_text: RichTextLabel
+
 var dead: bool = false
 var block: bool = false
+var bounce_tween = null
 
 func _ready():
 	update_text()
@@ -16,9 +20,24 @@ func _ready():
 func create_damage_label(hurt_amount: int, damage_message: String = "") -> void:
 	var damage_label: RichTextLabel = load("res://Scenes/DamageLabel.scn").instantiate()
 	damage_label.set_damage(hurt_amount, damage_message)
-	add_child(damage_label)
+	scene.add_child(damage_label)
 	damage_label.global_position = global_position
 	damage_label.float_up(25.0)
+	
+func bounce() -> void:
+	if is_instance_valid(bounce_tween):
+		bounce_tween.stop()
+		bounce_tween = null
+		
+	bounce_tween = get_tree().create_tween()
+	var original_scale = Vector2.ONE
+	scale = original_scale * 2
+	bounce_tween.tween_property(self, "scale", original_scale, 0.5).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+
+	#var original_size = size
+	#size *= 2
+	#tween.tween_property(self, "size", original_size, 0.5).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+
 
 func blink() -> void:
 	self_modulate = Color.WHITE
@@ -37,6 +56,7 @@ func set_health(new_health: int) -> void:
 func add_health(add_health_amount: int) -> void:
 	set_health(health + add_health_amount)
 	create_damage_label(0, "+%d" % add_health_amount)
+	bounce()
 	
 func get_health() -> int:
 	return health
@@ -54,6 +74,8 @@ func hurt(amount: int) -> void:
 		buffs_container.remove_block_buff()
 	else:
 		health = max(health-amount,0)
+		audio_handler.play_sfx("PlayerHurtSFX")
+		bounce()
 		blink()
 		#create_damage_label(amount)
 	
@@ -82,7 +104,7 @@ func get_text_template() -> String:
 			return "[center][b]%d[/b][/center]"
 	
 func update_text() -> void:
-	$HealthAmountText.set_text(get_text_template() % health)
+	health_amount_text.set_text(get_text_template() % health)
 
 
 func _on_gui_input(event):

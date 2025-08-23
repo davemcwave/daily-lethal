@@ -21,6 +21,9 @@ func _on_cards_played_cards_played_modified(cards_played_count: int) -> void:
 
 
 func play():
+	
+	handle_sfx()
+	
 	buffs_container.clear_buffs_added_or_removed_this_turn()
 
 	set_state(State.Playing)

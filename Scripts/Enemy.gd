@@ -15,7 +15,8 @@ var animating: bool = false
 var debuff_activate_queue: Array = []
 @onready var blink_shader: Shader = load("res://Scripts/Shaders/WhiteBlink.gdshader")
 @onready var wobble_shader: Shader = load("res://Scripts/Shaders/Wobble.gdshader")
-
+@onready var audio_handler = $"/root/AudioHandler"
+@onready var custom_camera: CustomCamera = scene.get_node("CustomCamera")
 func _ready():
 	set_enemy_name(enemy_name)
 	$EnemyHealthBar.max_value = health
@@ -103,6 +104,11 @@ func hurt(hurt_amount: int, hurt_from_card: bool = true) -> void:
 	if hurt_from_card and hurt_amount > 0:
 		activate_on_hurt_buffs()
 		activate_on_hurt_debuffs()
+	
+	if hurt_amount > 0:
+		audio_handler.play_sfx("HurtSFX")
+		custom_camera.add_trauma(0.2)
+		audio_handler.increase_pitch_scale("HurtSFX", 0.05)
 		
 	shake_briefly()
 	blink_white()

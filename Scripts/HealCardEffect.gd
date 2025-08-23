@@ -11,3 +11,4 @@ func get_heal_amount() -> int:
 	
 func apply() -> void:
 	health.add_health(heal_amount)
+	audio_handler.play_sfx("HealSFX")

@@ -223,7 +223,7 @@ func reset_z_index() -> void:
 	z_index = original_z_index
 
 func grab() -> void:
-	audio_handler.play_sfx("GrabSFX", 0.9)
+	audio_handler.play_sfx("GrabSFX", 1.0)
 	set_state(State.Grabbed)
 	grabbed_timestamp = Time.get_ticks_msec()
 	grab_position = position
@@ -297,10 +297,10 @@ func drop() -> void:
 	show_card_contents(true)
 	
 	if can_play():
-		audio_handler.play_sfx("PlaySFX")
+		#audio_handler.play_sfx("PlaySFX")
 		play()
 	else:
-		audio_handler.play_sfx("GrabSFX", 0.75)
+		audio_handler.play_sfx("GrabSFX", 0.8)
 		set_state(State.InHand)
 		
 		if is_reordering():
@@ -367,9 +367,20 @@ func apply_card_effects() -> bool:
 			await card_effect.player_input_finished
 	return true
 
-func play():
+func handle_sfx() -> void:
+	#audio_handler.reset_pitch_scale("PlaySFX")
+	audio_handler.reset_pitch_scale("HurtSFX")
 	audio_handler.play_sfx("PlaySFX")
-	audio_handler.increase_pitch_scale("PlaySFX", 0.25)
+	audio_handler.increase_pitch_scale("PlaySFX", 0.005)
+
+	for card_effect: CardEffect in get_card_effects():
+		if card_effect is BuffCardEffect:
+			audio_handler.reset_pitch_scale("AddBuffSFX")
+		elif card_effect is DamageCardEffect:
+			audio_handler.reset_pitch_scale("EnhanceOtherCardsSFX")
+			
+func play():
+	handle_sfx()
 	buffs_container.clear_buffs_added_or_removed_this_turn()
 	scene.increment_card_count()
 	set_state(State.Playing)

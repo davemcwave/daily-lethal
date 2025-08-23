@@ -38,6 +38,8 @@ func increase_damage_amount(damage_increase_amount: int) -> void:
 	var card: Card = get_parent()
 	card.update_description_panel()
 	
+	audio_handler.play_sfx("EnhanceOtherCardsSFX")
+	audio_handler.increase_pitch_scale("EnhanceOtherCardsSFX", 0.25)
 	await get_tree().create_timer(0.1).timeout
 	await card.inflate(false if not card.is_discarded() else true)
 	
@@ -58,6 +60,6 @@ func apply() -> void:
 		deal_damage(modified_damage_amount)
 	else:
 		deal_damage(damage_amount)
-		
+	
 	var on_hit_buff: Array = await buffs_container.activate_buffs(Buff.ActivationType.OnHit)
 	

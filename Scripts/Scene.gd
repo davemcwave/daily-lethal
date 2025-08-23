@@ -8,6 +8,7 @@ signal card_count_incremented
 @onready var health = get_node("Health")
 @onready var background = get_node("/root/Background")
 @onready var deck: Deck = get_node("Deck")
+@onready var audio_handler = get_node("/root/AudioHandler")
 @export_file("*.scn") var puzzle_scene
 @export var override_puzzle_date: bool = false
 var starting_card_amount: int = 3
@@ -61,7 +62,7 @@ func _ready():
 	
 	background.add_attempt()
 	
-	call_deferred("draw_starting_cards")
+	await draw_starting_cards()
 		#
 #func _input(event):
 	#if event.is_action_pressed("test"):
@@ -294,6 +295,7 @@ func check_game_over() -> void:
 	if p_dead:
 		game_over = true
 		disable_all_cards()
+		audio_handler.play_sfx("LoseSFX")
 		# Show death panel after delay
 		await get_tree().create_timer(1.0).timeout
 		$CanvasLayer/DeadPanel.appear()
@@ -301,6 +303,7 @@ func check_game_over() -> void:
 	elif e_dead:
 		game_over = true
 		background.set_best_card_count(card_count)
+		audio_handler.play_sfx("WinSFX")
 		# Brief pause before win screen
 		await get_tree().create_timer(0.75).timeout
 		# If player also died in the meantime, show death instead

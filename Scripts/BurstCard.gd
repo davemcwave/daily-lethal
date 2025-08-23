@@ -16,6 +16,7 @@ func update_description_panel() -> void:
 	#super.discard()
 
 func play():
+	handle_sfx()
 	buffs_container.clear_buffs_added_or_removed_this_turn()
 	set_state(State.Playing)
 	

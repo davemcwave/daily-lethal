@@ -31,10 +31,14 @@ func set_buff(new_buff: Buff) -> void:
 		add_child(new_buff)
 	
 	modulate = buff.get_color()
-	buff.set_buff_panel(self)
 	
+	
+	buff.set_buff_panel(self)
+	_base_modulate = buff.get_color()
+
 	if buff.is_unlimited_uses():
 		$UnlimitedPanel.show()
+		#$UnlimitedPanel.get("theme_override_styles/panel").set("bg_color", buff.get_color())
 	
 	update_text()
 	

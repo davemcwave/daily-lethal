@@ -7,6 +7,9 @@ class_name Energy
 @onready var original_color: Color = self_modulate
 @onready var center_description: CenterDescription = get_tree().get_root().get_node("Scene/CanvasLayer/CenterDescription")
 @onready var health: Health 
+@export var energy_amount_text: RichTextLabel
+var bounce_tween = null
+
 func _ready():
 	update_energy_text()
 	
@@ -14,6 +17,16 @@ func has_enough_energy(cost: int) -> bool:
 	return cost <= energy_amount \
 		or buffs_container.has_free_buff() \
 		or buffs_container.get_discounted_cost(cost) <= energy_amount
+
+func bounce() -> void:
+	if is_instance_valid(bounce_tween):
+		bounce_tween.stop()
+		bounce_tween = null
+		
+	bounce_tween = get_tree().create_tween()
+	var original_scale = Vector2.ONE
+	scale = original_scale * 2
+	bounce_tween.tween_property(self, "scale", original_scale, 0.5).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 
 
 func get_energy_amount() -> int:
@@ -35,7 +48,8 @@ func add_energy(additional_energy_amount: int) -> void:
 	
 func use_energy(cost: int) -> void:
 	energy_amount -= cost
-		
+	
+	bounce()
 	blink()
 
 	update_energy_text()
@@ -52,7 +66,7 @@ func get_text_template() -> String:
 			return "[center][b]%d[/b][/center]"
 	
 func update_energy_text() -> void:
-	$EnergyAmountText.set_text(get_text_template() % energy_amount)
+	energy_amount_text.set_text(get_text_template() % energy_amount)
 
 
 func _on_gui_input(event):

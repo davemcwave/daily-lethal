@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dcwoaftvn0kls"
+path="res://.godot/imported/urodela v2_2(Loop).ogg-740c9ff93632ceea9a17a162162a5bb6.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Audio/OST/urodela v2_2(Loop).ogg"
+dest_files=["res://.godot/imported/urodela v2_2(Loop).ogg-740c9ff93632ceea9a17a162162a5bb6.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

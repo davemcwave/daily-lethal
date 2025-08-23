@@ -11,6 +11,7 @@ signal player_input_finished
 @export var effect_color: Color
 @onready var scene: Scene = get_tree().get_root().get_node("Scene")
 @onready var buffs_container: BuffsContainer = scene.get_node("BuffsContainer")
+@onready var audio_handler = get_node("/root/AudioHandler")
 
 func set_effect_name(new_effect_name: String) -> void:
 	effect_name = new_effect_name

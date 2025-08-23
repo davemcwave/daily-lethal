@@ -24,8 +24,11 @@ func get_effect_description() -> String:
 func set_buff_color(new_buff_color: Color) -> void:
 	buff_color = new_buff_color
 	
+func get_buff() -> Buff:
+	return buff
+	
 func apply() -> void:
-	#buff.set_color(buff_color)
+	audio_handler.play_sfx("AddBuffSFX")
+	audio_handler.increase_pitch_scale("AddBuffSFX", 0.25)
 	buffs_container.add_buff(buff)
-	#await get_tree().create_timer(0.01).timeout
 	emit_signal("applied")

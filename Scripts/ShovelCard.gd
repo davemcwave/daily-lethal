@@ -14,6 +14,8 @@ func update_description_panel() -> void:
 	$DescriptionPanel/Title.set_text(card_description)
 
 func play():
+	handle_sfx()
+	
 	buffs_container.clear_buffs_added_or_removed_this_turn()
 	scene.increment_card_count()
 	set_state(State.Playing)
