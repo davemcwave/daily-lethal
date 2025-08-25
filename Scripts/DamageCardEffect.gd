@@ -7,7 +7,7 @@ class_name DamageCardEffect
 @export var increase_damage_multiplier: int = 1
 @export var increase_damage_effect: bool = true
 @export var modifiable: bool = true
-
+	
 func is_modifiable() -> bool:
 	return modifiable
 	
@@ -22,7 +22,7 @@ func _ready() -> void:
 		target = get_tree().get_root().get_node("Scene/Enemy")
 	else:
 		target = get_tree().get_root().get_node("Scene/Health")
-
+		
 func get_effect_short_description() -> String:
 	return "Deal %d damage" % damage_amount
 

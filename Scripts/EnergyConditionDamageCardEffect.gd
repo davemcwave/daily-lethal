@@ -12,7 +12,11 @@ enum ConditionType {
 @export var if_false_damage_amount: int = 0
 @onready var energy: Energy = get_tree().get_root().get_node("Scene/Energy")
 
+func _ready():
+	super._ready()
+
 func apply() -> void:
+	var original_damage_amount: int = damage_amount
 	var energy_amount: int = energy.get_energy_amount()
 	
 	match condition_type:
@@ -35,4 +39,6 @@ func apply() -> void:
 				set_damage_amount(damage_amount)
 	
 	super.apply()
-		
+	
+	# Reset the damage amount for things like Reclaim.
+	damage_amount = original_damage_amount
