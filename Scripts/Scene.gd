@@ -23,11 +23,59 @@ var puzzle: Puzzle = null
 @onready var url_capturer: URLCapturer = $URLCapturer
 @onready var next_puzzle_button = $NextPreviousPuzzleButtonContainer/NextPuzzleButton
 @onready var previous_puzzle_button = $NextPreviousPuzzleButtonContainer/PreviousPuzzleButton
+@onready var dialog_handler = $"/root/DialogHandler"
+var dialog_fight_button
+var player_dialog_panel
+var enemy_dialog_panel
+var black_bg
 
 func _ready():
-	print("Window Size")
-	print(DisplayServer.window_get_size())
-	#print("Latest Releasable Puzzle: %s" % get_latest_releasable_puzzle(get_files_in_folder("res://Scenes/Puzzles")))
+	
+	load_puzzle()
+	
+	background.add_attempt()
+	
+	if can_show_initial_dialog():
+		await handle_initial_dialog()
+	
+	await draw_starting_cards()
+
+func can_show_initial_dialog() -> bool:
+	return dialog_handler.is_enabled() and has_node("CanvasLayer/DialogFightButton") and puzzle.get_dialogue_lines().size() > 0
+
+func handle_initial_dialog() -> bool:
+	dialog_fight_button = $CanvasLayer/DialogFightButton
+	player_dialog_panel = $CanvasLayer/PlayerDialogPanel
+	enemy_dialog_panel = $CanvasLayer/EnemyDialogPanel
+	black_bg = $CanvasLayer/BlackBG
+	
+	enemy_dialog_panel.set_icon_texture(puzzle.get_enemy_icon_texture())
+	enemy_dialog_panel.set_title_text("[b][color=red]%s[/color][/b]" % puzzle.get_enemy_name())
+	
+	player_dialog_panel.show()
+	enemy_dialog_panel.show()
+	black_bg.show()
+	
+	await dialog_handler.play_dialog(puzzle.get_dialogue_first(), puzzle.get_dialogue_lines())
+	dialog_fight_button.show()
+	audio_handler.play_sfx("HitSFX", 1.2)
+	
+	await dialog_fight_button.pressed
+	audio_handler.play_sfx("HitSFX", 0.75)
+	await get_tree().create_timer(0.25).timeout
+	hide_dialog_elements()
+	
+	await get_tree().create_timer(0.5).timeout
+	
+	return true
+
+func hide_dialog_elements() -> void:
+	black_bg.hide()
+	dialog_fight_button.hide()
+	player_dialog_panel.hide()
+	enemy_dialog_panel.hide()
+
+func load_puzzle() -> void:
 	if override_puzzle_date:
 		var current_puzzle: Puzzle = load(puzzle_scene).instantiate()
 		set_puzzle(current_puzzle)
@@ -60,14 +108,7 @@ func _ready():
 		else:
 			get_tree().change_scene_to_file("res://Scenes/PuzzleNotReadyScreen.tscn")
 	
-	background.add_attempt()
 	
-	await draw_starting_cards()
-		#
-#func _input(event):
-	#if event.is_action_pressed("test"):
-		#get_viewport_rect().size.x += 5
-
 func get_latest_releasable_puzzle() -> String:
 	var path_list: Array = get_files_in_folder("res://Scenes/Puzzles")
 	var latest_path := ""
@@ -169,6 +210,8 @@ func set_puzzle(new_puzzle: Puzzle) -> void:
 	$Enemy.set_health($URLCapturer.get_energy_health_from_test_puzzle() if puzzle.is_test_puzzle() else puzzle.get_enemy_health())
 	$Enemy.set_enemy_name($URLCapturer.get_enemy_name_from_test_puzzle() if puzzle.is_test_puzzle() else puzzle.get_enemy_name())
 	$Enemy.set_enemy_icon_texture(puzzle.get_enemy_icon_texture())
+	$Enemy.set_hurt_lines(puzzle.get_enemy_hurt_lines())
+	$Enemy.set_hurt_line_chance(puzzle.get_hurt_line_chance())
 	$"/root/Background".set_enemy_texture(puzzle.get_enemy_icon_texture())
 	for enemy_buff: Buff in puzzle.get_enemy_buffs():
 		var buff_panel: BuffPanel = load("res://Scenes/BuffPanel.scn").instantiate()

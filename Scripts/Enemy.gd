@@ -16,7 +16,12 @@ var debuff_activate_queue: Array = []
 @onready var blink_shader: Shader = load("res://Scripts/Shaders/WhiteBlink.gdshader")
 @onready var wobble_shader: Shader = load("res://Scripts/Shaders/Wobble.gdshader")
 @onready var audio_handler = $"/root/AudioHandler"
+@onready var dialog_handler = $"/root/DialogHandler"
 @onready var custom_camera: CustomCamera = scene.get_node("CustomCamera")
+var hurt_lines: Array[String] = []
+var hurt_lines_bag: Array[String] = []
+var hurt_line_chance: float = 0.0
+
 func _ready():
 	set_enemy_name(enemy_name)
 	$EnemyHealthBar.max_value = health
@@ -25,6 +30,19 @@ func _ready():
 	
 	background.set_enemy_texture($EnemyIcon.get_texture())
 	$EnemyIcon.material.shader = wobble_shader
+
+func set_hurt_line_chance(new_hurt_line_chance: float) -> void:
+	hurt_line_chance = new_hurt_line_chance
+	
+func get_hurt_line_chance() -> float:
+	return hurt_line_chance
+	
+func set_hurt_lines(new_hurt_lines: Array[String]) -> void:
+	hurt_lines = new_hurt_lines
+	hurt_lines_bag = hurt_lines.duplicate(true)
+	
+func get_hurt_lines() -> Array[String]:
+	return hurt_lines
 	
 func set_enemy_name(new_enemy_name: String) -> void:
 	enemy_name = new_enemy_name
@@ -94,7 +112,33 @@ func create_damage_label(hurt_amount: int) -> void:
 	add_child(damage_label)
 	damage_label.global_position = $DamageLabelSpawn.global_position
 	damage_label.float_up()
+
+func create_hurt_text(hurt_text_message: String) -> void:
+	var label := RichTextLabel.new()
+	label.bbcode_enabled = true
+	label.text = hurt_text_message
 	
+	var random_rotation = randf_range(-25, 25)
+	
+	var y_offset: float = 20
+	var word_count = 1
+	for word in label.get_parsed_text().split(" "):
+		var hurt_text: RichTextLabel = load("res://Scenes/HurtText.scn").instantiate()
+		add_child(hurt_text)
+		hurt_text.global_position = $EnemyIcon.global_position + $EnemyIcon.size/2
+		hurt_text.rotation_degrees += random_rotation
+		hurt_text.position.y += (y_offset * word_count)
+		hurt_text.set_text(hurt_text_message)
+		hurt_text.play_hurt_text(word, hurt_text.position)
+		word_count += 1
+		await get_tree().create_timer(0.15).timeout
+
+func get_random_hurt_line() -> String:
+	if hurt_lines_bag.size() <= 0:
+		hurt_lines_bag = hurt_lines.duplicate(true)
+		
+	hurt_lines_bag.shuffle()
+	return hurt_lines_bag.pop_back()
 	
 func hurt(hurt_amount: int, hurt_from_card: bool = true) -> void:
 	health -= hurt_amount
@@ -109,6 +153,9 @@ func hurt(hurt_amount: int, hurt_from_card: bool = true) -> void:
 		audio_handler.play_sfx("HurtSFX")
 		custom_camera.add_trauma(0.2)
 		audio_handler.increase_pitch_scale("HurtSFX", 0.05)
+	
+	if dialog_handler.is_enabled() and randf() <= hurt_line_chance:
+		create_hurt_text(get_random_hurt_line())
 		
 	shake_briefly()
 	blink_white()

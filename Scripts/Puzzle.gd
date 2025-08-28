@@ -25,10 +25,28 @@ class_name Puzzle
 
 @export var initial_draw_amount: int = -1
 
+@export_group("Dialog")
+@export_enum("Player", "Enemy") var dialogue_first: String = "Player"
+@export_multiline var dialogue_lines: Array[String]
+@export_multiline var enemy_hurt_lines: Array[String]
+@export var enemy_hurt_line_chance: float = 0.0
+
 var test_puzzle: bool = false
 
+func get_hurt_line_chance() -> float:
+	return enemy_hurt_line_chance
+	
 func set_test_puzzle(new_test_puzzle: bool) -> void:
 	test_puzzle = new_test_puzzle 
+
+func get_enemy_hurt_lines() -> Array[String]:
+	return enemy_hurt_lines
+	
+func get_dialogue_first() -> String:
+	return dialogue_first
+	
+func get_dialogue_lines() -> Array[String]:
+	return dialogue_lines
 	
 func is_test_puzzle() -> bool:
 	return test_puzzle

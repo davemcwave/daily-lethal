@@ -8,6 +8,7 @@ const DISCARD_TEXT = "[center][b]Discard {max_discard_amount} card{card_plural}[
 @export var max_discard_amount: int = 2
 var discard_amount: int = 0
 var cards_marked_for_discard: Array[Card] = []
+@onready var audio_handler = get_node("/root/AudioHandler")
 
 func activate_with_max_discard_amount(max_discard_amount: int) -> void:
 	set_max_discard_amount(max_discard_amount)
@@ -42,8 +43,10 @@ func clear_cards() -> void:
 
 func _on_card_marked_for_discard(marked: bool) -> void:
 	if marked:
+		audio_handler.play_sfx("DiscardSFX", 1.0)
 		discard_amount += 1
 	else:
+		audio_handler.play_sfx("DiscardSFX", 1.25)
 		discard_amount -= 1
 
 	# Disable all the unmarked discarding buttons if player 
@@ -85,4 +88,6 @@ func _on_discard_button_pressed() -> void:
 		if card.is_marked_for_discard():
 			var card_in_hand: Card = hand.get_card_with_id(card.get_id())
 			card_in_hand.discard()
+	
+	audio_handler.play_sfx("DiscardSFX", 1.25)
 	close()
