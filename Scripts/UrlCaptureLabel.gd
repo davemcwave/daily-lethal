@@ -12,7 +12,7 @@ func _ready():
 		puzzle_date = search.split("?puzzle_date=")[-1].split("&")[0]
 		#puzzle_date = path_name.split("/")[-2]
 		
-	update_label()
+	#update_label()
 
 func has_puzzle_date() -> bool:
 	#var puzzle_date_from_search = get_puzzle_date_from_search() 
@@ -23,7 +23,7 @@ func has_today() -> bool:
 	return puzzle_date == "today"
 	
 func is_test_puzzle() -> bool:
-	return path_name != null and "/test-puzzle/" in path_name 
+	return search != null and "?cards=" in search
 
 func get_player_energy_from_test_puzzle() -> int:
 	return int(search.split("&pnrg=")[-1].split("&")[0])

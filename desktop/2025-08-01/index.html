@@ -2,15 +2,9 @@
 <meta charset="utf-8">
 <title>Lethal – 2025-08-01</title>
 <script>
-  // Pick up device preference
-  let deviceType = localStorage.getItem('device_type');
-  if (deviceType !== 'desktop' && deviceType !== 'mobile') {
-    deviceType = 'mobile'; // default fallback
-  }
-
   // Build absolute URL to the evergreen build at the site root
-  const url = new URL("/" + deviceType + "/", window.location.origin);
-  url.searchParams.set("puzzle", "2025-08-01");
+  const url = new URL("/" + "desktop" + "/", window.location.origin);
+  url.searchParams.set("puzzle_date", "2025-08-01");
 
   // Redirect
   location.replace(url.toString());

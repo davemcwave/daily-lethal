@@ -2,6 +2,7 @@ extends Node
 
 @export var mute_all: bool = false
 @onready var original_pitch_scales = {}
+@export var mute_sfx = get_children()
 
 func _ready() -> void:
 	save_original_pitch_scales()
@@ -16,6 +17,9 @@ func save_original_pitch_scales() -> void:
 	
 func play_sfx(node_name: String, pitch_scale: float = -1.0) -> void:
 	if mute_all:
+		return
+	
+	if get_node(node_name) in mute_sfx:
 		return
 	
 	var sfx_node: AudioStreamPlayer = get_node(node_name)

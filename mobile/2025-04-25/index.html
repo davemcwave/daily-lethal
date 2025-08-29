@@ -1,0 +1,11 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Lethal – 2025-04-25</title>
+<script>
+  // Build absolute URL to the evergreen build at the site root
+  const url = new URL("/" + "mobile" + "/", window.location.origin);
+  url.searchParams.set("puzzle_date", "2025-04-25");
+
+  // Redirect
+  location.replace(url.toString());
+</script>
