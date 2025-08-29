@@ -83,9 +83,6 @@ func load_puzzle() -> void:
 		var new_puzzle: Puzzle = load(puzzle_scene).instantiate()
 		new_puzzle.set_test_puzzle(true)
 		set_puzzle(new_puzzle)
-	elif url_capturer.has_today():
-		var latest_releaseable_puzzle: Puzzle = load(get_latest_releasable_puzzle()).instantiate()
-		set_puzzle(latest_releaseable_puzzle)
 	elif url_capturer.has_puzzle_date():
 		if puzzle_exists_with_date(url_capturer.get_puzzle_date()):
 			var current_puzzle: Puzzle = load(get_puzzle_scene_that_starts_with(url_capturer.get_puzzle_date())).instantiate()

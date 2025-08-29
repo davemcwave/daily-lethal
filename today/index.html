@@ -1,107 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
-		<title>Play Lethal</title>
-		<style>
-html, body, #canvas {
-	margin: 0;
-	padding: 0;
-	border: 0;
-}
-
-body {
-	color: white;
-	background-color: black;
-	overflow: hidden;
-	touch-action: none;
-}
-
-#canvas {
-	display: block;
-}
-
-#canvas:focus {
-	outline: none;
-}
-
-#status, #status-splash, #status-progress {
-	position: absolute;
-	left: 0;
-	right: 0;
-}
-
-#status, #status-splash {
-	top: 0;
-	bottom: 0;
-}
-
-#status {
-	background-color: #242424;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	visibility: hidden;
-}
-
-#status-splash {
-	max-height: 100%;
-	max-width: 100%;
-	margin: auto;
-}
-
-#status-splash.show-image--false {
-	display: none;
-}
-
-#status-splash.fullsize--true {
-	height: 100%;
-	width: 100%;
-	object-fit: contain;
-}
-
-#status-splash.use-filter--false {
-	image-rendering: pixelated;
-}
-
-#status-progress, #status-notice {
-	display: none;
-}
-
-#status-progress {
-	bottom: 10%;
-	width: 50%;
-	margin: 0 auto;
-}
-
-#status-notice {
-	background-color: #5b3943;
-	border-radius: 0.5rem;
-	border: 1px solid #9b3943;
-	color: #e0e0e0;
-	font-family: 'Noto Sans', 'Droid Sans', Arial, sans-serif;
-	line-height: 1.3;
-	margin: 0 2rem;
-	overflow: hidden;
-	padding: 1rem;
-	text-align: center;
-	z-index: 1;
-}
-		</style>
-		<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
-<link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
-
-	<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LW9PLMBBGT"></script>
+<!doctype html>
+<meta charset="utf-8">
+<title>Lethal – Today</title>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+(async function() {
+  try {
+    // 1) Fetch manifest
+    const resp = await fetch("../manifest.json", {cache:"no-store"});
+    const manifest = await resp.json();
 
-  gtag('config', 'G-LW9PLMBBGT');
+    // 2) Current time in America/New_York
+    const now = new Date();
+    const fmt = new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/New_York",
+      year: "numeric", month: "2-digit", day: "2-digit",
+      hour: "2-digit", minute: "2-digit", second: "2-digit"
+    });
+    const parts = Object.fromEntries(fmt.formatToParts(now).map(p => [p.type, p.value]));
+    const nowStr = `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}:${parts.second}-04:00`;
+    const nowDate = new Date(nowStr);
+
+    // 3) Pick latest puzzle <= now
+    let latest = null;
+    for (const p of manifest.puzzles) {
+      const rel = new Date(p.release_at);
+      if (rel <= nowDate && (!latest || rel > new Date(latest.release_at))) {
+        latest = p;
+      }
+    }
+
+    if (!latest) {
+      document.body.textContent = "No puzzle released yet.";
+      return;
+    }
+
+    // 4) Decide device type
+    let deviceType = localStorage.getItem('device_type');
+    if (deviceType !== 'desktop' && deviceType !== 'mobile') {
+      deviceType = 'mobile'; // default
+    }
+
+    // 5) Redirect
+    location.replace("/" + deviceType + "?puzzle=" + latest.id);
+
+  } catch (e) {
+    console.error("Failed to load manifest:", e);
+    document.body.textContent = "Error loading latest puzzle.";
+  }
+})();
 </script>
+<<<<<<< HEAD
 </head>
 	<body>
 		<canvas id="canvas">
@@ -227,3 +174,5 @@ const engine = new Engine(GODOT_CONFIG);
 	</body>
 </html>
 
+=======
+>>>>>>> f444457 (Redirects.)

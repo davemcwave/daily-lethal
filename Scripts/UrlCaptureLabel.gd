@@ -7,13 +7,16 @@ var search
 func _ready():
 	path_name = JavaScriptBridge.eval("window.location.pathname")
 	search = JavaScriptBridge.eval("window.location.search")
-	#set_text("[center][b]%s[/b][/center]" % search)
 
 	if path_name != null and path_name != "":
-		puzzle_date = path_name.split("/")[-2]
-	#update_label()
+		puzzle_date = search.split("?puzzle_date=")[-1].split("&")[0]
+		#puzzle_date = path_name.split("/")[-2]
+		
+	update_label()
 
 func has_puzzle_date() -> bool:
+	#var puzzle_date_from_search = get_puzzle_date_from_search() 
+	#return puzzle_date_from_search != null and "-" in puzzle_date_from_search
 	return puzzle_date != null and puzzle_date != "" and "-" in puzzle_date
 
 func has_today() -> bool:
@@ -66,4 +69,10 @@ func get_path_name() -> String:
 
 func update_label() -> void:
 	if path_name != null:
-		set_text("[center][b]%s%s[/b][/center]" % [path_name, search])
+		set_text("""
+			[center][b]
+			path_name: %s
+			search: %s
+			puzzle_date: %s
+			[/b][/center]
+		""" % [path_name, search, puzzle_date])
