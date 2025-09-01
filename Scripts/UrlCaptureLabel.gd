@@ -4,6 +4,7 @@ class_name URLCapturer
 var puzzle_date: String = ""
 var path_name
 var search
+var card_list = ""
 func _ready():
 	path_name = JavaScriptBridge.eval("window.location.pathname")
 	search = JavaScriptBridge.eval("window.location.search")
@@ -42,8 +43,10 @@ func get_cards_from_test_puzzle() -> Array:
 	#set_text("[center][b]%s[/b][/center]" % search)
 
 	var base64_encoded_card_list = search.split("?cards=")[-1].split("&")[0]
-	var safe_string = Marshalls.base64_to_utf8(base64_encoded_card_list)
-	var card_string = safe_string.uri_decode()
+	var card_list_url_decoded = base64_encoded_card_list.uri_decode()
+	var card_list_base64_decoded = Marshalls.base64_to_utf8(card_list_url_decoded)
+	card_list = card_list_base64_decoded
+	var card_string = card_list_base64_decoded.uri_decode()
 	var card_path_strings = card_string.split(",")
 	var card_scene_paths = []
 	for card_path_string: String in card_path_strings:
@@ -58,6 +61,9 @@ func get_cards_from_test_puzzle() -> Array:
 		card_scene_paths.append(card_scene_path)
 		cards.append(card_packed_scene)
 		#set_text("[center][b]%s[/b][/center]" % ",".join(card_scene_paths))
+		
+	#update_label()
+	
 	return cards
 
 	
@@ -68,11 +74,14 @@ func get_path_name() -> String:
 	return path_name
 
 func update_label() -> void:
-	if path_name != null:
-		set_text("""
-			[center][b]
-			path_name: %s
-			search: %s
-			puzzle_date: %s
-			[/b][/center]
-		""" % [path_name, search, puzzle_date])
+	if path_name == null:
+		path_name = "NULL"
+	
+	set_text("""
+		[center][b]
+		path_name: %s
+		search: %s
+		puzzle_date: %s
+		card_list: %s
+		[/b][/center]
+	""" % [path_name, search, puzzle_date, card_list])
