@@ -289,6 +289,7 @@ func set_last_card_effects(card: Card) -> void:
 		add_child(new_card_effect)
 
 func set_last_card_effects_directly(card: Card, new_last_card_effects: Array) -> void:
+	last_card_played = card
 	last_card_backup = card.duplicate(DUPLICATE_USE_INSTANTIATION)
 	last_card_scene_file_path = card.get_scene_file_path()
 	last_card_effects = []

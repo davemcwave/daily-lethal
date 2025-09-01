@@ -17,6 +17,7 @@ const LOW_ENERGY_CARD_TEXT = "[center][b][pulse freq=2.0 color=#ffffff40 ease=-2
 @export var energy_cost: int = 1
 @export var card_description: String = "Deal 2 damage"
 @export var card_effect_delay: float = 0.0
+@export var wait_for_effect_applied: bool = false
 @onready var enemy = scene.get_node("Enemy")
 @onready var card_preview = scene.get_node("CanvasLayer/CardPreview")
 @onready var energy: Energy = scene.get_node("Energy")
@@ -362,7 +363,12 @@ func apply_card_effects() -> bool:
 	for card_effect in card_effects:
 		if card_effect_delay > 0.0:
 			await get_tree().create_timer(card_effect_delay).timeout
+		
 		card_effect.apply()
+		
+		if wait_for_effect_applied:
+			await card_effect.applied
+			
 		if card_effect.does_require_player_input():
 			await card_effect.player_input_finished
 	return true

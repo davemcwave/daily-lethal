@@ -19,6 +19,8 @@ func is_animating() -> bool:
 func add_buff(new_buff: Buff) -> void:
 	var buff_panel: BuffPanel = load("res://Scenes/BuffPanel.scn").instantiate()
 	buff_panel.set_buff(new_buff)
+	
+	print("%s buff being added" % new_buff.get_buff_name())
 	add_child(buff_panel)
 	var buff_instance_id = new_buff.get_instance_id()
 	buffs_added_this_turn.append(buff_instance_id)

@@ -40,6 +40,8 @@ func take_cards(amount: int = 1) -> Array[Card]:
 func update_discard_count() -> void:
 	await get_tree().create_timer(0.05).timeout
 	discard_count_text.set_text("[right][b]%d[/b][/right]" % get_card_count())
+	emit_signal("updated")
+	
 
 func add_card(new_card: Card) -> void:
 	var new_card_original_postion: Vector2 = new_card.global_position
@@ -83,6 +85,13 @@ func get_last_card() -> Card:
 		
 	return cards.back()
 
+func get_first_card() -> Card:
+	var cards = get_cards()
+	if len(cards) <= 0:
+		return null
+		
+	return cards.front()
+	
 
 func _on_discard_count_gui_input(event):
 	if event.is_action_pressed("select"):
