@@ -1,0 +1,13 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Lethal – 2025-09-05</title> 
+<script>
+  // Pick up device preference
+  let deviceType = localStorage.getItem('device_type');
+  if (deviceType !== 'desktop' && deviceType !== 'mobile') {
+    deviceType = 'mobile'; // default fallback
+  }
+
+  // Redirect
+  location.replace("/" + deviceType + "/2025-09-05/"); 
+</script>
