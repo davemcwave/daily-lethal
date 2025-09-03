@@ -18,7 +18,7 @@ func set_card_amount(new_card_amount: int) -> void:
 func get_card_amount() -> int:
 	return card_amount
 	
-func apply() -> void:
+func apply() -> bool:
 	var cards: Array[Card] = discard_panel.get_cards()
 	
 	if reclaim_direction == ReclaimDirection.Bottom:
@@ -37,3 +37,5 @@ func apply() -> void:
 	print("discard_panel size: %d" % discard_panel.get_cards().size())
 	
 	discard_panel.update_discard_count()
+	
+	return super.apply()

@@ -9,5 +9,7 @@ func set_health_amount(new_health_amount: int) -> void:
 func get_health_amount() -> int:
 	return health_amount
 	
-func apply() -> void:
+func apply() -> bool:
 	health.set_health(health_amount)
+	
+	return super.apply()

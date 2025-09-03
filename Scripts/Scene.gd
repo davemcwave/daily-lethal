@@ -280,8 +280,13 @@ func get_last_card_played():
 		
 func set_last_card_effects(card: Card) -> void:
 	last_card_played = card
-	last_card_backup = card.duplicate(DUPLICATE_USE_INSTANTIATION)
+	#last_card_backup = card.duplicate(DUPLICATE_USE_INSTANTIATION)
 	last_card_scene_file_path = card.get_scene_file_path()
+	
+	# Clone a fresh backup from the PackedScene (safe; no disappearing children)
+	var ps: PackedScene = load(last_card_scene_file_path)
+	last_card_backup = ps.instantiate() if ps != null else null
+	
 	last_card_effects = []
 	for card_effect: CardEffect in card.get_card_effects():
 		var new_card_effect: CardEffect = card_effect.duplicate(DUPLICATE_USE_INSTANTIATION)

@@ -9,5 +9,7 @@ func set_energy_amount(new_energy_amount: int) -> void:
 func get_energy_amount() -> int:
 	return energy_amount
 	
-func apply() -> void:
+func apply() -> bool:
 	energy.set_energy(energy_amount)
+	
+	return super.apply()

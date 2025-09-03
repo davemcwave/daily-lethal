@@ -49,7 +49,7 @@ func set_target(new_target) -> void:
 func deal_damage(damage_amount: int) ->  void:
 	target.hurt(damage_amount)
 	
-func apply() -> void:
+func apply() -> bool:
 	var on_attack_buffs: Array = await buffs_container.activate_buffs(Buff.ActivationType.OnAttack, {'current_damage_amount': damage_amount})
 	var modified_damage_amount = damage_amount
 	for on_attack_buff: Buff in on_attack_buffs:
@@ -63,3 +63,4 @@ func apply() -> void:
 	
 	var on_hit_buff: Array = await buffs_container.activate_buffs(Buff.ActivationType.OnHit)
 	
+	return super.apply()

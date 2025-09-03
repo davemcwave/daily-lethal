@@ -9,6 +9,7 @@ func set_heal_amount(new_heal_amount: int) -> void:
 func get_heal_amount() -> int:
 	return heal_amount
 	
-func apply() -> void:
+func apply() -> bool:
 	health.add_health(heal_amount)
 	audio_handler.play_sfx("HealSFX")
+	return super.apply()

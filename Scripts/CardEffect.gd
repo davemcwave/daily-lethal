@@ -9,6 +9,7 @@ signal player_input_finished
 @export var effect_short_description = ""
 @export var requires_player_input: bool = false
 @export var effect_color: Color
+@export var wait_for_effect_applied: bool = false
 @onready var scene: Scene = get_tree().get_root().get_node("Scene")
 @onready var buffs_container: BuffsContainer = scene.get_node("BuffsContainer")
 @onready var audio_handler = get_node("/root/AudioHandler")
@@ -16,6 +17,9 @@ signal player_input_finished
 func set_effect_name(new_effect_name: String) -> void:
 	effect_name = new_effect_name
 
+func get_wait_for_effect_applied() -> bool:
+	return wait_for_effect_applied
+	
 func get_effect_short_description() -> String:
 	return effect_short_description
 	
@@ -35,5 +39,6 @@ func get_effect_description() -> String:
 	return effect_description
 	
 # TO BE OVERWRITTEN
-func apply() -> void:
+func apply() -> bool:
 	emit_signal("applied")
+	return true

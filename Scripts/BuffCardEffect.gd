@@ -27,8 +27,8 @@ func set_buff_color(new_buff_color: Color) -> void:
 func get_buff() -> Buff:
 	return buff
 	
-func apply() -> void:
+func apply() -> bool:
 	audio_handler.play_sfx("AddBuffSFX")
 	audio_handler.increase_pitch_scale("AddBuffSFX", 0.25)
 	buffs_container.add_buff(buff)
-	emit_signal("applied")
+	return super.apply()
