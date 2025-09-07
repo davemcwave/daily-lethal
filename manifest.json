@@ -1,5 +1,13 @@
 {
   "puzzles": [
+    { "id": "2025-09-19", "release_at": "2025-09-19T00:00:00-04:00", "title": "Deity" },
+    { "id": "2025-09-17", "release_at": "2025-09-17T00:00:00-04:00", "title": "Void Monster" },
+    { "id": "2025-09-15", "release_at": "2025-09-15T00:00:00-04:00", "title": "Giant Wurm" },
+    { "id": "2025-09-13", "release_at": "2025-09-13T00:00:00-04:00", "title": "Wasm Swarm" },
+    { "id": "2025-09-11", "release_at": "2025-09-11T00:00:00-04:00", "title": "Snowman" },
+    { "id": "2025-09-09", "release_at": "2025-09-09T00:00:00-04:00", "title": "Warlock" },
+    { "id": "2025-09-07", "release_at": "2025-09-07T00:00:00-04:00", "title": "Flumph" },
+    { "id": "2025-09-05", "release_at": "2025-09-05T00:00:00-04:00", "title": "Dire Wolf" },
     { "id": "2025-09-03", "release_at": "2025-09-03T00:00:00-04:00", "title": "Assassin" },
     { "id": "2025-09-01", "release_at": "2025-09-01T00:00:00-04:00", "title": "Beetle" },
     { "id": "2025-08-31", "release_at": "2025-08-31T00:00:00-04:00", "title": "Roc" },
