@@ -374,8 +374,8 @@ func apply_card_effects() -> bool:
 		
 		var card_effect_result = await card_effect.apply()
 			
-		if card_effect.does_require_player_input():
-			await card_effect.player_input_finished
+		#if card_effect.does_require_player_input():
+			#await card_effect.player_input_finished
 			
 		if break_effects_on_apply and card_effect_result == false:
 			break
@@ -432,7 +432,7 @@ func _process(delta):
 		global_position = get_global_mouse_position() - grab_offset
 		if reordering:
 			global_position.y = hand.global_position.y - 10
-			hand.reorder_cards_by_x_position()
+			await hand.reorder_cards_by_x_position()
 
 func get_energy_cost() -> int:
 	return energy_cost

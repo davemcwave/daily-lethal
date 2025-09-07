@@ -7,5 +7,5 @@ class_name CreateCardCardEffect
 func apply() -> bool:
 	var card: Card = card_to_create_scene.instantiate()
 	hand.add_card(card)
-	hand.reorder_cards_by_x_position()
+	await hand.reorder_cards_by_x_position()
 	return super.apply()

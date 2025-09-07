@@ -7,8 +7,10 @@ func apply() -> bool:
 	
 	match card_direction:
 		"Top":
-			set_card(discard_panel.get_last_card())
+			if discard_panel.get_last_card() != null:
+				set_card(discard_panel.get_last_card())
 		"Bottom":
-			set_card(discard_panel.get_first_card())
+			if discard_panel.get_first_card() != null:
+				set_card(discard_panel.get_first_card())
 
 	return await super.apply()

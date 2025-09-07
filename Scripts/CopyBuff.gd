@@ -17,7 +17,7 @@ func activate() -> bool:
 		last_card.set_energy_cost(energy_cost_copy)
 	
 	hand.add_card(last_card)
-	hand.reorder_cards_by_x_position()
+	await hand.reorder_cards_by_x_position()
 
 	return super.activate()
 	

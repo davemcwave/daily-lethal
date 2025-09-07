@@ -33,7 +33,7 @@ func set_cards_to_reordering(reorder: bool) -> void:
 	for card in get_cards():
 		card.set_reordering(reorder)
 		
-func reorder_cards_by_x_position():
+func reorder_cards_by_x_position() -> bool:
 	var sorted_children = get_cards()
 
 	# Wait for the next idle frame to ensure positions are updated
@@ -51,6 +51,7 @@ func reorder_cards_by_x_position():
 		child.z_index = i
 		child.set_original_z_index(child.z_index)
 		
+	return true
 
 func _sort_by_x(a, b):
 	return a.global_position.x < b.global_position.x
