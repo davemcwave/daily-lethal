@@ -42,6 +42,7 @@ var grabbed_timestamp = null
 var last_mouse_position = null
 var can_show_discarding_button: bool = true
 var id
+var queue_free_after_applying_card_effects: bool = false
 
 enum State {
 	InHand,
@@ -92,6 +93,11 @@ func is_reordering() -> bool:
 func _on_mouse_entered() -> void:
 	if no_cards_grabbed() and not is_discarded():
 		self.show_card_preview()
+	
+func reset_buffs() -> void:
+	for card_effect: CardEffect in get_card_effects():
+		if card_effect is BuffCardEffect:
+			card_effect.reset_buff()
 	
 func _on_mouse_exited() -> void:
 	card_preview.hide()
@@ -364,6 +370,12 @@ func get_damage_card_effects() -> Array:
 			damage_card_effects.append(card_effect)
 	return damage_card_effects
 
+func set_queue_free_after_applying_card_effects(new_queue_free_after_applying_card_effects: bool) -> void:
+	queue_free_after_applying_card_effects = new_queue_free_after_applying_card_effects
+
+func card_queue_free_after_applying_card_effects() -> bool:
+	return queue_free_after_applying_card_effects
+	
 func get_first_damage_card_effect() -> DamageCardEffect:
 	return get_damage_card_effects().front()
 	
@@ -380,6 +392,9 @@ func apply_card_effects() -> bool:
 		if break_effects_on_apply and card_effect_result == false:
 			break
 			
+	if queue_free_after_applying_card_effects:
+		queue_free()
+		
 	return true
 
 func is_choice_card() -> bool:
@@ -413,6 +428,7 @@ func play():
 	set_state(State.Playing)
 	pay_cost(energy_cost)
 	await apply_card_effects()
+	print("### applied card effects")
 	scene.set_last_card_effects(self)
 	await buffs_container.activate_buffs(Buff.ActivationType.OnCardPlay)
 	discard()
@@ -426,7 +442,14 @@ func discard() -> void:
 		
 	set_state(State.Discarded)
 	discard_panel.add_card(self)
-	
+	#hand.update_card_separation()
+
+func is_offscreen_right() -> bool:
+	var panel_right = global_position.x + size.x
+	var screen_right = get_viewport().size.x
+	print("%d > %d: %s" % [panel_right, screen_right, panel_right > screen_right])
+	return panel_right > screen_right
+
 func _process(delta):
 	if state == State.Grabbed:
 		global_position = get_global_mouse_position() - grab_offset

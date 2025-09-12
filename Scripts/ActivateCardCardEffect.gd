@@ -3,11 +3,18 @@ class_name ActivateCardCardEffect
 
 @export var activation_count: int = 1
 @export var ignore_parent_card: bool = false
+@export var trash: bool = false
+
 var card_scene_file_path = null
+var card = null
 
 func set_card(new_card) -> void:
+	card = new_card
 	card_scene_file_path = new_card.get_scene_file_path()
 
+func get_card():
+	return card
+	
 func is_card_parent() -> bool:
 	if card_scene_file_path == null:
 		return false
@@ -25,22 +32,17 @@ func apply() -> bool:
 	if is_card_parent() and ignore_parent_card:
 		return false
 	
-	var card = load(card_scene_file_path).instantiate()
-	card.hide()
-	add_child(card)
+	if trash:
+		card.queue_free()
+		await card.tree_exited
+		
+	var temporary_card = load(card_scene_file_path).instantiate()
+	temporary_card.hide()
+	add_child(temporary_card)
 	
-	print("%s applying effects for card %s" % [get_effect_name(), card.get_card_name()])
-	await card.apply_card_effects()
-	card.queue_free()
+	await temporary_card.apply_card_effects()
 	
-	#for card_effect: CardEffect in card.get_card_effects(true):
-		#var new_card_effect: CardEffect = card_effect.duplicate(DUPLICATE_USE_INSTANTIATION)
-		#add_child(new_card_effect)
-		#
-		#for i in range(activation_count):
-			#await new_card_effect.apply()
-			#
-			#if new_card_effect.does_require_player_input():
-				#await new_card_effect.player_input_finished
-
+	temporary_card.queue_free()
+	
+	
 	return super.apply()

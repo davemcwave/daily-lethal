@@ -12,5 +12,5 @@ func get_additional_energy_amount() -> int:
 func apply() -> bool:
 	#print("cards_played.get_cards_played_count(): %d" % cards_played.get_cards_played_count())
 	set_additional_energy_amount(cards_played.get_cards_played_count())
-	energy.add_energy(additional_energy_amount)
-	return super.apply()
+	#energy.add_energy(additional_energy_amount)
+	return await super.apply()

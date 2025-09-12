@@ -26,13 +26,15 @@ func apply() -> bool:
 	
 	for i in range(min(cards.size(), card_amount)):
 		var card: Card = cards[i]
-		var new_card: Card = card.duplicate(DUPLICATE_USE_INSTANTIATION)
-		card.queue_free()
-		new_card.set_state(Card.State.InHand)
-		new_card.normalize_saturation()
-		new_card.set_rotation(0)
-		hand.add_card(new_card)
-		hand.move_child(new_card, i)
+		card.get_parent().remove_child(card)
+		hand.add_card(card)
+		
+		card.set_state(Card.State.InHand)
+		card.normalize_saturation()
+		card.set_rotation(0)
+		card.reset_buffs()
+		
+		hand.move_child(card, i)
 		#await get_tree().create_timer(0.1).timeout
 	print("discard_panel size: %d" % discard_panel.get_cards().size())
 	

@@ -1,7 +1,7 @@
 extends Buff
 
 const USE_ENERGY_COST_FROM_ORIGINAL_CARD: int = -1
-@onready var scene = get_tree().get_root().get_node("Scene")
+@onready var scene: Scene = get_tree().get_root().get_node("Scene")
 @onready var hand = scene.get_node("Hand")
 @export var energy_cost_copy: int = USE_ENERGY_COST_FROM_ORIGINAL_CARD
 

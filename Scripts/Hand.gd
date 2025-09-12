@@ -3,6 +3,7 @@ class_name Hand
 
 const STARTING_INDEX_POSITION = Vector2(8.0, 425.0)
 const X_POSITION_GAP = 30.0
+@export var is_mobile: bool = false
 @onready var energy = get_tree().get_root().get_node("Scene/Energy")
 @onready var deck = get_tree().get_root().get_node("Scene/Deck")
 @onready var original_separation: int = get("theme_override_constants/separation")
@@ -19,6 +20,14 @@ func has_playable_cards() -> bool:
 		if card.get_energy_cost() <= energy_left:
 			return true
 	return false
+
+func get_card_separation(card_count: int) -> float:
+	var target_n =  7 if is_mobile else 12
+	var target_sep = -120.0 if is_mobile else -60.0
+
+	if card_count <= 1:
+		return 0.0
+	return target_sep * float(card_count - 1) / float(target_n - 1)
 
 func set_state(new_state: State) -> void:
 	state = new_state
@@ -73,6 +82,13 @@ func add_card(card: Card) -> void:
 	card.show()
 	card.bounce()
 	
+		
+func reduce_card_separation(pixels: int) -> void:
+	set("theme_override_constants/separation", get("theme_override_constants/separation") - pixels)
+	
+
+func update_card_separation() -> void:
+	set("theme_override_constants/separation", get_card_separation(get_cards().size()))
 	
 
 #func _input(event):
