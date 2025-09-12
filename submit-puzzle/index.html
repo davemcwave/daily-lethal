@@ -342,7 +342,7 @@
       }
 
       const deviceType = localStorage.getItem('device_type');
-      const basePath = (deviceType === 'desktop') ? '/desktop/test-puzzle' : '/test-puzzle';
+      const basePath = '/test-puzzle';
       const testUrl = `${basePath}?cards=${base64}&php=${playerHp}&pnrg=${playerEnergy}&ehp=${enemyHp}`;
 
       document.getElementById('testUrlField').value = testUrl;
