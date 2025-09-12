@@ -15,7 +15,7 @@ class_name ConditionCardEffect
 func set_threshold_amount(new_threshold_amount: int) -> void:
 	threshold_amount = new_threshold_amount
 	
-func apply() -> void:
+func apply() -> bool:
 	var condition_function: Callable
 	if condition_object == "Health":
 		condition_function = health.get_health
@@ -33,3 +33,5 @@ func apply() -> void:
 		(condition == "EqualTo" and condition_function.call() == threshold_amount)
 	):
 		child_card_effect.apply()
+
+	return super.apply()

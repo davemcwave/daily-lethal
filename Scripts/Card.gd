@@ -17,7 +17,7 @@ const LOW_ENERGY_CARD_TEXT = "[center][b][pulse freq=2.0 color=#ffffff40 ease=-2
 @export var energy_cost: int = 1
 @export var card_description: String = "Deal 2 damage"
 @export var card_effect_delay: float = 0.0
-@export var wait_for_effect_applied: bool = false
+@export var break_effects_on_apply: bool = false
 @onready var enemy = scene.get_node("Enemy")
 @onready var card_preview = scene.get_node("CanvasLayer/CardPreview")
 @onready var energy: Energy = scene.get_node("Energy")
@@ -42,6 +42,7 @@ var grabbed_timestamp = null
 var last_mouse_position = null
 var can_show_discarding_button: bool = true
 var id
+var queue_free_after_applying_card_effects: bool = false
 
 enum State {
 	InHand,
@@ -80,6 +81,9 @@ func no_cards_grabbed() -> bool:
 			return false
 	return true
 
+func get_formatted_state() -> String:
+	return State.keys()[state]
+	
 func set_reordering(new_reordering: bool) -> void:
 	reordering = new_reordering
 	
@@ -89,6 +93,11 @@ func is_reordering() -> bool:
 func _on_mouse_entered() -> void:
 	if no_cards_grabbed() and not is_discarded():
 		self.show_card_preview()
+	
+func reset_buffs() -> void:
+	for card_effect: CardEffect in get_card_effects():
+		if card_effect is BuffCardEffect:
+			card_effect.reset_buff()
 	
 func _on_mouse_exited() -> void:
 	card_preview.hide()
@@ -183,8 +192,13 @@ func _on_gui_input(event):
 	if is_playing_on_mobile_browser() and is_grabbed() and event is InputEventScreenDrag and event.relative.length() > 5 and card_preview.visible:
 		card_preview.hide()
 
-func get_card_effects() -> Array:
-	return card_effects
+func get_card_effects(only_top_level_card_effects: bool = false) -> Array:
+	if only_top_level_card_effects:
+		return card_effects
+	elif is_choice_card():
+		return $PlayerChooseEffectCardEffect.get_card_effects_to_choose_from() + [$PlayerChooseEffectCardEffect, ]
+	else:
+		return card_effects
 
 func get_card_name() -> String:
 	return card_name
@@ -356,6 +370,12 @@ func get_damage_card_effects() -> Array:
 			damage_card_effects.append(card_effect)
 	return damage_card_effects
 
+func set_queue_free_after_applying_card_effects(new_queue_free_after_applying_card_effects: bool) -> void:
+	queue_free_after_applying_card_effects = new_queue_free_after_applying_card_effects
+
+func card_queue_free_after_applying_card_effects() -> bool:
+	return queue_free_after_applying_card_effects
+	
 func get_first_damage_card_effect() -> DamageCardEffect:
 	return get_damage_card_effects().front()
 	
@@ -364,14 +384,30 @@ func apply_card_effects() -> bool:
 		if card_effect_delay > 0.0:
 			await get_tree().create_timer(card_effect_delay).timeout
 		
-		card_effect.apply()
-		
-		if wait_for_effect_applied:
-			await card_effect.applied
+		var card_effect_result = await card_effect.apply()
 			
-		if card_effect.does_require_player_input():
-			await card_effect.player_input_finished
+		#if card_effect.does_require_player_input():
+			#await card_effect.player_input_finished
+			
+		if break_effects_on_apply and card_effect_result == false:
+			break
+			
+	if queue_free_after_applying_card_effects:
+		queue_free()
+		
 	return true
+
+func is_choice_card() -> bool:
+	for child in get_children():
+		if child is PlayerChooseEffectCardEffect:
+			return true
+	return false
+	
+func get_player_choice_card_effect() -> CardEffect:
+	for card_effect in get_card_effects():
+		if card_effect is PlayerChooseEffectCardEffect:
+			return card_effect
+	return null
 
 func handle_sfx() -> void:
 	#audio_handler.reset_pitch_scale("PlaySFX")
@@ -392,6 +428,7 @@ func play():
 	set_state(State.Playing)
 	pay_cost(energy_cost)
 	await apply_card_effects()
+	print("### applied card effects")
 	scene.set_last_card_effects(self)
 	await buffs_container.activate_buffs(Buff.ActivationType.OnCardPlay)
 	discard()
@@ -405,13 +442,20 @@ func discard() -> void:
 		
 	set_state(State.Discarded)
 	discard_panel.add_card(self)
-	
+	#hand.update_card_separation()
+
+func is_offscreen_right() -> bool:
+	var panel_right = global_position.x + size.x
+	var screen_right = get_viewport().size.x
+	print("%d > %d: %s" % [panel_right, screen_right, panel_right > screen_right])
+	return panel_right > screen_right
+
 func _process(delta):
 	if state == State.Grabbed:
 		global_position = get_global_mouse_position() - grab_offset
 		if reordering:
 			global_position.y = hand.global_position.y - 10
-			hand.reorder_cards_by_x_position()
+			await hand.reorder_cards_by_x_position()
 
 func get_energy_cost() -> int:
 	return energy_cost

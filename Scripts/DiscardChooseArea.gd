@@ -73,7 +73,8 @@ func populate_cards() -> void:
 		
 	clear_cards()
 	for child in hand.get_cards():
-		var new_card: Card = child.duplicate()
+		var child_scene_file_path = child.get_scene_file_path()
+		var new_card: Card = load(child_scene_file_path).instantiate()
 		new_card.connect("marked_for_discard", self._on_card_marked_for_discard)
 		new_card.set_state(Card.State.Discarding)
 		$GridContainer.add_child(new_card)

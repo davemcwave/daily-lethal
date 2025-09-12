@@ -9,6 +9,8 @@ func set_draw_amount(new_draw_amount: int) -> void:
 func get_draw_amount() -> int:
 	return draw_amount
 	
-func apply() -> void:
+func apply() -> bool:
 	if deck.can_draw_cards(draw_amount):
 		deck.draw_cards(draw_amount)
+	
+	return super.apply()

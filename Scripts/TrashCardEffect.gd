@@ -25,15 +25,16 @@ func set_discard_pile_trash_direction(new_discard_pile_trash_direction: String) 
 func get_discard_pile_trash_direction() -> String:
 	return discard_pile_trash_direction
 	
-func apply() -> void:
+func apply() -> bool:
 	if trash_from_location == "Discard Pile":
 		var cards: Array[Card] = discard_panel.get_cards()
 		
-		if discard_pile_trash_direction == "Bottom":
+		if discard_pile_trash_direction == "Top":
 			cards.reverse()
 		
 		for i in range(min(cards.size(), card_amount)):
 			var card: Card = cards[i]
+			print("Trashing card %s" % card.get_card_name())
 			card.shrink(0.15)
 			await get_tree().create_timer(0.15).timeout
 			card.queue_free()
@@ -47,4 +48,4 @@ func apply() -> void:
 			card.queue_free()
 	discard_panel.update_discard_count()
 		
-	emit_signal("applied")
+	return super.apply()

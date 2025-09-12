@@ -1,5 +1,8 @@
 extends Panel
 
+@onready var original_description_font_size = $DescriptionPanel/Title.get("theme_override_font_sizes/normal_font_size")
+
+
 func clear_extra_descriptions() -> void:
 	for extra_description in $ExtraDescriptions.get_children():
 		extra_description.queue_free()
@@ -10,6 +13,9 @@ func set_title(new_title: String) -> void:
 func set_description(new_description: String) -> void:
 	$DescriptionPanel/Title.set_text("[center]%s[/center]" % new_description)
 
+	if len($DescriptionPanel/Title.get_parsed_text()) >= 100:
+		$DescriptionPanel/Title.set("theme_override_font_sizes/normal_font_size", original_description_font_size - 2)
+		
 func set_energy_cost(energy_cost: int) -> void:
 	$EnergyPanel/Energy.set_text("[center]%d[/center]" % energy_cost)
 	

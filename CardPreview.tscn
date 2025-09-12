@@ -152,6 +152,8 @@ theme_override_fonts/bold_font = ExtResource("3_fgrna")
 theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
 text = "[center]Deal 2 damage[/center]"
+fit_content = true
+scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 

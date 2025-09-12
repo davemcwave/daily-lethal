@@ -17,5 +17,6 @@ func get_effect_description() -> String:
 func set_target(new_target) -> void:
 	target = new_target
 	
-func apply() -> void:
+func apply() -> bool:
 	target.add_debuff(debuff)
+	return super.apply()

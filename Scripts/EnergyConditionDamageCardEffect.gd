@@ -15,7 +15,7 @@ enum ConditionType {
 func _ready():
 	super._ready()
 
-func apply() -> void:
+func apply() -> bool:
 	var original_damage_amount: int = damage_amount
 	var energy_amount: int = energy.get_energy_amount()
 	
@@ -38,7 +38,7 @@ func apply() -> void:
 		_:
 				set_damage_amount(damage_amount)
 	
-	super.apply()
+	return await super.apply()
 	
 	# Reset the damage amount for things like Reclaim.
 	damage_amount = original_damage_amount

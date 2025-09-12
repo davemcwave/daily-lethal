@@ -1,7 +1,7 @@
 extends Buff
 
 const USE_ENERGY_COST_FROM_ORIGINAL_CARD: int = -1
-@onready var scene = get_tree().get_root().get_node("Scene")
+@onready var scene: Scene = get_tree().get_root().get_node("Scene")
 @onready var hand = scene.get_node("Hand")
 @export var energy_cost_copy: int = USE_ENERGY_COST_FROM_ORIGINAL_CARD
 
@@ -17,7 +17,7 @@ func activate() -> bool:
 		last_card.set_energy_cost(energy_cost_copy)
 	
 	hand.add_card(last_card)
-	hand.reorder_cards_by_x_position()
+	await hand.reorder_cards_by_x_position()
 
 	return super.activate()
 	
