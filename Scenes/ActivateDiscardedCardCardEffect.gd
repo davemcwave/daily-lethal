@@ -4,6 +4,7 @@ class_name ActivateDiscardedCardCardEffect
 @export var activation_count: int = 1
 @export var ignore_parent_card: bool = false
 @export var trash: bool = false
+@export var activation_delay: float = 0.25
 @export_enum ("Top", "Bottom") var card_direction: String = "Top"
 @onready var discard_panel: DiscardPanel = scene.get_node("DiscardPanel")
 
@@ -46,7 +47,7 @@ func apply() -> bool:
 		
 	for i in range(activation_count):
 		
-		var temporary_card = load(card_scene_file_path).instantiate()
+		var temporary_card = card.duplicate(DUPLICATE_USE_INSTANTIATION)
 		temporary_card.hide()
 		add_child(temporary_card)
 		
@@ -54,6 +55,8 @@ func apply() -> bool:
 		
 		temporary_card.queue_free()
 		await temporary_card.tree_exited
+		
+		await get_tree().create_timer(activation_delay).timeout
 	
 	card.queue_free()
 	

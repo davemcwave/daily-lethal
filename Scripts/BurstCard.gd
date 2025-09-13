@@ -28,5 +28,3 @@ func play():
 	
 	scene.increment_card_count()
 	discard()
-
-	
