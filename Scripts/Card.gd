@@ -323,6 +323,9 @@ func drop() -> void:
 		else:
 			set_position(grab_position)
 			reset_z_index()
+			hand.queue_sort()
+			hand.reorder_cards_by_x_position()
+		
 		
 		
 		#
