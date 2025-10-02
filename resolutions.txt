@@ -1,4 +1,4 @@
 resolutions.txt
 
 mobile: 360x640
-desktop: 960x540gt
+desktop: 960x540
