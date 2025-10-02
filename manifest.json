@@ -1,5 +1,6 @@
 {
   "puzzles": [
+    { "id": "2025-10-02", "release_at": "2025-10-02T00:00:00-04:00", "title": "Red Dragon" },
     { "id": "2025-10-01", "release_at": "2025-10-01T00:00:00-04:00", "title": "Buzzsaw Droid" },
     { "id": "2025-09-30", "release_at": "2025-09-30T00:00:00-04:00", "title": "Artificer" },
     { "id": "2025-09-29", "release_at": "2025-09-29T00:00:00-04:00", "title": "Chupacabra" },
