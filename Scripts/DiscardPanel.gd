@@ -41,7 +41,13 @@ func update_discard_count() -> void:
 	await get_tree().create_timer(0.05).timeout
 	discard_count_text.set_text("[right][b]%d[/b][/right]" % get_card_count())
 	emit_signal("updated")
-	
+
+func get_card_with_id(id: int) -> Card:
+	for card: Card in get_cards():
+		if card.get_id() == id:
+			return card
+			
+	return null
 
 func add_card(new_card: Card) -> void:
 	var new_card_original_postion: Vector2 = new_card.global_position

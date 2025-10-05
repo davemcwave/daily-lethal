@@ -4,7 +4,7 @@ class_name Card
 signal played
 signal bounced
 signal changed_state(state)
-signal marked_for_discard(marked: bool)
+signal chosen(is_chosen: bool)
 
 const PLAY_CARD_TEXT = "[center][b][pulse freq=2.0 color=#ffffff40 ease=-2.0]PLAY CARD![/pulse][/b][/center]"
 const LOW_ENERGY_CARD_TEXT = "[center][b][pulse freq=2.0 color=#ffffff40 ease=-2.0]LOW ENERGY[/pulse][/b][/center]"
@@ -35,19 +35,21 @@ const LOW_ENERGY_CARD_TEXT = "[center][b][pulse freq=2.0 color=#ffffff40 ease=-2
 @onready var energy_texture: Texture2D = preload("res://Assets/Textures/bolt-white.png")
 @onready var health_texture: Texture2D = preload("res://Assets/Textures/heart-white.png")
 @onready var audio_handler: AudioHandler = get_node("/root/AudioHandler")
+@onready var cards_choose_area: CardsChooseArea = scene.get_node("CanvasLayer/CardsChooseArea")
 
 var grab_position = Vector2.ZERO
 var grab_offset = Vector2.ZERO
 var grabbed_timestamp = null
 var last_mouse_position = null
-var can_show_discarding_button: bool = true
+var can_chose_choosing_button: bool = true
 var id
 var queue_free_after_applying_card_effects: bool = false
 
 enum State {
 	InHand,
 	Playing,
-	Discarding,
+	Choosing,
+	Chosen,
 	Discarded,
 	Bouncing,
 	Grabbed,
@@ -116,17 +118,20 @@ func set_state(new_state: State) -> void:
 	
 	emit_signal("changed_state", state)
 
-func set_can_show_discarding_button(new_can_show_discarding_button: bool) -> void:
-	can_show_discarding_button = new_can_show_discarding_button
+func set_can_show_choosing_button(new_can_show_choosing_button: bool) -> void:
+	can_chose_choosing_button = new_can_show_choosing_button
 
-func card_can_show_discarding_button() -> bool:
-	return can_show_discarding_button
+func card_can_show_choosing_button() -> bool:
+	return can_chose_choosing_button
 	
 func is_discarded() -> bool:
 	return state == State.Discarded
 		
-func is_discarding() -> bool:
-	return state == State.Discarding
+func is_chosen() -> bool:
+	return state == State.Chosen
+
+func is_choosing() -> bool:
+	return state == State.Choosing
 	
 func reduce_saturation() -> void:
 	modulate = Color(0.4, 0.4, 0.4, 1.0)
@@ -139,24 +144,21 @@ func calculate_pivot_offset() -> void:
 
 func is_grabbed() -> bool:
 	return state == State.Grabbed
-
-func is_marked_for_discard() -> bool:
-	for child in get_children():
-		if child is DiscardingButton:
-			return true
-	return false
 	
-func show_discarding_button() -> void:
-	var discarding_button: Button = load("res://Scenes/DiscardingButton.scn").instantiate()
-	add_child(discarding_button)
-	discarding_button.connect("pressed",self._on_discarding_button_pressed.bind(discarding_button))
-	emit_signal("marked_for_discard", true)
+func show_choosing_button() -> void:
+	var choosing_button: ChoosingButton = load("res://Scenes/ChoosingButton.scn").instantiate()
+	choosing_button.set_icon(cards_choose_area.get_choose_type())
+	add_child(choosing_button)
+	set_state(State.Chosen)
+	choosing_button.connect("pressed",self._on_choosing_button_pressed.bind(choosing_button))
+	emit_signal("chosen", true)
 
-func _on_discarding_button_pressed(discarding_button: DiscardingButton) -> void:
-	discarding_button.hide()
-	discarding_button.queue_free()
+func _on_choosing_button_pressed(choosing_button: ChoosingButton) -> void:
+	choosing_button.hide()
+	choosing_button.queue_free()
+	set_state(State.Choosing)
 	
-	emit_signal("marked_for_discard", false)
+	emit_signal("chosen", false)
 	
 func is_playing_on_desktop() -> bool:
 	return is_playing_on_desktop_browser() or is_playing_on_desktop_not_browser()
@@ -177,9 +179,10 @@ func _on_gui_input(event):
 			if not discard_pile_view.visible:
 				discard_pile_view.populate_cards()
 				discard_pile_view.show()
-		elif is_discarding():
-			if card_can_show_discarding_button():
-				show_discarding_button()
+		elif is_choosing():
+			if card_can_show_choosing_button():
+				show_choosing_button()
+				#show_discarding_button()
 		else:
 			grab()
 	elif event.is_action_released("select") and is_grabbed():
