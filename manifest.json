@@ -1,5 +1,6 @@
 {
   "puzzles": [
+    { "id": "2025-10-06", "release_at": "2025-10-06T00:00:00-04:00", "title": "Giftman" },
     { "id": "2025-10-03", "release_at": "2025-10-03T00:00:00-04:00", "title": "Barbarian" },
     { "id": "2025-10-02", "release_at": "2025-10-02T00:00:00-04:00", "title": "Red Dragon" },
     { "id": "2025-10-01", "release_at": "2025-10-01T00:00:00-04:00", "title": "Buzzsaw Droid" },
