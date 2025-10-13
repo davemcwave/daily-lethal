@@ -10,6 +10,14 @@ func clear() -> void:
 	for child in $CardEffectChoicesContainer.get_children():
 		$CardEffectChoicesContainer.remove_child(child)
 	
+func set_gradient_background_texture(gradient_texture: GradientTexture2D) -> void:
+	$CardPreview/IconPanel/GradientBackground.set_texture(gradient_texture)
+	$CardPreview/IconPanel/GradientBackground.show()
+	
+func hide_gradient_background_texture() -> void:
+	$CardPreview/IconPanel/GradientBackground.hide()
+	
+	
 func set_card_preview(card: Card) -> void:
 	$CardPreview/TitlePanel/Title.set_text("[center]%s[/center]" % card.get_card_name())
 	$CardPreview/EnergyPanel/Energy.set_text("[center]%d[/center]" % card.get_energy_cost())
@@ -18,6 +26,11 @@ func set_card_preview(card: Card) -> void:
 	$CardPreview/IconPanel.get("theme_override_styles/panel").bg_color = card.get_background_color()
 	$TitleText.get("theme_override_styles/normal").bg_color = card.get_background_color()
 	
+	if card.has_gradient_background():
+		set_gradient_background_texture(card.get_gradient_background_texture())
+	else:
+		hide_gradient_background_texture()
+		
 	var card_effects_to_choose_from = []
 	for card_effect: CardEffect in card.get_card_effects():
 		if card_effect is PlayerChooseEffectCardEffect:

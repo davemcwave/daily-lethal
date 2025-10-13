@@ -11,6 +11,7 @@ func apply() -> bool:
 	var trash_action = load("res://Scenes/CardsChooseAreaTrashAction.scn").instantiate()
 	cards_choose_area.set_cards_choose_area_action(trash_action)
 	cards_choose_area.activate(CardsChooseArea.ChooseType.Bad, CardsChooseArea.PopulateCardsType.FromDiscard)
-	await cards_choose_area.closed
+	if not cards_choose_area.is_closed(): # Just in case it's closed from not having enough cards to start.
+		await cards_choose_area.closed
 	emit_signal("player_input_finished")
 	return super.apply()

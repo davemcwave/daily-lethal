@@ -118,20 +118,21 @@ func populate_cards() -> void:
 			
 	if card_source.get_cards().size() <= 0:
 		close()
-		return
+	else:
+		clear_cards()
 		
-	clear_cards()
+		for child in card_source.get_cards():
+			var child_scene_file_path = child.get_scene_file_path()
+			var new_card: Card = load(child_scene_file_path).instantiate()
+			new_card.connect("chosen", self._on_card_chosen)
+			new_card.set_state(Card.State.Choosing)
+			cards_container.add_child(new_card)
+			new_card.set_id(child.get_id())
+				
+			
+func is_closed() -> bool:
+	return not visible
 	
-	for child in card_source.get_cards():
-		var child_scene_file_path = child.get_scene_file_path()
-		var new_card: Card = load(child_scene_file_path).instantiate()
-		new_card.connect("chosen", self._on_card_chosen)
-		new_card.set_state(Card.State.Choosing)
-		cards_container.add_child(new_card)
-		new_card.set_id(child.get_id())
-			
-			
-		
 func close() -> void:
 	if cards_choose_area_action != null:
 		cards_choose_area_action.queue_free()

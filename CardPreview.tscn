@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://djpma1pto7hx7"]
+[gd_scene load_steps=15 format=3 uid="uid://djpma1pto7hx7"]
 
 [ext_resource type="Script" uid="uid://b5y0kvbawb6lb" path="res://Scripts/CardPreview.gd" id="1_3v80l"]
 [ext_resource type="FontFile" uid="uid://dwo8xle1kx2ha" path="res://Assets/Fonts/Quicksand/static/Quicksand-Medium.ttf" id="2_72r5v"]
@@ -35,6 +35,17 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 
+[sub_resource type="Gradient" id="Gradient_3v80l"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.27, 0.78)
+colors = PackedColorArray(0, 0.164706, 0.54902, 1, 0.0641667, 0.55, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3v80l"]
+gradient = SubResource("Gradient_3v80l")
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.5, 1)
+metadata/_snap_enabled = true
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g3n18"]
 bg_color = Color(0.169245, 0.169245, 0.169245, 1)
 border_width_left = 2
@@ -51,7 +62,6 @@ border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 
 [node name="CardPreview" type="Panel"]
-visible = false
 custom_minimum_size = Vector2(120, 160)
 offset_left = 2.0
 offset_top = 1.0
@@ -121,6 +131,21 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("5_1ng8j")
+expand_mode = 1
+
+[node name="GradientBackground" type="TextureRect" parent="IconPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_3v80l")
 expand_mode = 1
 
 [node name="DescriptionPanel" type="Panel" parent="."]

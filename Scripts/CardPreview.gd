@@ -22,6 +22,13 @@ func set_energy_cost(energy_cost: int) -> void:
 func set_icon_texture(new_texture: Texture2D) -> void:
 	$IconPanel/Icon.set_texture(new_texture)
 	
+func set_gradient_background_texture(texture: GradientTexture2D) -> void:
+	$IconPanel/GradientBackground.set_texture(texture)
+	$IconPanel/GradientBackground.show()
+
+func hide_gradient_background() -> void:
+	$IconPanel/GradientBackground.hide()
+	
 func set_background_color(color: Color) -> void:
 	$IconPanel.get_theme_stylebox("panel").bg_color = color
 	

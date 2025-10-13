@@ -14,5 +14,5 @@ func play():
 	discard()
 	
 func update_description_panel() -> void:
-	card_description = "[center]%s[/center]" % ("Deal [color=red]%d[/color] damage or Heal [color=#256aff]%d[/color] HP" % [$DamageCardEffect.get_damage_amount(), $HealCardEffect.get_heal_amount()])
+	card_description = "[center]%s[/center]" % ("Deal [color=red]%d[/color] damage or Heal [color=#008c10]%d[/color] HP" % [$DamageCardEffect.get_damage_amount(), $HealCardEffect.get_heal_amount()])
 	$DescriptionPanel/Title.set_text(card_description)

@@ -229,6 +229,11 @@ func show_card_preview() -> void:
 	card_preview.set_description(card_description)
 	card_preview.set_icon_texture(get_icon_texture())
 	card_preview.set_energy_cost(energy_cost)
+	
+	if has_gradient_background():
+		card_preview.set_gradient_background_texture(get_gradient_background_texture())
+	else:
+		card_preview.hide_gradient_background()
 	card_preview.show()
 	
 func bring_to_front() -> void:
@@ -338,6 +343,12 @@ func drop() -> void:
 
 func get_background_color() -> Color:
 	return $IconPanel.get_theme_stylebox("panel").bg_color
+
+func has_gradient_background() -> bool:
+	return has_node("IconPanel/GradientBackground")
+	
+func get_gradient_background_texture() -> GradientTexture2D:
+	return get_node("IconPanel/GradientBackground").texture
 	
 func is_playing() -> bool:
 	return state == State.Playing
