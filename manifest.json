@@ -1,5 +1,6 @@
 {
   "puzzles": [
+    { "id": "2025-10-14", "release_at": "2025-10-14T00:00:00-04:00", "title": "Pinky" },
     { "id": "2025-10-13", "release_at": "2025-10-13T00:00:00-04:00", "title": "Cherub" },
     { "id": "2025-10-10", "release_at": "2025-10-10T00:00:00-04:00", "title": "Shoggoth" },
     { "id": "2025-10-09", "release_at": "2025-10-09T00:00:00-04:00", "title": "Spark Golem" },
