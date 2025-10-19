@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://dopaunpt3kjr5"]
+
+[ext_resource type="Script" uid="uid://3ggstibd3gh1" path="res://Scripts/DiscardPileViewPanel.gd" id="1_xli14"]
+[ext_resource type="FontFile" uid="uid://dwo8xle1kx2ha" path="res://Assets/Fonts/Quicksand/static/Quicksand-Medium.ttf" id="2_3k6o7"]
+[ext_resource type="FontFile" uid="uid://biw8kuuj8rwa8" path="res://Assets/Fonts/Quicksand/static/Quicksand-Bold.ttf" id="3_0xvoo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ic7mg"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 3
+shadow_offset = Vector2(3, 3)
+
+[node name="DiscardPileViewPanel" type="Panel"]
+z_index = 2
+offset_left = 6.0
+offset_top = 64.0
+offset_right = 122.0
+offset_bottom = 84.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ic7mg")
+script = ExtResource("1_xli14")
+
+[node name="LastPlayedText" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_3k6o7")
+theme_override_fonts/bold_font = ExtResource("3_0xvoo")
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+bbcode_enabled = true
+text = "[center][b]Bottom of Discard[/b][/center]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
