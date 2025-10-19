@@ -2,7 +2,7 @@ extends Buff
 class_name LifestealBuff
 
 @onready var scene: Scene = get_tree().get_root().get_node("Scene")
-@onready var hand = scene.get_node("ScrollHandContainer/Hand")
+@onready var hand = scene.get_node("HandScrollContainer/Hand")
 @onready var health: Health = scene.get_node("Health")
 
 func activate() -> bool:

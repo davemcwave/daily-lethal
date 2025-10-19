@@ -2,7 +2,7 @@ extends Buff
 
 @onready var scene: Scene = get_tree().get_root().get_node("Scene")
 @onready var discard_panel: DiscardPanel = scene.get_node("DiscardPanel")
-@onready var hand: Hand = scene.get_node("ScrollHandContainer/Hand")
+@onready var hand: Hand = scene.get_node("HandScrollContainer/Hand")
 
 func activate() -> bool:
 	await get_tree().create_timer(0.5).timeout

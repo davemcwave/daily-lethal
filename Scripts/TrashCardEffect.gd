@@ -4,7 +4,7 @@ extends CardEffect
 @export var card_amount: int = 1
 @export_enum("Top", "Bottom") var discard_pile_trash_direction: String = "Top"
 #@onready var scene: Scene = get_tree().get_root().get_node("Scene")
-@onready var hand: Hand = scene.get_node("ScrollHandContainer/Hand")
+@onready var hand: Hand = scene.get_node("HandScrollContainer/Hand")
 @onready var discard_panel: DiscardPanel = scene.get_node("DiscardPanel")
 
 func set_card_amount(new_card_amount: int) -> void:
