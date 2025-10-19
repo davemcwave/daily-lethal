@@ -13,6 +13,7 @@ func populate_cards() -> void:
 		new_card.set_state(Card.State.Discarded)
 		new_card.z_index = 1
 		new_card.normalize_saturation()
+		new_card.set_mouse_filter(Control.MOUSE_FILTER_PASS)
 		grid_container.add_child(new_card)
 		
 	
