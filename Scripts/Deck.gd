@@ -1,7 +1,7 @@
 extends Panel
 class_name Deck
 
-@onready var hand: Hand = get_tree().get_root().get_node("Scene/Hand")
+@onready var hand: Hand = get_tree().get_root().get_node("Scene/HandScrollContainer/Hand")
 @onready var cards_amount_text: RichTextLabel = get_tree().get_root().get_node("Scene/CardsAmountText")
 @onready var audio_handler: AudioHandler = $"/root/AudioHandler"
 func _ready() -> void:

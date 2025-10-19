@@ -5,7 +5,7 @@ signal closed
 
 @export var max_card_choose_amount: int = 2
 @export_multiline var action_name: String = "Discard"
-@onready var hand: Hand = get_tree().get_root().get_node("Scene/Hand")
+@onready var hand: Hand = get_tree().get_root().get_node("Scene/HandScrollContainer/Hand")
 @onready var discard_pile: DiscardPanel = get_tree().get_root().get_node("Scene/DiscardPanel")
 @onready var audio_handler = get_node("/root/AudioHandler")
 @onready var action_button: Button = $ActionButton

@@ -24,7 +24,7 @@ const LOW_ENERGY_CARD_TEXT = "[center][b][pulse freq=2.0 color=#ffffff40 ease=-2
 @onready var health: Health = scene.get_node("Health")
 @onready var original_position
 @onready var cards_played: CardsPlayed = scene.get_node("CardsPlayed")
-@onready var hand: Hand = scene.get_node('Hand')
+@onready var hand: Hand = scene.get_node('HandScrollContainer/Hand')
 @onready var play_text = scene.get_node("PlayText")
 @onready var background = get_node("/root/Background")
 #@onready var last_cards_played_container: GridContainer = scene.get_node("LastCardsPlayedContainer")

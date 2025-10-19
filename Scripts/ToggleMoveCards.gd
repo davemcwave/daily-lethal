@@ -1,7 +1,7 @@
 extends CheckButton
 
 @onready var scene: Scene = get_tree().get_root().get_node('Scene')
-@onready var hand: Hand = scene.get_node('Hand')
+@onready var hand: Hand = scene.get_node('HandScrollContainer/Hand')
 var blink_tween: Tween = null 
 
 func start_blink(node: Control):
