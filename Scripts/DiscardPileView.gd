@@ -1,9 +1,9 @@
 extends ColorRect
 
 @onready var discard_panel: DiscardPanel = get_tree().get_root().get_node("Scene/DiscardPanel")
-
+@onready var grid_container: GridContainer = $ScrollContainer/GridContainer
 func clear_cards() -> void:
-	for child in $GridContainer.get_children():
+	for child in grid_container.get_children():
 		child.queue_free()
 		
 func populate_cards() -> void:
@@ -13,7 +13,7 @@ func populate_cards() -> void:
 		new_card.set_state(Card.State.Discarded)
 		new_card.z_index = 1
 		new_card.normalize_saturation()
-		$GridContainer.add_child(new_card)
+		grid_container.add_child(new_card)
 		
 	
 func _on_button_exit_pressed():
