@@ -1,5 +1,6 @@
 {
   "puzzles": [
+    { "id": "2025-10-20", "release_at": "2025-10-20T00:00:00-04:00", "title": "Charger" },
     { "id": "2025-10-17", "release_at": "2025-10-17T00:00:00-04:00", "title": "Time Lord" },
     { "id": "2025-10-16", "release_at": "2025-10-16T00:00:00-04:00", "title": "Pterosaur" },
     { "id": "2025-10-15", "release_at": "2025-10-15T00:00:00-04:00", "title": "Water Drake" },
