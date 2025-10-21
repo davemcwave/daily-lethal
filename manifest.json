@@ -1,5 +1,6 @@
 {
   "puzzles": [
+    { "id": "2025-10-22", "release_at": "2025-10-22T00:00:00-04:00", "title": "Pink Slime" },
     { "id": "2025-10-21", "release_at": "2025-10-21T00:00:00-04:00", "title": "Grave Robber" },
     { "id": "2025-10-20", "release_at": "2025-10-20T00:00:00-04:00", "title": "Charger" },
     { "id": "2025-10-17", "release_at": "2025-10-17T00:00:00-04:00", "title": "Time Lord" },
