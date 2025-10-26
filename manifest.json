@@ -1,5 +1,9 @@
 {
   "puzzles": [
+    { "id": "2025-10-30", "release_at": "2025-10-30T00:00:00-04:00", "title": "Giant Bat" },
+    { "id": "2025-10-29", "release_at": "2025-10-29T00:00:00-04:00", "title": "Fairy" },
+    { "id": "2025-10-28", "release_at": "2025-10-28T00:00:00-04:00", "title": "Ice Golem" },
+    { "id": "2025-10-27", "release_at": "2025-10-27T00:00:00-04:00", "title": "Serpents" },
     { "id": "2025-10-24", "release_at": "2025-10-24T00:00:00-04:00", "title": "Time Demon" },
     { "id": "2025-10-23", "release_at": "2025-10-23T00:00:00-04:00", "title": "Flail Snail" },
     { "id": "2025-10-22", "release_at": "2025-10-22T00:00:00-04:00", "title": "Pink Slime" },
