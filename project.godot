@@ -15,8 +15,8 @@ run/main_scene="uid://bptsg5npxvovs"
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/show_image=false
 config/icon="uid://iq3ggtrrqtb3"
-run/size/viewport_width=960
-run/size/viewport_height=540
+run/size/viewport_width=360
+run/size/viewport_height=640
 run/main_scene.web_desktop_build=""
 run/main_scene.web_build=""
 
