@@ -13,11 +13,13 @@ func _ready() -> void:
 	
 	connect("pressed", self._on_button_pressed)
 
-func appear() -> bool:
+func appear(duration: float = 0.25) -> bool:
 	var tween = get_tree().create_tween()
 	modulate.a = 0.0
+	scale = Vector2(0, 0)
 	show()
-	tween.tween_property(self, "modulate:a", 1.0, 0.25).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(self, 'scale', Vector2(1.0,1.0), duration).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(self, "modulate:a", 1.0, duration).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
 	await tween.finished
 	return true
 	
