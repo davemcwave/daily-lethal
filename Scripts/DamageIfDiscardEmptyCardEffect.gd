@@ -8,5 +8,9 @@ func apply() -> bool:
 		set_damage_amount(damage_amount)
 	else:
 		set_damage_amount(0)
+		var card = discard_panel.get_cards()[0]
+		print("CARD! ")
+		print(card.get_card_name())
 	
-	return await super.apply()
+	var apply_result: bool = await super.apply()
+	return apply_result

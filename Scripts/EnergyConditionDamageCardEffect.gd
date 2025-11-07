@@ -39,5 +39,6 @@ func apply() -> bool:
 		_:
 				set_damage_amount(damage_amount)
 	
-	return await super.apply()
-	
+	var apply_result: bool = await super.apply()
+	damage_amount = original_damage_amount
+	return apply_result
