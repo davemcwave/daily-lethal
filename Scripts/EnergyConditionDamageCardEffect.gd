@@ -11,15 +11,13 @@ enum ConditionType {
 @export var comparison_value: int = 0
 @export var if_false_damage_amount: int = 0
 @onready var energy: Energy = get_tree().get_root().get_node("Scene/Energy")
-@onready var original_damage_amount: int = damage_amount
 
 func _ready():
 	super._ready()
-
+	
 func apply() -> bool:
 	var energy_amount: int = energy.get_energy_amount()
-	damage_amount = original_damage_amount
-	
+	var previous_damage_amount = damage_amount
 	match condition_type:
 		ConditionType.EqualTo:
 			if energy_amount != comparison_value:
@@ -40,5 +38,5 @@ func apply() -> bool:
 				set_damage_amount(damage_amount)
 	
 	var apply_result: bool = await super.apply()
-	damage_amount = original_damage_amount
+	set_damage_amount(previous_damage_amount)
 	return apply_result
