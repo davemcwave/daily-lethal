@@ -2,6 +2,7 @@ extends DamageCardEffect
 class_name DamageIfDiscardEmptyCardEffect
 
 @onready var discard_panel: DiscardPanel = get_tree().get_root().get_node("Scene/DiscardPanel")
+@onready var original_damage_amount = damage_amount
 
 func apply() -> bool:
 	if discard_panel.is_empty():
@@ -13,4 +14,5 @@ func apply() -> bool:
 		print(card.get_card_name())
 	
 	var apply_result: bool = await super.apply()
+	damage_amount = original_damage_amount
 	return apply_result
