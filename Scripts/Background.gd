@@ -45,6 +45,12 @@ func set_best_card_count(new_best_card_count: int) -> void:
 func set_enemy_name(new_enemy_name: String) -> void:
 	enemy_name = new_enemy_name
 	
+func cards_are_playing() -> bool:
+	for card in get_tree().get_nodes_in_group("Cards"):
+		if card.is_playing():
+			return true
+	return false
+	
 func mark_puzzle_completed(puzzle_date: String):
 	var js_code := """
 		(function() {
