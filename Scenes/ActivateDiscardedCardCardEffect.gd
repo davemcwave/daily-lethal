@@ -47,6 +47,9 @@ func apply() -> bool:
 		
 	for i in range(activation_count):
 		
+		if not is_instance_valid(card) or card == null:
+			continue
+			
 		var temporary_card = card.duplicate(DUPLICATE_USE_INSTANTIATION)
 		temporary_card.hide()
 		add_child(temporary_card)
@@ -58,6 +61,7 @@ func apply() -> bool:
 		
 		await get_tree().create_timer(activation_delay).timeout
 	
-	card.queue_free()
+	if is_instance_valid(card):
+		card.queue_free()
 	
 	return await super.apply()
