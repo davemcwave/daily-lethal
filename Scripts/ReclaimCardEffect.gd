@@ -26,7 +26,8 @@ func apply() -> bool:
 	
 	for i in range(min(cards.size(), card_amount)):
 		var card: Card = cards[i]
-		card.get_parent().remove_child(card)
+		#card.get_parent().remove_child(card)
+		discard_panel.remove_card(card)
 		hand.add_card(card)
 		
 		card.set_state(Card.State.InHand)

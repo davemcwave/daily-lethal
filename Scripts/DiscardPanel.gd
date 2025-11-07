@@ -49,6 +49,12 @@ func get_card_with_id(id: int) -> Card:
 			
 	return null
 
+func remove_card(card: Card) -> void:
+	if card.get_parent() == self:
+		remove_child(card)
+		
+		update_discard_count()
+	
 func add_card(new_card: Card) -> void:
 	var new_card_original_postion: Vector2 = new_card.global_position
 	new_card.get_parent().remove_child(new_card)

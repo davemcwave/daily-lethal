@@ -46,6 +46,7 @@ func apply() -> bool:
 		if get_parent() is Card:
 			var card: Card = get_parent()
 			card.queue_free()
+			
 	discard_panel.update_discard_count()
 		
 	return super.apply()

@@ -12,6 +12,6 @@ func activate() -> bool:
 	card.shrink(0.15)
 	await get_tree().create_timer(0.15).timeout
 	card.queue_free()
-	#discard_pile.update_discard_count()
+	discard_pile.update_discard_count()
 	return super.activate()
 	
