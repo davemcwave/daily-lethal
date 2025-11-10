@@ -313,6 +313,12 @@ func can_play() -> bool:
 		and not enemy.is_animating() \
 		and not buffs_container.is_animating() \
 		and can_pay_cost(energy_cost)
+
+func can_play_for_resolver() -> bool:
+	return not enemy.is_animating() \
+		and not buffs_container.is_animating() \
+		and can_pay_cost(energy_cost)
+	
 		
 func drop() -> void:
 	card_preview.hide()
@@ -451,13 +457,14 @@ func play():
 	discard()
 
 func discard() -> void:
-	if is_playing_on_desktop():
+	if is_playing_on_desktop() and is_instance_valid(card_preview):
 		if is_connected("mouse_entered", self.show_card_preview):
 			disconnect("mouse_entered", self.show_card_preview)
 		if is_connected("mouse_exited", card_preview.hide):
 			disconnect("mouse_exited", card_preview.hide)
 		
 	set_state(State.Discarded)
+	
 	discard_panel.add_card(self)
 	#hand.update_card_separation()
 

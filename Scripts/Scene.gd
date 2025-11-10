@@ -24,6 +24,7 @@ var puzzle: Puzzle = null
 @onready var next_puzzle_button = $NextPreviousPuzzleButtonContainer/NextPuzzleButton
 @onready var previous_puzzle_button = $NextPreviousPuzzleButtonContainer/PreviousPuzzleButton
 @onready var dialog_handler = $"/root/DialogHandler"
+@onready var puzzle_resolver = $"/root/PuzzleResolver"
 var dialog_fight_button
 var player_dialog_panel
 var enemy_dialog_panel
@@ -39,6 +40,9 @@ func _ready():
 		await handle_initial_dialog()
 	
 	await draw_starting_cards()
+	
+	if puzzle_resolver.is_active():
+		puzzle_resolver.resolve_puzzle()
 
 func can_show_initial_dialog() -> bool:
 	return dialog_handler.is_enabled() and has_node("CanvasLayer/DialogFightButton") and puzzle.get_dialogue_lines().size() > 0
@@ -79,6 +83,8 @@ func load_puzzle() -> void:
 	if override_puzzle_date:
 		var current_puzzle: Puzzle = load(puzzle_scene).instantiate()
 		set_puzzle(current_puzzle)
+	elif puzzle_resolver.is_active():
+		set_puzzle(puzzle_resolver.get_puzzle())
 	elif url_capturer.is_test_puzzle():
 		var new_puzzle: Puzzle = load(puzzle_scene).instantiate()
 		new_puzzle.set_test_puzzle(true)
@@ -328,6 +334,9 @@ func disable_all_cards() -> void:
 func is_checking_for_game_over() -> bool:
 	return checking_for_game_over
 
+func is_game_over() -> bool:
+	return game_over
+	
 func check_game_over() -> void:
 	# Prevent overlapping checks and ignore if game already over
 	if checking_for_game_over or game_over:

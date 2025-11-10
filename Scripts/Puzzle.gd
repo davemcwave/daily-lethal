@@ -22,6 +22,7 @@ class_name Puzzle
 
 @export_group("Cards")
 @export var card_scenes: Array[Resource]
+@export var card_solution: Array[Resource]
 
 @export var initial_draw_amount: int = -1
 
@@ -44,6 +45,20 @@ func get_enemy_hurt_lines() -> Array[String]:
 	
 func get_dialogue_first() -> String:
 	return dialogue_first
+
+func has_any_cards(check_card_scenes: Array) -> bool:
+	var cards: Array[Card] = []
+	for card_scene in card_scenes:
+		cards.append(card_scene.instantiate())
+		
+	for check_card_scene in check_card_scenes:
+		var check_card: Card = check_card_scene.instantiate()
+		
+		for card: Card in cards:
+			if card.get_card_name() == check_card.get_card_name():
+				return true
+	return false
+	
 	
 func get_dialogue_lines() -> Array[String]:
 	return dialogue_lines
@@ -53,6 +68,9 @@ func is_test_puzzle() -> bool:
 	
 func do_randomize_cards() -> bool:
 	return randomize_cards
+	
+func get_card_solution() -> Array:
+	return card_solution
 	
 func get_random_card_count() -> int:
 	return random_card_count
