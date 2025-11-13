@@ -1,5 +1,6 @@
 {
   "puzzles": [
+    { "id": "2025-11-13", "release_at": "2025-11-13T00:00:00-04:00", "title": "Rat King" },
     { "id": "2025-11-12", "release_at": "2025-11-12T00:00:00-04:00", "title": "Delvers" },
     { "id": "2025-11-11", "release_at": "2025-11-11T00:00:00-04:00", "title": "Ghost Pirate" },
     { "id": "2025-11-10", "release_at": "2025-11-10T00:00:00-04:00", "title": "Demon Nurse" },
