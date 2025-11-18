@@ -1,5 +1,6 @@
 {
   "puzzles": [
+    { "id": "2025-11-18", "release_at": "2025-11-18T00:00:00-04:00", "title": "Hydra" },
     { "id": "2025-11-17", "release_at": "2025-11-17T00:00:00-04:00", "title": "Target Dummy" },
     { "id": "2025-11-14", "release_at": "2025-11-14T00:00:00-04:00", "title": "Cannoneer" },
     { "id": "2025-11-13", "release_at": "2025-11-13T00:00:00-04:00", "title": "Rat King" },
