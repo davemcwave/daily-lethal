@@ -12,11 +12,11 @@ signal chose
 @onready var action_button: Button = $ActionButton
 @onready var title_label: RichTextLabel = $TitleLabel
 @onready var cards_container: GridContainer = $CardsContainer
+@onready var card_creator: CardCreator = $CardCreator
 var cards_chosen_amount: int = 0
 var cards_chosen: Array[Card] = []
 var cards_choose_area_action: CardsChooseAreaAction = null
 var choose_up_to_amount: bool = false
-var card_creator: CardCreator = null
 
 # Determines if a check, x, or circle is used to denote selected cards.
 enum ChooseType {
@@ -109,9 +109,9 @@ func get_all_cards_not_chosen() -> Array[Card]:
 		if not card.is_chosen():
 			cards_not_chosen.append(card)
 	return cards_not_chosen
-
-func set_card_creator(new_card_creator: CardCreator) -> void:
-	card_creator = new_card_creator
+	
+func get_card_creator() -> CardCreator:
+	return card_creator
 	
 func populate_cards() -> void:
 	var card_source = null
@@ -144,6 +144,9 @@ func is_closed() -> bool:
 func close() -> void:
 	if cards_choose_area_action != null:
 		cards_choose_area_action.queue_free()
+	
+	#if card_creator != null:
+		#card_creator.queue_free()
 		
 	emit_signal("closed")
 	hide()
@@ -154,6 +157,8 @@ func get_card_with_id(card_id) -> Card:
 			return hand.get_card_with_id(card_id)
 		PopulateCardsType.FromDiscard:
 			return discard_pile.get_card_with_id(card_id)
+		PopulateCardsType.FromCreate:
+			return card_creator.get_card_with_id(card_id)
 		_:
 			return null
 
@@ -169,6 +174,7 @@ func _on_action_button_pressed() -> void:
 		if card.is_chosen():
 			var card_in_hand: Card = get_card_with_id(card.get_id())
 			apply_action(card_in_hand)
+			await get_tree().create_timer(0.1).timeout
 			cards_chosen.append(card_in_hand)
 	
 	audio_handler.play_sfx("DiscardSFX", 1.25)

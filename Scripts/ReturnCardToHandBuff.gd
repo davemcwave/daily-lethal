@@ -14,6 +14,7 @@ func activate() -> bool:
 	else:
 		#var last_discarded_card_scene_file_path = discard_panel.get_last_card().get_scene_file_path()
 		var last_discarded_card: Card = card.duplicate(DUPLICATE_USE_INSTANTIATION)
+		await get_tree().process_frame
 		discard_panel.get_last_card().queue_free()
 		discard_panel.update_discard_count()
 		last_discarded_card.set_state(Card.State.InHand)

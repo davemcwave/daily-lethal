@@ -1,9 +1,17 @@
 [
   {
+    "name": "armory-card.PNG",
+    "date_added": "2025-11-19"
+  },
+  {
     "name": "bargain-card.PNG"
   },
   {
     "name": "burst-card.PNG"
+  },
+  {
+    "name": "cleave-card.PNG",
+    "date_added": "2025-11-19"
   },
   {
     "name": "echo-card.PNG"
@@ -86,6 +94,10 @@
   {
     "name": "spark-card.PNG",
     "date_added": "2025-08-08"
+  },
+  {
+    "name": "spear-card.PNG",
+    "date_added": "2025-11-19"
   },
   {
     "name": "surge-card.PNG"

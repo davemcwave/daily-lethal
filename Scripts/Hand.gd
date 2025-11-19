@@ -52,7 +52,7 @@ func reorder_cards_by_x_position() -> bool:
 	# Sort by global x-position
 	sorted_children.sort_custom(_sort_by_x)
 	
-	print(sorted_children)
+	#print(sorted_children)
 
 	# Move each child to the end and update z_index
 	for i in range(sorted_children.size()):
@@ -79,7 +79,14 @@ func get_card_with_id(id: int) -> Card:
 	
 func add_card(card: Card) -> void:
 	card.hide()
+	#
+	#if card.is_inside_tree() and card.get_parent() != null:
+		#card.get_parent().remove_child(card)
+		
 	add_child(card)
+	
+	reorder_cards_by_x_position()
+	
 	card.show()
 	card.bounce()
 	
