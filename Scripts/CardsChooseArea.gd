@@ -174,7 +174,6 @@ func _on_action_button_pressed() -> void:
 		if card.is_chosen():
 			var card_in_hand: Card = get_card_with_id(card.get_id())
 			apply_action(card_in_hand)
-			await get_tree().create_timer(0.1).timeout
 			cards_chosen.append(card_in_hand)
 	
 	audio_handler.play_sfx("DiscardSFX", 1.25)
