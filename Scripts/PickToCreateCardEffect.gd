@@ -1,0 +1,22 @@
+extends CardEffect
+class_name PickToCreateCardEffect
+
+@export var max_pick_amount: int = 2
+@export var card_scenes: Array[Resource] = []
+@onready var cards_choose_area: CardsChooseArea = get_tree().get_root().get_node('Scene/CanvasLayer/CardsChooseArea')
+	
+func apply() -> bool:
+	cards_choose_area.set_max_card_choose_amount(max_pick_amount)
+	cards_choose_area.set_action_name("Add To Hand")
+	var copy_to_hand_action = load("res://Scenes/CardsChooseAreaCopyToHandAction.scn").instantiate()
+	cards_choose_area.set_cards_choose_area_action(copy_to_hand_action)
+	
+	var card_creator: CardCreator = load("res://Scenes/CardCreator.scn").instantiate()
+	add_child(card_creator)
+	card_creator.set_card_scenes(card_scenes)
+	
+	cards_choose_area.set_card_creator(card_creator)
+	cards_choose_area.activate(CardsChooseArea.ChooseType.Good, CardsChooseArea.PopulateCardsType.FromCreate)
+	await cards_choose_area.closed
+	emit_signal("player_input_finished")
+	return super.apply()

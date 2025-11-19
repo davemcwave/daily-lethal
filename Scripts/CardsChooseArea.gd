@@ -2,6 +2,7 @@ extends ColorRect
 class_name CardsChooseArea
 
 signal closed
+signal chose
 
 @export var max_card_choose_amount: int = 2
 @export_multiline var action_name: String = "Discard"
@@ -15,6 +16,7 @@ var cards_chosen_amount: int = 0
 var cards_chosen: Array[Card] = []
 var cards_choose_area_action: CardsChooseAreaAction = null
 var choose_up_to_amount: bool = false
+var card_creator: CardCreator = null
 
 # Determines if a check, x, or circle is used to denote selected cards.
 enum ChooseType {
@@ -27,7 +29,8 @@ var choose_type = ChooseType.Neutral
 # Determines whether to populate cards from Hand or from Discard
 enum PopulateCardsType {
 	FromHand,
-	FromDiscard
+	FromDiscard,
+	FromCreate
 }
 var populate_cards_type = PopulateCardsType.FromHand
 
@@ -107,6 +110,9 @@ func get_all_cards_not_chosen() -> Array[Card]:
 			cards_not_chosen.append(card)
 	return cards_not_chosen
 
+func set_card_creator(new_card_creator: CardCreator) -> void:
+	card_creator = new_card_creator
+	
 func populate_cards() -> void:
 	var card_source = null
 	
@@ -115,7 +121,9 @@ func populate_cards() -> void:
 			card_source = hand
 		PopulateCardsType.FromDiscard:
 			card_source = discard_pile
-			
+		PopulateCardsType.FromCreate:
+			card_source = card_creator
+		
 	if card_source.get_cards().size() <= 0:
 		close()
 	else:
@@ -149,11 +157,19 @@ func get_card_with_id(card_id) -> Card:
 		_:
 			return null
 
+func set_cards_chosen(new_cards_chosen: Array[Card]) -> void:
+	cards_chosen = new_cards_chosen
+	
+func get_cards_chosen() -> Array[Card]:
+	return cards_chosen
+
 func _on_action_button_pressed() -> void:
+	cards_chosen.clear()
 	for card: Card in cards_container.get_children():
 		if card.is_chosen():
 			var card_in_hand: Card = get_card_with_id(card.get_id())
 			apply_action(card_in_hand)
+			cards_chosen.append(card_in_hand)
 	
 	audio_handler.play_sfx("DiscardSFX", 1.25)
 	close()
