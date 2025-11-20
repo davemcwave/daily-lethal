@@ -15,3 +15,4 @@ func play():
 	scene.set_last_card_effects(self)
 	
 	discard()
+	scene.check_game_over()

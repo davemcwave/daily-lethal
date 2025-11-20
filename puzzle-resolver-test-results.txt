@@ -1,0 +1,3 @@
+res://Scenes/Puzzles/2025-04-23-EvilRobot-Puzzle.scn:  PASS
+res://Scenes/Puzzles/2025-04-24-SeaMonster-Puzzle.scn:  PASS
+res://Scenes/Puzzles/2025-04-25-Bloodthorn-Puzzle.scn:  PASS

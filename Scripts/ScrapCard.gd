@@ -15,3 +15,4 @@ func play():
 	
 	await buffs_container.activate_buffs(Buff.ActivationType.OnCardPlay)
 	
+	scene.check_game_over()

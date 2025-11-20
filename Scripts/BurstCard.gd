@@ -28,3 +28,4 @@ func play():
 	
 	scene.increment_card_count()
 	discard()
+	scene.check_game_over()

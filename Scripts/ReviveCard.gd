@@ -16,3 +16,5 @@ func play():
 	await buffs_container.activate_buffs(Buff.ActivationType.OnCardPlay)
 	
 	discard()
+
+	scene.check_game_over()

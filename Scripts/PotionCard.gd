@@ -12,6 +12,7 @@ func play():
 	scene.set_last_card_effects_directly(self, [$PlayerChooseEffectCardEffect, ])
 	await buffs_container.activate_buffs(Buff.ActivationType.OnCardPlay)
 	discard()
+	scene.check_game_over()
 	
 func update_description_panel() -> void:
 	card_description = "[center]%s[/center]" % ("Deal [color=red]%d[/color] damage or Heal [color=#008c10]%d[/color] HP" % [$DamageCardEffect.get_damage_amount(), $HealCardEffect.get_heal_amount()])

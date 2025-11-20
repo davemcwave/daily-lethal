@@ -16,3 +16,5 @@ func play():
 	
 	await apply_card_effects()
 	
+	scene.check_game_over()
+	
