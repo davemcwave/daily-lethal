@@ -1,8 +1,6 @@
 extends DamageCardEffect
 class_name EnergyBasedDamageCardEffect
 
-@onready var energy: Energy = get_tree().get_root().get_node("Scene/Energy")
-
 func apply() -> bool:
 	var energy_amount: int = energy.get_energy_amount()
 	set_damage_amount(energy_amount)

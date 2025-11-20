@@ -10,7 +10,6 @@ enum ConditionType {
 @export var condition_type = ConditionType.EqualTo
 @export var comparison_value: int = 0
 @export var if_false_damage_amount: int = 0
-@onready var energy: Energy = get_tree().get_root().get_node("Scene/Energy")
 
 func _ready():
 	super._ready()

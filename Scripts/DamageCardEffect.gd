@@ -7,6 +7,7 @@ class_name DamageCardEffect
 @export var increase_damage_multiplier: int = 1
 @export var increase_damage_effect: bool = true
 @export var modifiable: bool = true
+@onready var energy: Energy = scene.get_node('Energy')
 	
 func is_modifiable() -> bool:
 	return modifiable
@@ -47,7 +48,12 @@ func set_target(new_target) -> void:
 	target = new_target
 
 func deal_damage(damage_amount: int) ->  void:
-	target.hurt(damage_amount)
+	
+	if buffs_container.has_charge_buff() and target_name == 'Enemy':
+		energy.add_energy(damage_amount)
+		buffs_container.remove_charge_buff()
+	else:
+		target.hurt(damage_amount)
 	
 func apply() -> bool:
 	var on_attack_buffs: Array = await buffs_container.activate_buffs(Buff.ActivationType.OnAttack, {'current_damage_amount': damage_amount})

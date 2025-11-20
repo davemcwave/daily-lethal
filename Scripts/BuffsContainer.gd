@@ -133,8 +133,29 @@ func has_blood_buff() -> bool:
 			return true
 			
 	return false
-	
 
+func has_charge_buff() -> bool:
+	for buff_panel: BuffPanel in get_children():
+		if not is_instance_valid(buff_panel):
+			continue
+			
+		var buff: Buff = buff_panel.get_buff()
+		if not is_instance_valid(buff):
+			continue
+		
+		if buff is ChargeBuff:
+			return true
+			
+	return false
+	
+func remove_charge_buff() -> void:
+	for buff_panel: BuffPanel in get_children():
+		var buff: Buff = buff_panel.get_buff()
+		if buff is ChargeBuff:
+			add_buff_removed_this_turn(buff.get_buff_name())
+			buff_panel.queue_free()
+			return
+	
 func remove_free_buff() -> void:
 	for buff_panel: BuffPanel in get_children():
 		var buff: Buff = buff_panel.get_buff()
