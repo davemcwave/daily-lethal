@@ -49,7 +49,9 @@ func set_health(new_health: int) -> void:
 	
 	if health <= 0:
 		dead = true
-		scene.check_game_over()
+	else:
+		dead = false
+		#scene.check_game_over()
 		
 	update_text()
 
@@ -73,7 +75,7 @@ func hurt(amount: int) -> void:
 		create_damage_label(0, "BLOCKED!")
 		buffs_container.remove_block_buff()
 	else:
-		health = max(health-amount,0)
+		health = health-amount
 		audio_handler.play_sfx("PlayerHurtSFX")
 		bounce()
 		blink()
@@ -84,7 +86,7 @@ func hurt(amount: int) -> void:
 			
 		update_text()
 		
-		scene.check_game_over()
+		#scene.check_game_over()
 		
 		if amount > 0:
 			buffs_container.activate_buffs(Buff.ActivationType.OnHurt)

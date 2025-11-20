@@ -337,6 +337,29 @@ func is_checking_for_game_over() -> bool:
 func is_game_over() -> bool:
 	return game_over
 	
+func check_game_over_because_of_enemy() -> void:
+	
+	# Prevent overlapping checks and ignore if game already over
+	if checking_for_game_over or game_over:
+		return
+		
+	checking_for_game_over = true
+
+	# Snapshot current health and enemy state
+	var e_dead = enemy.is_dead()
+	if e_dead:
+		game_over = true
+		background.set_best_card_count(card_count)
+		audio_handler.play_sfx("WinSFX")
+		# Brief pause before win screen
+		await get_tree().create_timer(0.75).timeout
+		# If player also died in the meantime, show death instead
+		if health.is_dead():
+			$CanvasLayer/DeadPanel.appear()
+		else:
+			get_tree().change_scene_to_file("res://Scenes/EndGameScreen.scn")
+
+	checking_for_game_over = false
 func check_game_over() -> void:
 	# Prevent overlapping checks and ignore if game already over
 	if checking_for_game_over or game_over:

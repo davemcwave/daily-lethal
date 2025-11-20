@@ -17,5 +17,5 @@ func activate() -> bool:
 			await card_effect.player_input_finished
 			print("%s found player input" % card_effect.name)
 
-	return super.activate()
+	return await super.activate()
 	

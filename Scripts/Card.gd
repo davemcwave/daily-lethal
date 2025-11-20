@@ -455,6 +455,7 @@ func play():
 	scene.set_last_card_effects(self)
 	await buffs_container.activate_buffs(Buff.ActivationType.OnCardPlay)
 	discard()
+	scene.check_game_over()
 
 func discard() -> void:
 	if is_playing_on_desktop() and is_instance_valid(card_preview):
