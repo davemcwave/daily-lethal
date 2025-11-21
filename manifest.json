@@ -1,5 +1,6 @@
 {
   "puzzles": [
+    { "id": "2025-11-21", "release_at": "2025-11-21T00:00:00-04:00", "title": "Cursed Campfire" },
     { "id": "2025-11-20", "release_at": "2025-11-20T00:00:00-04:00", "title": "Pufferfish" },
     { "id": "2025-11-19", "release_at": "2025-11-19T00:00:00-04:00", "title": "Giant Eel" },
     { "id": "2025-11-18", "release_at": "2025-11-18T00:00:00-04:00", "title": "Hydra" },
