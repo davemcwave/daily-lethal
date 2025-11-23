@@ -190,6 +190,32 @@
   font-size: 0.9rem;
 }
 
+.sync-wrapper {
+  position: fixed;
+  top: 1rem;
+  right: 1rem; /* place it opposite the desktop toggle */
+  display: flex;
+  gap: 0.5rem;
+  z-index: 1000;
+}
+
+.sync-wrapper button {
+  background: #222;
+  color: #fff;
+  font-weight: bold;
+  padding: 0.5rem 0.9rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: background 0.2s, color 0.2s;
+}
+
+.sync-wrapper button:hover {
+  background: #0ff;
+  color: #111;
+}
   </style>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW9PLMBBGT"></script>
@@ -217,6 +243,12 @@
   </div>
 
   <h1>Lethal Puzzle Archive</h1>
+
+  <div class="sync-wrapper">
+    <button id="export-btn">Export Progress</button>
+    <button id="import-btn">Import Progress</button>
+  </div>
+
   <div class="grid">
     
     <div class="grid-item">
@@ -1873,6 +1905,35 @@
         saveCompletedSet(completedSet);
       });
     });
+  </script>
+
+  <script>
+    const KEY = 'lethal_completed_puzzles';
+
+    // Export to a shareable code
+    document.getElementById("export-btn").onclick = () => {
+      const data = localStorage.getItem(KEY) || "[]";
+      const code = btoa(data); // base64 encode
+
+      navigator.clipboard.writeText(code).then(() => {
+        alert("Progress copied! Paste this into your mobile device to sync.");
+      });
+    };
+
+    // Import from a code
+    document.getElementById("import-btn").onclick = () => {
+      const code = prompt("Paste your sync code:");
+      if (!code) return;
+
+      try {
+        const json = atob(code); // decode base64
+        localStorage.setItem(KEY, json);
+        alert("Progress synced! Reloading...");
+        location.reload();
+      } catch (e) {
+        alert("Invalid code.");
+      }
+    };
   </script>
 
   <script>

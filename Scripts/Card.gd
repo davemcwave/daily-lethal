@@ -44,6 +44,7 @@ var last_mouse_position = null
 var can_chose_choosing_button: bool = true
 var id
 var queue_free_after_applying_card_effects: bool = false
+var permanent_card: bool = true
 
 enum State {
 	InHand,
@@ -83,6 +84,9 @@ func no_cards_grabbed() -> bool:
 			return false
 	return true
 
+func is_permanent_card() -> bool:
+	return permanent_card
+	
 func get_formatted_state() -> String:
 	return State.keys()[state]
 	
@@ -208,6 +212,11 @@ func get_card_name() -> String:
 
 func get_card_description() -> String:
 	return card_description
+	
+func get_card_description_without_bb_code() -> String:
+	var rich_text_label_temporary = RichTextLabel.new()
+	rich_text_label_temporary.parse_bbcode(card_description)
+	return rich_text_label_temporary.get_parsed_text()
 	
 func show_card_preview() -> void:
 	# Card preview data
