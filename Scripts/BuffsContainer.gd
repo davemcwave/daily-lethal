@@ -274,6 +274,15 @@ func activate_buffs(buff_activation_type: Buff.ActivationType, extra_info: Dicti
 			continue
 			
 		var buff: Buff = buff_panel.get_buff()
+		if extra_info.get('do_not_activate_buffs', []).size() > 0:
+			var do_not_activate_buff_flag: bool = false
+			for do_not_activate_buff: Buff in extra_info['do_not_activate_buffs']:
+				if buff == do_not_activate_buff:
+					do_not_activate_buff_flag = true
+					break
+			if do_not_activate_buff_flag:
+				continue
+		
 		if buff.get_activation_type() == buff_activation_type:
 				
 			var buff_instance_id = buff.get_instance_id()

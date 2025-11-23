@@ -11,12 +11,12 @@ config_version=5
 [application]
 
 config/name="Play Lethal"
-run/main_scene="uid://bptsg5npxvovs"
+run/main_scene="uid://bu6lgt3xfx2rr"
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/show_image=false
 config/icon="uid://iq3ggtrrqtb3"
-run/size/viewport_width=960
-run/size/viewport_height=540
+run/size/viewport_width=360
+run/size/viewport_height=640
 run/main_scene.web_desktop_build=""
 run/main_scene.web_build=""
 
@@ -30,8 +30,8 @@ PuzzleResolver="*res://Scenes/PuzzleResolver.scn"
 
 [display]
 
-window/size/viewport_width=960
-window/size/viewport_height=540
+window/size/viewport_width=360
+window/size/viewport_height=640
 window/stretch/mode="canvas_items"
 window/size/viewport_height.web_desktop_build=0
 window/size/viewport_width.web_desktop_build=0
