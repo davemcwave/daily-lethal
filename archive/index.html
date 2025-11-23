@@ -189,33 +189,44 @@
   user-select: none;
   font-size: 0.9rem;
 }
-
+/* Horizontal sync buttons centered under the title */
 .sync-wrapper {
-  position: fixed;
-  top: 1rem;
-  right: 1rem; /* place it opposite the desktop toggle */
   display: flex;
-  gap: 0.5rem;
-  z-index: 1000;
+  flex-direction: row;
+  gap: 0.75rem;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0 1.5rem 0;
 }
 
 .sync-wrapper button {
   background: #222;
   color: #fff;
   font-weight: bold;
-  padding: 0.5rem 0.9rem;
+  padding: 0.55rem 1.1rem;
   border-radius: 10px;
-  font-size: 0.85rem;
-  cursor: pointer;
+  font-size: 0.9rem;
   border: none;
+  cursor: pointer;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   transition: background 0.2s, color 0.2s;
+  white-space: nowrap; /* prevents squishing */
 }
 
 .sync-wrapper button:hover {
   background: #0ff;
   color: #111;
 }
+
+/* Mobile: keep horizontal but allow wrapping cleanly */
+@media (max-width: 420px) {
+  .sync-wrapper {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+}
+
+
   </style>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW9PLMBBGT"></script>
@@ -234,6 +245,8 @@
 
   gtag('config', 'G-LW9PLMBBGT');
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.5.0/lz-string.min.js"></script>
+
 </head>
 <body>
   <a href="/" class="home-button">🏠 Home</a>
@@ -1908,33 +1921,36 @@
   </script>
 
   <script>
-    const KEY = 'lethal_completed_puzzles';
+  const KEY = "lethal_completed_puzzles";
 
-    // Export to a shareable code
-    document.getElementById("export-btn").onclick = () => {
-      const data = localStorage.getItem(KEY) || "[]";
-      const code = btoa(data); // base64 encode
+  // Export: LZ-String compress → Base64 → clipboard
+  document.getElementById("export-btn").onclick = () => {
+    const raw = localStorage.getItem(KEY) || "[]";
+    const compressed = LZString.compressToBase64(raw);
 
-      navigator.clipboard.writeText(code).then(() => {
-        alert("Progress copied! Paste this into another device to sync.");
-      });
-    };
+    navigator.clipboard.writeText(compressed).then(() => {
+      alert("Compressed progress copied! Paste this into another device to sync.");
+    });
+  };
 
-    // Import from a code
-    document.getElementById("import-btn").onclick = () => {
-      const code = prompt("Paste your sync code:");
-      if (!code) return;
+  // Import: Base64 → decompress → JSON → save
+  document.getElementById("import-btn").onclick = () => {
+    const code = prompt("Paste your sync code:");
+    if (!code) return;
 
-      try {
-        const json = atob(code); // decode base64
-        localStorage.setItem(KEY, json);
-        alert("Progress synced! Reloading...");
-        location.reload();
-      } catch (e) {
-        alert("Invalid code.");
-      }
-    };
-  </script>
+    try {
+      const json = LZString.decompressFromBase64(code);
+      if (!json) throw new Error("decode fail");
+
+      localStorage.setItem(KEY, json);
+      alert("Progress synced! Reloading…");
+      location.reload();
+    } catch (e) {
+      alert("Invalid code.");
+    }
+  };
+</script>
+
 
   <script>
     const toggle = document.getElementById('desktop-toggle');
