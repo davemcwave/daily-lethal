@@ -8,7 +8,7 @@ func _ready() -> void:
 	modulate = Color('7ceef2')
 	modulate.h = randf()
 	
-	create_effect_inputs(effect_names.selected)
+	#create_effect_inputs(effect_names.selected)
 	
 func create_damage_effect_inputs() -> void:
 	for input_name in ['Damage Amount', 'Increase Damage Multiplier']:

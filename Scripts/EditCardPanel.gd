@@ -7,6 +7,7 @@ class_name EditCardPanel
 @onready var card_cost_input: LineEdit = card_tab.get_node("CardCostInput")
 @onready var card_description_input: TextEdit = card_tab.get_node("CardDescriptionInput")
 @onready var effects_tab: Panel = tab_container.get_node("Effects")
+@onready var effects_container: VBoxContainer = effects_tab.get_node('VBoxContainer')
 @onready var card_color_buttons: Control = $TabContainer/Card/CardColorButtons
 @onready var card_icon_upload_button: Button = $TabContainer/Card/CardIconUploadButton
 
@@ -21,6 +22,11 @@ func display_card_info(card: Card) -> void:
 	card_description_input.set_editable(not is_permanent_card)
 	enable_color_buttons(not is_permanent_card)
 	enable_icon_upload(not is_permanent_card)
+	
+	# Display effects.
+	for card_effect: CardEffect in card.get_card_effects():
+		var effect_panel: EffectPanel = load("res://Scenes/EffectPanel.scn").instantiate()
+		effects_container.add_child(effect_panel)
 
 func enable_color_buttons(enabled: bool) -> void:
 	for color_button: Button in card_color_buttons.get_children():
