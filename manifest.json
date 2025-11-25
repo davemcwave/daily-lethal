@@ -2,8 +2,8 @@
   "puzzles": [
     { "id": "2025-11-28", "release_at": "2025-11-28T00:00:00-04:00", "title": "Monk" },
     { "id": "2025-11-27", "release_at": "2025-11-27T00:00:00-04:00", "title": "Dwarven Miner" },
-    { "id": "2025-11-26", "release_at": "2025-11-26T00:00:00-04:00", "title": "Dr. Frankestein" },
-    { "id": "2025-11-25", "release_at": "2025-11-25T00:00:00-04:00", "title": "Frankestein's Monster" },
+    { "id": "2025-11-26", "release_at": "2025-11-26T00:00:00-04:00", "title": "Frankestein's Monster" },
+    { "id": "2025-11-25", "release_at": "2025-11-25T00:00:00-04:00", "title": "Dr. Frankestein" },
     { "id": "2025-11-24", "release_at": "2025-11-24T00:00:00-04:00", "title": "Mantis Shrimp" },
     { "id": "2025-11-21", "release_at": "2025-11-21T00:00:00-04:00", "title": "Cursed Campfire" },
     { "id": "2025-11-20", "release_at": "2025-11-20T00:00:00-04:00", "title": "Pufferfish" },
