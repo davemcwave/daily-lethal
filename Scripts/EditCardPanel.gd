@@ -22,11 +22,6 @@ func display_card_info(card: Card) -> void:
 	card_description_input.set_editable(not is_permanent_card)
 	enable_color_buttons(not is_permanent_card)
 	enable_icon_upload(not is_permanent_card)
-	
-	# Display effects.
-	for card_effect: CardEffect in card.get_card_effects():
-		var effect_panel: EffectPanel = load("res://Scenes/EffectPanel.scn").instantiate()
-		effects_container.add_child(effect_panel)
 
 func enable_color_buttons(enabled: bool) -> void:
 	for color_button: Button in card_color_buttons.get_children():
