@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lethal Card Editor</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0f1314;
+      --panel-bg: #1b1f20;
+      --card-bg: #2a2d2e;
+      --text: #eee;
+      --accent: #cf3d45;
+      --radius: 12px;
+      --shadow: 0 4px 18px rgba(0,0,0,0.55);
+      --divider: rgba(255,255,255,0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 1.5rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1450px;
+      display: grid;
+      grid-template-columns: 260px 1fr 380px;
+      gap: 1.5rem;
+    }
+
+    /* Card List */
+    .card-list {
+      background: var(--panel-bg);
+      border-radius: var(--radius);
+      padding: 1rem;
+      box-shadow: var(--shadow);
+      height: 80vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-list h2 {
+      font-size: 1.2rem;
+      margin-bottom: .6rem;
+      opacity: 0.85;
+    }
+
+    .card-search {
+      width: 100%;
+      background: #2d3031;
+      border: none;
+      border-radius: var(--radius);
+      color: var(--text);
+      font-size: 0.95rem;
+      padding: 0.55rem 0.9rem;
+      margin-bottom: 0.8rem;
+      outline: none;
+    }
+
+    .card-list-items {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .no-cards {
+      font-size: 0.9rem;
+      opacity: 0.6;
+      padding: 0.5rem 0.2rem;
+    }
+
+    .card-list-item {
+      background: var(--card-bg);
+      padding: .6rem .9rem;
+      border-radius: var(--radius);
+      cursor: pointer;
+      display: flex;
+      gap: .6rem;
+      align-items: center;
+      transition: 150ms;
+      font-size: 0.95rem;
+      border: 1px solid transparent;
+      position: relative;
+    }
+
+    .card-list-item span.card-name {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-list-item:hover {
+      background: #333;
+      transform: translateY(-1px);
+    }
+
+    .card-list-item.active {
+      border-color: var(--accent);
+    }
+
+    .card-icon {
+      width: 1.4rem;
+      text-align: center;
+    }
+
+    /* Hover-only delete icon in list */
+    .delete-card-btn {
+      margin-left: auto;
+      color: var(--accent);
+      opacity: 0;
+      padding: 0.2rem 0.45rem;
+      cursor: pointer;
+      font-size: 0.9rem;
+      border-radius: 6px;
+      pointer-events: none;
+      transition: 120ms;
+    }
+
+    .card-list-item:hover .delete-card-btn {
+      opacity: 0.9;
+      pointer-events: auto;
+      background: rgba(0,0,0,0.25);
+      transform: scale(1.1);
+    }
+
+    .delete-card-btn:hover {
+      background: rgba(255,0,0,0.18);
+    }
+
+    .new-card-btn {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      margin-top: 0.9rem;
+      border-radius: var(--radius);
+      border: none;
+      background: var(--accent);
+      color: var(--text);
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: 150ms;
+    }
+
+    .new-card-btn:hover {
+      filter: brightness(1.15);
+      transform: translateY(-2px);
+    }
+
+    /* Editor */
+    .editor {
+      background: var(--panel-bg);
+      border-radius: var(--radius);
+      padding: 0;
+      box-shadow: var(--shadow);
+      height: 80vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 🔒 Locked banner */
+    .lock-banner {
+      width: 100%;
+      background: rgba(255,200,0,0.12);
+      border-bottom: 2px solid #f6d75a;
+      color: #f6d75a;
+      padding: 8px 12px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: none; /* shown only for permanent cards */
+      align-items: center;
+      gap: 8px;
+    }
+
+    .lock-banner .icon {
+      font-size: 1.1rem;
+    }
+
+    .tabs {
+      display: flex;
+      gap: .5rem;
+      border-bottom: 1px solid var(--divider);
+      padding: .6rem 1rem;
+    }
+
+    .tab {
+      padding: .4rem .9rem;
+      background: rgba(255,255,255,0.06);
+      border-radius: 8px 8px 0 0;
+      cursor: pointer;
+      opacity: 0.8;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .tab.active {
+      background: var(--panel-bg);
+      opacity: 1;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .editor-content {
+      padding: 1.3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: opacity 150ms;
+    }
+
+    .editor-content.locked {
+      opacity: 0.4;
+    }
+
+    .tab-page {
+      display: none;
+    }
+
+    .tab-page.active {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    label {
+      font-size: .85rem;
+      opacity: .7;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      background: #2d3031;
+      border: none;
+      border-radius: var(--radius);
+      color: var(--text);
+      font-size: 1rem;
+      padding: .65rem 1rem;
+      margin-top: .3rem;
+      outline: none;
+    }
+
+    textarea {
+      height: 120px;
+      resize: none;
+    }
+
+    input[disabled], textarea[disabled], select[disabled] {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .color-row {
+      display: flex;
+      gap: .6rem;
+    }
+
+    .color-option {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+
+    .color-option.selected {
+      border-color: var(--text);
+    }
+
+    .upload-btn {
+      background: #333;
+      padding: .6rem 1rem;
+      border-radius: var(--radius);
+      cursor: pointer;
+      opacity: .85;
+      display: inline-block;
+      margin-top: .3rem;
+    }
+
+    .upload-btn:hover { opacity: 1; }
+
+    .remove-image-btn {
+      margin-top: .4rem;
+      font-size: 0.85rem;
+      opacity: .6;
+      cursor: pointer;
+    }
+
+    .remove-image-btn:hover {
+      opacity: 0.9;
+    }
+
+    .delete-save-row {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: .8rem 1.2rem;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-weight: 600;
+      transition: 150ms;
+      text-align: center;
+      flex: 1;
+    }
+
+    .btn.delete { background: #444; }
+    .btn.save   { background: var(--accent); }
+
+    .btn.disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      filter: none;
+      transform: none;
+    }
+
+    .btn:hover:not(.disabled) {
+      filter: brightness(1.18);
+      transform: translateY(-2px);
+    }
+
+    .effects-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .effect-row {
+      background: #2a2d2e;
+      border-radius: var(--radius);
+      padding: 0.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .effect-row-top {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .effect-fields {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .effect-field {
+      flex: 1 1 140px;
+    }
+
+    .effect-field label {
+      font-size: 0.75rem;
+      opacity: 0.7;
+    }
+
+    .effect-field input,
+    .effect-field select,
+    .effect-field textarea {
+      margin-top: 0.2rem;
+      font-size: 0.9rem;
+      padding: 0.5rem 0.7rem;
+    }
+
+    .remove-effect {
+      cursor: pointer;
+      opacity: 0.7;
+      padding: 0.3rem 0.7rem;
+      border-radius: var(--radius);
+      border: none;
+      background: transparent;
+      font-size: 1rem;
+    }
+    .remove-effect:hover {
+      background: rgba(255,255,255,0.08);
+      opacity: 1;
+    }
+
+    .add-effect-btn {
+      width: 100%;
+      padding: 0.8rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px dashed var(--divider);
+      color: var(--text);
+      cursor: pointer;
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      transition: 120ms;
+    }
+
+    .add-effect-btn:hover {
+      border-color: var(--accent);
+      background: rgba(255,255,255,0.1);
+    }
+
+    .preview-panel {
+      background: var(--panel-bg);
+      border-radius: var(--radius);
+      padding: 1rem;
+      box-shadow: var(--shadow);
+      height: 80vh;
+    }
+
+    .preview-panel h2 {
+      opacity: .55;
+      text-align: center;
+      margin-bottom: .8rem;
+    }
+
+    .preview-card {
+      margin: 0 auto;
+      width: 260px;
+      height: 430px;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 3px solid #555;
+    }
+
+    .preview-header {
+      flex: 0 0 22%;
+      display: flex;
+      align-items: center;
+      padding: .4rem .6rem;
+      justify-content: space-between;
+      font-weight: 700;
+      background: #303233;
+      font-size: 0.95rem;
+    }
+
+    .preview-cost {
+      display: flex;
+      gap: .3rem;
+      align-items: center;
+    }
+
+    .preview-art {
+      flex: 0 0 53%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #9b0c1c;
+      font-size: 2.4rem;
+      position: relative;
+    }
+
+    .preview-art img {
+      max-width: 88%;
+      max-height: 88%;
+      object-fit: contain;
+      pointer-events: none;
+    }
+
+    .preview-art.dragging {
+      outline: 3px dashed var(--accent);
+      opacity: 0.6;
+    }
+
+    .preview-desc {
+      flex: 0 0 25%;
+      padding: .6rem;
+      background: #303233;
+      text-align: center;
+      font-size: .9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+
+
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- Card List -->
+  <div class="card-list">
+    <h2>Card List</h2>
+    <input
+      type="text"
+      id="card-search"
+      class="card-search"
+      placeholder="Find a card"
+      autocomplete="off"
+    />
+    <div class="card-list-items" id="card-list"></div>
+    <button class="new-card-btn" id="new-card-btn">+ New Card</button>
+  </div>
+
+  <!-- Editor -->
+  <div class="editor">
+    <!-- Lock banner -->
+    <div id="lock-banner" class="lock-banner">
+      <span class="icon">🔒</span>
+      <span>Core card — cannot be edited</span>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active" data-target="card-tab">Card</div>
+      <div class="tab" data-target="effects-tab">Effects</div>
+    </div>
+
+    <div class="editor-content" id="editor-content">
+      <!-- Card Tab -->
+      <div id="card-tab" class="tab-page active">
+        <div>
+          <label for="card-name">Card Name</label>
+          <input id="card-name" type="text" placeholder="Slash">
+        </div>
+
+        <div>
+          <label for="energy-cost">Energy Cost</label>
+          <input id="energy-cost" type="number" min="0" max="3">
+        </div>
+
+        <div>
+          <label for="card-description">Description</label>
+          <textarea id="card-description"></textarea>
+        </div>
+
+        <div>
+          <label>Color</label>
+          <div class="color-row">
+            <div class="color-option selected" data-color="#9b0c1c" style="background:#9b0c1c"></div>
+            <div class="color-option" data-color="#0072f5" style="background:#0072f5"></div>
+            <div class="color-option" data-color="#9d28b0" style="background:#9d28b0"></div>
+            <div class="color-option" data-color="#00a04a" style="background:#00a04a"></div>
+            <div class="color-option" data-color="#ffa500" style="background:#ffa500"></div>
+          </div>
+        </div>
+
+        <div>
+          <label>Image</label><br>
+          <label class="upload-btn">
+            Upload Image
+            <input type="file" id="image-input" accept="image/*" style="display:none">
+          </label>
+          <div class="remove-image-btn" id="remove-image-btn" style="display:none;">Remove Image</div>
+        </div>
+      </div>
+
+      <!-- Effects Tab -->
+      <div id="effects-tab" class="tab-page">
+        <div>
+          <label>Effects</label>
+          <div class="effects-list" id="effects-list"></div>
+        </div>
+        <button type="button" class="add-effect-btn" id="add-effect-btn">+ Add Effect</button>
+      </div>
+    </div>
+
+    <div class="delete-save-row" id="action-row">
+      <div class="btn delete disabled" id="delete-btn">Cancel Changes</div>
+      <div class="btn save" id="save-btn">Save Card</div>
+      <div class="btn save" id="duplicate-btn" style="display:none;">Duplicate</div>
+    </div>
+  </div>
+
+  <!-- Preview -->
+  <div class="preview-panel">
+    <h2>Preview</h2>
+    <div class="preview-card">
+      <div class="preview-header">
+        <div class="preview-cost"><span id="preview-cost">0</span> ⚡</div>
+        <div id="preview-title">Card Name</div>
+      </div>
+      <div class="preview-art" id="preview-art">🗡</div>
+      <div class="preview-desc" id="preview-desc">Card description...</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const EFFECT_CONFIG = {
+    'Deal Damage': [
+      { name: 'amount',   label: 'Damage Amount', type: 'number',  placeholder: 'e.g. 6' },
+      { name: 'scaling',  label: 'Scaling / Notes', type: 'text',  placeholder: 'e.g. +1 per card played' }
+    ],
+    'Apply Buff': [
+      { name: 'buff',     label: 'Buff', type: 'select', options: ['Repeat', 'Charge', 'Shield', 'Weaken'] },
+      { name: 'stacks',   label: 'Stacks', type: 'number', placeholder: 'e.g. 2' }
+    ],
+    'Draw Cards': [
+      { name: 'cards',    label: 'Cards Drawn', type: 'number', placeholder: 'e.g. 2' }
+    ],
+    'Custom Text': [
+      { name: 'text',     label: 'Effect Text', type: 'textarea', placeholder: 'Free-form rules text...' }
+    ]
+  };
+
+  const STORAGE_KEY = 'lethal_custom_cards_v1';
+
+  let cards = [
+    {
+      id: 'armory',
+      name: 'Armory',
+      energy: 1,
+      description: 'Choose two of the following – Slash, Spear, Pound or Cleave. Create a copy of each chosen card.',
+      color: '#9b0c1c',
+      isPermanent: true,
+      wasEverSaved: true,
+      image: null,
+      effects: [
+        { type: 'Custom Text', fields: { text: 'Choose two basic attacks and create a copy of each.' } }
+      ]
+    },
+    {
+      id: 'bargain',
+      name: 'Bargain',
+      energy: 0,
+      description: 'Draw 2 cards. Lose 2 HP.',
+      color: '#0072f5',
+      isPermanent: true,
+      wasEverSaved: true,
+      image: null,
+      effects: [
+        { type: 'Draw Cards', fields: { cards: '2' } },
+        { type: 'Deal Damage', fields: { amount: '2', scaling: 'Self-inflicted' } }
+      ]
+    },
+    {
+      id: 'slash',
+      name: 'Slash',
+      energy: 1,
+      description: 'Deal 6 damage.',
+      color: '#cf3d45',
+      isPermanent: true,
+      wasEverSaved: true,
+      image: null,
+      effects: [
+        { type: 'Deal Damage', fields: { amount: '6', scaling: '' } }
+      ]
+    }
+  ];
+
+  let currentCardId = cards[0]?.id ?? null;
+  let searchQuery = '';
+
+  // per-card baselines and dirty buffers
+  const lastSavedSnapshots = {};   // cardId -> snapshot (for saved cards)
+  const newCardBaselines  = {};    // cardId -> snapshot (initial for new cards)
+  const dirtyEdits        = {};    // cardId -> snapshot (in-flight changes)
+
+  const cardListContainer = document.getElementById('card-list');
+  const cardSearchInput  = document.getElementById('card-search');
+  const newCardBtn       = document.getElementById('new-card-btn');
+
+  const cardNameInput    = document.getElementById('card-name');
+  const energyInput      = document.getElementById('energy-cost');
+  const descTextarea     = document.getElementById('card-description');
+  const colorOptions     = document.querySelectorAll('.color-option');
+  const effectsList      = document.getElementById('effects-list');
+  const addEffectBtn     = document.getElementById('add-effect-btn');
+  const deleteBtn        = document.getElementById('delete-btn');
+  const saveBtn          = document.getElementById('save-btn');
+  const duplicateBtn     = document.getElementById('duplicate-btn');
+  const actionRow        = document.getElementById('action-row');
+  const imageInput       = document.getElementById('image-input');
+  const removeImageBtn   = document.getElementById('remove-image-btn');
+  const editorContent    = document.getElementById('editor-content');
+  const lockBanner       = document.getElementById('lock-banner');
+
+  const previewTitle = document.getElementById('preview-title');
+  const previewCost  = document.getElementById('preview-cost');
+  const previewDesc  = document.getElementById('preview-desc');
+  const previewArt   = document.getElementById('preview-art');
+
+  function generateId() {
+    return 'card_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+  }
+
+  function getCardById(id) {
+    return cards.find(c => c.id === id) || null;
+  }
+
+  function getSelectedColor() {
+    const selected = document.querySelector('.color-option.selected');
+    return selected ? selected.dataset.color : '#9b0c1c';
+  }
+
+  function setSelectedColor(color) {
+    colorOptions.forEach(opt => {
+      opt.classList.toggle('selected', opt.dataset.color === color);
+    });
+    previewArt.style.backgroundColor = color;
+  }
+
+  function snapshotFromCard(card) {
+    return {
+      name: card.name,
+      energy: card.energy,
+      description: card.description,
+      color: card.color,
+      effects: JSON.parse(JSON.stringify(card.effects || [])),
+      image: card.image || null
+    };
+  }
+
+  function snapshotFromUI() {
+    return {
+      name: cardNameInput.value || '',
+      energy: Number(energyInput.value || 0),
+      description: descTextarea.value || '',
+      color: getSelectedColor(),
+      effects: readEffectsFromUI(),
+      image: getCardById(currentCardId)?.image || null
+    };
+  }
+
+  function updatePreviewImage(base64) {
+    previewArt.innerHTML = '';
+    if (!base64) {
+      previewArt.textContent = '🗡';
+      return;
+    }
+    const img = document.createElement('img');
+    img.src = base64;
+    previewArt.appendChild(img);
+  }
+
+  function loadImageForCardSnapshot(snap) {
+    updatePreviewImage(snap.image || null);
+  }
+
+  function cardMatchesSearch(card, query) {
+    if (!query) return true;
+    const q = query.toLowerCase();
+    const nameMatch = (card.name || '').toLowerCase().includes(q);
+    const descMatch = (card.description || '').toLowerCase().includes(q);
+
+    let effectsText = '';
+    (card.effects || []).forEach(eff => {
+      effectsText += ' ' + (eff.type || '');
+      if (eff.fields) {
+        Object.values(eff.fields).forEach(v => {
+          effectsText += ' ' + String(v || '');
+        });
+      }
+    });
+
+    const effectsMatch = effectsText.toLowerCase().includes(q);
+    return nameMatch || descMatch || effectsMatch;
+  }
+
+  function editorHasUnsavedChanges() {
+    const card = getCardById(currentCardId);
+    if (!card || card.isPermanent) return false;
+
+    const currentUI = snapshotFromUI();
+
+    if (!card.wasEverSaved) {
+      const base = newCardBaselines[card.id];
+      if (!base) return true;
+      const changed = JSON.stringify(currentUI) !== JSON.stringify(base);
+      if (!changed && dirtyEdits[card.id]) delete dirtyEdits[card.id];
+      return changed;
+    }
+
+    const baseline = lastSavedSnapshots[card.id] || snapshotFromCard(card);
+    const changed = JSON.stringify(currentUI) !== JSON.stringify(baseline);
+    if (!changed && dirtyEdits[card.id]) delete dirtyEdits[card.id];
+    return changed;
+  }
+
+  function updateCancelButtonState() {
+    const card = getCardById(currentCardId);
+    if (!card || card.isPermanent) {
+      deleteBtn.classList.add('disabled');
+      renderCardList();
+      return;
+    }
+    const hasChanges = editorHasUnsavedChanges();
+    deleteBtn.classList.toggle('disabled', !hasChanges);
+    renderCardList();
+  }
+
+  function renderCardList() {
+    cardListContainer.innerHTML = '';
+
+    const filtered = cards.filter(c => cardMatchesSearch(c, searchQuery));
+    if (filtered.length === 0) {
+      const div = document.createElement('div');
+      div.className = 'no-cards';
+      div.textContent = 'No cards found.';
+      cardListContainer.appendChild(div);
+      return;
+    }
+
+    filtered.forEach(card => {
+      const div = document.createElement('div');
+      div.className = 'card-list-item';
+      if (card.id === currentCardId) div.classList.add('active');
+
+      const iconSpan = document.createElement('span');
+      iconSpan.className = 'card-icon';
+      iconSpan.textContent = card.isPermanent ? '🔒' : '✏️';
+
+      const nameSpan = document.createElement('span');
+      nameSpan.className = 'card-name';
+
+      let displayName = card.name;
+      const isDirty = !!dirtyEdits[card.id];
+      if (!card.isPermanent && isDirty) {
+        displayName += '*';
+      }
+      nameSpan.textContent = displayName;
+      nameSpan.style.color = card.color;
+
+      div.appendChild(iconSpan);
+      div.appendChild(nameSpan);
+
+      if (!card.isPermanent) {
+        const delBtn = document.createElement('span');
+        delBtn.textContent = '✖';
+        delBtn.className = 'delete-card-btn';
+        delBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (!confirm(`Delete "${card.name}"?`)) return;
+          deleteCardById(card.id);
+        });
+        div.appendChild(delBtn);
+      }
+
+      div.addEventListener('click', () => {
+        if (card.id === currentCardId) return;
+        currentCardId = card.id;
+        loadCardIntoEditor(card);
+        renderCardList();
+      });
+
+      cardListContainer.appendChild(div);
+    });
+  }
+
+  function renderEffectFields(row, typeKey, savedFields = {}) {
+    const fieldsContainer = row.querySelector('.effect-fields');
+    fieldsContainer.innerHTML = '';
+
+    const schema = EFFECT_CONFIG[typeKey] || [];
+    schema.forEach(field => {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'effect-field';
+
+      const label = document.createElement('label');
+      label.textContent = field.label;
+      wrapper.appendChild(label);
+
+      let inputEl;
+      if (field.type === 'textarea') {
+        inputEl = document.createElement('textarea');
+      } else if (field.type === 'select') {
+        inputEl = document.createElement('select');
+        (field.options || []).forEach(optVal => {
+          const opt = document.createElement('option');
+          opt.value = optVal;
+          opt.textContent = optVal;
+          inputEl.appendChild(opt);
+        });
+      } else {
+        inputEl = document.createElement('input');
+        inputEl.type = field.type;
+      }
+
+      inputEl.name = field.name;
+      if (field.placeholder && field.type !== 'select') {
+        inputEl.placeholder = field.placeholder;
+      }
+
+      if (savedFields && savedFields[field.name] !== undefined) {
+        inputEl.value = savedFields[field.name];
+      }
+
+      wrapper.appendChild(inputEl);
+      fieldsContainer.appendChild(wrapper);
+    });
+  }
+
+  function createEffectRow(effect = null) {
+    const row = document.createElement('div');
+    row.className = 'effect-row';
+
+    const topRow = document.createElement('div');
+    topRow.className = 'effect-row-top';
+
+    const typeSelect = document.createElement('select');
+    Object.keys(EFFECT_CONFIG).forEach(key => {
+      const opt = document.createElement('option');
+      opt.value = key;
+      opt.textContent = key;
+      typeSelect.appendChild(opt);
+    });
+
+    const removeBtn = document.createElement('button');
+    removeBtn.type = 'button';
+    removeBtn.className = 'remove-effect';
+    removeBtn.textContent = '✕';
+    removeBtn.addEventListener('click', () => {
+      effectsList.removeChild(row);
+      onEditorChanged();
+    });
+
+    topRow.appendChild(typeSelect);
+    topRow.appendChild(removeBtn);
+
+    const fieldsContainer = document.createElement('div');
+    fieldsContainer.className = 'effect-fields';
+
+    row.appendChild(topRow);
+    row.appendChild(fieldsContainer);
+
+    const initialType = effect?.type || typeSelect.value;
+    typeSelect.value = initialType;
+    renderEffectFields(row, initialType, effect?.fields || {});
+
+    typeSelect.addEventListener('change', () => {
+      renderEffectFields(row, typeSelect.value, {});
+      onEditorChanged();
+    });
+
+    return row;
+  }
+
+  function loadEffectsFromSnapshot(snap) {
+    effectsList.innerHTML = '';
+    const effects = snap.effects || [];
+    if (effects.length === 0) {
+      effectsList.appendChild(createEffectRow());
+      return;
+    }
+    effects.forEach(eff => {
+      effectsList.appendChild(createEffectRow(eff));
+    });
+  }
+
+  function readEffectsFromUI() {
+    const rows = Array.from(effectsList.children);
+    return rows.map(row => {
+      const typeSelect = row.querySelector('.effect-row-top select');
+      const fields = {};
+      row.querySelectorAll('.effect-field [name]').forEach(input => {
+        fields[input.name] = input.value;
+      });
+      return {
+        type: typeSelect.value,
+        fields
+      };
+    });
+  }
+
+  function setEditorEnabled(card) {
+    const isPermanent = card.isPermanent;
+
+    if (isPermanent) {
+      lockBanner.style.display = 'flex';
+      editorContent.classList.add('locked');
+      actionRow.style.display = 'flex';
+      deleteBtn.style.display = 'none';
+      saveBtn.style.display = 'none';
+      duplicateBtn.style.display = 'block';
+    } else {
+      lockBanner.style.display = 'none';
+      editorContent.classList.remove('locked');
+      actionRow.style.display = 'flex';
+      deleteBtn.style.display = 'block';
+      saveBtn.style.display = 'block';
+      duplicateBtn.style.display = 'none';
+    }
+
+    const disableInputs = isPermanent;
+
+    const inputs = document.querySelectorAll(
+      '#card-tab input, #card-tab textarea, #effects-tab input, #effects-tab textarea, #effects-tab select'
+    );
+
+    inputs.forEach(el => {
+      if (el.id === 'card-search') return;
+      el.disabled = disableInputs;
+    });
+
+    colorOptions.forEach(opt => {
+      opt.style.pointerEvents = disableInputs ? 'none' : 'auto';
+      opt.style.opacity = disableInputs ? '0.5' : '1';
+    });
+
+    imageInput.disabled = disableInputs;
+    removeImageBtn.style.pointerEvents = disableInputs ? 'none' : 'auto';
+    removeImageBtn.style.opacity = disableInputs ? 0.3 : 0.6;
+
+    addEffectBtn.style.display = disableInputs ? 'none' : 'block';
+
+    if (isPermanent) {
+      deleteBtn.classList.add('disabled');
+      saveBtn.classList.add('disabled');
+    } else {
+      saveBtn.classList.remove('disabled');
+      updateCancelButtonState();
+    }
+  }
+
+  function loadCardIntoEditor(card) {
+    let snap;
+
+    if (!card.wasEverSaved) {
+      if (!newCardBaselines[card.id]) {
+        newCardBaselines[card.id] = snapshotFromCard(card);
+      }
+      snap = dirtyEdits[card.id] || newCardBaselines[card.id];
+    } else {
+      if (!lastSavedSnapshots[card.id]) {
+        lastSavedSnapshots[card.id] = snapshotFromCard(card);
+      }
+      snap = dirtyEdits[card.id] || lastSavedSnapshots[card.id];
+    }
+
+    cardNameInput.value = snap.name;
+    energyInput.value   = snap.energy;
+    descTextarea.value  = snap.description;
+
+    previewTitle.textContent = snap.name || 'Card Name';
+    previewCost.textContent  = snap.energy ?? 0;
+    previewDesc.textContent  = snap.description || 'Card description...';
+
+    setSelectedColor(snap.color || '#9b0c1c');
+    loadEffectsFromSnapshot(snap);
+    loadImageForCardSnapshot(snap);
+
+    removeImageBtn.style.display = snap.image && !card.isPermanent ? 'block' : 'none';
+
+    setEditorEnabled(card);
+    updateCancelButtonState();
+  }
+
+  function saveToLocalStorage() {
+    const customCards = cards.filter(c => !c.isPermanent && c.wasEverSaved);
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(customCards));
+    } catch (e) {
+      console.warn('Failed to save cards', e);
+    }
+  }
+
+  function loadFromLocalStorage() {
+    try {
+      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      stored.forEach(card => {
+        card.isPermanent = false;
+        card.wasEverSaved = true;
+        cards.push(card);
+        lastSavedSnapshots[card.id] = snapshotFromCard(card);
+      });
+    } catch(e) {
+      console.warn('Failed to load saved cards', e);
+    }
+  }
+
+  function onEditorChanged() {
+    const card = getCardById(currentCardId);
+    if (!card || card.isPermanent) return;
+
+    const snap = snapshotFromUI();
+    dirtyEdits[card.id] = snap;
+
+    previewTitle.textContent = snap.name || 'Card Name';
+    previewCost.textContent  = snap.energy ?? 0;
+    previewDesc.textContent  = snap.description || 'Card description...';
+    setSelectedColor(snap.color || '#9b0c1c');
+    loadImageForCardSnapshot(snap);
+
+    updateCancelButtonState();
+  }
+
+  function saveCurrentCardFromEditor() {
+    const card = getCardById(currentCardId);
+    if (!card || card.isPermanent) return;
+
+    const snap = snapshotFromUI();
+
+    card.name        = snap.name;
+    card.energy      = snap.energy;
+    card.description = snap.description;
+    card.color       = snap.color;
+    card.effects     = snap.effects;
+    card.image       = snap.image;
+    card.wasEverSaved = true;
+
+    lastSavedSnapshots[card.id] = snapshotFromCard(card);
+    delete dirtyEdits[card.id];
+
+    saveToLocalStorage();
+    updateCancelButtonState();
+    renderCardList();
+  }
+
+  function deleteCardById(cardId) {
+    const wasCurrent = (cardId === currentCardId);
+    cards = cards.filter(c => c.id !== cardId);
+    delete dirtyEdits[cardId];
+    delete lastSavedSnapshots[cardId];
+    delete newCardBaselines[cardId];
+    saveToLocalStorage();
+
+    if (wasCurrent) {
+      const nextCard =
+        cards.find(c => c.isPermanent) ||
+        cards[0] ||
+        null;
+
+      currentCardId = nextCard ? nextCard.id : null;
+      if (nextCard) {
+        loadCardIntoEditor(nextCard);
+      } else {
+        cardNameInput.value = '';
+        energyInput.value   = '';
+        descTextarea.value  = '';
+        previewTitle.textContent = 'Card Name';
+        previewCost.textContent  = '0';
+        previewDesc.textContent  = 'Card description...';
+        effectsList.innerHTML    = '';
+        updatePreviewImage(null);
+      }
+    }
+    renderCardList();
+  }
+
+  function createNewCard() {
+    const color = getSelectedColor();
+
+    const newCard = {
+      id: generateId(),
+      name: 'New Card',
+      energy: 1,
+      description: '',
+      color,
+      isPermanent: false,
+      wasEverSaved: false,
+      image: null,
+      effects: [
+        { type: 'Deal Damage', fields: { amount: '', scaling: '' } }
+      ]
+    };
+
+    cards.push(newCard);
+    currentCardId = newCard.id;
+
+    searchQuery = '';
+    cardSearchInput.value = '';
+
+    newCardBaselines[newCard.id] = snapshotFromCard(newCard);
+    delete dirtyEdits[newCard.id];
+
+    loadCardIntoEditor(newCard);
+    renderCardList();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll('.tab');
+    const tabPages = document.querySelectorAll('.tab-page');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const targetId = tab.dataset.target;
+        tabs.forEach(t => t.classList.remove('active'));
+        tabPages.forEach(page => page.classList.remove('active'));
+
+        tab.classList.add('active');
+        document.getElementById(targetId).classList.add('active');
+      });
+    });
+
+    loadFromLocalStorage();
+    if (currentCardId && getCardById(currentCardId)) {
+      loadCardIntoEditor(getCardById(currentCardId));
+    } else if (cards.length > 0) {
+      currentCardId = cards[0].id;
+      loadCardIntoEditor(cards[0]);
+    }
+
+    renderCardList();
+
+    colorOptions.forEach(opt => {
+      opt.addEventListener('click', () => {
+        const card = getCardById(currentCardId);
+        if (!card || card.isPermanent) return;
+        colorOptions.forEach(o => o.classList.remove('selected'));
+        opt.classList.add('selected');
+        onEditorChanged();
+      });
+    });
+
+    cardNameInput.addEventListener('input', onEditorChanged);
+    energyInput.addEventListener('input', onEditorChanged);
+    descTextarea.addEventListener('input', onEditorChanged);
+
+    cardSearchInput.addEventListener('input', () => {
+      searchQuery = cardSearchInput.value || '';
+      renderCardList();
+    });
+
+    addEffectBtn.addEventListener('click', () => {
+      effectsList.appendChild(createEffectRow());
+      onEditorChanged();
+    });
+
+    effectsList.addEventListener('input', onEditorChanged);
+    effectsList.addEventListener('change', onEditorChanged);
+
+    deleteBtn.addEventListener('click', () => {
+      if (deleteBtn.classList.contains('disabled')) return;
+      const card = getCardById(currentCardId);
+      if (!card || card.isPermanent) return;
+
+      if (!card.wasEverSaved) {
+        cards = cards.filter(c => c.id !== card.id);
+        delete dirtyEdits[card.id];
+        delete newCardBaselines[card.id];
+
+        const fallback =
+          cards.find(c => c.isPermanent) ||
+          cards[0] ||
+          null;
+
+        currentCardId = fallback ? fallback.id : null;
+
+        if (fallback) {
+          loadCardIntoEditor(fallback);
+        } else {
+          cardNameInput.value = '';
+          energyInput.value   = '';
+          descTextarea.value  = '';
+          previewTitle.textContent = 'Card Name';
+          previewCost.textContent  = '0';
+          previewDesc.textContent  = 'Card description...';
+          effectsList.innerHTML    = '';
+          updatePreviewImage(null);
+        }
+
+        saveToLocalStorage();
+        renderCardList();
+        return;
+      }
+
+      delete dirtyEdits[card.id];
+      const baseline = lastSavedSnapshots[card.id] || snapshotFromCard(card);
+      card.name        = baseline.name;
+      card.energy      = baseline.energy;
+      card.description = baseline.description;
+      card.color       = baseline.color;
+      card.effects     = JSON.parse(JSON.stringify(baseline.effects || []));
+      card.image       = baseline.image || null;
+
+      loadCardIntoEditor(card);
+      renderCardList();
+    });
+
+    saveBtn.addEventListener('click', () => {
+      const card = getCardById(currentCardId);
+      if (!card || card.isPermanent) return;
+      saveCurrentCardFromEditor();
+    });
+
+    newCardBtn.addEventListener('click', () => {
+      createNewCard();
+    });
+
+    imageInput.addEventListener('change', (e) => {
+      const card = getCardById(currentCardId);
+      if (!card || card.isPermanent) return;
+
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        const base64 = ev.target.result;
+        const snap = snapshotFromUI();
+        snap.image = base64;
+        dirtyEdits[card.id] = snap;
+        loadImageForCardSnapshot(snap);
+        removeImageBtn.style.display = 'block';
+        updateCancelButtonState();
+      };
+      reader.readAsDataURL(file);
+    });
+
+    removeImageBtn.addEventListener('click', () => {
+      const card = getCardById(currentCardId);
+      if (!card || card.isPermanent) return;
+      const snap = snapshotFromUI();
+      snap.image = null;
+      dirtyEdits[card.id] = snap;
+      loadImageForCardSnapshot(snap);
+      removeImageBtn.style.display = 'none';
+      updateCancelButtonState();
+    });
+
+    ['dragover', 'dragenter'].forEach(evt => {
+      previewArt.addEventListener(evt, (e) => {
+        e.preventDefault();
+        const card = getCardById(currentCardId);
+        if (!card || card.isPermanent) return;
+        previewArt.classList.add('dragging');
+      });
+    });
+
+    ['dragleave', 'drop'].forEach(evt => {
+      previewArt.addEventListener(evt, () => {
+        previewArt.classList.remove('dragging');
+      });
+    });
+
+    previewArt.addEventListener('drop', (e) => {
+      e.preventDefault();
+      const card = getCardById(currentCardId);
+      if (!card || card.isPermanent) return;
+
+      const file = e.dataTransfer.files?.[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        const base64 = ev.target.result;
+        const snap = snapshotFromUI();
+        snap.image = base64;
+        dirtyEdits[card.id] = snap;
+        loadImageForCardSnapshot(snap);
+        removeImageBtn.style.display = 'block';
+        updateCancelButtonState();
+      };
+      reader.readAsDataURL(file);
+    });
+  });
+
+// === DUPLICATE CORE CARD LOGIC ===
+if (duplicateBtn) {
+  duplicateBtn.addEventListener("click", () => {
+    const original = getCardById(currentCardId);
+    if (!original) return;
+
+    let baseName = original.name.replace(/ \(Copy.*\)$/i, "");
+    let copyIndex = 1;
+    let newName = `${baseName} (Copy)`;
+
+    // Ensure unique incremental naming
+    while (cards.some(c => c.name === newName)) {
+      copyIndex++;
+      newName = `${baseName} (Copy ${copyIndex})`;
+    }
+
+    const duplicate = {
+      ...original,
+      id: generateId(),
+      isPermanent: false,
+      wasEverSaved: false,
+      name: newName
+    };
+
+    cards.push(duplicate);
+    dirtyEdits[duplicate.id] = snapshotFromCard(duplicate);
+    currentCardId = duplicate.id;
+
+    loadCardIntoEditor(duplicate);
+    renderCardList();
+  });
+}
+
+</script>
+
+</body>
+</html>
