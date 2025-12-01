@@ -1,5 +1,6 @@
 {
   "puzzles": [
+    { "id": "2025-12-01", "release_at": "2025-12-01T00:00:00-04:00", "title": "Mushroom" },
     { "id": "2025-11-28", "release_at": "2025-11-28T00:00:00-04:00", "title": "Monk" },
     { "id": "2025-11-27", "release_at": "2025-11-27T00:00:00-04:00", "title": "Dwarven Miner" },
     { "id": "2025-11-26", "release_at": "2025-11-26T00:00:00-04:00", "title": "Frankestein's Monster" },

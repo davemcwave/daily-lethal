@@ -258,6 +258,43 @@ func merge_buff_extra_info(new_buff_extra_info: Dictionary) -> void:
 func get_buff_extra_info() -> Dictionary:
 	return buff_extra_info
 
+#func get_buff_panels_by_activation_order(buff_panels: Array, buff_activation_type: Buff.ActivationType) -> Array:
+	#var reordered_buff_panels = buff_panels.duplicate()
+#
+	#if buff_activation_type == Buff.ActivationType.OnAttack:
+		#reordered_buff_panels.sort_custom(self._compare_attack_buffs)
+#
+	#return reordered_buff_panels
+#
+#
+#func _compare_attack_buffs(a: BuffPanel, b: BuffPanel) -> bool:
+	#var buff_a: Buff = a.get_buff()
+	#var buff_b: Buff = b.get_buff()
+#
+	## Define priority (lower index => earlier activation)
+	#var priority_a = _attack_priority(buff_a)
+	#var priority_b = _attack_priority(buff_b)
+#
+	#if priority_a == priority_b:
+		## Stable fallback — alphabetical or creation order
+		#return buff_a.get_buff_name() < buff_b.get_buff_name()
+#
+	#return priority_a < priority_b
+#
+#
+#func _attack_priority(buff: Buff) -> int:
+	## Adjust this to match your desired OnAttack order:
+	#match buff.get_buff_name():
+		#"Critical":
+			#return 0
+		#"Poison":
+			#return 1
+		#Buff.BuffType.Echo:
+			#return 2
+		#_:
+			#return 99
+
+	
 func activate_buffs(buff_activation_type: Buff.ActivationType, extra_info: Dictionary = {}) -> Array:
 	merge_buff_extra_info(extra_info)
 	
@@ -269,7 +306,9 @@ func activate_buffs(buff_activation_type: Buff.ActivationType, extra_info: Dicti
 	var buff_objects_activated = []
 	print("------ animating is true")
 	animating = true
-	for buff_panel in get_children():
+	
+	var buff_panels = get_children()
+	for buff_panel in buff_panels:
 		if not is_instance_valid(buff_panel) or buff_panel == null and not buff_panel.is_inside_tree():
 			continue
 			
