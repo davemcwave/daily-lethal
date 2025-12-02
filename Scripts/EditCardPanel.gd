@@ -10,6 +10,7 @@ class_name EditCardPanel
 @onready var effects_container: VBoxContainer = effects_tab.get_node('VBoxContainer')
 @onready var card_color_buttons: Control = $TabContainer/Card/CardColorButtons
 @onready var card_icon_upload_button: Button = $TabContainer/Card/CardIconUploadButton
+@onready var card_preview_panel: CardEditorCardPreviewPanel = $"../CardPreviewPanel"
 
 func display_card_info(card: Card) -> void:
 	card_name_input.set_text(card.get_card_name())
@@ -29,3 +30,20 @@ func enable_color_buttons(enabled: bool) -> void:
 		
 func enable_icon_upload(enabled: bool) -> void:
 	card_icon_upload_button.set_disabled(not enabled)
+
+
+func _on_card_name_input_text_changed(new_text):
+	card_preview_panel.set_title(new_text)
+
+
+func _on_card_cost_input_text_changed(new_text):
+	card_preview_panel.set_energy(new_text)
+
+
+func _on_card_description_input_text_changed():
+	card_preview_panel.set_description(card_description_input.get_text())
+
+
+func _on_file_dialog_file_selected(path):
+	card_preview_panel.set_icon_texture(load(path))
+	

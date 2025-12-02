@@ -63,3 +63,43 @@ func mark_puzzle_completed(puzzle_date: String):
 		})();
 	""" % puzzle_date
 	JavaScriptBridge.eval(js_code, true)
+
+func get_all_buff_scenes() -> Array[Resource]:
+	var buff_scenes: Array[Resource] = []
+	var dir = DirAccess.open("res://Scenes/")
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if file_name.ends_with("Buff.scn") and not dir.current_is_dir() and file_name != "Card.scn":
+				var scene_path = "res://Scenes/" + file_name
+				var packed_scene = load(scene_path)
+				buff_scenes.append(packed_scene)
+			file_name = dir.get_next()
+		dir.list_dir_end()
+	return buff_scenes
+	
+func get_all_card_effect_scenes() -> Array[Resource]:
+	var buff_scenes: Array[Resource] = []
+	var dir = DirAccess.open("res://Scenes/")
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if file_name.ends_with("CardEffect.scn") and not dir.current_is_dir() and file_name != "Card.scn":
+				var scene_path = "res://Scenes/" + file_name
+				var packed_scene = load(scene_path)
+				buff_scenes.append(packed_scene)
+			file_name = dir.get_next()
+		dir.list_dir_end()
+	return buff_scenes
+	
+func get_card_effect_by_name(card_effect_name: String) -> CardEffect:
+	var card_effect_scenes: Array[Resource] = get_all_card_effect_scenes()
+	
+	for card_effect_scene: Resource in card_effect_scenes:
+		var card_effect: CardEffect = card_effect_scene.instantiate()
+		if card_effect.get_effect_name() == card_effect_name:
+			return card_effect
+	
+	return null

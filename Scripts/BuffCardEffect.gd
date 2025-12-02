@@ -11,7 +11,10 @@ func _ready() -> void:
 	reset_buff()
 
 func get_effect_name() -> String:
-	return buff.get_buff_name()
+	if buff == null:
+		return name
+	else:
+		return buff.get_buff_name()
 	#
 func get_effect_description() -> String:
 	return buff.get_buff_description()
