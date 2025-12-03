@@ -28,11 +28,16 @@ func appear() -> void:
 	
 func add_card_effect_panel(card_effect_panel) -> void:
 	disappear()
-	add_child(card_effect_panel)
+	
+	if card_effect_panel != null:
+		add_child(card_effect_panel)
+		
+	option_button.hide()
 	
 func _on_pressed():
-	option_button.show()
 	disappear()
+	option_button.show()
+	option_button.show_popup()
 	#var card_effect_buttons_container = load("res://Scenes/CardEffectButtonsContainer.scn").instantiate()
 	#var index = get_index()
 	#get_parent().add_child(card_effect_buttons_container)
@@ -51,7 +56,10 @@ func _on_option_button_item_selected(index):
 			appear()
 		_:
 			var card_effect: CardEffect = background.get_card_effect_by_name(card_effect_name) 
-			if card_effect != null:
-				add_card_effect_panel(card_effect.get_card_effect_panel())
+			if card_effect != null and card_effect.get_card_effect_panel() != null:
+				add_card_effect_panel(card_effect.get_card_effect_panel().instantiate())
+			else:
+				close_option_button()
+				appear()
 func _on_option_button_focus_exited():
 	close_option_button()
