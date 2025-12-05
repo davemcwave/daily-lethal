@@ -15,7 +15,8 @@ class_name Puzzle
 @export_enum("Player", "Enemy") var enemy_buff_target: String = "Player"
 
 @export var enemy_buffs: Array[Buff]
-
+@export var eye_1_position: Vector2
+@export var eye_2_position: Vector2
 @export_group("Player")
 @export var player_health: int = 3
 @export var player_energy: int = 5
@@ -34,6 +35,12 @@ class_name Puzzle
 
 var test_puzzle: bool = false
 
+func has_eye_positions() -> bool:
+	return eye_1_position != null and eye_2_position != null
+
+func get_eye_positions() -> Array[Vector2]:
+	return [eye_1_position, eye_2_position]
+	
 func get_hurt_line_chance() -> float:
 	return enemy_hurt_line_chance
 	

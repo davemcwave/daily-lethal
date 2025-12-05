@@ -10,13 +10,19 @@ signal just_hurt(amount: int)
 @onready var initial_icon_position: Vector2 = $EnemyIcon.position
 @export var health = 10
 @export var enemy_name_font_size = -1
+@export_enum("Normal", "Nightmare") var difficulty: String = "Normal"
 var dead: bool = false
 var animating: bool = false
 var debuff_activate_queue: Array = []
+
 @onready var blink_shader: Shader = load("res://Scripts/Shaders/WhiteBlink.gdshader")
 @onready var wobble_shader: Shader = load("res://Scripts/Shaders/Wobble.gdshader")
+@onready var shake_shader: Shader = load("res://Scripts/Shaders/Shake.gdshader")
+@onready var wobble_material: Material = load("res://Resources/EnemyWobbleMaterial.res")
+@onready var shake_material: Material = load("res://Resources/ShakeMaterial.res")
 @onready var audio_handler = $"/root/AudioHandler"
 @onready var dialog_handler = $"/root/DialogHandler"
+@onready var nightmare_icon: TextureRect = $NightmareIcon
 @onready var custom_camera: CustomCamera = scene.get_node("CustomCamera")
 var hurt_lines: Array[String] = []
 var hurt_lines_bag: Array[String] = []
@@ -29,8 +35,38 @@ func _ready():
 	update_health_bar()
 	
 	background.set_enemy_texture($EnemyIcon.get_texture())
-	$EnemyIcon.material.shader = wobble_shader
+	
+	initialize_for_difficulty()
 
+func get_difficulty() -> String:
+	return difficulty
+
+func set_difficulty(new_difficulty: String) -> void:
+	difficulty = new_difficulty
+	
+func initialize_for_difficulty() -> void:
+	match difficulty:
+		"Normal":
+			$EnemyIcon.material = wobble_material
+			$EnemyRedGlow.hide()
+			nightmare_icon.hide()
+		"Nightmare":
+			$EnemyIcon.material = shake_material
+			$EnemyRedGlow.show()
+			nightmare_icon.show()
+
+func set_eye_positions(eye_positions: Array[Vector2]) -> void:
+	var eye_1_position: Vector2 = eye_positions[0]
+	var eye_2_position: Vector2 = eye_positions[1]
+	var eye_1 = load("res://EnemyEyeGlow.scn").instantiate()
+	var eye_2 = load("res://EnemyEyeGlow.scn").instantiate()
+	$EnemyIcon.add_child(eye_1)
+	$EnemyIcon.add_child(eye_2)
+	eye_1.set_position(eye_1_position)
+	eye_2.set_position(eye_2_position)
+	
+func is_nightmare_difficulty() -> bool:
+	return difficulty == "Nightmare"
 func set_hurt_line_chance(new_hurt_line_chance: float) -> void:
 	hurt_line_chance = new_hurt_line_chance
 	
@@ -71,12 +107,13 @@ func add_debuff(new_debuff: Debuff) -> void:
 	$DebuffContainer.add_debuff(new_debuff)
 	
 func blink_white() -> void:
+	var previous_material = $EnemyIcon.material.duplicate()
 	$EnemyIcon.material.shader = blink_shader
 	$EnemyIcon.get_material().set_shader_parameter("blink_strength", 1.0)
 	
 	await get_tree().create_timer(0.1).timeout
 	$EnemyIcon.get_material().set_shader_parameter("blink_strength", 0.0)
-	$EnemyIcon.material.shader = wobble_shader
+	$EnemyIcon.material = previous_material
 
 func get_debuffs() -> Array:
 	return $DebuffContainer.get_debuffs()

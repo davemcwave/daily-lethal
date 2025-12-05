@@ -215,6 +215,10 @@ func set_puzzle(new_puzzle: Puzzle) -> void:
 	$Enemy.set_enemy_icon_texture(puzzle.get_enemy_icon_texture())
 	$Enemy.set_hurt_lines(puzzle.get_enemy_hurt_lines())
 	$Enemy.set_hurt_line_chance(puzzle.get_hurt_line_chance())
+	
+	if $Enemy.is_nightmare_difficulty() and puzzle.has_eye_positions():
+		$Enemy.set_eye_positions(puzzle.get_eye_positions())
+		
 	$"/root/Background".set_enemy_texture(puzzle.get_enemy_icon_texture())
 	for enemy_buff: Buff in puzzle.get_enemy_buffs():
 		var buff_panel: BuffPanel = load("res://Scenes/BuffPanel.scn").instantiate()
