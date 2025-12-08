@@ -7,6 +7,16 @@ var buffs_removed_this_turn: Array = []
 var buff_extra_info: Dictionary = {}
 var repeating: bool = false
 
+@onready var scene: Scene = get_parent()
+
+func _ready() -> void:
+	call_deferred('activate_add_buff_enemy_abilities')
+
+func activate_add_buff_enemy_abilities() -> void:
+	for enemy_ability: EnemyAbility in scene.get_enemy_abilities():
+		if enemy_ability is AddBuffEnemyAbility:
+			await enemy_ability.activate()
+			
 func set_repeating(new_repeating: bool) -> void:
 	repeating = new_repeating
 	

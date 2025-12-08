@@ -10,7 +10,8 @@ signal just_hurt(amount: int)
 @onready var initial_icon_position: Vector2 = $EnemyIcon.position
 @export var health = 10
 @export var enemy_name_font_size = -1
-@export_enum("Normal", "Nightmare") var difficulty: String = "Normal"
+
+var difficulty: String = "Normal"
 var dead: bool = false
 var animating: bool = false
 var debuff_activate_queue: Array = []
@@ -35,8 +36,6 @@ func _ready():
 	update_health_bar()
 	
 	background.set_enemy_texture($EnemyIcon.get_texture())
-	
-	initialize_for_difficulty()
 
 func get_difficulty() -> String:
 	return difficulty
@@ -44,7 +43,6 @@ func get_difficulty() -> String:
 func set_difficulty(new_difficulty: String) -> void:
 	difficulty = new_difficulty
 	
-func initialize_for_difficulty() -> void:
 	match difficulty:
 		"Normal":
 			$EnemyIcon.material = wobble_material
@@ -65,8 +63,6 @@ func set_eye_positions(eye_positions: Array[Vector2]) -> void:
 	eye_1.set_position(eye_1_position)
 	eye_2.set_position(eye_2_position)
 	
-func is_nightmare_difficulty() -> bool:
-	return difficulty == "Nightmare"
 func set_hurt_line_chance(new_hurt_line_chance: float) -> void:
 	hurt_line_chance = new_hurt_line_chance
 	
@@ -126,6 +122,14 @@ func get_buffs() -> Array[Buff]:
 	for buff_panel: BuffPanel in $EnemyBuffsContainer.get_children():
 		buffs.append(buff_panel.get_buff())
 	return buffs
+	
+func activate_on_play_buffs() -> void:
+	animating = true
+	for buff: Buff in get_buffs():
+		if buff.is_activated_on_card_play():
+			await get_tree().create_timer(0.25).timeout
+			buff.activate()
+	animating = false
 	
 func activate_on_hurt_buffs() -> void:
 	animating = true

@@ -7,6 +7,7 @@ class_name Puzzle
 @export_file("*.scn") var next_puzzle_scene
 @export var randomize_cards: bool = false
 @export var random_card_count: int = 6
+@export_enum("Normal", "Nightmare") var difficulty: String = "Normal"
 
 @export_group("Enemy")
 @export var enemy_health: int = 10
@@ -53,6 +54,12 @@ func get_enemy_hurt_lines() -> Array[String]:
 func get_dialogue_first() -> String:
 	return dialogue_first
 
+func is_nightmare_difficulty() -> bool:
+	return difficulty == "Nightmare"
+	
+func get_difficulty() -> String:
+	return difficulty
+	
 func has_any_cards(check_card_scenes: Array) -> bool:
 	var cards: Array[Card] = []
 	for card_scene in card_scenes:
@@ -65,7 +72,28 @@ func has_any_cards(check_card_scenes: Array) -> bool:
 			if card.get_card_name() == check_card.get_card_name():
 				return true
 	return false
+
+func has_enemy_abilities() -> bool:
+	return get_enemy_abilities().size() > 0
+
+func get_enemy_abilities() -> Array[EnemyAbility]:
+	var enemy_abilities: Array[EnemyAbility] = []
+	for child in get_children():
+		if child is EnemyAbility:
+			enemy_abilities.append(child)
+	return enemy_abilities
 	
+
+func activate_enemy_abilities() -> bool:
+	if has_enemy_abilities():
+		var all_activated: bool = true
+		for enemy_ability: EnemyAbility in get_enemy_abilities():
+			var activated: bool = await enemy_ability.activate()
+			if not activated:
+				all_activated = false
+		return all_activated
+	else:
+		return false
 	
 func get_dialogue_lines() -> Array[String]:
 	return dialogue_lines

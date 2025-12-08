@@ -401,6 +401,9 @@ func get_damage_card_effects() -> Array:
 		if card_effect is DamageCardEffect:
 			damage_card_effects.append(card_effect)
 	return damage_card_effects
+	
+func is_attack_card() -> bool:
+	return get_damage_card_effects().size() >= 0
 
 func set_queue_free_after_applying_card_effects(new_queue_free_after_applying_card_effects: bool) -> void:
 	queue_free_after_applying_card_effects = new_queue_free_after_applying_card_effects
@@ -452,7 +455,8 @@ func handle_sfx() -> void:
 			audio_handler.reset_pitch_scale("AddBuffSFX")
 		elif card_effect is DamageCardEffect:
 			audio_handler.reset_pitch_scale("EnhanceOtherCardsSFX")
-			
+	
+	
 func play():
 	handle_sfx()
 	buffs_container.clear_buffs_added_or_removed_this_turn()

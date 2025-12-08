@@ -29,6 +29,7 @@ var dialog_fight_button
 var player_dialog_panel
 var enemy_dialog_panel
 var black_bg
+var enemy_abilities: Array[EnemyAbility] = []
 
 func _ready():
 	
@@ -201,6 +202,17 @@ func get_files_in_folder(path: String) -> Array:
 func get_puzzle() -> Puzzle:
 	return puzzle
 	
+func set_enemy_abilities(new_enemy_abilities: Array[EnemyAbility]) -> void:
+	enemy_abilities.clear()
+	
+	for new_enemy_ability: EnemyAbility in new_enemy_abilities:
+		var enemy_ability = new_enemy_ability.duplicate(DUPLICATE_USE_INSTANTIATION)
+		enemy_abilities.append(enemy_ability)
+		add_child(enemy_ability)
+	
+func get_enemy_abilities() -> Array[EnemyAbility]:
+	return enemy_abilities
+	
 func set_puzzle(new_puzzle: Puzzle) -> void:
 	puzzle = new_puzzle
 	#var debug_text = ""
@@ -216,8 +228,10 @@ func set_puzzle(new_puzzle: Puzzle) -> void:
 	$Enemy.set_hurt_lines(puzzle.get_enemy_hurt_lines())
 	$Enemy.set_hurt_line_chance(puzzle.get_hurt_line_chance())
 	
-	if $Enemy.is_nightmare_difficulty() and puzzle.has_eye_positions():
+	if puzzle.is_nightmare_difficulty() and puzzle.has_eye_positions():
+		$Enemy.set_difficulty(puzzle.get_difficulty())
 		$Enemy.set_eye_positions(puzzle.get_eye_positions())
+		set_enemy_abilities(puzzle.get_enemy_abilities())
 		
 	$"/root/Background".set_enemy_texture(puzzle.get_enemy_icon_texture())
 	for enemy_buff: Buff in puzzle.get_enemy_buffs():
