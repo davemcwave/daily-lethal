@@ -1,5 +1,6 @@
 {
   "puzzles": [
+    { "id": "2025-12-12", "release_at": "2025-12-12T00:00:00-04:00", "title": "Owlbear" },
     { "id": "2025-12-11", "release_at": "2025-12-11T00:00:00-04:00", "title": "Wraith" },
     { "id": "2025-12-10", "release_at": "2025-12-10T00:00:00-04:00", "title": "Addition Sign" },
     { "id": "2025-12-09", "release_at": "2025-12-09T00:00:00-04:00", "title": "Living Shadow" },
