@@ -249,6 +249,11 @@ func remove_buff_by_name(buff_name: String) -> void:
 		if buff.get_buff_name() == buff_name:
 			buff_panel.queue_free()
 			return
+	
+func remove_all_buffs() -> void:
+	for buff_panel: BuffPanel in get_children():
+		buff_panel.queue_free()
+	
 
 func get_buffs(buff_activation_type: Buff.ActivationType) -> Array:
 	var buffs: Array = []
