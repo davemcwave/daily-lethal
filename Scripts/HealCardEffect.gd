@@ -1,4 +1,5 @@
 extends CardEffect
+class_name HealCardEffect
 
 @export var heal_amount: int = 1
 @onready var health: Health = get_tree().get_root().get_node("Scene/Health")

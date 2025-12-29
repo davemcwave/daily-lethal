@@ -11,6 +11,7 @@ signal just_hurt(amount: int)
 @export var health = 10
 @export var enemy_name_font_size = -1
 
+var max_health = 0
 var difficulty: String = "Normal"
 var dead: bool = false
 var animating: bool = false
@@ -90,11 +91,27 @@ func set_enemy_name(new_enemy_name: String) -> void:
 	if len(enemy_name) >= 19:
 		var current_enemy_name_font_size: int = $EnemyNamePanel/EnemyName.get("theme_override_font_sizes/bold_font_size") if enemy_name_font_size <= 0 else enemy_name_font_size 
 		$EnemyNamePanel/EnemyName.set("theme_override_font_sizes/bold_font_size",enemy_name_font_size)
-		
+	
+func set_max_health(new_max_health: int) -> void:
+	max_health = new_max_health
+	
+	$EnemyHealthBar.max_value = max_health
+	
 func set_health(new_health: int) -> void:
 	health = new_health
-	$EnemyHealthBar.max_value = health
 	$EnemyHealthBar.value = health
+	
+	update_health_bar()
+	
+func get_max_health() -> int:
+	return max_health
+	
+func get_health() -> int:
+	return health
+	
+func add_health(added_health: int) -> void:
+	health = min(max_health, health + added_health)
+	
 	update_health_bar()
 	
 func set_enemy_icon_texture(new_texture: Texture2D) -> void:
