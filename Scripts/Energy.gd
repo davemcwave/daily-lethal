@@ -3,7 +3,8 @@ class_name Energy
 
 @export_enum("left", "right", "center") var manual_justification: String = "center"
 @export var energy_amount: int = 5
-@onready var buffs_container: BuffsContainer = get_tree().get_root().get_node("Scene/BuffsContainer")
+@onready var scene: Scene = get_tree().get_root().get_node("Scene")
+@onready var buffs_container: BuffsContainer = scene.get_node("BuffsContainer")
 @onready var original_color: Color = self_modulate
 @onready var center_description: CenterDescription = get_tree().get_root().get_node("Scene/CanvasLayer/CenterDescription")
 @onready var health: Health 
@@ -43,6 +44,9 @@ func set_energy(new_energy: int) -> void:
 	
 func add_energy(additional_energy_amount: int) -> void:
 	energy_amount += additional_energy_amount
+	
+	create_add_energy_label(additional_energy_amount)
+	
 	blink()
 	update_energy_text()
 	
@@ -57,17 +61,24 @@ func use_energy(cost: int) -> void:
 func get_text_template() -> String:
 	match manual_justification:
 		"center": 
-			return "[center][b]%d[/b][/center]"
+			return "[center][b][shake rate=2.0 level=1 connected=1]%d[/shake][/b][/center]"
 		"left": 
-			return "[left][b]%d[/b][/left]"
+			return "[left][b][shake rate=2.0 level=1 connected=1]%d[/shake][/b][/left]"
 		"right": 
-			return "[right][b]%d[/b][/right]"
+			return "[right][b][shake rate=2.0 level=1 connected=1]%d[/shake][/b][/right]"
 		_:
-			return "[center][b]%d[/b][/center]"
+			return "[center][b][shake rate=2.0 level=1 connected=1]%d[/shake][/b][/center]"
 	
 func update_energy_text() -> void:
 	energy_amount_text.set_text(get_text_template() % energy_amount)
 
+func create_add_energy_label(amount: int, message: String = "") -> void:
+	var add_energy_label: RichTextLabel = load("res://Scenes/AddEnergyLabel.scn").instantiate()
+	add_energy_label.set_energy_amount(amount, message)
+	scene.add_child(add_energy_label)
+	add_energy_label.global_position = global_position
+	add_energy_label.float_up(25.0)
+	
 
 func _on_gui_input(event):
 	if event.is_action_pressed("select"):

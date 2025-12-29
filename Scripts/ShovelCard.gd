@@ -10,7 +10,7 @@ extends Card
 func update_description_panel() -> void:
 	var discard_pile_damage_card_effect: DiscardPileBasedDamageCardEffect = get_card_effects()[0]
 	
-	card_description = "[center]%s[/center]" % ("Deal damage equal to number of cards in the discard pile")
+	card_description = "[center][shake rate=2.0 level=1 connected=1]%s[/shake][/center]" % ("Deal damage equal to number of cards in the discard pile")
 	$DescriptionPanel/Title.set_text(card_description)
 
 func play():

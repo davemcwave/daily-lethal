@@ -4,7 +4,7 @@ extends Buff
 @onready var discard_panel: DiscardPanel = scene.get_node("DiscardPanel")
 @onready var hand: Hand = scene.get_node("HandScrollContainer/Hand")
 
-func activate() -> bool:
+func activate(context: Dictionary = {}) -> bool:
 	await get_tree().create_timer(0.5).timeout
 	
 	var card = scene.get_last_card_played()

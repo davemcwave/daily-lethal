@@ -2,7 +2,12 @@ extends Panel
 
 const BANNER_WAIT_TIME_SECONDS: float = 3.0
 func _ready():
-	if not has_seen_intro():
+	var show_intro_banner: bool = true
+	
+	if get_parent().get_parent() is Scene:
+		show_intro_banner = get_parent().get_parent().show_intro_banner
+		
+	if not has_seen_intro() and show_intro_banner:
 		show()
 		swipe_down()
 		set_intro_seen()

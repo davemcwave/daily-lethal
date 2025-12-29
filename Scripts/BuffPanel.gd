@@ -6,6 +6,8 @@ class_name BuffPanel
 @export var buff: Buff
 var _blinking: bool = false
 var _base_modulate: Color
+var _highlighted: bool = false
+const HIGHLIGHT_ADJUST: float = 0.2
 
 func _ready():
 	_base_modulate = modulate
@@ -18,7 +20,7 @@ func blink() -> void:
 	# don’t read modulate at runtime, you already know your normal
 	modulate = Color(1,1,1)      # blink red
 	await get_tree().create_timer(0.1).timeout
-	modulate = _base_modulate
+	_apply_modulate()
 
 
 	
@@ -30,11 +32,9 @@ func set_buff(new_buff: Buff) -> void:
 			new_buff.get_parent().remove_child(new_buff)
 		add_child(new_buff)
 	
-	modulate = buff.get_color()
-	
-	
 	buff.set_buff_panel(self)
 	_base_modulate = buff.get_color()
+	_apply_modulate()
 
 	if buff.is_unlimited_uses():
 		$UnlimitedPanel.show()
@@ -56,3 +56,18 @@ func _on_gui_input(event):
 		center_description.show()
 	elif event.is_action_released("select"):
 		center_description.hide()
+
+func set_highlighted(new_highlighted: bool) -> void:
+	if _highlighted == new_highlighted:
+		return
+	_highlighted = new_highlighted
+	_apply_modulate()
+
+func _apply_modulate() -> void:
+	if _highlighted:
+		var r = clamp(_base_modulate.r + HIGHLIGHT_ADJUST, 0.0, 1.0)
+		var g = clamp(_base_modulate.g + HIGHLIGHT_ADJUST, 0.0, 1.0)
+		var b = clamp(_base_modulate.b + HIGHLIGHT_ADJUST, 0.0, 1.0)
+		modulate = Color(r, g, b, _base_modulate.a)
+	else:
+		modulate = _base_modulate

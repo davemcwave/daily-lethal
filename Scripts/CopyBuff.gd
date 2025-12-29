@@ -5,7 +5,7 @@ const USE_ENERGY_COST_FROM_ORIGINAL_CARD: int = -1
 @onready var hand = scene.get_node("HandScrollContainer/Hand")
 @export var energy_cost_copy: int = USE_ENERGY_COST_FROM_ORIGINAL_CARD
 
-func activate() -> bool:
+func activate(context: Dictionary = {}) -> bool:
 	await get_tree().create_timer(0.5).timeout
 	var last_card: Card = scene.get_last_card_backup()
 	last_card.set_state(Card.State.InHand)

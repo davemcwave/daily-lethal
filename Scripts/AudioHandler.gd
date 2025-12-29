@@ -7,7 +7,7 @@ extends Node
 func _ready() -> void:
 	save_original_pitch_scales()
 	
-	play_sfx("BGMusic")
+	#play_sfx("BGMusic")
 
 func save_original_pitch_scales() -> void:
 	for child in get_children():

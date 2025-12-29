@@ -10,7 +10,7 @@ func set_damage_amount(new_damage_amount: int) -> void:
 func get_damage_amount() -> int:
 	return damage_amount
 
-func activate() -> bool:
+func activate(context: Dictionary = {}) -> bool:
 	target.hurt(damage_amount)
 	return super.activate()
 	

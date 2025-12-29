@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://dtm24yroeoe3y" path="res://Scripts/ExtraDescriptions.gd" id="7_2c5vv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ff5h1"]
+resource_local_to_scene = true
 bg_color = Color(0.433266, 0.433266, 0.433266, 1)
 border_width_left = 2
 border_width_top = 2
@@ -29,6 +30,7 @@ border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3hw04"]
+resource_local_to_scene = true
 bg_color = Color(0.548094, 0.00210453, 0.154114, 1)
 border_width_left = 2
 border_width_right = 2
@@ -95,7 +97,7 @@ mouse_filter = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_fonts/normal_font = ExtResource("2_72r5v")
 theme_override_fonts/bold_font = ExtResource("3_fgrna")
-theme_override_font_sizes/normal_font_size = 14
+theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
 text = "[center]Slash[/center]"
 horizontal_alignment = 1
@@ -109,11 +111,26 @@ anchor_bottom = 1.0
 offset_left = 7.0
 offset_top = 35.0
 offset_right = -7.0
-offset_bottom = -53.0
+offset_bottom = -58.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3hw04")
+
+[node name="GradientBackground" type="TextureRect" parent="IconPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_3v80l")
+expand_mode = 1
 
 [node name="Icon" type="TextureRect" parent="IconPanel"]
 material = ExtResource("4_l0cqn")
@@ -133,27 +150,12 @@ mouse_filter = 2
 texture = ExtResource("5_1ng8j")
 expand_mode = 1
 
-[node name="GradientBackground" type="TextureRect" parent="IconPanel"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = SubResource("GradientTexture2D_3v80l")
-expand_mode = 1
-
 [node name="DescriptionPanel" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_left = 7.0
-offset_top = 107.0
+offset_top = 102.0
 offset_right = -7.0
 offset_bottom = 153.0
 grow_horizontal = 2
@@ -174,7 +176,7 @@ mouse_filter = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_fonts/normal_font = ExtResource("2_72r5v")
 theme_override_fonts/bold_font = ExtResource("3_fgrna")
-theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/normal_font_size = 10
 bbcode_enabled = true
 text = "[center]Deal 2 damage[/center]"
 fit_content = true
@@ -207,7 +209,7 @@ mouse_filter = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_fonts/normal_font = ExtResource("2_72r5v")
 theme_override_fonts/bold_font = ExtResource("3_fgrna")
-theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
 text = "[center]2[/center]"
 scroll_active = false

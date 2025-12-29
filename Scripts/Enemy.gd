@@ -28,6 +28,10 @@ var debuff_activate_queue: Array = []
 var hurt_lines: Array[String] = []
 var hurt_lines_bag: Array[String] = []
 var hurt_line_chance: float = 0.0
+var death_line: String = ""
+var original_material
+var blink_in_progress = false
+var pending_blink = false
 
 func _ready():
 	set_enemy_name(enemy_name)
@@ -36,6 +40,8 @@ func _ready():
 	update_health_bar()
 	
 	background.set_enemy_texture($EnemyIcon.get_texture())
+	
+	original_material = $EnemyIcon.material.duplicate()
 
 func get_difficulty() -> String:
 	return difficulty
@@ -79,7 +85,7 @@ func get_hurt_lines() -> Array[String]:
 func set_enemy_name(new_enemy_name: String) -> void:
 	enemy_name = new_enemy_name
 	background.set_enemy_name(new_enemy_name)
-	$EnemyNamePanel/EnemyName.set_text("[center][b]%s[/b][/center]" % enemy_name)
+	$EnemyNamePanel/EnemyName.set_text("[center][b][shake rate=2.0 level=1 connected=1]%s[/shake][/b][/center]" % enemy_name)
 	
 	if len(enemy_name) >= 19:
 		var current_enemy_name_font_size: int = $EnemyNamePanel/EnemyName.get("theme_override_font_sizes/bold_font_size") if enemy_name_font_size <= 0 else enemy_name_font_size 
@@ -102,14 +108,28 @@ func add_debuff(new_debuff: Debuff) -> void:
 	new_debuff.set_target(self)
 	$DebuffContainer.add_debuff(new_debuff)
 	
+
 func blink_white() -> void:
-	var previous_material = $EnemyIcon.material.duplicate()
-	$EnemyIcon.material.shader = blink_shader
-	$EnemyIcon.get_material().set_shader_parameter("blink_strength", 1.0)
-	
-	await get_tree().create_timer(0.1).timeout
-	$EnemyIcon.get_material().set_shader_parameter("blink_strength", 0.0)
+	if blink_in_progress:
+		pending_blink = true
+		return
+
+	blink_in_progress = true
+	var previous_material = $EnemyIcon.material
+	var blink_material = previous_material.duplicate()
+	blink_material.shader = blink_shader
+	$EnemyIcon.material = blink_material
+	blink_material.set_shader_parameter("blink_strength", 1.0)
+
+	await get_tree().create_timer(0.05).timeout
+
+	blink_material.set_shader_parameter("blink_strength", 0.0)
 	$EnemyIcon.material = previous_material
+	blink_in_progress = false
+
+	if pending_blink:
+		pending_blink = false
+		blink_white()
 
 func get_debuffs() -> Array:
 	return $DebuffContainer.get_debuffs()
@@ -154,7 +174,7 @@ func create_damage_label(hurt_amount: int) -> void:
 	damage_label.global_position = $DamageLabelSpawn.global_position
 	damage_label.float_up()
 
-func create_hurt_text(hurt_text_message: String) -> void:
+func create_hurt_text(hurt_text_message: String) -> bool:
 	var label := RichTextLabel.new()
 	label.bbcode_enabled = true
 	label.text = hurt_text_message
@@ -174,6 +194,21 @@ func create_hurt_text(hurt_text_message: String) -> void:
 		word_count += 1
 		await get_tree().create_timer(0.15).timeout
 
+	return true
+	
+func fade_away(texture: TextureRect) -> bool:
+	var tween = get_tree().create_tween()
+	tween.tween_property(texture, "self_modulate:a", 0.0, 1.0).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
+	await tween.finished#print("fading away " + texture.name)
+	return true
+	
+func fade_in(texture: TextureRect) -> bool:
+	var tween = get_tree().create_tween()
+	texture.self_modulate.a = 0.0
+	texture.show()
+	tween.tween_property(texture, "self_modulate:a", 1.0, 1.0).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	return true
+	
 func get_random_hurt_line() -> String:
 	if hurt_lines_bag.size() <= 0:
 		hurt_lines_bag = hurt_lines.duplicate(true)
@@ -201,10 +236,22 @@ func hurt(hurt_amount: int, hurt_from_card: bool = true) -> void:
 	shake_briefly()
 	blink_white()
 	
+	update_health_bar()
+	
 	if health <= 0:
+		audio_handler.play_sfx("WinSFX")
+		
+		if not death_line.is_empty():
+			await create_hurt_text(death_line)
+			
+		await get_tree().create_timer(0.75).timeout
+		#await fade_away($EnemyIcon)
+		$EnemyIcon.hide()
+		fade_in($DefeatIcon)
+		await get_tree().create_timer(0.25).timeout
+			
 		die()
 	
-	update_health_bar()
 	
 	while background.cards_are_playing():
 		await get_tree().create_timer(0.5).timeout
@@ -213,7 +260,7 @@ func hurt(hurt_amount: int, hurt_from_card: bool = true) -> void:
 	
 func update_health_bar() -> void:
 	$EnemyHealthBar.value = health
-	$EnemyHealthBar/HealthText.set_text("[center][b]%d/%d[/b][/center]" % [health, $EnemyHealthBar.max_value])
+	$EnemyHealthBar/HealthText.set_text("[center][b][shake rate=2.0 level=1 connected=1]%d/%d[/shake][/b][/center]" % [health, $EnemyHealthBar.max_value])
 
 func shake_briefly():
 	$EnemyIcon.position = initial_icon_position
@@ -232,7 +279,10 @@ func shake_briefly():
 func is_dead() -> bool:
 	return dead
 	
+func set_death_line(new_death_line: String) -> void:
+	death_line = new_death_line
+	
 func die() -> void:
-	$EnemyIcon.hide()
-	$DefeatIcon.show()
+	#$DefeatIcon.show()
+	#$EnemyIcon.hide()
 	dead = true

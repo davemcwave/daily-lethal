@@ -11,6 +11,7 @@ signal card_count_incremented
 @onready var audio_handler = get_node("/root/AudioHandler")
 @export_file("*.scn") var puzzle_scene
 @export var override_puzzle_date: bool = false
+@export var show_intro_banner: bool = true
 var starting_card_amount: int = 3
 var card_count: int = 0
 var last_card_effects: Array[CardEffect] = []
@@ -227,7 +228,7 @@ func set_puzzle(new_puzzle: Puzzle) -> void:
 	$Enemy.set_enemy_icon_texture(puzzle.get_enemy_icon_texture())
 	$Enemy.set_hurt_lines(puzzle.get_enemy_hurt_lines())
 	$Enemy.set_hurt_line_chance(puzzle.get_hurt_line_chance())
-	
+	$Enemy.set_death_line(puzzle.get_death_line())
 	if puzzle.is_nightmare_difficulty() and puzzle.has_eye_positions():
 		$Enemy.set_difficulty(puzzle.get_difficulty())
 		$Enemy.set_eye_positions(puzzle.get_eye_positions())
@@ -399,7 +400,6 @@ func check_game_over() -> void:
 	elif e_dead:
 		game_over = true
 		background.set_best_card_count(card_count)
-		audio_handler.play_sfx("WinSFX")
 		# Brief pause before win screen
 		await get_tree().create_timer(0.75).timeout
 		# If player also died in the meantime, show death instead

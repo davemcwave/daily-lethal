@@ -3,7 +3,7 @@ extends Buff
 @onready var scene: Scene = get_tree().get_root().get_node("Scene")
 @onready var buffs_container: BuffsContainer = scene.get_node("BuffsContainer")
 
-func activate() -> bool:
+func activate(context: Dictionary = {}) -> bool:
 	await get_tree().create_timer(0.25).timeout
 	var card_effects: Array[CardEffect] = scene.get_last_card_effects()
 	

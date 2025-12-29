@@ -44,7 +44,7 @@ var last_mouse_position = null
 var can_chose_choosing_button: bool = true
 var id
 var queue_free_after_applying_card_effects: bool = false
-var permanent_card: bool = true
+var permanent_card: bool = false
 
 enum State {
 	InHand,
@@ -64,7 +64,7 @@ func _ready():
 	id = get_instance_id()
 	
 	calculate_pivot_offset()
-	$TitlePanel/Title.set_text("[center]%s[/center]" % card_name)
+	$TitlePanel/Title.set_text("[center][shake rate=2.0 level=1 connected=1]%s[/shake][/center]" % card_name)
 	#$CardEffect.set_target(enemy)
 	set_description(card_description)
 	
@@ -303,10 +303,10 @@ func set_energy_cost(new_energy_cost: int) -> void:
 	
 func set_energy_text(energy_cost: int, color_hex: String = "") -> void:
 	if not color_hex.is_empty():
-		$EnergyPanel/Energy.set_text("[center][color=#%s]%d[/color][/center]" % [color_hex, energy_cost])
+		$EnergyPanel/Energy.set_text("[center][color=#%s][shake rate=2.0 level=1 connected=1]%d[/shake][/color][/center]" % [color_hex, energy_cost])
 		$EnergyPanel/Icon.self_modulate = Color(color_hex)
 	else:
-		$EnergyPanel/Energy.set_text("[center]%d[/center]" % energy_cost)
+		$EnergyPanel/Energy.set_text("[center][shake rate=2.0 level=1 connected=1]%d[/shake][/center]" % energy_cost)
 		$EnergyPanel/Icon.self_modulate = Color.WHITE
 func can_play() -> bool:
 	print(card_play_area != null,
@@ -543,4 +543,4 @@ func is_bouncing() -> bool:
 	return state == State.Bouncing
 	
 func update_description_panel() -> void:
-	$DescriptionPanel/Title.set_text("[center]%s[/center]" % card_description)
+	$DescriptionPanel/Title.set_text("[center][shake rate=2.0 level=1 connected=1]%s[/shake][/center]" % card_description)

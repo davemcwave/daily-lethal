@@ -1,0 +1,5 @@
+1. Cold Open
+2. Text card that says "A card game where you have 1 turn to kill the enemy."
+3. 
+
+A card battler built around one-turn combat puzzles! You have one hand of cards, one turn, and endless enemies to reap. Keep the balance as Death's work is never done.

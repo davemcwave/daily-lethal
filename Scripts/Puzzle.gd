@@ -33,6 +33,7 @@ class_name Puzzle
 @export_multiline var dialogue_lines: Array[String]
 @export_multiline var enemy_hurt_lines: Array[String]
 @export var enemy_hurt_line_chance: float = 0.0
+@export_multiline var death_line: String = ""
 
 var test_puzzle: bool = false
 
@@ -124,6 +125,9 @@ func get_initial_draw_amount() -> int:
 	
 func set_initial_draw_amount(new_initial_draw_amount: int) -> void:
 	initial_draw_amount = new_initial_draw_amount
+
+func get_death_line() -> String:
+	return death_line
 	
 func get_enemy_name() -> String:
 	return enemy_name

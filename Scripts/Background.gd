@@ -94,6 +94,22 @@ func get_all_card_effect_scenes() -> Array[Resource]:
 		dir.list_dir_end()
 	return scenes
 	
+
+func get_all_card_scenes() -> Array[Resource]:
+	var scenes: Array[Resource] = []
+	var dir = DirAccess.open("res://Scenes/")
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if file_name.ends_with("Card.scn") and not dir.current_is_dir():
+				var scene_path = "res://Scenes/" + file_name
+				var packed_scene = load(scene_path)
+				scenes.append(packed_scene)
+			file_name = dir.get_next()
+		dir.list_dir_end()
+	return scenes
+	
 func get_card_effect_by_name(card_effect_name: String) -> CardEffect:
 	var card_effect_scenes: Array[Resource] = get_all_card_effect_scenes()
 	

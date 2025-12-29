@@ -97,13 +97,13 @@ func is_dead() -> bool:
 func get_text_template() -> String:
 	match manual_justification:
 		"center": 
-			return "[center][b]%d[/b][/center]"
+			return "[center][b][shake rate=2.0 level=1 connected=1]%d[/shake][/b][/center]"
 		"left": 
-			return "[left][b]%d[/b][/left]"
+			return "[left][b][shake rate=2.0 level=1 connected=1]%d[/shake][/b][/left]"
 		"right": 
-			return "[right][b]%d[/b][/right]"
+			return "[right][b][shake rate=2.0 level=1 connected=1]%d[/shake][/b][/right]"
 		_:
-			return "[center][b]%d[/b][/center]"
+			return "[center][b][shake rate=2.0 level=1 connected=1]%d[/shake][/b][/center]"
 	
 func update_text() -> void:
 	health_amount_text.set_text(get_text_template() % health)

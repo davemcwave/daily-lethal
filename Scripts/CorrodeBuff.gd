@@ -3,7 +3,7 @@ class_name CorrodeBuff
 
 @onready var scene = get_tree().get_root().get_node("Scene")
 
-func activate() -> bool:
+func activate(context: Dictionary = {}) -> bool:
 	await get_tree().create_timer(0.5).timeout
 	var card: Card = scene.get_last_card_played()
 	

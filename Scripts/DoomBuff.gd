@@ -27,6 +27,6 @@ func reduce_turns_left(turns_less_value: int = 1) -> void:
 	else:
 		buff_panel.update_text()
 	
-func activate() -> bool:
+func activate(context: Dictionary = {}) -> bool:
 	reduce_turns_left()
 	return super.activate()

@@ -38,7 +38,7 @@ func play_dialog_text(optional_text: String = "") -> bool:
 			force_dialog_finish = false
 			break
 			
-		await get_tree().create_timer(0.025).timeout
+		await get_tree().create_timer(0.02).timeout
 	
 	playing = false
 	return true

@@ -47,25 +47,19 @@ func increase_damage_amount(damage_increase_amount: int) -> void:
 func set_target(new_target) -> void:
 	target = new_target
 
-func deal_damage(damage_amount: int) ->  void:
-	
-	if buffs_container.has_charge_buff() and target_name == 'Enemy':
-		energy.add_energy(damage_amount)
-		buffs_container.remove_charge_buff()
-	else:
-		target.hurt(damage_amount)
+func deal_damage(damage_amount: int, context: Dictionary = {}) ->  void:
+	if damage_amount > 0:
+		var on_deal_damage_buffs: Array = await buffs_container.activate_buffs(Buff.ActivationType.OnDealDamage, context)
+		damage_amount = context['current_damage_amount']
+	target.hurt(damage_amount)
 	
 func apply() -> bool:
-	var on_attack_buffs: Array = await buffs_container.activate_buffs(Buff.ActivationType.OnAttack, {'current_damage_amount': damage_amount})
-	var modified_damage_amount = damage_amount
-	for on_attack_buff: Buff in on_attack_buffs:
-		if on_attack_buff is ModifyAttackBuff:
-			modified_damage_amount = on_attack_buff.modify_attack(modified_damage_amount)
+	var context = {'current_damage_amount': damage_amount, 'deal_damage': true}
 	
-	if modified_damage_amount != damage_amount:
-		deal_damage(modified_damage_amount)
-	else:
-		deal_damage(damage_amount)
+	var on_attack_buffs: Array = await buffs_container.activate_buffs(Buff.ActivationType.OnAttack, context)
+	
+	if context['deal_damage']:
+		deal_damage(context['current_damage_amount'], context)
 	
 	var on_hit_buff: Array = await buffs_container.activate_buffs(Buff.ActivationType.OnHit)
 	

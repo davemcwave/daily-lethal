@@ -15,5 +15,5 @@ func play():
 	scene.check_game_over()
 	
 func update_description_panel() -> void:
-	card_description = "[center]%s[/center]" % ("Deal [color=red]%d[/color] damage or Heal [color=#008c10]%d[/color] HP" % [$DamageCardEffect.get_damage_amount(), $HealCardEffect.get_heal_amount()])
+	card_description = "[center][shake rate=2.0 level=1 connected=1]%s[/shake][/center]" % ("Deal [color=red]%d[/color] damage or Heal [color=#008c10]%d[/color] HP" % [$DamageCardEffect.get_damage_amount(), $HealCardEffect.get_heal_amount()])
 	$DescriptionPanel/Title.set_text(card_description)

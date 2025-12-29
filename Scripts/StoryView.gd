@@ -3,7 +3,7 @@ extends Control
 @onready var play_puzzle_buttons = $PlayPuzzleButtons
 @export var current_puzzle_buttons: Array[PlayPuzzleButton]
 @onready var puzzle_button_line_connector = $PuzzleButtonLineConnector
-
+@onready var audio_handler = $"/root/AudioHandler"
 func _ready() -> void:
 	hide_puzzle_buttons()
 	
@@ -14,6 +14,8 @@ func hide_puzzle_buttons() -> void:
 func show_next_puzzle_buttons() -> bool:
 	var next_puzzle_buttons: Array[PlayPuzzleButton] = []
 	for puzzle_button: PlayPuzzleButton in current_puzzle_buttons:
+		audio_handler.play_sfx("DrawSFX")
+		audio_handler.increase_pitch_scale("DrawSFX", 0.05)
 		await puzzle_button.appear(0.1)
 		next_puzzle_buttons.append_array(puzzle_button.get_next_buttons())
 
@@ -31,9 +33,13 @@ func animate_all_puzzle_buttons() -> void:
 		await get_tree().create_timer(0.1).timeout
 		puzzle_button_line_connector.queue_redraw()
 	
+	audio_handler.reset_pitch_scale("DrawSFX")
+	
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
 		animate_all_puzzle_buttons()
+	elif event.is_action_pressed("reset"):
+		get_tree().reload_current_scene()
 		#await show_next_puzzle_buttons()
 		#puzzle_button_line_connector.queue_redraw()
 		

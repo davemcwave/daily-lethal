@@ -25,6 +25,11 @@ func populate_card_list() -> void:
 	# Populate all permanent cards.
 	var card_scenes: Array = get_card_scenes()
 	for card_scene in card_scenes:
+		var object = load(card_scene).instantiate()
+		
+		if not (object is Card):
+			continue
+			
 		var card: Card = load(card_scene).instantiate()
 		var card_select_button: CardSelectButton = load("res://Scenes/CardSelectButton.scn").instantiate()
 		card_select_button.set_card(card)
