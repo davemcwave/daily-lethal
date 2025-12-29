@@ -11,7 +11,7 @@ func apply() -> bool:
 	#audio_handler.increase_pitch_scale("AddBuffSFX", 0.25)
 	
 	if remove_all_buffs:
-		buffs_container.remove_all_buffs()
+		await buffs_container.remove_all_buffs()
 	else:
 		for buff_scene in buff_scenes:
 			var buff_to_remove: Buff = load(buff_scene).instantiate()

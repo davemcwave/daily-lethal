@@ -250,9 +250,11 @@ func remove_buff_by_name(buff_name: String) -> void:
 			buff_panel.queue_free()
 			return
 	
-func remove_all_buffs() -> void:
+func remove_all_buffs() -> bool:
 	for buff_panel: BuffPanel in get_children():
 		buff_panel.queue_free()
+		await buff_panel.tree_exited
+	return true
 	
 
 func get_buffs(buff_activation_type: Buff.ActivationType) -> Array:
