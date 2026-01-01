@@ -8,6 +8,7 @@ class_name DamageCardEffect
 @export var increase_damage_effect: bool = true
 @export var modifiable: bool = true
 @onready var energy: Energy = scene.get_node('Energy')
+var context: Dictionary = {}
 	
 func is_modifiable() -> bool:
 	return modifiable
@@ -52,9 +53,12 @@ func deal_damage(damage_amount: int, context: Dictionary = {}) ->  void:
 		var on_deal_damage_buffs: Array = await buffs_container.activate_buffs(Buff.ActivationType.OnDealDamage, context)
 		damage_amount = context['current_damage_amount']
 	target.hurt(damage_amount)
-	
+
+func get_context() -> Dictionary:
+	return context
+
 func apply() -> bool:
-	var context = {'current_damage_amount': damage_amount, 'deal_damage': true}
+	context = {'current_damage_amount': damage_amount, 'deal_damage': true}
 	
 	var on_attack_buffs: Array = await buffs_container.activate_buffs(Buff.ActivationType.OnAttack, context)
 	
