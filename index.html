@@ -168,7 +168,7 @@
 
     .desktop-toggle-wrapper {
       position: fixed;
-      top: 1rem;
+      top: 4rem;
       left: 1rem;
       font-size: 0.9rem;
       background: rgba(40, 55, 61, 0.95);
@@ -192,6 +192,156 @@
       user-select: none;
     }
 
+    .steam-banner {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      z-index: 900;
+      pointer-events: none;
+    }
+
+    .steam-banner a {
+      pointer-events: auto;
+      background: linear-gradient(90deg, #66c0f4, #2c8bdc);
+      color: #02111b;
+      border-radius: 0 0 18px 18px;
+      padding: 0.9rem 1.5rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    }
+
+    .steam-banner span {
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 600px) {
+      .steam-banner a {
+        border-radius: 0;
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    .steam-splash {
+      position: fixed;
+      inset: 0;
+      background: rgba(7, 12, 14, 0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      z-index: 2000;
+    }
+
+    .steam-splash.hidden {
+      display: none;
+    }
+
+    .steam-splash__panel {
+      background: radial-gradient(circle at top, #2e3d41 0%, #10191b 90%);
+      border-radius: 22px;
+      width: min(720px, 100%);
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.65);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      gap: 1.5rem;
+      padding: 1.5rem;
+    }
+
+    .steam-splash__capsule {
+      flex: 1.25;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.55);
+    }
+
+    .steam-splash__capsule img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .steam-splash__content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: left;
+      gap: 0.5rem;
+    }
+
+    .steam-splash__content h2 {
+      margin: 0.25rem 0 0;
+      font-size: 1.9rem;
+    }
+
+    .steam-splash__tagline {
+      color: #ccefff;
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .steam-splash__cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: linear-gradient(90deg, #66c0f4, #45a9dd);
+      color: #02121b;
+      padding: 0.85rem 1.6rem;
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      margin-top: 1rem;
+      width: fit-content;
+      box-shadow: 0 10px 25px rgba(102, 192, 244, 0.35);
+    }
+
+    .steam-splash__cta:hover {
+      transform: translateY(-1px);
+    }
+
+    .steam-splash__close {
+      position: absolute;
+      top: 0.6rem;
+      right: 0.7rem;
+      background: rgba(6, 11, 12, 0.55);
+      border: none;
+      color: #fff;
+      font-size: 1.4rem;
+      cursor: pointer;
+      border-radius: 999px;
+      width: 32px;
+      height: 32px;
+      line-height: 0;
+    }
+
+    @media (max-width: 640px) {
+      .steam-splash__panel {
+        flex-direction: column;
+      }
+
+      .steam-splash__content {
+        text-align: center;
+        align-items: center;
+      }
+
+      .steam-splash__cta {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
   </style>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW9PLMBBGT"></script>
@@ -212,6 +362,28 @@
 </script>
 </head>
 <body>
+  <div class="steam-banner">
+    <a href="https://store.steampowered.com/app/4281710/Lethal_Last_Turn/" target="_blank" rel="noopener" id="steam-banner-link">
+      <img src="/Assets/Textures/steam/lethal-icon-256x256.png" alt="" style="height: 28px; width: 28px; border-radius: 6px;">
+      <span>Wishlist Lethal on Steam Now</span>
+    </a>
+  </div>
+  <div id="steam-splash" class="steam-splash hidden">
+    <div class="steam-splash__panel">
+      <button type="button" class="steam-splash__close" id="steam-splash-close" aria-label="Dismiss Steam promotion">&times;</button>
+      <div class="steam-splash__capsule">
+        <img src="/Assets/Textures/steam/lethal-capsule-1232x706.png" alt="Lethal: Last Turn Steam capsule" loading="lazy">
+      </div>
+      <div class="steam-splash__content">
+        <h2>Lethal: Last Turn</h2>
+        <p class="steam-splash__tagline">Wishlist the full version of Lethal on Steam!</p>
+        <a class="steam-splash__cta" href="https://store.steampowered.com/app/4281710/Lethal_Last_Turn/" target="_blank" rel="noopener" id="steam-splash-cta">
+          Wishlist on Steam Now →
+        </a>
+      </div>
+    </div>
+  </div>
+
   <div class="desktop-toggle-wrapper">
     <input type="checkbox" id="desktop-toggle">
     <label for="desktop-toggle" id="desktop-label">Enable Desktop Version</label>
@@ -279,6 +451,64 @@
       const target = type === 'desktop' ? '/desktop/today' : '/today';
       window.location.href = target;
     }
+
+
+    const bannerLink = document.getElementById('steam-banner-link');
+    bannerLink && bannerLink.addEventListener('click', () => {
+      if (typeof gtag === 'function') {
+        gtag('event', 'steam_banner_click', { event_category: 'steam', event_label: 'banner' });
+      }
+    });
+
+    (function manageSteamSplash() {
+      const STORAGE_KEY = 'steam_splash_seen_v1';
+      const COOLDOWN_MS = 7 * 24 * 60 * 60 * 1000; // reshow weekly
+      const splash = document.getElementById('steam-splash');
+      const closeBtn = document.getElementById('steam-splash-close');
+      const cta = document.getElementById('steam-splash-cta');
+
+      if (!splash) {
+        return;
+      }
+
+      const lastSeen = Number(localStorage.getItem(STORAGE_KEY) || 0);
+      const shouldShow = !lastSeen || (Date.now() - lastSeen) > COOLDOWN_MS;
+      if (shouldShow) {
+        splash.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function markSeen(label) {
+        localStorage.setItem(STORAGE_KEY, Date.now().toString());
+        if (typeof gtag === 'function') {
+          gtag('event', label, { event_category: 'steam', event_label: label });
+        }
+      }
+
+      function hideSplash() {
+        if (splash.classList.contains('hidden')) {
+          return;
+        }
+        splash.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+
+      closeBtn && closeBtn.addEventListener('click', () => {
+        hideSplash();
+        markSeen('steam_splash_dismiss_close');
+      });
+      splash.addEventListener('click', (event) => {
+        if (event.target === splash) {
+          hideSplash();
+          markSeen('steam_splash_dismiss_backdrop');
+        }
+      });
+
+      cta && cta.addEventListener('click', () => {
+        hideSplash();
+        markSeen('steam_splash_cta');
+      });
+    })();
   </script>
 </body>
 </html>
