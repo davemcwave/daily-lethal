@@ -1,5 +1,6 @@
 {
   "puzzles": [
+    { "id": "2026-01-14", "release_at": "2026-01-14T00:00:00-04:00", "title": "Weather Witch" },
     { "id": "2026-01-13", "release_at": "2026-01-13T00:00:00-04:00", "title": "Ancient Tree" },
     { "id": "2026-01-09", "release_at": "2026-01-09T00:00:00-04:00", "title": "Paladin" },
     { "id": "2026-01-08", "release_at": "2026-01-08T00:00:00-04:00", "title": "Giant Crab" },
