@@ -325,12 +325,13 @@ func activate_buffs(buff_activation_type: Buff.ActivationType, context: Dictiona
 	# Track if 2 of the same type of buff can be applied on the same turn
 	# Also keep track of those buffs that were removed during this turn but 
 	# outside of the of this function.
-	var buffs_activated = buffs_removed_this_turn
+	var blocked_buff_names: Array = buffs_removed_this_turn.duplicate()
+	var buff_instance_ids_activated: Array = []
 	var buff_objects_activated = []
 	print("------ animating is true")
 	animating = true
 	
-	var activation_queue = _build_buff_activation_queue(buff_activation_type, context, buffs_activated, buffs_added_this_turn)
+	var activation_queue = _build_buff_activation_queue(buff_activation_type, context, blocked_buff_names, buff_instance_ids_activated, buffs_added_this_turn)
 	for activation_candidate in activation_queue:
 		var buff_panel: BuffPanel = activation_candidate['panel']
 		var buff: Buff = activation_candidate['buff']
@@ -348,7 +349,7 @@ func activate_buffs(buff_activation_type: Buff.ActivationType, context: Dictiona
 	print("animating is false ------")
 	return buff_objects_activated
 	
-func _build_buff_activation_queue(buff_activation_type: Buff.ActivationType, context: Dictionary, buffs_activated: Array, buffs_added_instance_ids: Array) -> Array:
+func _build_buff_activation_queue(buff_activation_type: Buff.ActivationType, context: Dictionary, blocked_buff_names: Array, buff_instance_ids_activated: Array, buffs_added_instance_ids: Array) -> Array:
 	var activation_queue: Array = []
 	var current_repeating_state: bool = is_repeating()
 	var buff_panels = get_children()
@@ -365,14 +366,18 @@ func _build_buff_activation_queue(buff_activation_type: Buff.ActivationType, con
 		
 		var buff_instance_id = buff.get_instance_id()
 		var buff_is_repeating: bool = current_repeating_state and buff.can_single_turn_repeat()
-		if !buff_is_repeating and buff.can_be_activated_only_once_per_turn() and (buffs_activated.has(buff.get_buff_name()) or buffs_added_instance_ids.has(buff_instance_id)):
-			continue
+		if !buff_is_repeating and buff.can_be_activated_only_once_per_turn():
+			if blocked_buff_names.has(buff.get_buff_name()):
+				continue
+			if buff_instance_ids_activated.has(buff_instance_id) or buffs_added_instance_ids.has(buff_instance_id):
+				continue
 		
 		activation_queue.append({
 			'buff': buff,
 			'panel': buff_panel
 		})
-		buffs_activated.append(buff.get_buff_name())
+		blocked_buff_names.append(buff.get_buff_name())
+		buff_instance_ids_activated.append(buff_instance_id)
 		if buff_is_repeating:
 			current_repeating_state = false
 	return activation_queue

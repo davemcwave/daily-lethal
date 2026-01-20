@@ -3,6 +3,7 @@ extends Node
 @export var active: bool = false
 @export var cards_to_test: Array[PackedScene] = []
 @export var puzzle_index: int = 0
+@export var time_scale_speed: float = 5.0
 
 func _ready() -> void:
 	truncate_file()
@@ -58,7 +59,7 @@ func play_card_in_choose_area(cards_choose_area: CardsChooseArea, card: Card) ->
 			return
 	
 func resolve_puzzle(card_play_delay_seconds: float = 1.25) -> void:
-	Engine.set_time_scale(5.0)
+	Engine.set_time_scale(time_scale_speed)
 	
 	var scene: Scene = get_tree().get_root().get_node('Scene')
 	var cards_choose_area: CardsChooseArea = scene.get_node('CanvasLayer/CardsChooseArea')
