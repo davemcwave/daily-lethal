@@ -1,5 +1,6 @@
 {
   "puzzles": [
+    { "id": "2026-01-21", "release_at": "2026-01-21T00:00:00-04:00", "title": "Butler" },
     { "id": "2026-01-20", "release_at": "2026-01-20T00:00:00-04:00", "title": "Modron" },
     { "id": "2026-01-19", "release_at": "2026-01-19T00:00:00-04:00", "title": "Scorpion" },
     { "id": "2026-01-16", "release_at": "2026-01-16T00:00:00-04:00", "title": "Green Dragon" },
