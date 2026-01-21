@@ -1,8 +1,0 @@
-res://Scenes/Puzzles/2025-05-15-GoblinPuzzle.scn:  PASS
-res://Scenes/Puzzles/2025-05-17-MinotaurPuzzle.scn:  PASS
-res://Scenes/Puzzles/2025-05-20-OgrePuzzle.scn:  PASS
-res://Scenes/Puzzles/2025-05-25-FlameImpPuzzle.scn:  PASS
-res://Scenes/Puzzles/2025-05-29-KoboldPuzzle.scn:  FAIL
-res://Scenes/Puzzles/2025-06-01-GiantRatPuzzle.scn:  PASS
-res://Scenes/Puzzles/2025-06-03-MimicPuzzle.scn:  PASS
-res://Scenes/Puzzles/2025-06-05-NagaPuzzle.scn:  PASS

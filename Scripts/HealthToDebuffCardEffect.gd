@@ -12,7 +12,7 @@ func set_target(new_target) -> void:
 	
 func apply() -> bool:
 	var health_reduced: int = health.get_health() - 1
-	health.set_health(health.get_health() - health_reduced)
+	health.hurt(health_reduced)
 	
 	for i in range(health_reduced):
 		var debuff: Debuff = load(debuff_scene).instantiate()

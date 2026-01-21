@@ -6,6 +6,7 @@ class_name DamageCardEffect
 @export_enum("Player", "Enemy") var target_name: String = "Enemy"
 @export var increase_damage_multiplier: int = 1
 @export var increase_damage_effect: bool = true
+@export var increase_damage_effect_for_player: bool = false
 @export var modifiable: bool = true
 @onready var energy: Energy = scene.get_node('Energy')
 var context: Dictionary = {}
@@ -15,7 +16,7 @@ func is_modifiable() -> bool:
 	
 func set_modifiable(new_modifiable: bool) -> void:
 	modifiable = new_modifiable
-	
+
 func can_increase_damage_amount() -> bool:
 	return increase_damage_effect
 	
@@ -48,9 +49,9 @@ func increase_damage_amount(damage_increase_amount: int) -> void:
 func set_target(new_target) -> void:
 	target = new_target
 
-func deal_damage(damage_amount: int, context: Dictionary = {}) ->  void:
-	if damage_amount > 0:
-		var on_deal_damage_buffs: Array = await buffs_container.activate_buffs(Buff.ActivationType.OnDealDamage, context)
+func deal_damage(damage_amount: int, context: Dictionary = {}, apply_buffs: bool = true) ->  void:
+	if apply_buffs and damage_amount > 0:			
+		await buffs_container.activate_buffs(Buff.ActivationType.OnDealDamage, context)
 		damage_amount = context['current_damage_amount']
 	target.hurt(damage_amount)
 
@@ -58,13 +59,19 @@ func get_context() -> Dictionary:
 	return context
 
 func apply() -> bool:
-	context = {'current_damage_amount': damage_amount, 'deal_damage': true}
+	var should_apply_damage_buffs: bool = target_name == "Enemy" or increase_damage_effect_for_player
+	context = {
+		'current_damage_amount': damage_amount,
+		'deal_damage': true,
+		'target_name': target_name,
+	}
 	
-	var on_attack_buffs: Array = await buffs_container.activate_buffs(Buff.ActivationType.OnAttack, context)
+	if should_apply_damage_buffs:
+		await buffs_container.activate_buffs(Buff.ActivationType.OnAttack, context)
 	
 	if context['deal_damage']:
-		deal_damage(context['current_damage_amount'], context)
+		await deal_damage(context['current_damage_amount'], context, should_apply_damage_buffs)
 	
-	var on_hit_buff: Array = await buffs_container.activate_buffs(Buff.ActivationType.OnHit)
+	await buffs_container.activate_buffs(Buff.ActivationType.OnHit)
 	
 	return super.apply()
