@@ -18,7 +18,7 @@ func set_modifiable(new_modifiable: bool) -> void:
 	modifiable = new_modifiable
 
 func can_increase_damage_amount() -> bool:
-	return increase_damage_effect
+	return increase_damage_effect and (target_name == "Enemy" or increase_damage_effect_for_player)
 	
 func _ready() -> void:
 	if target_name == "Enemy":
