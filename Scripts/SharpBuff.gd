@@ -17,6 +17,7 @@ func reduce_sharp_count(decrease_value: int = 1) -> void:
 	if sharp_count <= 0:
 		var scene: Scene = get_tree().get_root().get_node('Scene')
 		buff_panel.queue_free()
+		await buff_panel.tree_exited
 	else:
 		buff_panel.update_text()
 

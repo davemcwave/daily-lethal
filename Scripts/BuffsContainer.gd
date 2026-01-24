@@ -398,7 +398,7 @@ func _try_merge_existing_buff(new_buff: Buff) -> bool:
 		return false
 	
 	for buff_panel: BuffPanel in get_children():
-		if not is_instance_valid(buff_panel):
+		if not is_instance_valid(buff_panel) or buff_panel.is_queued_for_deletion():
 			continue
 			
 		var existing_buff: Buff = buff_panel.get_buff()
