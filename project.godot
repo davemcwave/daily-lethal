@@ -27,6 +27,7 @@ EmailHandler="*res://Scenes/EmailHandler.scn"
 AudioHandler="*res://Scenes/AudioHandler.scn"
 DialogHandler="*res://Scenes/DialogHandler.scn"
 PuzzleResolver="*res://Scenes/PuzzleResolver.scn"
+CardInteractionTester="*res://Scenes/CardInteractionTester.scn"
 
 [display]
 

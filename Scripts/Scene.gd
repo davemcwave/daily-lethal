@@ -26,6 +26,7 @@ var puzzle: Puzzle = null
 @onready var previous_puzzle_button = $NextPreviousPuzzleButtonContainer/PreviousPuzzleButton
 @onready var dialog_handler = $"/root/DialogHandler"
 @onready var puzzle_resolver = $"/root/PuzzleResolver"
+@onready var card_interaction_tester = $"/root/CardInteractionTester"
 var dialog_fight_button
 var player_dialog_panel
 var enemy_dialog_panel
@@ -45,6 +46,9 @@ func _ready():
 	
 	if puzzle_resolver.is_active():
 		puzzle_resolver.resolve_puzzle()
+
+	if card_interaction_tester.is_active():
+		card_interaction_tester.run_all_tests()
 
 func can_show_initial_dialog() -> bool:
 	return dialog_handler.is_enabled() and has_node("CanvasLayer/DialogFightButton") and puzzle.get_dialogue_lines().size() > 0
@@ -87,6 +91,8 @@ func load_puzzle() -> void:
 		set_puzzle(current_puzzle)
 	elif puzzle_resolver.is_active():
 		set_puzzle(puzzle_resolver.get_puzzle())
+	elif card_interaction_tester.is_active():
+		set_puzzle(card_interaction_tester.get_test_puzzle())
 	elif url_capturer.is_test_puzzle():
 		var new_puzzle: Puzzle = load(puzzle_scene).instantiate()
 		new_puzzle.set_test_puzzle(true)

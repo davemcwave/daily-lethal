@@ -1,0 +1,3 @@
+ScrapCard discards a card and gains +2 energy: PASS
+ReverberateCard plays bottom of discard twice then trashes it: PASS
+Rebound returns ReverberateCard to hand: PASS
