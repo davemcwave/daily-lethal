@@ -275,6 +275,12 @@ func grab() -> void:
 	#if is_reordering():
 		#show_card_contents(false)
 
+func is_in_hand() -> bool:
+	return state == State.InHand
+	
+func get_state() -> State:
+	return state
+	
 func show_card_contents(do_show: bool) -> void:
 	$IconPanel/Icon.set_visible(do_show)
 

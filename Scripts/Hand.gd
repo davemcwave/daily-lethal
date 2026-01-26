@@ -74,7 +74,7 @@ func get_card_with_id(id: int) -> Card:
 	for card: Card in get_cards():
 		if card.get_id() == id:
 			return card
-			
+
 	return null
 	
 func add_card(card: Card) -> void:

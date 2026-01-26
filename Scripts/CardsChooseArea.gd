@@ -115,7 +115,7 @@ func get_card_creator() -> CardCreator:
 	
 func populate_cards() -> void:
 	var card_source = null
-	
+
 	match populate_cards_type:
 		PopulateCardsType.FromHand:
 			card_source = hand
@@ -123,13 +123,21 @@ func populate_cards() -> void:
 			card_source = discard_pile
 		PopulateCardsType.FromCreate:
 			card_source = card_creator
-		
-	if card_source.get_cards().size() <= 0:
-		close()
+
+	# Filter cards - skip Playing cards when populating from hand
+	var cards_to_show = []
+	for child in card_source.get_cards():
+		if populate_cards_type == PopulateCardsType.FromHand and child is Card:
+			if not child.is_in_hand():
+				continue
+		cards_to_show.append(child)
+
+	if cards_to_show.size() <= 0:
+		call_deferred("close")
 	else:
 		clear_cards()
-		
-		for child in card_source.get_cards():
+
+		for child in cards_to_show:
 			var child_scene_file_path = child.get_scene_file_path()
 			var new_card: Card = load(child_scene_file_path).instantiate()
 			new_card.connect("chosen", self._on_card_chosen)
