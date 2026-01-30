@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://bpcug31u40aki"]
+
+[ext_resource type="Script" uid="uid://emf3um5w6si0" path="res://Scripts/EffectItemButton.gd" id="1_oiim2"]
+[ext_resource type="FontFile" uid="uid://dwo8xle1kx2ha" path="res://Assets/Fonts/Quicksand/static/Quicksand-Medium.ttf" id="1_pxggg"]
+[ext_resource type="FontFile" uid="uid://biw8kuuj8rwa8" path="res://Assets/Fonts/Quicksand/static/Quicksand-Bold.ttf" id="2_oiim2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oiim2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oiim2"]
+bg_color = Color(0.393085, 0.393086, 0.393085, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_color = Color(0, 0, 0, 0.494118)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m6t3h"]
+bg_color = Color(0.230315, 0.230315, 0.230315, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_color = Color(0, 0, 0, 0.494118)
+
+[node name="EffectItemButton" type="Button"]
+custom_minimum_size = Vector2(0, 30)
+offset_right = 192.0
+offset_bottom = 30.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_oiim2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_oiim2")
+theme_override_styles/normal = SubResource("StyleBoxFlat_m6t3h")
+script = ExtResource("1_oiim2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_top = 4.0
+offset_right = 248.0
+offset_bottom = 28.0
+mouse_filter = 2
+
+[node name="CheckBox" type="CheckBox" parent="HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="RichTextLabel" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("1_pxggg")
+theme_override_fonts/bold_font = ExtResource("2_oiim2")
+theme_override_font_sizes/bold_font_size = 12
+bbcode_enabled = true
+text = "[b]hello[/b]"
+fit_content = true
+scroll_active = false
+vertical_alignment = 1
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

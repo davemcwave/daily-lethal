@@ -15,6 +15,9 @@ func get_effect_name() -> String:
 		return debuff.get_debuff_name()
 	
 func get_effect_description() -> String:
+	if debuff == null:
+		return ""
+		
 	return debuff.get_debuff_description()
 	
 func set_target(new_target) -> void:

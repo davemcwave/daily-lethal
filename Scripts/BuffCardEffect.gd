@@ -18,6 +18,9 @@ func get_effect_name() -> String:
 		return buff.get_buff_name()
 	#
 func get_effect_description() -> String:
+	if buff == null:
+		return ""
+		
 	return buff.get_buff_description()
 	
 func set_buff_color(new_buff_color: Color) -> void:
