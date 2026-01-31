@@ -7,10 +7,14 @@ var enemy_texture: Texture2D = null
 var puzzle_date: String = ""
 var puzzle_scene: String = ""
 var next_puzzle_scene = null
+var recorded_card_scene_paths: Array[String] = []
+var card_solution_slugs: Array[String] = []
 
 func clear() -> void:
 	attempts = 0
 	best_card_count = 0
+	clear_recorded_card_solutions()
+	card_solution_slugs.clear()
 	
 func set_puzzle_scene(new_puzzle_scene: String) -> void:
 	puzzle_scene = new_puzzle_scene
@@ -44,6 +48,58 @@ func set_best_card_count(new_best_card_count: int) -> void:
 	
 func set_enemy_name(new_enemy_name: String) -> void:
 	enemy_name = new_enemy_name
+func record_played_card_scene_path(card_scene_path: String) -> void:
+	if card_scene_path.is_empty():
+		return
+	recorded_card_scene_paths.append(card_scene_path)
+
+func clear_recorded_card_solutions() -> void:
+	recorded_card_scene_paths.clear()
+
+func set_card_solution_slugs(new_slugs: Array[String]) -> void:
+	card_solution_slugs = new_slugs.duplicate()
+
+func save_played_cards_solution() -> void:
+	if recorded_card_scene_paths.is_empty():
+		return
+	var resource_path: String = get_solution_resource_path()
+	if resource_path.is_empty():
+		return
+	var card_solution_resource := CardSolutionResource.new()
+	var packed_scenes: Array[PackedScene] = []
+	for scene_path: String in recorded_card_scene_paths:
+		if scene_path.is_empty():
+			continue
+		if not ResourceLoader.exists(scene_path):
+			continue
+		var packed_scene = load(scene_path)
+		if packed_scene is PackedScene:
+			packed_scenes.append(packed_scene)
+	if packed_scenes.is_empty():
+		return
+	card_solution_resource.card_scenes = packed_scenes
+	ensure_directory_exists(resource_path.get_base_dir())
+	var result = ResourceSaver.save(card_solution_resource, resource_path)
+	if result != OK:
+		push_error("Failed to save card solution to %s (error %d)" % [resource_path, result])
+
+func get_solution_resource_path() -> String:
+	for slug in card_solution_slugs:
+		var normalized_slug: String = slug
+		if normalized_slug.is_empty():
+			continue
+		if normalized_slug.ends_with(".tres"):
+			normalized_slug = normalized_slug.substr(0, normalized_slug.length() - 5)
+		return "res://Scenes/Puzzles/Solutions/%s.tres" % normalized_slug
+	return ""
+
+func ensure_directory_exists(dir_path: String) -> void:
+	if dir_path.is_empty():
+		return
+	var dir = DirAccess.open(dir_path)
+	if dir == null:
+		var absolute_path: String = ProjectSettings.globalize_path(dir_path)
+		DirAccess.make_dir_recursive_absolute(absolute_path)
 	
 func cards_are_playing() -> bool:
 	for card in get_tree().get_nodes_in_group("Cards"):

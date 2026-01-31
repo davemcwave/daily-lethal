@@ -27,5 +27,6 @@ func play():
 	await buffs_container.activate_buffs(Buff.ActivationType.OnCardPlay)
 	
 	scene.increment_card_count()
+	scene.add_card_played(self)
 	discard()
 	scene.check_game_over()

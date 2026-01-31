@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CardSolutionResource" load_steps=9 format=3]
+
+[ext_resource type="PackedScene" path="res://Scenes/SnipeCard.scn" id="1_a1n7w"]
+[ext_resource type="PackedScene" path="res://Scenes/TributeCard.scn" id="2_hnodt"]
+[ext_resource type="PackedScene" path="res://Scenes/TargetCard.scn" id="3_qi64l"]
+[ext_resource type="PackedScene" path="res://Scenes/GiftCard.scn" id="4_d4dq2"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.scn" id="5_jwvkj"]
+[ext_resource type="PackedScene" path="res://Scenes/SurgeCard.scn" id="6_54l8a"]
+[ext_resource type="PackedScene" path="res://Scenes/BurstCard.scn" id="7_i5o1j"]
+[ext_resource type="Script" path="res://Scripts/CardSolutionResource.gd" id="8_qbeyv"]
+
+[resource]
+script = ExtResource("8_qbeyv")
+card_scenes = Array[PackedScene]([ExtResource("1_a1n7w"), ExtResource("2_hnodt"), ExtResource("3_qi64l"), ExtResource("4_d4dq2"), ExtResource("5_jwvkj"), ExtResource("6_54l8a"), ExtResource("6_54l8a"), ExtResource("7_i5o1j")])

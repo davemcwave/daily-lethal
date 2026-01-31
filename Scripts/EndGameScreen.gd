@@ -19,14 +19,18 @@ func _ready():
 	$EnemyIcon.set_texture(background.get_enemy_texture())
 	
 	background.mark_puzzle_completed(background.get_puzzle_date())
+	background.save_played_cards_solution()
 
 func _on_play_again_button_pressed():
 	background.clear()
 	
-	if JavaScriptBridge.eval("localStorage.getItem('device_type')", true) == "desktop":
-		get_tree().change_scene_to_file("res://Scenes/Scene0Desktop.scn")
+	if is_web_platform():
+		if JavaScriptBridge.eval("localStorage.getItem('device_type')", true) == "desktop":
+			get_tree().change_scene_to_file("res://Scenes/Scene0Desktop.scn")
+		else:
+			get_tree().change_scene_to_file("res://Scenes/Scene0.scn")
 	else:
-		get_tree().change_scene_to_file("res://Scenes/Scene0.scn")
+		change_to_main_scene()
 
 func _on_share_button_pressed():
 	DisplayServer.clipboard_set(share_text)
@@ -39,18 +43,25 @@ func _on_share_button_pressed():
 	$ShareButton/TextureRect.show()
 
 func _on_get_tomorrow_button_pressed():
+	var next_puzzle_scene = background.get_next_puzzle_scene()
 	background.clear()
 	
-	if background.get_next_puzzle_scene() == null:
+	if next_puzzle_scene == null:
 		OS.shell_open("https://playlethal.beehiiv.com/subscribe")
 	else:
-		var next_puzzle: Puzzle = load(background.get_next_puzzle_scene()).instantiate()
-		var next_puzzle_date: String = next_puzzle.get_puzzle_date()
-		var base_url = JavaScriptBridge.eval("window.location.origin", true)
-		var device_type = JavaScriptBridge.eval("localStorage.getItem('device_type')", true)
-		var desktop = "/desktop" if device_type == "desktop" else ""
-		var next_url = "%s%s/%s" % [base_url, desktop, next_puzzle_date]
-		open_window_in_same_tab(next_url)
+		if is_web_platform():
+			var next_puzzle: Puzzle = load(next_puzzle_scene).instantiate()
+			if next_puzzle == null:
+				return
+			var next_puzzle_date: String = next_puzzle.get_puzzle_date()
+			var base_url = JavaScriptBridge.eval("window.location.origin", true)
+			var device_type = JavaScriptBridge.eval("localStorage.getItem('device_type')", true)
+			var desktop = "/desktop" if device_type == "desktop" else ""
+			var next_url = "%s%s/%s" % [base_url, desktop, next_puzzle_date]
+			open_window_in_same_tab(next_url)
+		else:
+			background.set_puzzle_scene(next_puzzle_scene)
+			change_to_main_scene()
 
 func open_window_in_same_tab(url: String) -> void:
 	JavaScriptBridge.eval("window.location.href = '%s';" % url)
@@ -58,3 +69,10 @@ func open_window_in_same_tab(url: String) -> void:
 
 func _on_no_thanks_button_pressed() -> void:
 	$Overlay.queue_free()
+
+func is_web_platform() -> bool:
+	return Engine.has_singleton("JavaScriptBridge") and OS.has_feature("web")
+
+func change_to_main_scene() -> void:
+	var main_scene_path := "res://Scenes/Scene0.scn" if OS.has_feature("mobile") else "res://Scenes/Scene0Desktop.scn"
+	get_tree().change_scene_to_file(main_scene_path)

@@ -7,6 +7,7 @@ func play():
 	pay_cost(energy_cost)
 	await apply_card_effects()
 	scene.increment_card_count()
+	scene.add_card_played(self)
 	scene.set_last_card_effects(self)
 	await buffs_container.activate_buffs(Buff.ActivationType.OnCardPlay)
 	discard()

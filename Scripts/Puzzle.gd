@@ -25,6 +25,7 @@ class_name Puzzle
 @export_group("Cards")
 @export var card_scenes: Array[Resource]
 @export var card_solution: Array[Resource]
+@export var card_solution_resource_name: String = ""
 
 @export var initial_draw_amount: int = -1
 
@@ -36,6 +37,8 @@ class_name Puzzle
 @export_multiline var death_line: String = ""
 
 var test_puzzle: bool = false
+var cached_resource_card_solution: Array = []
+var has_loaded_resource_card_solution: bool = false
 
 func has_eye_positions() -> bool:
 	return eye_1_position != null and eye_2_position != null
@@ -106,8 +109,70 @@ func do_randomize_cards() -> bool:
 	return randomize_cards
 	
 func get_card_solution() -> Array:
+	var resource_solution: Array = get_resource_card_solution()
+	if not resource_solution.is_empty():
+		return resource_solution
 	return card_solution
-	
+
+func get_resource_card_solution() -> Array:
+	if not has_loaded_resource_card_solution:
+		cached_resource_card_solution = load_card_solution_from_resource()
+		has_loaded_resource_card_solution = true
+	return cached_resource_card_solution
+
+func load_card_solution_from_resource() -> Array:
+	for candidate_path: String in get_card_solution_resource_paths():
+		if candidate_path.is_empty():
+			continue
+		if not ResourceLoader.exists(candidate_path):
+			continue
+		var resource = load(candidate_path)
+		if resource == null:
+			continue
+		if resource is CardSolutionResource:
+			return resource.get_card_scenes()
+		if resource.has_method("get_card_scenes"):
+			return resource.get_card_scenes()
+	return []
+
+func get_card_solution_resource_paths() -> Array[String]:
+	var paths: Array[String] = []
+	for slug in get_card_solution_slugs():
+		if slug.is_empty():
+			continue
+		var normalized_slug: String = slug
+		if slug.ends_with(".tres"):
+			normalized_slug = slug.substr(0, slug.length() - 5)
+		paths.append("res://Scenes/Puzzles/Solutions/%s.tres" % normalized_slug)
+	return paths
+
+func get_card_solution_slugs() -> Array[String]:
+	var slugs: Array[String] = []
+	if not card_solution_resource_name.is_empty():
+		slugs.append(normalize_solution_slug(card_solution_resource_name))
+	if not puzzle_date.is_empty() and not enemy_name.is_empty():
+		slugs.append("%s-%s" % [puzzle_date, normalize_solution_slug(enemy_name)])
+	if not puzzle_date.is_empty():
+		slugs.append(puzzle_date)
+	if not scene_file_path.is_empty():
+		var file_name: String = scene_file_path.get_file().get_basename()
+		if file_name.ends_with("Puzzle"):
+			file_name = file_name.substr(0, file_name.length() - "Puzzle".length())
+		slugs.append(normalize_solution_slug(file_name))
+	return slugs
+
+func normalize_solution_slug(value: String) -> String:
+	var lowercase: String = value.strip_edges().to_lower()
+	var builder := ""
+	for char in lowercase:
+		var code: int = char.unicode_at(0)
+		var character := char
+		if character == "." or character == " " or character == "_" or character == ":":
+			character = "-"
+		if (character >= "a" and character <= "z") or (character >= "0" and character <= "9") or character == "-":
+			builder += character
+	return builder
+
 func get_random_card_count() -> int:
 	return random_card_count
 

@@ -21,6 +21,7 @@ var last_card_played: Card = null
 var checking_for_game_over: bool = false
 var game_over: bool = false
 var puzzle: Puzzle = null
+var card_play_history_paths: Array[String] = []
 @onready var url_capturer: URLCapturer = $URLCapturer
 @onready var next_puzzle_button = $NextPreviousPuzzleButtonContainer/NextPuzzleButton
 @onready var previous_puzzle_button = $NextPreviousPuzzleButtonContainer/PreviousPuzzleButton
@@ -216,6 +217,9 @@ func get_enemy_abilities() -> Array[EnemyAbility]:
 	
 func set_puzzle(new_puzzle: Puzzle) -> void:
 	puzzle = new_puzzle
+	card_play_history_paths.clear()
+	background.clear_recorded_card_solutions()
+	background.set_card_solution_slugs(puzzle.get_card_solution_slugs())
 	#var debug_text = ""
 	#for card_scene in new_puzzle.get_card_scenes():
 		#debug_text += card_scene.resource_path + ", " 
@@ -341,9 +345,21 @@ func draw_starting_cards() -> Array[Card]:
 func increment_card_count() -> void:
 	card_count += 1
 	emit_signal("card_count_incremented")
-	
+
 func get_card_count() -> int:
 	return card_count
+
+func add_card_played(card: Card) -> void:
+	if card == null:
+		return
+	var card_scene_path: String = card.get_scene_file_path()
+	if card_scene_path.is_empty():
+		return
+	card_play_history_paths.append(card_scene_path)
+	background.record_played_card_scene_path(card_scene_path)
+
+func get_card_play_history_paths() -> Array[String]:
+	return card_play_history_paths.duplicate()
 
 func disable_all_cards() -> void:
 	for card: Card in get_tree().get_nodes_in_group("Cards"):

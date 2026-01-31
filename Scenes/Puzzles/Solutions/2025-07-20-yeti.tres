@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CardSolutionResource" load_steps=7 format=3]
+
+[ext_resource type="PackedScene" path="res://Scenes/LungeCard.scn" id="1_36h6l"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.scn" id="2_pbekk"]
+[ext_resource type="PackedScene" path="res://Scenes/TargetCard.scn" id="3_bpj4n"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.scn" id="4_y0ytr"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.scn" id="5_amr3x"]
+[ext_resource type="Script" path="res://Scripts/CardSolutionResource.gd" id="6_1fmye"]
+
+[resource]
+script = ExtResource("6_1fmye")
+card_scenes = Array[PackedScene]([ExtResource("1_36h6l"), ExtResource("2_pbekk"), ExtResource("3_bpj4n"), ExtResource("3_bpj4n"), ExtResource("4_y0ytr"), ExtResource("5_amr3x")])

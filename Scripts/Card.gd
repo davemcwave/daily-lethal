@@ -330,6 +330,7 @@ func can_play() -> bool:
 		and can_pay_cost(energy_cost)
 
 func can_play_for_resolver() -> bool:
+	print(not enemy.is_animating(), not buffs_container.is_animating(), can_pay_cost(energy_cost))
 	return not enemy.is_animating() \
 		and not buffs_container.is_animating() \
 		and can_pay_cost(energy_cost)
@@ -467,6 +468,7 @@ func play():
 	handle_sfx()
 	buffs_container.clear_buffs_added_or_removed_this_turn()
 	scene.increment_card_count()
+	scene.add_card_played(self)
 	set_state(State.Playing)
 	pay_cost(energy_cost)
 	await apply_card_effects()

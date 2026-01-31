@@ -121,7 +121,9 @@ func add_to_debuff_activate_queue(debuff: Debuff) -> void:
 	debuff_activate_queue.append(debuff_activate_queue)
 	
 func add_debuff(new_debuff: Debuff) -> void:
-	add_child(new_debuff)
+	if new_debuff.get_parent() != self:
+		add_child(new_debuff)
+		
 	new_debuff.set_target(self)
 	$DebuffContainer.add_debuff(new_debuff)
 	

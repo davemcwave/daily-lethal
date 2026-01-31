@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CardSolutionResource" load_steps=7 format=3]
+
+[ext_resource type="PackedScene" path="res://Scenes/BargainCard.scn" id="1_6kw6e"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.scn" id="2_vhbis"]
+[ext_resource type="PackedScene" path="res://Scenes/MendCard.scn" id="3_ulrbb"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.scn" id="4_w1csm"]
+[ext_resource type="PackedScene" path="res://Scenes/FangCard.scn" id="5_5u8mf"]
+[ext_resource type="Script" path="res://Scripts/CardSolutionResource.gd" id="6_t6f5k"]
+
+[resource]
+script = ExtResource("6_t6f5k")
+card_scenes = Array[PackedScene]([ExtResource("1_6kw6e"), ExtResource("2_vhbis"), ExtResource("3_ulrbb"), ExtResource("4_w1csm"), ExtResource("5_5u8mf")])

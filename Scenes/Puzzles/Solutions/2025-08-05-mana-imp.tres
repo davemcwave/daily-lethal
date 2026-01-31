@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CardSolutionResource" load_steps=9 format=3]
+
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.scn" id="1_ao4s7"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.scn" id="2_etcq1"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.scn" id="3_bo2jv"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.scn" id="4_u8qii"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.scn" id="5_lanr5"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.scn" id="6_vvm3l"]
+[ext_resource type="PackedScene" path="res://Scenes/EmptyfistCard.scn" id="7_jlmu2"]
+[ext_resource type="Script" path="res://Scripts/CardSolutionResource.gd" id="8_gp5f6"]
+
+[resource]
+script = ExtResource("8_gp5f6")
+card_scenes = Array[PackedScene]([ExtResource("1_ao4s7"), ExtResource("2_etcq1"), ExtResource("3_bo2jv"), ExtResource("4_u8qii"), ExtResource("5_lanr5"), ExtResource("2_etcq1"), ExtResource("1_ao4s7"), ExtResource("4_u8qii"), ExtResource("3_bo2jv"), ExtResource("4_u8qii"), ExtResource("6_vvm3l"), ExtResource("1_ao4s7"), ExtResource("2_etcq1"), ExtResource("7_jlmu2"), ExtResource("7_jlmu2"), ExtResource("7_jlmu2")])

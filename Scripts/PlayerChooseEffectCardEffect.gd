@@ -3,6 +3,7 @@ class_name PlayerChooseEffectCardEffect
 
 @export var card_effects_to_choose_from: Array[CardEffect]
 @onready var card_choice_view: CardChoiceView = get_tree().get_root().get_node('Scene/CanvasLayer/CardChoiceView')
+
 @export var card_for_preview: Card
 var selected_card_effect = null
 	

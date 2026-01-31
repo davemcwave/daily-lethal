@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CardSolutionResource" load_steps=9 format=3]
+
+[ext_resource type="PackedScene" path="res://Scenes/TributeCard.scn" id="1_ln0g3"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.scn" id="2_i8u32"]
+[ext_resource type="PackedScene" path="res://Scenes/FangCard.scn" id="3_ml8ud"]
+[ext_resource type="PackedScene" path="res://Scenes/InspirationCard.scn" id="4_6ho5h"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.scn" id="5_v43ep"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.scn" id="6_iaaau"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.scn" id="7_rp05b"]
+[ext_resource type="Script" path="res://Scripts/CardSolutionResource.gd" id="8_hjgf4"]
+
+[resource]
+script = ExtResource("8_hjgf4")
+card_scenes = Array[PackedScene]([ExtResource("1_ln0g3"), ExtResource("2_i8u32"), ExtResource("3_ml8ud"), ExtResource("3_ml8ud"), ExtResource("4_6ho5h"), ExtResource("5_v43ep"), ExtResource("6_iaaau"), ExtResource("7_rp05b")])
