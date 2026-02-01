@@ -8,6 +8,7 @@ signal card_count_incremented
 @onready var health = get_node("Health")
 @onready var background = get_node("/root/Background")
 @onready var deck: Deck = get_node("Deck")
+@onready var hand: Hand = get_node("HandScrollContainer/Hand")
 @onready var audio_handler = get_node("/root/AudioHandler")
 @export_file("*.scn") var puzzle_scene
 @export var override_puzzle_date: bool = false
@@ -356,7 +357,11 @@ func add_card_played(card: Card) -> void:
 	if card_scene_path.is_empty():
 		return
 	card_play_history_paths.append(card_scene_path)
-	background.record_played_card_scene_path(card_scene_path)
+	var hand_index: int = -1
+	if hand != null:
+		var cards_in_hand: Array = hand.get_cards()
+		hand_index = cards_in_hand.find(card)
+	background.record_played_card_scene_path(card_scene_path, hand_index)
 
 func get_card_play_history_paths() -> Array[String]:
 	return card_play_history_paths.duplicate()

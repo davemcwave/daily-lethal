@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1jau1yjdgqcm"]
+
+[ext_resource type="Script" uid="uid://82w8fa6nb6ne" path="res://Scripts/PuzzleCardSearch.gd" id="1_37iwg"]
+
+[node name="PuzzleCardSearch" type="Node"]
+script = ExtResource("1_37iwg")

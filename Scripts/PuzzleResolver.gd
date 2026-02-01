@@ -5,6 +5,8 @@ extends Node
 @export var initial_enemy_name: String = ""
 @export var puzzle_index: int = 0
 @export var time_scale_speed: float = 5.0
+var filtered_puzzle_paths: Array[String] = []
+var filtered_puzzles_cache: Array[Puzzle] = []
 
 func _ready() -> void:
 	truncate_file()
@@ -23,13 +25,43 @@ func get_puzzle_index_for_enemy_name(enemy_name: String) -> int:
 	
 func is_active() -> bool:
 	return active
+func set_filtered_puzzle_paths(new_paths: Array[String]) -> void:
+	filtered_puzzle_paths.clear()
+	for path in new_paths:
+		if path.is_empty():
+			continue
+		filtered_puzzle_paths.append(path)
+	filtered_puzzles_cache.clear()
+	puzzle_index = 0
 
 func get_puzzle() -> Puzzle:
-	var puzzle = get_puzzles()[puzzle_index]
+	var puzzles = get_puzzles()
+	if puzzles.is_empty():
+		push_error("PuzzleResolver: No puzzles available to resolve.")
+		return null
+	if puzzle_index >= puzzles.size():
+		puzzle_index = 0
+	var puzzle = puzzles[puzzle_index]
 	puzzle_index += 1
 	return puzzle
 	
 func get_puzzles() -> Array:
+	if not filtered_puzzle_paths.is_empty():
+		if filtered_puzzles_cache.is_empty():
+			for scene_path in filtered_puzzle_paths:
+				if scene_path.is_empty():
+					continue
+				if not ResourceLoader.exists(scene_path):
+					push_warning("PuzzleResolver: Filtered puzzle %s does not exist." % scene_path)
+					continue
+				var scene = load(scene_path)
+				if scene == null:
+					push_warning("PuzzleResolver: Failed to load %s" % scene_path)
+					continue
+				var puzzle: Puzzle = scene.instantiate()
+				filtered_puzzles_cache.append(puzzle)
+		return filtered_puzzles_cache
+
 	var puzzles = []
 	var dir := DirAccess.open("res://Scenes/Puzzles/")
 	if dir == null:

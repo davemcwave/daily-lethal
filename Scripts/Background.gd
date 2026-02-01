@@ -8,6 +8,7 @@ var puzzle_date: String = ""
 var puzzle_scene: String = ""
 var next_puzzle_scene = null
 var recorded_card_scene_paths: Array[String] = []
+var recorded_card_hand_indices: Array[int] = []
 var card_solution_slugs: Array[String] = []
 
 func clear() -> void:
@@ -48,13 +49,15 @@ func set_best_card_count(new_best_card_count: int) -> void:
 	
 func set_enemy_name(new_enemy_name: String) -> void:
 	enemy_name = new_enemy_name
-func record_played_card_scene_path(card_scene_path: String) -> void:
+func record_played_card_scene_path(card_scene_path: String, hand_index: int = -1) -> void:
 	if card_scene_path.is_empty():
 		return
 	recorded_card_scene_paths.append(card_scene_path)
+	recorded_card_hand_indices.append(hand_index)
 
 func clear_recorded_card_solutions() -> void:
 	recorded_card_scene_paths.clear()
+	recorded_card_hand_indices.clear()
 
 func set_card_solution_slugs(new_slugs: Array[String]) -> void:
 	card_solution_slugs = new_slugs.duplicate()
@@ -67,7 +70,10 @@ func save_played_cards_solution() -> void:
 		return
 	var card_solution_resource := CardSolutionResource.new()
 	var packed_scenes: Array[PackedScene] = []
-	for scene_path: String in recorded_card_scene_paths:
+	var filtered_hand_indices: Array[int] = []
+	for i in range(recorded_card_scene_paths.size()):
+		var scene_path: String = recorded_card_scene_paths[i]
+		var hand_index: int = recorded_card_hand_indices[i] if recorded_card_hand_indices.size() > i else -1
 		if scene_path.is_empty():
 			continue
 		if not ResourceLoader.exists(scene_path):
@@ -75,9 +81,11 @@ func save_played_cards_solution() -> void:
 		var packed_scene = load(scene_path)
 		if packed_scene is PackedScene:
 			packed_scenes.append(packed_scene)
+			filtered_hand_indices.append(hand_index)
 	if packed_scenes.is_empty():
 		return
 	card_solution_resource.card_scenes = packed_scenes
+	card_solution_resource.hand_indices = filtered_hand_indices
 	ensure_directory_exists(resource_path.get_base_dir())
 	var result = ResourceSaver.save(card_solution_resource, resource_path)
 	if result != OK:

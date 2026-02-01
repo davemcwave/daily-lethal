@@ -1,0 +1,5 @@
+res://Scenes/Puzzles/2025-05-05-Leech-Puzzle.scn:  PASS
+res://Scenes/Puzzles/2025-05-10-GelatinousCube-Puzzle.scn:  PASS
+res://Scenes/Puzzles/2025-05-17-MinotaurPuzzle.scn:  FAIL
+res://Scenes/Puzzles/2025-05-20-OgrePuzzle.scn:  PASS
+res://Scenes/Puzzles/2025-06-03-MimicPuzzle.scn:  PASS

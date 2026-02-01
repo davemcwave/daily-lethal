@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CardSolutionResource" load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://Scenes/SurgeCard.scn" id="1_mpmwr"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.scn" id="2_23lvw"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.scn" id="3_asdfc"]
+[ext_resource type="Script" path="res://Scripts/CardSolutionResource.gd" id="4_wh8ig"]
+
+[resource]
+script = ExtResource("4_wh8ig")
+card_scenes = Array[PackedScene]([ExtResource("1_mpmwr"), ExtResource("1_mpmwr"), ExtResource("2_23lvw"), ExtResource("2_23lvw"), ExtResource("2_23lvw"), ExtResource("2_23lvw"), ExtResource("3_asdfc")])
+hand_indices = Array[int]([2, 5, 0, 0, 1, 1, 0])
