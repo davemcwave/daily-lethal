@@ -1,5 +1,6 @@
 {
   "puzzles": [
+    { "id": "2026-02-02", "release_at": "2026-02-02T00:00:00-04:00", "title": "Carnivorous Plant" },
     { "id": "2026-01-30", "release_at": "2026-01-30T00:00:00-04:00", "title": "Hammerhead" },
     { "id": "2026-01-29", "release_at": "2026-01-29T00:00:00-04:00", "title": "Evil Carrot" },
     { "id": "2026-01-28", "release_at": "2026-01-28T00:00:00-04:00", "title": "Ninja" },
