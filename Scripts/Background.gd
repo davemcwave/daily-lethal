@@ -127,7 +127,7 @@ func mark_puzzle_completed(puzzle_date: String):
 		})();
 	""" % puzzle_date
 	JavaScriptBridge.eval(js_code, true)
-
+	
 func get_all_buff_scenes() -> Array[Resource]:
 	var buff_scenes: Array[Resource] = []
 	var dir = DirAccess.open("res://Scenes/")

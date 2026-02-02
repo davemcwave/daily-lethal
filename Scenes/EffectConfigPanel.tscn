@@ -1,0 +1,86 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwoqobt0iw4ev"]
+
+[ext_resource type="FontFile" uid="uid://dwo8xle1kx2ha" path="res://Assets/Fonts/Quicksand/static/Quicksand-Medium.ttf" id="1_medium"]
+[ext_resource type="Script" uid="uid://dg5hwq8orwtlg" path="res://Scripts/EffectConfigPanel.gd" id="1_script"]
+[ext_resource type="FontFile" uid="uid://biw8kuuj8rwa8" path="res://Assets/Fonts/Quicksand/static/Quicksand-Bold.ttf" id="2_bold"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.196078, 0.196078, 0.196078, 1)
+
+[node name="EffectConfigPanel" type="Panel"]
+custom_minimum_size = Vector2(280, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = -244.0
+offset_right = 240.0
+offset_bottom = 244.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+script = ExtResource("1_script")
+
+[node name="TitleLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 3.0
+offset_bottom = 21.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("1_medium")
+theme_override_fonts/bold_font = ExtResource("2_bold")
+theme_override_font_sizes/bold_font_size = 14
+bbcode_enabled = true
+text = "[b]Effect Configuration[/b]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CloseButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 444.0
+offset_top = 4.0
+offset_right = 472.0
+offset_bottom = 24.0
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 14
+text = "X"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 32.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="ColorRect" type="ColorRect" parent="."]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -312.0
+offset_top = -24.0
+offset_right = 368.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.756863)
