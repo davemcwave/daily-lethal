@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://urgv04gl7rl6"]
+[gd_scene load_steps=2 format=3 uid="uid://2uuhbxk6u3de"]
 
-[ext_resource type="Script" uid="uid://df5ni8bqyysjl" path="res://Scripts/CardEffectCatalog.gd" id="1"]
+[ext_resource type="Script" path="res://Scripts/CardEffectCatalog.gd" id="1"]
 
 [node name="CardEffectCatalog" type="Control"]
 layout_mode = 3

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cxtinc3a0jmxi"]
+[gd_scene load_steps=9 format=3 uid="uid://qt0bstrm5bxn"]
 
 [ext_resource type="Texture2D" uid="uid://dp57kw80gb4ks" path="res://bg.png" id="1_0se2k"]
 [ext_resource type="Script" uid="uid://bovr7nwpkcppo" path="res://Scripts/CardLab.gd" id="1_ielgb"]
@@ -58,7 +58,7 @@ layout_mode = 0
 offset_left = 32.0
 offset_top = 32.0
 offset_right = 264.0
-offset_bottom = 512.0
+offset_bottom = 520.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_8wo5g")
 
 [node name="TitleLabel" type="RichTextLabel" parent="EffectLibraryPanel"]
@@ -120,13 +120,183 @@ offset_right = 232.0
 offset_bottom = 54.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="EffectLibraryPanel"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_top = 64.0
-offset_right = 232.0
-offset_bottom = 480.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="EffectLibraryPanel/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 1
+
+[node name="SelectedEffectsPanel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 304.0
+offset_top = 32.0
+offset_right = 536.0
+offset_bottom = 312.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_8wo5g")
+
+[node name="TitleLabel" type="RichTextLabel" parent="SelectedEffectsPanel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 3.0
+offset_bottom = 21.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_8wo5g")
+theme_override_fonts/bold_font = ExtResource("3_m6t3h")
+theme_override_font_sizes/bold_font_size = 14
+bbcode_enabled = true
+text = "[b]Selected Effects[/b]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="SelectedEffectsPanel"]
+layout_mode = 0
+offset_top = 32.0
+offset_right = 232.0
+offset_bottom = 272.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SelectedEffectsPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 4
+
+[node name="EffectConfigDialog" type="AcceptDialog" parent="."]
+title = "Effect Configuration"
+initial_position = 1
+size = Vector2i(400, 500)
+ok_button_text = "Close"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="EffectConfigDialog"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 392.0
+offset_bottom = 451.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EffectConfigDialog/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="EffectConfigPanel_DEPRECATED" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 576.0
+offset_top = 32.0
+offset_right = 928.0
+offset_bottom = 360.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_8wo5g")
+
+[node name="CardPreviewPanel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 576.0
+offset_top = 32.0
+offset_right = 928.0
+offset_bottom = 520.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_8wo5g")
+
+[node name="TitleLabel" type="RichTextLabel" parent="CardPreviewPanel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 3.0
+offset_bottom = 21.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_8wo5g")
+theme_override_fonts/bold_font = ExtResource("3_m6t3h")
+theme_override_font_sizes/bold_font_size = 14
+bbcode_enabled = true
+text = "[b]Card Preview[/b]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CardContainer" type="Panel" parent="CardPreviewPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 40.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ielgb")
+
+[node name="ActionsPanel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 304.0
+offset_top = 328.0
+offset_right = 536.0
+offset_bottom = 528.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_8wo5g")
+
+[node name="TitleLabel" type="RichTextLabel" parent="ActionsPanel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 3.0
+offset_bottom = 21.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_8wo5g")
+theme_override_fonts/bold_font = ExtResource("3_m6t3h")
+theme_override_font_sizes/bold_font_size = 14
+bbcode_enabled = true
+text = "[b]Card Actions[/b]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ActionsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 32.0
+offset_right = -12.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="CardNameLabel" type="Label" parent="ActionsPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_m6t3h")
+theme_override_font_sizes/font_size = 12
+text = "Card Name:"
+
+[node name="CardNameEdit" type="LineEdit" parent="ActionsPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_8wo5g")
+placeholder_text = "Enter card name..."
+
+[node name="SaveButton" type="Button" parent="ActionsPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_m6t3h")
+text = "Save Custom Card"
+
+[node name="LoadButton" type="Button" parent="ActionsPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_m6t3h")
+text = "Load Custom Card"

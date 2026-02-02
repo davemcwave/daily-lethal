@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://ch46b60hl6q8q"]
+
+[ext_resource type="Script" uid="uid://dg7q32rq6s5ct" path="res://Scripts/SelectedEffectItem.gd" id="1_selected"]
+[ext_resource type="FontFile" uid="uid://dwo8xle1kx2ha" path="res://Assets/Fonts/Quicksand/static/Quicksand-Medium.ttf" id="2_selected"]
+[ext_resource type="FontFile" uid="uid://biw8kuuj8rwa8" path="res://Assets/Fonts/Quicksand/static/Quicksand-Bold.ttf" id="3_selected"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_selected"]
+bg_color = Color(0.3, 0.3, 0.35, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.5, 0.5, 0.5, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="SelectedEffectItem" type="Panel"]
+custom_minimum_size = Vector2(0, 40)
+offset_right = 220.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_selected")
+script = ExtResource("1_selected")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4
+
+[node name="Label" type="RichTextLabel" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_selected")
+theme_override_fonts/bold_font = ExtResource("3_selected")
+theme_override_font_sizes/bold_font_size = 12
+bbcode_enabled = true
+text = "[b]Effect Name[/b]"
+fit_content = true
+scroll_active = false
+vertical_alignment = 1
+
+[node name="MoveUpButton" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+text = "↑"
+
+[node name="MoveDownButton" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+text = "↓"
+
+[node name="RemoveButton" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+text = "×"
