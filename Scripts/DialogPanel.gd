@@ -7,6 +7,9 @@ class_name DialogPanel
 var force_dialog_finish: bool = false
 var playing: bool = false
 func _ready():
+	$NextIcon/Timer.connect("timeout", blink_next_icon)
+	$NextIcon.hide()
+	
 	dialog_text.set_text("")
 	#if visible:
 		#play_dialog_text()
@@ -20,6 +23,18 @@ func set_icon_texture(new_icon_texture: Texture2D) -> void:
 	
 func set_title_text(new_title_text: String) -> void:
 	$TitleText.set_text(new_title_text)
+
+func blink_next_icon() -> void:
+	$NextIcon.set_visible(not $NextIcon.visible)
+	
+func enable_blink_next_icon(enabled: bool) -> void:
+	if enabled:
+		$NextIcon/Timer.start()
+		$NextIcon.show()
+	else:
+		$NextIcon/Timer.stop()
+		$NextIcon.hide()
+	
 	
 func play_dialog_text(optional_text: String = "") -> bool:
 	if not optional_text.is_empty():
@@ -31,7 +46,7 @@ func play_dialog_text(optional_text: String = "") -> bool:
 		$DialogText.visible_characters += 1
 		
 		if $DialogText.visible_characters % 3 == 0:
-			audio_handler.play_sfx("Dialog%dSFX" % dialog_sfx_index, randf_range(0.7, 0.9))
+			audio_handler.play_sfx("Dialog%dSFX" % dialog_sfx_index, randf_range(0.5, 0.7))
 	
 		if force_dialog_finish:
 			dialog_text.visible_characters = -1
