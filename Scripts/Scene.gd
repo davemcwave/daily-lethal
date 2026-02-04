@@ -2,6 +2,8 @@ extends Control
 class_name Scene
 
 signal checked_for_game_over
+signal shown_card_preview
+signal buff_added(buff)
 signal card_count_incremented
 
 @onready var enemy = get_node("Enemy")
@@ -51,6 +53,12 @@ func _ready():
 func can_show_initial_dialog() -> bool:
 	return dialog_handler.is_enabled() and has_node("CanvasLayer/DialogFightButton") and puzzle.get_dialogue_lines().size() > 0
 
+func emit_card_preview_signal() -> void:
+	emit_signal('shown_card_preview')
+	
+func emit_buff_added_signal(buff: Buff) -> void:
+	emit_signal("buff_added", buff)
+	
 func handle_initial_dialog() -> bool:
 	dialog_fight_button = $CanvasLayer/DialogFightButton
 	player_dialog_panel = $CanvasLayer/PlayerDialogPanel

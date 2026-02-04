@@ -10,7 +10,7 @@ func _ready() -> void:
 	var puzzle: Puzzle = load(puzzle_scene).instantiate()
 	var puzzle_icon: Texture2D = puzzle.get_enemy_icon_texture()
 	enemy_icon.set_texture(puzzle_icon)
-	
+
 	connect("pressed", self._on_button_pressed)
 
 func appear(duration: float = 0.25) -> bool:
@@ -25,6 +25,7 @@ func appear(duration: float = 0.25) -> bool:
 	
 func _on_button_pressed() -> void:
 	background.set_puzzle_scene(puzzle_scene)
+	background.set_from_story_view(true)
 	get_tree().change_scene_to_file("res://Scenes/Scene0Desktop.scn")
 
 func get_next_buttons() -> Array[PlayPuzzleButton]:

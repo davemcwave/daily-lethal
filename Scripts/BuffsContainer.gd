@@ -37,6 +37,7 @@ func add_buff(new_buff: Buff) -> void:
 	add_child(buff_panel)
 	var buff_instance_id = new_buff.get_instance_id()
 	buffs_added_this_turn.append(buff_instance_id)
+	scene.emit_buff_added_signal(new_buff)
 
 func clear_buffs_added_or_removed_this_turn() -> void:
 	clear_buffs_added_this_turn()

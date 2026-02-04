@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bl58qub3qkc0a"]
+
+[ext_resource type="Script" uid="uid://cvakcc6kfrciv" path="res://Scripts/CardPrinter.gd" id="1_hvbxg"]
+
+[node name="CardPrinter" type="Node"]
+script = ExtResource("1_hvbxg")
+print_on_ready = true

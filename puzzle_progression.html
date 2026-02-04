@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Puzzle Progression Graph</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1e1e1e;
+            color: #e0e0e0;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #4ec9b0;
+            margin-bottom: 10px;
+        }
+        .stats {
+            text-align: center;
+            color: #9cdcfe;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .tier {
+            margin-bottom: 40px;
+            border-left: 4px solid #4ec9b0;
+            padding-left: 20px;
+        }
+        .tier-header {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4ec9b0;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .tier-number {
+            background: #4ec9b0;
+            color: #1e1e1e;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 18px;
+        }
+        .puzzle-count {
+            color: #9cdcfe;
+            font-size: 16px;
+        }
+        .puzzles {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
+        .puzzle {
+            background: #2d2d2d;
+            padding: 12px 16px;
+            border-radius: 6px;
+            border-left: 3px solid #569cd6;
+            transition: all 0.2s;
+            cursor: default;
+        }
+        .puzzle:hover {
+            background: #363636;
+            transform: translateX(5px);
+            border-left-color: #4ec9b0;
+        }
+        .puzzle-name {
+            font-size: 14px;
+            color: #dcdcdc;
+        }
+        .tier-1 .puzzle { border-left-color: #4ec9b0; }
+        .tier-2 .puzzle { border-left-color: #569cd6; }
+        .tier-3 .puzzle { border-left-color: #c586c0; }
+        .tier-4 .puzzle { border-left-color: #dcdcaa; }
+        .tier-5 .puzzle { border-left-color: #ce9178; }
+        .tier-6 .puzzle { border-left-color: #d16969; }
+        .tier-7 .puzzle { border-left-color: #f48771; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Puzzle Progression Graph</h1>
+        <div class="stats">Total Tiers: 7 | Total Puzzles: 153</div>
+
+        <div class="tier tier-1">
+            <div class="tier-header">
+                <span class="tier-number">Tier 1</span>
+                <span class="puzzle-count">5 puzzles</span>
+            </div>
+            <div class="puzzles">
+                <div class="puzzle"><div class="puzzle-name">2025-04-23-EvilRobot-Puzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-04-24-SeaMonster-Puzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-05-04-Werewolf-Puzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">Puzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">Tutorial-Puzzle</div></div>
+            </div>
+        </div>
+
+        <div class="tier tier-2">
+            <div class="tier-header">
+                <span class="tier-number">Tier 2</span>
+                <span class="puzzle-count">10 puzzles</span>
+            </div>
+            <div class="puzzles">
+                <div class="puzzle"><div class="puzzle-name">2025-05-25-FlameImpPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-05-29-KoboldPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-06-21-SoldierPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-06-24-FlameGiantPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-07-20-YetiPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-07-26-DisplacerBeastPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-09-13-WaspSwarmPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-10-24-TimeDemon-Puzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-11-11-GhostPiratePuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-12-03-TermitesPuzzle</div></div>
+            </div>
+        </div>
+
+        <div class="tier tier-3">
+            <div class="tier-header">
+                <span class="tier-number">Tier 3</span>
+                <span class="puzzle-count">12 puzzles</span>
+            </div>
+            <div class="puzzles">
+                <div class="puzzle"><div class="puzzle-name">2025-05-02-DrBonez-Puzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-10-02-RedDragonPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-10-31-ZombiePuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-11-06-BlueDragonPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-11-21-CursedCampfirePuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-11-24-MantisShrimpPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-12-01-MushroomPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2026-01-05-RadiantSlugPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2026-01-13-AncientTreePuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2026-01-15-ElderPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2026-01-16-GreenDragonPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">TestPuzzle</div></div>
+            </div>
+        </div>
+
+        <div class="tier tier-4">
+            <div class="tier-header">
+                <span class="tier-number">Tier 4</span>
+                <span class="puzzle-count">28 puzzles</span>
+            </div>
+            <div class="puzzles">
+                <div class="puzzle"><div class="puzzle-name">2025-06-19-SaplingPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-06-26-OozePuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-06-30-GolemPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-07-12-EarthwormPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-07-22-SnipeBirdPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-08-01-GravediggerPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-08-13-OrigamiPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-08-19-TentacleCultistPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-08-21-GargoylePuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-08-27-ScarecrowPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-08-29-WitchPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-09-01-BeetlePuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-09-15-GiantWurmPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-09-26-PoltergeistPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-09-30-ArtificerPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-10-03-BarbarianPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-10-06-GiftmanPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-10-17-TimelordPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-10-21-GraveRobber-Puzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-10-22-PinkSlime-Puzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-11-07-BigfootPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-11-12-DelversPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-12-02-FungiPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-12-10-AdditionSignPuzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2026-01-06-BlackKnightPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2026-01-07-VendingMachinePuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2026-01-23-HarpyPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2026-01-27-WarriorPuzzle</div></div>
+            </div>
+        </div>
+
+        <div class="tier tier-5">
+            <div class="tier-header">
+                <span class="tier-number">Tier 5</span>
+                <span class="puzzle-count">31 puzzles</span>
+            </div>
+            <div class="puzzles">
+                <div class="puzzle"><div class="puzzle-name">2025-05-05-Leech-Puzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-05-10-GelatinousCube-Puzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-06-01-GiantRatPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-06-03-MimicPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-06-05-NagaPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-06-09-CloakerPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-06-15-MummyPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-06-17-AnimatedArmorPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-06-28-Puzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-07-06-CreepingVinePuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-07-08-EarthElementalPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-07-10-HellHoundPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-07-14-MadScientistPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-07-24-TentaclePiratePuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-08-03-NogglePuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-08-05-ManaImpPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-08-11-DecrepitMousePuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-09-11-SnowmanPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-09-17-VoidCreaturePuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-09-19-DeityPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-09-22-MoocherPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-10-01-BuzzsawDroidPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-10-09-SparkGiantPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-10-10-ShoggothPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-10-16-PterosaurPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-10-27-SerpentsPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-10-30-GiantBatPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-11-14-CannoneerPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-11-20-PufferfishPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2026-01-21-ButlerPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2026-01-26-ViperPuzzle</div></div>
+            </div>
+        </div>
+
+        <div class="tier tier-6">
+            <div class="tier-header">
+                <span class="tier-number">Tier 6</span>
+                <span class="puzzle-count">64 puzzles</span>
+            </div>
+            <div class="puzzles">
+                <div class="puzzle"><div class="puzzle-name">2025-04-25-Bloodthorn-Puzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-05-13-KrakenPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-05-15-GoblinPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-05-17-MinotaurPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-05-20-OgrePuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-06-07-TrollPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-06-11-CyclopsPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-06-13-GeniePuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-07-02-WidowPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-07-04-VampirePuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-07-16-CrawlerPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-07-18-BeholderPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-07-28-LightningElementalPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-07-30-ThunderbirdPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-08-07-CollectorPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-08-09-DemogorgonPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-08-15-DustDroidPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-08-17-FunambulistPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-08-23-AlchemistPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-08-25-MerfolkPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-08-31-RocPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-09-03-AssassinPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-09-05-DirewolfPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-09-07-FlumphPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-09-09-WarlockPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-09-23-RedeyePuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-09-24-FirebugPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-09-25-LichPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-09-29-ChupacabraPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-10-07-PorcupinePuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-10-08-FiendPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-10-13-CherubPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-10-14-PinkyPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-10-15-WaterDrakePuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-10-20-ChargerPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-10-23-FlailSnail-Puzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-10-28-IceGolemPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-10-29-FairyPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-11-03-LeprechaunPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-11-04-CarBatteryPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-11-05-RavenPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-11-10-DemonNursePuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-11-13-RatKingPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-11-17-TargetDummyPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-11-18-HydraPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-11-19-GiantEelPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-11-25-DrFrankensteinPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-11-26-FrankensteinsMonsterPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-11-27-DwarvenMinerPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-11-28-MonkPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-12-04-SpeedElfPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-12-05-TitanPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-12-08-BanditPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-12-09-LivingShadowPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-12-11-WraithPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2025-12-12-OwlbearPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2026-01-08-GiantCrabPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2026-01-09-PaladinPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2026-01-14-WeatherWitchPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2026-01-19-ScorpionPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2026-01-20-ModronPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2026-01-22-AxebeakPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2026-02-02-CarniverousPlantPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2026-02-03-WolverinePuzzle</div></div>
+            </div>
+        </div>
+
+        <div class="tier tier-7">
+            <div class="tier-header">
+                <span class="tier-number">Tier 7</span>
+                <span class="puzzle-count">3 puzzles</span>
+            </div>
+            <div class="puzzles">
+                <div class="puzzle"><div class="puzzle-name">2026-01-28-NinjaPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2026-01-29-EvilCarrotPuzzle</div></div>
+                <div class="puzzle"><div class="puzzle-name">2026-01-30-HammerheadPuzzle</div></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

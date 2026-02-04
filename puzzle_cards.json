@@ -823,21 +823,445 @@
 		"Reverberate",
 		"Trace"
 	],
+	"2025-10-31-ZombiePuzzle.scn": [
+		"Snipe",
+		"Revive",
+		"Revive",
+		"Echo",
+		"Echo",
+		"Haunt",
+		"Waste"
+	],
+	"2025-11-03-LeprechaunPuzzle.scn": [
+		"Pound",
+		"Wound",
+		"Shield",
+		"Martyr",
+		"Revive"
+	],
+	"2025-11-04-CarBatteryPuzzle.scn": [
+		"Ignite",
+		"Overload",
+		"Revive",
+		"Thunderbolt",
+		"Revive",
+		"Overload",
+		"Ignite"
+	],
+	"2025-11-05-RavenPuzzle.scn": [
+		"Haunt",
+		"Overload",
+		"Reverberate",
+		"Surge",
+		"Surge",
+		"Thunderbolt",
+		"Waste"
+	],
+	"2025-11-06-BlueDragonPuzzle.scn": [
+		"Haunt",
+		"Flurry",
+		"Reverberate",
+		"Reverberate",
+		"Wound",
+		"Venom"
+	],
+	"2025-11-07-BigfootPuzzle.scn": [
+		"Venom",
+		"Ignite",
+		"Empty Fist",
+		"Bargain",
+		"Tribute",
+		"Reverberate",
+		"Ignite"
+	],
+	"2025-11-10-DemonNursePuzzle.scn": [
+		"Martyr",
+		"Potion",
+		"Potion",
+		"Pound",
+		"Scrap",
+		"Scrap",
+		"Shield"
+	],
+	"2025-11-11-GhostPiratePuzzle.scn": [
+		"Haunt",
+		"Haunt",
+		"Lunge",
+		"Revive",
+		"Haunt",
+		"Rebound",
+		"Echo"
+	],
+	"2025-11-12-DelversPuzzle.scn": [
+		"Snipe",
+		"Surge",
+		"Scrap",
+		"Reverberate",
+		"Tribute",
+		"Surge",
+		"Shovel"
+	],
+	"2025-11-13-RatKingPuzzle.scn": [
+		"Martyr",
+		"Trace",
+		"Reverberate",
+		"Reverberate",
+		"Shield",
+		"Pound"
+	],
+	"2025-11-14-CannoneerPuzzle.scn": [
+		"Rebound",
+		"Rebound",
+		"Rebound",
+		"Reverberate",
+		"Scrap",
+		"Snipe",
+		"Burst"
+	],
+	"2025-11-17-TargetDummyPuzzle.scn": [
+		"Martyr",
+		"Inspiration",
+		"Reverberate",
+		"Potion",
+		"Thunderbolt"
+	],
+	"2025-11-18-HydraPuzzle.scn": [
+		"Fang",
+		"Inspiration",
+		"Heartbeat",
+		"Rebound",
+		"Rebound",
+		"Rebound",
+		"Rebound"
+	],
+	"2025-11-19-GiantEelPuzzle.scn": [
+		"Empty Fist",
+		"Thunderbolt",
+		"Pound",
+		"Lunge",
+		"Bargain",
+		"Overload",
+		"Venom"
+	],
+	"2025-11-20-PufferfishPuzzle.scn": [
+		"Burst",
+		"Empty Fist",
+		"Surge",
+		"Tribute",
+		"Tribute",
+		"Trace",
+		"Haunt"
+	],
+	"2025-11-21-CursedCampfirePuzzle.scn": [
+		"Spark",
+		"Scrap",
+		"Reverberate",
+		"Rebound",
+		"Haunt",
+		"Trace",
+		"Waste"
+	],
+	"2025-11-24-MantisShrimpPuzzle.scn": [
+		"Haunt",
+		"Flurry",
+		"Reverberate",
+		"Rage"
+	],
+	"2025-11-25-DrFrankensteinPuzzle.scn": [
+		"Wound",
+		"Thunderbolt",
+		"Reverberate",
+		"Trace",
+		"Overload"
+	],
+	"2025-11-26-FrankensteinsMonsterPuzzle.scn": [
+		"Haunt",
+		"Trace",
+		"Reverberate",
+		"Overload",
+		"Thunderbolt"
+	],
+	"2025-11-27-DwarvenMinerPuzzle.scn": [
+		"Echo",
+		"Ignite",
+		"Martyr",
+		"Potion",
+		"Reverberate",
+		"Reverberate",
+		"Shield"
+	],
+	"2025-11-28-MonkPuzzle.scn": [
+		"Empty Fist",
+		"Echo",
+		"Echo",
+		"Revive",
+		"Martyr",
+		"Exchange",
+		"Exchange"
+	],
+	"2025-12-01-MushroomPuzzle.scn": [
+		"Capacitor",
+		"Capacitor",
+		"Capacitor",
+		"Cleave",
+		"Pound",
+		"Slash",
+		"Spear"
+	],
+	"2025-12-02-FungiPuzzle.scn": [
+		"Rebound",
+		"Armory"
+	],
+	"2025-12-03-TermitesPuzzle.scn": [
+		"Echo",
+		"Echo",
+		"Echo",
+		"Rage",
+		"Flurry",
+		"Venom",
+		"Flurry"
+	],
+	"2025-12-04-SpeedElfPuzzle.scn": [
+		"Thunderbolt",
+		"Slash",
+		"Target",
+		"Overload",
+		"Tribute",
+		"Trace",
+		"Reverberate"
+	],
+	"2025-12-05-TitanPuzzle.scn": [
+		"Heartbeat",
+		"Capacitor",
+		"Exchange",
+		"Echo",
+		"Reverberate",
+		"Revive"
+	],
+	"2025-12-08-BanditPuzzle.scn": [
+		"Exchange",
+		"Spear",
+		"Wound",
+		"Wound"
+	],
+	"2025-12-09-LivingShadowPuzzle.scn": [
+		"Cauterize",
+		"Heartbeat",
+		"Mend",
+		"Mend",
+		"Mend",
+		"Mend"
+	],
+	"2025-12-10-AdditionSignPuzle.scn": [
+		"Venom",
+		"Slash",
+		"Spear",
+		"Pound",
+		"Cleave",
+		"Armory"
+	],
+	"2025-12-11-WraithPuzzle.scn": [
+		"Cauterize",
+		"Inspiration",
+		"Martyr",
+		"Reverberate",
+		"Trace",
+		"Armory"
+	],
+	"2025-12-12-OwlbearPuzzle.scn": [
+		"Rebound",
+		"Revive",
+		"Capacitor",
+		"Rage",
+		"Fang",
+		"Cauterize"
+	],
+	"2026-01-05-RadiantSlugPuzzle.scn": [
+		"Echo",
+		"Spear",
+		"Thunderbolt",
+		"Lunge",
+		"Bargain",
+		"Capacitor"
+	],
+	"2026-01-06-BlackKnightPuzzle.scn": [
+		"Armory",
+		"Armory",
+		"Echo",
+		"Target",
+		"Wound"
+	],
+	"2026-01-07-VendingMachinePuzzle.scn": [
+		"Armory",
+		"Armory",
+		"Rage",
+		"Echo",
+		"Capacitor",
+		"Capacitor"
+	],
+	"2026-01-08-GiantCrabPuzzle.scn": [
+		"Armory",
+		"Echo",
+		"Overload",
+		"Overload",
+		"Reverberate"
+	],
+	"2026-01-09-PaladinPuzzle.scn": [
+		"Cauterize",
+		"Inspiration",
+		"Trace",
+		"Revive",
+		"Thunderbolt"
+	],
+	"2026-01-13-AncientTreePuzzle.scn": [
+		"Bargain",
+		"Thunderbolt",
+		"Lunge",
+		"Lunge",
+		"Lunge",
+		"Capacitor",
+		"Capacitor"
+	],
+	"2026-01-14-WeatherWitchPuzzle.scn": [
+		"Armory",
+		"Capacitor",
+		"Capacitor",
+		"Martyr",
+		"Shield",
+		"Target",
+		"Thunderbolt"
+	],
+	"2026-01-15-ElderPuzzle.scn": [
+		"Echo",
+		"Reverberate",
+		"Scrap",
+		"Cleave",
+		"Flurry",
+		"Rage",
+		"Rage"
+	],
+	"2026-01-16-GreenDragonPuzzle.scn": [
+		"Flurry",
+		"Wound",
+		"Gift",
+		"Rebound",
+		"Rebound",
+		"Rebound",
+		"Reverberate"
+	],
+	"2026-01-19-ScorpionPuzzle.scn": [
+		"Venom",
+		"Cleanse",
+		"Cleave",
+		"Slash",
+		"Slash"
+	],
+	"2026-01-20-ModronPuzzle.scn": [
+		"Inspiration",
+		"Empty Fist",
+		"Surge",
+		"Cauterize",
+		"Thunderbolt",
+		"Inspiration",
+		"Empty Fist"
+	],
+	"2026-01-21-ButlerPuzzle.scn": [
+		"Revive",
+		"Echo",
+		"Spark",
+		"Reverberate",
+		"Inspiration"
+	],
+	"2026-01-22-AxebeakPuzzle.scn": [
+		"Cauterize",
+		"Overload",
+		"Scrap",
+		"Armory",
+		"Rebound",
+		"Wound",
+		"Cleave"
+	],
+	"2026-01-23-HarpyPuzzle.scn": [
+		"Slash",
+		"Scrap",
+		"Tribute",
+		"Trace",
+		"Revive"
+	],
+	"2026-01-26-ViperPuzzle.scn": [
+		"Fang",
+		"Fang",
+		"Flurry",
+		"Haunt",
+		"Inspiration",
+		"Wound",
+		"Wound"
+	],
+	"2026-01-27-WarriorPuzzle.scn": [
+		"Armory",
+		"Flurry",
+		"Flurry",
+		"Sharpen",
+		"Sharpen",
+		"Gift"
+	],
+	"2026-01-28-NinjaPuzzle.scn": [
+		"Cooperate",
+		"Flurry",
+		"Rage",
+		"Target",
+		"Thunderbolt"
+	],
+	"2026-01-29-EvilCarrotPuzzle.scn": [
+		"Empty Fist",
+		"Flurry",
+		"Shovel",
+		"Cleave",
+		"Berserk",
+		"Rebound",
+		"Cooperate"
+	],
+	"2026-01-30-HammerheadPuzzle.scn": [
+		"Target",
+		"Berserk",
+		"Sharpen",
+		"Cooperate",
+		"Flurry",
+		"Empty Fist",
+		"Slash"
+	],
+	"2026-02-02-CarniverousPlantPuzzle.scn": [
+		"Drain",
+		"Potion",
+		"Berserk",
+		"Reverberate",
+		"Heartbeat",
+		"Fang",
+		"Fang"
+	],
+	"2026-02-03-WolverinePuzzle.scn": [
+		"Berserk",
+		"Drain",
+		"Frenzy",
+		"Heartbeat",
+		"Sharpen",
+		"Inspiration",
+		"Inspiration"
+	],
 	"Puzzle.scn": [
 		"Focus",
 		"Focus",
 		"Focus"
 	],
 	"TestPuzzle.scn": [
-		"Gift",
-		"Shield",
-		"Spark",
-		"Surge",
-		"Target",
-		"Trace",
-		"Tribute",
-		"Venom",
-		"Waste",
+		"Rebound",
+		"Snipe",
+		"Reverberate",
+		"Scrap"
+	],
+	"Tutorial-Puzzle.scn": [
+		"Echo",
+		"Slash",
 		"Wound"
 	]
 }

@@ -7,19 +7,22 @@ func _ready():
 	var attempt_plural: String = '' if background.attempts <= 1 else 's'
 	share_text = share_text_template.format(
 		{
-			'enemy_name': background.enemy_name, 
+			'enemy_name': background.enemy_name,
 			'attempt_plural': attempt_plural,
-			'attempt_count': background.attempts, 
+			'attempt_count': background.attempts,
 			'best_card_count': background.best_card_count,
 		}
 	)
-	
+
 	$VBoxContainer/AttemptText.set_text("[center][b]IN [color=green]%d[/color] ATTEMPT%s[/b][/center]" % [background.attempts, attempt_plural.to_upper()])
 	$VBoxContainer/BestAttemptText.set_text("[center][b]WITH [color=gold]%d[/color] CARDS PLAYED[/b][/center]" % background.best_card_count)
 	$EnemyIcon.set_texture(background.get_enemy_texture())
-	
+
 	background.mark_puzzle_completed(background.get_puzzle_date())
 	background.save_played_cards_solution()
+
+	if background.is_from_story_view():
+		background.mark_story_puzzle_completed(background.get_puzzle_scene())
 
 func _on_play_again_button_pressed():
 	background.clear()
@@ -43,9 +46,14 @@ func _on_share_button_pressed():
 	$ShareButton/TextureRect.show()
 
 func _on_get_tomorrow_button_pressed():
+	if background.is_from_story_view():
+		background.clear()
+		get_tree().change_scene_to_file("res://Scenes/StoryView.scn")
+		return
+
 	var next_puzzle_scene = background.get_next_puzzle_scene()
 	background.clear()
-	
+
 	if next_puzzle_scene == null:
 		OS.shell_open("https://playlethal.beehiiv.com/subscribe")
 	else:

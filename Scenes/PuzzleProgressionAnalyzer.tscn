@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://2ypsdb651jyo"]
+
+[ext_resource type="Script" uid="uid://lhr4wbvjb2ds" path="res://Scripts/PuzzleProgressionAnalyzer.gd" id="1"]
+
+[node name="PuzzleProgressionAnalyzer" type="Node"]
+script = ExtResource("1")

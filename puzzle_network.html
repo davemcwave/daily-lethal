@@ -1,0 +1,4323 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Puzzle Dependency Graph</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1e1e1e;
+            color: #e0e0e0;
+            overflow: hidden;
+        }
+
+        #graph {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .controls {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(30, 30, 30, 0.95);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #4ec9b0;
+            z-index: 1000;
+            max-width: 300px;
+        }
+
+        .controls h3 {
+            margin: 0 0 10px 0;
+            color: #4ec9b0;
+            font-size: 16px;
+        }
+
+        .control-group {
+            margin-bottom: 10px;
+        }
+
+        .control-group label {
+            display: block;
+            font-size: 12px;
+            color: #9cdcfe;
+            margin-bottom: 5px;
+        }
+
+        .control-group select, .control-group input {
+            width: 100%;
+            padding: 5px;
+            background: #2d2d2d;
+            border: 1px solid #569cd6;
+            color: #e0e0e0;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .legend {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #4ec9b0;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 11px;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+            margin-right: 8px;
+        }
+
+        .tooltip {
+            position: absolute;
+            background: rgba(30, 30, 30, 0.95);
+            border: 1px solid #4ec9b0;
+            border-radius: 6px;
+            padding: 10px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            z-index: 2000;
+            max-width: 250px;
+        }
+
+        .tooltip.visible {
+            opacity: 1;
+        }
+
+        .tooltip-title {
+            font-weight: bold;
+            color: #4ec9b0;
+            margin-bottom: 5px;
+        }
+
+        .tooltip-content {
+            font-size: 12px;
+            color: #dcdcdc;
+        }
+
+        .node-group {
+            cursor: pointer;
+        }
+
+        .node-group:hover .node-bg {
+            stroke: #4ec9b0;
+            stroke-width: 3px;
+        }
+
+        .node-bg {
+            transition: all 0.2s;
+        }
+
+        .node-image {
+            border-radius: 50%;
+        }
+
+        .link {
+            stroke: #569cd6;
+            stroke-opacity: 0.3;
+            stroke-width: 1px;
+        }
+
+        .link.highlighted {
+            stroke: #4ec9b0;
+            stroke-opacity: 0.8;
+            stroke-width: 2px;
+        }
+
+        .node-label {
+            font-size: 10px;
+            fill: #dcdcdc;
+            pointer-events: none;
+            text-anchor: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <h3>🎮 Puzzle Dependency Graph</h3>
+
+        <div class="control-group">
+            <label>Filter by Tier:</label>
+            <select id="tierFilter">
+                <option value="all">All Tiers</option>
+                <option value="1">Tier 1</option>
+                <option value="2">Tier 2</option>
+                <option value="3">Tier 3</option>
+                <option value="4">Tier 4</option>
+                <option value="5">Tier 5</option>
+                <option value="6">Tier 6</option>
+                <option value="7">Tier 7</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label>Search Puzzle:</label>
+            <input type="text" id="searchBox" placeholder="Type puzzle name...">
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background: #4ec9b0;"></div>
+                <span>Tier 1 (Starter)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #569cd6;"></div>
+                <span>Tier 2-3 (Early)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #c586c0;"></div>
+                <span>Tier 4-5 (Mid)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #dcdcaa;"></div>
+                <span>Tier 6 (Late)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #d16969;"></div>
+                <span>Tier 7 (End)</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="tooltip" id="tooltip">
+        <div class="tooltip-title" id="tooltipTitle"></div>
+        <div class="tooltip-content" id="tooltipContent"></div>
+    </div>
+
+    <svg id="graph"></svg>
+
+    <script>
+        const nodes = [
+        {
+                "id": "2025-04-23-EvilRobot-Puzzle.scn",
+                "name": "2025-04-23-EvilRobot-Puzzle",
+                "tier": 1,
+                "provides": [
+                        "Wound"
+                ],
+                "cardCount": 4,
+                "image": "Assets/Textures/evil-robot.png"
+        },
+        {
+                "id": "2025-04-24-SeaMonster-Puzzle.scn",
+                "name": "2025-04-24-SeaMonster-Puzzle",
+                "tier": 1,
+                "provides": [
+                        "Pound"
+                ],
+                "cardCount": 5,
+                "image": "Assets/Textures/sea-monster.png"
+        },
+        {
+                "id": "2025-04-25-Bloodthorn-Puzzle.scn",
+                "name": "2025-04-25-Bloodthorn-Puzzle",
+                "tier": 6,
+                "provides": [
+                        "Shield",
+                        "Flurry",
+                        "Focus"
+                ],
+                "cardCount": 8,
+                "image": "Assets/Textures/bloodthorn.png"
+        },
+        {
+                "id": "2025-05-02-DrBonez-Puzzle.scn",
+                "name": "2025-05-02-DrBonez-Puzzle",
+                "tier": 3,
+                "provides": [
+                        "Thunderbolt",
+                        "Gift",
+                        "Wound"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/dr-bonez.png"
+        },
+        {
+                "id": "2025-05-04-Werewolf-Puzzle.scn",
+                "name": "2025-05-04-Werewolf-Puzzle",
+                "tier": 1,
+                "provides": [
+                        "Rebound",
+                        "Flurry"
+                ],
+                "cardCount": 5,
+                "image": "Assets/Textures/werewolf.png"
+        },
+        {
+                "id": "2025-05-05-Leech-Puzzle.scn",
+                "name": "2025-05-05-Leech-Puzzle",
+                "tier": 5,
+                "provides": [
+                        "Burst",
+                        "Rebound",
+                        "Wound"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/leech.png"
+        },
+        {
+                "id": "2025-05-10-GelatinousCube-Puzzle.scn",
+                "name": "2025-05-10-GelatinousCube-Puzzle",
+                "tier": 5,
+                "provides": [
+                        "Gift",
+                        "Pound",
+                        "Burst",
+                        "Rebound"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/gelatinous-cube.png"
+        },
+        {
+                "id": "2025-05-13-KrakenPuzzle.scn",
+                "name": "2025-05-13-KrakenPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Thunderbolt",
+                        "Flurry",
+                        "Rebound",
+                        "Scrap",
+                        "Overload"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/kraken.png"
+        },
+        {
+                "id": "2025-05-15-GoblinPuzzle.scn",
+                "name": "2025-05-15-GoblinPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Flurry",
+                        "Rebound",
+                        "Bargain",
+                        "Overload"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/goblin.png"
+        },
+        {
+                "id": "2025-05-17-MinotaurPuzzle.scn",
+                "name": "2025-05-17-MinotaurPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Rebound",
+                        "Overload",
+                        "Pound",
+                        "Flurry",
+                        "Burst"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/minotaur.png"
+        },
+        {
+                "id": "2025-05-20-OgrePuzzle.scn",
+                "name": "2025-05-20-OgrePuzzle",
+                "tier": 6,
+                "provides": [
+                        "Rebound",
+                        "Overload",
+                        "Pound",
+                        "Bargain",
+                        "Burst"
+                ],
+                "cardCount": 8,
+                "image": "Assets/Textures/ogre.png"
+        },
+        {
+                "id": "2025-05-25-FlameImpPuzzle.scn",
+                "name": "2025-05-25-FlameImpPuzzle",
+                "tier": 2,
+                "provides": [
+                        "Lunge",
+                        "Revive",
+                        "Rebound",
+                        "Trace",
+                        "Bargain"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/flame-imp.png"
+        },
+        {
+                "id": "2025-05-29-KoboldPuzzle.scn",
+                "name": "2025-05-29-KoboldPuzzle",
+                "tier": 2,
+                "provides": [
+                        "Bargain",
+                        "Haunt",
+                        "Flurry",
+                        "Lunge"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/kobold.png"
+        },
+        {
+                "id": "2025-06-01-GiantRatPuzzle.scn",
+                "name": "2025-06-01-GiantRatPuzzle",
+                "tier": 5,
+                "provides": [
+                        "Mend",
+                        "Martyr",
+                        "Pound"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/giant-rat.png"
+        },
+        {
+                "id": "2025-06-03-MimicPuzzle.scn",
+                "name": "2025-06-03-MimicPuzzle",
+                "tier": 5,
+                "provides": [
+                        "Snipe",
+                        "Haunt",
+                        "Burst",
+                        "Rebound",
+                        "Tribute"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/mimic.png"
+        },
+        {
+                "id": "2025-06-05-NagaPuzzle.scn",
+                "name": "2025-06-05-NagaPuzzle",
+                "tier": 5,
+                "provides": [
+                        "Revive",
+                        "Burst",
+                        "Rebound",
+                        "Scrap",
+                        "Gift",
+                        "Flurry"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/naga.png"
+        },
+        {
+                "id": "2025-06-07-TrollPuzzle.scn",
+                "name": "2025-06-07-TrollPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Thunderbolt",
+                        "Martyr",
+                        "Lunge",
+                        "Rebound",
+                        "Overload"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/troll.png"
+        },
+        {
+                "id": "2025-06-09-CloakerPuzzle.scn",
+                "name": "2025-06-09-CloakerPuzzle",
+                "tier": 5,
+                "provides": [
+                        "Martyr",
+                        "Pound",
+                        "Lunge"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/cloaker.png"
+        },
+        {
+                "id": "2025-06-11-CyclopsPuzzle.scn",
+                "name": "2025-06-11-CyclopsPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Trace",
+                        "Burst",
+                        "Rebound",
+                        "Overload",
+                        "Thunderbolt"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/cyclops.png"
+        },
+        {
+                "id": "2025-06-13-GeniePuzzle.scn",
+                "name": "2025-06-13-GeniePuzzle",
+                "tier": 6,
+                "provides": [
+                        "Snipe",
+                        "Rebound",
+                        "Overload",
+                        "Burst"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/genie.png"
+        },
+        {
+                "id": "2025-06-15-MummyPuzzle.scn",
+                "name": "2025-06-15-MummyPuzzle",
+                "tier": 5,
+                "provides": [
+                        "Inspiration",
+                        "Martyr",
+                        "Pound",
+                        "Lunge"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/mummy.png"
+        },
+        {
+                "id": "2025-06-17-AnimatedArmorPuzzle.scn",
+                "name": "2025-06-17-AnimatedArmorPuzzle",
+                "tier": 5,
+                "provides": [
+                        "Martyr",
+                        "Inspiration",
+                        "Mend",
+                        "Burst",
+                        "Lunge"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/animated-armor.png"
+        },
+        {
+                "id": "2025-06-19-SaplingPuzzle.scn",
+                "name": "2025-06-19-SaplingPuzzle",
+                "tier": 4,
+                "provides": [
+                        "Tribute",
+                        "Gift",
+                        "Thunderbolt",
+                        "Trace",
+                        "Scrap",
+                        "Pound",
+                        "Lunge"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/sapling.png"
+        },
+        {
+                "id": "2025-06-21-SoldierPuzzle.scn",
+                "name": "2025-06-21-SoldierPuzzle",
+                "tier": 2,
+                "provides": [
+                        "Lunge",
+                        "Haunt",
+                        "Bargain",
+                        "Revive"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/soldier.png"
+        },
+        {
+                "id": "2025-06-24-FlameGiantPuzzle.scn",
+                "name": "2025-06-24-FlameGiantPuzzle",
+                "tier": 2,
+                "provides": [
+                        "Bargain",
+                        "Lunge",
+                        "Revive",
+                        "Rebound",
+                        "Trace"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/flame-giant.png"
+        },
+        {
+                "id": "2025-06-26-OozePuzzle.scn",
+                "name": "2025-06-26-OozePuzzle",
+                "tier": 4,
+                "provides": [
+                        "Shovel",
+                        "Lunge",
+                        "Revive",
+                        "Trace"
+                ],
+                "cardCount": 5,
+                "image": "Assets/Textures/ooze.png"
+        },
+        {
+                "id": "2025-06-28-Puzzle.scn",
+                "name": "2025-06-28-Puzzle",
+                "tier": 5,
+                "provides": [
+                        "Fang",
+                        "Rebound",
+                        "Mend",
+                        "Burst"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/2025-06-28.png"
+        },
+        {
+                "id": "2025-06-30-GolemPuzzle.scn",
+                "name": "2025-06-30-GolemPuzzle",
+                "tier": 4,
+                "provides": [
+                        "Tribute",
+                        "Revive",
+                        "Trace",
+                        "Snipe",
+                        "Lunge"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/golem.png"
+        },
+        {
+                "id": "2025-07-02-WidowPuzzle.scn",
+                "name": "2025-07-02-WidowPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Shield",
+                        "Pound",
+                        "Gift",
+                        "Fang",
+                        "Lunge",
+                        "Scrap"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/widow.png"
+        },
+        {
+                "id": "2025-07-04-VampirePuzzle.scn",
+                "name": "2025-07-04-VampirePuzzle",
+                "tier": 6,
+                "provides": [
+                        "Martyr",
+                        "Shield",
+                        "Fang",
+                        "Scrap"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/vampire.png"
+        },
+        {
+                "id": "2025-07-06-CreepingVinePuzzle.scn",
+                "name": "2025-07-06-CreepingVinePuzzle",
+                "tier": 5,
+                "provides": [
+                        "Martyr",
+                        "Bargain",
+                        "Pound",
+                        "Fang",
+                        "Mend"
+                ],
+                "cardCount": 5,
+                "image": "Assets/Textures/creeping-vine.png"
+        },
+        {
+                "id": "2025-07-08-EarthElementalPuzzle.scn",
+                "name": "2025-07-08-EarthElementalPuzzle",
+                "tier": 5,
+                "provides": [
+                        "Burst",
+                        "Inspiration",
+                        "Revive",
+                        "Fang"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/earth-elemental.png"
+        },
+        {
+                "id": "2025-07-10-HellHoundPuzzle.scn",
+                "name": "2025-07-10-HellHoundPuzzle",
+                "tier": 5,
+                "provides": [
+                        "Burst",
+                        "Gift",
+                        "Martyr",
+                        "Rebound",
+                        "Mend"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/hell-hound.png"
+        },
+        {
+                "id": "2025-07-12-EarthwormPuzzle.scn",
+                "name": "2025-07-12-EarthwormPuzzle",
+                "tier": 4,
+                "provides": [
+                        "Shovel",
+                        "Trace",
+                        "Rebound",
+                        "Scrap"
+                ],
+                "cardCount": 5,
+                "image": "Assets/Textures/earthworm.png"
+        },
+        {
+                "id": "2025-07-14-MadScientistPuzzle.scn",
+                "name": "2025-07-14-MadScientistPuzzle",
+                "tier": 5,
+                "provides": [
+                        "Burst",
+                        "Inspiration",
+                        "Martyr",
+                        "Mend",
+                        "Thunderbolt",
+                        "Fang"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/mad-scientist.png"
+        },
+        {
+                "id": "2025-07-16-CrawlerPuzzle.scn",
+                "name": "2025-07-16-CrawlerPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Overload",
+                        "Haunt",
+                        "Lunge",
+                        "Shovel",
+                        "Inspiration"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/crawler.png"
+        },
+        {
+                "id": "2025-07-18-BeholderPuzzle.scn",
+                "name": "2025-07-18-BeholderPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Thunderbolt",
+                        "Inspiration",
+                        "Martyr",
+                        "Overload"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/beholder.png"
+        },
+        {
+                "id": "2025-07-20-YetiPuzzle.scn",
+                "name": "2025-07-20-YetiPuzzle",
+                "tier": 2,
+                "provides": [
+                        "Lunge",
+                        "Pound",
+                        "Target",
+                        "Trace"
+                ],
+                "cardCount": 5,
+                "image": "Assets/Textures/yeti.png"
+        },
+        {
+                "id": "2025-07-22-SnipeBirdPuzzle.scn",
+                "name": "2025-07-22-SnipeBirdPuzzle",
+                "tier": 4,
+                "provides": [
+                        "Haunt",
+                        "Snipe",
+                        "Revive",
+                        "Tribute"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/snipe-bird.png"
+        },
+        {
+                "id": "2025-07-24-TentaclePiratePuzzle.scn",
+                "name": "2025-07-24-TentaclePiratePuzzle",
+                "tier": 5,
+                "provides": [
+                        "Target",
+                        "Snipe",
+                        "Tribute",
+                        "Rebound",
+                        "Burst",
+                        "Gift"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/tentacle-pirate.png"
+        },
+        {
+                "id": "2025-07-26-DisplacerBeastPuzzle.scn",
+                "name": "2025-07-26-DisplacerBeastPuzzle",
+                "tier": 2,
+                "provides": [
+                        "Target",
+                        "Haunt",
+                        "Rebound",
+                        "Pound"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/displacer-beast.png"
+        },
+        {
+                "id": "2025-07-28-LightningElementalPuzzle.scn",
+                "name": "2025-07-28-LightningElementalPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Scrap",
+                        "Overload",
+                        "Thunderbolt",
+                        "Revive",
+                        "Pound"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/lightning-elemental.png"
+        },
+        {
+                "id": "2025-07-30-ThunderbirdPuzzle.scn",
+                "name": "2025-07-30-ThunderbirdPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Thunderbolt",
+                        "Tribute",
+                        "Overload",
+                        "Inspiration",
+                        "Fang",
+                        "Rebound"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/thunderbird.png"
+        },
+        {
+                "id": "2025-08-01-GravediggerPuzzle.scn",
+                "name": "2025-08-01-GravediggerPuzzle",
+                "tier": 4,
+                "provides": [
+                        "Shovel",
+                        "Revive",
+                        "Gift",
+                        "Trace"
+                ],
+                "cardCount": 5,
+                "image": "Assets/Textures/gravedigger.png"
+        },
+        {
+                "id": "2025-08-03-NogglePuzzle.scn",
+                "name": "2025-08-03-NogglePuzzle",
+                "tier": 5,
+                "provides": [
+                        "Martyr",
+                        "Bargain",
+                        "Revive",
+                        "Burst",
+                        "Mend",
+                        "Flurry"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/noggle.png"
+        },
+        {
+                "id": "2025-08-05-ManaImpPuzzle.scn",
+                "name": "2025-08-05-ManaImpPuzzle",
+                "tier": 5,
+                "provides": [
+                        "Empty Fist",
+                        "Haunt",
+                        "Martyr",
+                        "Revive",
+                        "Rebound"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/mana-imp.png"
+        },
+        {
+                "id": "2025-08-07-CollectorPuzzle.scn",
+                "name": "2025-08-07-CollectorPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Inspiration",
+                        "Shield",
+                        "Empty Fist",
+                        "Pound",
+                        "Martyr",
+                        "Potion",
+                        "Target"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/collector.png"
+        },
+        {
+                "id": "2025-08-09-DemogorgonPuzzle.scn",
+                "name": "2025-08-09-DemogorgonPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Lunge",
+                        "Trace",
+                        "Revive",
+                        "Pound",
+                        "Potion"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/demogorgon.png"
+        },
+        {
+                "id": "2025-08-11-DecrepitMousePuzzle.scn",
+                "name": "2025-08-11-DecrepitMousePuzzle",
+                "tier": 5,
+                "provides": [
+                        "Empty Fist",
+                        "Burst",
+                        "Bargain"
+                ],
+                "cardCount": 5,
+                "image": "Assets/Textures/decrepit-mouse.png"
+        },
+        {
+                "id": "2025-08-13-OrigamiPuzzle.scn",
+                "name": "2025-08-13-OrigamiPuzzle",
+                "tier": 4,
+                "provides": [
+                        "Empty Fist",
+                        "Fang",
+                        "Flurry"
+                ],
+                "cardCount": 5,
+                "image": "Assets/Textures/origami.png"
+        },
+        {
+                "id": "2025-08-15-DustDroidPuzzle.scn",
+                "name": "2025-08-15-DustDroidPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Overload",
+                        "Thunderbolt"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/dust-droid.png"
+        },
+        {
+                "id": "2025-08-17-FunambulistPuzzle.scn",
+                "name": "2025-08-17-FunambulistPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Haunt",
+                        "Heartbeat",
+                        "Martyr",
+                        "Pound",
+                        "Thunderbolt"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/funambulist.png"
+        },
+        {
+                "id": "2025-08-19-TentacleCultistPuzzle.scn",
+                "name": "2025-08-19-TentacleCultistPuzzle",
+                "tier": 4,
+                "provides": [
+                        "Lunge",
+                        "Trace",
+                        "Tribute",
+                        "Rebound"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/tentacle-cultist.png"
+        },
+        {
+                "id": "2025-08-21-GargoylePuzzle.scn",
+                "name": "2025-08-21-GargoylePuzzle",
+                "tier": 4,
+                "provides": [
+                        "Empty Fist",
+                        "Wound",
+                        "Rebound",
+                        "Revive",
+                        "Haunt"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/gargoyle.png"
+        },
+        {
+                "id": "2025-08-23-AlchemistPuzzle.scn",
+                "name": "2025-08-23-AlchemistPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Target",
+                        "Potion",
+                        "Heartbeat",
+                        "Fang",
+                        "Inspiration",
+                        "Revive",
+                        "Mend"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/alchemist.png"
+        },
+        {
+                "id": "2025-08-25-MerfolkPuzzle.scn",
+                "name": "2025-08-25-MerfolkPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Potion",
+                        "Overload",
+                        "Heartbeat",
+                        "Empty Fist",
+                        "Revive",
+                        "Martyr"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/merfolk.png"
+        },
+        {
+                "id": "2025-08-27-ScarecrowPuzzle.scn",
+                "name": "2025-08-27-ScarecrowPuzzle",
+                "tier": 4,
+                "provides": [
+                        "Flurry",
+                        "Ignite",
+                        "Scrap",
+                        "Trace"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/scarecrow.png"
+        },
+        {
+                "id": "2025-08-29-WitchPuzzle.scn",
+                "name": "2025-08-29-WitchPuzzle",
+                "tier": 4,
+                "provides": [
+                        "Venom",
+                        "Snipe",
+                        "Revive",
+                        "Empty Fist",
+                        "Gift"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/witch.png"
+        },
+        {
+                "id": "2025-08-31-RocPuzzle.scn",
+                "name": "2025-08-31-RocPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Venom",
+                        "Ignite",
+                        "Overload",
+                        "Scrap"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/roc.png"
+        },
+        {
+                "id": "2025-09-01-BeetlePuzzle.scn",
+                "name": "2025-09-01-BeetlePuzzle",
+                "tier": 4,
+                "provides": [
+                        "Empty Fist",
+                        "Wound",
+                        "Revive",
+                        "Rebound"
+                ],
+                "cardCount": 4,
+                "image": "Assets/Textures/beetle.png"
+        },
+        {
+                "id": "2025-09-03-AssassinPuzzle.scn",
+                "name": "2025-09-03-AssassinPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Burst",
+                        "Overload",
+                        "Rebound",
+                        "Thunderbolt",
+                        "Target"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/assassin.png"
+        },
+        {
+                "id": "2025-09-05-DirewolfPuzzle.scn",
+                "name": "2025-09-05-DirewolfPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Fang",
+                        "Mend",
+                        "Overload",
+                        "Revive",
+                        "Scrap",
+                        "Target"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/direwolf.png"
+        },
+        {
+                "id": "2025-09-07-FlumphPuzzle.scn",
+                "name": "2025-09-07-FlumphPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Bargain",
+                        "Exchange",
+                        "Gift",
+                        "Heartbeat",
+                        "Inspiration",
+                        "Overload",
+                        "Scrap"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/flumph.png"
+        },
+        {
+                "id": "2025-09-09-WarlockPuzzle.scn",
+                "name": "2025-09-09-WarlockPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Exchange",
+                        "Heartbeat",
+                        "Overload",
+                        "Potion",
+                        "Revive",
+                        "Target"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/warlock.png"
+        },
+        {
+                "id": "2025-09-11-SnowmanPuzzle.scn",
+                "name": "2025-09-11-SnowmanPuzzle",
+                "tier": 5,
+                "provides": [
+                        "Rebound",
+                        "Trace",
+                        "Burst"
+                ],
+                "cardCount": 3,
+                "image": "Assets/Textures/snowman.png"
+        },
+        {
+                "id": "2025-09-13-WaspSwarmPuzzle.scn",
+                "name": "2025-09-13-WaspSwarmPuzzle",
+                "tier": 2,
+                "provides": [
+                        "Venom",
+                        "Rebound",
+                        "Flurry"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/wasp-swarm.png"
+        },
+        {
+                "id": "2025-09-15-GiantWurmPuzzle.scn",
+                "name": "2025-09-15-GiantWurmPuzzle",
+                "tier": 4,
+                "provides": [
+                        "Empty Fist",
+                        "Haunt",
+                        "Rebound",
+                        "Revive",
+                        "Venom"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/giant-wurm.png"
+        },
+        {
+                "id": "2025-09-17-VoidCreaturePuzzle.scn",
+                "name": "2025-09-17-VoidCreaturePuzzle",
+                "tier": 5,
+                "provides": [
+                        "Trace",
+                        "Rebound",
+                        "Thunderbolt",
+                        "Burst"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/void-creature.png"
+        },
+        {
+                "id": "2025-09-19-DeityPuzzle.scn",
+                "name": "2025-09-19-DeityPuzzle",
+                "tier": 5,
+                "provides": [
+                        "Snipe",
+                        "Wound",
+                        "Burst",
+                        "Pound",
+                        "Tribute",
+                        "Trace"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/deity.png"
+        },
+        {
+                "id": "2025-09-22-MoocherPuzzle.scn",
+                "name": "2025-09-22-MoocherPuzzle",
+                "tier": 5,
+                "provides": [
+                        "Bargain",
+                        "Rebound",
+                        "Revive",
+                        "Burst",
+                        "Scrap"
+                ],
+                "cardCount": 5,
+                "image": "Assets/Textures/moocher.png"
+        },
+        {
+                "id": "2025-09-23-RedeyePuzzle.scn",
+                "name": "2025-09-23-RedeyePuzzle",
+                "tier": 6,
+                "provides": [
+                        "Fang",
+                        "Snipe",
+                        "Heartbeat",
+                        "Empty Fist",
+                        "Burst",
+                        "Pound",
+                        "Lunge"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/redeye.png"
+        },
+        {
+                "id": "2025-09-24-FirebugPuzzle.scn",
+                "name": "2025-09-24-FirebugPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Ignite",
+                        "Bargain",
+                        "Rebound",
+                        "Overload"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/firebug.png"
+        },
+        {
+                "id": "2025-09-25-LichPuzzle.scn",
+                "name": "2025-09-25-LichPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Exchange",
+                        "Rebound",
+                        "Mend",
+                        "Heartbeat",
+                        "Inspiration"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/lich.png"
+        },
+        {
+                "id": "2025-09-26-PoltergeistPuzzle.scn",
+                "name": "2025-09-26-PoltergeistPuzzle",
+                "tier": 4,
+                "provides": [
+                        "Haunt",
+                        "Snipe",
+                        "Target",
+                        "Tribute"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/poltergeist.png"
+        },
+        {
+                "id": "2025-09-29-ChupacabraPuzzle.scn",
+                "name": "2025-09-29-ChupacabraPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Heartbeat",
+                        "Martyr",
+                        "Mend",
+                        "Rebound",
+                        "Shield",
+                        "Target"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/chupacabra.png"
+        },
+        {
+                "id": "2025-09-30-ArtificerPuzzle.scn",
+                "name": "2025-09-30-ArtificerPuzzle",
+                "tier": 4,
+                "provides": [
+                        "Bargain",
+                        "Ignite",
+                        "Thunderbolt",
+                        "Target",
+                        "Spark",
+                        "Revive"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/artificer.png"
+        },
+        {
+                "id": "2025-10-01-BuzzsawDroidPuzzle.scn",
+                "name": "2025-10-01-BuzzsawDroidPuzzle",
+                "tier": 5,
+                "provides": [
+                        "Martyr",
+                        "Pound",
+                        "Revive",
+                        "Scrap",
+                        "Snipe",
+                        "Thunderbolt"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/buzzsaw-droid.png"
+        },
+        {
+                "id": "2025-10-02-RedDragonPuzzle.scn",
+                "name": "2025-10-02-RedDragonPuzzle",
+                "tier": 3,
+                "provides": [
+                        "Bargain",
+                        "Gift",
+                        "Haunt",
+                        "Flurry",
+                        "Pound",
+                        "Revive",
+                        "Rebound"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/red-dragon.png"
+        },
+        {
+                "id": "2025-10-03-BarbarianPuzzle.scn",
+                "name": "2025-10-03-BarbarianPuzzle",
+                "tier": 4,
+                "provides": [
+                        "Flurry",
+                        "Lunge",
+                        "Venom",
+                        "Trace",
+                        "Target",
+                        "Empty Fist"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/barbarian.png"
+        },
+        {
+                "id": "2025-10-06-GiftmanPuzzle.scn",
+                "name": "2025-10-06-GiftmanPuzzle",
+                "tier": 4,
+                "provides": [
+                        "Gift",
+                        "Pound",
+                        "Shovel"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/giftman.png"
+        },
+        {
+                "id": "2025-10-07-PorcupinePuzzle.scn",
+                "name": "2025-10-07-PorcupinePuzzle",
+                "tier": 6,
+                "provides": [
+                        "Inspiration",
+                        "Heartbeat",
+                        "Exchange",
+                        "Snipe",
+                        "Mend",
+                        "Bargain",
+                        "Fang"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/porcupine.png"
+        },
+        {
+                "id": "2025-10-08-FiendPuzzle.scn",
+                "name": "2025-10-08-FiendPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Bargain",
+                        "Martyr",
+                        "Potion",
+                        "Revive",
+                        "Rebound",
+                        "Fang"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/fiend.png"
+        },
+        {
+                "id": "2025-10-09-SparkGiantPuzzle.scn",
+                "name": "2025-10-09-SparkGiantPuzzle",
+                "tier": 5,
+                "provides": [
+                        "Ignite",
+                        "Burst",
+                        "Bargain",
+                        "Inspiration"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/spark-giant.png"
+        },
+        {
+                "id": "2025-10-10-ShoggothPuzzle.scn",
+                "name": "2025-10-10-ShoggothPuzzle",
+                "tier": 5,
+                "provides": [
+                        "Burst",
+                        "Reverberate",
+                        "Revive",
+                        "Wound"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/shoggoth.png"
+        },
+        {
+                "id": "2025-10-13-CherubPuzzle.scn",
+                "name": "2025-10-13-CherubPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Inspiration",
+                        "Heartbeat",
+                        "Empty Fist",
+                        "Revive",
+                        "Rebound",
+                        "Exchange"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/cherub.png"
+        },
+        {
+                "id": "2025-10-14-PinkyPuzzle.scn",
+                "name": "2025-10-14-PinkyPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Haunt",
+                        "Martyr",
+                        "Potion",
+                        "Target",
+                        "Tribute"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/pinky.png"
+        },
+        {
+                "id": "2025-10-15-WaterDrakePuzzle.scn",
+                "name": "2025-10-15-WaterDrakePuzzle",
+                "tier": 6,
+                "provides": [
+                        "Ignite",
+                        "Reverberate",
+                        "Heartbeat",
+                        "Bargain",
+                        "Lunge"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/water-drake.png"
+        },
+        {
+                "id": "2025-10-16-PterosaurPuzzle.scn",
+                "name": "2025-10-16-PterosaurPuzzle",
+                "tier": 5,
+                "provides": [
+                        "Bargain",
+                        "Inspiration",
+                        "Rebound",
+                        "Reverberate",
+                        "Thunderbolt",
+                        "Target"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/pterosaur.png"
+        },
+        {
+                "id": "2025-10-17-TimelordPuzzle.scn",
+                "name": "2025-10-17-TimelordPuzzle",
+                "tier": 4,
+                "provides": [
+                        "Trace",
+                        "Reverberate",
+                        "Ignite",
+                        "Venom"
+                ],
+                "cardCount": 5,
+                "image": "Assets/Textures/timelord.png"
+        },
+        {
+                "id": "2025-10-20-ChargerPuzzle.scn",
+                "name": "2025-10-20-ChargerPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Inspiration",
+                        "Reverberate",
+                        "Rebound",
+                        "Overload",
+                        "Thunderbolt"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/charger.png"
+        },
+        {
+                "id": "2025-10-21-GraveRobber-Puzzle.scn",
+                "name": "2025-10-21-GraveRobber-Puzzle",
+                "tier": 4,
+                "provides": [
+                        "Revive",
+                        "Scrap",
+                        "Tribute",
+                        "Shovel",
+                        "Haunt"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/grave-robber.png"
+        },
+        {
+                "id": "2025-10-22-PinkSlime-Puzzle.scn",
+                "name": "2025-10-22-PinkSlime-Puzzle",
+                "tier": 4,
+                "provides": [
+                        "Shovel",
+                        "Snipe",
+                        "Tribute",
+                        "Waste",
+                        "Wound"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/pink-slime.png"
+        },
+        {
+                "id": "2025-10-23-FlailSnail-Puzzle.scn",
+                "name": "2025-10-23-FlailSnail-Puzzle",
+                "tier": 6,
+                "provides": [
+                        "Martyr",
+                        "Reverberate",
+                        "Potion",
+                        "Trace",
+                        "Waste",
+                        "Fang"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/flail-snail.png"
+        },
+        {
+                "id": "2025-10-24-TimeDemon-Puzzle.scn",
+                "name": "2025-10-24-TimeDemon-Puzzle",
+                "tier": 2,
+                "provides": [
+                        "Bargain",
+                        "Haunt",
+                        "Pound",
+                        "Rebound",
+                        "Revive"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/time-demon.png"
+        },
+        {
+                "id": "2025-10-27-SerpentsPuzzle.scn",
+                "name": "2025-10-27-SerpentsPuzzle",
+                "tier": 5,
+                "provides": [
+                        "Haunt",
+                        "Flurry",
+                        "Venom",
+                        "Burst"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/serpents.png"
+        },
+        {
+                "id": "2025-10-28-IceGolemPuzzle.scn",
+                "name": "2025-10-28-IceGolemPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Empty Fist",
+                        "Flurry",
+                        "Gift",
+                        "Potion",
+                        "Shovel"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/ice-golem.png"
+        },
+        {
+                "id": "2025-10-29-FairyPuzzle.scn",
+                "name": "2025-10-29-FairyPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Rebound",
+                        "Reverberate",
+                        "Exchange",
+                        "Heartbeat",
+                        "Scrap",
+                        "Inspiration"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/fairy.png"
+        },
+        {
+                "id": "2025-10-30-GiantBatPuzzle.scn",
+                "name": "2025-10-30-GiantBatPuzzle",
+                "tier": 5,
+                "provides": [
+                        "Fang",
+                        "Mend",
+                        "Trace",
+                        "Reverberate"
+                ],
+                "cardCount": 5,
+                "image": "Assets/Textures/giant-bat.png"
+        },
+        {
+                "id": "2025-10-31-ZombiePuzzle.scn",
+                "name": "2025-10-31-ZombiePuzzle",
+                "tier": 3,
+                "provides": [
+                        "Snipe",
+                        "Revive",
+                        "Haunt",
+                        "Waste"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/zombie.png"
+        },
+        {
+                "id": "2025-11-03-LeprechaunPuzzle.scn",
+                "name": "2025-11-03-LeprechaunPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Pound",
+                        "Wound",
+                        "Shield",
+                        "Martyr",
+                        "Revive"
+                ],
+                "cardCount": 5,
+                "image": "Assets/Textures/leprechaun.png"
+        },
+        {
+                "id": "2025-11-04-CarBatteryPuzzle.scn",
+                "name": "2025-11-04-CarBatteryPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Ignite",
+                        "Overload",
+                        "Revive",
+                        "Thunderbolt"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/car-battery.png"
+        },
+        {
+                "id": "2025-11-05-RavenPuzzle.scn",
+                "name": "2025-11-05-RavenPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Haunt",
+                        "Overload",
+                        "Reverberate",
+                        "Thunderbolt",
+                        "Waste"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/raven.png"
+        },
+        {
+                "id": "2025-11-06-BlueDragonPuzzle.scn",
+                "name": "2025-11-06-BlueDragonPuzzle",
+                "tier": 3,
+                "provides": [
+                        "Haunt",
+                        "Flurry",
+                        "Reverberate",
+                        "Wound",
+                        "Venom"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/blue-dragon.png"
+        },
+        {
+                "id": "2025-11-07-BigfootPuzzle.scn",
+                "name": "2025-11-07-BigfootPuzzle",
+                "tier": 4,
+                "provides": [
+                        "Venom",
+                        "Ignite",
+                        "Empty Fist",
+                        "Bargain",
+                        "Tribute",
+                        "Reverberate"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/bigfoot.png"
+        },
+        {
+                "id": "2025-11-10-DemonNursePuzzle.scn",
+                "name": "2025-11-10-DemonNursePuzzle",
+                "tier": 6,
+                "provides": [
+                        "Martyr",
+                        "Potion",
+                        "Pound",
+                        "Scrap",
+                        "Shield"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/demon-nurse.png"
+        },
+        {
+                "id": "2025-11-11-GhostPiratePuzzle.scn",
+                "name": "2025-11-11-GhostPiratePuzzle",
+                "tier": 2,
+                "provides": [
+                        "Haunt",
+                        "Lunge",
+                        "Revive",
+                        "Rebound"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/ghost-pirate.png"
+        },
+        {
+                "id": "2025-11-12-DelversPuzzle.scn",
+                "name": "2025-11-12-DelversPuzzle",
+                "tier": 4,
+                "provides": [
+                        "Snipe",
+                        "Scrap",
+                        "Reverberate",
+                        "Tribute",
+                        "Shovel"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/delvers.png"
+        },
+        {
+                "id": "2025-11-13-RatKingPuzzle.scn",
+                "name": "2025-11-13-RatKingPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Martyr",
+                        "Trace",
+                        "Reverberate",
+                        "Shield",
+                        "Pound"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/rat-king.png"
+        },
+        {
+                "id": "2025-11-14-CannoneerPuzzle.scn",
+                "name": "2025-11-14-CannoneerPuzzle",
+                "tier": 5,
+                "provides": [
+                        "Rebound",
+                        "Reverberate",
+                        "Scrap",
+                        "Snipe",
+                        "Burst"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/cannoneer.png"
+        },
+        {
+                "id": "2025-11-17-TargetDummyPuzzle.scn",
+                "name": "2025-11-17-TargetDummyPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Martyr",
+                        "Inspiration",
+                        "Reverberate",
+                        "Potion",
+                        "Thunderbolt"
+                ],
+                "cardCount": 5,
+                "image": "Assets/Textures/target-dummy.png"
+        },
+        {
+                "id": "2025-11-18-HydraPuzzle.scn",
+                "name": "2025-11-18-HydraPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Fang",
+                        "Inspiration",
+                        "Heartbeat",
+                        "Rebound"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/hydra.png"
+        },
+        {
+                "id": "2025-11-19-GiantEelPuzzle.scn",
+                "name": "2025-11-19-GiantEelPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Empty Fist",
+                        "Thunderbolt",
+                        "Pound",
+                        "Lunge",
+                        "Bargain",
+                        "Overload",
+                        "Venom"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/giant-eel.png"
+        },
+        {
+                "id": "2025-11-20-PufferfishPuzzle.scn",
+                "name": "2025-11-20-PufferfishPuzzle",
+                "tier": 5,
+                "provides": [
+                        "Burst",
+                        "Empty Fist",
+                        "Tribute",
+                        "Trace",
+                        "Haunt"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/pufferfish.png"
+        },
+        {
+                "id": "2025-11-21-CursedCampfirePuzzle.scn",
+                "name": "2025-11-21-CursedCampfirePuzzle",
+                "tier": 3,
+                "provides": [
+                        "Spark",
+                        "Scrap",
+                        "Reverberate",
+                        "Rebound",
+                        "Haunt",
+                        "Trace",
+                        "Waste"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/cursed-campfire.png"
+        },
+        {
+                "id": "2025-11-24-MantisShrimpPuzzle.scn",
+                "name": "2025-11-24-MantisShrimpPuzzle",
+                "tier": 3,
+                "provides": [
+                        "Haunt",
+                        "Flurry",
+                        "Reverberate"
+                ],
+                "cardCount": 4,
+                "image": "Assets/Textures/mantis-shrimp.png"
+        },
+        {
+                "id": "2025-11-25-DrFrankensteinPuzzle.scn",
+                "name": "2025-11-25-DrFrankensteinPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Wound",
+                        "Thunderbolt",
+                        "Reverberate",
+                        "Trace",
+                        "Overload"
+                ],
+                "cardCount": 5,
+                "image": "Assets/Textures/dr-frankenstein.png"
+        },
+        {
+                "id": "2025-11-26-FrankensteinsMonsterPuzzle.scn",
+                "name": "2025-11-26-FrankensteinsMonsterPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Haunt",
+                        "Trace",
+                        "Reverberate",
+                        "Overload",
+                        "Thunderbolt"
+                ],
+                "cardCount": 5,
+                "image": "Assets/Textures/frankensteins-monster.png"
+        },
+        {
+                "id": "2025-11-27-DwarvenMinerPuzzle.scn",
+                "name": "2025-11-27-DwarvenMinerPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Ignite",
+                        "Martyr",
+                        "Potion",
+                        "Reverberate",
+                        "Shield"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/dwarven-miner.png"
+        },
+        {
+                "id": "2025-11-28-MonkPuzzle.scn",
+                "name": "2025-11-28-MonkPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Empty Fist",
+                        "Revive",
+                        "Martyr",
+                        "Exchange"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/monk.png"
+        },
+        {
+                "id": "2025-12-01-MushroomPuzzle.scn",
+                "name": "2025-12-01-MushroomPuzzle",
+                "tier": 3,
+                "provides": [
+                        "Capacitor",
+                        "Cleave",
+                        "Pound",
+                        "Spear"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/mushroom.png"
+        },
+        {
+                "id": "2025-12-02-FungiPuzzle.scn",
+                "name": "2025-12-02-FungiPuzzle",
+                "tier": 4,
+                "provides": [
+                        "Rebound",
+                        "Armory"
+                ],
+                "cardCount": 2,
+                "image": "Assets/Textures/fungi.png"
+        },
+        {
+                "id": "2025-12-03-TermitesPuzzle.scn",
+                "name": "2025-12-03-TermitesPuzzle",
+                "tier": 2,
+                "provides": [
+                        "Flurry",
+                        "Venom"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/termites.png"
+        },
+        {
+                "id": "2025-12-04-SpeedElfPuzzle.scn",
+                "name": "2025-12-04-SpeedElfPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Thunderbolt",
+                        "Target",
+                        "Overload",
+                        "Tribute",
+                        "Trace",
+                        "Reverberate"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/speed-elf.png"
+        },
+        {
+                "id": "2025-12-05-TitanPuzzle.scn",
+                "name": "2025-12-05-TitanPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Heartbeat",
+                        "Capacitor",
+                        "Exchange",
+                        "Reverberate",
+                        "Revive"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/titan.png"
+        },
+        {
+                "id": "2025-12-08-BanditPuzzle.scn",
+                "name": "2025-12-08-BanditPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Exchange",
+                        "Spear",
+                        "Wound"
+                ],
+                "cardCount": 4,
+                "image": "Assets/Textures/bandit.png"
+        },
+        {
+                "id": "2025-12-09-LivingShadowPuzzle.scn",
+                "name": "2025-12-09-LivingShadowPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Cauterize",
+                        "Heartbeat",
+                        "Mend"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/living-shadow.png"
+        },
+        {
+                "id": "2025-12-10-AdditionSignPuzle.scn",
+                "name": "2025-12-10-AdditionSignPuzle",
+                "tier": 4,
+                "provides": [
+                        "Venom",
+                        "Spear",
+                        "Pound",
+                        "Cleave",
+                        "Armory"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/addition-sign-puzle.png"
+        },
+        {
+                "id": "2025-12-11-WraithPuzzle.scn",
+                "name": "2025-12-11-WraithPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Cauterize",
+                        "Inspiration",
+                        "Martyr",
+                        "Reverberate",
+                        "Trace",
+                        "Armory"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/wraith.png"
+        },
+        {
+                "id": "2025-12-12-OwlbearPuzzle.scn",
+                "name": "2025-12-12-OwlbearPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Rebound",
+                        "Revive",
+                        "Capacitor",
+                        "Fang",
+                        "Cauterize"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/owlbear.png"
+        },
+        {
+                "id": "2026-01-05-RadiantSlugPuzzle.scn",
+                "name": "2026-01-05-RadiantSlugPuzzle",
+                "tier": 3,
+                "provides": [
+                        "Spear",
+                        "Thunderbolt",
+                        "Lunge",
+                        "Bargain",
+                        "Capacitor"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/radiant-slug.png"
+        },
+        {
+                "id": "2026-01-06-BlackKnightPuzzle.scn",
+                "name": "2026-01-06-BlackKnightPuzzle",
+                "tier": 4,
+                "provides": [
+                        "Armory",
+                        "Target",
+                        "Wound"
+                ],
+                "cardCount": 5,
+                "image": "Assets/Textures/black-knight.png"
+        },
+        {
+                "id": "2026-01-07-VendingMachinePuzzle.scn",
+                "name": "2026-01-07-VendingMachinePuzzle",
+                "tier": 4,
+                "provides": [
+                        "Armory",
+                        "Capacitor"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/vending-machine.png"
+        },
+        {
+                "id": "2026-01-08-GiantCrabPuzzle.scn",
+                "name": "2026-01-08-GiantCrabPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Armory",
+                        "Overload",
+                        "Reverberate"
+                ],
+                "cardCount": 5,
+                "image": "Assets/Textures/giant-crab.png"
+        },
+        {
+                "id": "2026-01-09-PaladinPuzzle.scn",
+                "name": "2026-01-09-PaladinPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Cauterize",
+                        "Inspiration",
+                        "Trace",
+                        "Revive",
+                        "Thunderbolt"
+                ],
+                "cardCount": 5,
+                "image": "Assets/Textures/paladin.png"
+        },
+        {
+                "id": "2026-01-13-AncientTreePuzzle.scn",
+                "name": "2026-01-13-AncientTreePuzzle",
+                "tier": 3,
+                "provides": [
+                        "Bargain",
+                        "Thunderbolt",
+                        "Lunge",
+                        "Capacitor"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/ancient-tree.png"
+        },
+        {
+                "id": "2026-01-14-WeatherWitchPuzzle.scn",
+                "name": "2026-01-14-WeatherWitchPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Armory",
+                        "Capacitor",
+                        "Martyr",
+                        "Shield",
+                        "Target",
+                        "Thunderbolt"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/weather-witch.png"
+        },
+        {
+                "id": "2026-01-15-ElderPuzzle.scn",
+                "name": "2026-01-15-ElderPuzzle",
+                "tier": 3,
+                "provides": [
+                        "Reverberate",
+                        "Scrap",
+                        "Cleave",
+                        "Flurry"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/elder.png"
+        },
+        {
+                "id": "2026-01-16-GreenDragonPuzzle.scn",
+                "name": "2026-01-16-GreenDragonPuzzle",
+                "tier": 3,
+                "provides": [
+                        "Flurry",
+                        "Wound",
+                        "Gift",
+                        "Rebound",
+                        "Reverberate"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/green-dragon.png"
+        },
+        {
+                "id": "2026-01-19-ScorpionPuzzle.scn",
+                "name": "2026-01-19-ScorpionPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Venom",
+                        "Cleanse",
+                        "Cleave"
+                ],
+                "cardCount": 5,
+                "image": "Assets/Textures/scorpion.png"
+        },
+        {
+                "id": "2026-01-20-ModronPuzzle.scn",
+                "name": "2026-01-20-ModronPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Inspiration",
+                        "Empty Fist",
+                        "Cauterize",
+                        "Thunderbolt"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/modron.png"
+        },
+        {
+                "id": "2026-01-21-ButlerPuzzle.scn",
+                "name": "2026-01-21-ButlerPuzzle",
+                "tier": 5,
+                "provides": [
+                        "Revive",
+                        "Spark",
+                        "Reverberate",
+                        "Inspiration"
+                ],
+                "cardCount": 5,
+                "image": "Assets/Textures/butler.png"
+        },
+        {
+                "id": "2026-01-22-AxebeakPuzzle.scn",
+                "name": "2026-01-22-AxebeakPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Cauterize",
+                        "Overload",
+                        "Scrap",
+                        "Armory",
+                        "Rebound",
+                        "Wound",
+                        "Cleave"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/axebeak.png"
+        },
+        {
+                "id": "2026-01-23-HarpyPuzzle.scn",
+                "name": "2026-01-23-HarpyPuzzle",
+                "tier": 4,
+                "provides": [
+                        "Scrap",
+                        "Tribute",
+                        "Trace",
+                        "Revive"
+                ],
+                "cardCount": 5,
+                "image": "Assets/Textures/harpy.png"
+        },
+        {
+                "id": "2026-01-26-ViperPuzzle.scn",
+                "name": "2026-01-26-ViperPuzzle",
+                "tier": 5,
+                "provides": [
+                        "Fang",
+                        "Flurry",
+                        "Haunt",
+                        "Inspiration",
+                        "Wound"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/viper.png"
+        },
+        {
+                "id": "2026-01-27-WarriorPuzzle.scn",
+                "name": "2026-01-27-WarriorPuzzle",
+                "tier": 4,
+                "provides": [
+                        "Armory",
+                        "Flurry",
+                        "Sharpen",
+                        "Gift"
+                ],
+                "cardCount": 6,
+                "image": "Assets/Textures/warrior.png"
+        },
+        {
+                "id": "2026-01-28-NinjaPuzzle.scn",
+                "name": "2026-01-28-NinjaPuzzle",
+                "tier": 7,
+                "provides": [
+                        "Cooperate",
+                        "Flurry",
+                        "Target",
+                        "Thunderbolt"
+                ],
+                "cardCount": 5,
+                "image": "Assets/Textures/ninja.png"
+        },
+        {
+                "id": "2026-01-29-EvilCarrotPuzzle.scn",
+                "name": "2026-01-29-EvilCarrotPuzzle",
+                "tier": 7,
+                "provides": [
+                        "Empty Fist",
+                        "Flurry",
+                        "Shovel",
+                        "Cleave",
+                        "Berserk",
+                        "Rebound",
+                        "Cooperate"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/evil-carrot.png"
+        },
+        {
+                "id": "2026-01-30-HammerheadPuzzle.scn",
+                "name": "2026-01-30-HammerheadPuzzle",
+                "tier": 7,
+                "provides": [
+                        "Target",
+                        "Berserk",
+                        "Sharpen",
+                        "Cooperate",
+                        "Flurry",
+                        "Empty Fist"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/hammerhead.png"
+        },
+        {
+                "id": "2026-02-02-CarniverousPlantPuzzle.scn",
+                "name": "2026-02-02-CarniverousPlantPuzzle",
+                "tier": 6,
+                "provides": [
+                        "Drain",
+                        "Potion",
+                        "Berserk",
+                        "Reverberate",
+                        "Heartbeat",
+                        "Fang"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/carniverous-plant.png"
+        },
+        {
+                "id": "2026-02-03-WolverinePuzzle.scn",
+                "name": "2026-02-03-WolverinePuzzle",
+                "tier": 6,
+                "provides": [
+                        "Berserk",
+                        "Drain",
+                        "Frenzy",
+                        "Heartbeat",
+                        "Sharpen",
+                        "Inspiration"
+                ],
+                "cardCount": 7,
+                "image": "Assets/Textures/wolverine.png"
+        },
+        {
+                "id": "Puzzle.scn",
+                "name": "Puzzle",
+                "tier": 1,
+                "provides": [
+                        "Focus"
+                ],
+                "cardCount": 3,
+                "image": "Assets/Textures/.png"
+        },
+        {
+                "id": "TestPuzzle.scn",
+                "name": "TestPuzzle",
+                "tier": 3,
+                "provides": [
+                        "Rebound",
+                        "Snipe",
+                        "Reverberate",
+                        "Scrap"
+                ],
+                "cardCount": 4,
+                "image": "Assets/Textures/test.png"
+        },
+        {
+                "id": "Tutorial-Puzzle.scn",
+                "name": "Tutorial-Puzzle",
+                "tier": 1,
+                "provides": [
+                        "Wound"
+                ],
+                "cardCount": 3,
+                "image": "Assets/Textures/tutorial.png"
+        }
+];
+        const links = [
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-04-25-Bloodthorn-Puzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-05-02-DrBonez-Puzzle.scn"
+        },
+        {
+                "source": "2025-06-26-OozePuzzle.scn",
+                "target": "2025-05-05-Leech-Puzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-05-10-GelatinousCube-Puzzle.scn"
+        },
+        {
+                "source": "2025-06-26-OozePuzzle.scn",
+                "target": "2025-05-10-GelatinousCube-Puzzle.scn"
+        },
+        {
+                "source": "2025-05-05-Leech-Puzzle.scn",
+                "target": "2025-05-13-KrakenPuzzle.scn"
+        },
+        {
+                "source": "2025-05-05-Leech-Puzzle.scn",
+                "target": "2025-05-15-GoblinPuzzle.scn"
+        },
+        {
+                "source": "2025-05-05-Leech-Puzzle.scn",
+                "target": "2025-05-17-MinotaurPuzzle.scn"
+        },
+        {
+                "source": "2025-06-26-OozePuzzle.scn",
+                "target": "2025-05-17-MinotaurPuzzle.scn"
+        },
+        {
+                "source": "2025-05-05-Leech-Puzzle.scn",
+                "target": "2025-05-20-OgrePuzzle.scn"
+        },
+        {
+                "source": "2025-06-26-OozePuzzle.scn",
+                "target": "2025-05-20-OgrePuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-05-25-FlameImpPuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-05-29-KoboldPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-06-01-GiantRatPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-06-01-GiantRatPuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-06-03-MimicPuzzle.scn"
+        },
+        {
+                "source": "2025-06-26-OozePuzzle.scn",
+                "target": "2025-06-03-MimicPuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-06-03-MimicPuzzle.scn"
+        },
+        {
+                "source": "2025-05-29-KoboldPuzzle.scn",
+                "target": "2025-06-03-MimicPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-06-05-NagaPuzzle.scn"
+        },
+        {
+                "source": "2025-06-26-OozePuzzle.scn",
+                "target": "2025-06-05-NagaPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-06-05-NagaPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-06-07-TrollPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-06-07-TrollPuzzle.scn"
+        },
+        {
+                "source": "2025-05-05-Leech-Puzzle.scn",
+                "target": "2025-06-07-TrollPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-06-09-CloakerPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-06-09-CloakerPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-06-11-CyclopsPuzzle.scn"
+        },
+        {
+                "source": "2025-06-26-OozePuzzle.scn",
+                "target": "2025-06-11-CyclopsPuzzle.scn"
+        },
+        {
+                "source": "2025-05-05-Leech-Puzzle.scn",
+                "target": "2025-06-11-CyclopsPuzzle.scn"
+        },
+        {
+                "source": "2025-05-05-Leech-Puzzle.scn",
+                "target": "2025-06-13-GeniePuzzle.scn"
+        },
+        {
+                "source": "2025-06-26-OozePuzzle.scn",
+                "target": "2025-06-13-GeniePuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-06-15-MummyPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-06-15-MummyPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-06-17-AnimatedArmorPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-06-17-AnimatedArmorPuzzle.scn"
+        },
+        {
+                "source": "2025-06-26-OozePuzzle.scn",
+                "target": "2025-06-17-AnimatedArmorPuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-06-19-SaplingPuzzle.scn"
+        },
+        {
+                "source": "2025-05-29-KoboldPuzzle.scn",
+                "target": "2025-06-19-SaplingPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-06-19-SaplingPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-06-19-SaplingPuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-06-21-SoldierPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-06-21-SoldierPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-06-24-FlameGiantPuzzle.scn"
+        },
+        {
+                "source": "2025-06-03-MimicPuzzle.scn",
+                "target": "2025-06-26-OozePuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-06-26-OozePuzzle.scn"
+        },
+        {
+                "source": "2025-07-02-WidowPuzzle.scn",
+                "target": "2025-06-28-Puzzle.scn"
+        },
+        {
+                "source": "2025-06-26-OozePuzzle.scn",
+                "target": "2025-06-28-Puzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-06-30-GolemPuzzle.scn"
+        },
+        {
+                "source": "2025-05-29-KoboldPuzzle.scn",
+                "target": "2025-06-30-GolemPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-06-30-GolemPuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-07-02-WidowPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-07-02-WidowPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-07-04-VampirePuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-07-04-VampirePuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-07-04-VampirePuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-07-06-CreepingVinePuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-07-06-CreepingVinePuzzle.scn"
+        },
+        {
+                "source": "2025-06-26-OozePuzzle.scn",
+                "target": "2025-07-08-EarthElementalPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-07-08-EarthElementalPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-07-08-EarthElementalPuzzle.scn"
+        },
+        {
+                "source": "2025-06-26-OozePuzzle.scn",
+                "target": "2025-07-10-HellHoundPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-07-10-HellHoundPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-07-10-HellHoundPuzzle.scn"
+        },
+        {
+                "source": "2025-06-03-MimicPuzzle.scn",
+                "target": "2025-07-12-EarthwormPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-07-12-EarthwormPuzzle.scn"
+        },
+        {
+                "source": "2025-06-26-OozePuzzle.scn",
+                "target": "2025-07-14-MadScientistPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-07-14-MadScientistPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-07-14-MadScientistPuzzle.scn"
+        },
+        {
+                "source": "2025-05-05-Leech-Puzzle.scn",
+                "target": "2025-07-16-CrawlerPuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-07-16-CrawlerPuzzle.scn"
+        },
+        {
+                "source": "2025-06-03-MimicPuzzle.scn",
+                "target": "2025-07-16-CrawlerPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-07-16-CrawlerPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-07-18-BeholderPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-07-18-BeholderPuzzle.scn"
+        },
+        {
+                "source": "2025-05-05-Leech-Puzzle.scn",
+                "target": "2025-07-18-BeholderPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-07-20-YetiPuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-07-22-SnipeBirdPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-07-22-SnipeBirdPuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-07-22-SnipeBirdPuzzle.scn"
+        },
+        {
+                "source": "2025-05-29-KoboldPuzzle.scn",
+                "target": "2025-07-22-SnipeBirdPuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-07-24-TentaclePiratePuzzle.scn"
+        },
+        {
+                "source": "2025-05-29-KoboldPuzzle.scn",
+                "target": "2025-07-24-TentaclePiratePuzzle.scn"
+        },
+        {
+                "source": "2025-06-26-OozePuzzle.scn",
+                "target": "2025-07-24-TentaclePiratePuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-07-24-TentaclePiratePuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-07-26-DisplacerBeastPuzzle.scn"
+        },
+        {
+                "source": "2025-05-05-Leech-Puzzle.scn",
+                "target": "2025-07-28-LightningElementalPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-07-28-LightningElementalPuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-07-30-ThunderbirdPuzzle.scn"
+        },
+        {
+                "source": "2025-05-29-KoboldPuzzle.scn",
+                "target": "2025-07-30-ThunderbirdPuzzle.scn"
+        },
+        {
+                "source": "2025-05-05-Leech-Puzzle.scn",
+                "target": "2025-07-30-ThunderbirdPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-07-30-ThunderbirdPuzzle.scn"
+        },
+        {
+                "source": "2025-06-03-MimicPuzzle.scn",
+                "target": "2025-08-01-GravediggerPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-08-01-GravediggerPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-08-01-GravediggerPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-08-03-NogglePuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-08-03-NogglePuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-08-03-NogglePuzzle.scn"
+        },
+        {
+                "source": "2025-06-26-OozePuzzle.scn",
+                "target": "2025-08-03-NogglePuzzle.scn"
+        },
+        {
+                "source": "2025-06-03-MimicPuzzle.scn",
+                "target": "2025-08-05-ManaImpPuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-08-05-ManaImpPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-08-05-ManaImpPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-08-05-ManaImpPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-08-05-ManaImpPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-08-07-CollectorPuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-08-07-CollectorPuzzle.scn"
+        },
+        {
+                "source": "2025-06-03-MimicPuzzle.scn",
+                "target": "2025-08-07-CollectorPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-08-07-CollectorPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-08-09-DemogorgonPuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-08-09-DemogorgonPuzzle.scn"
+        },
+        {
+                "source": "2025-06-03-MimicPuzzle.scn",
+                "target": "2025-08-11-DecrepitMousePuzzle.scn"
+        },
+        {
+                "source": "2025-06-26-OozePuzzle.scn",
+                "target": "2025-08-11-DecrepitMousePuzzle.scn"
+        },
+        {
+                "source": "2025-06-03-MimicPuzzle.scn",
+                "target": "2025-08-13-OrigamiPuzzle.scn"
+        },
+        {
+                "source": "2025-05-05-Leech-Puzzle.scn",
+                "target": "2025-08-15-DustDroidPuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-08-17-FunambulistPuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-08-17-FunambulistPuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-08-17-FunambulistPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-08-17-FunambulistPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-08-17-FunambulistPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-08-19-TentacleCultistPuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-08-19-TentacleCultistPuzzle.scn"
+        },
+        {
+                "source": "2025-05-29-KoboldPuzzle.scn",
+                "target": "2025-08-19-TentacleCultistPuzzle.scn"
+        },
+        {
+                "source": "2025-06-03-MimicPuzzle.scn",
+                "target": "2025-08-21-GargoylePuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-08-21-GargoylePuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-08-21-GargoylePuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-08-23-AlchemistPuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-08-23-AlchemistPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-08-23-AlchemistPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-08-23-AlchemistPuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-08-25-MerfolkPuzzle.scn"
+        },
+        {
+                "source": "2025-05-05-Leech-Puzzle.scn",
+                "target": "2025-08-25-MerfolkPuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-08-25-MerfolkPuzzle.scn"
+        },
+        {
+                "source": "2025-06-03-MimicPuzzle.scn",
+                "target": "2025-08-25-MerfolkPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-08-25-MerfolkPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-08-25-MerfolkPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-08-25-MerfolkPuzzle.scn"
+        },
+        {
+                "source": "2025-09-30-ArtificerPuzzle.scn",
+                "target": "2025-08-27-ScarecrowPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-08-27-ScarecrowPuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-08-29-WitchPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-08-29-WitchPuzzle.scn"
+        },
+        {
+                "source": "2025-06-03-MimicPuzzle.scn",
+                "target": "2025-08-29-WitchPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-08-29-WitchPuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-08-31-RocPuzzle.scn"
+        },
+        {
+                "source": "2025-09-30-ArtificerPuzzle.scn",
+                "target": "2025-08-31-RocPuzzle.scn"
+        },
+        {
+                "source": "2025-05-05-Leech-Puzzle.scn",
+                "target": "2025-08-31-RocPuzzle.scn"
+        },
+        {
+                "source": "2025-06-03-MimicPuzzle.scn",
+                "target": "2025-09-01-BeetlePuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-09-01-BeetlePuzzle.scn"
+        },
+        {
+                "source": "2025-06-26-OozePuzzle.scn",
+                "target": "2025-09-03-AssassinPuzzle.scn"
+        },
+        {
+                "source": "2025-05-05-Leech-Puzzle.scn",
+                "target": "2025-09-03-AssassinPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-09-05-DirewolfPuzzle.scn"
+        },
+        {
+                "source": "2025-05-05-Leech-Puzzle.scn",
+                "target": "2025-09-05-DirewolfPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-09-05-DirewolfPuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-09-07-FlumphPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-09-07-FlumphPuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-09-07-FlumphPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-09-07-FlumphPuzzle.scn"
+        },
+        {
+                "source": "2025-05-05-Leech-Puzzle.scn",
+                "target": "2025-09-07-FlumphPuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-09-09-WarlockPuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-09-09-WarlockPuzzle.scn"
+        },
+        {
+                "source": "2025-05-05-Leech-Puzzle.scn",
+                "target": "2025-09-09-WarlockPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-09-09-WarlockPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-09-11-SnowmanPuzzle.scn"
+        },
+        {
+                "source": "2025-06-26-OozePuzzle.scn",
+                "target": "2025-09-11-SnowmanPuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-09-13-WaspSwarmPuzzle.scn"
+        },
+        {
+                "source": "2025-06-03-MimicPuzzle.scn",
+                "target": "2025-09-15-GiantWurmPuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-09-15-GiantWurmPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-09-15-GiantWurmPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-09-17-VoidCreaturePuzzle.scn"
+        },
+        {
+                "source": "2025-06-26-OozePuzzle.scn",
+                "target": "2025-09-17-VoidCreaturePuzzle.scn"
+        },
+        {
+                "source": "2025-06-26-OozePuzzle.scn",
+                "target": "2025-09-19-DeityPuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-09-19-DeityPuzzle.scn"
+        },
+        {
+                "source": "2025-05-29-KoboldPuzzle.scn",
+                "target": "2025-09-19-DeityPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-09-19-DeityPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-09-22-MoocherPuzzle.scn"
+        },
+        {
+                "source": "2025-06-26-OozePuzzle.scn",
+                "target": "2025-09-22-MoocherPuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-09-23-RedeyePuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-09-23-RedeyePuzzle.scn"
+        },
+        {
+                "source": "2025-06-03-MimicPuzzle.scn",
+                "target": "2025-09-23-RedeyePuzzle.scn"
+        },
+        {
+                "source": "2025-06-26-OozePuzzle.scn",
+                "target": "2025-09-23-RedeyePuzzle.scn"
+        },
+        {
+                "source": "2025-09-30-ArtificerPuzzle.scn",
+                "target": "2025-09-24-FirebugPuzzle.scn"
+        },
+        {
+                "source": "2025-05-05-Leech-Puzzle.scn",
+                "target": "2025-09-24-FirebugPuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-09-25-LichPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-09-25-LichPuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-09-25-LichPuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-09-26-PoltergeistPuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-09-26-PoltergeistPuzzle.scn"
+        },
+        {
+                "source": "2025-05-29-KoboldPuzzle.scn",
+                "target": "2025-09-26-PoltergeistPuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-09-29-ChupacabraPuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-09-29-ChupacabraPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-09-29-ChupacabraPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-09-29-ChupacabraPuzzle.scn"
+        },
+        {
+                "source": "2025-11-21-CursedCampfirePuzzle.scn",
+                "target": "2025-09-30-ArtificerPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-09-30-ArtificerPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-10-01-BuzzsawDroidPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-10-01-BuzzsawDroidPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-10-01-BuzzsawDroidPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-10-02-RedDragonPuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-10-02-RedDragonPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-10-02-RedDragonPuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-10-03-BarbarianPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-10-03-BarbarianPuzzle.scn"
+        },
+        {
+                "source": "2025-06-03-MimicPuzzle.scn",
+                "target": "2025-10-03-BarbarianPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-10-06-GiftmanPuzzle.scn"
+        },
+        {
+                "source": "2025-06-03-MimicPuzzle.scn",
+                "target": "2025-10-06-GiftmanPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-10-07-PorcupinePuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-10-07-PorcupinePuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-10-07-PorcupinePuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-10-08-FiendPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-10-08-FiendPuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-10-08-FiendPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-10-08-FiendPuzzle.scn"
+        },
+        {
+                "source": "2025-09-30-ArtificerPuzzle.scn",
+                "target": "2025-10-09-SparkGiantPuzzle.scn"
+        },
+        {
+                "source": "2025-06-26-OozePuzzle.scn",
+                "target": "2025-10-09-SparkGiantPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-10-09-SparkGiantPuzzle.scn"
+        },
+        {
+                "source": "2025-06-26-OozePuzzle.scn",
+                "target": "2025-10-10-ShoggothPuzzle.scn"
+        },
+        {
+                "source": "2025-05-25-FlameImpPuzzle.scn",
+                "target": "2025-10-10-ShoggothPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-10-10-ShoggothPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-10-13-CherubPuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-10-13-CherubPuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-10-13-CherubPuzzle.scn"
+        },
+        {
+                "source": "2025-06-03-MimicPuzzle.scn",
+                "target": "2025-10-13-CherubPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-10-13-CherubPuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-10-14-PinkyPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-10-14-PinkyPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-10-14-PinkyPuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-10-14-PinkyPuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-10-14-PinkyPuzzle.scn"
+        },
+        {
+                "source": "2025-05-29-KoboldPuzzle.scn",
+                "target": "2025-10-14-PinkyPuzzle.scn"
+        },
+        {
+                "source": "2025-09-30-ArtificerPuzzle.scn",
+                "target": "2025-10-15-WaterDrakePuzzle.scn"
+        },
+        {
+                "source": "2025-05-25-FlameImpPuzzle.scn",
+                "target": "2025-10-15-WaterDrakePuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-10-15-WaterDrakePuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-10-15-WaterDrakePuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-10-16-PterosaurPuzzle.scn"
+        },
+        {
+                "source": "2025-05-25-FlameImpPuzzle.scn",
+                "target": "2025-10-16-PterosaurPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-10-17-TimelordPuzzle.scn"
+        },
+        {
+                "source": "2025-05-25-FlameImpPuzzle.scn",
+                "target": "2025-10-17-TimelordPuzzle.scn"
+        },
+        {
+                "source": "2025-09-30-ArtificerPuzzle.scn",
+                "target": "2025-10-17-TimelordPuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-10-17-TimelordPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-10-20-ChargerPuzzle.scn"
+        },
+        {
+                "source": "2025-05-25-FlameImpPuzzle.scn",
+                "target": "2025-10-20-ChargerPuzzle.scn"
+        },
+        {
+                "source": "2025-05-05-Leech-Puzzle.scn",
+                "target": "2025-10-20-ChargerPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-10-21-GraveRobber-Puzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-10-21-GraveRobber-Puzzle.scn"
+        },
+        {
+                "source": "2025-05-29-KoboldPuzzle.scn",
+                "target": "2025-10-21-GraveRobber-Puzzle.scn"
+        },
+        {
+                "source": "2025-06-03-MimicPuzzle.scn",
+                "target": "2025-10-21-GraveRobber-Puzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-10-21-GraveRobber-Puzzle.scn"
+        },
+        {
+                "source": "2025-06-03-MimicPuzzle.scn",
+                "target": "2025-10-22-PinkSlime-Puzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-10-22-PinkSlime-Puzzle.scn"
+        },
+        {
+                "source": "2025-05-29-KoboldPuzzle.scn",
+                "target": "2025-10-22-PinkSlime-Puzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-10-23-FlailSnail-Puzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-10-23-FlailSnail-Puzzle.scn"
+        },
+        {
+                "source": "2025-05-25-FlameImpPuzzle.scn",
+                "target": "2025-10-23-FlailSnail-Puzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-10-23-FlailSnail-Puzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-10-23-FlailSnail-Puzzle.scn"
+        },
+        {
+                "source": "2025-05-29-KoboldPuzzle.scn",
+                "target": "2025-10-23-FlailSnail-Puzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-10-24-TimeDemon-Puzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-10-24-TimeDemon-Puzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-10-27-SerpentsPuzzle.scn"
+        },
+        {
+                "source": "2025-06-26-OozePuzzle.scn",
+                "target": "2025-10-27-SerpentsPuzzle.scn"
+        },
+        {
+                "source": "2025-06-03-MimicPuzzle.scn",
+                "target": "2025-10-28-IceGolemPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-10-28-IceGolemPuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-10-28-IceGolemPuzzle.scn"
+        },
+        {
+                "source": "2025-05-25-FlameImpPuzzle.scn",
+                "target": "2025-10-29-FairyPuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-10-29-FairyPuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-10-29-FairyPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-10-29-FairyPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-10-30-GiantBatPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-10-30-GiantBatPuzzle.scn"
+        },
+        {
+                "source": "2025-05-25-FlameImpPuzzle.scn",
+                "target": "2025-10-30-GiantBatPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-10-31-ZombiePuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-10-31-ZombiePuzzle.scn"
+        },
+        {
+                "source": "2025-05-29-KoboldPuzzle.scn",
+                "target": "2025-10-31-ZombiePuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-11-03-LeprechaunPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-11-03-LeprechaunPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-11-03-LeprechaunPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-11-03-LeprechaunPuzzle.scn"
+        },
+        {
+                "source": "2025-09-30-ArtificerPuzzle.scn",
+                "target": "2025-11-04-CarBatteryPuzzle.scn"
+        },
+        {
+                "source": "2025-05-05-Leech-Puzzle.scn",
+                "target": "2025-11-04-CarBatteryPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-11-04-CarBatteryPuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-11-05-RavenPuzzle.scn"
+        },
+        {
+                "source": "2025-05-05-Leech-Puzzle.scn",
+                "target": "2025-11-05-RavenPuzzle.scn"
+        },
+        {
+                "source": "2025-05-25-FlameImpPuzzle.scn",
+                "target": "2025-11-05-RavenPuzzle.scn"
+        },
+        {
+                "source": "2025-05-29-KoboldPuzzle.scn",
+                "target": "2025-11-05-RavenPuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-11-06-BlueDragonPuzzle.scn"
+        },
+        {
+                "source": "2025-05-25-FlameImpPuzzle.scn",
+                "target": "2025-11-06-BlueDragonPuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-11-07-BigfootPuzzle.scn"
+        },
+        {
+                "source": "2025-09-30-ArtificerPuzzle.scn",
+                "target": "2025-11-07-BigfootPuzzle.scn"
+        },
+        {
+                "source": "2025-06-03-MimicPuzzle.scn",
+                "target": "2025-11-07-BigfootPuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-11-07-BigfootPuzzle.scn"
+        },
+        {
+                "source": "2025-05-29-KoboldPuzzle.scn",
+                "target": "2025-11-07-BigfootPuzzle.scn"
+        },
+        {
+                "source": "2025-05-25-FlameImpPuzzle.scn",
+                "target": "2025-11-07-BigfootPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-11-10-DemonNursePuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-11-10-DemonNursePuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-11-10-DemonNursePuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-11-11-GhostPiratePuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-11-11-GhostPiratePuzzle.scn"
+        },
+        {
+                "source": "2025-05-25-FlameImpPuzzle.scn",
+                "target": "2025-11-12-DelversPuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-11-12-DelversPuzzle.scn"
+        },
+        {
+                "source": "2025-05-29-KoboldPuzzle.scn",
+                "target": "2025-11-12-DelversPuzzle.scn"
+        },
+        {
+                "source": "2025-06-03-MimicPuzzle.scn",
+                "target": "2025-11-12-DelversPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-11-13-RatKingPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-11-13-RatKingPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-11-13-RatKingPuzzle.scn"
+        },
+        {
+                "source": "2025-05-25-FlameImpPuzzle.scn",
+                "target": "2025-11-13-RatKingPuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-11-13-RatKingPuzzle.scn"
+        },
+        {
+                "source": "2025-05-25-FlameImpPuzzle.scn",
+                "target": "2025-11-14-CannoneerPuzzle.scn"
+        },
+        {
+                "source": "2025-06-26-OozePuzzle.scn",
+                "target": "2025-11-14-CannoneerPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-11-17-TargetDummyPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-11-17-TargetDummyPuzzle.scn"
+        },
+        {
+                "source": "2025-05-25-FlameImpPuzzle.scn",
+                "target": "2025-11-17-TargetDummyPuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-11-17-TargetDummyPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-11-18-HydraPuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-11-18-HydraPuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-11-18-HydraPuzzle.scn"
+        },
+        {
+                "source": "2025-06-03-MimicPuzzle.scn",
+                "target": "2025-11-19-GiantEelPuzzle.scn"
+        },
+        {
+                "source": "2025-05-05-Leech-Puzzle.scn",
+                "target": "2025-11-19-GiantEelPuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-11-19-GiantEelPuzzle.scn"
+        },
+        {
+                "source": "2025-06-26-OozePuzzle.scn",
+                "target": "2025-11-20-PufferfishPuzzle.scn"
+        },
+        {
+                "source": "2025-06-03-MimicPuzzle.scn",
+                "target": "2025-11-20-PufferfishPuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-11-20-PufferfishPuzzle.scn"
+        },
+        {
+                "source": "2025-05-29-KoboldPuzzle.scn",
+                "target": "2025-11-20-PufferfishPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-11-20-PufferfishPuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-11-20-PufferfishPuzzle.scn"
+        },
+        {
+                "source": "2025-05-25-FlameImpPuzzle.scn",
+                "target": "2025-11-21-CursedCampfirePuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-11-21-CursedCampfirePuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-11-21-CursedCampfirePuzzle.scn"
+        },
+        {
+                "source": "2025-05-29-KoboldPuzzle.scn",
+                "target": "2025-11-21-CursedCampfirePuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-11-24-MantisShrimpPuzzle.scn"
+        },
+        {
+                "source": "2025-05-25-FlameImpPuzzle.scn",
+                "target": "2025-11-24-MantisShrimpPuzzle.scn"
+        },
+        {
+                "source": "2025-05-25-FlameImpPuzzle.scn",
+                "target": "2025-11-25-DrFrankensteinPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-11-25-DrFrankensteinPuzzle.scn"
+        },
+        {
+                "source": "2025-05-05-Leech-Puzzle.scn",
+                "target": "2025-11-25-DrFrankensteinPuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-11-26-FrankensteinsMonsterPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-11-26-FrankensteinsMonsterPuzzle.scn"
+        },
+        {
+                "source": "2025-05-25-FlameImpPuzzle.scn",
+                "target": "2025-11-26-FrankensteinsMonsterPuzzle.scn"
+        },
+        {
+                "source": "2025-05-05-Leech-Puzzle.scn",
+                "target": "2025-11-26-FrankensteinsMonsterPuzzle.scn"
+        },
+        {
+                "source": "2025-09-30-ArtificerPuzzle.scn",
+                "target": "2025-11-27-DwarvenMinerPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-11-27-DwarvenMinerPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-11-27-DwarvenMinerPuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-11-27-DwarvenMinerPuzzle.scn"
+        },
+        {
+                "source": "2025-05-25-FlameImpPuzzle.scn",
+                "target": "2025-11-27-DwarvenMinerPuzzle.scn"
+        },
+        {
+                "source": "2025-06-03-MimicPuzzle.scn",
+                "target": "2025-11-28-MonkPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-11-28-MonkPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-11-28-MonkPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-11-28-MonkPuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-11-28-MonkPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-12-01-MushroomPuzzle.scn"
+        },
+        {
+                "source": "2025-08-29-WitchPuzzle.scn",
+                "target": "2025-12-01-MushroomPuzzle.scn"
+        },
+        {
+                "source": "2025-12-01-MushroomPuzzle.scn",
+                "target": "2025-12-02-FungiPuzzle.scn"
+        },
+        {
+                "source": "2025-04-24-SeaMonster-Puzzle.scn",
+                "target": "2025-12-02-FungiPuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-12-03-TermitesPuzzle.scn"
+        },
+        {
+                "source": "2025-05-05-Leech-Puzzle.scn",
+                "target": "2025-12-04-SpeedElfPuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-12-04-SpeedElfPuzzle.scn"
+        },
+        {
+                "source": "2025-05-29-KoboldPuzzle.scn",
+                "target": "2025-12-04-SpeedElfPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-12-04-SpeedElfPuzzle.scn"
+        },
+        {
+                "source": "2025-05-25-FlameImpPuzzle.scn",
+                "target": "2025-12-04-SpeedElfPuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-12-05-TitanPuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-12-05-TitanPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-12-05-TitanPuzzle.scn"
+        },
+        {
+                "source": "2025-08-29-WitchPuzzle.scn",
+                "target": "2025-12-05-TitanPuzzle.scn"
+        },
+        {
+                "source": "2025-05-25-FlameImpPuzzle.scn",
+                "target": "2025-12-05-TitanPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-12-05-TitanPuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-12-08-BanditPuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-12-09-LivingShadowPuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2025-12-09-LivingShadowPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-12-09-LivingShadowPuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2025-12-10-AdditionSignPuzle.scn"
+        },
+        {
+                "source": "2025-12-01-MushroomPuzzle.scn",
+                "target": "2025-12-10-AdditionSignPuzle.scn"
+        },
+        {
+                "source": "2025-04-24-SeaMonster-Puzzle.scn",
+                "target": "2025-12-10-AdditionSignPuzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-12-11-WraithPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2025-12-11-WraithPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-12-11-WraithPuzzle.scn"
+        },
+        {
+                "source": "2025-05-25-FlameImpPuzzle.scn",
+                "target": "2025-12-11-WraithPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-12-11-WraithPuzzle.scn"
+        },
+        {
+                "source": "2025-12-01-MushroomPuzzle.scn",
+                "target": "2025-12-11-WraithPuzzle.scn"
+        },
+        {
+                "source": "2025-04-24-SeaMonster-Puzzle.scn",
+                "target": "2025-12-11-WraithPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2025-12-12-OwlbearPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2025-12-12-OwlbearPuzzle.scn"
+        },
+        {
+                "source": "2025-08-29-WitchPuzzle.scn",
+                "target": "2025-12-12-OwlbearPuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2025-12-12-OwlbearPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2026-01-05-RadiantSlugPuzzle.scn"
+        },
+        {
+                "source": "2025-08-29-WitchPuzzle.scn",
+                "target": "2026-01-05-RadiantSlugPuzzle.scn"
+        },
+        {
+                "source": "2025-12-01-MushroomPuzzle.scn",
+                "target": "2026-01-06-BlackKnightPuzzle.scn"
+        },
+        {
+                "source": "2025-04-24-SeaMonster-Puzzle.scn",
+                "target": "2026-01-06-BlackKnightPuzzle.scn"
+        },
+        {
+                "source": "2025-12-01-MushroomPuzzle.scn",
+                "target": "2026-01-07-VendingMachinePuzzle.scn"
+        },
+        {
+                "source": "2025-04-24-SeaMonster-Puzzle.scn",
+                "target": "2026-01-07-VendingMachinePuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2026-01-07-VendingMachinePuzzle.scn"
+        },
+        {
+                "source": "2025-08-29-WitchPuzzle.scn",
+                "target": "2026-01-07-VendingMachinePuzzle.scn"
+        },
+        {
+                "source": "2025-12-01-MushroomPuzzle.scn",
+                "target": "2026-01-08-GiantCrabPuzzle.scn"
+        },
+        {
+                "source": "2025-04-24-SeaMonster-Puzzle.scn",
+                "target": "2026-01-08-GiantCrabPuzzle.scn"
+        },
+        {
+                "source": "2025-05-05-Leech-Puzzle.scn",
+                "target": "2026-01-08-GiantCrabPuzzle.scn"
+        },
+        {
+                "source": "2025-05-25-FlameImpPuzzle.scn",
+                "target": "2026-01-08-GiantCrabPuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2026-01-09-PaladinPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2026-01-09-PaladinPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2026-01-09-PaladinPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2026-01-13-AncientTreePuzzle.scn"
+        },
+        {
+                "source": "2025-08-29-WitchPuzzle.scn",
+                "target": "2026-01-13-AncientTreePuzzle.scn"
+        },
+        {
+                "source": "2025-12-01-MushroomPuzzle.scn",
+                "target": "2026-01-14-WeatherWitchPuzzle.scn"
+        },
+        {
+                "source": "2025-04-24-SeaMonster-Puzzle.scn",
+                "target": "2026-01-14-WeatherWitchPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2026-01-14-WeatherWitchPuzzle.scn"
+        },
+        {
+                "source": "2025-08-29-WitchPuzzle.scn",
+                "target": "2026-01-14-WeatherWitchPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2026-01-14-WeatherWitchPuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2026-01-14-WeatherWitchPuzzle.scn"
+        },
+        {
+                "source": "2025-05-25-FlameImpPuzzle.scn",
+                "target": "2026-01-15-ElderPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2026-01-16-GreenDragonPuzzle.scn"
+        },
+        {
+                "source": "2025-05-25-FlameImpPuzzle.scn",
+                "target": "2026-01-16-GreenDragonPuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2026-01-19-ScorpionPuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2026-01-19-ScorpionPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2026-01-20-ModronPuzzle.scn"
+        },
+        {
+                "source": "2025-06-03-MimicPuzzle.scn",
+                "target": "2026-01-20-ModronPuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2026-01-20-ModronPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2026-01-21-ButlerPuzzle.scn"
+        },
+        {
+                "source": "2025-05-25-FlameImpPuzzle.scn",
+                "target": "2026-01-21-ButlerPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2026-01-21-ButlerPuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2026-01-22-AxebeakPuzzle.scn"
+        },
+        {
+                "source": "2025-05-05-Leech-Puzzle.scn",
+                "target": "2026-01-22-AxebeakPuzzle.scn"
+        },
+        {
+                "source": "2025-12-01-MushroomPuzzle.scn",
+                "target": "2026-01-22-AxebeakPuzzle.scn"
+        },
+        {
+                "source": "2025-04-24-SeaMonster-Puzzle.scn",
+                "target": "2026-01-22-AxebeakPuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2026-01-23-HarpyPuzzle.scn"
+        },
+        {
+                "source": "2025-05-29-KoboldPuzzle.scn",
+                "target": "2026-01-23-HarpyPuzzle.scn"
+        },
+        {
+                "source": "2025-05-04-Werewolf-Puzzle.scn",
+                "target": "2026-01-23-HarpyPuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2026-01-26-ViperPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2026-01-26-ViperPuzzle.scn"
+        },
+        {
+                "source": "2025-12-01-MushroomPuzzle.scn",
+                "target": "2026-01-27-WarriorPuzzle.scn"
+        },
+        {
+                "source": "2025-04-24-SeaMonster-Puzzle.scn",
+                "target": "2026-01-27-WarriorPuzzle.scn"
+        },
+        {
+                "source": "2025-05-15-GoblinPuzzle.scn",
+                "target": "2026-01-27-WarriorPuzzle.scn"
+        },
+        {
+                "source": "2025-05-13-KrakenPuzzle.scn",
+                "target": "2026-01-28-NinjaPuzzle.scn"
+        },
+        {
+                "source": "2025-06-03-MimicPuzzle.scn",
+                "target": "2026-01-29-EvilCarrotPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2026-01-29-EvilCarrotPuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2026-01-29-EvilCarrotPuzzle.scn"
+        },
+        {
+                "source": "2025-05-13-KrakenPuzzle.scn",
+                "target": "2026-01-29-EvilCarrotPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2026-01-30-HammerheadPuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2026-01-30-HammerheadPuzzle.scn"
+        },
+        {
+                "source": "2025-05-13-KrakenPuzzle.scn",
+                "target": "2026-01-30-HammerheadPuzzle.scn"
+        },
+        {
+                "source": "2025-06-03-MimicPuzzle.scn",
+                "target": "2026-01-30-HammerheadPuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2026-02-02-CarniverousPlantPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2026-02-02-CarniverousPlantPuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2026-02-02-CarniverousPlantPuzzle.scn"
+        },
+        {
+                "source": "2025-05-25-FlameImpPuzzle.scn",
+                "target": "2026-02-02-CarniverousPlantPuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2026-02-02-CarniverousPlantPuzzle.scn"
+        },
+        {
+                "source": "2025-06-28-Puzzle.scn",
+                "target": "2026-02-03-WolverinePuzzle.scn"
+        },
+        {
+                "source": "2025-04-23-EvilRobot-Puzzle.scn",
+                "target": "2026-02-03-WolverinePuzzle.scn"
+        },
+        {
+                "source": "2025-06-01-GiantRatPuzzle.scn",
+                "target": "2026-02-03-WolverinePuzzle.scn"
+        },
+        {
+                "source": "2025-06-15-MummyPuzzle.scn",
+                "target": "2026-02-03-WolverinePuzzle.scn"
+        },
+        {
+                "source": "2025-07-20-YetiPuzzle.scn",
+                "target": "2026-02-03-WolverinePuzzle.scn"
+        },
+        {
+                "source": "2025-05-02-DrBonez-Puzzle.scn",
+                "target": "2026-02-03-WolverinePuzzle.scn"
+        },
+        {
+                "source": "2025-05-25-FlameImpPuzzle.scn",
+                "target": "TestPuzzle.scn"
+        }
+];
+
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+
+        const svg = d3.select("#graph")
+            .attr("width", width)
+            .attr("height", height);
+
+        const g = svg.append("g");
+
+        // Add zoom behavior
+        const zoom = d3.zoom()
+            .scaleExtent([0.1, 4])
+            .on("zoom", (event) => {
+                g.attr("transform", event.transform);
+            });
+
+        svg.call(zoom);
+
+        // Tier colors
+        const tierColors = {
+            1: "#4ec9b0",
+            2: "#569cd6",
+            3: "#569cd6",
+            4: "#c586c0",
+            5: "#c586c0",
+            6: "#dcdcaa",
+            7: "#d16969"
+        };
+
+        // Create simulation
+        const simulation = d3.forceSimulation(nodes)
+            .force("link", d3.forceLink(links).id(d => d.id).distance(100))
+            .force("charge", d3.forceManyBody().strength(-300))
+            .force("x", d3.forceX(width / 2).strength(0.1))
+            .force("y", d3.forceY(height / 2).strength(0.1))
+            .force("collision", d3.forceCollide().radius(20));
+
+        // Create links
+        const link = g.append("g")
+            .selectAll("line")
+            .data(links)
+            .join("line")
+            .attr("class", "link");
+
+        // Create node groups
+        const nodeGroup = g.append("g")
+            .selectAll("g")
+            .data(nodes)
+            .join("g")
+            .attr("class", "node-group")
+            .call(drag(simulation));
+
+        // Add circles as backgrounds
+        nodeGroup.append("circle")
+            .attr("class", "node-bg")
+            .attr("r", d => 15 + d.cardCount * 0.3)
+            .attr("fill", d => tierColors[d.tier] || "#666")
+            .attr("stroke", "#1e1e1e")
+            .attr("stroke-width", 2);
+
+        // Add images
+        nodeGroup.append("image")
+            .attr("class", "node-image")
+            .attr("xlink:href", d => d.image)
+            .attr("x", d => -(12 + d.cardCount * 0.3))
+            .attr("y", d => -(12 + d.cardCount * 0.3))
+            .attr("width", d => (12 + d.cardCount * 0.3) * 2)
+            .attr("height", d => (12 + d.cardCount * 0.3) * 2)
+            .attr("clip-path", "circle()")
+            .style("pointer-events", "none")
+            .on("error", function(e, d) {
+                // If image fails to load, hide it
+                d3.select(this).style("display", "none");
+            });
+
+        // Add interaction handlers to the group
+        nodeGroup
+            .on("mouseover", showTooltip)
+            .on("mouseout", hideTooltip)
+            .on("click", highlightConnections);
+
+        const node = nodeGroup.select("circle");
+
+        // Add labels (only shown when zoomed in)
+        const label = g.append("g")
+            .selectAll("text")
+            .data(nodes)
+            .join("text")
+            .attr("class", "node-label")
+            .text(d => d.name.substring(0, 20))
+            .style("opacity", 0);
+
+        // Update positions on simulation tick
+        simulation.on("tick", () => {
+            link
+                .attr("x1", d => d.source.x)
+                .attr("y1", d => d.source.y)
+                .attr("x2", d => d.target.x)
+                .attr("y2", d => d.target.y);
+
+            nodeGroup
+                .attr("transform", d => `translate(${d.x},${d.y})`);
+
+            label
+                .attr("x", d => d.x)
+                .attr("y", d => d.y - 25);
+        });
+
+        // Show labels when zoomed in
+        svg.on("zoom", () => {
+            const scale = d3.zoomTransform(svg.node()).k;
+            label.style("opacity", scale > 1.5 ? 1 : 0);
+        });
+
+        // Drag behavior
+        function drag(simulation) {
+            function dragstarted(event) {
+                if (!event.active) simulation.alphaTarget(0.3).restart();
+                event.subject.fx = event.subject.x;
+                event.subject.fy = event.subject.y;
+            }
+
+            function dragged(event) {
+                event.subject.fx = event.x;
+                event.subject.fy = event.y;
+            }
+
+            function dragended(event) {
+                if (!event.active) simulation.alphaTarget(0);
+                event.subject.fx = null;
+                event.subject.fy = null;
+            }
+
+            return d3.drag()
+                .on("start", dragstarted)
+                .on("drag", dragged)
+                .on("end", dragended);
+        }
+
+        // Tooltip
+        function showTooltip(event, d) {
+            const tooltip = d3.select("#tooltip");
+            const title = d3.select("#tooltipTitle");
+            const content = d3.select("#tooltipContent");
+
+            title.text(d.name);
+            content.html(`
+                <strong>Tier:</strong> ${d.tier}<br>
+                <strong>Cards:</strong> ${d.cardCount}<br>
+                <strong>Provides:</strong> ${d.provides.length > 0 ? d.provides.join(", ") : "None"}
+            `);
+
+            tooltip
+                .style("left", (event.pageX + 15) + "px")
+                .style("top", (event.pageY + 15) + "px")
+                .classed("visible", true);
+        }
+
+        function hideTooltip() {
+            d3.select("#tooltip").classed("visible", false);
+        }
+
+        // Highlight connections
+        let selectedNode = null;
+        function highlightConnections(event, d) {
+            if (selectedNode === d) {
+                // Deselect
+                selectedNode = null;
+                link.classed("highlighted", false);
+                node.style("opacity", 1);
+            } else {
+                // Select
+                selectedNode = d;
+
+                const connectedNodes = new Set();
+                connectedNodes.add(d.id);
+
+                link.classed("highlighted", l => {
+                    if (l.source.id === d.id || l.target.id === d.id) {
+                        connectedNodes.add(l.source.id);
+                        connectedNodes.add(l.target.id);
+                        return true;
+                    }
+                    return false;
+                });
+
+                nodeGroup.style("opacity", n => connectedNodes.has(n.id) ? 1 : 0.2);
+            }
+        }
+
+        // Tier filter
+        d3.select("#tierFilter").on("change", function() {
+            const tier = this.value;
+            if (tier === "all") {
+                nodeGroup.style("display", "block");
+                link.style("display", "block");
+            } else {
+                const tierNum = parseInt(tier);
+                nodeGroup.style("display", d => d.tier === tierNum ? "block" : "none");
+                link.style("display", l => {
+                    const sourceVisible = l.source.tier === tierNum;
+                    const targetVisible = l.target.tier === tierNum;
+                    return sourceVisible && targetVisible ? "block" : "none";
+                });
+            }
+        });
+
+        // Search
+        d3.select("#searchBox").on("input", function() {
+            const search = this.value.toLowerCase();
+            if (search === "") {
+                nodeGroup.style("opacity", 1);
+                nodeGroup.select(".node-bg").attr("r", d => 15 + d.cardCount * 0.3);
+                nodeGroup.select(".node-image")
+                    .attr("x", d => -(12 + d.cardCount * 0.3))
+                    .attr("y", d => -(12 + d.cardCount * 0.3))
+                    .attr("width", d => (12 + d.cardCount * 0.3) * 2)
+                    .attr("height", d => (12 + d.cardCount * 0.3) * 2);
+            } else {
+                nodeGroup.style("opacity", d => d.name.toLowerCase().includes(search) ? 1 : 0.2);
+                nodeGroup.select(".node-bg").attr("r", d => {
+                    return d.name.toLowerCase().includes(search) ? 20 + d.cardCount * 0.3 : 15 + d.cardCount * 0.3;
+                });
+                nodeGroup.select(".node-image")
+                    .attr("x", d => {
+                        const size = d.name.toLowerCase().includes(search) ? 17 : 12;
+                        return -(size + d.cardCount * 0.3);
+                    })
+                    .attr("y", d => {
+                        const size = d.name.toLowerCase().includes(search) ? 17 : 12;
+                        return -(size + d.cardCount * 0.3);
+                    })
+                    .attr("width", d => {
+                        const size = d.name.toLowerCase().includes(search) ? 17 : 12;
+                        return (size + d.cardCount * 0.3) * 2;
+                    })
+                    .attr("height", d => {
+                        const size = d.name.toLowerCase().includes(search) ? 17 : 12;
+                        return (size + d.cardCount * 0.3) * 2;
+                    });
+            }
+        });
+    </script>
+</body>
+</html>

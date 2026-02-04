@@ -245,6 +245,8 @@ func show_card_preview() -> void:
 		card_preview.hide_gradient_background()
 	card_preview.show()
 	
+	scene.emit_card_preview_signal()
+	
 func bring_to_front() -> void:
 	z_index = RenderingServer.CANVAS_ITEM_Z_MAX
 
