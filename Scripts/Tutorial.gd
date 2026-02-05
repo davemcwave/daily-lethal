@@ -157,7 +157,12 @@ func hide_tutorial() -> void:
 	dialog_panel_bottom.hide()
 
 func _on_no_button_pressed():
+	background.set_show_tutorial(false)
 	hide_tutorial()
+	var next_puzzle_scene = scene.get_puzzle().get_next_puzzle_scene()
+	var background: Background = get_tree().get_root().get_node("/root/Background")
+	background.set_puzzle_scene(next_puzzle_scene)
+	get_tree().change_scene_to_file("res://Scenes/Scene0Desktop.scn")
 
 func _on_play_button_pressed():
 	background.set_show_tutorial(false)
