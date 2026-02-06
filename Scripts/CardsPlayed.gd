@@ -69,3 +69,13 @@ func _on_gui_input(event):
 		center_description.show()
 	elif event.is_action_released("select"):
 		center_description.hide()
+
+
+func _on_mouse_entered():
+	center_description.set_text("Cards Played Count", "Total number of cards you've played")
+	center_description.set_color(Color('0050f4'))
+	center_description.show()
+
+
+func _on_mouse_exited():
+	center_description.hide()

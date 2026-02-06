@@ -7,7 +7,8 @@ extends Node
 func _ready() -> void:
 	save_original_pitch_scales()
 	
-	#play_sfx("BGMusic")
+	if not mute_all:
+		play_sfx("BGMusic", 1)
 
 func save_original_pitch_scales() -> void:
 	for child in get_children():
@@ -15,7 +16,7 @@ func save_original_pitch_scales() -> void:
 			var sfx_node: AudioStreamPlayer = child
 			original_pitch_scales[sfx_node] = sfx_node.pitch_scale
 	
-func play_sfx(node_name: String, pitch_scale: float = -1.0) -> void:
+func play_sfx(node_name: String, pitch_scale: float = -1.0, volume_db: float = -999) -> void:
 	if mute_all:
 		return
 	
@@ -27,6 +28,9 @@ func play_sfx(node_name: String, pitch_scale: float = -1.0) -> void:
 	var use_custom_pitch_scale = pitch_scale > -1
 	if use_custom_pitch_scale:
 		sfx_node.pitch_scale = pitch_scale
+		
+	if volume_db != -999:
+		sfx_node.volume_db = volume_db
 		
 	sfx_node.play()
 	

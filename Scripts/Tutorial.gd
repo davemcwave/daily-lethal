@@ -30,8 +30,10 @@ func _ready():
 	
 	dialog_panel_top.set_icon_texture(load(player_image_file_path))
 	dialog_panel_top.set_title_text("[b][color=red]Grim[/color][/b]")
+	dialog_panel_top.set_dialog_sfx_index(1)
 	dialog_panel_bottom.set_icon_texture(load(player_image_file_path))
 	dialog_panel_bottom.set_title_text("[b][color=red]Grim[/color][/b]")
+	dialog_panel_bottom.set_dialog_sfx_index(1)
 
 	if active:
 		call_deferred('show_next_step')
@@ -98,10 +100,16 @@ func step_5() -> void:
 	await say("[b][color=red]You only get 1 turn to kill them.[/color]\nYou must play these cards in the perfect order to get the enemy's red health bar to 0.[/b]", PanelPosition.Top)
 
 func step_6() -> void:
-	blur.hide()
+	set_blur_position(0.55, 0.5)
+	set_blur_scale(0.205,0.115)
 	await say("[b]The 🗲 symbol is energy. The 🗲 symbol on the card is the cost to play it. The 🗲 symbol in the middle of the screen is how much energy you have.[/b]", PanelPosition.Top)
 	
 func step_7() -> void:
+	set_blur_position(0.55, 0.5)
+	set_blur_scale(0.205,0.115)
+	await say("[b]The ♥ symbol is your health. Death is good unless you die. So make sure this doesn't go to 0.[/b]", PanelPosition.Top)
+	
+func step_8() -> void:
 	blur.hide()
 	await say("[b]Hover over a few cards to see what they do.\nDrag the cards upwards, drop to play them.", PanelPosition.Top)
 	waiting = true
@@ -112,12 +120,17 @@ func step_7() -> void:
 	waiting = false
 	show_next_step()
 	
-func step_8() -> void:
+func step_9() -> void:
 	#waiting = true
 	blur.hide()
 	await say("[b]Some cards apply their effect instantly, like Slash. Other cards apply status effects, like Echo and Wound.", PanelPosition.Top)
 	
-func step_9() -> void:
+func step_10() -> void:
+	#waiting = true
+	blur.hide()
+	await say("[b]Did you notice that the enemy never takes a turn? We need to defeat them in 1 turn, in a single play of cards. As the gamers say, we need to \"Find Lethal\"!", PanelPosition.Top)
+	
+func step_11() -> void:
 	dialog_panel_top.set_visible(false)
 	waiting = true
 	blur.hide()
@@ -128,9 +141,9 @@ func step_9() -> void:
 	if scene.get_card_count() < 3:
 		await scene.card_count_incremented
 		
-	step_10()
+	step_12()
 
-func step_10() -> void:
+func step_12() -> void:
 	waiting = true
 	blur.hide()
 	await say("[b]Eh, you know enough. You can learn the rest on the job. Let's start killin'.", PanelPosition.Bottom)
@@ -159,10 +172,7 @@ func hide_tutorial() -> void:
 func _on_no_button_pressed():
 	background.set_show_tutorial(false)
 	hide_tutorial()
-	var next_puzzle_scene = scene.get_puzzle().get_next_puzzle_scene()
-	var background: Background = get_tree().get_root().get_node("/root/Background")
-	background.set_puzzle_scene(next_puzzle_scene)
-	get_tree().change_scene_to_file("res://Scenes/Scene0Desktop.scn")
+	get_tree().change_scene_to_file("res://Scenes/StoryView.scn")
 
 func _on_play_button_pressed():
 	background.set_show_tutorial(false)
@@ -170,6 +180,7 @@ func _on_play_button_pressed():
 	var next_puzzle_scene = scene.get_puzzle().get_next_puzzle_scene()
 	var background: Background = get_tree().get_root().get_node("/root/Background")
 	background.set_puzzle_scene(next_puzzle_scene)
+	background.set_from_story_view(true)
 	get_tree().change_scene_to_file("res://Scenes/Scene0Desktop.scn")
 
 

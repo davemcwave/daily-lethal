@@ -112,3 +112,13 @@ func _on_discard_count_gui_input(event):
 		center_description.show()
 	elif event.is_action_released("select"):
 		center_description.hide()
+
+
+func _on_discard_count_mouse_entered():
+	center_description.set_text("Discard Pile", "Contains discarded cards")
+	center_description.set_color(Color.DIM_GRAY)
+	center_description.show()
+
+
+func _on_discard_count_mouse_exited():
+	center_description.hide()

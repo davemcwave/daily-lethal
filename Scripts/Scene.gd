@@ -30,6 +30,7 @@ var card_play_history_paths: Array[String] = []
 @onready var previous_puzzle_button = $NextPreviousPuzzleButtonContainer/PreviousPuzzleButton
 @onready var dialog_handler = $"/root/DialogHandler"
 @onready var puzzle_resolver = $"/root/PuzzleResolver"
+@onready var puzzle_author_text = get_node_or_null("PuzzleAuthorText")
 var dialog_fight_button
 var player_dialog_panel
 var enemy_dialog_panel
@@ -290,6 +291,10 @@ func set_puzzle(new_puzzle: Puzzle) -> void:
 	if puzzle.is_test_puzzle():
 		puzzle.set_initial_draw_amount(-1)
 
+	if puzzle_author_text != null:
+		var author = background.get_author_for_enemy(puzzle.get_enemy_name())
+		puzzle_author_text.set_author(author)
+
 func get_all_card_scenes() -> Array[Resource]:
 	var card_scenes: Array[Resource] = []
 	var dir = DirAccess.open("res://Scenes/")
@@ -385,7 +390,7 @@ func is_checking_for_game_over() -> bool:
 
 func is_game_over() -> bool:
 	return game_over
-	
+
 func check_game_over_because_of_enemy() -> void:
 	
 	# Prevent overlapping checks and ignore if game already over

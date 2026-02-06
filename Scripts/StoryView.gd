@@ -5,10 +5,23 @@ extends Control
 @onready var puzzle_button_line_connector = $PuzzleButtonLineConnector
 @onready var audio_handler = $"/root/AudioHandler"
 @onready var background = $"/root/Background"
+@onready var puzzle_description_panel = $PuzzleDescriptionPanel
+@export var show_all: bool = false
 
 func _ready() -> void:
-	hide_puzzle_buttons()
+	if not show_all:
+		hide_puzzle_buttons()
+
+	setup_description_panel()
+	background.set_from_story_view(true)
+	call_deferred('set_completed_colors')
 	await show_progression()
+
+func setup_description_panel() -> void:
+	if puzzle_description_panel:
+		puzzle_description_panel.hide()
+		for button: PlayPuzzleButton in play_puzzle_buttons.get_children():
+			button.set_description_panel(puzzle_description_panel)
 
 func hide_puzzle_buttons() -> void:
 	for play_puzzle_button: PlayPuzzleButton in play_puzzle_buttons.get_children():
@@ -20,6 +33,10 @@ func get_puzzle_button_map() -> Dictionary:
 		button_map[button.puzzle_scene] = button
 	return button_map
 
+func set_completed_colors() -> void:
+	for play_puzzle_button: PlayPuzzleButton in play_puzzle_buttons.get_children():
+		if play_puzzle_button.is_completed():
+			play_puzzle_button.set_self_modulate(Color.GREEN)
 func get_buttons_to_show() -> Array[PlayPuzzleButton]:
 	var completed_puzzles = background.get_completed_story_puzzles()
 	var button_map = get_puzzle_button_map()
@@ -63,9 +80,8 @@ func show_progression() -> void:
 		if not is_newly_unlocked:
 			button.show()
 			button.modulate.a = 1.0
+			#await button.appear(0.05)
 			button.scale = Vector2(1.0, 1.0)
-
-	puzzle_button_line_connector.queue_redraw()
 
 	# Animate newly unlocked buttons
 	if newly_unlocked.size() > 0:
@@ -76,6 +92,8 @@ func show_progression() -> void:
 			await button.appear(0.15)
 			puzzle_button_line_connector.queue_redraw()
 		audio_handler.reset_pitch_scale("DrawSFX")
+		
+	puzzle_button_line_connector.queue_redraw()
 
 	background.clear_last_completed_story_puzzle()
 
@@ -102,3 +120,7 @@ func animate_all_puzzle_buttons() -> void:
 		puzzle_button_line_connector.queue_redraw()
 
 	audio_handler.reset_pitch_scale("DrawSFX")
+
+
+func _on_main_menu_button_pressed():
+	get_tree().change_scene_to_file("res://Scenes/MainMenu.tscn")

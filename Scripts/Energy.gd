@@ -87,3 +87,13 @@ func _on_gui_input(event):
 		center_description.show()
 	elif event.is_action_released("select"):
 		center_description.hide()
+
+
+func _on_mouse_entered():
+	center_description.set_text("Energy", "Amount to spend on cards, each card has its own energy cost")
+	center_description.set_color(self_modulate)
+	center_description.show()
+
+
+func _on_mouse_exited():
+	center_description.hide()

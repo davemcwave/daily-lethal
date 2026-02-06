@@ -2,12 +2,12 @@
 
 [ext_resource type="PackedScene" path="res://Scenes/ReboundCard.scn" id="1_guu6s"]
 [ext_resource type="PackedScene" path="res://Scenes/RageCard.scn" id="2_k3yhw"]
-[ext_resource type="PackedScene" path="res://Scenes/EchoCard.scn" id="3_jpo6c"]
-[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.scn" id="4_5dvym"]
-[ext_resource type="PackedScene" path="res://Scenes/SlashCard.scn" id="5_8ds2v"]
+[ext_resource type="PackedScene" path="res://Scenes/SlashCard.scn" id="3_jpo6c"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.scn" id="4_5dvym"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.scn" id="5_8ds2v"]
 [ext_resource type="Script" path="res://Scripts/CardSolutionResource.gd" id="6_qv7hf"]
 
 [resource]
 script = ExtResource("6_qv7hf")
 card_scenes = Array[PackedScene]([ExtResource("1_guu6s"), ExtResource("2_k3yhw"), ExtResource("2_k3yhw"), ExtResource("3_jpo6c"), ExtResource("4_5dvym"), ExtResource("5_8ds2v")])
-hand_indices = Array[int]([0, 0, 3, 1, 0, 0])
+hand_indices = Array[int]([0, 0, 3, 2, 1, 0])

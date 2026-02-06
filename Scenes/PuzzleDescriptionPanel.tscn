@@ -1,0 +1,141 @@
+[gd_scene load_steps=8 format=3 uid="uid://uy0aavc6yqnd"]
+
+[ext_resource type="Script" uid="uid://m3bc8cwfily5" path="res://Scripts/PuzzleDescriptionPanel.gd" id="1_7b8uu"]
+[ext_resource type="Texture2D" uid="uid://dt3rf8txeji6c" path="res://Assets/Textures/scarecrow.png" id="1_8dwb3"]
+[ext_resource type="FontFile" uid="uid://dwo8xle1kx2ha" path="res://Assets/Fonts/Quicksand/static/Quicksand-Medium.ttf" id="2_7b8uu"]
+[ext_resource type="FontFile" uid="uid://biw8kuuj8rwa8" path="res://Assets/Fonts/Quicksand/static/Quicksand-Bold.ttf" id="3_ec1yl"]
+[ext_resource type="Texture2D" uid="uid://db4s1t2n4xcdo" path="res://Assets/Textures/skull-face.png" id="4_t7xdj"]
+[ext_resource type="Texture2D" uid="uid://1j1hfut6wolw" path="res://Assets/Textures/circle.svg" id="5_bncdq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j4iq5"]
+bg_color = Color(0.0885598, 0.0885599, 0.0885599, 0.94902)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="PuzzleDescriptionPanel" type="Panel"]
+top_level = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -157.0
+offset_top = -87.0
+offset_right = 238.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_j4iq5")
+script = ExtResource("1_7b8uu")
+
+[node name="Character Icon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 9.0
+offset_right = 155.0
+offset_bottom = 154.0
+mouse_filter = 2
+texture = ExtResource("1_8dwb3")
+expand_mode = 1
+
+[node name="EnemyText" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.423
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.085
+offset_top = -73.5
+offset_right = 193.5
+offset_bottom = -3.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_7b8uu")
+theme_override_fonts/bold_font = ExtResource("3_ec1yl")
+theme_override_font_sizes/bold_font_size = 20
+bbcode_enabled = true
+text = "[b]Scarecrow[/b]"
+fit_content = true
+scroll_active = false
+vertical_alignment = 1
+
+[node name="AuthorText" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.423
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.085
+offset_top = -45.5
+offset_right = 193.5
+offset_bottom = 24.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_7b8uu")
+theme_override_fonts/bold_font = ExtResource("3_ec1yl")
+theme_override_font_sizes/bold_font_size = 20
+bbcode_enabled = true
+text = "by mcwavegames"
+fit_content = true
+scroll_active = false
+vertical_alignment = 1
+
+[node name="DifficultyText" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.423
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.085
+offset_top = 14.5
+offset_right = 192.5
+offset_bottom = 43.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_7b8uu")
+theme_override_fonts/bold_font = ExtResource("3_ec1yl")
+theme_override_font_sizes/bold_font_size = 20
+bbcode_enabled = true
+text = "Very Easy"
+fit_content = true
+scroll_active = false
+vertical_alignment = 1
+
+[node name="DiffcultyContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 153.0
+offset_top = 129.0
+offset_right = 292.0
+offset_bottom = 164.0
+mouse_filter = 2
+
+[node name="DifficultyIcon" type="TextureRect" parent="DiffcultyContainer"]
+self_modulate = Color(0.829963, 0.234691, 0.248875, 1)
+custom_minimum_size = Vector2(35.685, 2.29)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_t7xdj")
+expand_mode = 1
+
+[node name="StatusBG" type="TextureRect" parent="DiffcultyContainer/DifficultyIcon"]
+self_modulate = Color(0.772882, 0.288569, 0.296433, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_bncdq")
+expand_mode = 1
+metadata/_edit_lock_ = true

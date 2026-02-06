@@ -34,7 +34,9 @@ func enable_blink_next_icon(enabled: bool) -> void:
 	else:
 		$NextIcon/Timer.stop()
 		$NextIcon.hide()
-	
+
+func set_dialog_sfx_index(new_dialog_sfx_index: int) -> void:
+	dialog_sfx_index = new_dialog_sfx_index
 	
 func play_dialog_text(optional_text: String = "") -> bool:
 	if not optional_text.is_empty():

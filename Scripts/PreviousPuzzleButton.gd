@@ -1,7 +1,12 @@
 extends Button
 
 @onready var scene: Scene = get_tree().get_root().get_node("Scene")
+@onready var background = $"/root/Background"
 
+func _ready():
+	if background.is_from_story_view():
+		hide()
+		
 func _on_pressed() -> void:
 	var previous_puzzle_scene = scene.get_puzzle().get_previous_puzzle_scene()
 	if previous_puzzle_scene == null:

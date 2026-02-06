@@ -3,20 +3,177 @@ extends Node2D
 enum Difficulty { VERY_EASY, EASY, MEDIUM, HARD, VERY_HARD }
 
 const DIFFICULTY_COLORS := {
-	Difficulty.VERY_EASY: Color(0.53, 0.81, 0.92, 1.0),  # Light Blue
-	Difficulty.EASY: Color(0.56, 0.93, 0.56, 1.0),       # Light Green
-	Difficulty.MEDIUM: Color(1.0, 0.84, 0.0, 1.0),       # Gold/Yellow
-	Difficulty.HARD: Color(1.0, 0.65, 0.0, 1.0),         # Orange
-	Difficulty.VERY_HARD: Color(1.0, 0.39, 0.28, 1.0),   # Red/Tomato
+	Difficulty.VERY_EASY: Color.PINK,  # Light Blue
+	Difficulty.EASY: Color.GREEN,       # Light Green
+	Difficulty.MEDIUM: Color.YELLOW,       # Gold/Yellow
+	Difficulty.HARD: Color.RED,         # Orange
+	Difficulty.VERY_HARD: Color.PURPLE,   # Red/Tomato
+}
+
+const PUZZLE_AUTHORS := {
+	"Evil Robot": "mcwavegames",
+	"Sea Monster": "mcwavegames",
+	"Bloodthorn": "mcwavegames",
+	"Skeleton": "mcwavegames",
+	"Dr Bonez": "mcwavegames",
+	"Werewolf": "mcwavegames",
+	"Leech": "mcwavegames",
+	"Gelatinous Cube": "mcwavegames",
+	"Kraken": "mcwavegames",
+	"Goblin": "mcwavegames",
+	"Minotaur": "mcwavegames",
+	"Ogre": "mcwavegames",
+	"Flame Imp": "mcwavegames",
+	"Kobold": "mcwavegames",
+	"Giant Rat": "mcwavegames",
+	"Mimic": "mcwavegames",
+	"Naga": "mcwavegames",
+	"Troll": "mcwavegames",
+	"Cloaker": "mcwavegames",
+	"Cyclops": "mcwavegames",
+	"Genie": "mcwavegames",
+	"Mummy": "mcwavegames",
+	"Animated Armor": "GamesDeconstructed",
+	"Sapling": "laminatedmoth",
+	"Soldier": "Aquacier",
+	"Flame Giant": "jatloe",
+	"Ooze": "mcwavegames",
+	"Stirge": "mcwavegames",
+	"Rock Golem": "laminatedmoth",
+	"Weaver": "mcwavegames",
+	"Vampire": "Penguiny5110",
+	"Creeping Vine": "mcwavegames",
+	"Earth Elemental": "Sandcastle",
+	"Hell Hound": "Penguiny5110",
+	"Earthworm": "Erik",
+	"Mad Scientist": "ZeeBee",
+	"Crawler": "Sandcastle",
+	"Beholder": "Penguiny5110",
+	"Yeti": "mcwavegames",
+	"Snipe Bird": "ZeeBee",
+	"Tentacle Pirate": "Lunerias",
+	"Displacer Beast": "Penguiny5110",
+	"Lightning Elemental": "OnOff",
+	"Thunderbird": "Lejcles",
+	"Gravedigger": "OnOff",
+	"Noggle": "Samuel",
+	"Mana Imp": "Cochonouille",
+	"Collector": "ZeeBee",
+	"Demogorgon": "David abt",
+	"Decrepit Mouse": "Macropolo",
+	"Origami": "Macropolo",
+	"Dust Droid": "ZeeBee",
+	"Funambulist": "jatloe",
+	"Tentacled Cultist": "Palestar",
+	"Gargoyle": "Sacred",
+	"Alchemist": "BenMiff",
+	"Merfolk": "Sandcastle",
+	"Scarecrow": "BenMiff",
+	"Witch": "deltarail",
+	"Roc": "BenMiff",
+	"Beetle": "Sacred",
+	"Assassin": "BenMiff",
+	"Dire Wolf": "BenMiff",
+	"Flumph": "Penguiny5110",
+	"Warlock": "BenMiff",
+	"Snowman": "OnOff",
+	"Wasp Swarm": "BenMiff",
+	"Giant Wurm": "BenMiff & Moribam",
+	"Void Creature": "OnOff",
+	"Deity": "OnOff",
+	"Moocher": "ZeeBee",
+	"Redeye": "ZeeBee",
+	"Firebug": "ZeeBee",
+	"Lich": "OnOff",
+	"Poltergeist": "BenMiff",
+	"Chupacabra": "BenMiff",
+	"Artificer": "BenMiff",
+	"Buzzsaw Droid": "BenMiff",
+	"Red Dragon": "BenMiff",
+	"Barbarian": "ZeeBee",
+	"Giftman": "ZeeBee",
+	"Porcupine": "ZeeBee",
+	"Fiend": "Versze",
+	"Spark Golem": "Penguiny5110",
+	"Shoggoth": "BenMiff & Sandcastle",
+	"Cherub": "Yungha",
+	"Pinky": "ZeeBee",
+	"Water Drake": "Versze",
+	"Pterosaur": "BenMiff",
+	"Time Lord": "BenMiff",
+	"Charger": "Andyroid22",
+	"Grave Robber": "RadioInactive",
+	"Pink Slime": "BenMiff",
+	"Flail Snail": "Moribam",
+	"Time Demon": "jatloe",
+	"Serpents": "potatomato",
+	"Ice Golem": "BenMiff",
+	"Fairy": "RadioInactive",
+	"Giant Bat": "BenMiff",
+	"Zombie": "RadioInactive",
+	"Leprechaun": "RadioInactive",
+	"Car Battery": "potatomato",
+	"Raven": "BenMiff",
+	"Blue Dragon": "BenMiff",
+	"Bigfoot": "Moribam",
+	"Demon Nurse": "BenMiff",
+	"Ghost Pirate": "Penguiny5110",
+	"Delvers": "potatomato",
+	"Rat King": "RoboTea",
+	"Cannoneer": "RadioInactive",
+	"Target Dummy": "RoboTea",
+	"Hydra": "BenMiff",
+	"Giant Eel": "RadioInactive",
+	"Pufferfish": "potatomato",
+	"Cursed Campfire": "vroenVen",
+	"Mantis Shrimp": "Penguiny5110",
+	"Dr. Frankenstein": "RadioInactive",
+	"Frankenstein's Monster": "RadioInactive",
+	"Dwarven Miner": "BenMiff",
+	"Monk": "RadioInactive",
+	"Mushroom": "BenMiff",
+	"Fungi": "RoboTea",
+	"Termites": "BenMiff",
+	"Speed Elf": "potatomato",
+	"Titan": "RadioInactive",
+	"Bandit": "BenMiff",
+	"Living Shadow": "BenMiff",
+	"Addition Sign": "jatloe",
+	"Wraith": "RoboTea",
+	"Owlbear": "BenMiff",
+	"Radiant Slug": "potatomato",
+	"Black Knight": "BenMiff",
+	"Vending Machine": "RadioInactive",
+	"Giant Crab": "BenMiff",
+	"Paladin": "RoboTea",
+	"Ancient Tree": "RoboTea",
+	"Weather Witch": "BenMiff",
+	"Elder": "Penguiny5110",
+	"Green Dragon": "RadioInactive",
+	"Scorpion": "RoboTea",
+	"Modron": "potatomato",
+	"Butler": "BenMiff",
+	"Axebeak": "potatomato",
+	"Harpy": "RadioInactive",
+	"Viper": "BenMiff",
+	"Warrior": "RadioInactive",
+	"Ninja": "BenMiff",
+	"Evil Carrot": "potatomato",
+	"Hammerhead": "potatomato",
+	"Wolverine": "BenMiff",
+	"Carnivorous Plant": "RadioInactive",
+	"Wight": "BenMiff",
+	"Jack Frost": "Vanillabean",
+	"Crusader": "KirbyCarrot",
 }
 
 const ENEMY_DIFFICULTIES := {
-	"Robot": Difficulty.VERY_EASY,
+	"Evil Robot": Difficulty.VERY_EASY,
 	"Mantis Shrimp": Difficulty.VERY_EASY,
-	"Sea Monster": Difficulty.EASY,
-	"Bloodthorn": Difficulty.EASY,
-	"Skeleton": Difficulty.EASY,
-	"Dr Bonez": Difficulty.EASY,
+	"Sea Monster": Difficulty.VERY_EASY,
+	"Bloodthorn": Difficulty.VERY_EASY,
+	"Skeleton": Difficulty.VERY_EASY,
+	"Dr Bonez": Difficulty.VERY_EASY,
 	"Giant Rat": Difficulty.EASY,
 	"Creeping Vine": Difficulty.EASY,
 	"Decrepit Mouse": Difficulty.EASY,
@@ -30,7 +187,7 @@ const ENEMY_DIFFICULTIES := {
 	"Scorpion": Difficulty.EASY,
 	"Viper": Difficulty.EASY,
 	"Ninja": Difficulty.EASY,
-	"Werewolf": Difficulty.MEDIUM,
+	"Werewolf": Difficulty.EASY,
 	"Goblin": Difficulty.MEDIUM,
 	"Kobold": Difficulty.MEDIUM,
 	"Mimic": Difficulty.MEDIUM,
@@ -86,7 +243,7 @@ const ENEMY_DIFFICULTIES := {
 	"Vending Machine": Difficulty.MEDIUM,
 	"Ancient Tree": Difficulty.MEDIUM,
 	"Weather Witch": Difficulty.MEDIUM,
-	"Elder": Difficulty.MEDIUM,
+	"Elder": Difficulty.HARD,
 	"Modron": Difficulty.MEDIUM,
 	"Butler": Difficulty.MEDIUM,
 	"Axebeak": Difficulty.MEDIUM,
@@ -147,8 +304,8 @@ const ENEMY_DIFFICULTIES := {
 	"Harpy": Difficulty.HARD,
 	"Hammerhead": Difficulty.HARD,
 	"Gelatinous Cube": Difficulty.VERY_HARD,
-	"Kraken": Difficulty.VERY_HARD,
-	"Minotaur": Difficulty.VERY_HARD,
+	"Kraken": Difficulty.HARD,
+	"Minotaur": Difficulty.HARD,
 	"Flame Imp": Difficulty.VERY_HARD,
 	"Naga": Difficulty.VERY_HARD,
 	"Flame Giant": Difficulty.VERY_HARD,
@@ -156,7 +313,7 @@ const ENEMY_DIFFICULTIES := {
 	"Shoggoth": Difficulty.VERY_HARD,
 	"Time Demon": Difficulty.VERY_HARD,
 	"Zombie": Difficulty.VERY_HARD,
-	"Cannoneer": Difficulty.VERY_HARD,
+	"Cannoneer": Difficulty.HARD,
 	"Cursed Campfire": Difficulty.VERY_HARD,
 	"Monk": Difficulty.VERY_HARD,
 	"Titan": Difficulty.VERY_HARD,
@@ -197,12 +354,16 @@ func get_difficulty_color_for_enemy(enemy_name: String) -> Color:
 	var difficulty := get_difficulty_for_enemy(enemy_name)
 	return DIFFICULTY_COLORS[difficulty]
 
+func get_author_for_enemy(enemy_name: String) -> String:
+	if PUZZLE_AUTHORS.has(enemy_name):
+		return PUZZLE_AUTHORS[enemy_name]
+	return ""
+
 func clear() -> void:
 	attempts = 0
 	best_card_count = 0
 	clear_recorded_card_solutions()
 	card_solution_slugs.clear()
-	from_story_view = false
 	
 func set_puzzle_scene(new_puzzle_scene: String) -> void:
 	puzzle_scene = new_puzzle_scene
@@ -221,6 +382,9 @@ func set_from_story_view(value: bool) -> void:
 
 func is_from_story_view() -> bool:
 	return from_story_view
+
+func is_web_platform() -> bool:
+	return Engine.has_singleton("JavaScriptBridge") and OS.has_feature("web")
 
 func mark_story_puzzle_completed(puzzle_scene_path: String) -> void:
 	if puzzle_scene_path.is_empty():

@@ -1,13 +1,13 @@
-[gd_resource type="Resource" script_class="CardSolutionResource" load_steps=8 format=3]
+[gd_resource type="Resource" script_class="CardSolutionResource" load_steps=7 format=3 uid="uid://d0asvcy1fkdv3"]
 
-[ext_resource type="PackedScene" path="res://Scenes/ScrapCard.scn" id="1_bm4vp"]
-[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.scn" id="2_gnbst"]
-[ext_resource type="PackedScene" path="res://Scenes/RageCard.scn" id="3_vlk17"]
-[ext_resource type="PackedScene" path="res://Scenes/EchoCard.scn" id="4_1gpx5"]
-[ext_resource type="PackedScene" path="res://Scenes/ShieldCard.scn" id="5_a1h11"]
-[ext_resource type="PackedScene" path="res://Scenes/FangCard.scn" id="6_wgclt"]
-[ext_resource type="Script" path="res://Scripts/CardSolutionResource.gd" id="7_gr2mq"]
+[ext_resource type="PackedScene" uid="uid://ch2nusykqg02r" path="res://Scenes/ScrapCard.scn" id="1_kwd8o"]
+[ext_resource type="PackedScene" uid="uid://buxwquwarhtc6" path="res://Scenes/RageCard.scn" id="2_bm4vp"]
+[ext_resource type="PackedScene" uid="uid://bwjb01igdh18r" path="res://Scenes/EchoCard.scn" id="3_gnbst"]
+[ext_resource type="PackedScene" uid="uid://dm54uep8farnm" path="res://Scenes/ShieldCard.scn" id="4_vlk17"]
+[ext_resource type="PackedScene" uid="uid://g0h6rcx6ql5o" path="res://Scenes/FangCard.scn" id="5_1gpx5"]
+[ext_resource type="Script" uid="uid://cugpgmdtsumrl" path="res://Scripts/CardSolutionResource.gd" id="6_a1h11"]
 
 [resource]
-script = ExtResource("7_gr2mq")
-card_scenes = Array[PackedScene]([ExtResource("1_bm4vp"), ExtResource("2_gnbst"), ExtResource("3_vlk17"), ExtResource("4_1gpx5"), ExtResource("5_a1h11"), ExtResource("4_1gpx5"), ExtResource("6_wgclt")])
+script = ExtResource("6_a1h11")
+card_scenes = Array[PackedScene]([ExtResource("1_kwd8o"), ExtResource("2_bm4vp"), ExtResource("3_gnbst"), ExtResource("4_vlk17"), ExtResource("3_gnbst"), ExtResource("5_1gpx5")])
+hand_indices = Array[int]([4, 2, 2, 0, 1, 0])
