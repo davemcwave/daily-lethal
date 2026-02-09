@@ -31,6 +31,7 @@
       --shadow: 0 4px 18px rgba(0,0,0,0.55);
       --divider: rgba(255,255,255,0.08);
       --sidebar-width: 280px;
+      --banner-height: 52px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -41,6 +42,31 @@
       color: var(--text);
       min-height: 100vh;
       display: flex;
+      padding-top: var(--banner-height);
+    }
+
+    .beta-banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--banner-height);
+      background: linear-gradient(90deg, #ff5f6d, #ffc371);
+      color: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      z-index: 1000;
+      text-transform: uppercase;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+    }
+
+    .beta-banner a {
+      color: inherit;
+      text-decoration: underline;
+      margin-left: 0.4rem;
     }
 
     /* Sidebar */
@@ -51,10 +77,10 @@
       border-right: 1px solid var(--divider);
       display: flex;
       flex-direction: column;
-      height: 100vh;
+      height: calc(100vh - var(--banner-height));
       position: fixed;
       left: 0;
-      top: 0;
+      top: var(--banner-height);
       transition: transform 0.3s ease;
       z-index: 100;
     }
@@ -1191,7 +1217,7 @@
       .mobile-toggle {
         display: block;
         position: fixed;
-        top: 1rem;
+        top: calc(var(--banner-height) + 0.5rem);
         left: 1rem;
         z-index: 99;
         background: var(--panel-bg);
@@ -1213,9 +1239,14 @@
         display: none;
       }
     }
-  </style>
+</style>
 </head>
 <body>
+
+<div class="beta-banner">
+  Puzzle Lab is an experimental beta – expect rough edges & please share feedback in
+  <a href="https://discord.gg/J27VJUH8Qw" target="_blank" rel="noopener">Discord</a>.
+</div>
 
 <button class="mobile-toggle" id="mobile-toggle">Cards</button>
 
