@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://tfgxtcd1egy"]
+
+[ext_resource type="Script" uid="uid://c1sq7dujixkdq" path="res://Scripts/CardDescriptionExporter.gd" id="1"]
+
+[node name="CardDescriptionExporter" type="Node"]
+script = ExtResource("1")

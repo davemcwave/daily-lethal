@@ -5,3 +5,5 @@ Exports/
 *.zip
 .vscode/
 tokens/
+.claude/
+remove_ocr.py

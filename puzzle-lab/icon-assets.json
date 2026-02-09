@@ -1,0 +1,207 @@
+[
+  {
+    "path": "Assets/Textures/acupunture.png",
+    "name": "acupunture",
+    "label": "Acupunture"
+  },
+  {
+    "path": "Assets/Textures/angry.png",
+    "name": "angry",
+    "label": "Angry"
+  },
+  {
+    "path": "Assets/Textures/armory.png",
+    "name": "armory",
+    "label": "Armory"
+  },
+  {
+    "path": "Assets/Textures/arrow-hand-drawn.png",
+    "name": "arrow-hand-drawn",
+    "label": "Arrow Hand Drawn"
+  },
+  {
+    "path": "Assets/Textures/banner.png",
+    "name": "banner",
+    "label": "Banner"
+  },
+  {
+    "path": "Assets/Textures/battery.png",
+    "name": "battery",
+    "label": "Battery"
+  },
+  {
+    "path": "Assets/Textures/berserk.png",
+    "name": "berserk",
+    "label": "Berserk"
+  },
+  {
+    "path": "Assets/Textures/bomb.png",
+    "name": "bomb",
+    "label": "Bomb"
+  },
+  {
+    "path": "Assets/Textures/bouncing.png",
+    "name": "bouncing",
+    "label": "Bouncing"
+  },
+  {
+    "path": "Assets/Textures/burning.png",
+    "name": "burning",
+    "label": "Burning"
+  },
+  {
+    "path": "Assets/Textures/charge.png",
+    "name": "charge",
+    "label": "Charge"
+  },
+  {
+    "path": "Assets/Textures/cleave.png",
+    "name": "cleave",
+    "label": "Cleave"
+  },
+  {
+    "path": "Assets/Textures/clenched-fist.png",
+    "name": "clenched-fist",
+    "label": "Clenched Fist"
+  },
+  {
+    "path": "Assets/Textures/diskette.png",
+    "name": "diskette",
+    "label": "Diskette"
+  },
+  {
+    "path": "Assets/Textures/down-arrow.png",
+    "name": "down-arrow",
+    "label": "Down Arrow"
+  },
+  {
+    "path": "Assets/Textures/electricity.png",
+    "name": "electricity",
+    "label": "Electricity"
+  },
+  {
+    "path": "Assets/Textures/fangs.png",
+    "name": "fangs",
+    "label": "Fangs"
+  },
+  {
+    "path": "Assets/Textures/fist.png",
+    "name": "fist",
+    "label": "Fist"
+  },
+  {
+    "path": "Assets/Textures/frenzy.png",
+    "name": "frenzy",
+    "label": "Frenzy"
+  },
+  {
+    "path": "Assets/Textures/ghost.png",
+    "name": "ghost",
+    "label": "Ghost"
+  },
+  {
+    "path": "Assets/Textures/ghost-face.png",
+    "name": "ghost-face",
+    "label": "Ghost Face"
+  },
+  {
+    "path": "Assets/Textures/katana.png",
+    "name": "katana",
+    "label": "Katana"
+  },
+  {
+    "path": "Assets/Textures/knife.png",
+    "name": "knife",
+    "label": "Knife"
+  },
+  {
+    "path": "Assets/Textures/life.png",
+    "name": "life",
+    "label": "Life"
+  },
+  {
+    "path": "Assets/Textures/lightning.png",
+    "name": "lightning",
+    "label": "Lightning"
+  },
+  {
+    "path": "Assets/Textures/lock.png",
+    "name": "lock",
+    "label": "Lock"
+  },
+  {
+    "path": "Assets/Textures/playing-cards.png",
+    "name": "playing-cards",
+    "label": "Playing Cards"
+  },
+  {
+    "path": "Assets/Textures/ribbon.png",
+    "name": "ribbon",
+    "label": "Ribbon"
+  },
+  {
+    "path": "Assets/Textures/scrap.png",
+    "name": "scrap",
+    "label": "Scrap"
+  },
+  {
+    "path": "Assets/Textures/security.png",
+    "name": "security",
+    "label": "Security"
+  },
+  {
+    "path": "Assets/Textures/settings.png",
+    "name": "settings",
+    "label": "Settings"
+  },
+  {
+    "path": "Assets/Textures/share.png",
+    "name": "share",
+    "label": "Share"
+  },
+  {
+    "path": "Assets/Textures/shovel.png",
+    "name": "shovel",
+    "label": "Shovel"
+  },
+  {
+    "path": "Assets/Textures/sonar.png",
+    "name": "sonar",
+    "label": "Sonar"
+  },
+  {
+    "path": "Assets/Textures/sparkle.png",
+    "name": "sparkle",
+    "label": "Sparkle"
+  },
+  {
+    "path": "Assets/Textures/spear.png",
+    "name": "spear",
+    "label": "Spear"
+  },
+  {
+    "path": "Assets/Textures/swap.png",
+    "name": "swap",
+    "label": "Swap"
+  },
+  {
+    "path": "Assets/Textures/targeting.png",
+    "name": "targeting",
+    "label": "Targeting"
+  },
+  {
+    "path": "Assets/Textures/targets.png",
+    "name": "targets",
+    "label": "Targets"
+  },
+  {
+    "path": "Assets/Textures/two-hands.png",
+    "name": "two-hands",
+    "label": "Two Hands"
+  },
+  {
+    "path": "Assets/Textures/undo.png",
+    "name": "undo",
+    "label": "Undo"
+  }
+]

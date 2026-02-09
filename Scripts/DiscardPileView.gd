@@ -13,9 +13,11 @@ func populate_cards() -> void:
 	
 	for child_index in range(discard_panel.get_card_count()):
 		var child = discard_panel.get_cards()[child_index]
-		var new_card: Card = child.duplicate(DUPLICATE_USE_INSTANTIATION)
+		var new_card: Card = child.duplicate()
 		new_card.set_state(Card.State.Discarded)
 		new_card.z_index = 1
+		
+		#new_card.get_node('IconPane')l.move_child(gradient_background,0)
 		new_card.normalize_saturation()
 		new_card.set_mouse_filter(Control.MOUSE_FILTER_PASS)
 		grid_container.add_child(new_card)

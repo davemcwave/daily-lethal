@@ -52,6 +52,15 @@ func is_freed_manually() -> bool:
 func set_target(new_target: Node) -> void:
 	target = new_target
 
+func get_target() -> Node:
+	return target
+	
+func get_other_target() -> Node:
+	if target is Health:
+		return get_tree().get_root().get_node('Scene/Enemy')
+	else:
+		return get_tree().get_root().get_node('Scene/Health')
+
 func get_on_play_activation_category() -> OnPlayActivationCategory:
 	return on_play_activation_category
 	

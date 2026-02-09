@@ -21,3 +21,9 @@ func activate(context: Dictionary = {}) -> bool:
 
 	return super.activate()
 	
+
+func set_energy_cost_copy(new_energy_cost_copy: int) -> void:
+	energy_cost_copy = new_energy_cost_copy
+
+func get_energy_cost_copy() -> int:
+	return energy_cost_copy

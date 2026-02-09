@@ -16,6 +16,7 @@ const LOW_ENERGY_CARD_TEXT = "[center][b][pulse freq=2.0 color=#ffffff40 ease=-2
 @export var card_name: String = "Slash"
 @export var energy_cost: int = 1
 @export var card_description: String = "Deal 2 damage"
+var description_template: String = ""
 @export var card_effect_delay: float = 0.0
 @export var break_effects_on_apply: bool = false
 @onready var enemy = scene.get_node("Enemy")
@@ -77,6 +78,15 @@ func _ready():
 	if is_playing_on_desktop():
 		connect("mouse_entered", _on_mouse_entered)
 		connect("mouse_exited", _on_mouse_exited)
+	
+func add_gradient_background(new_colors: PackedColorArray) -> void:
+	if has_gradient_background():
+		get_node("IconPanel/GradientBackground").queue_free()
+	var gradient_background: GradientBackground = load("res://Scenes/GradientBackground.scn").instantiate()
+	gradient_background.set_colors(new_colors)
+	$IconPanel.add_child(gradient_background)
+	$IconPanel.move_child(gradient_background,0)
+	
 	
 func no_cards_grabbed() -> bool:
 	for card: Card in get_tree().get_nodes_in_group("Cards"):
@@ -515,6 +525,13 @@ func set_description(new_description: String) -> void:
 	card_description = new_description
 	update_description_panel()
 
+func set_description_template(new_template: String) -> void:
+	description_template = new_template if new_template is String else ""
+	update_description_panel()
+
+func get_description_template() -> String:
+	return description_template
+
 func bounce(use_current_scale: bool = false) -> void:
 	#var previous_state_before_bouncing: State = state
 	#set_state(State.Bouncing)
@@ -553,4 +570,105 @@ func is_bouncing() -> bool:
 	return state == State.Bouncing
 	
 func update_description_panel() -> void:
-	$DescriptionPanel/Title.set_text("[center][shake rate=2.0 level=1 connected=1]%s[/shake][/center]" % card_description)
+	var inner_text: String = card_description
+	if not description_template.is_empty():
+		if description_template.find("{{") != -1:
+			inner_text = _render_description_template(description_template)
+		else:
+			inner_text = description_template
+		card_description = inner_text
+	$DescriptionPanel/Title.set_text("[center][shake rate=2.0 level=1 connected=1]%s[/shake][/center]" % inner_text)
+
+func _render_description_template(template: String) -> String:
+	if template.is_empty():
+		return template
+	var regex := RegEx.new()
+	if regex.compile("\\{\\{\\s*([^\\}]+)\\s*\\}\\}") != OK:
+		return template
+	var rendered := ""
+	var last_end := 0
+	var match_search = regex.search(template)
+	while match_search != null:
+		var start_index := match_search.get_start(0)
+		rendered += template.substr(last_end, start_index - last_end)
+		var token := match_search.get_string(1).strip_edges()
+		rendered += _resolve_description_template_token(token)
+		last_end = match_search.get_end(0)
+		match_search = regex.search(template, last_end)
+	rendered += template.substr(last_end)
+	return rendered
+
+func _resolve_description_template_token(token: String) -> String:
+	if token.begins_with("card."):
+		var card_key := token.substr(5)
+		return str(_resolve_card_template_value(card_key))
+	elif token.begins_with("effect"):
+		var dot_index := token.find(".")
+		if dot_index == -1:
+			return ""
+		var index_text := token.substr(6, dot_index - 6)
+		if not index_text.is_valid_int():
+			return ""
+		var property_path := token.substr(dot_index + 1)
+		if property_path.is_empty():
+			return ""
+		var resolved_value = _resolve_effect_template_value(int(index_text), property_path)
+		return "" if resolved_value == null else str(resolved_value)
+	return ""
+
+func _resolve_card_template_value(property_name: String):
+	match property_name:
+		"name":
+			return card_name
+		"energy", "energy_cost":
+			return energy_cost
+		"description":
+			return card_description
+		_:
+			var getter := "get_%s" % property_name
+			if has_method(getter):
+				return call(getter)
+	return ""
+
+func _resolve_effect_template_value(effect_index: int, property_path: String):
+	if effect_index < 0 or effect_index >= card_effects.size():
+		return ""
+	var value: Variant = card_effects[effect_index]
+	if value == null:
+		return ""
+	var segments: PackedStringArray = property_path.split(".", false)
+	for segment in segments:
+		value = _resolve_template_segment(value, segment)
+		if value == null:
+			return ""
+	return value
+
+func _resolve_template_segment(source, segment: String):
+	if source == null:
+		return null
+	match typeof(source):
+		TYPE_OBJECT:
+			return _resolve_object_member(source, segment)
+		TYPE_DICTIONARY:
+			return source.get(segment, null)
+		TYPE_ARRAY:
+			if segment.is_valid_int():
+				var idx := int(segment)
+				if idx >= 0 and idx < source.size():
+					return source[idx]
+			return null
+		_:
+			return null
+
+func _resolve_object_member(obj: Object, member: String):
+	if obj == null:
+		return null
+	for property in obj.get_property_list():
+		if property.has("name") and property["name"] == member:
+			return obj.get(member)
+	var getter := "get_%s" % member
+	if obj.has_method(getter):
+		return obj.call(getter)
+	if member.begins_with("get_") and obj.has_method(member):
+		return obj.call(member)
+	return null

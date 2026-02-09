@@ -48,6 +48,9 @@ func _ready():
 	
 	await draw_starting_cards()
 	
+	if url_capturer.has_card_order():
+		await _apply_card_order_to_hand()
+	
 	if puzzle_resolver.is_active():
 		puzzle_resolver.resolve_puzzle()
 
@@ -269,16 +272,48 @@ func set_puzzle(new_puzzle: Puzzle) -> void:
 		puzzle.set_card_scenes(random_card_scenes)
 	
 	var card_scenes = url_capturer.get_cards_from_test_puzzle() if puzzle.is_test_puzzle() else puzzle.get_card_scenes()
+	var existing_card_index: int = 0
 	for card_scene in card_scenes:
 		var card: Card = card_scene.instantiate()
+		if puzzle.is_test_puzzle():
+			card.set_meta("card_order_token", "E%d" % existing_card_index)
+			card.set_meta("card_order_source", "existing")
+			card.set_meta("card_order_index", existing_card_index)
+			existing_card_index += 1
 		$Deck.add_child(card)
 		#$URLCapturer.set_text("[center][b]%s[/b][/center]" % card.name)
 		#await get_tree().create_timer(2.5).timeout
 		card.hide()
-	
+
+	# Add custom cards from Card Lab URL parameter
+	var custom_card_count = 0
+	var custom_card_index: int = 0
+	if url_capturer.has_custom_cards():
+		var custom_cards = url_capturer.create_custom_cards()
+		print("DEBUG: create_custom_cards returned %d cards" % custom_cards.size())
+		for custom_card: Card in custom_cards:
+			print("DEBUG: Adding custom card '%s' to deck" % custom_card.card_name)
+			if puzzle.is_test_puzzle():
+				custom_card.set_meta("card_order_token", "C%d" % custom_card_index)
+				custom_card.set_meta("card_order_source", "custom")
+				custom_card.set_meta("card_order_index", custom_card_index)
+				custom_card_index += 1
+			$Deck.add_child(custom_card)
+			custom_card.hide()
+		custom_card_count = custom_cards.size()
+		print("DEBUG: Deck now has %d children, starting_card_amount will be increased by %d" % [$Deck.get_child_count(), custom_card_count])
+
+	if url_capturer.has_card_order():
+		_apply_card_order_to_deck()
+
 	$Health.set_health($URLCapturer.get_player_health_from_test_puzzle() if puzzle.is_test_puzzle() else puzzle.get_player_health())
 	$Energy.set_energy($URLCapturer.get_player_energy_from_test_puzzle() if puzzle.is_test_puzzle() else puzzle.get_player_energy())
-	starting_card_amount = puzzle.get_initial_draw_amount() if puzzle.get_initial_draw_amount() > 0 else $Deck.get_child_count() 
+
+	# If custom cards are present, draw all cards in deck; otherwise use puzzle's initial draw amount
+	if custom_card_count > 0:
+		starting_card_amount = $Deck.get_child_count()
+	else:
+		starting_card_amount = puzzle.get_initial_draw_amount() if puzzle.get_initial_draw_amount() > 0 else $Deck.get_child_count() 
 	
 	get_node("/root/Background").set_next_puzzle_scene(puzzle.get_next_puzzle_scene())
 	
@@ -293,7 +328,81 @@ func set_puzzle(new_puzzle: Puzzle) -> void:
 
 	if puzzle_author_text != null:
 		var author = background.get_author_for_enemy(puzzle.get_enemy_name())
+		if url_capturer != null and url_capturer.has_puzzle_creator_name():
+			author = url_capturer.get_puzzle_creator_name()
 		puzzle_author_text.set_author(author)
+
+func _apply_card_order_to_deck() -> void:
+	if url_capturer == null or not url_capturer.has_card_order():
+		return
+
+	var tokens: Array = url_capturer.get_card_order_tokens()
+	if tokens.is_empty():
+		return
+
+	var deck_cards: Array = deck.get_cards()
+	if deck_cards.is_empty():
+		return
+
+	var token_to_card: Dictionary = {}
+	for card in deck_cards:
+		if card.has_meta("card_order_token"):
+			var token = str(card.get_meta("card_order_token"))
+			token_to_card[token] = card
+
+	var ordered_cards: Array = []
+	for token in tokens:
+		var normalized = str(token)
+		if token_to_card.has(normalized):
+			ordered_cards.append(token_to_card[normalized])
+
+	for card in deck_cards:
+		if not ordered_cards.has(card):
+			ordered_cards.append(card)
+
+	for i in range(ordered_cards.size()):
+		var card: Card = ordered_cards[i]
+		if card != null and card.get_parent() == deck:
+			deck.move_child(card, i)
+
+func _apply_card_order_to_hand() -> void:
+	if url_capturer == null or not url_capturer.has_card_order():
+		return
+
+	var tokens: Array = url_capturer.get_card_order_tokens()
+	if tokens.is_empty():
+		return
+
+	var cards_in_hand: Array = hand.get_cards()
+	if cards_in_hand.is_empty():
+		return
+
+	var token_to_card: Dictionary = {}
+	for card in cards_in_hand:
+		if card.has_meta("card_order_token"):
+			var token = str(card.get_meta("card_order_token"))
+			token_to_card[token] = card
+
+	var ordered_cards: Array = []
+	for token in tokens:
+		var normalized = str(token)
+		if token_to_card.has(normalized):
+			ordered_cards.append(token_to_card[normalized])
+
+	for card in cards_in_hand:
+		if not ordered_cards.has(card):
+			ordered_cards.append(card)
+
+	for i in range(ordered_cards.size()):
+		var card: Card = ordered_cards[i]
+		if card.get_parent() != hand:
+			continue
+		hand.move_child(card, i)
+		card.z_index = i
+		card.set_original_z_index(i)
+
+	hand.queue_sort()
+	await hand.reorder_cards_by_x_position()
 
 func get_all_card_scenes() -> Array[Resource]:
 	var card_scenes: Array[Resource] = []
@@ -351,7 +460,10 @@ func get_last_card_effects() -> Array[CardEffect]:
 	return last_card_effects
 	
 func draw_starting_cards() -> Array[Card]:
+	print("DEBUG: draw_starting_cards called with starting_card_amount = %d" % starting_card_amount)
+	print("DEBUG: deck.get_cards().size() = %d" % deck.get_cards().size())
 	var can_draw_cards: bool = deck.can_draw_cards(starting_card_amount)
+	print("DEBUG: can_draw_cards(%d) = %s" % [starting_card_amount, can_draw_cards])
 	if can_draw_cards:
 		return await deck.draw_cards(starting_card_amount)
 	return []

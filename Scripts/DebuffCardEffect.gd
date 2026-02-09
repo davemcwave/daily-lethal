@@ -2,24 +2,94 @@ extends CardEffect
 
 @export_file("*.scn") var debuff_scene
 @export var target: Node = null
-var debuff: Debuff = null
+var debuff_template: Debuff = null
+var debuff_scene_resource: PackedScene = null
+var card_lab_template_values: Dictionary = {}
+@export var card_lab_debuff_name: String = ""
+@export var card_lab_debuff_stacks: int = 1
+@export var card_lab_debuff_target: String = "Enemy"
 
 func _ready() -> void:
-	debuff = load(debuff_scene).instantiate()
-	target = get_tree().get_root().get_node("Scene/Enemy")
+	_ensure_target()
+	_ensure_debuff_template()
 
 func get_effect_name() -> String:
-	if debuff == null:
+	_ensure_debuff_template()
+	if debuff_template == null:
 		return name
-	else:
-		return debuff.get_debuff_name()
-	
+	return debuff_template.get_debuff_name()
+
+func set_debuff_scene(new_debuff) -> void:
+	if typeof(new_debuff) == TYPE_STRING:
+		debuff_scene = new_debuff
+		debuff_scene_resource = null
+		debuff_template = null
+		_ensure_debuff_template()
+	elif new_debuff is PackedScene:
+		debuff_scene_resource = new_debuff
+		debuff_scene = new_debuff.resource_path
+		debuff_template = null
+		_ensure_debuff_template()
+	elif new_debuff is Debuff:
+		debuff_template = new_debuff
+		if new_debuff.scene_file_path != "":
+			debuff_scene = new_debuff.scene_file_path
+
 func get_effect_description() -> String:
-	return debuff.get_debuff_description()
+	_ensure_debuff_template()
+	if debuff_template == null:
+		return ""
+	return debuff_template.get_debuff_description()
+
+func set_card_lab_template_values(values: Dictionary) -> void:
+	card_lab_template_values = values.duplicate(true)
+	card_lab_debuff_name = str(card_lab_template_values.get("debuff", card_lab_debuff_name))
+	card_lab_debuff_stacks = int(card_lab_template_values.get("stacks", card_lab_debuff_stacks))
+	card_lab_debuff_target = str(card_lab_template_values.get("target", card_lab_debuff_target))
+
+func get_card_lab_template_values() -> Dictionary:
+	return card_lab_template_values.duplicate(true)
+
+func get_status_effect() -> Dictionary:
+	return {
+		"name": card_lab_debuff_name,
+		"stacks": card_lab_debuff_stacks,
+		"target": card_lab_debuff_target,
+		"params": get_card_lab_template_values()
+	}
 	
 func set_target(new_target) -> void:
 	target = new_target
+	_ensure_target()
 	
 func apply() -> bool:
-	target.add_debuff(debuff)
+	_ensure_target()
+	_ensure_debuff_template()
+	if debuff_template == null:
+		push_warning("DebuffCardEffect has no debuff template to apply.")
+		return false
+	var debuff_instance: Debuff = debuff_template.duplicate(DUPLICATE_USE_INSTANTIATION)
+	print(target)
+	target.add_debuff(debuff_instance)
 	return super.apply()
+
+func _ensure_debuff_template() -> void:
+	if debuff_template != null:
+		return
+	_load_debuff_scene()
+	if debuff_scene_resource != null:
+		debuff_template = debuff_scene_resource.instantiate()
+
+func _load_debuff_scene() -> void:
+	if debuff_scene_resource != null:
+		return
+	if typeof(debuff_scene) == TYPE_STRING and not debuff_scene.is_empty():
+		var packed = load(debuff_scene)
+		if packed is PackedScene:
+			debuff_scene_resource = packed
+
+func _ensure_target() -> void:
+	if target == null or not is_instance_valid(target) or target is CardEffect:
+		var enemy = get_tree().get_root().get_node_or_null("Scene/Enemy")
+		if enemy != null:
+			target = enemy

@@ -123,9 +123,19 @@ func add_to_debuff_activate_queue(debuff: Debuff) -> void:
 func add_debuff(new_debuff: Debuff) -> void:
 	if new_debuff.get_parent() != self:
 		add_child(new_debuff)
-		
+			
 	new_debuff.set_target(self)
+			
 	$DebuffContainer.add_debuff(new_debuff)
+
+func add_buff(new_buff: Buff) -> void:
+	if new_buff.get_parent() != self:
+		add_child(new_buff)
+			
+	new_buff.set_target(self)
+			
+	$EnemyBuffsContainer.add_buff(new_buff)
+	
 	
 
 func blink_white() -> void:
