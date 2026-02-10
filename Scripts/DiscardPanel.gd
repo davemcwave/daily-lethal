@@ -67,10 +67,10 @@ func add_card(new_card: Card) -> void:
 	new_card.global_position = new_card_original_postion
 	
 	var tween = get_tree().create_tween()
-	tween.parallel().tween_property(new_card, "rotation_degrees", rotation_degrees + randf_range(-25, 15), 0.75).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	tween.parallel().tween_property(new_card, "global_position:x", global_position.x + randf_range(-5, 20), 0.75).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	tween.parallel().tween_property(new_card, "global_position:y", global_position.y + randf_range(-10, 10), 0.75).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
-	tween.parallel().tween_property(new_card, "scale", Vector2.ONE*0.75, 0.75).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(new_card, "rotation_degrees", rotation_degrees + randf_range(-25, 15), 0.50).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(new_card, "global_position:x", global_position.x + randf_range(-5, 20), 0.50).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(new_card, "global_position:y", global_position.y + randf_range(-10, 10), 0.50).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(new_card, "scale", Vector2.ONE*0.75, 0.50).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 	
 	buffs_container.activate_buffs(Buff.ActivationType.OnCardDiscarded)
 	#await tween.finished
@@ -79,6 +79,7 @@ func add_card(new_card: Card) -> void:
 		#$DiscardOutsideText.show()
 	#print_order()
 	update_discard_count()
+	await tween.finished
 		
 func print_order() -> void:
 	var card_index: int = 0

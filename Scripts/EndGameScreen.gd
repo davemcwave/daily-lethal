@@ -25,13 +25,12 @@ func _ready():
 		background.mark_story_puzzle_completed(background.get_puzzle_scene())
 
 func _on_play_again_button_pressed():
+	var should_use_desktop_layout = background.is_using_desktop_layout()
 	background.clear()
 	
 	if is_web_platform():
-		if JavaScriptBridge.eval("localStorage.getItem('device_type')", true) == "desktop":
-			get_tree().change_scene_to_file("res://Scenes/Scene0Desktop.scn")
-		else:
-			get_tree().change_scene_to_file("res://Scenes/Scene0.scn")
+		var next_scene_path := "res://Scenes/Scene0Desktop.scn" if should_use_desktop_layout else "res://Scenes/Scene0.scn"
+		get_tree().change_scene_to_file(next_scene_path)
 	else:
 		change_to_main_scene()
 

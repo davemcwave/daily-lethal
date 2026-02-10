@@ -1,6 +1,7 @@
 extends Card
 
 func play():
+	begin_play_resolution()
 	handle_sfx()
 	buffs_container.clear_buffs_added_or_removed_this_turn()
 
@@ -11,13 +12,14 @@ func play():
 	pay_cost(energy_cost)
 	scene.set_last_card_effects(self)
 	
-	discard()
+	await discard()
 	
 	await apply_card_effects()
 	
 	await buffs_container.activate_buffs(Buff.ActivationType.OnCardPlay)
 
 	scene.check_game_over()
+	finish_play_resolution()
 
 func _on_tree_exiting():
 	print("####")

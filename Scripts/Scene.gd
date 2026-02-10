@@ -23,6 +23,7 @@ var last_card_backup: Card = null
 var last_card_played: Card = null
 var checking_for_game_over: bool = false
 var game_over: bool = false
+var resolving_cards: int = 0
 var puzzle: Puzzle = null
 var card_play_history_paths: Array[String] = []
 @onready var url_capturer: URLCapturer = $URLCapturer
@@ -38,7 +39,7 @@ var black_bg
 var enemy_abilities: Array[EnemyAbility] = []
 
 func _ready():
-	
+	background.set_using_desktop_layout(_is_desktop_layout_scene())
 	load_puzzle()
 	
 	background.add_attempt()
@@ -53,6 +54,25 @@ func _ready():
 	
 	if puzzle_resolver.is_active():
 		puzzle_resolver.resolve_puzzle()
+
+func _is_desktop_layout_scene() -> bool:
+	var packed_scene_path := ""
+	if has_method("get_scene_file_path"):
+		packed_scene_path = get_scene_file_path()
+	if packed_scene_path.is_empty():
+		var current_scene = get_tree().current_scene
+		if current_scene != null and current_scene.has_method("get_scene_file_path"):
+			packed_scene_path = current_scene.get_scene_file_path()
+	return packed_scene_path.ends_with("Scene0Desktop.scn")
+
+func notify_card_started_playing(card: Card) -> void:
+	resolving_cards += 1
+
+func notify_card_finished_playing(card: Card) -> void:
+	resolving_cards = max(resolving_cards - 1, 0)
+
+func is_card_resolving() -> bool:
+	return resolving_cards > 0
 
 func can_show_initial_dialog() -> bool:
 	return dialog_handler.is_enabled() and has_node("CanvasLayer/DialogFightButton") and puzzle.get_dialogue_lines().size() > 0

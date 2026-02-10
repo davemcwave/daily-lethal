@@ -330,6 +330,8 @@ func can_play() -> bool:
 	print(card_play_area != null,
 		 card_play_area.has_card(),
 		 card_play_area.get_card() == self ,
+		 card_play_area != null and card_play_area.is_useable(),
+		 scene != null and not scene.is_card_resolving(),
 		 not enemy.is_animating(),
 		 not buffs_container.is_animating(),
 		 can_pay_cost(energy_cost))
@@ -337,12 +339,19 @@ func can_play() -> bool:
 	return card_play_area != null \
 		and card_play_area.has_card() \
 		and card_play_area.get_card() == self \
+		and card_play_area.is_useable() \
+		and scene != null \
+		and not scene.is_card_resolving() \
 		and not enemy.is_animating() \
 		and not buffs_container.is_animating() \
 		and can_pay_cost(energy_cost)
 
 func can_play_for_resolver() -> bool:
 	print(not enemy.is_animating(), not buffs_container.is_animating(), can_pay_cost(energy_cost))
+	if card_play_area != null and not card_play_area.is_useable():
+		return false
+	if scene != null and scene.is_card_resolving():
+		return false
 	return not enemy.is_animating() \
 		and not buffs_container.is_animating() \
 		and can_pay_cost(energy_cost)
@@ -476,7 +485,20 @@ func handle_sfx() -> void:
 			audio_handler.reset_pitch_scale("EnhanceOtherCardsSFX")
 	
 	
+func begin_play_resolution() -> void:
+	if card_play_area != null:
+		card_play_area.set_useable(false)
+	if scene != null:
+		scene.notify_card_started_playing(self)
+
+func finish_play_resolution() -> void:
+	if scene != null:
+		scene.notify_card_finished_playing(self)
+	if card_play_area != null and (scene == null or not scene.is_game_over()):
+		card_play_area.set_useable(true)
+
 func play():
+	begin_play_resolution()
 	handle_sfx()
 	buffs_container.clear_buffs_added_or_removed_this_turn()
 	scene.increment_card_count()
@@ -487,10 +509,12 @@ func play():
 	print("### applied card effects")
 	scene.set_last_card_effects(self)
 	await buffs_container.activate_buffs(Buff.ActivationType.OnCardPlay)
-	discard()
+	await discard()
 	scene.check_game_over()
+	finish_play_resolution()
 
 func discard() -> void:
+	var card_removed_before_discard = not is_inside_tree() or is_queued_for_deletion()
 	if is_playing_on_desktop() and is_instance_valid(card_preview):
 		if is_connected("mouse_entered", self.show_card_preview):
 			disconnect("mouse_entered", self.show_card_preview)
@@ -499,7 +523,11 @@ func discard() -> void:
 		
 	set_state(State.Discarded)
 	
-	discard_panel.add_card(self)
+	if card_removed_before_discard:
+		discard_panel.update_discard_count()
+		return
+	
+	await discard_panel.add_card(self)
 	#hand.update_card_separation()
 
 func is_offscreen_right() -> bool:

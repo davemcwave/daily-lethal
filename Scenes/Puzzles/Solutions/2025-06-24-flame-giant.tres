@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardSolutionResource" load_steps=7 format=3]
+
+[ext_resource type="PackedScene" path="res://Scenes/BargainCard.scn" id="1_yrnss"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.scn" id="2_0h83i"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.scn" id="3_qgpom"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.scn" id="4_itmfa"]
+[ext_resource type="PackedScene" path="res://Scenes/LungeCard.scn" id="5_v7rna"]
+[ext_resource type="Script" path="res://Scripts/CardSolutionResource.gd" id="6_pvrfn"]
+
+[resource]
+script = ExtResource("6_pvrfn")
+card_scenes = Array[PackedScene]([ExtResource("1_yrnss"), ExtResource("2_0h83i"), ExtResource("3_qgpom"), ExtResource("2_0h83i"), ExtResource("3_qgpom"), ExtResource("1_yrnss"), ExtResource("3_qgpom"), ExtResource("2_0h83i"), ExtResource("4_itmfa"), ExtResource("4_itmfa"), ExtResource("3_qgpom"), ExtResource("4_itmfa"), ExtResource("3_qgpom"), ExtResource("4_itmfa"), ExtResource("3_qgpom"), ExtResource("4_itmfa"), ExtResource("3_qgpom"), ExtResource("4_itmfa"), ExtResource("3_qgpom"), ExtResource("4_itmfa"), ExtResource("3_qgpom"), ExtResource("4_itmfa"), ExtResource("3_qgpom"), ExtResource("3_qgpom"), ExtResource("4_itmfa"), ExtResource("3_qgpom"), ExtResource("5_v7rna"), ExtResource("3_qgpom"), ExtResource("5_v7rna"), ExtResource("3_qgpom"), ExtResource("5_v7rna"), ExtResource("3_qgpom"), ExtResource("5_v7rna"), ExtResource("3_qgpom"), ExtResource("5_v7rna"), ExtResource("3_qgpom"), ExtResource("5_v7rna"), ExtResource("3_qgpom"), ExtResource("5_v7rna"), ExtResource("3_qgpom"), ExtResource("5_v7rna"), ExtResource("3_qgpom"), ExtResource("5_v7rna"), ExtResource("3_qgpom"), ExtResource("5_v7rna")])
+hand_indices = Array[int]([0, 3, 1, 0, 4, 2, 1, 2, 4, 5, 1, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])

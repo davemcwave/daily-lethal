@@ -11,7 +11,7 @@ signal chose
 @onready var audio_handler = get_node("/root/AudioHandler")
 @onready var action_button: Button = $ActionButton
 @onready var title_label: RichTextLabel = $TitleLabel
-@onready var cards_container: GridContainer = $CardsContainer
+@onready var cards_container: GridContainer = $ScrollContainer/CardsContainer
 @onready var card_creator: CardCreator = $CardCreator
 var cards_chosen_amount: int = 0
 var cards_chosen: Array[Card] = []
@@ -138,8 +138,8 @@ func populate_cards() -> void:
 		clear_cards()
 
 		for child in cards_to_show:
-			var child_scene_file_path = child.get_scene_file_path()
-			var new_card: Card = load(child_scene_file_path).instantiate()
+			var new_card = child.duplicate(DUPLICATE_USE_INSTANTIATION)
+			#var new_card: Card = load(child_scene_file_path).instantiate()
 			new_card.connect("chosen", self._on_card_chosen)
 			new_card.set_state(Card.State.Choosing)
 			cards_container.add_child(new_card)

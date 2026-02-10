@@ -16,6 +16,7 @@ func update_description_panel() -> void:
 	#super.discard()
 
 func play():
+	begin_play_resolution()
 	handle_sfx()
 	buffs_container.clear_buffs_added_or_removed_this_turn()
 	set_state(State.Playing)
@@ -28,5 +29,6 @@ func play():
 	
 	scene.increment_card_count()
 	scene.add_card_played(self)
-	discard()
+	await discard()
 	scene.check_game_over()
+	finish_play_resolution()

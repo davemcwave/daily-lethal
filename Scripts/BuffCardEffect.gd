@@ -85,6 +85,8 @@ func apply() -> bool:
 
 	var target = buff.get_target()
 	var buff_instance: Buff = buff.duplicate(DUPLICATE_USE_INSTANTIATION)
+	if get_parent() is Card:
+		buff_instance.set_source_card(get_parent())
 
 	if target is Health:
 		if defer_add_until_after_card_play:

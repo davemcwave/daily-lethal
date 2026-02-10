@@ -33,6 +33,7 @@ enum OnPlayActivationCategory {OnPlayAttackCard}
 @export var merge_buff_panels: bool = false
 
 var activation_ids: Array[int] = []
+var source_card_ref: WeakRef = null
 
 func can_deal_damage() -> bool:
 	return deal_damage
@@ -54,6 +55,12 @@ func set_target(new_target: Node) -> void:
 
 func get_target() -> Node:
 	return target
+
+func set_source_card(card: Card) -> void:
+	source_card_ref = weakref(card) if card != null else null
+
+func get_source_card() -> Card:
+	return source_card_ref.get_ref() if source_card_ref != null else null
 	
 func get_other_target() -> Node:
 	if target is Health:

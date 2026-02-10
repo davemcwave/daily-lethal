@@ -337,6 +337,7 @@ var last_completed_story_puzzle: String = ""
 var recorded_card_scene_paths: Array[String] = []
 var recorded_card_hand_indices: Array[int] = []
 var card_solution_slugs: Array[String] = []
+var using_desktop_layout: bool = false
 @export var show_tutorial: bool = true
 
 func set_show_tutorial(new_show_tutorial: bool) -> void:
@@ -344,6 +345,12 @@ func set_show_tutorial(new_show_tutorial: bool) -> void:
 	
 func get_show_tutorial() -> bool:
 	return show_tutorial
+
+func set_using_desktop_layout(is_desktop_layout: bool) -> void:
+	using_desktop_layout = is_desktop_layout
+
+func is_using_desktop_layout() -> bool:
+	return using_desktop_layout
 
 func get_difficulty_for_enemy(enemy_name: String) -> int:
 	if ENEMY_DIFFICULTIES.has(enemy_name):

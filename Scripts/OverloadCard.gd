@@ -21,7 +21,7 @@ func _on_cards_played_cards_played_modified(cards_played_count: int) -> void:
 
 
 func play():
-	
+	begin_play_resolution()
 	handle_sfx()
 	
 	buffs_container.clear_buffs_added_or_removed_this_turn()
@@ -37,5 +37,6 @@ func play():
 	scene.increment_card_count()
 	scene.add_card_played(self)
 	
-	discard()
+	await discard()
 	scene.check_game_over()
+	finish_play_resolution()

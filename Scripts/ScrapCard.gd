@@ -1,6 +1,7 @@
 extends Card
 
 func play():
+	begin_play_resolution()
 	handle_sfx()
 	buffs_container.clear_buffs_added_or_removed_this_turn()
 
@@ -17,3 +18,4 @@ func play():
 	await buffs_container.activate_buffs(Buff.ActivationType.OnCardPlay)
 	
 	scene.check_game_over()
+	finish_play_resolution()

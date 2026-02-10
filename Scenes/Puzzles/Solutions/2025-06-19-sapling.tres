@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CardSolutionResource" load_steps=8 format=3]
+
+[ext_resource type="PackedScene" path="res://Scenes/ScrapCard.scn" id="1_ki177"]
+[ext_resource type="PackedScene" path="res://Scenes/TributeCard.scn" id="2_atsig"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.scn" id="3_f7hul"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.scn" id="4_ci8do"]
+[ext_resource type="PackedScene" path="res://Scenes/LungeCard.scn" id="5_xa4pm"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.scn" id="6_ehi5b"]
+[ext_resource type="Script" path="res://Scripts/CardSolutionResource.gd" id="7_gej8s"]
+
+[resource]
+script = ExtResource("7_gej8s")
+card_scenes = Array[PackedScene]([ExtResource("1_ki177"), ExtResource("2_atsig"), ExtResource("3_f7hul"), ExtResource("4_ci8do"), ExtResource("4_ci8do"), ExtResource("5_xa4pm"), ExtResource("6_ehi5b")])
+hand_indices = Array[int]([4, 0, 1, 1, 2, 1, 0])
