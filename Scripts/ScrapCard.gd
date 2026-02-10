@@ -11,7 +11,7 @@ func play():
 	
 	pay_cost(energy_cost)
 	scene.set_last_card_effects(self)
-	discard()
+	await discard()
 	
 	await apply_card_effects()
 	

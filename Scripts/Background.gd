@@ -165,6 +165,8 @@ const PUZZLE_AUTHORS := {
 	"Wight": "BenMiff",
 	"Jack Frost": "Vanillabean",
 	"Crusader": "KirbyCarrot",
+	"Worg": "Deloptin",
+	"Gunslinger": "Gold_me",
 }
 
 const ENEMY_DIFFICULTIES := {

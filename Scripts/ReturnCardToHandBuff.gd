@@ -2,10 +2,8 @@ extends Buff
 
 @onready var scene: Scene = get_tree().get_root().get_node("Scene")
 @onready var discard_panel: DiscardPanel = scene.get_node("DiscardPanel")
-@onready var hand: Hand = scene.get_node("HandScrollContainer/Hand")
 
 func activate(context: Dictionary = {}) -> bool:
-	await get_tree().create_timer(0.5).timeout
 	print("=== ReturnCardToHandBuff activate ===")
 
 	if discard_panel.get_card_count() <= 0:
@@ -28,16 +26,7 @@ func activate(context: Dictionary = {}) -> bool:
 	print("RETURNING card to hand!")
 
 	# Return this card to hand
-	var card_to_return: Card = discarded_card.duplicate(DUPLICATE_USE_INSTANTIATION)
-	await get_tree().process_frame
-	discarded_card.queue_free()
-	discard_panel.update_discard_count()
-	card_to_return.set_state(Card.State.InHand)
-	card_to_return.normalize_saturation()
-	card_to_return.set_rotation(0)
-	hand.add_card(card_to_return)
-	hand.reorder_cards_by_x_position()
-	scene.set_last_card_played(card_to_return)
-	return super.activate()  # Only consume when we actually return a card
+	discarded_card.schedule_return_to_hand_after_resolution()
+	return super.activate()  # Only consume when we actually schedule a return
 
 	

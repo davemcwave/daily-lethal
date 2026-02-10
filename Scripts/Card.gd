@@ -46,6 +46,7 @@ var can_chose_choosing_button: bool = true
 var id
 var queue_free_after_applying_card_effects: bool = false
 var permanent_card: bool = false
+var pending_return_to_hand: bool = false
 
 enum State {
 	InHand,
@@ -438,6 +439,9 @@ func set_queue_free_after_applying_card_effects(new_queue_free_after_applying_ca
 
 func card_queue_free_after_applying_card_effects() -> bool:
 	return queue_free_after_applying_card_effects
+
+func schedule_return_to_hand_after_resolution() -> void:
+	pending_return_to_hand = true
 	
 func get_first_damage_card_effect() -> DamageCardEffect:
 	return get_damage_card_effects().front()
@@ -496,6 +500,22 @@ func finish_play_resolution() -> void:
 		scene.notify_card_finished_playing(self)
 	if card_play_area != null and (scene == null or not scene.is_game_over()):
 		card_play_area.set_useable(true)
+	if pending_return_to_hand:
+		pending_return_to_hand = false
+		call_deferred("_return_card_to_hand_from_discard")
+
+func _return_card_to_hand_from_discard() -> void:
+	if discard_panel != null:
+		discard_panel.remove_card(self)
+	set_state(State.InHand)
+	normalize_saturation()
+	set_rotation(0)
+	scale = Vector2.ONE
+	if hand != null:
+		hand.add_card(self)
+		hand.reorder_cards_by_x_position()
+	if scene != null:
+		scene.set_last_card_played(self)
 
 func play():
 	begin_play_resolution()

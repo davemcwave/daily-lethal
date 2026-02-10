@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Play Lethal"
-run/main_scene="uid://bu6lgt3xfx2rr"
+run/main_scene="uid://bptsg5npxvovs"
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/show_image=false
 config/icon="uid://iq3ggtrrqtb3"
@@ -31,8 +31,8 @@ PuzzleResolver="*res://Scenes/PuzzleResolver.scn"
 
 [display]
 
-window/size/viewport_width=360
-window/size/viewport_height=640
+window/size/viewport_width=960
+window/size/viewport_height=540
 window/stretch/mode="canvas_items"
 window/size/viewport_height.web_desktop_build=0
 window/size/viewport_width.web_desktop_build=0
