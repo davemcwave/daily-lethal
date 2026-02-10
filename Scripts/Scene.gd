@@ -128,6 +128,7 @@ func load_puzzle() -> void:
 	elif url_capturer.has_puzzle_date():
 		if puzzle_exists_with_date(url_capturer.get_puzzle_date()):
 			var current_puzzle: Puzzle = load(get_puzzle_scene_that_starts_with(url_capturer.get_puzzle_date())).instantiate()
+			_debug_log_puzzle_release_status(current_puzzle, "URL puzzle date match")
 			if is_puzzle_is_releasable(current_puzzle):
 				set_puzzle(current_puzzle)
 			else:
@@ -136,12 +137,14 @@ func load_puzzle() -> void:
 			get_tree().change_scene_to_file("res://Scenes/PuzzleNotReadyScreen.tscn")
 	elif not background.get_puzzle_scene().is_empty():
 		var current_puzzle: Puzzle = load(background.get_puzzle_scene()).instantiate()
+		_debug_log_puzzle_release_status(current_puzzle, "Background puzzle")
 		if is_puzzle_is_releasable(current_puzzle):
 			set_puzzle(current_puzzle)
 		else:
 			get_tree().change_scene_to_file("res://Scenes/PuzzleNotReadyScreen.tscn")
 	else:
 		var current_puzzle: Puzzle = load(puzzle_scene).instantiate()
+		_debug_log_puzzle_release_status(current_puzzle, "Default puzzle")
 		if is_puzzle_is_releasable(current_puzzle):
 			set_puzzle(current_puzzle)
 		else:
@@ -236,6 +239,22 @@ func get_files_in_folder(path: String) -> Array:
 	
 func get_puzzle() -> Puzzle:
 	return puzzle
+
+func _debug_log_puzzle_release_status(puzzle_to_check: Puzzle, label: String = "") -> void:
+	if puzzle_to_check == null:
+		print("[Puzzle Release Debug] %s | puzzle is null" % label)
+		return
+	var now_dict = get_now_timestamp()
+	var now_string = Time.get_datetime_string_from_datetime_dict(now_dict, true)
+	var puzzle_date = puzzle_to_check.get_puzzle_date()
+	var puzzle_unix = get_unix_timestamp_from_iso_date_string(puzzle_date)
+	var now_unix = Time.get_unix_time_from_datetime_dict(now_dict)
+	print("[Puzzle Release Debug] %s" % label)
+	print("  puzzle_date: %s" % puzzle_date)
+	print("  puzzle_unix: %d" % puzzle_unix)
+	print("  now: %s" % now_string)
+	print("  now_unix: %d" % now_unix)
+	print("  releasable: %s" % (puzzle_unix <= now_unix))
 	
 func set_enemy_abilities(new_enemy_abilities: Array[EnemyAbility]) -> void:
 	enemy_abilities.clear()
