@@ -44,6 +44,8 @@ func activate(new_choose_type = ChooseType.Neutral, new_populate_cards_type = Po
 	else:
 		action_button.set_disabled(true)
 	
+	
+	clear_cards()
 	show()
 	populate_cards()
 	
@@ -135,15 +137,16 @@ func populate_cards() -> void:
 	if cards_to_show.size() <= 0:
 		call_deferred("close")
 	else:
-		clear_cards()
-
 		for child in cards_to_show:
-			var new_card = child.duplicate(DUPLICATE_USE_INSTANTIATION)
+			var new_card: Card = child.duplicate(DUPLICATE_USE_INSTANTIATION)
+			
 			#var new_card: Card = load(child_scene_file_path).instantiate()
 			new_card.connect("chosen", self._on_card_chosen)
 			new_card.set_state(Card.State.Choosing)
 			cards_container.add_child(new_card)
 			new_card.set_id(child.get_id())
+			new_card.normalize_saturation()
+			new_card.show()
 				
 			
 func is_closed() -> bool:
