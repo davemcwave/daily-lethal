@@ -278,7 +278,8 @@ func set_puzzle(new_puzzle: Puzzle) -> void:
 	#$URLCapturer.set_text("[center][b]%s[/b][/center]" % debug_text)
 	
 	
-	$"/root/Background".set_puzzle_date(puzzle.get_puzzle_date())
+	background.set_puzzle_date(puzzle.get_puzzle_date())
+	background.set_is_test_puzzle(puzzle.is_test_puzzle())
 	$Enemy.set_max_health($URLCapturer.get_energy_health_from_test_puzzle() if puzzle.is_test_puzzle() else puzzle.get_enemy_health())
 	$Enemy.set_health($URLCapturer.get_energy_health_from_test_puzzle() if puzzle.is_test_puzzle() else puzzle.get_enemy_health())
 	$Enemy.set_enemy_name($URLCapturer.get_enemy_name_from_test_puzzle() if puzzle.is_test_puzzle() else puzzle.get_enemy_name())

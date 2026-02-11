@@ -167,6 +167,7 @@ const PUZZLE_AUTHORS := {
 	"Crusader": "KirbyCarrot",
 	"Worg": "Deloptin",
 	"Gunslinger": "Gold_me",
+	"Cockatrice": "Kookoo",
 }
 
 const ENEMY_DIFFICULTIES := {
@@ -332,6 +333,7 @@ var enemy_name: String = ""
 var enemy_texture: Texture2D = null
 var puzzle_date: String = ""
 var puzzle_scene: String = ""
+var puzzle_is_test: bool = false
 var next_puzzle_scene = null
 var from_story_view: bool = false
 var completed_story_puzzles: Array[String] = []
@@ -448,6 +450,12 @@ func set_puzzle_date(new_puzzle_date: String) -> void:
 	
 func get_puzzle_date() -> String:
 	return puzzle_date
+
+func set_is_test_puzzle(is_test: bool) -> void:
+	puzzle_is_test = is_test
+
+func is_test_puzzle() -> bool:
+	return puzzle_is_test
 	
 func set_enemy_texture(new_enemy_texture: Texture2D) -> void:
 	enemy_texture = new_enemy_texture
