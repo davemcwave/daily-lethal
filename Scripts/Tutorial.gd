@@ -6,6 +6,7 @@ var player_image_file_path: String = "res://Assets/Textures/grim.png"
 @onready var dialog_panel_bottom: DialogPanel = $"../PlayerDialogPanel"
 @onready var blur: ColorRect = $Blur
 @onready var scene: Scene = get_tree().get_root().get_node('Scene')
+@onready var enemy: Enemy = scene.get_node("Enemy")
 @onready var background = $"/root/Background"
 
 enum PanelPosition {
@@ -34,9 +35,11 @@ func _ready():
 	dialog_panel_bottom.set_icon_texture(load(player_image_file_path))
 	dialog_panel_bottom.set_title_text("[b][color=red]Grim[/color][/b]")
 	dialog_panel_bottom.set_dialog_sfx_index(1)
+	
 
 	if active:
 		call_deferred('show_next_step')
+		enemy.connect('died', _on_enemy_died)
 
 func show_tutorial(is_active: bool) -> void:
 	set_visible(is_active)
@@ -115,7 +118,7 @@ func step_8() -> void:
 	waiting = true
 	await scene.shown_card_preview
 	dialog_panel_top.set_visible(false)
-	await scene.buff_added
+	await scene.card_count_incremented
 	dialog_panel_top.set_visible(true)
 	waiting = false
 	show_next_step()
@@ -123,30 +126,21 @@ func step_8() -> void:
 func step_9() -> void:
 	#waiting = true
 	blur.hide()
-	await say("[b]Some cards apply their effect instantly, like Slash. Other cards apply status effects, like Echo and Wound.", PanelPosition.Top)
+	await say("[b]Some cards apply their effect instantly, like Slash or Pound. Other cards apply status effects, like Echo.", PanelPosition.Top)
 	
 func step_10() -> void:
 	#waiting = true
 	blur.hide()
-	await say("[b]Did you notice that the enemy never takes a turn? We need to defeat them in 1 turn, in a single play of cards. As the gamers say, we need to \"Find Lethal\"!", PanelPosition.Top)
-	
+	await say("[b]Did you notice that the enemy never takes a turn? That's because you need to defeat them on just your turn, in a single play of cards. As the gamers say, we need to \"Find Lethal\"!", PanelPosition.Top)
+
 func step_11() -> void:
 	dialog_panel_top.set_visible(false)
-	waiting = true
-	blur.hide()
 	
-	if scene.get_card_count() < 3:
-		await scene.card_count_incremented
-		
-	if scene.get_card_count() < 3:
-		await scene.card_count_incremented
-		
-	step_12()
-
-func step_12() -> void:
-	waiting = true
+	
+func _on_enemy_died() -> void:
+	enemy.disconnect("died", _on_enemy_died)
 	blur.hide()
-	await say("[b]Eh, you know enough. You can learn the rest on the job. Let's start killin'.", PanelPosition.Bottom)
+	await say("[b]Nice work! You can learn the rest on the job. Let's start killin'.", PanelPosition.Bottom)
 	$PlayButton.show()
 	$RestartButton.show()
 	
@@ -175,6 +169,7 @@ func _on_no_button_pressed():
 	get_tree().change_scene_to_file("res://Scenes/StoryView.scn")
 
 func _on_play_button_pressed():
+	enemy.disconnect("died", _on_enemy_died)
 	background.set_show_tutorial(false)
 	hide_tutorial()
 	var next_puzzle_scene = scene.get_puzzle().get_next_puzzle_scene()

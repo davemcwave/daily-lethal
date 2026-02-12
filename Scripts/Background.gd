@@ -168,6 +168,8 @@ const PUZZLE_AUTHORS := {
 	"Worg": "Deloptin",
 	"Gunslinger": "Gold_me",
 	"Cockatrice": "Kookoo",
+	"Punching Bag": "kino",
+	"Blacksmith": "BenMiff",
 }
 
 const ENEMY_DIFFICULTIES := {

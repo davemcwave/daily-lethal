@@ -2,6 +2,7 @@ extends Node
 class_name Enemy
 
 signal just_hurt(amount: int)
+signal died
 
 @export var enemy_name: String = ""
 @onready var scene: Scene = get_tree().get_root().get_node("Scene")
@@ -315,3 +316,4 @@ func die() -> void:
 	#$DefeatIcon.show()
 	#$EnemyIcon.hide()
 	dead = true
+	emit_signal("died")

@@ -548,6 +548,9 @@ func check_game_over_because_of_enemy() -> void:
 	# Prevent overlapping checks and ignore if game already over
 	if checking_for_game_over or game_over:
 		return
+
+	if background.get_show_tutorial():
+		return
 		
 	checking_for_game_over = true
 
@@ -569,6 +572,10 @@ func check_game_over_because_of_enemy() -> void:
 func check_game_over() -> void:
 	# Prevent overlapping checks and ignore if game already over
 	if checking_for_game_over or game_over:
+		return
+
+	if background.get_show_tutorial():
+		checking_for_game_over = false
 		return
 	checking_for_game_over = true
 

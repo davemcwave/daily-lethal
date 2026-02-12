@@ -4,3 +4,4 @@
 
 [node name="PuzzleCardSearch" type="Node"]
 script = ExtResource("1_37iwg")
+target_card_names = Array[String](["Target"])
