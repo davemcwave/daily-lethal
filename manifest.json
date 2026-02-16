@@ -1,5 +1,6 @@
 {
   "puzzles": [
+    { "id": "2026-02-16", "release_at": "2026-02-16T00:00:00-04:00", "title": "Moon Elemental" },
     { "id": "2026-02-13", "release_at": "2026-02-13T00:00:00-04:00", "title": "Blacksmith" },
     { "id": "2026-02-12", "release_at": "2026-02-12T00:00:00-04:00", "title": "Punching Bag" },
     { "id": "2026-02-11", "release_at": "2026-02-11T00:00:00-04:00", "title": "Cockatrice" },

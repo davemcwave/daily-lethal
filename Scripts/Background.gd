@@ -170,6 +170,7 @@ const PUZZLE_AUTHORS := {
 	"Cockatrice": "Kookoo",
 	"Punching Bag": "kino",
 	"Blacksmith": "BenMiff",
+	"Moon Elemental": "Vanillabean",
 }
 
 const ENEMY_DIFFICULTIES := {
