@@ -171,6 +171,7 @@ const PUZZLE_AUTHORS := {
 	"Punching Bag": "kino",
 	"Blacksmith": "BenMiff",
 	"Moon Elemental": "Vanillabean",
+	"Swordmaster": "ARMA"
 }
 
 const ENEMY_DIFFICULTIES := {
