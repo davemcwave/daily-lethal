@@ -13,6 +13,7 @@ func apply() -> bool:
 	cards_choose_area.set_cards_choose_area_action(copy_to_hand_action)
 	
 	card_creator.set_card_scenes(card_scenes)
+	cards_choose_area.set_source_card(get_parent() if get_parent() is Card else null)
 	cards_choose_area.activate(CardsChooseArea.ChooseType.Good, CardsChooseArea.PopulateCardsType.FromCreate)
 	
 	await cards_choose_area.closed

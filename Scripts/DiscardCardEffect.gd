@@ -9,6 +9,7 @@ func apply() -> bool:
 	cards_choose_area.set_max_card_choose_amount(max_discard_amount)
 	var discard_action = load("res://Scenes/CardsChooseAreaDiscardAction.scn").instantiate()
 	cards_choose_area.set_cards_choose_area_action(discard_action)
+	cards_choose_area.set_source_card(get_parent() if get_parent() is Card else null)
 	cards_choose_area.activate(CardsChooseArea.ChooseType.Bad, CardsChooseArea.PopulateCardsType.FromHand)
 	await cards_choose_area.closed
 	emit_signal("player_input_finished")

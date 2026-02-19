@@ -172,7 +172,8 @@ const PUZZLE_AUTHORS := {
 	"Blacksmith": "BenMiff",
 	"Moon Elemental": "Vanillabean",
 	"Swordmaster": "ARMA",
-	"Banshee": "RadioInactive"
+	"Banshee": "RadioInactive",
+	"Circuit Breaker": "potatomato"
 }
 
 const ENEMY_DIFFICULTIES := {
@@ -345,6 +346,13 @@ var completed_story_puzzles: Array[String] = []
 var last_completed_story_puzzle: String = ""
 var recorded_card_scene_paths: Array[String] = []
 var recorded_card_hand_indices: Array[int] = []
+var recorded_card_step_types: Array[int] = []
+var recorded_card_instance_ids: Array[int] = []
+
+const SOLUTION_STEP_TYPE_PLAY := 0
+const SOLUTION_STEP_TYPE_CHOOSE_HAND := 1
+const SOLUTION_STEP_TYPE_CHOOSE_DISCARD := 2
+const SOLUTION_STEP_TYPE_CHOOSE_CREATE := 3
 var card_solution_slugs: Array[String] = []
 var using_desktop_layout: bool = false
 @export var show_tutorial: bool = true
@@ -476,15 +484,27 @@ func set_best_card_count(new_best_card_count: int) -> void:
 	
 func set_enemy_name(new_enemy_name: String) -> void:
 	enemy_name = new_enemy_name
-func record_played_card_scene_path(card_scene_path: String, hand_index: int = -1) -> void:
+func record_played_card_scene_path(card_scene_path: String, hand_index: int = -1, card_instance_id: int = -1) -> void:
 	if card_scene_path.is_empty():
 		return
 	recorded_card_scene_paths.append(card_scene_path)
 	recorded_card_hand_indices.append(hand_index)
+	recorded_card_step_types.append(SOLUTION_STEP_TYPE_PLAY)
+	recorded_card_instance_ids.append(card_instance_id)
+
+func record_cards_choose_selection(card_scene_path: String, source_index: int, step_type: int) -> void:
+	if card_scene_path.is_empty():
+		return
+	recorded_card_scene_paths.append(card_scene_path)
+	recorded_card_hand_indices.append(source_index)
+	recorded_card_step_types.append(step_type)
+	recorded_card_instance_ids.append(-1)
 
 func clear_recorded_card_solutions() -> void:
 	recorded_card_scene_paths.clear()
 	recorded_card_hand_indices.clear()
+	recorded_card_step_types.clear()
+	recorded_card_instance_ids.clear()
 
 func set_card_solution_slugs(new_slugs: Array[String]) -> void:
 	card_solution_slugs = new_slugs.duplicate()
@@ -498,9 +518,11 @@ func save_played_cards_solution() -> void:
 	var card_solution_resource := CardSolutionResource.new()
 	var packed_scenes: Array[PackedScene] = []
 	var filtered_hand_indices: Array[int] = []
+	var filtered_step_types: Array[int] = []
 	for i in range(recorded_card_scene_paths.size()):
 		var scene_path: String = recorded_card_scene_paths[i]
 		var hand_index: int = recorded_card_hand_indices[i] if recorded_card_hand_indices.size() > i else -1
+		var step_type: int = recorded_card_step_types[i] if recorded_card_step_types.size() > i else SOLUTION_STEP_TYPE_PLAY
 		if scene_path.is_empty():
 			continue
 		if not ResourceLoader.exists(scene_path):
@@ -509,10 +531,12 @@ func save_played_cards_solution() -> void:
 		if packed_scene is PackedScene:
 			packed_scenes.append(packed_scene)
 			filtered_hand_indices.append(hand_index)
+			filtered_step_types.append(step_type)
 	if packed_scenes.is_empty():
 		return
 	card_solution_resource.card_scenes = packed_scenes
 	card_solution_resource.hand_indices = filtered_hand_indices
+	card_solution_resource.step_types = filtered_step_types
 	ensure_directory_exists(resource_path.get_base_dir())
 	var result = ResourceSaver.save(card_solution_resource, resource_path)
 	if result != OK:

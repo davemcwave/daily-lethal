@@ -18,7 +18,10 @@ func activate(context: Dictionary = {}) -> bool:
 		
 	card.shrink(0.15)
 	await get_tree().create_timer(0.15).timeout
-	card.queue_free()
+	
+	if card != null and is_instance_valid(card):
+		card.queue_free()
+		
 	discard_pile.update_discard_count()
 	return super.activate()
 	

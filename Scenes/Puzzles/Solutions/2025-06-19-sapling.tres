@@ -1,14 +1,15 @@
 [gd_resource type="Resource" script_class="CardSolutionResource" load_steps=8 format=3]
 
-[ext_resource type="PackedScene" path="res://Scenes/ScrapCard.scn" id="1_ki177"]
-[ext_resource type="PackedScene" path="res://Scenes/TributeCard.scn" id="2_atsig"]
-[ext_resource type="PackedScene" path="res://Scenes/TraceCard.scn" id="3_f7hul"]
-[ext_resource type="PackedScene" path="res://Scenes/PoundCard.scn" id="4_ci8do"]
-[ext_resource type="PackedScene" path="res://Scenes/LungeCard.scn" id="5_xa4pm"]
-[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.scn" id="6_ehi5b"]
-[ext_resource type="Script" path="res://Scripts/CardSolutionResource.gd" id="7_gej8s"]
+[ext_resource type="PackedScene" path="res://Scenes/TributeCard.scn" id="1_atsig"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.scn" id="2_f7hul"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.scn" id="3_ci8do"]
+[ext_resource type="PackedScene" path="res://Scenes/ScrapCard.scn" id="4_xa4pm"]
+[ext_resource type="PackedScene" path="res://Scenes/LungeCard.scn" id="6_gej8s"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.scn" id="7_dy1bh"]
+[ext_resource type="Script" path="res://Scripts/CardSolutionResource.gd" id="8_6bjl3"]
 
 [resource]
-script = ExtResource("7_gej8s")
-card_scenes = Array[PackedScene]([ExtResource("1_ki177"), ExtResource("2_atsig"), ExtResource("3_f7hul"), ExtResource("4_ci8do"), ExtResource("4_ci8do"), ExtResource("5_xa4pm"), ExtResource("6_ehi5b")])
-hand_indices = Array[int]([4, 0, 1, 1, 2, 1, 0])
+script = ExtResource("8_6bjl3")
+card_scenes = Array[PackedScene]([ExtResource("1_atsig"), ExtResource("2_f7hul"), ExtResource("3_ci8do"), ExtResource("3_ci8do"), ExtResource("4_xa4pm"), ExtResource("6_gej8s"), ExtResource("7_dy1bh")])
+hand_indices = Array[int]([0, 2, 3, 4, 2, 1, 0])
+step_types = Array[int]([0, 0, 0, 0, 0, 0, 0])

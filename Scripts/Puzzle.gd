@@ -38,7 +38,14 @@ class_name Puzzle
 
 var test_puzzle: bool = false
 var cached_resource_card_solution: Array = []
+var cached_resource_card_solution_hand_indices: Array[int] = []
+var cached_resource_card_solution_step_types: Array[int] = []
 var has_loaded_resource_card_solution: bool = false
+
+const SOLUTION_STEP_TYPE_PLAY := 0
+const SOLUTION_STEP_TYPE_CHOOSE_HAND := 1
+const SOLUTION_STEP_TYPE_CHOOSE_DISCARD := 2
+const SOLUTION_STEP_TYPE_CHOOSE_CREATE := 3
 
 func has_eye_positions() -> bool:
 	return eye_1_position != null and eye_2_position != null
@@ -114,6 +121,22 @@ func get_card_solution() -> Array:
 		return resource_solution
 	return card_solution
 
+func get_card_solution_steps() -> Array:
+	var solution: Array = get_card_solution()
+	var hand_indices: Array[int] = _get_hand_indices_for_size(solution.size())
+	var step_types: Array[int] = _get_step_types_for_size(solution.size())
+	var steps: Array = []
+	for i in range(solution.size()):
+		var card_scene = solution[i]
+		var hand_index: int = hand_indices[i] if i < hand_indices.size() else -1
+		var step_type: int = step_types[i] if i < step_types.size() else SOLUTION_STEP_TYPE_PLAY
+		steps.append({
+			"card_scene": card_scene,
+			"hand_index": hand_index,
+			"step_type": step_type
+		})
+	return steps
+
 func get_resource_card_solution() -> Array:
 	if not has_loaded_resource_card_solution:
 		cached_resource_card_solution = load_card_solution_from_resource()
@@ -121,6 +144,8 @@ func get_resource_card_solution() -> Array:
 	return cached_resource_card_solution
 
 func load_card_solution_from_resource() -> Array:
+	cached_resource_card_solution_hand_indices.clear()
+	cached_resource_card_solution_step_types.clear()
 	for candidate_path: String in get_card_solution_resource_paths():
 		if candidate_path.is_empty():
 			continue
@@ -130,10 +155,39 @@ func load_card_solution_from_resource() -> Array:
 		if resource == null:
 			continue
 		if resource is CardSolutionResource:
+			var resource_hand_indices: Array[int] = resource.get_hand_indices()
+			cached_resource_card_solution_hand_indices = resource_hand_indices.duplicate()
+			if resource.has_method("get_step_types"):
+				var step_types: Array[int] = resource.get_step_types()
+				cached_resource_card_solution_step_types = step_types.duplicate()
 			return resource.get_card_scenes()
 		if resource.has_method("get_card_scenes"):
+			if resource.has_method("get_hand_indices"):
+				var extra_indices: Array = resource.get_hand_indices()
+				if extra_indices is Array:
+					cached_resource_card_solution_hand_indices = extra_indices.duplicate()
+			if resource.has_method("get_step_types"):
+				var extra_types: Array = resource.get_step_types()
+				if extra_types is Array:
+					cached_resource_card_solution_step_types = extra_types.duplicate()
 			return resource.get_card_scenes()
 	return []
+
+func _get_hand_indices_for_size(solution_size: int) -> Array[int]:
+	var indices: Array[int] = cached_resource_card_solution_hand_indices.duplicate()
+	while indices.size() < solution_size:
+		indices.append(-1)
+	if indices.size() > solution_size:
+		indices.resize(solution_size)
+	return indices
+
+func _get_step_types_for_size(solution_size: int) -> Array[int]:
+	var types: Array[int] = cached_resource_card_solution_step_types.duplicate()
+	while types.size() < solution_size:
+		types.append(SOLUTION_STEP_TYPE_PLAY)
+	if types.size() > solution_size:
+		types.resize(solution_size)
+	return types
 
 func get_card_solution_resource_paths() -> Array[String]:
 	var paths: Array[String] = []

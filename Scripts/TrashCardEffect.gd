@@ -1,4 +1,5 @@
 extends CardEffect
+class_name TrashCardEffect
 
 @export_enum("Discard Pile", "Hand", "Self") var trash_from_location: String = "Discard Pile"
 @export var card_amount: int = 1
@@ -46,7 +47,7 @@ func apply() -> bool:
 		if get_parent() is Card:
 			var card: Card = get_parent()
 			card.queue_free()
-			
+		
 	discard_panel.update_discard_count()
 		
 	return super.apply()

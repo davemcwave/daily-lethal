@@ -1,5 +1,10 @@
 extends Node
 
+const STEP_TYPE_PLAY := 0
+const STEP_TYPE_CHOOSE_HAND := 1
+const STEP_TYPE_CHOOSE_DISCARD := 2
+const STEP_TYPE_CHOOSE_CREATE := 3
+
 @export var active: bool = false
 @export var cards_to_test: Array[PackedScene] = []
 @export var initial_enemy_name: String = ""
@@ -87,23 +92,20 @@ func get_puzzles() -> Array:
 	dir.list_dir_end()
 	return puzzles
 	
-func play_card(card: Card) -> bool:
+func play_card(card: Card, target_index: int = -1) -> bool:
 	var hand: Hand = get_tree().get_root().get_node('Scene/HandScrollContainer/Hand')
-	var energy: Energy = get_tree().get_root().get_node('Scene/Energy')
-	for current_card: Card in hand.get_cards():
+	var cards_in_hand = hand.get_cards()
+	if target_index >= 0 and target_index < cards_in_hand.size():
+		var candidate: Card = cards_in_hand[target_index]
+		if candidate != null and candidate.get_card_name() == card.get_card_name() and candidate.can_play_for_resolver():
+			candidate.play()
+			return true
+	for current_card: Card in cards_in_hand:
 		if current_card.get_card_name() == card.get_card_name() and current_card.can_play_for_resolver():
 			current_card.play()
 			return true
 	return false
 
-func play_card_in_choose_area(cards_choose_area: CardsChooseArea, card: Card) -> void:
-	var hand: Hand = get_tree().get_root().get_node('Scene/HandScrollContainer/Hand')
-	for current_card: Card in hand.get_cards():
-		if current_card.get_card_name() == card.get_card_name():
-			cards_choose_area.apply_action(current_card)
-			cards_choose_area.close()
-			return
-	
 func resolve_puzzle(card_play_delay_seconds: float = 1.25) -> void:
 	Engine.set_time_scale(time_scale_speed)
 	
@@ -113,19 +115,30 @@ func resolve_puzzle(card_play_delay_seconds: float = 1.25) -> void:
 	var puzzle: Puzzle = scene.get_puzzle()
 	var enemy: Enemy = scene.get_node("Enemy")
 	var card_choice_view: CardChoiceView = scene.get_node('CanvasLayer/CardChoiceView')
+	var hand: Hand = scene.get_node('HandScrollContainer/Hand')
+	var discard_panel: DiscardPanel = scene.get_node("DiscardPanel")
+	var solution_steps: Array = puzzle.get_card_solution_steps()
 	
-	for card_scene in puzzle.get_card_solution():
+	for step_data in solution_steps:
+		var card_scene: PackedScene = step_data.get("card_scene", null)
+		if card_scene == null:
+			continue
+		var target_index: int = int(step_data.get("hand_index", -1))
+		var step_type: int = int(step_data.get("step_type", STEP_TYPE_PLAY))
 		var card: Card = card_scene.instantiate()
 		
-		if cards_choose_area.visible:
-			play_card_in_choose_area(cards_choose_area, card)
-		else:
-			
-			if card_choice_view.visible:
-				await play_card(card)
-				await card_choice_view.finished_selecting_card_effect
-			else:
-				play_card(card)
+		match step_type:
+			STEP_TYPE_PLAY:
+				if card_choice_view.visible:
+					await play_card(card, target_index)
+					await card_choice_view.finished_selecting_card_effect
+				else:
+					play_card(card, target_index)
+			STEP_TYPE_CHOOSE_HAND, STEP_TYPE_CHOOSE_DISCARD, STEP_TYPE_CHOOSE_CREATE:
+				await _wait_for_cards_choose_area(cards_choose_area)
+				_apply_choose_step(step_type, cards_choose_area, card, target_index, hand, discard_panel)
+			_:
+				play_card(card, target_index)
 			
 		while buffs_container.is_animating():
 			await get_tree().create_timer(card_play_delay_seconds).timeout
@@ -143,6 +156,41 @@ func resolve_puzzle(card_play_delay_seconds: float = 1.25) -> void:
 	
 	await get_tree().create_timer(0.25).timeout
 	get_tree().change_scene_to_file("res://Scenes/Scene0Desktop.scn")
+	
+func _wait_for_cards_choose_area(cards_choose_area: CardsChooseArea) -> void:
+	var attempts := 0
+	while not cards_choose_area.visible and attempts < 120:
+		await get_tree().process_frame
+		attempts += 1
+
+func _apply_choose_step(step_type: int, cards_choose_area: CardsChooseArea, card: Card, target_index: int, hand: Hand, discard_panel: DiscardPanel) -> void:
+	if not cards_choose_area.visible:
+		return
+	var collection: Array = []
+	match step_type:
+		STEP_TYPE_CHOOSE_HAND:
+			collection = hand.get_cards()
+		STEP_TYPE_CHOOSE_DISCARD:
+			collection = discard_panel.get_cards()
+		STEP_TYPE_CHOOSE_CREATE:
+			var card_creator: CardCreator = cards_choose_area.get_card_creator()
+			collection = card_creator.get_cards()
+		_:
+			collection = hand.get_cards()
+	var selected_card: Card = _find_card_in_collection(collection, card.get_card_name(), target_index)
+	if selected_card != null:
+		cards_choose_area.apply_action(selected_card)
+		cards_choose_area.close()
+
+func _find_card_in_collection(collection: Array, card_name: String, target_index: int) -> Card:
+	if target_index >= 0 and target_index < collection.size():
+		var candidate: Card = collection[target_index]
+		if candidate != null and candidate.get_card_name() == card_name:
+			return candidate
+	for current_card: Card in collection:
+		if current_card != null and current_card.get_card_name() == card_name:
+			return current_card
+	return null
 	
 func truncate_file():
 	var path = "res://puzzle-resolver-test-results.txt"

@@ -6,8 +6,9 @@ signal chose
 
 @export var max_card_choose_amount: int = 2
 @export_multiline var action_name: String = "Discard"
-@onready var hand: Hand = get_tree().get_root().get_node("Scene/HandScrollContainer/Hand")
-@onready var discard_pile: DiscardPanel = get_tree().get_root().get_node("Scene/DiscardPanel")
+@onready var scene: Scene = get_tree().get_root().get_node("Scene")
+@onready var hand: Hand = scene.get_node("HandScrollContainer/Hand")
+@onready var discard_pile: DiscardPanel = scene.get_node("DiscardPanel")
 @onready var audio_handler = get_node("/root/AudioHandler")
 @onready var action_button: Button = $ActionButton
 @onready var title_label: RichTextLabel = $TitleLabel
@@ -17,6 +18,7 @@ var cards_chosen_amount: int = 0
 var cards_chosen: Array[Card] = []
 var cards_choose_area_action: CardsChooseAreaAction = null
 var choose_up_to_amount: bool = false
+var source_card: Card = null
 
 # Determines if a check, x, or circle is used to denote selected cards.
 enum ChooseType {
@@ -77,6 +79,9 @@ func get_max_card_choose_amount() -> int:
 func set_cards_choose_area_action(new_cards_choose_area_action: CardsChooseAreaAction) -> void:
 	cards_choose_area_action = new_cards_choose_area_action
 	add_child(cards_choose_area_action)
+
+func set_source_card(new_source_card: Card) -> void:
+	source_card = new_source_card
 	
 func apply_action(card: Card) -> bool:
 	return await cards_choose_area_action.apply(card)
@@ -161,6 +166,7 @@ func close() -> void:
 		
 	emit_signal("closed")
 	hide()
+	source_card = null
 
 func get_card_with_id(card_id) -> Card:
 	match populate_cards_type:
@@ -179,11 +185,39 @@ func set_cards_chosen(new_cards_chosen: Array[Card]) -> void:
 func get_cards_chosen() -> Array[Card]:
 	return cards_chosen
 
+func _get_selection_index(card_reference: Card) -> int:
+	if card_reference == null:
+		return -1
+	match populate_cards_type:
+		PopulateCardsType.FromHand:
+			return _find_index_by_reference(hand.get_cards(), card_reference)
+		PopulateCardsType.FromDiscard:
+			return _find_index_by_reference(discard_pile.get_cards(), card_reference)
+		PopulateCardsType.FromCreate:
+			return _find_index_by_reference(card_creator.get_cards(), card_reference)
+		_:
+			return -1
+
+func _find_index_by_reference(collection: Array, card_reference: Card) -> int:
+	var index := collection.find(card_reference)
+	if index != -1:
+		return index
+	var target_id = card_reference.get_id() if card_reference.has_method("get_id") else null
+	if target_id == null:
+		return -1
+	for i in range(collection.size()):
+		var item = collection[i]
+		if item != null and item.has_method("get_id") and item.get_id() == target_id:
+			return i
+	return -1
+
 func _on_action_button_pressed() -> void:
 	cards_chosen.clear()
 	for card: Card in cards_container.get_children():
 		if card.is_chosen():
 			var card_in_hand: Card = get_card_with_id(card.get_id())
+			var selection_index: int = _get_selection_index(card_in_hand)
+			scene.record_cards_choose_selection(source_card, populate_cards_type, selection_index, card_in_hand)
 			apply_action(card_in_hand)
 			cards_chosen.append(card_in_hand)
 	

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CardSolutionResource" load_steps=8 format=3 uid="uid://cxfif5wtrv6gk"]
+[gd_resource type="Resource" script_class="CardSolutionResource" load_steps=8 format=3 uid="uid://yia6652g8ymh"]
 
 [ext_resource type="PackedScene" uid="uid://bwjb01igdh18r" path="res://Scenes/EchoCard.scn" id="1_dp6nr"]
 [ext_resource type="PackedScene" uid="uid://cyaoopurvntvh" path="res://Scenes/HauntCard.scn" id="2_qogmc"]

@@ -526,10 +526,27 @@ func add_card_played(card: Card) -> void:
 	if hand != null:
 		var cards_in_hand: Array = hand.get_cards()
 		hand_index = cards_in_hand.find(card)
-	background.record_played_card_scene_path(card_scene_path, hand_index)
+	var card_instance_id: int = card.get_instance_id()
+	background.record_played_card_scene_path(card_scene_path, hand_index, card_instance_id)
 
 func get_card_play_history_paths() -> Array[String]:
 	return card_play_history_paths.duplicate()
+
+func record_cards_choose_selection(source_card: Card, populate_type: int, source_index: int, selected_card: Card) -> void:
+	if selected_card == null:
+		return
+	var card_scene_path: String = selected_card.get_scene_file_path()
+	if card_scene_path.is_empty():
+		return
+	var step_type: int = background.SOLUTION_STEP_TYPE_CHOOSE_HAND
+	match populate_type:
+		CardsChooseArea.PopulateCardsType.FromHand:
+			step_type = background.SOLUTION_STEP_TYPE_CHOOSE_HAND
+		CardsChooseArea.PopulateCardsType.FromDiscard:
+			step_type = background.SOLUTION_STEP_TYPE_CHOOSE_DISCARD
+		CardsChooseArea.PopulateCardsType.FromCreate:
+			step_type = background.SOLUTION_STEP_TYPE_CHOOSE_CREATE
+	background.record_cards_choose_selection(card_scene_path, source_index, step_type)
 
 func disable_all_cards() -> void:
 	for card: Card in get_tree().get_nodes_in_group("Cards"):
