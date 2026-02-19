@@ -46,4 +46,4 @@ func is_activated_on_hurt() -> bool:
 	
 # TO BE OVERWRITTEN
 func activate() -> void:
-	pass
+	return

@@ -1,14 +1,14 @@
-[gd_resource type="Resource" script_class="CardSolutionResource" load_steps=8 format=3]
+[gd_resource type="Resource" script_class="CardSolutionResource" load_steps=8 format=3 uid="uid://cxfif5wtrv6gk"]
 
-[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.scn" id="1_dp6nr"]
-[ext_resource type="PackedScene" path="res://Scenes/HauntCard.scn" id="2_qogmc"]
-[ext_resource type="PackedScene" path="res://Scenes/WoundCard.scn" id="3_t7tbm"]
-[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.scn" id="4_vuokw"]
-[ext_resource type="PackedScene" path="res://Scenes/EchoCard.scn" id="5_5cqv8"]
-[ext_resource type="PackedScene" path="res://Scenes/EmptyfistCard.scn" id="6_5i1l8"]
-[ext_resource type="Script" path="res://Scripts/CardSolutionResource.gd" id="7_comv6"]
+[ext_resource type="PackedScene" uid="uid://bwjb01igdh18r" path="res://Scenes/EchoCard.scn" id="1_dp6nr"]
+[ext_resource type="PackedScene" uid="uid://cyaoopurvntvh" path="res://Scenes/HauntCard.scn" id="2_qogmc"]
+[ext_resource type="PackedScene" uid="uid://brwf4mv0a45c0" path="res://Scenes/ReviveCard.scn" id="3_t7tbm"]
+[ext_resource type="PackedScene" uid="uid://bidrui0yghql8" path="res://Scenes/WoundCard.scn" id="4_vuokw"]
+[ext_resource type="PackedScene" uid="uid://dl4l48y3acorh" path="res://Scenes/ReboundCard.scn" id="5_5cqv8"]
+[ext_resource type="PackedScene" uid="uid://bahsukhwsj148" path="res://Scenes/EmptyfistCard.scn" id="6_5i1l8"]
+[ext_resource type="Script" uid="uid://cugpgmdtsumrl" path="res://Scripts/CardSolutionResource.gd" id="7_comv6"]
 
 [resource]
 script = ExtResource("7_comv6")
-card_scenes = Array[PackedScene]([ExtResource("1_dp6nr"), ExtResource("2_qogmc"), ExtResource("2_qogmc"), ExtResource("3_t7tbm"), ExtResource("4_vuokw"), ExtResource("2_qogmc"), ExtResource("5_5cqv8"), ExtResource("1_dp6nr"), ExtResource("6_5i1l8"), ExtResource("6_5i1l8")])
-hand_indices = Array[int]([3, 4, 4, 2, 2, 0, 2, 0, 0, 0])
+card_scenes = Array[PackedScene]([ExtResource("1_dp6nr"), ExtResource("2_qogmc"), ExtResource("3_t7tbm"), ExtResource("1_dp6nr"), ExtResource("2_qogmc"), ExtResource("4_vuokw"), ExtResource("5_5cqv8"), ExtResource("6_5i1l8"), ExtResource("6_5i1l8")])
+hand_indices = Array[int]([1, 4, 3, 1, 0, 1, 1, 0, 0])

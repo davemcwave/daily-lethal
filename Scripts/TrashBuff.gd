@@ -10,7 +10,10 @@ func activate(context: Dictionary = {}) -> bool:
 		return super.activate()
 
 	var source_card: Card = get_source_card()
-	if is_instance_valid(source_card) and source_card == card:
+	var activation_type: int = context.get("activation_type", Buff.ActivationType.OnCardPlay)
+	var is_same_card: bool = is_instance_valid(source_card) and source_card == card
+	var activated_from_discard: bool = activation_type == Buff.ActivationType.OnCardDiscarded
+	if is_same_card and not activated_from_discard:
 		return false
 		
 	card.shrink(0.15)
