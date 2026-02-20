@@ -173,7 +173,8 @@ const PUZZLE_AUTHORS := {
 	"Moon Elemental": "Vanillabean",
 	"Swordmaster": "ARMA",
 	"Banshee": "RadioInactive",
-	"Circuit Breaker": "potatomato"
+	"Circuit Breaker": "potatomato",
+	"Mad Hatter": "BenMiff"
 }
 
 const ENEMY_DIFFICULTIES := {
