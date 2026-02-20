@@ -1,16 +1,18 @@
 extends Control
 
-var share_text_template = "💀 I defeated the {enemy_name} in {attempt_count} attempt{attempt_plural}!\n🃏 My solution: {best_card_count} cards\nPlay today’s puzzle 👉 https://playlethal.fun" # https://playlethal.fun"
+var share_text_template = "💀 I defeated the {enemy_name} in {attempt_count} attempt{attempt_plural}!\n🃏 My solution: {best_card_count} cards\nPlay today’s puzzle 👉 {puzzle_url}" # https://playlethal.fun"
 var share_text = ""
 @onready var background = get_node("/root/Background")
 func _ready():
 	var attempt_plural: String = '' if background.attempts <= 1 else 's'
+	var share_url = get_share_url()
 	share_text = share_text_template.format(
 		{
 			'enemy_name': background.enemy_name,
 			'attempt_plural': attempt_plural,
 			'attempt_count': background.attempts,
 			'best_card_count': background.best_card_count,
+			'puzzle_url': share_url,
 		}
 	)
 
@@ -24,6 +26,13 @@ func _ready():
 
 	if background.is_from_story_view():
 		background.mark_story_puzzle_completed(background.get_puzzle_scene())
+
+func get_share_url() -> String:
+	var base_url := "https://playlethal.fun"
+	var puzzle_date: String = background.get_puzzle_date()
+	if puzzle_date.is_empty():
+		return base_url
+	return "%s/%s" % [base_url, puzzle_date]
 
 func _on_play_again_button_pressed():
 	var should_use_desktop_layout = background.is_using_desktop_layout()
