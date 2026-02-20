@@ -1,6 +1,6 @@
 extends Control
 
-var share_text_template = "💀 I defeated the {enemy_name} in {attempt_count} attempt{attempt_plural}!\n🃏 My solution: {best_card_count} cards\nPlay today’s puzzle 👉 {puzzle_url}" # https://playlethal.fun"
+var share_text_template = "💀 I defeated the {enemy_name} in {attempt_count} attempt{attempt_plural}!\n🃏 My solution: {best_card_count} cards\nPlay puzzle 👉 {puzzle_url}" # https://playlethal.fun"
 var share_text = ""
 @onready var background = get_node("/root/Background")
 func _ready():
