@@ -344,6 +344,60 @@
 
   </style>
 
+  <script>
+    (function handleCustomRedirects() {
+      try {
+        var path = window.location.pathname || "/";
+        var search = window.location.search || "";
+        var normalizedSearch = search
+          ? (search.startsWith("?") ? search : "?" + search)
+          : "";
+        var dateMatch = path.match(/^\/(\d{4}-\d{2}-\d{2})\/?$/);
+        if (!dateMatch) {
+          return;
+        }
+
+        fetch("/custom-redirects.json", { cache: "no-store" })
+          .then(function(response) {
+            if (!response.ok) {
+              throw new Error("Redirect map load failed");
+            }
+            return response.json();
+          })
+          .then(function(map) {
+            var redirects = (map && typeof map === "object") ? map : {};
+            if (map && map.date_redirects) {
+              redirects = map.date_redirects;
+            }
+            var dateKey = dateMatch[1];
+            var target = redirects[dateKey] || redirects["/" + dateKey] || redirects[path];
+            if (typeof target === "string" && target.length > 0) {
+              var normalizedTarget;
+              if (/^https?:\/\//i.test(target)) {
+                normalizedTarget = target;
+              } else if (target.startsWith("/")) {
+                normalizedTarget = target;
+              } else if (target.startsWith("?")) {
+                normalizedTarget = "/" + target;
+              } else {
+                normalizedTarget = "/" + target;
+              }
+              if (normalizedTarget.indexOf("puzzle_date=") === -1) {
+                var joinChar = normalizedTarget.indexOf("?") === -1 ? "?" : "&";
+                normalizedTarget = normalizedTarget + joinChar + "puzzle_date=" + encodeURIComponent(dateKey);
+              }
+              window.location.replace(normalizedTarget);
+            }
+          })
+          .catch(function(err) {
+            console.error("Custom redirect error", err);
+          });
+      } catch (error) {
+        console.error("Custom redirect exception", error);
+      }
+    })();
+  </script>
+
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW9PLMBBGT"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -360,6 +414,28 @@
 
   gtag('config', 'G-LW9PLMBBGT');
 </script>
+  <script>
+    (function redirectTestLinks() {
+      try {
+        var search = window.location.search || "";
+        if (!search.includes("cards=")) {
+          return;
+        }
+        var path = window.location.pathname || "/";
+        if (path.startsWith("/desktop") || path.startsWith("/mobile")) {
+          return;
+        }
+        var preferred = localStorage.getItem("device_type") === "desktop" ? "desktop" : "mobile";
+        var basePath = preferred === "desktop" ? "/desktop" : "/mobile";
+        var normalizedPath = path === "/" ? "/" : path;
+        var destinationPath = basePath + (normalizedPath === "/" ? "/" : normalizedPath);
+        var hash = window.location.hash || "";
+        window.location.replace(destinationPath + search + hash);
+      } catch (err) {
+        console.error("Test link redirect failed", err);
+      }
+    })();
+  </script>
 </head>
 <body>
   <div class="steam-banner">

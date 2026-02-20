@@ -21,7 +21,14 @@ func _ready():
 		puzzle_creator_name = _get_query_param("creator")
 	if puzzle_creator_name.is_empty():
 		puzzle_creator_name = _get_query_param("author")
+	if puzzle_creator_name.is_empty():
+		puzzle_creator_name = _get_query_param("credit_name")
+
 	enemy_name_override = _get_query_param("enemy_name")
+	if enemy_name_override.is_empty():
+		enemy_name_override = _get_query_param("enemy")
+	if enemy_name_override.is_empty():
+		enemy_name_override = _get_query_param("enemy_info")
 
 	# DEBUG: If running in editor with debug JSON, use that instead
 	if not debug_custom_cards_json.is_empty():
@@ -36,9 +43,13 @@ func _ready():
 	if search != null and "card_order=" in search:
 		_parse_card_order()
 
-	if path_name != null and path_name != "":
-		puzzle_date = search.split("?puzzle_date=")[-1].split("&")[0]
-		#puzzle_date = path_name.split("/")[-2]
+	var query_puzzle_date := _get_query_param("puzzle_date")
+	if not query_puzzle_date.is_empty():
+		puzzle_date = query_puzzle_date
+	else:
+		var path_puzzle_date := _extract_puzzle_date_from_path(path_name)
+		if not path_puzzle_date.is_empty():
+			puzzle_date = path_puzzle_date
 
 	# Debug: bring to front and show URL parsing info
 	z_index = RenderingServer.CANVAS_ITEM_Z_MAX
@@ -136,6 +147,32 @@ func _get_query_param(param_name: String) -> String:
 			return ""
 		return key_value[1].uri_decode()
 	return ""
+
+func _extract_puzzle_date_from_path(path_value) -> String:
+	if path_value == null:
+		return ""
+	var normalized = str(path_value).lstrip("/").rstrip("/")
+	if normalized.is_empty():
+		return ""
+	var segments := normalized.split("/")
+	for i in range(segments.size() - 1, -1, -1):
+		var candidate: String = segments[i]
+		if _is_valid_puzzle_date(candidate):
+			return candidate
+	return ""
+
+func _is_valid_puzzle_date(value: String) -> bool:
+	if value.length() != 10:
+		return false
+	var parts := value.split("-")
+	if parts.size() != 3:
+		return false
+	if parts[0].length() != 4 or parts[1].length() != 2 or parts[2].length() != 2:
+		return false
+	for part in parts:
+		if not part.is_valid_int():
+			return false
+	return true
 
 # ============================================
 # CUSTOM CARDS FROM CARD LAB

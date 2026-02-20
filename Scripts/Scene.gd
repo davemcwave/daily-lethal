@@ -276,9 +276,11 @@ func set_puzzle(new_puzzle: Puzzle) -> void:
 	#for card_scene in new_puzzle.get_card_scenes():
 		#debug_text += card_scene.resource_path + ", " 
 	#$URLCapturer.set_text("[center][b]%s[/b][/center]" % debug_text)
+	var effective_puzzle_date := puzzle.get_puzzle_date()
+	if puzzle.is_test_puzzle() and url_capturer != null and url_capturer.has_puzzle_date():
+		effective_puzzle_date = url_capturer.get_puzzle_date()
 	
-	
-	background.set_puzzle_date(puzzle.get_puzzle_date())
+	background.set_puzzle_date(effective_puzzle_date)
 	background.set_is_test_puzzle(puzzle.is_test_puzzle())
 	$Enemy.set_max_health($URLCapturer.get_energy_health_from_test_puzzle() if puzzle.is_test_puzzle() else puzzle.get_enemy_health())
 	$Enemy.set_health($URLCapturer.get_energy_health_from_test_puzzle() if puzzle.is_test_puzzle() else puzzle.get_enemy_health())

@@ -14,14 +14,20 @@ func _on_pressed() -> void:
 		return
 	
 	if is_web_platform():
-		var next_puzzle: Puzzle = load(next_puzzle_scene).instantiate()
-		if next_puzzle == null:
+		var next_date := ManifestDateHelper.get_next_date(background.get_puzzle_date())
+		if next_date.is_empty():
+			var next_puzzle: Puzzle = load(next_puzzle_scene).instantiate()
+			if next_puzzle != null:
+				next_date = next_puzzle.get_puzzle_date()
+		if next_date.is_empty():
 			return
-		var next_puzzle_date: String = next_puzzle.get_puzzle_date()
-		var base_url = JavaScriptBridge.eval("window.location.origin", true)
+		var base_url_variant = JavaScriptBridge.eval("window.location.origin", true)
+		var base_url = String(base_url_variant)
+		if base_url.is_empty():
+			base_url = "https://playlethal.fun"
 		var device_type = JavaScriptBridge.eval("localStorage.getItem('device_type')", true)
 		var desktop = "/desktop" if device_type == "desktop" else ""
-		var next_url = "%s%s/%s" % [base_url, desktop, next_puzzle_date]
+		var next_url = "%s%s/%s" % [base_url, desktop, next_date]
 		open_window_in_same_tab(next_url)
 	else:
 		load_puzzle_locally(next_puzzle_scene)

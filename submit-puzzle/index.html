@@ -342,8 +342,13 @@
       }
 
       const deviceType = localStorage.getItem('device_type');
-      const basePath = (deviceType === 'desktop') ? '/desktop/' : '/mobile';
-      const testUrl = `${basePath}?cards=${base64}&php=${playerHp}&pnrg=${playerEnergy}&ehp=${enemyHp}`;
+      const enemyName = document.querySelector('input[name="enemy_info"]').value.trim();
+      const authorName = document.querySelector('input[name="credit_name"]').value.trim();
+      const enemyParam = enemyName ? `&enemy_name=${encodeURIComponent(enemyName)}` : '';
+      const authorParam = authorName ? `&author=${encodeURIComponent(authorName)}` : '';
+
+      const basePath = '/';
+      const testUrl = `${basePath}?cards=${base64}&php=${playerHp}&pnrg=${playerEnergy}&ehp=${enemyHp}${enemyParam}${authorParam}`;
 
       document.getElementById('testUrlField').value = testUrl;
       window.open(testUrl, '_blank');
