@@ -65,6 +65,111 @@
     button:hover {
       background-color: #ffec80;
     }
+    .card-filters {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+      align-items: end;
+    }
+    .card-filters label {
+      font-weight: bold;
+      margin-bottom: 0.35rem;
+      display: block;
+    }
+
+    .filter-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .filter-actions button {
+      padding: 6px 16px;
+      border-radius: 999px;
+      border: none;
+      background: #ffd700;
+      color: #111;
+      font-weight: bold;
+      cursor: pointer;
+      min-width: 180px;
+      text-align: center;
+    }
+
+    .filter-actions button:hover {
+      background: #ffec80;
+    }
+
+    .filters-summary {
+      font-size: 0.9rem;
+      color: #bbb;
+      flex: 1;
+      min-width: 200px;
+    }
+    .filters-summary .filter-color-box {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      margin: 0 4px;
+      vertical-align: middle;
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.45);
+    }
+    .card-filters input,
+    .card-filters select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      margin-top: 0.2rem;
+      font-size: 0.9rem;
+      box-sizing: border-box;
+      background: #1a262a;
+      color: #fff;
+    }
+    .color-filter-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.2rem;
+    }
+    .color-filter-chip {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.1);
+      transition: transform 0.1s ease, border-color 0.1s ease;
+    }
+    .color-filter-chip.selected {
+      border-color: #ffd700;
+      transform: scale(1.05);
+      box-shadow: 0 0 12px rgba(255, 215, 0, 0.85);
+      position: relative;
+    }
+
+    .color-filter-chip.selected::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #111;
+      border: 2px solid #ffd700;
+    }
+    .energy-range-inputs {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .energy-range-inputs input {
+      width: 100%;
+    }
     .card-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -204,6 +309,39 @@
   <div class="container">
     <h1>Submit Your Lethal Puzzle</h1>
     <p style="text-align: center; font-size: 1rem; color: #bbb; margin-bottom: 1rem;">Press + to add or - to remove cards (up to 7 total).</p>
+    <div class="card-filters">
+      <div>
+        <label for="cardNameFilter">Card Name</label>
+        <input type="text" id="cardNameFilter" placeholder="Search cards..." />
+      </div>
+      <div>
+        <label>Card Color</label>
+        <div id="cardColorFilter" class="color-filter-options"></div>
+      </div>
+      <div>
+        <label>Energy Cost</label>
+        <div class="energy-range-inputs">
+          <input type="number" id="minEnergyFilter" placeholder="Min" min="0" />
+          <input type="number" id="maxEnergyFilter" placeholder="Max" min="0" />
+        </div>
+      </div>
+      <div>
+        <label for="sortBySelect">Sort By</label>
+        <select id="sortBySelect">
+          <option value="name-asc">Name (A → Z)</option>
+          <option value="name-desc">Name (Z → A)</option>
+          <option value="energy-asc">Energy (Low → High)</option>
+          <option value="energy-desc">Energy (High → Low)</option>
+          <option value="color-order">Color</option>
+          <option value="date-desc">Newest</option>
+          <option value="date-asc">Oldest</option>
+        </select>
+      </div>
+    </div>
+    <div class="filter-actions">
+      <button type="button" id="clearFiltersBtn">Remove All Filters</button>
+      <div class="filters-summary" id="filtersSummary">Filters applied: None</div>
+    </div>
     <div class="card-grid" id="cardGallery"></div>
     <div class="selected-cards" id="selectedCardsText"></div>
 
@@ -222,6 +360,14 @@
       <label>Optional Enemy Name or Inspirations</label>
       <input type="text" name="enemy_info" placeholder="Godzilla / A Monster That Looks Like A Giant Lizard" />
       <div class="description">This is so I know what to draw for the enemy icon</div>
+      <label>Puzzle Difficulty</label>
+      <select name="difficulty" style="width: 100%; padding: 10px; border-radius: 8px; border: none; margin-top: 5px; font-size: 0.9rem; box-sizing: border-box;">
+        <option value="Very Easy">Very Easy</option>
+        <option value="Easy">Easy</option>
+        <option value="Medium" selected>Medium</option>
+        <option value="Hard">Hard</option>
+        <option value="Very Hard">Very Hard</option>
+      </select>
       <label>Email Address or Discord Username</label>
       <input type="text" name="contact_info" placeholder="mcwavegames@gmail.com" required />
       <div class="description">Used to verify puzzle author and troubleshoot puzzle with you</div>
@@ -237,12 +383,51 @@
 
   <script>
     const cardGallery = document.getElementById('cardGallery');
+    const cardNameFilter = document.getElementById('cardNameFilter');
+    const cardColorFilter = document.getElementById('cardColorFilter');
+    const minEnergyFilter = document.getElementById('minEnergyFilter');
+    const maxEnergyFilter = document.getElementById('maxEnergyFilter');
+    const sortBySelect = document.getElementById('sortBySelect');
+    const clearFiltersBtn = document.getElementById('clearFiltersBtn');
+    const filtersSummary = document.getElementById('filtersSummary');
     const selectedCards = [];
+    const cardEntries = [];
+    const cardMetadataMap = new Map();
+    const COLOR_SORT_ORDER = ['#8C0127', '#C35300', '#008C10', '#002A8C', '#8C008C'];
+
+    if (cardNameFilter) {
+      cardNameFilter.addEventListener('input', applyFilters);
+    }
+    let selectedColors = new Set();
+    if (minEnergyFilter) {
+      minEnergyFilter.addEventListener('input', applyFilters);
+    }
+    if (maxEnergyFilter) {
+      maxEnergyFilter.addEventListener('input', applyFilters);
+    }
+    if (sortBySelect) {
+      sortBySelect.addEventListener('change', applyFilters);
+    }
+    if (clearFiltersBtn) {
+      clearFiltersBtn.addEventListener('click', clearAllFilters);
+    }
 
     async function fetchCardList() {
       try {
-        const response = await fetch('../card-list.json');
-        const cardFiles = await response.json();
+        const [cardListResponse, cardMetadataResponse] = await Promise.all([
+          fetch('../card-list.json'),
+          fetch('../card-metadata.json').catch(() => null)
+        ]);
+        const cardFiles = await cardListResponse.json();
+        if (cardMetadataResponse && cardMetadataResponse.ok) {
+          const metadata = await cardMetadataResponse.json();
+          metadata.forEach(entry => {
+            const normalizedName = normalizeCardName(entry.name);
+            cardMetadataMap.set(normalizedName, entry);
+          });
+        }
+        cardEntries.length = 0;
+        cardGallery.innerHTML = '';
 
         const oneWeekAgo = new Date();
         oneWeekAgo.setDate(oneWeekAgo.getDate() - 7); // Calculate 7 days ago
@@ -316,7 +501,26 @@
           cardGallery.appendChild(wrapper);
 
           updateCardCount(card.name, countDisplay);
+
+          const displayName = formatCardDisplayName(card.name);
+          const metadata = cardMetadataMap.get(normalizeCardName(displayName));
+          const colors = getCardColors(metadata);
+          const primaryColor = colors.length ? colors[0] : 'Unknown';
+          const energyValue = getCardEnergy(metadata);
+          const dateAdded = card.date_added ? Date.parse(card.date_added) : null;
+          cardEntries.push({
+            name: displayName.toLowerCase(),
+            displayName,
+            color: primaryColor,
+            colors,
+            energy: energyValue,
+            dateAdded,
+            wrapper
+          });
         });
+
+        updateFilterOptions();
+        applyFilters();
       } catch (error) {
         console.error('Could not load card list:', error);
       }
@@ -366,7 +570,280 @@
       
     function finalizeBeforeSubmit() {
       document.getElementById('finalCards').value = selectedCards.join(', ');
+      syncEnemyIconField();
       return true;
+    }
+
+    function normalizeCardName(value = '') {
+      return value.toString().trim().toLowerCase();
+    }
+
+    function normalizeColorValue(color) {
+      if (!color) {
+        return '';
+      }
+      const trimmed = color.toString().trim();
+      if (!trimmed) {
+        return '';
+      }
+      return trimmed.startsWith('#') ? trimmed.toUpperCase() : trimmed;
+    }
+
+    function escapeHtml(str = '') {
+      return str.toString().replace(/[&<>"']/g, (char) => {
+        switch (char) {
+          case '&': return '&amp;';
+          case '<': return '&lt;';
+          case '>': return '&gt;';
+          case '"': return '&quot;';
+          case "'": return '&#39;';
+          default: return char;
+        }
+      });
+    }
+
+    function formatCardDisplayName(fileName = '') {
+      const withoutSuffix = fileName.replace(/-card\.png$/i, '').replace(/\.png$/i, '');
+      const spaced = withoutSuffix.replace(/-/g, ' ');
+      return spaced.replace(/\b\w/g, (l) => l.toUpperCase());
+    }
+
+    function getCardColors(metadata) {
+      const colorsSource = Array.isArray(metadata?.colors) ? metadata.colors : [metadata?.color, metadata?.card_color];
+      return colorsSource
+        .filter(Boolean)
+        .map(normalizeColorValue)
+        .filter((color) => color.length > 0);
+    }
+
+    function getCardEnergy(metadata) {
+      const candidate = metadata?.energy_cost ?? metadata?.energy ?? metadata?.cost ?? null;
+      if (candidate == null) {
+        return null;
+      }
+      const asNumber = typeof candidate === 'string' ? parseInt(candidate, 10) : candidate;
+      return Number.isFinite(asNumber) ? asNumber : null;
+    }
+
+    function updateFilterOptions() {
+      if (cardColorFilter) {
+        const colors = Array.from(new Set(cardEntries.flatMap(entry => entry.colors || []))).filter(color => color && color !== 'Unknown');
+        cardColorFilter.innerHTML = '';
+        colors.forEach(color => {
+          const chip = document.createElement('button');
+          chip.type = 'button';
+          chip.className = 'color-filter-chip';
+          chip.style.background = color;
+          chip.dataset.colorHex = color.toUpperCase();
+          chip.title = color;
+          chip.addEventListener('click', () => {
+            const normalizedColor = color.toUpperCase();
+            if (selectedColors.has(normalizedColor)) {
+              selectedColors.delete(normalizedColor);
+            } else {
+              selectedColors.add(normalizedColor);
+            }
+            updateColorChipSelection();
+            applyFilters();
+          });
+          cardColorFilter.appendChild(chip);
+        });
+        updateColorChipSelection();
+      }
+      if (minEnergyFilter || maxEnergyFilter) {
+        const energies = cardEntries.filter(entry => entry.energy !== null).map(entry => entry.energy);
+        if (energies.length > 0) {
+          const minEnergy = Math.min(...energies);
+          const maxEnergy = Math.max(...energies);
+          if (minEnergyFilter) {
+            minEnergyFilter.placeholder = `Min (${minEnergy})`;
+          }
+          if (maxEnergyFilter) {
+            maxEnergyFilter.placeholder = `Max (${maxEnergy})`;
+          }
+        }
+      }
+    }
+
+    function updateColorChipSelection() {
+      if (!cardColorFilter) {
+        return;
+      }
+      const chips = cardColorFilter.querySelectorAll('.color-filter-chip');
+      chips.forEach(chip => {
+        const chipColor = (chip.dataset.colorHex || chip.style.background).toUpperCase();
+        if (selectedColors.has(chipColor)) {
+          chip.classList.add('selected');
+        } else {
+          chip.classList.remove('selected');
+        }
+      });
+    }
+
+    function applyFilters() {
+      if (!cardEntries.length) {
+        return;
+      }
+      const nameQuery = (cardNameFilter?.value || '').trim().toLowerCase();
+      const activeColors = Array.from(selectedColors);
+      const minEnergy = minEnergyFilter?.value ? parseInt(minEnergyFilter.value, 10) : null;
+      const maxEnergy = maxEnergyFilter?.value ? parseInt(maxEnergyFilter.value, 10) : null;
+
+      const filteredEntries = [];
+      cardEntries.forEach(entry => {
+        let visible = true;
+        if (nameQuery && !entry.name.includes(nameQuery)) {
+          visible = false;
+        }
+        if (visible && activeColors.length > 0) {
+          visible = Array.isArray(entry.colors) && activeColors.some(color => entry.colors.includes(color));
+        }
+        if (visible && (minEnergy !== null || maxEnergy !== null)) {
+          if (entry.energy === null) {
+            visible = false;
+          } else {
+            if (minEnergy !== null && entry.energy < minEnergy) {
+              visible = false;
+            }
+            if (visible && maxEnergy !== null && entry.energy > maxEnergy) {
+              visible = false;
+            }
+          }
+        }
+        entry.wrapper.style.display = visible ? '' : 'none';
+        if (visible) {
+          filteredEntries.push(entry);
+        }
+      });
+
+      const sortedEntries = sortEntries(filteredEntries);
+      sortedEntries.forEach(entry => cardGallery.appendChild(entry.wrapper));
+      updateFiltersSummary(nameQuery, activeColors, minEnergy, maxEnergy, sortedEntries.length);
+    }
+
+    function sortEntries(entries) {
+      const sortMode = sortBySelect?.value || 'name-asc';
+      const copy = entries.slice();
+      copy.sort((a, b) => {
+        switch (sortMode) {
+          case 'name-desc':
+            return b.displayName.localeCompare(a.displayName);
+          case 'energy-asc':
+            return compareByEnergy(a, b, true);
+          case 'energy-desc':
+            return compareByEnergy(a, b, false);
+          case 'date-desc':
+            return compareByDate(a, b, false);
+          case 'date-asc':
+            return compareByDate(a, b, true);
+          case 'color-order':
+            return compareByColor(a, b);
+          case 'name-asc':
+          default:
+            return a.displayName.localeCompare(b.displayName);
+        }
+      });
+      return copy;
+    }
+
+    function compareByEnergy(a, b, ascending = true) {
+      const energyA = a.energy;
+      const energyB = b.energy;
+      if (energyA === null && energyB === null) return a.displayName.localeCompare(b.displayName);
+      if (energyA === null) return 1;
+      if (energyB === null) return -1;
+      return ascending ? energyA - energyB : energyB - energyA;
+    }
+
+    function compareByDate(a, b, ascending = true) {
+      const dateA = a.dateAdded ?? 0;
+      const dateB = b.dateAdded ?? 0;
+      return ascending ? dateA - dateB : dateB - dateA;
+    }
+
+    function compareByColor(a, b) {
+      const keyA = buildColorKeyForSort(a.colors);
+      const keyB = buildColorKeyForSort(b.colors);
+      if (keyA.priority !== keyB.priority) {
+        return keyA.priority - keyB.priority;
+      }
+      if (keyA.color && keyB.color && keyA.color !== keyB.color) {
+        return keyA.color.localeCompare(keyB.color);
+      }
+      if (!keyA.color && keyB.color) {
+        return 1;
+      }
+      if (keyA.color && !keyB.color) {
+        return -1;
+      }
+      return a.displayName.localeCompare(b.displayName);
+    }
+
+    function buildColorKeyForSort(colors = []) {
+      if (!Array.isArray(colors) || colors.length === 0) {
+        return { priority: COLOR_SORT_ORDER.length + 1, color: '' };
+      }
+      let priority = COLOR_SORT_ORDER.length + 1;
+      let chosenColor = '';
+      colors.forEach((color) => {
+        const normalized = normalizeColorValue(color);
+        if (!normalized) {
+          return;
+        }
+        const idx = COLOR_SORT_ORDER.indexOf(normalized);
+        const candidatePriority = idx === -1 ? COLOR_SORT_ORDER.length : idx;
+        if (candidatePriority < priority || (candidatePriority === priority && (chosenColor === '' || normalized < chosenColor))) {
+          priority = candidatePriority;
+          chosenColor = normalized;
+        }
+      });
+      if (!chosenColor) {
+        chosenColor = normalizeColorValue(colors[0]);
+      }
+      return { priority, color: chosenColor || '' };
+    }
+
+    function updateFiltersSummary(nameQuery, activeColors, minEnergy, maxEnergy, count) {
+      if (!filtersSummary) return;
+      const parts = [];
+      if (nameQuery) {
+        parts.push(`Name contains "${escapeHtml(nameQuery)}"`);
+      }
+      if (activeColors && activeColors.length > 0) {
+        const colorBoxes = activeColors
+          .map(color => {
+            const safeColor = escapeHtml(color);
+            return `<span class="filter-color-box" style="background:${safeColor};" title="${safeColor}" aria-label="Color ${safeColor}"></span>`;
+          })
+          .join('');
+        parts.push(`Colors: ${colorBoxes}`);
+      }
+      if (minEnergy !== null || maxEnergy !== null) {
+        const minLabel = minEnergy !== null ? minEnergy : '0';
+        const maxLabel = maxEnergy !== null ? maxEnergy : '&infin;';
+        parts.push(`Energy ${minLabel} - ${maxLabel}`);
+      }
+      const separator = ' &middot; ';
+      const base = parts.length ? parts.join(separator) : 'None';
+      filtersSummary.innerHTML = `Filters applied: ${base}${separator}Showing ${count} card${count === 1 ? '' : 's'}`;
+    }
+
+    function clearAllFilters() {
+      if (cardNameFilter) {
+        cardNameFilter.value = '';
+      }
+      selectedColors.clear();
+      updateColorChipSelection();
+      if (minEnergyFilter) {
+        minEnergyFilter.value = '';
+      }
+      if (maxEnergyFilter) {
+        maxEnergyFilter.value = '';
+      }
+      if (sortBySelect) {
+        sortBySelect.value = 'name-asc';
+      }
+      applyFilters();
     }
 
     fetchCardList();

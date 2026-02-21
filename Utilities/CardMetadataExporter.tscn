@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://gu74ukh4cmj5"]
+
+[ext_resource type="Script" uid="uid://dkxy1sl50u1tg" path="res://Utilities/CardMetadataExporter.gd" id="1"]
+
+[node name="CardMetadataExporter" type="Node"]
+script = ExtResource("1")
