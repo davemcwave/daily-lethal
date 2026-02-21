@@ -6,7 +6,7 @@
     "name": "Armory"
   },
   {
-    "color": "#002A8C ",
+    "color": "#002A8C",
     "energy": 1,
     "file": "res://Scenes/BargainCard.scn",
     "name": "Bargain"
@@ -30,7 +30,7 @@
     "name": "Burst"
   },
   {
-    "color": "#002A8C ",
+    "color": "#002A8C",
     "energy": 0,
     "file": "res://Scenes/CapacitorCard.scn",
     "name": "Capacitor"
@@ -103,12 +103,12 @@
     "name": "Empty Fist"
   },
   {
-    "color": "#002A8C ",
+    "color": "#002A8C",
     "energy": 1,
     "file": "res://Scenes/ExchangeCard.scn",
     "name": "Exchange",
     "colors": [
-      "#002A8C ",
+      "#002A8C",
       "#008C10"
     ]
   },
@@ -125,7 +125,7 @@
     "name": "Flurry"
   },
   {
-    "color": "#002A8C ",
+    "color": "#002A8C",
     "energy": 0,
     "file": "res://Scenes/FocusCard.scn",
     "name": "Focus"
@@ -140,12 +140,12 @@
     ]
   },
   {
-    "color": "#002A8C ",
+    "color": "#002A8C",
     "energy": 1,
     "file": "res://Scenes/GiftCard.scn",
     "name": "Gift",
     "colors": [
-      "#002A8C "
+      "#002A8C"
     ]
   },
   {
@@ -183,7 +183,7 @@
     "name": "Snipe"
   },
   {
-    "color": "#002A8C ",
+    "color": "#002A8C",
     "energy": 0,
     "file": "res://Scenes/InspirationCard.scn",
     "name": "Inspiration"
@@ -195,11 +195,11 @@
     "name": "Lunge",
     "colors": [
       "#8C0127",
-      "#002A8C "
+      "#002A8C"
     ]
   },
   {
-    "color": "#002A8C ",
+    "color": "#002A8C",
     "energy": 1,
     "file": "res://Scenes/MartyrCard.scn",
     "name": "Martyr"
@@ -211,7 +211,7 @@
     "name": "Mend"
   },
   {
-    "color": "#002A8C ",
+    "color": "#002A8C",
     "energy": 1,
     "file": "res://Scenes/OverloadCard.scn",
     "name": "Overload"
@@ -257,12 +257,12 @@
     "name": "Revive"
   },
   {
-    "color": "#002A8C ",
+    "color": "#002A8C",
     "energy": 0,
     "file": "res://Scenes/ScrapCard.scn",
     "name": "Scrap",
     "colors": [
-      "#002A8C ",
+      "#002A8C",
       "#8C008C"
     ]
   },
@@ -309,7 +309,7 @@
     "name": "Spear"
   },
   {
-    "color": "#002A8C ",
+    "color": "#002A8C",
     "energy": 0,
     "file": "res://Scenes/SurgeCard.scn",
     "name": "Surge"
@@ -333,12 +333,12 @@
     "name": "Trace"
   },
   {
-    "color": "#002A8C ",
+    "color": "#002A8C",
     "energy": 1,
     "file": "res://Scenes/TributeCard.scn",
     "name": "Tribute",
     "colors": [
-      "#002A8C ",
+      "#002A8C",
       "#8C008C"
     ]
   },
