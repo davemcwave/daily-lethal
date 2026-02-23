@@ -21,7 +21,7 @@ func _ready():
 	$VBoxContainer/BestAttemptText.set_text("[center][b]WITH [color=gold]%d[/color] CARDS PLAYED[/b][/center]" % background.best_card_count)
 	$EnemyIcon.set_texture(background.get_enemy_texture())
 
-	if not background.is_test_puzzle():
+	if not background.is_test_puzzle() or not background.get_puzzle_date().is_empty():
 		background.mark_puzzle_completed(background.get_puzzle_date())
 	background.save_played_cards_solution()
 
