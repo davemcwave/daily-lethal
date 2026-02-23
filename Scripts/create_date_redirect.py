@@ -20,6 +20,43 @@ TEMPLATE = """<!doctype html>
   <script>
     (function redirectViaJson() {{
       var dateKey = "{date}";
+      var requestPath = window.location.pathname || "";
+      var platformMatch = requestPath.match(/^\/(desktop|mobile)\b/i);
+      var requestedPlatform = platformMatch ? platformMatch[1].toLowerCase() : "";
+
+      function applyPlatformPreference(url) {{
+        if (!requestedPlatform) {{
+          return url;
+        }}
+
+        var platformPrefix = "/" + requestedPlatform;
+        var isPlatformPath = function(pathname) {{
+          return pathname.startsWith("/desktop") || pathname.startsWith("/mobile");
+        }};
+
+        if (/^https?:\/\//i.test(url)) {{
+          try {{
+            var parsed = new URL(url);
+            if (parsed.origin !== window.location.origin) {{
+              return url;
+            }}
+            if (isPlatformPath(parsed.pathname)) {{
+              return parsed.toString();
+            }}
+            parsed.pathname = platformPrefix + parsed.pathname;
+            return parsed.toString();
+          }} catch (platformErr) {{
+            console.error("Failed to apply platform preference", platformErr);
+            return url;
+          }}
+        }}
+
+        if (isPlatformPath(url)) {{
+          return url;
+        }}
+        return platformPrefix + url;
+      }}
+
       fetch("/custom-redirects.json", {{ cache: "no-store" }})
         .then(function(response) {{
           if (!response.ok) {{
@@ -47,6 +84,7 @@ TEMPLATE = """<!doctype html>
             var joinChar = normalized.indexOf("?") === -1 ? "?" : "&";
             normalized = normalized + joinChar + "puzzle_date=" + encodeURIComponent(dateKey);
           }}
+          normalized = applyPlatformPreference(normalized);
           window.location.replace(normalized);
         }})
         .catch(function(err) {{

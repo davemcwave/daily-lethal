@@ -1,5 +1,6 @@
 {
   "puzzles": [
+    { "id": "2026-02-23", "release_at": "2026-02-23T00:00:00-04:00", "title": "Boxer" },
     { "id": "2026-02-20", "release_at": "2026-02-20T00:00:00-04:00", "title": "Mad Hatter" },
     { "id": "2026-02-19", "release_at": "2026-02-19T00:00:00-04:00", "title": "Circuit Breaker" },
     { "id": "2026-02-18", "release_at": "2026-02-18T00:00:00-04:00", "title": "Banshee" },

@@ -522,10 +522,51 @@
       }
     });
 
-    function redirectToToday() {
-      const type = localStorage.getItem('device_type');
-      const target = type === 'desktop' ? '/desktop/today' : '/today';
-      window.location.href = target;
+    async function fetchLatestPuzzleDate() {
+      const response = await fetch("/manifest.json?ts=" + Date.now(), { cache: "no-store" });
+      if (!response.ok) {
+        throw new Error("Failed to fetch manifest.json");
+      }
+      const payload = await response.json();
+      const puzzles = Array.isArray(payload?.puzzles) ? payload.puzzles : [];
+      const parsed = [];
+      for (const entry of puzzles) {
+        if (typeof entry?.id !== 'string' || typeof entry?.release_at !== 'string') {
+          continue;
+        }
+        const releaseDate = new Date(entry.release_at);
+        if (Number.isNaN(releaseDate.getTime())) {
+          continue;
+        }
+        parsed.push({ id: entry.id, release: releaseDate });
+      }
+      if (!parsed.length) {
+        return null;
+      }
+      const now = new Date();
+      const available = parsed
+        .filter(entry => entry.release <= now)
+        .sort((a, b) => b.release - a.release);
+      if (available.length > 0) {
+        return available[0].id;
+      }
+      parsed.sort((a, b) => a.release - b.release);
+      return parsed[0].id;
+    }
+
+    async function redirectToToday() {
+      const fallback = '/today';
+      try {
+        const latestDate = await fetchLatestPuzzleDate();
+        if (!latestDate) {
+          window.location.href = fallback;
+          return;
+        }
+        window.location.href = '/' + latestDate + '/';
+      } catch (err) {
+        console.error('redirectToToday failed', err);
+        window.location.href = fallback;
+      }
     }
 
 
