@@ -2660,43 +2660,15 @@
 
   <script>
     const toggle = document.getElementById('desktop-toggle');
-    const label = document.getElementById('desktop-label');
 
-    // Update all puzzle links
-    function updateLinks() {
-      const type = localStorage.getItem('device_type');
-      document.querySelectorAll('a.puzzle-link').forEach(link => {
-        const href = link.dataset.originalHref;
-        if (!href) return;
-        const date = href.replace("/", "");
-        link.setAttribute('href', type === 'desktop' ? `/desktop/${date}` : `/${date}`);
-      });
-    }
-
-    // On load, preserve original hrefs as data attributes
-    document.querySelectorAll('a.puzzle-link').forEach(link => {
-      const original = link.getAttribute('href');
-      link.setAttribute('data-original-href', original);
-    });
-
-    // Set toggle state
+    // Set toggle state on load
     if (localStorage.getItem('device_type') === 'desktop') {
       toggle.checked = true;
-      label.innerText = "Enable Desktop Version";
     }
 
     toggle.addEventListener('change', () => {
-      if (toggle.checked) {
-        localStorage.setItem('device_type', 'desktop');
-        label.innerText = "Enable Desktop Version";
-      } else {
-        localStorage.setItem('device_type', 'mobile');
-        label.innerText = "Enable Desktop Version";
-      }
-      updateLinks(); // <--- THIS FIXES YOUR ISSUE
+      localStorage.setItem('device_type', toggle.checked ? 'desktop' : 'mobile');
     });
-
-    updateLinks(); // Initial load
   </script>
 
 

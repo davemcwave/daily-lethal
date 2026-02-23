@@ -20,16 +20,10 @@ TEMPLATE = """<!doctype html>
   <script>
     (function redirectViaJson() {{
       var dateKey = "{date}";
-      var requestPath = window.location.pathname || "";
-      var platformMatch = requestPath.match(/^\/(desktop|mobile)\b/i);
-      var requestedPlatform = platformMatch ? platformMatch[1].toLowerCase() : "";
+      var platform = localStorage.getItem('device_type') === 'desktop' ? 'desktop' : 'mobile';
+      var platformPrefix = "/" + platform;
 
       function applyPlatformPreference(url) {{
-        if (!requestedPlatform) {{
-          return url;
-        }}
-
-        var platformPrefix = "/" + requestedPlatform;
         var isPlatformPath = function(pathname) {{
           return pathname.startsWith("/desktop") || pathname.startsWith("/mobile");
         }};
@@ -68,6 +62,7 @@ TEMPLATE = """<!doctype html>
           var redirects = (map && map.date_redirects) ? map.date_redirects : map;
           var target = redirects[dateKey] || redirects["/" + dateKey];
           if (typeof target !== "string" || target.length === 0) {{
+            window.location.replace(platformPrefix + "/?puzzle_date=" + encodeURIComponent(dateKey));
             return;
           }}
           var normalized;
@@ -89,6 +84,7 @@ TEMPLATE = """<!doctype html>
         }})
         .catch(function(err) {{
           console.error("Date redirect error", err);
+          window.location.replace(platformPrefix + "/?puzzle_date=" + encodeURIComponent(dateKey));
         }});
     }})();
   </script>
