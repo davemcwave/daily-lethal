@@ -1,173 +1,869 @@
 {
   "puzzles": [
-    { "id": "2026-03-02", "release_at": "2026-03-02T00:00:00-04:00", "title": "Soup" },
-    { "id": "2026-02-27", "release_at": "2026-02-27T00:00:00-04:00", "title": "Fractal" },
-    { "id": "2026-02-26", "release_at": "2026-02-26T00:00:00-04:00", "title": "Shrine Spirit" },
-    { "id": "2026-02-25", "release_at": "2026-02-25T00:00:00-04:00", "title": "Enlightened Angel" },
-    { "id": "2026-02-24", "release_at": "2026-02-24T00:00:00-04:00", "title": "Sterilizing Flames" },
-    { "id": "2026-02-23", "release_at": "2026-02-23T00:00:00-04:00", "title": "Boxer" },
-    { "id": "2026-02-20", "release_at": "2026-02-20T00:00:00-04:00", "title": "Mad Hatter" },
-    { "id": "2026-02-19", "release_at": "2026-02-19T00:00:00-04:00", "title": "Circuit Breaker" },
-    { "id": "2026-02-18", "release_at": "2026-02-18T00:00:00-04:00", "title": "Banshee" },
-    { "id": "2026-02-17", "release_at": "2026-02-17T00:00:00-04:00", "title": "Swordmaster" },
-    { "id": "2026-02-16", "release_at": "2026-02-16T00:00:00-04:00", "title": "Moon Elemental" },
-    { "id": "2026-02-13", "release_at": "2026-02-13T00:00:00-04:00", "title": "Blacksmith" },
-    { "id": "2026-02-12", "release_at": "2026-02-12T00:00:00-04:00", "title": "Punching Bag" },
-    { "id": "2026-02-11", "release_at": "2026-02-11T00:00:00-04:00", "title": "Cockatrice" },
-    { "id": "2026-02-10", "release_at": "2026-02-10T00:00:00-04:00", "title": "Gunslinger" },
-    { "id": "2026-02-09", "release_at": "2026-02-09T00:00:00-04:00", "title": "Worg" },
-    { "id": "2026-02-06", "release_at": "2026-02-06T00:00:00-04:00", "title": "Crusader" },
-    { "id": "2026-02-05", "release_at": "2026-02-05T00:00:00-04:00", "title": "Jack Frost" },
-    { "id": "2026-02-04", "release_at": "2026-02-04T00:00:00-04:00", "title": "Wight" },
-    { "id": "2026-02-03", "release_at": "2026-02-03T00:00:00-04:00", "title": "Wolverine" },
-    { "id": "2026-02-02", "release_at": "2026-02-02T00:00:00-04:00", "title": "Carnivorous Plant" },
-    { "id": "2026-01-30", "release_at": "2026-01-30T00:00:00-04:00", "title": "Hammerhead" },
-    { "id": "2026-01-29", "release_at": "2026-01-29T00:00:00-04:00", "title": "Evil Carrot" },
-    { "id": "2026-01-28", "release_at": "2026-01-28T00:00:00-04:00", "title": "Ninja" },
-    { "id": "2026-01-27", "release_at": "2026-01-27T00:00:00-04:00", "title": "Warrior" },
-    { "id": "2026-01-26", "release_at": "2026-01-26T00:00:00-04:00", "title": "Viper" },
-    { "id": "2026-01-23", "release_at": "2026-01-23T00:00:00-04:00", "title": "Harpy" },
-    { "id": "2026-01-22", "release_at": "2026-01-22T00:00:00-04:00", "title": "Axebeak" },
-    { "id": "2026-01-21", "release_at": "2026-01-21T00:00:00-04:00", "title": "Butler" },
-    { "id": "2026-01-20", "release_at": "2026-01-20T00:00:00-04:00", "title": "Modron" },
-    { "id": "2026-01-19", "release_at": "2026-01-19T00:00:00-04:00", "title": "Scorpion" },
-    { "id": "2026-01-16", "release_at": "2026-01-16T00:00:00-04:00", "title": "Green Dragon" },
-    { "id": "2026-01-15", "release_at": "2026-01-15T00:00:00-04:00", "title": "Elder" },
-    { "id": "2026-01-14", "release_at": "2026-01-14T00:00:00-04:00", "title": "Weather Witch" },
-    { "id": "2026-01-13", "release_at": "2026-01-13T00:00:00-04:00", "title": "Ancient Tree" },
-    { "id": "2026-01-09", "release_at": "2026-01-09T00:00:00-04:00", "title": "Paladin" },
-    { "id": "2026-01-08", "release_at": "2026-01-08T00:00:00-04:00", "title": "Giant Crab" },
-    { "id": "2026-01-07", "release_at": "2026-01-07T00:00:00-04:00", "title": "Vending Machine" },
-    { "id": "2026-01-06", "release_at": "2026-01-06T00:00:00-04:00", "title": "Black Knight" },
-    { "id": "2026-01-05", "release_at": "2026-01-05T00:00:00-04:00", "title": "Radiant Slug" },
-    { "id": "2025-12-12", "release_at": "2025-12-12T00:00:00-04:00", "title": "Owlbear" },
-    { "id": "2025-12-11", "release_at": "2025-12-11T00:00:00-04:00", "title": "Wraith" },
-    { "id": "2025-12-10", "release_at": "2025-12-10T00:00:00-04:00", "title": "Addition Sign" },
-    { "id": "2025-12-09", "release_at": "2025-12-09T00:00:00-04:00", "title": "Living Shadow" },
-    { "id": "2025-12-08", "release_at": "2025-12-08T00:00:00-04:00", "title": "Bandit" },
-    { "id": "2025-12-05", "release_at": "2025-12-05T00:00:00-04:00", "title": "Titan" },
-    { "id": "2025-12-04", "release_at": "2025-12-04T00:00:00-04:00", "title": "Speed Elf" },
-    { "id": "2025-12-03", "release_at": "2025-12-03T00:00:00-04:00", "title": "Termites" },
-    { "id": "2025-12-02", "release_at": "2025-12-02T00:00:00-04:00", "title": "Fungi" },
-    { "id": "2025-12-01", "release_at": "2025-12-01T00:00:00-04:00", "title": "Mushroom" },
-    { "id": "2025-11-28", "release_at": "2025-11-28T00:00:00-04:00", "title": "Monk" },
-    { "id": "2025-11-27", "release_at": "2025-11-27T00:00:00-04:00", "title": "Dwarven Miner" },
-    { "id": "2025-11-26", "release_at": "2025-11-26T00:00:00-04:00", "title": "Frankestein's Monster" },
-    { "id": "2025-11-25", "release_at": "2025-11-25T00:00:00-04:00", "title": "Dr. Frankestein" },
-    { "id": "2025-11-24", "release_at": "2025-11-24T00:00:00-04:00", "title": "Mantis Shrimp" },
-    { "id": "2025-11-21", "release_at": "2025-11-21T00:00:00-04:00", "title": "Cursed Campfire" },
-    { "id": "2025-11-20", "release_at": "2025-11-20T00:00:00-04:00", "title": "Pufferfish" },
-    { "id": "2025-11-19", "release_at": "2025-11-19T00:00:00-04:00", "title": "Giant Eel" },
-    { "id": "2025-11-18", "release_at": "2025-11-18T00:00:00-04:00", "title": "Hydra" },
-    { "id": "2025-11-17", "release_at": "2025-11-17T00:00:00-04:00", "title": "Target Dummy" },
-    { "id": "2025-11-14", "release_at": "2025-11-14T00:00:00-04:00", "title": "Cannoneer" },
-    { "id": "2025-11-13", "release_at": "2025-11-13T00:00:00-04:00", "title": "Rat King" },
-    { "id": "2025-11-12", "release_at": "2025-11-12T00:00:00-04:00", "title": "Delvers" },
-    { "id": "2025-11-11", "release_at": "2025-11-11T00:00:00-04:00", "title": "Ghost Pirate" },
-    { "id": "2025-11-10", "release_at": "2025-11-10T00:00:00-04:00", "title": "Demon Nurse" },
-    { "id": "2025-11-07", "release_at": "2025-11-07T00:00:00-04:00", "title": "Bigfoot" },
-    { "id": "2025-11-06", "release_at": "2025-11-06T00:00:00-04:00", "title": "Blue Dragon" },
-    { "id": "2025-11-05", "release_at": "2025-11-05T00:00:00-04:00", "title": "Raven" },
-    { "id": "2025-11-04", "release_at": "2025-11-04T00:00:00-04:00", "title": "Car Battery" },
-    { "id": "2025-11-03", "release_at": "2025-11-03T00:00:00-04:00", "title": "Leprechaun" },
-    { "id": "2025-10-31", "release_at": "2025-10-31T00:00:00-04:00", "title": "Zombie" },
-    { "id": "2025-10-30", "release_at": "2025-10-30T00:00:00-04:00", "title": "Giant Bat" },
-    { "id": "2025-10-29", "release_at": "2025-10-29T00:00:00-04:00", "title": "Fairy" },
-    { "id": "2025-10-28", "release_at": "2025-10-28T00:00:00-04:00", "title": "Ice Golem" },
-    { "id": "2025-10-27", "release_at": "2025-10-27T00:00:00-04:00", "title": "Serpents" },
-    { "id": "2025-10-24", "release_at": "2025-10-24T00:00:00-04:00", "title": "Time Demon" },
-    { "id": "2025-10-23", "release_at": "2025-10-23T00:00:00-04:00", "title": "Flail Snail" },
-    { "id": "2025-10-22", "release_at": "2025-10-22T00:00:00-04:00", "title": "Pink Slime" },
-    { "id": "2025-10-21", "release_at": "2025-10-21T00:00:00-04:00", "title": "Grave Robber" },
-    { "id": "2025-10-20", "release_at": "2025-10-20T00:00:00-04:00", "title": "Charger" },
-    { "id": "2025-10-17", "release_at": "2025-10-17T00:00:00-04:00", "title": "Time Lord" },
-    { "id": "2025-10-16", "release_at": "2025-10-16T00:00:00-04:00", "title": "Pterosaur" },
-    { "id": "2025-10-15", "release_at": "2025-10-15T00:00:00-04:00", "title": "Water Drake" },
-    { "id": "2025-10-14", "release_at": "2025-10-14T00:00:00-04:00", "title": "Pinky" },
-    { "id": "2025-10-13", "release_at": "2025-10-13T00:00:00-04:00", "title": "Cherub" },
-    { "id": "2025-10-10", "release_at": "2025-10-10T00:00:00-04:00", "title": "Shoggoth" },
-    { "id": "2025-10-09", "release_at": "2025-10-09T00:00:00-04:00", "title": "Spark Golem" },
-    { "id": "2025-10-08", "release_at": "2025-10-08T00:00:00-04:00", "title": "Fiend" },
-    { "id": "2025-10-07", "release_at": "2025-10-07T00:00:00-04:00", "title": "Porcupine" },
-    { "id": "2025-10-06", "release_at": "2025-10-06T00:00:00-04:00", "title": "Giftman" },
-    { "id": "2025-10-03", "release_at": "2025-10-03T00:00:00-04:00", "title": "Barbarian" },
-    { "id": "2025-10-02", "release_at": "2025-10-02T00:00:00-04:00", "title": "Red Dragon" },
-    { "id": "2025-10-01", "release_at": "2025-10-01T00:00:00-04:00", "title": "Buzzsaw Droid" },
-    { "id": "2025-09-30", "release_at": "2025-09-30T00:00:00-04:00", "title": "Artificer" },
-    { "id": "2025-09-29", "release_at": "2025-09-29T00:00:00-04:00", "title": "Chupacabra" },
-    { "id": "2025-09-26", "release_at": "2025-09-26T00:00:00-04:00", "title": "Poltergeist" },
-    { "id": "2025-09-25", "release_at": "2025-09-25T00:00:00-04:00", "title": "Lich" },
-    { "id": "2025-09-24", "release_at": "2025-09-24T00:00:00-04:00", "title": "Firebug" },
-    { "id": "2025-09-23", "release_at": "2025-09-23T00:00:00-04:00", "title": "Redeye" },
-    { "id": "2025-09-22", "release_at": "2025-09-22T00:00:00-04:00", "title": "Moocher" },
-    { "id": "2025-09-19", "release_at": "2025-09-19T00:00:00-04:00", "title": "Deity" },
-    { "id": "2025-09-17", "release_at": "2025-09-17T00:00:00-04:00", "title": "Void Creature" },
-    { "id": "2025-09-15", "release_at": "2025-09-15T00:00:00-04:00", "title": "Giant Wurm" },
-    { "id": "2025-09-13", "release_at": "2025-09-13T00:00:00-04:00", "title": "Wasm Swarm" },
-    { "id": "2025-09-11", "release_at": "2025-09-11T00:00:00-04:00", "title": "Snowman" },
-    { "id": "2025-09-09", "release_at": "2025-09-09T00:00:00-04:00", "title": "Warlock" },
-    { "id": "2025-09-07", "release_at": "2025-09-07T00:00:00-04:00", "title": "Flumph" },
-    { "id": "2025-09-05", "release_at": "2025-09-05T00:00:00-04:00", "title": "Dire Wolf" },
-    { "id": "2025-09-03", "release_at": "2025-09-03T00:00:00-04:00", "title": "Assassin" },
-    { "id": "2025-09-01", "release_at": "2025-09-01T00:00:00-04:00", "title": "Beetle" },
-    { "id": "2025-08-31", "release_at": "2025-08-31T00:00:00-04:00", "title": "Roc" },
-    { "id": "2025-08-29", "release_at": "2025-08-29T00:00:00-04:00", "title": "Witch" },
-    { "id": "2025-08-27", "release_at": "2025-08-27T00:00:00-04:00", "title": "Scarecrow" },
-    { "id": "2025-08-25", "release_at": "2025-08-25T00:00:00-04:00", "title": "Merfolk" },
-    { "id": "2025-08-23", "release_at": "2025-08-23T00:00:00-04:00", "title": "Alchemist" },
-    { "id": "2025-08-21", "release_at": "2025-08-21T00:00:00-04:00", "title": "Gargoyle" },
-    { "id": "2025-08-19", "release_at": "2025-08-19T00:00:00-04:00", "title": "Tentacle Cultist" },
-    { "id": "2025-08-17", "release_at": "2025-08-17T00:00:00-04:00", "title": "Funambulist" },
-    { "id": "2025-08-15", "release_at": "2025-08-15T00:00:00-04:00", "title": "Dust Droid" },
-    { "id": "2025-08-13", "release_at": "2025-08-13T00:00:00-04:00", "title": "Origami" },
-    { "id": "2025-08-11", "release_at": "2025-08-11T00:00:00-04:00", "title": "Decrepit Mouse" },
-    { "id": "2025-08-09", "release_at": "2025-08-09T00:00:00-04:00", "title": "Demogorgon" },
-    { "id": "2025-08-07", "release_at": "2025-08-07T00:00:00-04:00", "title": "Collector" },
-    { "id": "2025-08-05", "release_at": "2025-08-05T00:00:00-04:00", "title": "Mana Imp" },
-    { "id": "2025-08-03", "release_at": "2025-08-03T00:00:00-04:00", "title": "Noggle" },
-    { "id": "2025-08-01", "release_at": "2025-08-01T00:00:00-04:00", "title": "Gravedigger" },
-    { "id": "2025-07-30", "release_at": "2025-07-30T00:00:00-04:00", "title": "Thunderbird" },
-    { "id": "2025-07-28", "release_at": "2025-07-28T00:00:00-04:00", "title": "Lightning Elemental" },
-    { "id": "2025-07-26", "release_at": "2025-07-26T00:00:00-04:00", "title": "Displacer Beast" },
-    { "id": "2025-07-24", "release_at": "2025-07-24T00:00:00-04:00", "title": "Tentacle Pirate" },
-    { "id": "2025-07-22", "release_at": "2025-07-22T00:00:00-04:00", "title": "Snipe Bird" },
-    { "id": "2025-07-20", "release_at": "2025-07-20T00:00:00-04:00", "title": "Yeti" },
-    { "id": "2025-07-18", "release_at": "2025-07-18T00:00:00-04:00", "title": "Beholder" },
-    { "id": "2025-07-16", "release_at": "2025-07-16T00:00:00-04:00", "title": "Crawler" },
-    { "id": "2025-07-14", "release_at": "2025-07-14T00:00:00-04:00", "title": "Mad Scientist" },
-    { "id": "2025-07-12", "release_at": "2025-07-12T00:00:00-04:00", "title": "Earthworm" },
-    { "id": "2025-07-10", "release_at": "2025-07-10T00:00:00-04:00", "title": "Hell Hound" },
-    { "id": "2025-07-08", "release_at": "2025-07-08T00:00:00-04:00", "title": "Earth Elemental" },
-    { "id": "2025-07-06", "release_at": "2025-07-06T00:00:00-04:00", "title": "Creeping Vine" },
-    { "id": "2025-07-04", "release_at": "2025-07-04T00:00:00-04:00", "title": "Vampire" },
-    { "id": "2025-07-02", "release_at": "2025-07-02T00:00:00-04:00", "title": "Weaver" },
-    { "id": "2025-06-30", "release_at": "2025-06-30T00:00:00-04:00", "title": "Rock Golem" },
-    { "id": "2025-06-28", "release_at": "2025-06-28T00:00:00-04:00", "title": "Stirge" },
-    { "id": "2025-06-26", "release_at": "2025-06-26T00:00:00-04:00", "title": "Ooze" },
-    { "id": "2025-06-24", "release_at": "2025-06-24T00:00:00-04:00", "title": "Flame Giant" },
-    { "id": "2025-06-21", "release_at": "2025-06-21T00:00:00-04:00", "title": "Soldier" },
-    { "id": "2025-06-19", "release_at": "2025-06-19T00:00:00-04:00", "title": "Sapling" },
-    { "id": "2025-06-17", "release_at": "2025-06-17T00:00:00-04:00", "title": "Animated Armor" },
-    { "id": "2025-06-15", "release_at": "2025-06-15T00:00:00-04:00", "title": "Mummy" },
-    { "id": "2025-06-13", "release_at": "2025-06-13T00:00:00-04:00", "title": "Genie" },
-    { "id": "2025-06-11", "release_at": "2025-06-11T00:00:00-04:00", "title": "Cyclops" },
-    { "id": "2025-06-09", "release_at": "2025-06-09T00:00:00-04:00", "title": "Cloaker" },
-    { "id": "2025-06-07", "release_at": "2025-06-07T00:00:00-04:00", "title": "Troll" },
-    { "id": "2025-06-05", "release_at": "2025-06-05T00:00:00-04:00", "title": "Naga" },
-    { "id": "2025-06-03", "release_at": "2025-06-03T00:00:00-04:00", "title": "Mimic" },
-    { "id": "2025-06-01", "release_at": "2025-06-01T00:00:00-04:00", "title": "Giant Rat" },
-    { "id": "2025-05-29", "release_at": "2025-05-29T00:00:00-04:00", "title": "Kobold" },
-    { "id": "2025-05-25", "release_at": "2025-05-25T00:00:00-04:00", "title": "Flame Imp" },
-    { "id": "2025-05-20", "release_at": "2025-05-20T00:00:00-04:00", "title": "Ogre" },
-    { "id": "2025-05-17", "release_at": "2025-05-17T00:00:00-04:00", "title": "Minotaur" },
-    { "id": "2025-05-15", "release_at": "2025-05-15T00:00:00-04:00", "title": "Goblin" },
-    { "id": "2025-05-13", "release_at": "2025-05-13T00:00:00-04:00", "title": "Kraken" },
-    { "id": "2025-05-10", "release_at": "2025-05-10T00:00:00-04:00", "title": "Gelatinous Cube" },
-    { "id": "2025-05-05", "release_at": "2025-05-05T00:00:00-04:00", "title": "Leech" },
-    { "id": "2025-05-04", "release_at": "2025-05-04T00:00:00-04:00", "title": "Werewolf" },
-    { "id": "2025-05-02", "release_at": "2025-05-02T00:00:00-04:00", "title": "Skeleton" },
-    { "id": "2025-04-25", "release_at": "2025-04-25T00:00:00-04:00", "title": "Bloodthorn" },
-    { "id": "2025-04-24", "release_at": "2025-04-24T00:00:00-04:00", "title": "Sea Monster" },
-    { "id": "2025-04-23", "release_at": "2025-04-23T00:00:00-04:00", "title": "Robot" }
+    {
+      "id": "2026-03-06",
+      "release_at": "2026-03-06T00:00:00-04:00",
+      "title": "Tyrant"
+    },
+    {
+      "id": "2026-03-05",
+      "release_at": "2026-03-05T00:00:00-04:00",
+      "title": "Vampiric Thrall"
+    },
+    {
+      "id": "2026-03-04",
+      "release_at": "2026-03-04T00:00:00-04:00",
+      "title": "Wind Elemental"
+    },
+    {
+      "id": "2026-03-03",
+      "release_at": "2026-03-03T00:00:00-04:00",
+      "title": "Potion Dealer"
+    },
+    {
+      "id": "2026-03-02",
+      "release_at": "2026-03-02T00:00:00-04:00",
+      "title": "Soup"
+    },
+    {
+      "id": "2026-02-27",
+      "release_at": "2026-02-27T00:00:00-04:00",
+      "title": "Fractal"
+    },
+    {
+      "id": "2026-02-26",
+      "release_at": "2026-02-26T00:00:00-04:00",
+      "title": "Shrine Spirit"
+    },
+    {
+      "id": "2026-02-25",
+      "release_at": "2026-02-25T00:00:00-04:00",
+      "title": "Enlightened Angel"
+    },
+    {
+      "id": "2026-02-24",
+      "release_at": "2026-02-24T00:00:00-04:00",
+      "title": "Sterilizing Flames"
+    },
+    {
+      "id": "2026-02-23",
+      "release_at": "2026-02-23T00:00:00-04:00",
+      "title": "Boxer"
+    },
+    {
+      "id": "2026-02-20",
+      "release_at": "2026-02-20T00:00:00-04:00",
+      "title": "Mad Hatter"
+    },
+    {
+      "id": "2026-02-19",
+      "release_at": "2026-02-19T00:00:00-04:00",
+      "title": "Circuit Breaker"
+    },
+    {
+      "id": "2026-02-18",
+      "release_at": "2026-02-18T00:00:00-04:00",
+      "title": "Banshee"
+    },
+    {
+      "id": "2026-02-17",
+      "release_at": "2026-02-17T00:00:00-04:00",
+      "title": "Swordmaster"
+    },
+    {
+      "id": "2026-02-16",
+      "release_at": "2026-02-16T00:00:00-04:00",
+      "title": "Moon Elemental"
+    },
+    {
+      "id": "2026-02-13",
+      "release_at": "2026-02-13T00:00:00-04:00",
+      "title": "Blacksmith"
+    },
+    {
+      "id": "2026-02-12",
+      "release_at": "2026-02-12T00:00:00-04:00",
+      "title": "Punching Bag"
+    },
+    {
+      "id": "2026-02-11",
+      "release_at": "2026-02-11T00:00:00-04:00",
+      "title": "Cockatrice"
+    },
+    {
+      "id": "2026-02-10",
+      "release_at": "2026-02-10T00:00:00-04:00",
+      "title": "Gunslinger"
+    },
+    {
+      "id": "2026-02-09",
+      "release_at": "2026-02-09T00:00:00-04:00",
+      "title": "Worg"
+    },
+    {
+      "id": "2026-02-06",
+      "release_at": "2026-02-06T00:00:00-04:00",
+      "title": "Crusader"
+    },
+    {
+      "id": "2026-02-05",
+      "release_at": "2026-02-05T00:00:00-04:00",
+      "title": "Jack Frost"
+    },
+    {
+      "id": "2026-02-04",
+      "release_at": "2026-02-04T00:00:00-04:00",
+      "title": "Wight"
+    },
+    {
+      "id": "2026-02-03",
+      "release_at": "2026-02-03T00:00:00-04:00",
+      "title": "Wolverine"
+    },
+    {
+      "id": "2026-02-02",
+      "release_at": "2026-02-02T00:00:00-04:00",
+      "title": "Carnivorous Plant"
+    },
+    {
+      "id": "2026-01-30",
+      "release_at": "2026-01-30T00:00:00-04:00",
+      "title": "Hammerhead"
+    },
+    {
+      "id": "2026-01-29",
+      "release_at": "2026-01-29T00:00:00-04:00",
+      "title": "Evil Carrot"
+    },
+    {
+      "id": "2026-01-28",
+      "release_at": "2026-01-28T00:00:00-04:00",
+      "title": "Ninja"
+    },
+    {
+      "id": "2026-01-27",
+      "release_at": "2026-01-27T00:00:00-04:00",
+      "title": "Warrior"
+    },
+    {
+      "id": "2026-01-26",
+      "release_at": "2026-01-26T00:00:00-04:00",
+      "title": "Viper"
+    },
+    {
+      "id": "2026-01-23",
+      "release_at": "2026-01-23T00:00:00-04:00",
+      "title": "Harpy"
+    },
+    {
+      "id": "2026-01-22",
+      "release_at": "2026-01-22T00:00:00-04:00",
+      "title": "Axebeak"
+    },
+    {
+      "id": "2026-01-21",
+      "release_at": "2026-01-21T00:00:00-04:00",
+      "title": "Butler"
+    },
+    {
+      "id": "2026-01-20",
+      "release_at": "2026-01-20T00:00:00-04:00",
+      "title": "Modron"
+    },
+    {
+      "id": "2026-01-19",
+      "release_at": "2026-01-19T00:00:00-04:00",
+      "title": "Scorpion"
+    },
+    {
+      "id": "2026-01-16",
+      "release_at": "2026-01-16T00:00:00-04:00",
+      "title": "Green Dragon"
+    },
+    {
+      "id": "2026-01-15",
+      "release_at": "2026-01-15T00:00:00-04:00",
+      "title": "Elder"
+    },
+    {
+      "id": "2026-01-14",
+      "release_at": "2026-01-14T00:00:00-04:00",
+      "title": "Weather Witch"
+    },
+    {
+      "id": "2026-01-13",
+      "release_at": "2026-01-13T00:00:00-04:00",
+      "title": "Ancient Tree"
+    },
+    {
+      "id": "2026-01-09",
+      "release_at": "2026-01-09T00:00:00-04:00",
+      "title": "Paladin"
+    },
+    {
+      "id": "2026-01-08",
+      "release_at": "2026-01-08T00:00:00-04:00",
+      "title": "Giant Crab"
+    },
+    {
+      "id": "2026-01-07",
+      "release_at": "2026-01-07T00:00:00-04:00",
+      "title": "Vending Machine"
+    },
+    {
+      "id": "2026-01-06",
+      "release_at": "2026-01-06T00:00:00-04:00",
+      "title": "Black Knight"
+    },
+    {
+      "id": "2026-01-05",
+      "release_at": "2026-01-05T00:00:00-04:00",
+      "title": "Radiant Slug"
+    },
+    {
+      "id": "2025-12-12",
+      "release_at": "2025-12-12T00:00:00-04:00",
+      "title": "Owlbear"
+    },
+    {
+      "id": "2025-12-11",
+      "release_at": "2025-12-11T00:00:00-04:00",
+      "title": "Wraith"
+    },
+    {
+      "id": "2025-12-10",
+      "release_at": "2025-12-10T00:00:00-04:00",
+      "title": "Addition Sign"
+    },
+    {
+      "id": "2025-12-09",
+      "release_at": "2025-12-09T00:00:00-04:00",
+      "title": "Living Shadow"
+    },
+    {
+      "id": "2025-12-08",
+      "release_at": "2025-12-08T00:00:00-04:00",
+      "title": "Bandit"
+    },
+    {
+      "id": "2025-12-05",
+      "release_at": "2025-12-05T00:00:00-04:00",
+      "title": "Titan"
+    },
+    {
+      "id": "2025-12-04",
+      "release_at": "2025-12-04T00:00:00-04:00",
+      "title": "Speed Elf"
+    },
+    {
+      "id": "2025-12-03",
+      "release_at": "2025-12-03T00:00:00-04:00",
+      "title": "Termites"
+    },
+    {
+      "id": "2025-12-02",
+      "release_at": "2025-12-02T00:00:00-04:00",
+      "title": "Fungi"
+    },
+    {
+      "id": "2025-12-01",
+      "release_at": "2025-12-01T00:00:00-04:00",
+      "title": "Mushroom"
+    },
+    {
+      "id": "2025-11-28",
+      "release_at": "2025-11-28T00:00:00-04:00",
+      "title": "Monk"
+    },
+    {
+      "id": "2025-11-27",
+      "release_at": "2025-11-27T00:00:00-04:00",
+      "title": "Dwarven Miner"
+    },
+    {
+      "id": "2025-11-26",
+      "release_at": "2025-11-26T00:00:00-04:00",
+      "title": "Frankestein's Monster"
+    },
+    {
+      "id": "2025-11-25",
+      "release_at": "2025-11-25T00:00:00-04:00",
+      "title": "Dr. Frankestein"
+    },
+    {
+      "id": "2025-11-24",
+      "release_at": "2025-11-24T00:00:00-04:00",
+      "title": "Mantis Shrimp"
+    },
+    {
+      "id": "2025-11-21",
+      "release_at": "2025-11-21T00:00:00-04:00",
+      "title": "Cursed Campfire"
+    },
+    {
+      "id": "2025-11-20",
+      "release_at": "2025-11-20T00:00:00-04:00",
+      "title": "Pufferfish"
+    },
+    {
+      "id": "2025-11-19",
+      "release_at": "2025-11-19T00:00:00-04:00",
+      "title": "Giant Eel"
+    },
+    {
+      "id": "2025-11-18",
+      "release_at": "2025-11-18T00:00:00-04:00",
+      "title": "Hydra"
+    },
+    {
+      "id": "2025-11-17",
+      "release_at": "2025-11-17T00:00:00-04:00",
+      "title": "Target Dummy"
+    },
+    {
+      "id": "2025-11-14",
+      "release_at": "2025-11-14T00:00:00-04:00",
+      "title": "Cannoneer"
+    },
+    {
+      "id": "2025-11-13",
+      "release_at": "2025-11-13T00:00:00-04:00",
+      "title": "Rat King"
+    },
+    {
+      "id": "2025-11-12",
+      "release_at": "2025-11-12T00:00:00-04:00",
+      "title": "Delvers"
+    },
+    {
+      "id": "2025-11-11",
+      "release_at": "2025-11-11T00:00:00-04:00",
+      "title": "Ghost Pirate"
+    },
+    {
+      "id": "2025-11-10",
+      "release_at": "2025-11-10T00:00:00-04:00",
+      "title": "Demon Nurse"
+    },
+    {
+      "id": "2025-11-07",
+      "release_at": "2025-11-07T00:00:00-04:00",
+      "title": "Bigfoot"
+    },
+    {
+      "id": "2025-11-06",
+      "release_at": "2025-11-06T00:00:00-04:00",
+      "title": "Blue Dragon"
+    },
+    {
+      "id": "2025-11-05",
+      "release_at": "2025-11-05T00:00:00-04:00",
+      "title": "Raven"
+    },
+    {
+      "id": "2025-11-04",
+      "release_at": "2025-11-04T00:00:00-04:00",
+      "title": "Car Battery"
+    },
+    {
+      "id": "2025-11-03",
+      "release_at": "2025-11-03T00:00:00-04:00",
+      "title": "Leprechaun"
+    },
+    {
+      "id": "2025-10-31",
+      "release_at": "2025-10-31T00:00:00-04:00",
+      "title": "Zombie"
+    },
+    {
+      "id": "2025-10-30",
+      "release_at": "2025-10-30T00:00:00-04:00",
+      "title": "Giant Bat"
+    },
+    {
+      "id": "2025-10-29",
+      "release_at": "2025-10-29T00:00:00-04:00",
+      "title": "Fairy"
+    },
+    {
+      "id": "2025-10-28",
+      "release_at": "2025-10-28T00:00:00-04:00",
+      "title": "Ice Golem"
+    },
+    {
+      "id": "2025-10-27",
+      "release_at": "2025-10-27T00:00:00-04:00",
+      "title": "Serpents"
+    },
+    {
+      "id": "2025-10-24",
+      "release_at": "2025-10-24T00:00:00-04:00",
+      "title": "Time Demon"
+    },
+    {
+      "id": "2025-10-23",
+      "release_at": "2025-10-23T00:00:00-04:00",
+      "title": "Flail Snail"
+    },
+    {
+      "id": "2025-10-22",
+      "release_at": "2025-10-22T00:00:00-04:00",
+      "title": "Pink Slime"
+    },
+    {
+      "id": "2025-10-21",
+      "release_at": "2025-10-21T00:00:00-04:00",
+      "title": "Grave Robber"
+    },
+    {
+      "id": "2025-10-20",
+      "release_at": "2025-10-20T00:00:00-04:00",
+      "title": "Charger"
+    },
+    {
+      "id": "2025-10-17",
+      "release_at": "2025-10-17T00:00:00-04:00",
+      "title": "Time Lord"
+    },
+    {
+      "id": "2025-10-16",
+      "release_at": "2025-10-16T00:00:00-04:00",
+      "title": "Pterosaur"
+    },
+    {
+      "id": "2025-10-15",
+      "release_at": "2025-10-15T00:00:00-04:00",
+      "title": "Water Drake"
+    },
+    {
+      "id": "2025-10-14",
+      "release_at": "2025-10-14T00:00:00-04:00",
+      "title": "Pinky"
+    },
+    {
+      "id": "2025-10-13",
+      "release_at": "2025-10-13T00:00:00-04:00",
+      "title": "Cherub"
+    },
+    {
+      "id": "2025-10-10",
+      "release_at": "2025-10-10T00:00:00-04:00",
+      "title": "Shoggoth"
+    },
+    {
+      "id": "2025-10-09",
+      "release_at": "2025-10-09T00:00:00-04:00",
+      "title": "Spark Golem"
+    },
+    {
+      "id": "2025-10-08",
+      "release_at": "2025-10-08T00:00:00-04:00",
+      "title": "Fiend"
+    },
+    {
+      "id": "2025-10-07",
+      "release_at": "2025-10-07T00:00:00-04:00",
+      "title": "Porcupine"
+    },
+    {
+      "id": "2025-10-06",
+      "release_at": "2025-10-06T00:00:00-04:00",
+      "title": "Giftman"
+    },
+    {
+      "id": "2025-10-03",
+      "release_at": "2025-10-03T00:00:00-04:00",
+      "title": "Barbarian"
+    },
+    {
+      "id": "2025-10-02",
+      "release_at": "2025-10-02T00:00:00-04:00",
+      "title": "Red Dragon"
+    },
+    {
+      "id": "2025-10-01",
+      "release_at": "2025-10-01T00:00:00-04:00",
+      "title": "Buzzsaw Droid"
+    },
+    {
+      "id": "2025-09-30",
+      "release_at": "2025-09-30T00:00:00-04:00",
+      "title": "Artificer"
+    },
+    {
+      "id": "2025-09-29",
+      "release_at": "2025-09-29T00:00:00-04:00",
+      "title": "Chupacabra"
+    },
+    {
+      "id": "2025-09-26",
+      "release_at": "2025-09-26T00:00:00-04:00",
+      "title": "Poltergeist"
+    },
+    {
+      "id": "2025-09-25",
+      "release_at": "2025-09-25T00:00:00-04:00",
+      "title": "Lich"
+    },
+    {
+      "id": "2025-09-24",
+      "release_at": "2025-09-24T00:00:00-04:00",
+      "title": "Firebug"
+    },
+    {
+      "id": "2025-09-23",
+      "release_at": "2025-09-23T00:00:00-04:00",
+      "title": "Redeye"
+    },
+    {
+      "id": "2025-09-22",
+      "release_at": "2025-09-22T00:00:00-04:00",
+      "title": "Moocher"
+    },
+    {
+      "id": "2025-09-19",
+      "release_at": "2025-09-19T00:00:00-04:00",
+      "title": "Deity"
+    },
+    {
+      "id": "2025-09-17",
+      "release_at": "2025-09-17T00:00:00-04:00",
+      "title": "Void Creature"
+    },
+    {
+      "id": "2025-09-15",
+      "release_at": "2025-09-15T00:00:00-04:00",
+      "title": "Giant Wurm"
+    },
+    {
+      "id": "2025-09-13",
+      "release_at": "2025-09-13T00:00:00-04:00",
+      "title": "Wasm Swarm"
+    },
+    {
+      "id": "2025-09-11",
+      "release_at": "2025-09-11T00:00:00-04:00",
+      "title": "Snowman"
+    },
+    {
+      "id": "2025-09-09",
+      "release_at": "2025-09-09T00:00:00-04:00",
+      "title": "Warlock"
+    },
+    {
+      "id": "2025-09-07",
+      "release_at": "2025-09-07T00:00:00-04:00",
+      "title": "Flumph"
+    },
+    {
+      "id": "2025-09-05",
+      "release_at": "2025-09-05T00:00:00-04:00",
+      "title": "Dire Wolf"
+    },
+    {
+      "id": "2025-09-03",
+      "release_at": "2025-09-03T00:00:00-04:00",
+      "title": "Assassin"
+    },
+    {
+      "id": "2025-09-01",
+      "release_at": "2025-09-01T00:00:00-04:00",
+      "title": "Beetle"
+    },
+    {
+      "id": "2025-08-31",
+      "release_at": "2025-08-31T00:00:00-04:00",
+      "title": "Roc"
+    },
+    {
+      "id": "2025-08-29",
+      "release_at": "2025-08-29T00:00:00-04:00",
+      "title": "Witch"
+    },
+    {
+      "id": "2025-08-27",
+      "release_at": "2025-08-27T00:00:00-04:00",
+      "title": "Scarecrow"
+    },
+    {
+      "id": "2025-08-25",
+      "release_at": "2025-08-25T00:00:00-04:00",
+      "title": "Merfolk"
+    },
+    {
+      "id": "2025-08-23",
+      "release_at": "2025-08-23T00:00:00-04:00",
+      "title": "Alchemist"
+    },
+    {
+      "id": "2025-08-21",
+      "release_at": "2025-08-21T00:00:00-04:00",
+      "title": "Gargoyle"
+    },
+    {
+      "id": "2025-08-19",
+      "release_at": "2025-08-19T00:00:00-04:00",
+      "title": "Tentacle Cultist"
+    },
+    {
+      "id": "2025-08-17",
+      "release_at": "2025-08-17T00:00:00-04:00",
+      "title": "Funambulist"
+    },
+    {
+      "id": "2025-08-15",
+      "release_at": "2025-08-15T00:00:00-04:00",
+      "title": "Dust Droid"
+    },
+    {
+      "id": "2025-08-13",
+      "release_at": "2025-08-13T00:00:00-04:00",
+      "title": "Origami"
+    },
+    {
+      "id": "2025-08-11",
+      "release_at": "2025-08-11T00:00:00-04:00",
+      "title": "Decrepit Mouse"
+    },
+    {
+      "id": "2025-08-09",
+      "release_at": "2025-08-09T00:00:00-04:00",
+      "title": "Demogorgon"
+    },
+    {
+      "id": "2025-08-07",
+      "release_at": "2025-08-07T00:00:00-04:00",
+      "title": "Collector"
+    },
+    {
+      "id": "2025-08-05",
+      "release_at": "2025-08-05T00:00:00-04:00",
+      "title": "Mana Imp"
+    },
+    {
+      "id": "2025-08-03",
+      "release_at": "2025-08-03T00:00:00-04:00",
+      "title": "Noggle"
+    },
+    {
+      "id": "2025-08-01",
+      "release_at": "2025-08-01T00:00:00-04:00",
+      "title": "Gravedigger"
+    },
+    {
+      "id": "2025-07-30",
+      "release_at": "2025-07-30T00:00:00-04:00",
+      "title": "Thunderbird"
+    },
+    {
+      "id": "2025-07-28",
+      "release_at": "2025-07-28T00:00:00-04:00",
+      "title": "Lightning Elemental"
+    },
+    {
+      "id": "2025-07-26",
+      "release_at": "2025-07-26T00:00:00-04:00",
+      "title": "Displacer Beast"
+    },
+    {
+      "id": "2025-07-24",
+      "release_at": "2025-07-24T00:00:00-04:00",
+      "title": "Tentacle Pirate"
+    },
+    {
+      "id": "2025-07-22",
+      "release_at": "2025-07-22T00:00:00-04:00",
+      "title": "Snipe Bird"
+    },
+    {
+      "id": "2025-07-20",
+      "release_at": "2025-07-20T00:00:00-04:00",
+      "title": "Yeti"
+    },
+    {
+      "id": "2025-07-18",
+      "release_at": "2025-07-18T00:00:00-04:00",
+      "title": "Beholder"
+    },
+    {
+      "id": "2025-07-16",
+      "release_at": "2025-07-16T00:00:00-04:00",
+      "title": "Crawler"
+    },
+    {
+      "id": "2025-07-14",
+      "release_at": "2025-07-14T00:00:00-04:00",
+      "title": "Mad Scientist"
+    },
+    {
+      "id": "2025-07-12",
+      "release_at": "2025-07-12T00:00:00-04:00",
+      "title": "Earthworm"
+    },
+    {
+      "id": "2025-07-10",
+      "release_at": "2025-07-10T00:00:00-04:00",
+      "title": "Hell Hound"
+    },
+    {
+      "id": "2025-07-08",
+      "release_at": "2025-07-08T00:00:00-04:00",
+      "title": "Earth Elemental"
+    },
+    {
+      "id": "2025-07-06",
+      "release_at": "2025-07-06T00:00:00-04:00",
+      "title": "Creeping Vine"
+    },
+    {
+      "id": "2025-07-04",
+      "release_at": "2025-07-04T00:00:00-04:00",
+      "title": "Vampire"
+    },
+    {
+      "id": "2025-07-02",
+      "release_at": "2025-07-02T00:00:00-04:00",
+      "title": "Weaver"
+    },
+    {
+      "id": "2025-06-30",
+      "release_at": "2025-06-30T00:00:00-04:00",
+      "title": "Rock Golem"
+    },
+    {
+      "id": "2025-06-28",
+      "release_at": "2025-06-28T00:00:00-04:00",
+      "title": "Stirge"
+    },
+    {
+      "id": "2025-06-26",
+      "release_at": "2025-06-26T00:00:00-04:00",
+      "title": "Ooze"
+    },
+    {
+      "id": "2025-06-24",
+      "release_at": "2025-06-24T00:00:00-04:00",
+      "title": "Flame Giant"
+    },
+    {
+      "id": "2025-06-21",
+      "release_at": "2025-06-21T00:00:00-04:00",
+      "title": "Soldier"
+    },
+    {
+      "id": "2025-06-19",
+      "release_at": "2025-06-19T00:00:00-04:00",
+      "title": "Sapling"
+    },
+    {
+      "id": "2025-06-17",
+      "release_at": "2025-06-17T00:00:00-04:00",
+      "title": "Animated Armor"
+    },
+    {
+      "id": "2025-06-15",
+      "release_at": "2025-06-15T00:00:00-04:00",
+      "title": "Mummy"
+    },
+    {
+      "id": "2025-06-13",
+      "release_at": "2025-06-13T00:00:00-04:00",
+      "title": "Genie"
+    },
+    {
+      "id": "2025-06-11",
+      "release_at": "2025-06-11T00:00:00-04:00",
+      "title": "Cyclops"
+    },
+    {
+      "id": "2025-06-09",
+      "release_at": "2025-06-09T00:00:00-04:00",
+      "title": "Cloaker"
+    },
+    {
+      "id": "2025-06-07",
+      "release_at": "2025-06-07T00:00:00-04:00",
+      "title": "Troll"
+    },
+    {
+      "id": "2025-06-05",
+      "release_at": "2025-06-05T00:00:00-04:00",
+      "title": "Naga"
+    },
+    {
+      "id": "2025-06-03",
+      "release_at": "2025-06-03T00:00:00-04:00",
+      "title": "Mimic"
+    },
+    {
+      "id": "2025-06-01",
+      "release_at": "2025-06-01T00:00:00-04:00",
+      "title": "Giant Rat"
+    },
+    {
+      "id": "2025-05-29",
+      "release_at": "2025-05-29T00:00:00-04:00",
+      "title": "Kobold"
+    },
+    {
+      "id": "2025-05-25",
+      "release_at": "2025-05-25T00:00:00-04:00",
+      "title": "Flame Imp"
+    },
+    {
+      "id": "2025-05-20",
+      "release_at": "2025-05-20T00:00:00-04:00",
+      "title": "Ogre"
+    },
+    {
+      "id": "2025-05-17",
+      "release_at": "2025-05-17T00:00:00-04:00",
+      "title": "Minotaur"
+    },
+    {
+      "id": "2025-05-15",
+      "release_at": "2025-05-15T00:00:00-04:00",
+      "title": "Goblin"
+    },
+    {
+      "id": "2025-05-13",
+      "release_at": "2025-05-13T00:00:00-04:00",
+      "title": "Kraken"
+    },
+    {
+      "id": "2025-05-10",
+      "release_at": "2025-05-10T00:00:00-04:00",
+      "title": "Gelatinous Cube"
+    },
+    {
+      "id": "2025-05-05",
+      "release_at": "2025-05-05T00:00:00-04:00",
+      "title": "Leech"
+    },
+    {
+      "id": "2025-05-04",
+      "release_at": "2025-05-04T00:00:00-04:00",
+      "title": "Werewolf"
+    },
+    {
+      "id": "2025-05-02",
+      "release_at": "2025-05-02T00:00:00-04:00",
+      "title": "Skeleton"
+    },
+    {
+      "id": "2025-04-25",
+      "release_at": "2025-04-25T00:00:00-04:00",
+      "title": "Bloodthorn"
+    },
+    {
+      "id": "2025-04-24",
+      "release_at": "2025-04-24T00:00:00-04:00",
+      "title": "Sea Monster"
+    },
+    {
+      "id": "2025-04-23",
+      "release_at": "2025-04-23T00:00:00-04:00",
+      "title": "Robot"
+    }
   ]
 }
