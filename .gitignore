@@ -8,3 +8,7 @@ tokens/
 .claude/
 remove_ocr.py
 Assets/Textures/steam/Steam Page Assets - Lethal*
+discord_forum_scraper.py
+formspree*
+forum_data.json
+community_card_ideas.md

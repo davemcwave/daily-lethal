@@ -6,6 +6,12 @@
     "name": "Armory"
   },
   {
+    "color": "#8C0127",
+    "energy": 1,
+    "file": "res://Scenes/BalanceCard.scn",
+    "name": "Balance"
+  },
+  {
     "color": "#002A8C",
     "energy": 1,
     "file": "res://Scenes/BargainCard.scn",
