@@ -16,8 +16,6 @@ config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/show_image=false
 config/icon="uid://iq3ggtrrqtb3"
 config/windows_native_icon="res://Assets/Textures/lethal-last-turn-icon.ico"
-run/size/viewport_width=360
-run/size/viewport_height=640
 run/main_scene.web_desktop_build="res://Scenes/Scene0Desktop.scn"
 run/main_scene.web_build="res://Scenes/Scene0.scn"
 
@@ -34,8 +32,6 @@ PuzzleResolver="*res://Scenes/PuzzleResolver.scn"
 window/size/viewport_width=960
 window/size/viewport_height=540
 window/stretch/mode="canvas_items"
-window/size/viewport_height.web_desktop_build=0
-window/size/viewport_width.web_desktop_build=0
 window/size/viewport_width.web_build=360
 window/size/viewport_height.web_build=640
 
