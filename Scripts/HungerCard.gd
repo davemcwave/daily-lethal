@@ -10,6 +10,7 @@ func play():
 	pay_cost(energy_cost)
 	
 	await buffs_container.activate_buffs(Buff.ActivationType.OnCardPlay)
+	await enemy.activate_on_card_play_debuffs()
 	scene.set_last_card_effects(self)
 	
 	await discard()

@@ -191,12 +191,20 @@ func activate_on_hurt_buffs() -> void:
 	
 func activate_on_hurt_debuffs() -> void:
 	animating = true
-	for debuff: Debuff in get_debuffs():
-		if debuff.is_activated_on_hurt():
+	for debuff in get_debuffs().duplicate():
+		if is_instance_valid(debuff) and not debuff.is_queued_for_deletion() and debuff.is_activated_on_hurt():
 			await get_tree().create_timer(0.25).timeout
-			debuff.activate()
+			await debuff.activate()
 	animating = false
-			
+
+func activate_on_card_play_debuffs() -> void:
+	animating = true
+	for debuff: Debuff in get_debuffs().duplicate():
+		if  is_instance_valid(debuff) and not debuff.is_queued_for_deletion() and debuff.is_activated_on_card_play():
+			await get_tree().create_timer(0.25).timeout
+			await debuff.activate()
+	animating = false
+
 func create_damage_label(hurt_amount: int) -> void:
 	var damage_label: RichTextLabel = load("res://Scenes/DamageLabel.scn").instantiate()
 	damage_label.set_damage(hurt_amount)

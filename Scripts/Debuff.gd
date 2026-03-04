@@ -5,7 +5,7 @@ class_name Debuff
 @export var debuff_description: String = "Debuffs the target."
 @export var unlimited_uses: bool = true
 
-enum ActivationType {OnHurt, OnAttack}
+enum ActivationType {OnHurt, OnAttack, OnCardPlay}
 @export var activation_type: ActivationType
 
 var target: Enemy = null
@@ -43,7 +43,19 @@ func is_unlimited_uses() -> bool:
 	
 func is_activated_on_hurt() -> bool:
 	return activation_type == ActivationType.OnHurt
-	
+
+func is_activated_on_card_play() -> bool:
+	return activation_type == ActivationType.OnCardPlay
+
+func set_stacks(n: int) -> void:
+	pass
+
+func can_merge_with(other_debuff: Debuff) -> bool:
+	return false
+
+func merge_with(other_debuff: Debuff) -> void:
+	pass
+
 # TO BE OVERWRITTEN
 func activate() -> void:
 	return

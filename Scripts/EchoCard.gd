@@ -14,6 +14,7 @@ func play():
 	scene.set_last_card_effects(self)
 	var buff: Buff = get_card_effects()[0].get_buff()
 	await buffs_container.activate_buffs(Buff.ActivationType.OnCardPlay, {'do_not_activate_buffs': [buff]})
+	await enemy.activate_on_card_play_debuffs()
 	await discard()
 	scene.check_game_over()
 	finish_play_resolution()

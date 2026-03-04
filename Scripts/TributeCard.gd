@@ -16,6 +16,7 @@ func play():
 	await apply_card_effects()
 	scene.set_last_card_effects(self)
 	await buffs_container.activate_buffs(Buff.ActivationType.OnCardPlay)
+	await enemy.activate_on_card_play_debuffs()
 	await discard()
 	await _apply_pending_trash_effects()
 	scene.check_game_over()

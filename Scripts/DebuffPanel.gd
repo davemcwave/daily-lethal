@@ -24,6 +24,9 @@ func get_debuff() -> Debuff:
 func set_text(new_text: String) -> void:
 	$DebuffText.set_text("[center][b]%s[/b][/center]" % new_text)
 
+func update_text() -> void:
+	set_text(debuff.get_debuff_name())
+
 func _on_gui_input(event):
 	if event.is_action_pressed("select"):
 		center_description.set_text(debuff.get_debuff_name(), debuff.get_debuff_description())

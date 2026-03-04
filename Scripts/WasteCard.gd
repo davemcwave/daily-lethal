@@ -14,4 +14,5 @@ extends Card
 	#await apply_card_effects()
 	#
 	#await buffs_container.activate_buffs(Buff.ActivationType.OnCardPlay)
+	#await enemy.activate_on_card_play_debuffs()
 	#

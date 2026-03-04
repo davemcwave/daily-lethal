@@ -1,13 +1,13 @@
 extends CardEffect
 
 @export_file("*.scn") var debuff_scene
+@export var stacks: int = 1
 @export var target: Node = null
 var debuff_template: Debuff = null
 var debuff_scene_resource: PackedScene = null
-var card_lab_template_values: Dictionary = {}
-@export var card_lab_debuff_name: String = ""
-@export var card_lab_debuff_stacks: int = 1
-@export var card_lab_debuff_target: String = "Enemy"
+var template_values: Dictionary = {}
+@export var debuff_name: String = ""
+@export var target_name: String = "Enemy"
 
 func _ready() -> void:
 	_ensure_target()
@@ -41,27 +41,33 @@ func get_effect_description() -> String:
 		return ""
 	return debuff_template.get_debuff_description()
 
+func set_template_values(values: Dictionary) -> void:
+	template_values = values.duplicate(true)
+	debuff_name = str(template_values.get("debuff", debuff_name))
+	stacks = int(template_values.get("stacks", stacks))
+	target_name = str(template_values.get("target", target_name))
+
+func get_template_values() -> Dictionary:
+	return template_values.duplicate(true)
+
 func set_card_lab_template_values(values: Dictionary) -> void:
-	card_lab_template_values = values.duplicate(true)
-	card_lab_debuff_name = str(card_lab_template_values.get("debuff", card_lab_debuff_name))
-	card_lab_debuff_stacks = int(card_lab_template_values.get("stacks", card_lab_debuff_stacks))
-	card_lab_debuff_target = str(card_lab_template_values.get("target", card_lab_debuff_target))
+	set_template_values(values)
 
 func get_card_lab_template_values() -> Dictionary:
-	return card_lab_template_values.duplicate(true)
+	return get_template_values()
 
 func get_status_effect() -> Dictionary:
 	return {
-		"name": card_lab_debuff_name,
-		"stacks": card_lab_debuff_stacks,
-		"target": card_lab_debuff_target,
-		"params": get_card_lab_template_values()
+		"name": debuff_name,
+		"stacks": stacks,
+		"target": target_name,
+		"params": get_template_values()
 	}
-	
+
 func set_target(new_target) -> void:
 	target = new_target
 	_ensure_target()
-	
+
 func apply() -> bool:
 	_ensure_target()
 	_ensure_debuff_template()
@@ -69,6 +75,7 @@ func apply() -> bool:
 		push_warning("DebuffCardEffect has no debuff template to apply.")
 		return false
 	var debuff_instance: Debuff = debuff_template.duplicate(DUPLICATE_USE_INSTANTIATION)
+	debuff_instance.set_stacks(stacks)
 	print(target)
 	target.add_debuff(debuff_instance)
 	return super.apply()
@@ -76,6 +83,10 @@ func apply() -> bool:
 func _ensure_debuff_template() -> void:
 	if debuff_template != null:
 		return
+	for child in get_children():
+		if child is Debuff:
+			debuff_template = child
+			return
 	_load_debuff_scene()
 	if debuff_scene_resource != null:
 		debuff_template = debuff_scene_resource.instantiate()

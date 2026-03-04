@@ -11,3 +11,4 @@
 script = ExtResource("6_qv7hf")
 card_scenes = Array[PackedScene]([ExtResource("1_guu6s"), ExtResource("2_k3yhw"), ExtResource("2_k3yhw"), ExtResource("3_jpo6c"), ExtResource("4_5dvym"), ExtResource("5_8ds2v")])
 hand_indices = Array[int]([0, 0, 3, 1, 0, 0])
+step_types = Array[int]([0, 0, 0, 0, 0, 0])

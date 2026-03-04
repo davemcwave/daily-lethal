@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CardSolutionResource" load_steps=7 format=3]
+
+[ext_resource type="PackedScene" path="res://Scenes/BargainCard.scn" id="1_pgjce"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.scn" id="2_c3s2b"]
+[ext_resource type="PackedScene" path="res://Scenes/MendCard.scn" id="3_gxo3i"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.scn" id="4_pstgb"]
+[ext_resource type="PackedScene" path="res://Scenes/FangCard.scn" id="5_drmb6"]
+[ext_resource type="Script" path="res://Scripts/CardSolutionResource.gd" id="6_4lua4"]
+
+[resource]
+script = ExtResource("6_4lua4")
+card_scenes = Array[PackedScene]([ExtResource("1_pgjce"), ExtResource("2_c3s2b"), ExtResource("3_gxo3i"), ExtResource("4_pstgb"), ExtResource("5_drmb6")])
+hand_indices = Array[int]([1, 0, 2, 0, 0])
+step_types = Array[int]([0, 0, 0, 0, 0])
