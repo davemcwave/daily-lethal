@@ -263,6 +263,12 @@
     "name": "Revive"
   },
   {
+    "color": "#C35300",
+    "energy": 1,
+    "file": "res://Scenes/ScorchCard.scn",
+    "name": "Scorch"
+  },
+  {
     "color": "#002A8C",
     "energy": 0,
     "file": "res://Scenes/ScrapCard.scn",
