@@ -139,6 +139,12 @@
   {
     "color": "#C35300",
     "energy": 1,
+    "file": "res://Scenes/ForgeCard.scn",
+    "name": "Forge"
+  },
+  {
+    "color": "#C35300",
+    "energy": 1,
     "file": "res://Scenes/FrenzyCard.scn",
     "name": "Frenzy",
     "colors": [

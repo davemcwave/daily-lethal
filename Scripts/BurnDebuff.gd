@@ -5,6 +5,7 @@ class_name BurnDebuff
 # Stacks merge when multiple applications are applied.
 
 @export var burn_count: int = 1
+var skip_next_activation: bool = false
 
 func _ready() -> void:
 	activation_type = ActivationType.OnCardPlay
@@ -30,6 +31,9 @@ func merge_with(other_debuff: Debuff) -> void:
 		add_stacks(other_debuff.burn_count)
 
 func activate() -> void:
+	if skip_next_activation:
+		skip_next_activation = false
+		return
 	target.hurt(burn_count, true)
 	burn_count -= 1
 	if is_instance_valid(debuff_panel):

@@ -31,6 +31,9 @@ enum OnPlayActivationCategory {OnPlayAttackCard}
 @export var freed_manually: bool = false
 @export var deal_damage: bool = true
 @export var merge_buff_panels: bool = false
+# Lower priority fires first within the same activation type.
+# 0 = modifier (e.g. Critical), 1 = replacement (e.g. Charge, Poison)
+@export var priority: int = 0
 
 var activation_ids: Array[int] = []
 var source_card_ref: WeakRef = null

@@ -354,6 +354,7 @@ func _build_buff_activation_queue(buff_activation_type: Buff.ActivationType, con
 	var activation_queue: Array = []
 	var current_repeating_state: bool = is_repeating()
 	var buff_panels = get_children()
+	buff_panels.sort_custom(func(a, b): return a.get_buff().priority < b.get_buff().priority)
 	for buff_panel in buff_panels:
 		if not is_instance_valid(buff_panel) or buff_panel == null and not buff_panel.is_inside_tree():
 			continue

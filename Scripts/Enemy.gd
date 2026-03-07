@@ -197,12 +197,15 @@ func activate_on_hurt_debuffs() -> void:
 			await debuff.activate()
 	animating = false
 
-func activate_on_card_play_debuffs() -> void:
+func activate_on_card_play_debuffs(do_not_activate: Array = []) -> void:
 	animating = true
 	for debuff: Debuff in get_debuffs().duplicate():
-		if  is_instance_valid(debuff) and not debuff.is_queued_for_deletion() and debuff.is_activated_on_card_play():
+		if is_instance_valid(debuff) and not debuff.is_queued_for_deletion() and debuff.is_activated_on_card_play():
+			if do_not_activate.has(debuff):
+				continue
 			await get_tree().create_timer(0.25).timeout
-			await debuff.activate()
+			if is_instance_valid(debuff) and not debuff.is_queued_for_deletion():
+				await debuff.activate()
 	animating = false
 
 func create_damage_label(hurt_amount: int) -> void:
