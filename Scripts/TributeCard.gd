@@ -1,5 +1,9 @@
 extends Card
 
+func update_description_panel() -> void:
+	card_description = "[color=purple]Trash[/color] this card and the next card you play. Your next 2 cards cost 0."
+	$DescriptionPanel/Title.set_text("[center][shake rate=2.0 level=1 connected=1]%s[/shake][/center]" % card_description)
+
 const TRASH_CARD_EFFECT_SCRIPT := preload("res://Scripts/TrashCardEffect.gd")
 
 var pending_trash_effects: Array[CardEffect] = []

@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Lethal - Card Wording Style Guide</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #111;
+      color: #e0e0e0;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      color: #fff;
+      margin-bottom: 0.25rem;
+    }
+
+    .subtitle {
+      color: #888;
+      font-size: 0.95rem;
+      margin-bottom: 2.5rem;
+    }
+
+    h2 {
+      font-size: 1.1rem;
+      color: #aaa;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 2.5rem 0 1rem;
+      border-bottom: 1px solid #2a2a2a;
+      padding-bottom: 0.4rem;
+    }
+
+    /* Rules */
+    .rules {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      max-width: 800px;
+    }
+
+    .rule {
+      display: grid;
+      grid-template-columns: 1.8rem 1fr;
+      gap: 0.5rem;
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 6px;
+      padding: 0.65rem 0.9rem;
+    }
+
+    .rule-num {
+      color: #555;
+      font-size: 0.85rem;
+      padding-top: 0.05rem;
+    }
+
+    .rule-text { font-size: 0.95rem; }
+
+    .rule-text strong { color: #fff; }
+
+    .yes { color: #4ade80; }
+    .no  { color: #f87171; }
+
+    code {
+      font-family: "Fira Code", "Cascadia Code", monospace;
+      font-size: 0.85em;
+      background: #222;
+      border: 1px solid #333;
+      border-radius: 3px;
+      padding: 0.1em 0.35em;
+    }
+
+    /* Color swatches */
+    .colors {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .swatch {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 6px;
+      padding: 0.5rem 0.9rem;
+      font-size: 0.9rem;
+    }
+
+    .dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .swatch code { background: #111; }
+
+    /* Cards table */
+    .table-wrap {
+      overflow-x: auto;
+      margin-top: 0.5rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+
+    th {
+      text-align: left;
+      color: #888;
+      font-weight: 600;
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid #2a2a2a;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid #1e1e1e;
+      vertical-align: top;
+    }
+
+    tr:hover td { background: #161616; }
+
+    .card-name { color: #fff; font-weight: 500; white-space: nowrap; }
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      background: #2a2a2a;
+      color: #888;
+      border-radius: 3px;
+      padding: 0.05em 0.4em;
+      margin-left: 0.3rem;
+      vertical-align: middle;
+    }
+
+    .old { color: #888; text-decoration: line-through; }
+
+    .preview {
+      font-family: inherit;
+      line-height: 1.4;
+    }
+
+    /* Inline BBcode preview rendering */
+    .dmg   { color: #f87171; }
+    .hp    { color: #4ade80; }
+    .debuf { color: #e67e22; }
+    .buff  { color: #e67e22; }
+  </style>
+</head>
+<body>
+
+  <h1>Card Wording Style Guide</h1>
+  <p class="subtitle">Daily Lethal - internal reference for card descriptions</p>
+
+  <h2>Rules</h2>
+  <div class="rules">
+
+    <div class="rule">
+      <span class="rule-num">1</span>
+      <span class="rule-text"><strong>HP</strong> - always uppercase.
+        <span class="no">✗ health, hp, Health</span> &nbsp;
+        <span class="yes">✓ HP</span>
+      </span>
+    </div>
+
+    <div class="rule">
+      <span class="rule-num">2</span>
+      <span class="rule-text"><strong>Gain X HP</strong> - never "Heal".
+        <span class="no">✗ Heal 1 HP</span> &nbsp;
+        <span class="yes">✓ Gain 1 HP</span>
+      </span>
+    </div>
+
+    <div class="rule">
+      <span class="rule-num">3</span>
+      <span class="rule-text"><strong>Imperative verbs</strong> - no third-person.
+        <span class="no">✗ Deals damage. Inflicts Vulnerable. Consumes energy.</span><br>
+        <span class="yes">✓ Deal damage. Inflict Vulnerable. Consume energy.</span>
+      </span>
+    </div>
+
+    <div class="rule">
+      <span class="rule-num">4</span>
+      <span class="rule-text"><strong>Periods</strong> - every sentence ends with one.</span>
+    </div>
+
+    <div class="rule">
+      <span class="rule-num">5</span>
+      <span class="rule-text"><strong>Periods between clauses</strong> - never commas.
+        <span class="no">✗ Deal 2 damage, Gain 1 energy</span> &nbsp;
+        <span class="yes">✓ Deal 2 damage. Gain 1 energy.</span>
+      </span>
+    </div>
+
+    <div class="rule">
+      <span class="rule-num">6</span>
+      <span class="rule-text"><strong>No + prefix on gains.</strong>
+        <span class="no">✗ Gain +2 energy</span> &nbsp;
+        <span class="yes">✓ Gain 2 energy</span>
+      </span>
+    </div>
+
+    <div class="rule">
+      <span class="rule-num">7</span>
+      <span class="rule-text"><strong>Always include "Your"</strong> before "next X attacks/cards".
+        <span class="no">✗ Next 2 attacks have Flame</span> &nbsp;
+        <span class="yes">✓ Your next 2 attacks have Flame</span>
+      </span>
+    </div>
+
+    <div class="rule">
+      <span class="rule-num">8</span>
+      <span class="rule-text"><strong>Always "your discard pile"</strong> - never "the discard" or "discard".
+        <span class="no">✗ if discard is empty</span> &nbsp;
+        <span class="yes">✓ if your discard pile is empty</span>
+      </span>
+    </div>
+
+    <div class="rule">
+      <span class="rule-num">9</span>
+      <span class="rule-text"><strong>"less than X"</strong> - never "below X".
+        <span class="no">✗ If below 3 health</span> &nbsp;
+        <span class="yes">✓ If you have less than 3 HP</span>
+      </span>
+    </div>
+
+    <div class="rule">
+      <span class="rule-num">10</span>
+      <span class="rule-text"><strong>"Inflict"</strong> for debuffs on the enemy - never "Apply".
+        <span class="no">✗ Apply Vulnerable</span> &nbsp;
+        <span class="yes">✓ Inflict Vulnerable</span>
+      </span>
+    </div>
+
+    <div class="rule">
+      <span class="rule-num">11</span>
+      <span class="rule-text"><strong>No parentheses.</strong>
+        <span class="no">✗ Remove all (your) status effects.</span> &nbsp;
+        <span class="yes">✓ Remove all your status effects.</span>
+      </span>
+    </div>
+
+    <div class="rule">
+      <span class="rule-num">12</span>
+      <span class="rule-text"><strong>Numerals not words.</strong>
+        <span class="no">✗ Trash up to two cards</span> &nbsp;
+        <span class="yes">✓ Trash up to 2 cards</span>
+      </span>
+    </div>
+
+    <div class="rule">
+      <span class="rule-num">13</span>
+      <span class="rule-text"><strong>"action"</strong> not "effect" when referring to what a card does - avoids confusion with status effects.
+        <span class="no">✗ Repeat the effect of the next card you play.</span> &nbsp;
+        <span class="yes">✓ Repeat the action of the next card you play.</span>
+      </span>
+    </div>
+
+  </div>
+
+  <h2>BBcode Colors</h2>
+  <div class="colors">
+    <div class="swatch">
+      <div class="dot" style="background:#f87171;"></div>
+      <span>Damage dealt / HP lost</span>
+      <code>[color=red]X[/color]</code>
+    </div>
+    <div class="swatch">
+      <div class="dot" style="background:#4ade80;"></div>
+      <span>HP gained</span>
+      <code>[color=#008c10]X[/color]</code>
+    </div>
+    <div class="swatch">
+      <div class="dot" style="background:#e67e22;"></div>
+      <span>All keywords (Vulnerable, Burn, Corrode, Sharp, Critical, Flame, Poison, Charge)</span>
+      <code>[color=#e67e22]Keyword[/color]</code>
+    </div>
+  </div>
+
+  <div class="rules" style="margin-top:1rem;">
+    <div class="rule">
+      <span class="rule-num">✓</span>
+      <span class="rule-text"><strong>Color a number only if it is the primary effect output</strong> - the thing being dealt, gained, or lost.<br>
+        <span class="yes">✓ "Deal <span style="color:#f87171">2</span> damage." — 2 is the damage output</span><br>
+        <span class="yes">✓ "Gain <span style="color:#4ade80">1</span> HP." — 1 is the HP gain</span><br>
+        <span class="yes">✓ "Lose <span style="color:#f87171">2</span> HP." — 2 is the HP loss</span>
+      </span>
+    </div>
+    <div class="rule">
+      <span class="rule-num">✗</span>
+      <span class="rule-text"><strong>Do not color</strong> thresholds, target states, counts, or conditional values.<br>
+        <span class="no">✗ "Reduce your HP to 1." — 1 is a target state, not an effect amount</span><br>
+        <span class="no">✗ "Deal damage 3 times." — 3 is a repeat count</span><br>
+        <span class="no">✗ "If you have 0 energy." — 0 is a condition</span><br>
+        <span class="no">✗ "The next 3 times you play a card." — 3 is a duration count</span><br>
+        <span class="no">✗ "Top 2 cards / next 2 cards." — 2 is a card count</span>
+      </span>
+    </div>
+  </div>
+
+  <h2>Card Descriptions</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Card</th>
+          <th>Old</th>
+          <th>Revised (as rendered)</th>
+          <th>BBcode</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <td class="card-name">ArmoryCard</td>
+          <td class="old">Choose two of the following - Slash, Spear, Pound or Cleave. Create a copy of each chosen card.</td>
+          <td class="preview">Choose two: Slash, Spear, Pound, or Cleave. Create a copy of each chosen card.</td>
+          <td><code>Choose two: Slash, Spear, Pound, or Cleave. Create a copy of each chosen card.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">BalanceCard <span class="badge">gd</span></td>
+          <td class="old">If your energy and health are equal, deal damage equal to that number.</td>
+          <td class="preview">If your energy and HP are equal, deal damage equal to that number.</td>
+          <td><code>If your energy and HP are equal, deal damage equal to that number.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">BargainCard</td>
+          <td class="old">Discount the cost of the next 3 cards you play</td>
+          <td class="preview">Discount the next 3 cards you play.</td>
+          <td><code>Discount the next 3 cards you play.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">BerserkCard</td>
+          <td class="old">HP is reduced to 1. Inflict vulnerable equal to the HP you lost.</td>
+          <td class="preview">Reduce your HP to 1. Inflict <span class="debuf">Vulnerable</span> equal to the HP you lost.</td>
+          <td><code>Reduce your HP to 1. Inflict [color=#e67e22]Vulnerable[/color] equal to the HP you lost.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">BurstCard <span class="badge">gd</span></td>
+          <td class="old">Deal 0 damage (+1 damage per card played)</td>
+          <td class="preview">Deal damage equal to the number of cards played this turn.</td>
+          <td><code>Deal damage equal to the number of cards played this turn.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">CapacitorCard</td>
+          <td class="old">Next attack has Charge, gaining energy instead of dealing damage</td>
+          <td class="preview">Your next attack has Charge, gaining energy instead of dealing damage.</td>
+          <td><code>Your next attack has Charge, gaining energy instead of dealing damage.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">CauterizeCard</td>
+          <td class="old">Lose 2 HP. The next 3 times you play a card, heal 1 HP.</td>
+          <td class="preview">Lose <span class="dmg">2</span> HP. The next 3 times you play a card, gain <span class="hp">1</span> HP.</td>
+          <td><code>Lose [color=red]2[/color] HP. The next 3 times you play a card, gain [color=#008c10]1[/color] HP.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">CleanseCard</td>
+          <td class="old">Remove all (your) status effects.</td>
+          <td class="preview">Remove all your status effects.</td>
+          <td><code>Remove all your status effects.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">CooperationCard</td>
+          <td class="old">Enemy is fully healed. Gain energy equal to the amount healed.</td>
+          <td class="preview">Fully heal the enemy. Gain energy equal to the amount healed.</td>
+          <td><code>Fully heal the enemy. Gain energy equal to the amount healed.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">CorrodeCard</td>
+          <td class="old">Apply 1 Corrode</td>
+          <td class="preview">Inflict 1 <span class="debuf">Corrode</span>.</td>
+          <td><code>Inflict 1 [color=#e67e22]Corrode[/color].</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">EchoCard</td>
+          <td class="old">Repeat the action of the next card you play</td>
+          <td class="preview">Repeat the action of the next card you play.</td>
+          <td><code>Repeat the action of the next card you play.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">EmptyFistCard <span class="badge">gd</span></td>
+          <td class="old">Deal 3 damage if you have 0 energy, otherwise deal 0 damage.</td>
+          <td class="preview">Deal <span class="dmg">3</span> damage if you have 0 energy. Otherwise deal 0.</td>
+          <td><code>Deal [color=red]%d[/color] damage if you have 0 energy. Otherwise deal 0.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">ExchangeCard</td>
+          <td class="old">Swap your health and energy amounts.</td>
+          <td class="preview">Swap your HP and energy.</td>
+          <td><code>Swap your HP and energy.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">FangCard <span class="badge">gd</span></td>
+          <td class="old">Deal 1 damage. Lose 1 health.</td>
+          <td class="preview">Deal <span class="dmg">1</span> damage. Lose 1 HP.</td>
+          <td><code>Deal [color=red]%d[/color] damage. Lose 1 HP.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">FlurryCard <span class="badge">gd</span></td>
+          <td class="old">Deal 1 damage 3 times</td>
+          <td class="preview">Deal <span class="dmg">1</span> damage 3 times.</td>
+          <td><code>Deal [color=red]%d[/color] damage 3 times.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">FocusCard</td>
+          <td class="old">Draw 1 Card</td>
+          <td class="preview">Draw 1 card.</td>
+          <td><code>Draw 1 card.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">ForgeCard</td>
+          <td class="old">Next 2 attacks have Flame, applying Burn instead of dealing damage</td>
+          <td class="preview">Your next 2 attacks have Flame, inflicting <span class="debuf">Burn</span> instead of dealing damage.</td>
+          <td><code>Your next 2 attacks have Flame, inflicting [color=#e67e22]Burn[/color] instead of dealing damage.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">FrenzyCard</td>
+          <td class="old">Gain Critical for each HP less than 3 you have</td>
+          <td class="preview">Gain 1 Critical for each HP less than 3.</td>
+          <td><code>Gain 1 Critical for each HP less than 3.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">GiftCard</td>
+          <td class="old">Next card you play is Free</td>
+          <td class="preview">Your next card costs 0.</td>
+          <td><code>Your next card costs 0.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">HauntCard</td>
+          <td class="old">Trash the next card you play, Inflict 3 vulnerable to enemy</td>
+          <td class="preview">Trash the next card you play. Inflict 3 <span class="debuf">Vulnerable</span>.</td>
+          <td><code>Trash the next card you play. Inflict 3 [color=#e67e22]Vulnerable[/color].</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">HeartbeatCard</td>
+          <td class="old">Deal damage equal to your hp</td>
+          <td class="preview">Deal damage equal to your HP.</td>
+          <td><code>Deal damage equal to your HP.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">HungerCard</td>
+          <td class="old">Lifesteal HP equal to the damage of your next attack.</td>
+          <td class="preview">Gain HP equal to the damage of your next attack.</td>
+          <td><code>Gain HP equal to the damage of your next attack.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">IgniteCard</td>
+          <td class="old">Add 2 Spark cards to your hand</td>
+          <td class="preview">Add 2 Spark cards to your hand.</td>
+          <td><code>Add 2 Spark cards to your hand.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">InitiateCard</td>
+          <td class="old">Deal 2 damage if discard is empty</td>
+          <td class="preview">Deal <span class="dmg">2</span> damage if your discard pile is empty. Otherwise deal 0.</td>
+          <td><code>Deal [color=red]2[/color] damage if your discard pile is empty. Otherwise deal 0.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">InspirationCard</td>
+          <td class="old">If below 3 health, gain 3 energy</td>
+          <td class="preview">If you have less than 3 HP, gain 3 energy.</td>
+          <td><code>If you have less than 3 HP, gain 3 energy.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">LungeCard <span class="badge">gd</span></td>
+          <td class="old">Deal 1 damage, Gain +1 energy</td>
+          <td class="preview">Deal <span class="dmg">1</span> damage. Gain 1 energy.</td>
+          <td><code>Deal [color=red]%d[/color] damage. Gain 1 energy.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">MartyrCard</td>
+          <td class="old">Next 2 cards played cost health instead of energy</td>
+          <td class="preview">Your next 2 cards cost HP instead of energy.</td>
+          <td><code>Your next 2 cards cost HP instead of energy.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">MendCard</td>
+          <td class="old">Heal 1 HP</td>
+          <td class="preview">Gain <span class="hp">1</span> HP.</td>
+          <td><code>Gain [color=#008c10]1[/color] HP.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">OverloadCard</td>
+          <td class="old">Gain 0 energy (+1 energy per card played)</td>
+          <td class="preview">Gain energy equal to the number of cards played this turn.</td>
+          <td><code>Gain energy equal to the number of cards played this turn.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">PotionCard <span class="badge">gd</span></td>
+          <td class="old">Deal %d damage or Heal 2 HP</td>
+          <td class="preview">Deal <span class="dmg">1</span> damage or gain <span class="hp">2</span> HP.</td>
+          <td><code>Deal [color=red]%d[/color] damage or gain [color=#008c10]%d[/color] HP.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">RageCard</td>
+          <td class="old">Increase all damage cards by 1 damage</td>
+          <td class="preview">All damage cards deal 1 more damage.</td>
+          <td><code>All damage cards deal 1 more damage.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">ReboundCard</td>
+          <td class="old">Return the next card you play</td>
+          <td class="preview">Return the next card you play to your hand.</td>
+          <td><code>Return the next card you play to your hand.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">ReverberateCard</td>
+          <td class="old">Activate the card at the bottom of the discard twice. Trash that card. Cannot apply to another Reverberate.</td>
+          <td class="preview">Activate the card at the bottom of your discard pile twice. Trash that card. Cannot apply to another Reverberate.</td>
+          <td><code>Activate the card at the bottom of your discard pile twice. Trash that card. Cannot apply to another Reverberate.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">ReviveCard</td>
+          <td class="old">Reclaim the top 2 cards from your discard pile</td>
+          <td class="preview">Return the top 2 cards of your discard pile to your hand.</td>
+          <td><code>Return the top 2 cards of your discard pile to your hand.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">ScorchCard</td>
+          <td class="old">Inflict 2 Burn</td>
+          <td class="preview">Inflict 2 <span class="debuf">Burn</span>.</td>
+          <td><code>Inflict 2 [color=#e67e22]Burn[/color].</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">ScrapCard</td>
+          <td class="old">Discard 1 card, Gain +2 energy</td>
+          <td class="preview">Discard 1 card. Gain 2 energy.</td>
+          <td><code>Discard 1 card. Gain 2 energy.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">SharpenCard</td>
+          <td class="old">Gain 3 Sharp</td>
+          <td class="preview">Gain 3 Sharp.</td>
+          <td><code>Gain 3 Sharp.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">ShieldCard</td>
+          <td class="old">Block the next time you take damage</td>
+          <td class="preview">Block the next damage you would take.</td>
+          <td><code>Block the next damage you would take.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">ShovelCard <span class="badge">gd</span></td>
+          <td class="old">Deal damage equal to number of cards in the discard pile</td>
+          <td class="preview">Deal damage equal to the number of cards in your discard pile.</td>
+          <td><code>Deal damage equal to the number of cards in your discard pile.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">SlashCard <span class="badge">gd</span></td>
+          <td class="old">Deal 2 damage</td>
+          <td class="preview">Deal <span class="dmg">2</span> damage.</td>
+          <td><code>Deal [color=red]2[/color] damage.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">SnipeCard <span class="badge">gd</span></td>
+          <td class="old">Deal 2 damage if discard is empty, otherwise deal 0</td>
+          <td class="preview">Deal <span class="dmg">2</span> damage if your discard pile is empty. Otherwise deal 0.</td>
+          <td><code>Deal [color=red]%d[/color] damage if your discard pile is empty. Otherwise deal 0.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">SparkCard <span class="badge">gd</span></td>
+          <td class="old">Deal 0 damage, increase all Spark cards by +1 damage</td>
+          <td class="preview">Deal <span class="dmg">0</span> damage. Other Spark cards deal 1 more damage.</td>
+          <td><code>Deal [color=red]%d[/color] damage. Other Spark cards deal 1 more damage.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">SpearCard</td>
+          <td class="old">Deal 3 damage.</td>
+          <td class="preview">Deal <span class="dmg">3</span> damage.</td>
+          <td><code>Deal [color=red]3[/color] damage.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">SurgeCard</td>
+          <td class="old">Gain +1 energy</td>
+          <td class="preview">Gain 1 energy.</td>
+          <td><code>Gain 1 energy.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">TargetCard</td>
+          <td class="old">The next time you deal damage, deal a Critical hit</td>
+          <td class="preview">Gain 1 Critical.</td>
+          <td><code>Gain 1 Critical.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">ThunderboltCard</td>
+          <td class="old">Deals damage equal to your total energy. Consumes all energy.</td>
+          <td class="preview">Deal damage equal to your energy. Consume all energy.</td>
+          <td><code>Deal damage equal to your energy. Consume all energy.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">TraceCard</td>
+          <td class="old">Copy your next card played with 0 energy cost</td>
+          <td class="preview">Copy the next card you play. It costs 0.</td>
+          <td><code>Copy the next card you play. It costs 0.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">TributeCard</td>
+          <td class="old">Trash this card and the next card, next 2 cards are Free</td>
+          <td class="preview">Trash this card and the next card you play. Your next 2 cards cost 0.</td>
+          <td><code>Trash this card and the next card you play. Your next 2 cards cost 0.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">VenomCard</td>
+          <td class="old">Next 2 attacks have poison, applying Vulnerable instead of dealing damage</td>
+          <td class="preview">Your next 2 attacks have Poison, inflicting <span class="debuf">Vulnerable</span> instead of dealing damage.</td>
+          <td><code>Your next 2 attacks have Poison, inflicting [color=#e67e22]Vulnerable[/color] instead of dealing damage.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">WasteCard</td>
+          <td class="old">Trash up to two cards from the discard pile</td>
+          <td class="preview">Trash up to 2 cards from your discard pile.</td>
+          <td><code>Trash up to 2 cards from your discard pile.</code></td>
+        </tr>
+
+        <tr>
+          <td class="card-name">WoundCard</td>
+          <td class="old">Inflicts Vulnerable</td>
+          <td class="preview">Inflict <span class="debuf">Vulnerable</span>.</td>
+          <td><code>Inflict [color=#e67e22]Vulnerable[/color].</code></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Keywords Glossary</h2>
+  <div class="rules">
+
+    <div class="rule">
+      <span class="rule-num" style="padding-top:0.2rem;">🗡</span>
+      <span class="rule-text">
+        <strong>Sharp</strong> — <em>player buff</em><br>
+        Your attacks deal X more damage, where X is your Sharp stacks. Lose 1 Sharp per card played.
+      </span>
+    </div>
+
+    <div class="rule">
+      <span class="rule-num" style="padding-top:0.2rem;">⚡</span>
+      <span class="rule-text">
+        <strong>Critical</strong> — <em>player buff</em><br>
+        Your next attack deals double damage. Consumed on use.
+      </span>
+    </div>
+
+    <div class="rule">
+      <span class="rule-num" style="padding-top:0.2rem;">🔥</span>
+      <span class="rule-text">
+        <strong style="color:#e67e22;">Burn</strong> — <em>enemy debuff</em><br>
+        Each card played deals damage equal to the Burn stacks, then reduces Burn by 1.
+      </span>
+    </div>
+
+    <div class="rule">
+      <span class="rule-num" style="padding-top:0.2rem;">💀</span>
+      <span class="rule-text">
+        <strong style="color:#e67e22;">Vulnerable</strong> — <em>enemy debuff</em><br>
+        Enemy takes increased damage. Applied by Venom, Berserk, Haunt, Wound.
+      </span>
+    </div>
+
+    <div class="rule">
+      <span class="rule-num" style="padding-top:0.2rem;">🧪</span>
+      <span class="rule-text">
+        <strong style="color:#e67e22;">Corrode</strong> — <em>enemy debuff</em><br>
+        Applied by CorrodeCard.
+      </span>
+    </div>
+
+    <div class="rule">
+      <span class="rule-num" style="padding-top:0.2rem;">☁</span>
+      <span class="rule-text">
+        <strong>Charge</strong> — <em>attack modifier</em><br>
+        The attack gains energy instead of dealing damage.
+      </span>
+    </div>
+
+    <div class="rule">
+      <span class="rule-num" style="padding-top:0.2rem;">🔥</span>
+      <span class="rule-text">
+        <strong>Flame</strong> — <em>attack modifier</em><br>
+        The attack inflicts <span style="color:#e67e22;">Burn</span> instead of dealing damage.
+      </span>
+    </div>
+
+    <div class="rule">
+      <span class="rule-num" style="padding-top:0.2rem;">☠</span>
+      <span class="rule-text">
+        <strong>Poison</strong> — <em>attack modifier</em><br>
+        The attack inflicts <span style="color:#e67e22;">Vulnerable</span> instead of dealing damage.
+      </span>
+    </div>
+
+  </div>
+
+</body>
+</html>

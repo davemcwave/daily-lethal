@@ -1,5 +1,9 @@
 extends Card
 
+func update_description_panel() -> void:
+	card_description = "Choose 2: Slash, Spear, Pound, or Cleave. Add a copy of each chosen card to your hand."
+	$DescriptionPanel/Title.set_text("[center][shake rate=2.0 level=1 connected=1]%s[/shake][/center]" % card_description)
+
 func play():
 	begin_play_resolution()
 	handle_sfx()

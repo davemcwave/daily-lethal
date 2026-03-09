@@ -1,6 +1,8 @@
 extends Card
 
-const TEXT = "Gain [color=#256aff]%d[/color] energy (+1 energy per card played)"
+const TEXT = "Gain energy equal to the number of cards played. ([color=#256aff]%d[/color])"
+	# card_description = "[center]Deal damage equal to the number of cards played ([color=red]%d[/color]).[/center]" % get_card_effects()[0].get_damage_amount()
+
 
 func _ready():
 	super._ready()

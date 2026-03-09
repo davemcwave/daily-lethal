@@ -8,7 +8,7 @@ func _on_scene_card_count_incremented() -> void:
 	$CardEffect.increase_damage_amount(1)
 	
 func update_description_panel() -> void:
-	card_description = "[center]%s[/center]" % ("Deal [color=red]{damage_amount}[/color] damage (+1 damage per card played)".format({"damage_amount": get_card_effects()[0].get_damage_amount()}))
+	card_description = "[center]Deal damage equal to the number of cards played ([color=red]%d[/color]).[/center]" % get_card_effects()[0].get_damage_amount()
 	$DescriptionPanel/Title.set_text(card_description)
 
 #func discard() -> void:

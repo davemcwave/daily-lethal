@@ -1,5 +1,9 @@
 extends Card
 
+func update_description_panel() -> void:
+	card_description = "[color=#2565ff]Discount[/color] the next 3 cards you play."
+	$DescriptionPanel/Title.set_text("[center][shake rate=2.0 level=1 connected=1]%s[/shake][/center]" % card_description)
+
 func play():
 	begin_play_resolution()
 	handle_sfx()
