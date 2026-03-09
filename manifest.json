@@ -1,6 +1,31 @@
 {
   "puzzles": [
     {
+      "id": "2026-03-10",
+      "release_at": "2026-03-10T00:00:00-04:00",
+      "title": "Salesman"
+    },
+    {
+      "id": "2026-03-09",
+      "release_at": "2026-03-09T00:00:00-04:00",
+      "title": "Vampire hunter"
+    },
+    {
+      "id": "2026-03-10",
+      "release_at": "2026-03-10T00:00:00-04:00",
+      "title": "Vampire hunter"
+    },
+    {
+      "id": "2026-03-12",
+      "release_at": "2026-03-12T00:00:00-04:00",
+      "title": "Griffin"
+    },
+    {
+      "id": "2026-03-11",
+      "release_at": "2026-03-11T00:00:00-04:00",
+      "title": "Viking"
+    },
+    {
       "id": "2026-03-06",
       "release_at": "2026-03-06T00:00:00-04:00",
       "title": "Tyrant"
