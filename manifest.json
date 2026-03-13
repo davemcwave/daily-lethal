@@ -1,6 +1,11 @@
 {
   "puzzles": [
     {
+      "id": "2026-03-13",
+      "release_at": "2026-03-13T00:00:00-04:00",
+      "title": "Walking Minefield"
+    },
+    {
       "id": "2026-03-10",
       "release_at": "2026-03-10T00:00:00-04:00",
       "title": "Salesman"

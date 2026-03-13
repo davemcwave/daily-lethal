@@ -9,6 +9,7 @@ var custom_cards_data: Array = []
 var card_order_tokens: Array = []
 var puzzle_creator_name: String = ""
 var enemy_name_override: String = ""
+var enemy_buffs_url_data: Array = []
 
 # DEBUG: Set this to test custom cards in the Godot editor
 @export var debug_custom_cards_json: String = ""
@@ -42,6 +43,8 @@ func _ready():
 
 	if search != null and "card_order=" in search:
 		_parse_card_order()
+
+	_parse_enemy_buffs()
 
 	var query_puzzle_date := _get_query_param("puzzle_date")
 	if not query_puzzle_date.is_empty():
@@ -227,6 +230,29 @@ func _parse_card_order() -> void:
 
 func get_card_order_tokens() -> Array:
 	return card_order_tokens.duplicate()
+
+func has_enemy_buffs_from_url() -> bool:
+	return enemy_buffs_url_data.size() > 0
+
+func get_enemy_buffs_from_url() -> Array:
+	return enemy_buffs_url_data.duplicate()
+
+func _parse_enemy_buffs() -> void:
+	var raw := _get_query_param("enemy_buffs")
+	if raw.is_empty():
+		return
+	for token in raw.split(","):
+		token = token.strip_edges()
+		if token.is_empty():
+			continue
+		var parts := token.split(":")
+		var buff_name := parts[0].strip_edges()
+		var params := {}
+		if parts.size() >= 2:
+			var second := parts[1].strip_edges()
+			if second.is_valid_int():
+				params["damage"] = int(second)
+		enemy_buffs_url_data.append({"name": buff_name, "params": params})
 
 func create_custom_cards() -> Array:
 	var cards: Array = []

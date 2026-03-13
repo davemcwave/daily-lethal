@@ -301,7 +301,10 @@ func set_puzzle(new_puzzle: Puzzle) -> void:
 		buff_panel.set_buff(enemy_buff)
 		var target = $Health if puzzle.get_enemy_buff_target() == 'Player' else $Enemy
 		enemy_buff.set_target(target)
-	
+
+	if url_capturer != null and url_capturer.has_enemy_buffs_from_url():
+		_apply_url_enemy_buffs()
+
 	if puzzle.do_randomize_cards():
 		puzzle.clear_card_scenes()
 		var card_scenes: Array[Resource] = get_all_card_scenes()
@@ -445,6 +448,33 @@ func _apply_card_order_to_hand() -> void:
 
 	hand.queue_sort()
 	await hand.reorder_cards_by_x_position()
+
+func _apply_url_enemy_buffs() -> void:
+	var buff_scene_map := {
+		"Retaliate": "res://Scenes/RetaliateBuff.scn",
+	}
+	for buff_data in url_capturer.get_enemy_buffs_from_url():
+		var buff_name: String = buff_data.get("name", "")
+		var scene_path: String = buff_scene_map.get(buff_name, "")
+		if scene_path.is_empty():
+			push_warning("Unknown URL enemy buff: %s" % buff_name)
+			continue
+		var buff_scene = load(scene_path)
+		if buff_scene == null:
+			push_warning("Could not load enemy buff scene: %s" % scene_path)
+			continue
+		var buff: Buff = buff_scene.instantiate()
+		buff.activation_type = Buff.ActivationType.OnHurt
+		var params: Dictionary = buff_data.get("params", {})
+		if params.has("damage") and buff.has_method("set_damage_amount"):
+			buff.set_damage_amount(int(params["damage"]))
+		if buff_name == "Retaliate":
+			var dmg: int = buff.get_damage_amount() if buff.has_method("get_damage_amount") else 1
+			buff.set_buff_name("Retaliate %d" % dmg)
+		var buff_panel: BuffPanel = load("res://Scenes/BuffPanel.scn").instantiate()
+		$Enemy/EnemyBuffsContainer.add_child(buff_panel)
+		buff_panel.set_buff(buff)
+		buff.set_target($Health)
 
 func get_all_card_scenes() -> Array[Resource]:
 	var card_scenes: Array[Resource] = []
