@@ -1,6 +1,11 @@
 {
   "puzzles": [
     {
+      "id": "2026-03-17",
+      "release_at": "2026-03-17T00:00:00-04:00",
+      "title": "Octopus"
+    },
+    {
       "id": "2026-03-16",
       "release_at": "2026-03-16T00:00:00-04:00",
       "title": "Mercenary"
