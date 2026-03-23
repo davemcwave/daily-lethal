@@ -1,6 +1,11 @@
 {
   "puzzles": [
     {
+      "id": "2026-03-23",
+      "release_at": "2026-03-23T00:00:00-04:00",
+      "title": "Soldier's Phantom"
+    },
+    {
       "id": "2026-03-20",
       "release_at": "2026-03-20T00:00:00-04:00",
       "title": "Toad"
