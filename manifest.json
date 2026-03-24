@@ -1,6 +1,11 @@
 {
   "puzzles": [
     {
+      "id": "2026-03-24",
+      "release_at": "2026-03-24T00:00:00-04:00",
+      "title": "Explosioneer"
+    },
+    {
       "id": "2026-03-23",
       "release_at": "2026-03-23T00:00:00-04:00",
       "title": "Soldier's Phantom"
