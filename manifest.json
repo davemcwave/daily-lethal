@@ -1,6 +1,11 @@
 {
   "puzzles": [
     {
+      "id": "2026-03-27",
+      "release_at": "2026-03-27T00:00:00-04:00",
+      "title": "Limbo Bar"
+    },
+    {
       "id": "2026-03-26",
       "release_at": "2026-03-26T00:00:00-04:00",
       "title": "Fiber-Optic Cable Snake"
