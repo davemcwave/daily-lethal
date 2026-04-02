@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Lethal – 2026-12-28</title>
+  <script>
+    (function redirectViaJson() {
+      var dateKey = "2026-12-28";
+      var requestPath = window.location.pathname || "";
+      var platformMatch = requestPath.match(/^\/(desktop|mobile)/i);
+      var requestedPlatform = platformMatch ? platformMatch[1].toLowerCase() : "";
+
+      function applyPlatformPreference(url) {
+        if (!requestedPlatform) {
+          return url;
+        }
+
+        var platformPrefix = "/" + requestedPlatform;
+        var isPlatformPath = function(pathname) {
+          return pathname.startsWith("/desktop") || pathname.startsWith("/mobile");
+        };
+
+        if (/^https?:\/\//i.test(url)) {
+          try {
+            var parsed = new URL(url);
+            if (parsed.origin !== window.location.origin) {
+              return url;
+            }
+            if (isPlatformPath(parsed.pathname)) {
+              return parsed.toString();
+            }
+            parsed.pathname = platformPrefix + parsed.pathname;
+            return parsed.toString();
+          } catch (platformErr) {
+            console.error("Failed to apply platform preference", platformErr);
+            return url;
+          }
+        }
+
+        if (isPlatformPath(url)) {
+          return url;
+        }
+        return platformPrefix + url;
+      }
+
+      fetch("/custom-redirects.json", { cache: "no-store" })
+        .then(function(response) {
+          if (!response.ok) {
+            throw new Error("Failed to load redirect map");
+          }
+          return response.json();
+        })
+        .then(function(map) {
+          var redirects = (map && map.date_redirects) ? map.date_redirects : map;
+          var target = redirects[dateKey] || redirects["/" + dateKey];
+          if (typeof target !== "string" || target.length === 0) {
+            return;
+          }
+          var normalized;
+          if (/^https?:\/\//i.test(target)) {
+            normalized = target;
+          } else if (target.startsWith("/")) {
+            normalized = target;
+          } else if (target.startsWith("?")) {
+            normalized = "/" + target;
+          } else {
+            normalized = "/" + target;
+          }
+          if (normalized.indexOf("puzzle_date=") === -1) {
+            var joinChar = normalized.indexOf("?") === -1 ? "?" : "&";
+            normalized = normalized + joinChar + "puzzle_date=" + encodeURIComponent(dateKey);
+          }
+          normalized = applyPlatformPreference(normalized);
+          window.location.replace(normalized);
+        })
+        .catch(function(err) {
+          console.error("Date redirect error", err);
+        });
+    })();
+  </script>
+</head>
+<body></body>
+</html>
