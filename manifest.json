@@ -1,6 +1,31 @@
 {
   "puzzles": [
     {
+      "id": "2026-04-10",
+      "release_at": "2026-04-10T00:00:00-04:00",
+      "title": "Adamantine Golem"
+    },
+    {
+      "id": "2026-04-09",
+      "release_at": "2026-04-09T00:00:00-04:00",
+      "title": "Specimen"
+    },
+    {
+      "id": "2026-04-08",
+      "release_at": "2026-04-08T00:00:00-04:00",
+      "title": "Chanter"
+    },
+    {
+      "id": "2026-04-07",
+      "release_at": "2026-04-07T00:00:00-04:00",
+      "title": "Wizard"
+    },
+    {
+      "id": "2026-04-06",
+      "release_at": "2026-04-06T00:00:00-04:00",
+      "title": "Backstreet Thug"
+    },
+    {
       "id": "2026-04-03",
       "release_at": "2026-04-03T00:00:00-04:00",
       "title": "Monk"
