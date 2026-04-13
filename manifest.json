@@ -1,6 +1,11 @@
 {
   "puzzles": [
     {
+      "id": "2026-04-13",
+      "release_at": "2026-04-13T00:00:00-04:00",
+      "title": "Count of Monte Cristo"
+    },
+    {
       "id": "2026-04-10",
       "release_at": "2026-04-10T00:00:00-04:00",
       "title": "Adamantine Golem"
