@@ -1,6 +1,11 @@
 {
   "puzzles": [
     {
+      "id": "2026-04-14",
+      "release_at": "2026-04-14T00:00:00-04:00",
+      "title": "Snail"
+    },
+    {
       "id": "2026-04-13",
       "release_at": "2026-04-13T00:00:00-04:00",
       "title": "Count of Monte Cristo"
