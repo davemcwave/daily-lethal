@@ -1,6 +1,11 @@
 {
   "puzzles": [
     {
+      "id": "2026-04-17",
+      "release_at": "2026-04-17T00:00:00-04:00",
+      "title": "The Plaintiff"
+    },
+    {
       "id": "2026-04-16",
       "release_at": "2026-04-16T00:00:00-04:00",
       "title": "Sculptor"
