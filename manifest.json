@@ -1,6 +1,26 @@
 {
   "puzzles": [
     {
+      "id": "2026-04-23",
+      "release_at": "2026-04-23T00:00:00-04:00",
+      "title": "Copycat"
+    },
+    {
+      "id": "2026-04-22",
+      "release_at": "2026-04-22T00:00:00-04:00",
+      "title": "The Judge"
+    },
+    {
+      "id": "2026-04-21",
+      "release_at": "2026-04-21T00:00:00-04:00",
+      "title": "Animated Tree"
+    },
+    {
+      "id": "2026-04-20",
+      "release_at": "2026-04-20T00:00:00-04:00",
+      "title": "Vermillion Slime"
+    },
+    {
       "id": "2026-04-17",
       "release_at": "2026-04-17T00:00:00-04:00",
       "title": "The Plaintiff"
