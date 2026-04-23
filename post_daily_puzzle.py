@@ -59,7 +59,7 @@ def build_post(date_key: str, enemy_name: str, author: str) -> tuple[str, str]:
     return title, content
 
 
-def post_forum_thread(token: str, title: str, content: str, image_path: Path, *, ping_role: bool = False) -> dict:
+def post_forum_thread(token: str, title: str, content: str, image_path: Path, *, ping_role: bool = True) -> dict:
     url = f"{API_BASE}/channels/{CHANNEL_ID}/threads"
     boundary = "----DailyLethalBoundary7f3a"
 
@@ -101,7 +101,7 @@ def post_forum_thread(token: str, title: str, content: str, image_path: Path, *,
 
 
 def main() -> int:
-    ping_role = "--ping" in sys.argv
+    ping_role = "--no-ping" not in sys.argv
 
     token = os.environ.get("DISCORD_BOT_TOKEN")
     if not token:

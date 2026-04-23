@@ -1,6 +1,36 @@
 {
   "puzzles": [
     {
+      "id": "2026-04-30",
+      "release_at": "2026-04-30T00:00:00-04:00",
+      "title": "Underworld Gatekeeper"
+    },
+    {
+      "id": "2026-04-29",
+      "release_at": "2026-04-29T00:00:00-04:00",
+      "title": "Sparky Sparky Boom Boom Man"
+    },
+    {
+      "id": "2026-04-28",
+      "release_at": "2026-04-28T00:00:00-04:00",
+      "title": "Undead"
+    },
+    {
+      "id": "2026-04-27",
+      "release_at": "2026-04-27T00:00:00-04:00",
+      "title": "Kappa"
+    },
+    {
+      "id": "2026-04-27",
+      "release_at": "2026-04-27T00:00:00-04:00",
+      "title": "Undead"
+    },
+    {
+      "id": "2026-04-24",
+      "release_at": "2026-04-24T00:00:00-04:00",
+      "title": "Glacial Mirror"
+    },
+    {
       "id": "2026-04-23",
       "release_at": "2026-04-23T00:00:00-04:00",
       "title": "Copycat"
