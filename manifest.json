@@ -1,6 +1,11 @@
 {
   "puzzles": [
     {
+      "id": "2026-05-01",
+      "release_at": "2026-05-01T00:00:00-04:00",
+      "title": "Supermassive Fusion Core"
+    },
+    {
       "id": "2026-04-30",
       "release_at": "2026-04-30T00:00:00-04:00",
       "title": "Underworld Gatekeeper"
