@@ -1,6 +1,6 @@
 extends Control
 
-var share_text_template = "💀 I defeated the {enemy_name} in {attempt_count} attempt{attempt_plural}!\n🃏 My solution: {best_card_count} cards\nPlay puzzle 👉 {puzzle_url}" # https://playlethal.fun"
+var share_text_template = "💀 I defeated the {enemy_name} in ||{attempt_count}|| attempt{attempt_plural}!\n🃏 My solution: {best_card_count} cards\nPlay puzzle 👉 {puzzle_url}" # https://playlethal.fun"
 var share_text = ""
 const SECONDS_PER_DAY := 24 * 60 * 60
 @onready var background = get_node("/root/Background")

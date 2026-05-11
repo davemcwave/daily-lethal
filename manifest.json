@@ -1,6 +1,26 @@
 {
   "puzzles": [
     {
+      "id": "2026-05-14",
+      "release_at": "2026-05-14T00:00:00-04:00",
+      "title": "Popped Corn"
+    },
+    {
+      "id": "2026-05-13",
+      "release_at": "2026-05-13T00:00:00-04:00",
+      "title": "Lover"
+    },
+    {
+      "id": "2026-05-12",
+      "release_at": "2026-05-12T00:00:00-04:00",
+      "title": "Centipede"
+    },
+    {
+      "id": "2026-05-11",
+      "release_at": "2026-05-11T00:00:00-04:00",
+      "title": "Pigman"
+    },
+    {
       "id": "2026-05-08",
       "release_at": "2026-05-08T00:00:00-04:00",
       "title": "Volcanic Mirror"
