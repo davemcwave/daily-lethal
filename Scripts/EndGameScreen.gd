@@ -1,21 +1,20 @@
 extends Control
 
-var share_text_template = "💀 I defeated the {enemy_name} in ||{attempt_count} attempt{attempt_plural_padded}||!\n🃏 My solution: ||{best_card_count} card{card_plural_padded}||\nPlay puzzle 👉 {puzzle_url}" # https://playlethal.fun"
+var share_text_template = "💀 I defeated the {enemy_name} in {attempt_count} attempt{attempt_plural}!\n🃏 My solution: ||{best_card_count}|| card{card_plural}\nPlay puzzle 👉 {puzzle_url}" # https://playlethal.fun"
 var share_text = ""
 const SECONDS_PER_DAY := 24 * 60 * 60
 @onready var background = get_node("/root/Background")
 func _ready():
 	var attempt_plural: String = '' if background.attempts <= 1 else 's'
-	var attempt_plural_padded: String = ' ' if background.attempts <= 1 else 's'
-	var card_plural_padded: String = ' ' if background.best_card_count <= 1 else 's'
+	var card_plural: String = '' if background.best_card_count <= 1 else 's'
 	var share_url = get_share_url()
 	share_text = share_text_template.format(
 		{
 			'enemy_name': background.enemy_name,
-			'attempt_plural_padded': attempt_plural_padded,
-			'card_plural_padded': card_plural_padded,
-			'attempt_count': str(background.attempts).lpad(3, " "),
-			'best_card_count': str(background.best_card_count).lpad(3, " "),
+			'attempt_plural': attempt_plural,
+			'card_plural': card_plural,
+			'attempt_count': str(background.attempts),
+			'best_card_count': str(background.best_card_count).lpad(3, "0"),
 			'puzzle_url': share_url,
 		}
 	)
