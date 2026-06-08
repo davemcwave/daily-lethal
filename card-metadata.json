@@ -1,5 +1,11 @@
 [
   {
+    "color": "#C35300",
+    "energy": 2,
+    "file": "res://Scenes/AcuminateCard.scn",
+    "name": "Acuminate"
+  },
+  {
     "color": "#8C008C",
     "energy": 1,
     "file": "res://Scenes/ArmoryCard.scn",
@@ -145,11 +151,23 @@
   {
     "color": "#C35300",
     "energy": 1,
+    "file": "res://Scenes/FragmentCard.scn",
+    "name": "Fragment"
+  },
+  {
+    "color": "#C35300",
+    "energy": 1,
     "file": "res://Scenes/FrenzyCard.scn",
     "name": "Frenzy",
     "colors": [
       "#C35300"
     ]
+  },
+  {
+    "color": "#8C008C",
+    "energy": 1,
+    "file": "res://Scenes/GambitCard.scn",
+    "name": "Gambit"
   },
   {
     "color": "#002A8C",
@@ -230,6 +248,12 @@
   },
   {
     "color": "#8C0127",
+    "energy": 1,
+    "file": "res://Scenes/PartingShotCard.scn",
+    "name": "Parting Shot"
+  },
+  {
+    "color": "#8C0127",
     "energy": 2,
     "file": "res://Scenes/PotionCard.scn",
     "name": "Potion",
@@ -283,6 +307,12 @@
       "#002A8C",
       "#8C008C"
     ]
+  },
+  {
+    "color": "#8C008C",
+    "energy": 3,
+    "file": "res://Scenes/SeanceCard.scn",
+    "name": "Seance"
   },
   {
     "color": "#C35300",

@@ -1,3 +1,4 @@
+class_name ReclaimCardEffect
 extends CardEffect
 
 @export var card_amount: int = 1

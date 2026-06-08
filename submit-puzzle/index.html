@@ -87,6 +87,18 @@
       display: block;
       line-height: 0.5;
     }
+    .new-only-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      white-space: nowrap;
+      font-weight: bold;
+    }
+    .new-only-toggle input {
+      width: auto;
+      margin: 0;
+    }
 
     .filter-actions {
       display: flex;
@@ -351,6 +363,7 @@
     </div>
     <div class="filter-actions">
       <button type="button" id="clearFiltersBtn">Remove All Filters</button>
+      <label class="new-only-toggle" for="newCardsOnlyFilter"><input type="checkbox" id="newCardsOnlyFilter" /> New cards only</label>
       <div class="filters-summary" id="filtersSummary">Filters applied: None</div>
     </div>
     <div class="card-grid" id="cardGallery"></div>
@@ -399,6 +412,7 @@
     const minEnergyFilter = document.getElementById('minEnergyFilter');
     const maxEnergyFilter = document.getElementById('maxEnergyFilter');
     const sortBySelect = document.getElementById('sortBySelect');
+    const newCardsOnlyFilter = document.getElementById('newCardsOnlyFilter');
     const clearFiltersBtn = document.getElementById('clearFiltersBtn');
     const filtersSummary = document.getElementById('filtersSummary');
     const selectedCards = [];
@@ -418,6 +432,9 @@
     }
     if (sortBySelect) {
       sortBySelect.addEventListener('change', applyFilters);
+    }
+    if (newCardsOnlyFilter) {
+      newCardsOnlyFilter.addEventListener('change', applyFilters);
     }
     if (clearFiltersBtn) {
       clearFiltersBtn.addEventListener('click', clearAllFilters);
@@ -526,6 +543,7 @@
             colors,
             energy: energyValue,
             dateAdded,
+            isNew: !!(cardDate && cardDate >= oneWeekAgo),
             wrapper
           });
         });
@@ -699,11 +717,15 @@
       const activeColors = Array.from(selectedColors);
       const minEnergy = minEnergyFilter?.value ? parseInt(minEnergyFilter.value, 10) : null;
       const maxEnergy = maxEnergyFilter?.value ? parseInt(maxEnergyFilter.value, 10) : null;
+      const newOnly = !!newCardsOnlyFilter?.checked;
 
       const filteredEntries = [];
       cardEntries.forEach(entry => {
         let visible = true;
-        if (nameQuery && !entry.name.includes(nameQuery)) {
+        if (newOnly && !entry.isNew) {
+          visible = false;
+        }
+        if (visible && nameQuery && !entry.name.includes(nameQuery)) {
           visible = false;
         }
         if (visible && activeColors.length > 0) {
@@ -729,7 +751,7 @@
 
       const sortedEntries = sortEntries(filteredEntries);
       sortedEntries.forEach(entry => cardGallery.appendChild(entry.wrapper));
-      updateFiltersSummary(nameQuery, activeColors, minEnergy, maxEnergy, sortedEntries.length);
+      updateFiltersSummary(nameQuery, activeColors, minEnergy, maxEnergy, sortedEntries.length, newOnly);
     }
 
     function sortEntries(entries) {
@@ -814,9 +836,12 @@
       return { priority, color: chosenColor || '' };
     }
 
-    function updateFiltersSummary(nameQuery, activeColors, minEnergy, maxEnergy, count) {
+    function updateFiltersSummary(nameQuery, activeColors, minEnergy, maxEnergy, count, newOnly) {
       if (!filtersSummary) return;
       const parts = [];
+      if (newOnly) {
+        parts.push('New cards only');
+      }
       if (nameQuery) {
         parts.push(`Name contains "${escapeHtml(nameQuery)}"`);
       }
@@ -853,6 +878,9 @@
       }
       if (sortBySelect) {
         sortBySelect.value = 'name-asc';
+      }
+      if (newCardsOnlyFilter) {
+        newCardsOnlyFilter.checked = false;
       }
       applyFilters();
     }
