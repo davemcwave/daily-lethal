@@ -87,6 +87,29 @@
       display: block;
       line-height: 0.5;
     }
+    .enemy-buff-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+    .enemy-buff-row .enemy-buff-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin: 0;
+      min-width: 120px;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+    .enemy-buff-row .enemy-buff-toggle input[type="checkbox"] {
+      width: auto;
+      margin: 0;
+    }
+    .enemy-buff-row input[type="number"] {
+      width: 90px;
+      margin-top: 0;
+    }
     .new-only-toggle {
       display: inline-flex;
       align-items: center;
@@ -384,6 +407,24 @@
       <label>Optional Enemy Name or Inspirations</label>
       <input type="text" name="enemy_info" placeholder="Godzilla / A Monster That Looks Like A Giant Lizard" />
       <div class="description">This is so I know what to draw for the enemy icon</div>
+      <label>Optional Enemy Buffs</label>
+      <div class="enemy-buff-row">
+        <label class="enemy-buff-toggle">
+          <input type="checkbox" name="enemy_buff_retaliate_enabled" id="enemyBuffRetaliateToggle" />
+          <span>Retaliate</span>
+        </label>
+        <span class="description" style="margin-top:0; white-space:nowrap;">damage per hit</span>
+        <input type="number" name="enemy_buff_retaliate_value" id="enemyBuffRetaliateValue" min="1" max="99" value="1" placeholder="damage" />
+      </div>
+      <div class="enemy-buff-row">
+        <label class="enemy-buff-toggle">
+          <input type="checkbox" name="enemy_buff_doom_enabled" id="enemyBuffDoomToggle" />
+          <span>Doom</span>
+        </label>
+        <span class="description" style="margin-top:0; white-space:nowrap;">turns until dead</span>
+        <input type="number" name="enemy_buff_doom_value" id="enemyBuffDoomValue" min="1" max="99" value="3" placeholder="turns" />
+      </div>
+      <input type="hidden" name="enemy_buffs" id="enemyBuffsField" />
       <label>Puzzle Difficulty</label>
       <select name="difficulty" style="width: 100%; padding: 10px; border-radius: 8px; border: none; margin-top: 5px; font-size: 0.9rem; box-sizing: border-box;">
         <option value="Very Easy">Very Easy</option>
@@ -555,15 +596,50 @@
       }
     }
 
+    function buildEnemyBuffsString() {
+      const tokens = [];
+      const retaliateToggle = document.getElementById('enemyBuffRetaliateToggle');
+      const retaliateValue = document.getElementById('enemyBuffRetaliateValue');
+      if (retaliateToggle && retaliateToggle.checked) {
+        const parsed = parseInt(retaliateValue ? retaliateValue.value : '', 10);
+        const n = Number.isFinite(parsed) && parsed > 0 ? parsed : 1;
+        tokens.push(`Retaliate:${n}`);
+      }
+      const doomToggle = document.getElementById('enemyBuffDoomToggle');
+      const doomValue = document.getElementById('enemyBuffDoomValue');
+      if (doomToggle && doomToggle.checked) {
+        const parsed = parseInt(doomValue ? doomValue.value : '', 10);
+        const n = Number.isFinite(parsed) && parsed > 0 ? parsed : 3;
+        tokens.push(`Doom:${n}`);
+      }
+      return tokens.join(',');
+    }
+
+    function buildPlayUrl() {
+      const cardString = selectedCards.join(',');
+      const safeString = encodeURIComponent(cardString);
+      const base64 = btoa(safeString);
+
+      const playerHp = document.querySelector('input[name="player_hp"]').value;
+      const playerEnergy = document.querySelector('input[name="player_energy"]').value;
+      const enemyHp = document.querySelector('input[name="enemy_hp"]').value;
+
+      const enemyName = document.querySelector('input[name="enemy_info"]').value.trim();
+      const authorName = document.querySelector('input[name="credit_name"]').value.trim();
+      const enemyParam = enemyName ? `&enemy_name=${encodeURIComponent(enemyName)}` : '';
+      const authorParam = authorName ? `&author=${encodeURIComponent(authorName)}` : '';
+      const enemyBuffs = buildEnemyBuffsString();
+      const enemyBuffsParam = enemyBuffs ? `&enemy_buffs=${encodeURIComponent(enemyBuffs)}` : '';
+
+      const basePath = '/';
+      return `${basePath}?cards=${base64}&php=${playerHp}&pnrg=${playerEnergy}&ehp=${enemyHp}${enemyParam}${authorParam}${enemyBuffsParam}`;
+    }
+
      function testPuzzle() {
       if (selectedCards.length === 0) {
         alert("Please select cards to test.");
         return;
       }
-
-      const cardString = selectedCards.join(',');
-      const safeString = encodeURIComponent(cardString);
-      const base64 = btoa(safeString);
 
       const playerHp = document.querySelector('input[name="player_hp"]').value;
       const playerEnergy = document.querySelector('input[name="player_energy"]').value;
@@ -574,15 +650,7 @@
         return;
       }
 
-      const deviceType = localStorage.getItem('device_type');
-      const enemyName = document.querySelector('input[name="enemy_info"]').value.trim();
-      const authorName = document.querySelector('input[name="credit_name"]').value.trim();
-      const enemyParam = enemyName ? `&enemy_name=${encodeURIComponent(enemyName)}` : '';
-      const authorParam = authorName ? `&author=${encodeURIComponent(authorName)}` : '';
-
-      const basePath = '/';
-      const testUrl = `${basePath}?cards=${base64}&php=${playerHp}&pnrg=${playerEnergy}&ehp=${enemyHp}${enemyParam}${authorParam}`;
-
+      const testUrl = buildPlayUrl();
       document.getElementById('testUrlField').value = testUrl;
       window.open(testUrl, '_blank');
     }
@@ -599,6 +667,14 @@
       
     function finalizeBeforeSubmit() {
       document.getElementById('finalCards').value = selectedCards.join(', ');
+      const enemyBuffsField = document.getElementById('enemyBuffsField');
+      if (enemyBuffsField) {
+        enemyBuffsField.value = buildEnemyBuffsString();
+      }
+      const testUrlField = document.getElementById('testUrlField');
+      if (testUrlField) {
+        testUrlField.value = buildPlayUrl();
+      }
       syncEnemyIconField();
       return true;
     }

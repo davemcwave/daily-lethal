@@ -175,10 +175,11 @@ func get_buffs() -> Array[Buff]:
 	
 func activate_on_play_buffs() -> void:
 	animating = true
-	for buff: Buff in get_buffs():
-		if buff.is_activated_on_card_play():
+	for buff: Buff in get_buffs().duplicate():
+		if is_instance_valid(buff) and not buff.is_queued_for_deletion() and buff.is_activated_on_card_play():
 			await get_tree().create_timer(0.25).timeout
-			buff.activate()
+			if is_instance_valid(buff) and not buff.is_queued_for_deletion():
+				await buff.activate()
 	animating = false
 	
 func activate_on_hurt_buffs() -> void:
@@ -207,6 +208,7 @@ func activate_on_card_play_debuffs(do_not_activate: Array = []) -> void:
 			if is_instance_valid(debuff) and not debuff.is_queued_for_deletion():
 				await debuff.activate()
 	animating = false
+	await activate_on_play_buffs()
 
 func create_damage_label(hurt_amount: int) -> void:
 	var damage_label: RichTextLabel = load("res://Scenes/DamageLabel.scn").instantiate()

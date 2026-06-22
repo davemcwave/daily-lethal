@@ -452,6 +452,7 @@ func _apply_card_order_to_hand() -> void:
 func _apply_url_enemy_buffs() -> void:
 	var buff_scene_map := {
 		"Retaliate": "res://Scenes/RetaliateBuff.scn",
+		"Doom": "res://Scenes/DoomBuff.scn",
 	}
 	for buff_data in url_capturer.get_enemy_buffs_from_url():
 		var buff_name: String = buff_data.get("name", "")
@@ -464,13 +465,18 @@ func _apply_url_enemy_buffs() -> void:
 			push_warning("Could not load enemy buff scene: %s" % scene_path)
 			continue
 		var buff: Buff = buff_scene.instantiate()
-		buff.activation_type = Buff.ActivationType.OnHurt
 		var params: Dictionary = buff_data.get("params", {})
-		if params.has("damage") and buff.has_method("set_damage_amount"):
-			buff.set_damage_amount(int(params["damage"]))
-		if buff_name == "Retaliate":
-			var dmg: int = buff.get_damage_amount() if buff.has_method("get_damage_amount") else 1
-			buff.set_buff_name("Retaliate %d" % dmg)
+		match buff_name:
+			"Retaliate":
+				buff.activation_type = Buff.ActivationType.OnHurt
+				if params.has("value"):
+					buff.set_damage_amount(int(params["value"]))
+				var dmg: int = buff.get_damage_amount()
+				buff.set_buff_name("Retaliate %d" % dmg)
+			"Doom":
+				buff.activation_type = Buff.ActivationType.OnCardPlay
+				if params.has("value"):
+					buff.set_turns_left(int(params["value"]))
 		var buff_panel: BuffPanel = load("res://Scenes/BuffPanel.scn").instantiate()
 		$Enemy/EnemyBuffsContainer.add_child(buff_panel)
 		buff_panel.set_buff(buff)

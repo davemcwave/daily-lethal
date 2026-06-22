@@ -30,3 +30,6 @@ func reduce_turns_left(turns_less_value: int = 1) -> void:
 func activate(context: Dictionary = {}) -> bool:
 	reduce_turns_left()
 	return super.activate()
+
+func should_show_unlimited_panel() -> bool:
+	return false

@@ -155,6 +155,46 @@
       font-size: 0.85rem;
     }
 
+    .sub-buffs {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid #2a2a2a;
+    }
+    .buff-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+    }
+    .buff-row .buff-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      min-width: 110px;
+      cursor: pointer;
+      color: #ddd;
+    }
+    .buff-row .buff-toggle input[type="checkbox"] {
+      margin: 0;
+      cursor: pointer;
+    }
+    .buff-row input[type="number"] {
+      width: 70px;
+      background: #222;
+      border: 1px solid #444;
+      border-radius: 4px;
+      padding: 0.2rem 0.4rem;
+      color: #eee;
+      font-size: 0.85rem;
+    }
+    .buff-row .buff-hint {
+      color: #888;
+      font-size: 0.75rem;
+    }
+
     .sub-solution {
       font-size: 0.7rem;
       color: #aaa;
@@ -409,8 +449,71 @@ function buildRedirectValue(testUrl, enemyName, author, overrides = {}) {
     }
   });
 
+  if (overrides.enemy_buffs !== undefined) {
+    const buffsValue = sanitize(overrides.enemy_buffs);
+    if (buffsValue) {
+      params.set('enemy_buffs', buffsValue);
+    } else {
+      params.delete('enemy_buffs');
+    }
+  }
+
   const queryString = params.toString();
   return queryString ? `?${queryString}` : '';
+}
+
+function parseEnemyBuffsFromUrl(testUrl) {
+  const state = {
+    retaliate: { enabled: false, value: 1 },
+    doom: { enabled: false, value: 3 },
+  };
+  if (!testUrl) return state;
+  const qs = normalizeQueryString(testUrl);
+  if (!qs) return state;
+  const raw = new URLSearchParams(qs).get('enemy_buffs');
+  if (!raw) return state;
+  raw.split(',').forEach(token => {
+    const trimmed = token.trim();
+    if (!trimmed) return;
+    const [name, valStr] = trimmed.split(':');
+    const lower = (name || '').trim().toLowerCase();
+    const value = parseInt((valStr || '').trim(), 10);
+    if (lower === 'retaliate') {
+      state.retaliate.enabled = true;
+      if (Number.isFinite(value) && value > 0) state.retaliate.value = value;
+    } else if (lower === 'doom') {
+      state.doom.enabled = true;
+      if (Number.isFinite(value) && value > 0) state.doom.value = value;
+    }
+  });
+  return state;
+}
+
+function buildEnemyBuffsString(state) {
+  const tokens = [];
+  if (state.retaliate.enabled) {
+    const n = parseInt(state.retaliate.value, 10);
+    tokens.push(`Retaliate:${Number.isFinite(n) && n > 0 ? n : 1}`);
+  }
+  if (state.doom.enabled) {
+    const n = parseInt(state.doom.value, 10);
+    tokens.push(`Doom:${Number.isFinite(n) && n > 0 ? n : 3}`);
+  }
+  return tokens.join(',');
+}
+
+function readEnemyBuffsState(i) {
+  const get = id => document.getElementById(`${id}-${i}`);
+  return {
+    retaliate: {
+      enabled: !!get('retaliate-enabled')?.checked,
+      value: parseInt(get('retaliate-value')?.value, 10) || 1,
+    },
+    doom: {
+      enabled: !!get('doom-enabled')?.checked,
+      value: parseInt(get('doom-value')?.value, 10) || 3,
+    },
+  };
 }
 
 function difficultyClass(diff) {
@@ -441,6 +544,7 @@ function renderCards(submissions) {
     ).join('');
 
     const submittedLabel = formatSubmittedDate(sub._date);
+    const initialBuffs = parseEnemyBuffsFromUrl(sub.test_url || '');
     const previewQS = buildRedirectValue(
       sub.test_url || '',
       sub.enemy_info || '',
@@ -449,6 +553,7 @@ function renderCards(submissions) {
         enemy_hp: sub.enemy_hp,
         player_hp: sub.player_hp,
         player_energy: sub.player_energy,
+        enemy_buffs: buildEnemyBuffsString(initialBuffs),
       }
     );
 
@@ -487,6 +592,24 @@ function renderCards(submissions) {
           <input type="number" id="player-energy-${i}" value="${escHtml(sub.player_energy || '')}" inputmode="numeric" />
         </div>
       </div>
+      <div class="sub-buffs">
+        <div class="buff-row">
+          <label class="buff-toggle" for="retaliate-enabled-${i}">
+            <input type="checkbox" id="retaliate-enabled-${i}" ${initialBuffs.retaliate.enabled ? 'checked' : ''} />
+            <span>Retaliate</span>
+          </label>
+          <input type="number" id="retaliate-value-${i}" min="1" max="99" value="${initialBuffs.retaliate.value}" />
+          <span class="buff-hint">damage per hit</span>
+        </div>
+        <div class="buff-row">
+          <label class="buff-toggle" for="doom-enabled-${i}">
+            <input type="checkbox" id="doom-enabled-${i}" ${initialBuffs.doom.enabled ? 'checked' : ''} />
+            <span>Doom</span>
+          </label>
+          <input type="number" id="doom-value-${i}" min="1" max="99" value="${initialBuffs.doom.value}" />
+          <span class="buff-hint">turns until dead</span>
+        </div>
+      </div>
       <div class="sub-solution" id="solution-${i}">${solutionHtml(sub.solution_order)}</div>
     `;
 
@@ -494,10 +617,12 @@ function renderCards(submissions) {
     setPreviewLink(i, previewQS);
 
     // Update preview live as fields change
-    ['enemy', 'author', 'enemy-hp', 'player-hp', 'player-energy'].forEach(field => {
+    ['enemy', 'author', 'enemy-hp', 'player-hp', 'player-energy',
+     'retaliate-enabled', 'retaliate-value', 'doom-enabled', 'doom-value'].forEach(field => {
       const input = document.getElementById(`${field}-${i}`);
       if (input) {
         input.addEventListener('input', () => updatePreview(i, sub));
+        input.addEventListener('change', () => updatePreview(i, sub));
       }
     });
 
@@ -534,6 +659,7 @@ function updatePreview(i, sub) {
     enemy_hp: enemyHp,
     player_hp: playerHp,
     player_energy: playerEnergy,
+    enemy_buffs: buildEnemyBuffsString(readEnemyBuffsState(i)),
   });
   setPreviewLink(i, qs);
 }
@@ -601,6 +727,7 @@ async function publish(i) {
       enemy_hp: enemyHp,
       player_hp: playerHp,
       player_energy: playerEnergy,
+      enemy_buffs: buildEnemyBuffsString(readEnemyBuffsState(i)),
     });
     const diffClass = difficultyClass(diff);
 

@@ -251,7 +251,7 @@ func _parse_enemy_buffs() -> void:
 		if parts.size() >= 2:
 			var second := parts[1].strip_edges()
 			if second.is_valid_int():
-				params["damage"] = int(second)
+				params["value"] = int(second)
 		enemy_buffs_url_data.append({"name": buff_name, "params": params})
 
 func create_custom_cards() -> Array:

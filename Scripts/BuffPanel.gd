@@ -36,7 +36,7 @@ func set_buff(new_buff: Buff) -> void:
 	_base_modulate = buff.get_color()
 	_apply_modulate()
 
-	if buff.is_unlimited_uses():
+	if buff.should_show_unlimited_panel():
 		$UnlimitedPanel.show()
 		#$UnlimitedPanel.get("theme_override_styles/panel").set("bg_color", buff.get_color())
 	

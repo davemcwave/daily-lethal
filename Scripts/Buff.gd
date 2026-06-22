@@ -155,6 +155,9 @@ func activate(context: Dictionary = {}) -> bool:
 
 func is_unlimited_uses() -> bool:
 	return unlimited_uses
+
+func should_show_unlimited_panel() -> bool:
+	return is_unlimited_uses()
 	
 func exceeded_uses() -> bool:
 	#print("Exceeded uses | not is_unlimited_uses(): %s,  uses_amount <= 0: %s, uses_amount: %s" % [str(not is_unlimited_uses()),  str(uses_amount <= 0), str(uses_amount)])
