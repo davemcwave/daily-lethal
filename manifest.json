@@ -1,6 +1,31 @@
 {
   "puzzles": [
     {
+      "id": "2026-06-26",
+      "release_at": "2026-06-26T00:00:00-04:00",
+      "title": "Wayward Spirit"
+    },
+    {
+      "id": "2026-06-25",
+      "release_at": "2026-06-25T00:00:00-04:00",
+      "title": "Divine Fletcher"
+    },
+    {
+      "id": "2026-06-24",
+      "release_at": "2026-06-24T00:00:00-04:00",
+      "title": "Guerilla Warrior"
+    },
+    {
+      "id": "2026-06-23",
+      "release_at": "2026-06-23T00:00:00-04:00",
+      "title": "Shield man"
+    },
+    {
+      "id": "2026-06-22",
+      "release_at": "2026-06-22T00:00:00-04:00",
+      "title": "Loiterer"
+    },
+    {
       "id": "2026-05-21",
       "release_at": "2026-05-21T00:00:00-04:00",
       "title": "Trashman"
