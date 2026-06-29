@@ -1,6 +1,31 @@
 {
   "puzzles": [
     {
+      "id": "2026-07-03",
+      "release_at": "2026-07-03T00:00:00-04:00",
+      "title": "Tar Elemental"
+    },
+    {
+      "id": "2026-07-02",
+      "release_at": "2026-07-02T00:00:00-04:00",
+      "title": "Siren"
+    },
+    {
+      "id": "2026-07-01",
+      "release_at": "2026-07-01T00:00:00-04:00",
+      "title": "Plasmavore"
+    },
+    {
+      "id": "2026-06-30",
+      "release_at": "2026-06-30T00:00:00-04:00",
+      "title": "Glass Golem"
+    },
+    {
+      "id": "2026-06-29",
+      "release_at": "2026-06-29T00:00:00-04:00",
+      "title": "Cave Snatcher"
+    },
+    {
       "id": "2026-06-26",
       "release_at": "2026-06-26T00:00:00-04:00",
       "title": "Wayward Spirit"
