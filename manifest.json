@@ -1,6 +1,31 @@
 {
   "puzzles": [
     {
+      "id": "2026-07-24",
+      "release_at": "2026-07-24T00:00:00-04:00",
+      "title": "Ascended Loiterer"
+    },
+    {
+      "id": "2026-07-23",
+      "release_at": "2026-07-23T00:00:00-04:00",
+      "title": "Blade Dancer"
+    },
+    {
+      "id": "2026-07-22",
+      "release_at": "2026-07-22T00:00:00-04:00",
+      "title": "Gambler"
+    },
+    {
+      "id": "2026-07-21",
+      "release_at": "2026-07-21T00:00:00-04:00",
+      "title": "Anti-Hero"
+    },
+    {
+      "id": "2026-07-20",
+      "release_at": "2026-07-20T00:00:00-04:00",
+      "title": "Gremlin"
+    },
+    {
       "id": "2026-07-17",
       "release_at": "2026-07-17T00:00:00-04:00",
       "title": "Zeus"
