@@ -1,6 +1,31 @@
 {
   "puzzles": [
     {
+      "id": "2026-07-31",
+      "release_at": "2026-07-31T00:00:00-04:00",
+      "title": "Occult Experimenter"
+    },
+    {
+      "id": "2026-07-30",
+      "release_at": "2026-07-30T00:00:00-04:00",
+      "title": "Ritualist"
+    },
+    {
+      "id": "2026-07-29",
+      "release_at": "2026-07-29T00:00:00-04:00",
+      "title": "Supersharp Garbage Bin"
+    },
+    {
+      "id": "2026-07-28",
+      "release_at": "2026-07-28T00:00:00-04:00",
+      "title": "Resplendent Slime"
+    },
+    {
+      "id": "2026-07-27",
+      "release_at": "2026-07-27T00:00:00-04:00",
+      "title": "Headbanger"
+    },
+    {
       "id": "2026-07-24",
       "release_at": "2026-07-24T00:00:00-04:00",
       "title": "Ascended Loiterer"
