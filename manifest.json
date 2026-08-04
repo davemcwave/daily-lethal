@@ -1,6 +1,31 @@
 {
   "puzzles": [
     {
+      "id": "2026-08-07",
+      "release_at": "2026-08-07T00:00:00-04:00",
+      "title": "Frost Giant"
+    },
+    {
+      "id": "2026-08-06",
+      "release_at": "2026-08-06T00:00:00-04:00",
+      "title": "Plague Doctor"
+    },
+    {
+      "id": "2026-08-05",
+      "release_at": "2026-08-05T00:00:00-04:00",
+      "title": "Treant"
+    },
+    {
+      "id": "2026-08-04",
+      "release_at": "2026-08-04T00:00:00-04:00",
+      "title": "Spined Scorpion"
+    },
+    {
+      "id": "2026-08-03",
+      "release_at": "2026-08-03T00:00:00-04:00",
+      "title": "Samurai"
+    },
+    {
       "id": "2026-07-31",
       "release_at": "2026-07-31T00:00:00-04:00",
       "title": "Occult Experimenter"
