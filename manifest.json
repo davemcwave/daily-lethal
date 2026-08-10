@@ -1,6 +1,31 @@
 {
   "puzzles": [
     {
+      "id": "2026-08-14",
+      "release_at": "2026-08-14T00:00:00-04:00",
+      "title": "Orange Dragon"
+    },
+    {
+      "id": "2026-08-13",
+      "release_at": "2026-08-13T00:00:00-04:00",
+      "title": "Cerberus"
+    },
+    {
+      "id": "2026-08-12",
+      "release_at": "2026-08-12T00:00:00-04:00",
+      "title": "Blood Knight"
+    },
+    {
+      "id": "2026-08-11",
+      "release_at": "2026-08-11T00:00:00-04:00",
+      "title": "Silk Road Trader"
+    },
+    {
+      "id": "2026-08-10",
+      "release_at": "2026-08-10T00:00:00-04:00",
+      "title": "Torchbearer"
+    },
+    {
       "id": "2026-08-07",
       "release_at": "2026-08-07T00:00:00-04:00",
       "title": "Frost Giant"
