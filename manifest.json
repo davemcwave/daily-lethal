@@ -1,6 +1,31 @@
 {
   "puzzles": [
     {
+      "id": "2026-08-28",
+      "release_at": "2026-08-28T00:00:00-04:00",
+      "title": "Angel of Revelation (>Very Hard difficulty candidate)"
+    },
+    {
+      "id": "2026-08-27",
+      "release_at": "2026-08-27T00:00:00-04:00",
+      "title": "Terminator"
+    },
+    {
+      "id": "2026-08-26",
+      "release_at": "2026-08-26T00:00:00-04:00",
+      "title": "Haunted Window"
+    },
+    {
+      "id": "2026-08-25",
+      "release_at": "2026-08-25T00:00:00-04:00",
+      "title": "Salamander"
+    },
+    {
+      "id": "2026-08-24",
+      "release_at": "2026-08-24T00:00:00-04:00",
+      "title": "Sword Juggler"
+    },
+    {
       "id": "2026-08-21",
       "release_at": "2026-08-21T00:00:00-04:00",
       "title": "Fuchsia Dragon"
