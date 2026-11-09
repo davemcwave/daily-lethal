@@ -282,6 +282,10 @@ func set_puzzle(new_puzzle: Puzzle) -> void:
 	
 	background.set_puzzle_date(effective_puzzle_date)
 	background.set_is_test_puzzle(puzzle.is_test_puzzle())
+	# "?cards=" with no date in the path = a creator testing a puzzle from /submit-puzzle
+	# (daily URL puzzles are /<date>?cards=...). The placeholder puzzle's own date
+	# ends up in background's puzzle date, so it can't be used to tell them apart.
+	background.set_is_creator_test_puzzle(puzzle.is_test_puzzle() and url_capturer != null and not url_capturer.has_puzzle_date())
 	$Enemy.set_max_health($URLCapturer.get_energy_health_from_test_puzzle() if puzzle.is_test_puzzle() else puzzle.get_enemy_health())
 	$Enemy.set_health($URLCapturer.get_energy_health_from_test_puzzle() if puzzle.is_test_puzzle() else puzzle.get_enemy_health())
 	$Enemy.set_enemy_name($URLCapturer.get_enemy_name_from_test_puzzle() if puzzle.is_test_puzzle() else puzzle.get_enemy_name())

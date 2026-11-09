@@ -348,7 +348,6 @@ func can_play() -> bool:
 		and can_pay_cost(energy_cost)
 
 func can_play_for_resolver() -> bool:
-	print(not enemy.is_animating(), not buffs_container.is_animating(), can_pay_cost(energy_cost))
 	if card_play_area != null and not card_play_area.is_useable():
 		return false
 	if scene != null and scene.is_card_resolving():
@@ -490,6 +489,11 @@ func handle_sfx() -> void:
 	
 	
 func begin_play_resolution() -> void:
+	# Record the play before its effects run, so picks/effect choices it triggers
+	# (even ones Reverberate, Burst or Overload trigger) attach to this card.
+	var background = get_node_or_null("/root/Background")
+	if background != null:
+		background.record_solution_play(get_scene_file_path())
 	if card_play_area != null:
 		card_play_area.set_useable(false)
 	if scene != null:

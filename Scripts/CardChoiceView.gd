@@ -59,6 +59,9 @@ func get_selected_card_effect() -> CardEffect:
 	
 func select_card_effect(card_effect: CardEffect) -> void:
 	selected_card_effect = card_effect
+	var background = get_node_or_null("/root/Background")
+	if background != null:
+		background.record_effect_choice(card_effect)
 	hide()
 	clear()
 	emit_signal("finished_selecting_card_effect")

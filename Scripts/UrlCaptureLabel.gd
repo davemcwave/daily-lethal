@@ -17,6 +17,13 @@ var enemy_buffs_url_data: Array = []
 func _ready():
 	path_name = JavaScriptBridge.eval("window.location.pathname")
 	search = JavaScriptBridge.eval("window.location.search")
+	# Off the web (editor, desktop, test runner) there is no URL; use the one
+	# Background was given via --url= or by the puzzle test runner.
+	if (search == null or str(search).is_empty()) and not OS.has_feature("web"):
+		var background = get_node_or_null("/root/Background")
+		if background != null and not background.url_override_search.is_empty():
+			path_name = background.url_override_path
+			search = background.url_override_search
 	puzzle_creator_name = _get_query_param("puzzle_creator")
 	if puzzle_creator_name.is_empty():
 		puzzle_creator_name = _get_query_param("creator")

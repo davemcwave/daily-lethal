@@ -28,6 +28,10 @@ func get_cards() -> Array[Card]:
 func get_card_with_id(id: int) -> Card:
 	for card: Card in get_cards():
 		if card.get_id() == id:
-			return card.duplicate(DUPLICATE_USE_INSTANTIATION)
+			var copy: Card = card.duplicate(DUPLICATE_USE_INSTANTIATION)
+			# `id` is only assigned in _ready(), so carry the source id over until the
+			# copy enters the tree; callers use it to find which option was picked.
+			copy.set_id(id)
+			return copy
 			
 	return null

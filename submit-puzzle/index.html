@@ -47,6 +47,20 @@
       color: #bbb;
       margin-top: 0.2rem;
     }
+    .description.solution-ok {
+      color: #7ddc7d;
+    }
+    .manual-solution-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      font-weight: normal;
+    }
+    .manual-solution-toggle input {
+      width: auto;
+      margin: 0;
+    }
     button {
       width: 100%;
       padding: 16px;
@@ -394,9 +408,14 @@
 
     <form action="https://formspree.io/f/myzjqgvw" method="POST" onsubmit="return finalizeBeforeSubmit()" accept-charset="UTF-8">
       <input type="hidden" name="selected_cards" id="finalCards" />
-      <label>Solution Order (Card Names in Order)</label>
-      <input type="text" name="solution_order" placeholder="e.g. Lunge, Rebound, Rage" required />
-      <div class="description">List the exact order the cards should be played in. This helps validate and reproduce your solution.</div>
+      <label>Your Solution (recorded automatically)</label>
+      <input type="text" name="solution_order" id="solutionOrderField" placeholder="Beat your puzzle with 🧪 Test Puzzle below" readonly />
+      <input type="hidden" name="solution_steps" id="solutionStepsField" />
+      <input type="hidden" name="solution_source" id="solutionSourceField" value="recorded" />
+      <div class="description" id="solutionStatus">Press 🧪 Test Puzzle and beat your puzzle. Your winning moves fill in here automatically.</div>
+      <label class="description manual-solution-toggle" for="manualSolutionToggle">
+        <input type="checkbox" id="manualSolutionToggle" /> I'll type my solution myself
+      </label>
       <input type="hidden" name="test_url" id="testUrlField" />
       <label>Player HP</label>
       <input type="number" name="player_hp" placeholder="e.g. 10" required />
@@ -665,7 +684,92 @@
       document.getElementById('selectedCardsText').textContent = formatted.join(', ');
     }
       
+    // When the creator beats their puzzle in the test tab, the game saves the
+    // winning moves to localStorage (Background.publish_test_puzzle_solution).
+    // Show them here; they only count if they were for the current setup.
+    const TEST_SOLUTION_KEY = 'lethal_test_solution';
+    let capturedSolution = null;
+
+    function puzzleSetupKey(search) {
+      const params = new URLSearchParams(search || '');
+      return ['cards', 'php', 'pnrg', 'ehp', 'enemy_buffs'].map(k => params.get(k) || '').join('|');
+    }
+
+    function isManualSolution() {
+      const toggle = document.getElementById('manualSolutionToggle');
+      return !!(toggle && toggle.checked);
+    }
+
+    function refreshCapturedSolution() {
+      const orderField = document.getElementById('solutionOrderField');
+      const stepsField = document.getElementById('solutionStepsField');
+      const status = document.getElementById('solutionStatus');
+      const sourceField = document.getElementById('solutionSourceField');
+      if (isManualSolution()) {
+        // The creator types it; leave their text alone and send no recorded steps.
+        capturedSolution = null;
+        stepsField.value = '';
+        sourceField.value = 'typed';
+        status.textContent = 'Type the cards in the order you play them, e.g. Lunge, Rebound, Rage.';
+        status.className = 'description';
+        return;
+      }
+      sourceField.value = 'recorded';
+      let saved = null;
+      try {
+        saved = JSON.parse(localStorage.getItem(TEST_SOLUTION_KEY) || 'null');
+      } catch (e) {
+        saved = null;
+      }
+      const currentUrl = buildPlayUrl();
+      const currentSearch = currentUrl.slice(currentUrl.indexOf('?'));
+      capturedSolution = saved && selectedCards.length > 0 && puzzleSetupKey(saved.search) === puzzleSetupKey(currentSearch)
+        ? saved : null;
+      if (capturedSolution) {
+        orderField.value = capturedSolution.text;
+        stepsField.value = JSON.stringify(capturedSolution.steps);
+        status.textContent = '✓ Recorded from your winning test playthrough.';
+        status.className = 'description solution-ok';
+      } else {
+        orderField.value = '';
+        stepsField.value = '';
+        status.textContent = 'Press 🧪 Test Puzzle and beat your puzzle. Your winning moves fill in here automatically.';
+        status.className = 'description';
+      }
+    }
+
+    window.addEventListener('storage', (e) => { if (e.key === TEST_SOLUTION_KEY) refreshCapturedSolution(); });
+    window.addEventListener('focus', refreshCapturedSolution);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) refreshCapturedSolution(); });
+    document.addEventListener('input', refreshCapturedSolution);
+    document.addEventListener('click', () => setTimeout(refreshCapturedSolution, 0));
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById('manualSolutionToggle');
+      const orderField = document.getElementById('solutionOrderField');
+      toggle.addEventListener('change', () => {
+        orderField.readOnly = !toggle.checked;
+        orderField.placeholder = toggle.checked
+          ? 'e.g. Lunge, Rebound, Rage'
+          : 'Beat your puzzle with 🧪 Test Puzzle below';
+        refreshCapturedSolution();
+        if (toggle.checked) {
+          orderField.focus();
+        }
+      });
+    });
+
     function finalizeBeforeSubmit() {
+      refreshCapturedSolution();
+      if (isManualSolution()) {
+        if (!document.getElementById('solutionOrderField').value.trim()) {
+          alert('Please type your solution: the cards in the order you play them.');
+          return false;
+        }
+      } else if (!capturedSolution) {
+        alert('Please press 🧪 Test Puzzle and beat your puzzle first. Your solution is recorded automatically when you win.');
+        return false;
+      }
       document.getElementById('finalCards').value = selectedCards.join(', ');
       const enemyBuffsField = document.getElementById('enemyBuffsField');
       if (enemyBuffsField) {
@@ -675,7 +779,10 @@
       if (testUrlField) {
         testUrlField.value = buildPlayUrl();
       }
-      syncEnemyIconField();
+      // syncEnemyIconField isn't defined on this page; calling it threw on every submit.
+      if (typeof syncEnemyIconField === 'function') {
+        syncEnemyIconField();
+      }
       return true;
     }
 

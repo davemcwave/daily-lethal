@@ -35,6 +35,10 @@ window/stretch/mode="canvas_items"
 window/size/viewport_width.web_build=360
 window/size/viewport_height.web_build=640
 
+[editor]
+
+export/convert_text_resources_to_binary=false
+
 [input]
 
 select={
@@ -66,7 +70,3 @@ pointing/emulate_touch_from_mouse=true
 [rendering]
 
 environment/defaults/default_clear_color=Color(0.176471, 0.258824, 0.282353, 1)
-
-[editor]
-
-export/convert_text_resources_to_binary=false
