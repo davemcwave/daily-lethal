@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://b4ww4gmxjfgtv"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_d4svx"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/kraken.png" id="2_x8m7c"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="3_0rk11"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="4_3b8jk"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="5_xjscc"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="6_ru7a2"]
+[ext_resource type="PackedScene" path="res://Scenes/ScrapCard.tscn" id="7_1jq5u"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="8_j0cck"]
+
+[node name="Puzzle" type="Node"]
+script = ExtResource("1_d4svx")
+puzzle_date = "2025-05-13"
+previous_puzzle_scene = "uid://coc02rxb3ycg4"
+next_puzzle_scene = "uid://qm8h6cmjnbb1"
+enemy_health = 24
+enemy_name = "Kraken"
+enemy_icon_texture = ExtResource("2_x8m7c")
+player_energy = 8
+card_scenes = [ExtResource("3_0rk11"), ExtResource("4_3b8jk"), ExtResource("5_xjscc"), ExtResource("6_ru7a2"), ExtResource("6_ru7a2"), ExtResource("7_1jq5u"), ExtResource("8_j0cck")]
+card_solution = [ExtResource("7_1jq5u"), ExtResource("5_xjscc"), ExtResource("6_ru7a2"), ExtResource("6_ru7a2"), ExtResource("6_ru7a2"), ExtResource("6_ru7a2"), ExtResource("6_ru7a2"), ExtResource("6_ru7a2"), ExtResource("6_ru7a2"), ExtResource("8_j0cck"), ExtResource("6_ru7a2"), ExtResource("8_j0cck"), ExtResource("8_j0cck"), ExtResource("3_0rk11"), ExtResource("4_3b8jk")]

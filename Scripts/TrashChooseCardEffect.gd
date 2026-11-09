@@ -8,7 +8,7 @@ func apply() -> bool:
 	cards_choose_area.set_action_name("Trash")
 	cards_choose_area.set_choose_up_to_amount(true)
 	cards_choose_area.set_max_card_choose_amount(max_trash_amount)
-	var trash_action = load("res://Scenes/CardsChooseAreaTrashAction.scn").instantiate()
+	var trash_action = load("res://Scenes/CardsChooseAreaTrashAction.tscn").instantiate()
 	cards_choose_area.set_cards_choose_area_action(trash_action)
 	cards_choose_area.set_source_card(get_parent() if get_parent() is Card else null)
 	cards_choose_area.activate(CardsChooseArea.ChooseType.Bad, CardsChooseArea.PopulateCardsType.FromDiscard)

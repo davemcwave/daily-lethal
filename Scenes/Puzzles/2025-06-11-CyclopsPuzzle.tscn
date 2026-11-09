@@ -1,0 +1,21 @@
+[gd_scene load_steps=8 format=3 uid="uid://cyqai10g1njux"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_pjxrc"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/cyclops.png" id="2_xmy7b"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="3_40yag"]
+[ext_resource type="PackedScene" path="res://Scenes/BurstCard.tscn" id="4_l0vbt"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="5_d260f"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="6_q70wq"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="7_ai3dh"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_pjxrc")
+puzzle_date = "2025-06-11"
+previous_puzzle_scene = "uid://bcetax4843ich"
+next_puzzle_scene = "uid://dqrsnicv7mdy4"
+enemy_health = 39
+enemy_name = "Cyclops"
+enemy_icon_texture = ExtResource("2_xmy7b")
+player_energy = 7
+card_scenes = [ExtResource("3_40yag"), ExtResource("4_l0vbt"), ExtResource("5_d260f"), ExtResource("6_q70wq"), ExtResource("5_d260f"), ExtResource("7_ai3dh")]
+card_solution = [ExtResource("5_d260f"), ExtResource("5_d260f"), ExtResource("5_d260f"), ExtResource("5_d260f"), ExtResource("5_d260f"), ExtResource("5_d260f"), ExtResource("6_q70wq"), ExtResource("5_d260f"), ExtResource("6_q70wq"), ExtResource("6_q70wq"), ExtResource("3_40yag"), ExtResource("4_l0vbt"), ExtResource("4_l0vbt"), ExtResource("7_ai3dh")]

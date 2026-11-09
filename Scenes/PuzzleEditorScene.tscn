@@ -1,0 +1,106 @@
+[gd_scene load_steps=6 format=3 uid="uid://daae3l2cwb8g1"]
+
+[ext_resource type="Texture2D" path="res://bg.png" id="1_wvul2"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Medium.ttf" id="2_xlhxb"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Bold.ttf" id="3_mmmbu"]
+[ext_resource type="PackedScene" path="res://CardPreview.tscn" id="4_t58aw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ff5h1"]
+resource_local_to_scene = true
+bg_color = Color(0.433266, 0.433266, 0.433266, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Scene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="BGRepeat" type="TextureRect" parent="."]
+self_modulate = Color(1, 1, 1, 0.0823529)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 3054.0
+offset_bottom = 5216.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.105193, 0.105193)
+texture = ExtResource("1_wvul2")
+stretch_mode = 1
+
+[node name="TitleText" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -300.0
+offset_bottom = -280.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_xlhxb")
+theme_override_fonts/bold_font = ExtResource("3_mmmbu")
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+bbcode_enabled = true
+text = "[center][b][shake rate=10.0 level=5 connected=1]Puzzle Editor[/shake][/b][/center]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 64.0
+offset_right = 1.0
+offset_bottom = -112.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 3
+
+[node name="CardPanel" type="Panel" parent="GridContainer"]
+custom_minimum_size = Vector2(123.415, 161.27)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ModifyCardButton" type="Button" parent="GridContainer/CardPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -206.0
+offset_bottom = -0.270004
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.389287, 0.389287, 0.389287, 1)
+theme_override_fonts/font = ExtResource("3_mmmbu")
+theme_override_font_sizes/font_size = 64
+text = "+"
+
+[node name="CardPreview" parent="GridContainer/CardPanel" instance=ExtResource("4_t58aw")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 120.0
+offset_bottom = 160.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ff5h1")

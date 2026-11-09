@@ -1,0 +1,21 @@
+[gd_scene load_steps=8 format=3 uid="uid://by02n1ya1vjs"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_pwjfi"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/green-dragon.png" id="2_f4bik"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="3_7srst"]
+[ext_resource type="PackedScene" path="res://Scenes/WoundCard.tscn" id="4_dh7cp"]
+[ext_resource type="PackedScene" path="res://Scenes/GiftCard.tscn" id="5_eo2c5"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="6_u3nwa"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="7_gs4g0"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_pwjfi")
+puzzle_date = "2026-01-16"
+previous_puzzle_scene = "uid://b8nahk6yuhkcx"
+next_puzzle_scene = "uid://cnvvo0ut85fm2"
+enemy_health = 90
+enemy_name = "Green Dragon"
+enemy_icon_texture = ExtResource("2_f4bik")
+player_health = 1
+player_energy = 21
+card_scenes = [ExtResource("3_7srst"), ExtResource("4_dh7cp"), ExtResource("5_eo2c5"), ExtResource("6_u3nwa"), ExtResource("6_u3nwa"), ExtResource("6_u3nwa"), ExtResource("7_gs4g0")]

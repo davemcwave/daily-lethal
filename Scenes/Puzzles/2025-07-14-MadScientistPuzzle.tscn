@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://boayusvvioqn3"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_cbgio"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/mad-scientist.png" id="2_fyax8"]
+[ext_resource type="PackedScene" path="res://Scenes/BurstCard.tscn" id="3_tnv0x"]
+[ext_resource type="PackedScene" path="res://Scenes/InspirationCard.tscn" id="4_sjhwj"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="5_njjxh"]
+[ext_resource type="PackedScene" path="res://Scenes/MendCard.tscn" id="6_ro8o0"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="7_rglfp"]
+[ext_resource type="PackedScene" path="res://Scenes/FangCard.tscn" id="8_5y55t"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_cbgio")
+puzzle_date = "2025-07-14"
+previous_puzzle_scene = "uid://du76dm6nj35pw"
+next_puzzle_scene = "uid://b5chn8h186gy7"
+enemy_health = 8
+enemy_name = "Mad Scientist"
+enemy_icon_texture = ExtResource("2_fyax8")
+player_health = 2
+player_energy = 1
+card_scenes = [ExtResource("3_tnv0x"), ExtResource("4_sjhwj"), ExtResource("5_njjxh"), ExtResource("6_ro8o0"), ExtResource("7_rglfp"), ExtResource("8_5y55t"), ExtResource("8_5y55t")]

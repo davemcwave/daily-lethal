@@ -1,0 +1,23 @@
+[gd_scene load_steps=10 format=3 uid="uid://caxhwp4066cbx"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_w1i61"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/leeta-256x256.svg" id="2_p8l1w"]
+[ext_resource type="PackedScene" path="res://Scenes/WasteCard.tscn" id="3_kvsxg"]
+[ext_resource type="PackedScene" path="res://Scenes/ArmoryCard.tscn" id="4_1aas0"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="5_uqqeh"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="6_qdbdo"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="7_0yh6e"]
+[ext_resource type="PackedScene" path="res://Scenes/ScrapCard.tscn" id="8_dao87"]
+[ext_resource type="PackedScene" path="res://Scenes/TributeCard.tscn" id="9_le3is"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_w1i61")
+puzzle_date = "2026-02-05"
+previous_puzzle_scene = "uid://0btrof7mwvsn"
+next_puzzle_scene = "uid://dmwvhtbx1qwyc"
+enemy_health = 21
+enemy_name = "Jack Frost"
+enemy_icon_texture = ExtResource("2_p8l1w")
+player_health = 6
+player_energy = 1
+card_scenes = [ExtResource("3_kvsxg"), ExtResource("4_1aas0"), ExtResource("5_uqqeh"), ExtResource("6_qdbdo"), ExtResource("7_0yh6e"), ExtResource("8_dao87"), ExtResource("9_le3is")]

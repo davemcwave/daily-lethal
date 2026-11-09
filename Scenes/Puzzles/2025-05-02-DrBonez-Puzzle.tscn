@@ -1,0 +1,22 @@
+[gd_scene load_steps=8 format=3 uid="uid://bjplnuf2sgvrr"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_v2rk6"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/skeleton.png" id="2_n51ru"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="3_m2ge4"]
+[ext_resource type="PackedScene" path="res://Scenes/GiftCard.tscn" id="4_7t47d"]
+[ext_resource type="PackedScene" path="res://Scenes/WoundCard.tscn" id="5_1438q"]
+[ext_resource type="PackedScene" path="res://Scenes/SurgeCard.tscn" id="6_r0csb"]
+[ext_resource type="PackedScene" path="res://Scenes/SlashCard.tscn" id="7_o2d2d"]
+
+[node name="Puzzle" type="Node"]
+script = ExtResource("1_v2rk6")
+puzzle_date = "2025-05-02"
+previous_puzzle_scene = "uid://iur67agkk6gr"
+next_puzzle_scene = "uid://o4msbmfsgm6d"
+enemy_health = 9
+enemy_name = "Skeleton"
+enemy_icon_texture = ExtResource("2_n51ru")
+player_health = 1
+player_energy = 4
+card_scenes = [ExtResource("3_m2ge4"), ExtResource("4_7t47d"), ExtResource("5_1438q"), ExtResource("6_r0csb"), ExtResource("7_o2d2d"), ExtResource("7_o2d2d")]
+card_solution = [ExtResource("6_r0csb"), ExtResource("4_7t47d"), ExtResource("5_1438q"), ExtResource("7_o2d2d"), ExtResource("7_o2d2d"), ExtResource("3_m2ge4")]

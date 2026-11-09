@@ -1,0 +1,20 @@
+[gd_scene load_steps=8 format=3 uid="uid://byp6oim23577e"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_o0x7f"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/paladin.png" id="2_fjx7u"]
+[ext_resource type="PackedScene" path="res://Scenes/CauterizeCard.tscn" id="3_fm7i2"]
+[ext_resource type="PackedScene" path="res://Scenes/InspirationCard.tscn" id="4_autna"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="5_ui7ww"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="6_bxab7"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="7_iy23h"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_o0x7f")
+puzzle_date = "2026-01-09"
+previous_puzzle_scene = "uid://dwvg31t1qnfhb"
+next_puzzle_scene = "uid://wkahhiiufh7o"
+enemy_health = 9
+enemy_name = "Paladin"
+enemy_icon_texture = ExtResource("2_fjx7u")
+player_energy = 0
+card_scenes = [ExtResource("3_fm7i2"), ExtResource("4_autna"), ExtResource("5_ui7ww"), ExtResource("6_bxab7"), ExtResource("7_iy23h")]

@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="CardSolutionResource" load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.scn" id="1_luadi"]
-[ext_resource type="PackedScene" path="res://Scenes/PoundCard.scn" id="2_og2t1"]
-[ext_resource type="PackedScene" path="res://Scenes/LungeCard.scn" id="3_jwtbk"]
-[ext_resource type="PackedScene" path="res://Scenes/InspirationCard.scn" id="4_nsi14"]
-[ext_resource type="PackedScene" path="res://Scenes/EchoCard.scn" id="5_uqli0"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="1_luadi"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="2_og2t1"]
+[ext_resource type="PackedScene" path="res://Scenes/LungeCard.tscn" id="3_jwtbk"]
+[ext_resource type="PackedScene" path="res://Scenes/InspirationCard.tscn" id="4_nsi14"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="5_uqli0"]
 [ext_resource type="Script" path="res://Scripts/CardSolutionResource.gd" id="6_1n64x"]
 
 [resource]

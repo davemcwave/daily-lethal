@@ -1,0 +1,20 @@
+[gd_scene load_steps=7 format=3 uid="uid://dwvg31t1qnfhb"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_j0jhw"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/giant-crab.png" id="2_3h3tf"]
+[ext_resource type="PackedScene" path="res://Scenes/ArmoryCard.tscn" id="3_nakwm"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="4_2loht"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="5_mdc2j"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="6_7uy64"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_j0jhw")
+puzzle_date = "2026-01-08"
+previous_puzzle_scene = "uid://dpgae7hbbpg21"
+next_puzzle_scene = "uid://byp6oim23577e"
+enemy_health = 22
+enemy_name = "Giant Crab"
+enemy_icon_texture = ExtResource("2_3h3tf")
+player_health = 1
+player_energy = 7
+card_scenes = [ExtResource("3_nakwm"), ExtResource("4_2loht"), ExtResource("5_mdc2j"), ExtResource("5_mdc2j"), ExtResource("6_7uy64")]

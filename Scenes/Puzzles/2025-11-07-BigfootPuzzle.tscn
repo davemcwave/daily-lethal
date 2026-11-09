@@ -1,0 +1,24 @@
+[gd_scene load_steps=10 format=3 uid="uid://by8lmagy2fxob"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_0isxj"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/bigfoot.png" id="2_mbugd"]
+[ext_resource type="PackedScene" path="res://Scenes/VenomCard.tscn" id="3_vvayx"]
+[ext_resource type="PackedScene" path="res://Scenes/IgniteCard.tscn" id="4_mpiua"]
+[ext_resource type="PackedScene" path="res://Scenes/EmptyfistCard.tscn" id="5_qx8qi"]
+[ext_resource type="PackedScene" path="res://Scenes/BargainCard.tscn" id="6_85tut"]
+[ext_resource type="PackedScene" path="res://Scenes/TributeCard.tscn" id="7_405tr"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="8_lw1sr"]
+[ext_resource type="PackedScene" path="res://Scenes/SparkCard.tscn" id="9_81asf"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_0isxj")
+puzzle_date = "2025-11-07"
+previous_puzzle_scene = "uid://coehkhmbws06b"
+next_puzzle_scene = "uid://15fjibfujpjl"
+enemy_health = 12
+enemy_name = "Bigfoot"
+enemy_icon_texture = ExtResource("2_mbugd")
+player_health = 1
+player_energy = 1
+card_scenes = [ExtResource("3_vvayx"), ExtResource("4_mpiua"), ExtResource("5_qx8qi"), ExtResource("6_85tut"), ExtResource("7_405tr"), ExtResource("8_lw1sr"), ExtResource("4_mpiua")]
+card_solution = [ExtResource("6_85tut"), ExtResource("7_405tr"), ExtResource("8_lw1sr"), ExtResource("4_mpiua"), ExtResource("4_mpiua"), ExtResource("9_81asf"), ExtResource("3_vvayx"), ExtResource("9_81asf"), ExtResource("9_81asf"), ExtResource("9_81asf"), ExtResource("5_qx8qi")]

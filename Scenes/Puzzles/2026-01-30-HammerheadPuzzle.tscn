@@ -1,0 +1,23 @@
+[gd_scene load_steps=10 format=3 uid="uid://qf7t82wuwtyd"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_gmgcj"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/hammerhead-shark.png" id="2_8tecd"]
+[ext_resource type="PackedScene" path="res://Scenes/TargetCard.tscn" id="3_nc2ch"]
+[ext_resource type="PackedScene" path="res://Scenes/BerserkCard.tscn" id="4_ogrtr"]
+[ext_resource type="PackedScene" path="res://Scenes/SharpenCard.tscn" id="5_nyvc2"]
+[ext_resource type="PackedScene" path="res://Scenes/CooperationCard.tscn" id="6_atryp"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="7_ly5sw"]
+[ext_resource type="PackedScene" path="res://Scenes/EmptyfistCard.tscn" id="8_alclm"]
+[ext_resource type="PackedScene" path="res://Scenes/SlashCard.tscn" id="9_3xb3o"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_gmgcj")
+puzzle_date = "2026-01-30"
+previous_puzzle_scene = "uid://f4argynqhqr2"
+next_puzzle_scene = "uid://w8nck21rq80i"
+enemy_health = 40
+enemy_name = "Hammerhead"
+enemy_icon_texture = ExtResource("2_8tecd")
+player_health = 7
+player_energy = 1
+card_scenes = [ExtResource("3_nc2ch"), ExtResource("4_ogrtr"), ExtResource("5_nyvc2"), ExtResource("6_atryp"), ExtResource("7_ly5sw"), ExtResource("8_alclm"), ExtResource("9_3xb3o")]

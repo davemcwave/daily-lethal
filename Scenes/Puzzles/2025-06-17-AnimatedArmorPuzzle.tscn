@@ -1,0 +1,23 @@
+[gd_scene load_steps=9 format=3 uid="uid://b8bojsoeb6s5d"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_wfat7"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/animated-armor.png" id="2_8mv4s"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="3_sre33"]
+[ext_resource type="PackedScene" path="res://Scenes/InspirationCard.tscn" id="4_dcnsu"]
+[ext_resource type="PackedScene" path="res://Scenes/MendCard.tscn" id="5_mrkxx"]
+[ext_resource type="PackedScene" path="res://Scenes/BurstCard.tscn" id="6_j2u21"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="7_3s1x5"]
+[ext_resource type="PackedScene" path="res://Scenes/LungeCard.tscn" id="8_qdjx0"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_wfat7")
+puzzle_date = "2025-06-17"
+previous_puzzle_scene = "uid://bj48n6xsr8b4n"
+next_puzzle_scene = "uid://c6j04r6rw5fe8"
+enemy_health = 11
+enemy_name = "Animated Armor"
+enemy_icon_texture = ExtResource("2_8mv4s")
+player_health = 2
+player_energy = 3
+card_scenes = [ExtResource("3_sre33"), ExtResource("4_dcnsu"), ExtResource("5_mrkxx"), ExtResource("6_j2u21"), ExtResource("7_3s1x5"), ExtResource("8_qdjx0")]
+card_solution = [ExtResource("4_dcnsu"), ExtResource("3_sre33"), ExtResource("5_mrkxx"), ExtResource("8_qdjx0"), ExtResource("7_3s1x5"), ExtResource("6_j2u21")]

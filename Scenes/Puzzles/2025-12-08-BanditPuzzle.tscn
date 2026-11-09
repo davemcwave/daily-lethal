@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=3 uid="uid://djq377ar2fnho"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_phpbm"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/bandit.png" id="2_lr7xx"]
+[ext_resource type="PackedScene" path="res://Scenes/ExchangeCard.tscn" id="3_2whmr"]
+[ext_resource type="PackedScene" path="res://Scenes/SpearCard.tscn" id="4_ws8mc"]
+[ext_resource type="PackedScene" path="res://Scenes/WoundCard.tscn" id="5_ir5t3"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_phpbm")
+puzzle_date = "2025-12-08"
+previous_puzzle_scene = "uid://mq3jnd4eh6oy"
+next_puzzle_scene = "uid://skavpev0h3ie"
+enemy_health = 5
+enemy_name = "Bandit"
+enemy_icon_texture = ExtResource("2_lr7xx")
+player_energy = 3
+card_scenes = [ExtResource("3_2whmr"), ExtResource("4_ws8mc"), ExtResource("5_ir5t3"), ExtResource("5_ir5t3")]
+card_solution = [ExtResource("5_ir5t3"), ExtResource("3_2whmr"), ExtResource("5_ir5t3"), ExtResource("4_ws8mc")]

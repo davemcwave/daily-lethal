@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="CardSolutionResource" load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://Scenes/BargainCard.scn" id="1_m5ek8"]
-[ext_resource type="PackedScene" path="res://Scenes/RageCard.scn" id="2_6qw1v"]
-[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.scn" id="3_7xhi0"]
-[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.scn" id="4_tka6w"]
-[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.scn" id="5_mqrbq"]
+[ext_resource type="PackedScene" path="res://Scenes/BargainCard.tscn" id="1_m5ek8"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="2_6qw1v"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="3_7xhi0"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="4_tka6w"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="5_mqrbq"]
 [ext_resource type="Script" path="res://Scripts/CardSolutionResource.gd" id="6_wbywr"]
 
 [resource]

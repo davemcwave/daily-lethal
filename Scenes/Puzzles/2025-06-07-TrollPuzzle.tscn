@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://dljpqovqutjqf"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_jvejt"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/troll-black.png" id="2_ai5wl"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="3_nyjrv"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="4_smbyx"]
+[ext_resource type="PackedScene" path="res://Scenes/LungeCard.tscn" id="5_l6hhb"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="6_1w4ip"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="7_hfs4c"]
+[ext_resource type="PackedScene" path="res://Scenes/SurgeCard.tscn" id="8_majej"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_jvejt")
+puzzle_date = "2025-06-07"
+previous_puzzle_scene = "uid://gblivu8v54sf"
+next_puzzle_scene = "uid://bcetax4843ich"
+enemy_health = 22
+enemy_name = "Troll"
+enemy_icon_texture = ExtResource("2_ai5wl")
+player_energy = 10
+card_scenes = [ExtResource("3_nyjrv"), ExtResource("4_smbyx"), ExtResource("5_l6hhb"), ExtResource("5_l6hhb"), ExtResource("6_1w4ip"), ExtResource("7_hfs4c"), ExtResource("8_majej")]
+card_solution = [ExtResource("4_smbyx"), ExtResource("5_l6hhb"), ExtResource("5_l6hhb"), ExtResource("8_majej"), ExtResource("6_1w4ip"), ExtResource("7_hfs4c"), ExtResource("7_hfs4c"), ExtResource("3_nyjrv")]

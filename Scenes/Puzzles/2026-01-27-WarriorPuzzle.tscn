@@ -1,0 +1,20 @@
+[gd_scene load_steps=7 format=3 uid="uid://cj207rkfxv5rr"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_sea7v"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/warrior.png" id="2_5bg0e"]
+[ext_resource type="PackedScene" path="res://Scenes/ArmoryCard.tscn" id="3_ftmwe"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="4_it16s"]
+[ext_resource type="PackedScene" path="res://Scenes/SharpenCard.tscn" id="5_v25br"]
+[ext_resource type="PackedScene" path="res://Scenes/GiftCard.tscn" id="6_ihmoq"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_sea7v")
+puzzle_date = "2026-01-27"
+previous_puzzle_scene = "uid://8k266qpd2isj"
+next_puzzle_scene = "uid://rku0vux5pndj"
+enemy_health = 44
+enemy_name = "Warrior"
+enemy_icon_texture = ExtResource("2_5bg0e")
+player_health = 1
+player_energy = 7
+card_scenes = [ExtResource("3_ftmwe"), ExtResource("4_it16s"), ExtResource("4_it16s"), ExtResource("5_v25br"), ExtResource("5_v25br"), ExtResource("6_ihmoq")]

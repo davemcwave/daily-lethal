@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://bdd78yt6n5hed"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_7m5cf"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/leech2.png" id="2_eugrq"]
+[ext_resource type="PackedScene" path="res://Scenes/FocusCard.tscn" id="3_nid1i"]
+
+[node name="Puzzle" type="Node"]
+script = ExtResource("1_7m5cf")
+enemy_name = "dave mcwave 2"
+enemy_icon_texture = ExtResource("2_eugrq")
+card_scenes = [ExtResource("3_nid1i"), ExtResource("3_nid1i"), ExtResource("3_nid1i")]

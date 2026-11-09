@@ -1,0 +1,23 @@
+[gd_scene load_steps=10 format=3 uid="uid://cl87bjgxfldq3"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_5tjyh"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/thunderbird-transparent.png" id="2_bwrk7"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="3_vwxu0"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="4_grbe4"]
+[ext_resource type="PackedScene" path="res://Scenes/TributeCard.tscn" id="5_gvi8r"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="6_t2h04"]
+[ext_resource type="PackedScene" path="res://Scenes/InspirationCard.tscn" id="7_ew7an"]
+[ext_resource type="PackedScene" path="res://Scenes/FangCard.tscn" id="8_xurl5"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="9_3swlu"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_5tjyh")
+puzzle_date = "2025-07-30"
+previous_puzzle_scene = "uid://beihlgj6o6d5i"
+next_puzzle_scene = "uid://bk5asu48uk5rl"
+enemy_health = 16
+enemy_name = "Thunderbird"
+enemy_icon_texture = ExtResource("2_bwrk7")
+player_health = 4
+player_energy = 3
+card_scenes = [ExtResource("3_vwxu0"), ExtResource("4_grbe4"), ExtResource("5_gvi8r"), ExtResource("6_t2h04"), ExtResource("7_ew7an"), ExtResource("8_xurl5"), ExtResource("9_3swlu")]

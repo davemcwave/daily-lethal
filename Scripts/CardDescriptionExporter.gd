@@ -1,7 +1,7 @@
 extends Node
 
 @export var cards_root_dir: String = "res://Scenes"
-@export var scene_suffix: String = "Card.scn"
+@export var scene_suffix: String = "Card.tscn"
 
 func _ready() -> void:
 	var card_paths = _collect_card_scene_paths(cards_root_dir)

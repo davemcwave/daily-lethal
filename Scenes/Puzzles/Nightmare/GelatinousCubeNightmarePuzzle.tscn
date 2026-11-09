@@ -1,0 +1,40 @@
+[gd_scene load_steps=13 format=3 uid="uid://kopvrgmwfkae"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_4o2yv"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/gelatinous-cube.png" id="2_6voa5"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="3_ufwb5"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="4_4k4uk"]
+[ext_resource type="PackedScene" path="res://Scenes/GiftCard.tscn" id="5_p5r77"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="6_dbsph"]
+[ext_resource type="PackedScene" path="res://Scenes/BurstCard.tscn" id="7_b0111"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="8_u0qya"]
+[ext_resource type="PackedScene" path="res://Scenes/SurgeCard.tscn" id="9_fl8il"]
+[ext_resource type="PackedScene" path="res://Scenes/AddBuffEnemyAbility.tscn" id="10_e05jc"]
+[ext_resource type="PackedScene" path="res://Scenes/DoomBuff.tscn" id="11_b05sw"]
+[ext_resource type="PackedScene" path="res://Scenes/CorrodeBuff.tscn" id="12_csv87"]
+
+[node name="Puzzle" type="Node" node_paths=PackedStringArray("enemy_buffs")]
+script = ExtResource("1_4o2yv")
+puzzle_date = "2025-05-10"
+previous_puzzle_scene = "uid://cp3kiv3r56uxj"
+next_puzzle_scene = "uid://b4ww4gmxjfgtv"
+difficulty = "Nightmare"
+enemy_health = 21
+enemy_name = "Gelatinous Cube"
+enemy_icon_texture = ExtResource("2_6voa5")
+enemy_buff_target = "Enemy"
+enemy_buffs = [NodePath("CorrodeBuff")]
+eye_1_position = Vector2(425, 110)
+eye_2_position = Vector2(452, 112)
+card_scenes = [ExtResource("3_ufwb5"), ExtResource("4_4k4uk"), ExtResource("5_p5r77"), ExtResource("6_dbsph"), ExtResource("7_b0111"), ExtResource("8_u0qya"), ExtResource("9_fl8il")]
+card_solution = [ExtResource("8_u0qya"), ExtResource("9_fl8il"), ExtResource("9_fl8il"), ExtResource("4_4k4uk"), ExtResource("5_p5r77"), ExtResource("6_dbsph"), ExtResource("3_ufwb5"), ExtResource("7_b0111")]
+
+[node name="AddBuffEnemyAbility" parent="." node_paths=PackedStringArray("buff") instance=ExtResource("10_e05jc")]
+buff_scene = "uid://bjq0151e0pts8"
+buff = NodePath("DoomBuff")
+
+[node name="DoomBuff" parent="AddBuffEnemyAbility" instance=ExtResource("11_b05sw")]
+turns_left = 5
+
+[node name="CorrodeBuff" parent="." instance=ExtResource("12_csv87")]
+unlimited_uses = true

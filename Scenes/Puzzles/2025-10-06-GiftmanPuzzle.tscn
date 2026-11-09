@@ -1,0 +1,18 @@
+[gd_scene load_steps=6 format=3 uid="uid://l4mib1pmr8cj"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_sr2b1"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/giftman.png" id="2_fsec3"]
+[ext_resource type="PackedScene" path="res://Scenes/GiftCard.tscn" id="3_qwu25"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="4_1y5oi"]
+[ext_resource type="PackedScene" path="res://Scenes/ShovelCard.tscn" id="5_tpv3r"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_sr2b1")
+puzzle_date = "2025-10-06"
+previous_puzzle_scene = "uid://djtb6kd5civ30"
+next_puzzle_scene = "uid://eu8eitbukbt"
+enemy_health = 14
+enemy_name = "Giftman"
+enemy_icon_texture = ExtResource("2_fsec3")
+player_energy = 3
+card_scenes = [ExtResource("3_qwu25"), ExtResource("3_qwu25"), ExtResource("3_qwu25"), ExtResource("3_qwu25"), ExtResource("4_1y5oi"), ExtResource("5_tpv3r"), ExtResource("5_tpv3r")]

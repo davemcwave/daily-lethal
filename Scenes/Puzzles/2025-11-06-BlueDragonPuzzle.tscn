@@ -1,0 +1,21 @@
+[gd_scene load_steps=8 format=3 uid="uid://coehkhmbws06b"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_hyuhe"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/blue-dragon.png" id="2_o4rcr"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="3_uageb"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="4_uhsa7"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="5_hu0bi"]
+[ext_resource type="PackedScene" path="res://Scenes/WoundCard.tscn" id="6_4aylp"]
+[ext_resource type="PackedScene" path="res://Scenes/VenomCard.tscn" id="7_dsef4"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_hyuhe")
+puzzle_date = "2025-11-06"
+previous_puzzle_scene = "uid://bkrkew68ssshq"
+next_puzzle_scene = "uid://by8lmagy2fxob"
+enemy_health = 91
+enemy_name = "Blue Dragon"
+enemy_icon_texture = ExtResource("2_o4rcr")
+player_health = 1
+player_energy = 10
+card_scenes = [ExtResource("3_uageb"), ExtResource("4_uhsa7"), ExtResource("5_hu0bi"), ExtResource("5_hu0bi"), ExtResource("6_4aylp"), ExtResource("7_dsef4")]

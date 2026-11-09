@@ -1,0 +1,20 @@
+[gd_scene load_steps=8 format=3 uid="uid://cp1f4oee2x11q"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_awfbg"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/leeta-256x256.svg" id="2_lt6ro"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="3_1dxcb"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="4_d815b"]
+[ext_resource type="PackedScene" path="res://Scenes/FrenzyCard.tscn" id="5_hp7ke"]
+[ext_resource type="PackedScene" path="res://Scenes/CooperationCard.tscn" id="6_pwddd"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="7_re5b5"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_awfbg")
+puzzle_date = "2026-02-12"
+previous_puzzle_scene = "uid://dhg3ikvqv8jlv"
+next_puzzle_scene = "uid://dmlggn0o374nl"
+enemy_health = 32
+enemy_name = "Punching Bag"
+enemy_icon_texture = ExtResource("2_lt6ro")
+player_health = 1
+card_scenes = [ExtResource("3_1dxcb"), ExtResource("4_d815b"), ExtResource("5_hp7ke"), ExtResource("6_pwddd"), ExtResource("6_pwddd"), ExtResource("7_re5b5"), ExtResource("7_re5b5")]

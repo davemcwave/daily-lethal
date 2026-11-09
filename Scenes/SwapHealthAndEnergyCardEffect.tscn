@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cp80h5q7l58yx"]
+
+[ext_resource type="Script" path="res://Scripts/SwapHealthAndEnergyCardEffect.gd" id="1_iw05j"]
+
+[node name="SwapHealthAndEnergyCardEffect" type="Node2D"]
+script = ExtResource("1_iw05j")
+effect_name = "Swap Health And Energy"
+effect_description = "Swap the current amounts of Health and Energy"

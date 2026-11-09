@@ -1,0 +1,22 @@
+[gd_scene load_steps=8 format=3 uid="uid://pxcc7juwb0oj"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_omu7i"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/cannoneer.png" id="2_ylvwa"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="3_7qn85"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="4_uhlw1"]
+[ext_resource type="PackedScene" path="res://Scenes/ScrapCard.tscn" id="5_uwb3b"]
+[ext_resource type="PackedScene" path="res://Scenes/SnipeCard.tscn" id="6_knohf"]
+[ext_resource type="PackedScene" path="res://Scenes/BurstCard.tscn" id="7_7e4cx"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_omu7i")
+puzzle_date = "2025-11-14"
+previous_puzzle_scene = "uid://ljjkeiqb57ej"
+next_puzzle_scene = "uid://xh8ae1xaop7j"
+enemy_health = 28
+enemy_name = "Cannoneer"
+enemy_icon_texture = ExtResource("2_ylvwa")
+player_health = 1
+player_energy = 8
+card_scenes = [ExtResource("3_7qn85"), ExtResource("3_7qn85"), ExtResource("3_7qn85"), ExtResource("4_uhlw1"), ExtResource("5_uwb3b"), ExtResource("6_knohf"), ExtResource("7_7e4cx")]
+card_solution = [ExtResource("3_7qn85"), ExtResource("4_uhlw1"), ExtResource("6_knohf"), ExtResource("6_knohf"), ExtResource("3_7qn85"), ExtResource("4_uhlw1"), ExtResource("6_knohf"), ExtResource("5_uwb3b"), ExtResource("7_7e4cx"), ExtResource("3_7qn85"), ExtResource("6_knohf"), ExtResource("5_uwb3b"), ExtResource("6_knohf"), ExtResource("4_uhlw1")]

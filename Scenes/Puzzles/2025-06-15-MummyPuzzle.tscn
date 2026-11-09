@@ -1,0 +1,22 @@
+[gd_scene load_steps=8 format=3 uid="uid://bj48n6xsr8b4n"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_nuo15"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/mummy.png" id="2_fd56b"]
+[ext_resource type="PackedScene" path="res://Scenes/InspirationCard.tscn" id="3_saxtb"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="4_cexgi"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="5_eslf6"]
+[ext_resource type="PackedScene" path="res://Scenes/LungeCard.tscn" id="6_724qh"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="7_gj0d1"]
+
+[node name="TestPuzzle2" type="Node"]
+script = ExtResource("1_nuo15")
+puzzle_date = "2025-06-15"
+previous_puzzle_scene = "uid://dqrsnicv7mdy4"
+next_puzzle_scene = "uid://b8bojsoeb6s5d"
+enemy_health = 13
+enemy_name = "Mummy"
+enemy_icon_texture = ExtResource("2_fd56b")
+player_health = 5
+player_energy = 2
+card_scenes = [ExtResource("3_saxtb"), ExtResource("4_cexgi"), ExtResource("5_eslf6"), ExtResource("5_eslf6"), ExtResource("6_724qh"), ExtResource("7_gj0d1")]
+card_solution = [ExtResource("4_cexgi"), ExtResource("5_eslf6"), ExtResource("6_724qh"), ExtResource("3_saxtb"), ExtResource("7_gj0d1"), ExtResource("5_eslf6")]

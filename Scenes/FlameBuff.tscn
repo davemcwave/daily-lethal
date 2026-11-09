@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://5o2j61ehojv6"]
+
+[ext_resource type="Script" path="res://Scripts/FlameBuff.gd" id="1_tumyu"]
+
+[node name="FlameBuff" type="Node2D"]
+script = ExtResource("1_tumyu")
+buff_name = "Flame"
+buff_description = "Next attack card's damage is converted into Burn."
+activation_type = 1
+color = Color(0.763655, 0.325858, 9.62615e-08, 1)
+activated_once_per_turn = true
+single_turn_repeat = true
+deal_damage = false

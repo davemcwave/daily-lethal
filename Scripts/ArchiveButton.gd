@@ -14,9 +14,9 @@ func _on_pressed():
 		var base_url = JavaScriptBridge.eval("window.location.origin", true)
 		open_window_in_same_tab(base_url + "/archive")
 	elif background.is_from_story_view():
-		get_tree().change_scene_to_file("res://Scenes/StoryView.scn")
+		get_tree().change_scene_to_file("res://Scenes/StoryView.tscn")
 	else:
-		get_tree().change_scene_to_file("res://Scenes/Scene0Desktop.scn")
+		get_tree().change_scene_to_file("res://Scenes/Scene0Desktop.tscn")
 		
 func open_window_in_same_tab(url: String) -> void:
 	JavaScriptBridge.eval("window.location.href = '%s';" % url)

@@ -1,0 +1,22 @@
+[gd_scene load_steps=10 format=3 uid="uid://bt85rmyf61qpl"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_o2qww"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/pinky.png" id="2_vfn3e"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="3_3arbu"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="4_gwa13"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="5_c0jdv"]
+[ext_resource type="PackedScene" path="res://Scenes/PotionCard.tscn" id="6_8xoee"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="7_uwg0w"]
+[ext_resource type="PackedScene" path="res://Scenes/TargetCard.tscn" id="8_d2m8m"]
+[ext_resource type="PackedScene" path="res://Scenes/TributeCard.tscn" id="9_3wh2q"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_o2qww")
+puzzle_date = "2025-10-14"
+previous_puzzle_scene = "uid://bj2o7yxwbq8cb"
+next_puzzle_scene = "uid://bn4ctc268xbrl"
+enemy_health = 18
+enemy_name = "Pinky"
+enemy_icon_texture = ExtResource("2_vfn3e")
+player_energy = 3
+card_scenes = [ExtResource("3_3arbu"), ExtResource("4_gwa13"), ExtResource("5_c0jdv"), ExtResource("6_8xoee"), ExtResource("7_uwg0w"), ExtResource("8_d2m8m"), ExtResource("9_3wh2q")]

@@ -1,0 +1,19 @@
+[gd_scene load_steps=7 format=3 uid="uid://i674fjb7in30"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_8yuca"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/termites.png" id="2_y85qv"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="3_raxri"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="4_bddg8"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="5_se50w"]
+[ext_resource type="PackedScene" path="res://Scenes/VenomCard.tscn" id="6_hdnwg"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_8yuca")
+puzzle_date = "2025-12-03"
+previous_puzzle_scene = "uid://b84gfqfhyty6w"
+next_puzzle_scene = "uid://clmin13th6cx8"
+enemy_health = 90
+enemy_name = "Termites"
+enemy_icon_texture = ExtResource("2_y85qv")
+player_energy = 10
+card_scenes = [ExtResource("3_raxri"), ExtResource("3_raxri"), ExtResource("3_raxri"), ExtResource("4_bddg8"), ExtResource("5_se50w"), ExtResource("6_hdnwg"), ExtResource("5_se50w")]

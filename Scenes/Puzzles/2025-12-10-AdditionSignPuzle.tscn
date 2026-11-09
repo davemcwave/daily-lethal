@@ -1,0 +1,21 @@
+[gd_scene load_steps=9 format=3 uid="uid://dc1fyk3gb0c0w"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_y165b"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/addition-sign.png" id="2_bglo4"]
+[ext_resource type="PackedScene" path="res://Scenes/VenomCard.tscn" id="3_nteb8"]
+[ext_resource type="PackedScene" path="res://Scenes/SlashCard.tscn" id="4_662h6"]
+[ext_resource type="PackedScene" path="res://Scenes/SpearCard.tscn" id="5_gjqci"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="6_iqodk"]
+[ext_resource type="PackedScene" path="res://Scenes/CleaveCard.tscn" id="7_as3vy"]
+[ext_resource type="PackedScene" path="res://Scenes/ArmoryCard.tscn" id="8_q00nj"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_y165b")
+puzzle_date = "2025-12-10"
+previous_puzzle_scene = "uid://skavpev0h3ie"
+next_puzzle_scene = "uid://bq5dvwvfq64hq"
+enemy_health = 51
+enemy_name = "Addition Sign"
+enemy_icon_texture = ExtResource("2_bglo4")
+player_energy = 17
+card_scenes = [ExtResource("3_nteb8"), ExtResource("4_662h6"), ExtResource("5_gjqci"), ExtResource("6_iqodk"), ExtResource("7_as3vy"), ExtResource("8_q00nj")]

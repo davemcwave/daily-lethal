@@ -1,0 +1,20 @@
+[gd_scene load_steps=8 format=3 uid="uid://moopo2n5irv4"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_plia1"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/creeping-vine.png" id="2_bb5fk"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="3_hl0st"]
+[ext_resource type="PackedScene" path="res://Scenes/BargainCard.tscn" id="4_7xat6"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="5_u5ob4"]
+[ext_resource type="PackedScene" path="res://Scenes/FangCard.tscn" id="6_vbylv"]
+[ext_resource type="PackedScene" path="res://Scenes/MendCard.tscn" id="7_oe2qd"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_plia1")
+puzzle_date = "2025-07-06"
+previous_puzzle_scene = "uid://bow8hr8s4mg1n"
+next_puzzle_scene = "uid://cqomyl6ai4vhd"
+enemy_health = 5
+enemy_name = "Creeping Vine"
+enemy_icon_texture = ExtResource("2_bb5fk")
+player_energy = 1
+card_scenes = [ExtResource("3_hl0st"), ExtResource("4_7xat6"), ExtResource("5_u5ob4"), ExtResource("6_vbylv"), ExtResource("7_oe2qd")]

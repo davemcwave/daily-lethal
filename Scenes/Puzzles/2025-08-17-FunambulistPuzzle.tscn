@@ -1,0 +1,21 @@
+[gd_scene load_steps=9 format=3 uid="uid://bsqt2q44eqy5q"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_i56uw"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/funambulist.png" id="2_wr8jm"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="3_l8i4a"]
+[ext_resource type="PackedScene" path="res://Scenes/HeartbeatCard.tscn" id="4_0ryi0"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="5_mvvha"]
+[ext_resource type="PackedScene" path="res://Scenes/SurgeCard.tscn" id="6_0f65g"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="7_svnux"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="8_tm2yk"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_i56uw")
+puzzle_date = "2025-08-17"
+previous_puzzle_scene = "uid://d055b5megp6x5"
+next_puzzle_scene = "uid://bpndqotfccsr"
+enemy_health = 20
+enemy_name = "Funambulist"
+enemy_icon_texture = ExtResource("2_wr8jm")
+player_health = 5
+card_scenes = [ExtResource("3_l8i4a"), ExtResource("4_0ryi0"), ExtResource("5_mvvha"), ExtResource("6_0f65g"), ExtResource("7_svnux"), ExtResource("8_tm2yk"), ExtResource("8_tm2yk")]

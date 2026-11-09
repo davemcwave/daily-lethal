@@ -1,0 +1,20 @@
+[gd_scene load_steps=7 format=3 uid="uid://b87ubb1n8av3g"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_alrgl"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/beetle2.png" id="2_mc5bm"]
+[ext_resource type="PackedScene" path="res://Scenes/EmptyfistCard.tscn" id="3_425rw"]
+[ext_resource type="PackedScene" path="res://Scenes/WoundCard.tscn" id="4_k41iv"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="5_u5546"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="6_els15"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_alrgl")
+puzzle_date = "2025-09-01"
+previous_puzzle_scene = "uid://b67j0vpb8i0kk"
+next_puzzle_scene = "uid://butsnj0uttmmq"
+enemy_health = 26
+enemy_name = "Beetle"
+enemy_icon_texture = ExtResource("2_mc5bm")
+player_health = 1
+player_energy = 30
+card_scenes = [ExtResource("3_425rw"), ExtResource("4_k41iv"), ExtResource("5_u5546"), ExtResource("6_els15")]

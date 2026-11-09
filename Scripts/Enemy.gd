@@ -21,8 +21,8 @@ var debuff_activate_queue: Array = []
 @onready var blink_shader: Shader = load("res://Scripts/Shaders/WhiteBlink.gdshader")
 @onready var wobble_shader: Shader = load("res://Scripts/Shaders/Wobble.gdshader")
 @onready var shake_shader: Shader = load("res://Scripts/Shaders/Shake.gdshader")
-@onready var wobble_material: Material = load("res://Resources/EnemyWobbleMaterial.res")
-@onready var shake_material: Material = load("res://Resources/ShakeMaterial.res")
+@onready var wobble_material: Material = load("res://Resources/EnemyWobbleMaterial.tres")
+@onready var shake_material: Material = load("res://Resources/ShakeMaterial.tres")
 @onready var audio_handler = $"/root/AudioHandler"
 @onready var dialog_handler = $"/root/DialogHandler"
 @onready var nightmare_icon: TextureRect = $NightmareIcon
@@ -64,8 +64,8 @@ func set_difficulty(new_difficulty: String) -> void:
 func set_eye_positions(eye_positions: Array[Vector2]) -> void:
 	var eye_1_position: Vector2 = eye_positions[0]
 	var eye_2_position: Vector2 = eye_positions[1]
-	var eye_1 = load("res://EnemyEyeGlow.scn").instantiate()
-	var eye_2 = load("res://EnemyEyeGlow.scn").instantiate()
+	var eye_1 = load("res://EnemyEyeGlow.tscn").instantiate()
+	var eye_2 = load("res://EnemyEyeGlow.tscn").instantiate()
 	$EnemyIcon.add_child(eye_1)
 	$EnemyIcon.add_child(eye_2)
 	eye_1.set_position(eye_1_position)
@@ -211,7 +211,7 @@ func activate_on_card_play_debuffs(do_not_activate: Array = []) -> void:
 	await activate_on_play_buffs()
 
 func create_damage_label(hurt_amount: int) -> void:
-	var damage_label: RichTextLabel = load("res://Scenes/DamageLabel.scn").instantiate()
+	var damage_label: RichTextLabel = load("res://Scenes/DamageLabel.tscn").instantiate()
 	damage_label.set_damage(hurt_amount)
 	add_child(damage_label)
 	damage_label.global_position = $DamageLabelSpawn.global_position
@@ -227,7 +227,7 @@ func create_hurt_text(hurt_text_message: String) -> bool:
 	var y_offset: float = 20
 	var word_count = 1
 	for word in label.get_parsed_text().split(" "):
-		var hurt_text: RichTextLabel = load("res://Scenes/HurtText.scn").instantiate()
+		var hurt_text: RichTextLabel = load("res://Scenes/HurtText.tscn").instantiate()
 		add_child(hurt_text)
 		hurt_text.global_position = $EnemyIcon.global_position + $EnemyIcon.size/2
 		hurt_text.rotation_degrees += random_rotation

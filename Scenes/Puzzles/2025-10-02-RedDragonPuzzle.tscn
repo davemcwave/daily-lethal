@@ -1,0 +1,23 @@
+[gd_scene load_steps=10 format=3 uid="uid://d4b3g2osj81xm"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_uvcw4"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/red-dragon.png" id="2_5mjfw"]
+[ext_resource type="PackedScene" path="res://Scenes/BargainCard.tscn" id="3_nrjul"]
+[ext_resource type="PackedScene" path="res://Scenes/GiftCard.tscn" id="4_lxh28"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="5_8yqp4"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="6_y7yc3"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="7_xjppg"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="8_6h3op"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="9_uelfn"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_uvcw4")
+puzzle_date = "2025-10-02"
+previous_puzzle_scene = "uid://b0qj80tf2q3e6"
+next_puzzle_scene = "uid://djtb6kd5civ30"
+enemy_health = 30
+enemy_name = "Red Dragon"
+enemy_icon_texture = ExtResource("2_5mjfw")
+player_health = 1
+player_energy = 1
+card_scenes = [ExtResource("3_nrjul"), ExtResource("4_lxh28"), ExtResource("5_8yqp4"), ExtResource("6_y7yc3"), ExtResource("7_xjppg"), ExtResource("8_6h3op"), ExtResource("9_uelfn")]

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bl43xqvgnkrps"]
+
+[ext_resource type="Script" path="res://Scripts/CardsChooseAreaAction.gd" id="1_3tu2x"]
+
+[node name="CardsChooseAreaAction" type="Node"]
+script = ExtResource("1_3tu2x")

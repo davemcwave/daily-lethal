@@ -72,7 +72,7 @@ func _ready():
 	
 	set_energy_text(energy_cost)
 	
-	$IconPanel/Icon.material = load("res://Resources/WobbleMaterial.res")
+	$IconPanel/Icon.material = load("res://Resources/WobbleMaterial.tres")
 	add_to_group("Cards")
 	#connect("played", scene._on_card_played.bind(self))
 	
@@ -83,7 +83,7 @@ func _ready():
 func add_gradient_background(new_colors: PackedColorArray) -> void:
 	if has_gradient_background():
 		get_node("IconPanel/GradientBackground").queue_free()
-	var gradient_background: GradientBackground = load("res://Scenes/GradientBackground.scn").instantiate()
+	var gradient_background: GradientBackground = load("res://Scenes/GradientBackground.tscn").instantiate()
 	gradient_background.set_colors(new_colors)
 	$IconPanel.add_child(gradient_background)
 	$IconPanel.move_child(gradient_background,0)
@@ -161,7 +161,7 @@ func is_grabbed() -> bool:
 	return state == State.Grabbed
 	
 func show_choosing_button() -> void:
-	var choosing_button: ChoosingButton = load("res://Scenes/ChoosingButton.scn").instantiate()
+	var choosing_button: ChoosingButton = load("res://Scenes/ChoosingButton.tscn").instantiate()
 	choosing_button.set_icon(cards_choose_area.get_choose_type())
 	add_child(choosing_button)
 	set_state(State.Chosen)

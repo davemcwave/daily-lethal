@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cirksxgkab1fo"]
+
+[ext_resource type="Script" path="res://Scripts/LifestealBuff.gd" id="1_bbbi7"]
+
+[node name="LifestealBuff" type="Node2D"]
+script = ExtResource("1_bbbi7")
+buff_name = "Lifesteal"
+buff_description = "Heal HP equal to the damage of your next attack."
+activation_type = 6
+color = Color(0, 0.55, 0.0641667, 1)

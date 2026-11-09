@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://cdweegj8o7m48"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_gcfrg"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/robot.png" id="2_bwsj4"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="3_a62h0"]
+[ext_resource type="PackedScene" path="res://Scenes/SlashCard.tscn" id="4_cqsim"]
+[ext_resource type="PackedScene" path="res://Scenes/WoundCard.tscn" id="5_oojcl"]
+
+[node name="Puzzle" type="Node"]
+script = ExtResource("1_gcfrg")
+puzzle_date = "2025-04-23"
+next_puzzle_scene = "uid://bmhwx6r6etcv6"
+enemy_health = 8
+enemy_name = "Evil Robot"
+enemy_icon_texture = ExtResource("2_bwsj4")
+player_energy = 7
+card_scenes = [ExtResource("3_a62h0"), ExtResource("4_cqsim"), ExtResource("5_oojcl"), ExtResource("5_oojcl")]
+card_solution = [ExtResource("5_oojcl"), ExtResource("5_oojcl"), ExtResource("3_a62h0"), ExtResource("4_cqsim")]
+initial_draw_amount = 4
+dialogue_first = "Enemy"
+dialogue_lines = ["[b][shake rate=2.0 level=1 connected=1]I'll kill this thing in 1 turn.[/shake][/b]", "[b][shake rate=2.0 level=1 connected=1]HA-HA, YOU CANNOT KILL AI. NOT IN 2025.[/shake][/b]"]
+enemy_hurt_lines = ["010101001010101", "BEEP, BOOP! ARG!"]
+death_line = "UNTIL WE M33T AGAIN..."

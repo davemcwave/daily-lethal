@@ -1,0 +1,21 @@
+[gd_scene load_steps=7 format=3 uid="uid://bmhwx6r6etcv6"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_aa5ja"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/sea-monster.png" id="2_w8p46"]
+[ext_resource type="PackedScene" path="res://Scenes/SurgeCard.tscn" id="3_jf374"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="4_p0r0n"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="5_qpi0t"]
+[ext_resource type="PackedScene" path="res://Scenes/SlashCard.tscn" id="6_cghod"]
+
+[node name="Puzzle" type="Node"]
+script = ExtResource("1_aa5ja")
+puzzle_date = "2025-04-24"
+previous_puzzle_scene = "uid://cdweegj8o7m48"
+next_puzzle_scene = "uid://iur67agkk6gr"
+enemy_name = "Sea Monster"
+enemy_icon_texture = ExtResource("2_w8p46")
+player_energy = 4
+card_scenes = [ExtResource("3_jf374"), ExtResource("4_p0r0n"), ExtResource("5_qpi0t"), ExtResource("6_cghod"), ExtResource("3_jf374")]
+card_solution = [ExtResource("3_jf374"), ExtResource("3_jf374"), ExtResource("4_p0r0n"), ExtResource("5_qpi0t"), ExtResource("6_cghod")]
+initial_draw_amount = 5
+death_line = "Swimming with the fishes..."

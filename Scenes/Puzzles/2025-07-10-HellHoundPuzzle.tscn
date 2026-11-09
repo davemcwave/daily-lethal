@@ -1,0 +1,21 @@
+[gd_scene load_steps=9 format=3 uid="uid://5ldo8rhfo50g"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_1m5kt"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/hell-hound.png" id="2_iw5p5"]
+[ext_resource type="PackedScene" path="res://Scenes/BurstCard.tscn" id="3_bt2yn"]
+[ext_resource type="PackedScene" path="res://Scenes/GiftCard.tscn" id="4_lqhmv"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="5_et3hm"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="6_50mu2"]
+[ext_resource type="PackedScene" path="res://Scenes/MendCard.tscn" id="7_q2xi2"]
+[ext_resource type="PackedScene" path="res://Scenes/SurgeCard.tscn" id="8_u5f6h"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_1m5kt")
+puzzle_date = "2025-07-10"
+previous_puzzle_scene = "uid://cqomyl6ai4vhd"
+next_puzzle_scene = "uid://du76dm6nj35pw"
+enemy_health = 11
+enemy_name = "Hell Hound"
+enemy_icon_texture = ExtResource("2_iw5p5")
+player_health = 1
+card_scenes = [ExtResource("3_bt2yn"), ExtResource("4_lqhmv"), ExtResource("5_et3hm"), ExtResource("6_50mu2"), ExtResource("7_q2xi2"), ExtResource("8_u5f6h")]

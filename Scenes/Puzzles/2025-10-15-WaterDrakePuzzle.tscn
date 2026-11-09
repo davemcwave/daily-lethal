@@ -1,0 +1,19 @@
+[gd_scene load_steps=8 format=3 uid="uid://bn4ctc268xbrl"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_asay2"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/water-drake.png" id="2_d305u"]
+[ext_resource type="PackedScene" path="res://Scenes/IgniteCard.tscn" id="3_7kj1l"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="4_s2w6d"]
+[ext_resource type="PackedScene" path="res://Scenes/HeartbeatCard.tscn" id="5_xg884"]
+[ext_resource type="PackedScene" path="res://Scenes/BargainCard.tscn" id="6_cln85"]
+[ext_resource type="PackedScene" path="res://Scenes/LungeCard.tscn" id="7_0o57a"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_asay2")
+puzzle_date = "2025-10-15"
+previous_puzzle_scene = "uid://bt85rmyf61qpl"
+next_puzzle_scene = "uid://0bte0dm76h6p"
+enemy_name = "Water Drake"
+enemy_icon_texture = ExtResource("2_d305u")
+player_energy = 4
+card_scenes = [ExtResource("3_7kj1l"), ExtResource("4_s2w6d"), ExtResource("3_7kj1l"), ExtResource("5_xg884"), ExtResource("6_cln85"), ExtResource("7_0o57a")]

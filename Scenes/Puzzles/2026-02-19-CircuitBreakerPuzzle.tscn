@@ -1,0 +1,20 @@
+[gd_scene load_steps=9 format=3 uid="uid://dkyhh7hq21hqh"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_1fr4h"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/leeta-256x256.svg" id="2_u5gmf"]
+[ext_resource type="PackedScene" path="res://Scenes/IgniteCard.tscn" id="3_fmkn4"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="4_jsaxv"]
+[ext_resource type="PackedScene" path="res://Scenes/FrenzyCard.tscn" id="5_3cv7l"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="6_vl1ac"]
+[ext_resource type="PackedScene" path="res://Scenes/VenomCard.tscn" id="7_e4elj"]
+[ext_resource type="PackedScene" path="res://Scenes/CauterizeCard.tscn" id="8_rr852"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_1fr4h")
+puzzle_date = "2026-02-19"
+previous_puzzle_scene = "uid://d3htefxh6iono"
+enemy_health = 48
+enemy_name = "Circuit Breaker"
+enemy_icon_texture = ExtResource("2_u5gmf")
+player_energy = 9
+card_scenes = [ExtResource("3_fmkn4"), ExtResource("4_jsaxv"), ExtResource("5_3cv7l"), ExtResource("6_vl1ac"), ExtResource("7_e4elj"), ExtResource("8_rr852"), ExtResource("3_fmkn4")]

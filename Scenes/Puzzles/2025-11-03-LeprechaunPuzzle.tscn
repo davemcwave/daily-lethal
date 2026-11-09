@@ -1,0 +1,20 @@
+[gd_scene load_steps=8 format=3 uid="uid://46vyrf6e8frw"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_cd1ml"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/leprechaun.png" id="2_qrabw"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="3_jsklh"]
+[ext_resource type="PackedScene" path="res://Scenes/WoundCard.tscn" id="4_flccu"]
+[ext_resource type="PackedScene" path="res://Scenes/ShieldCard.tscn" id="5_0tbio"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="6_ph4ut"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="7_wqshr"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_cd1ml")
+puzzle_date = "2025-11-03"
+previous_puzzle_scene = "uid://b7xh40p353elw"
+next_puzzle_scene = "uid://ddqsq6mj20b47"
+enemy_name = "Leprechaun"
+enemy_icon_texture = ExtResource("2_qrabw")
+player_health = 6
+player_energy = 3
+card_scenes = [ExtResource("3_jsklh"), ExtResource("4_flccu"), ExtResource("5_0tbio"), ExtResource("6_ph4ut"), ExtResource("7_wqshr")]

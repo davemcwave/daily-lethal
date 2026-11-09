@@ -1,0 +1,21 @@
+[gd_scene load_steps=8 format=3 uid="uid://boly4kt8qm3ox"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_b5w53"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/Stirge.png" id="2_iqpcn"]
+[ext_resource type="PackedScene" path="res://Scenes/FangCard.tscn" id="3_x87m5"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="4_ffw4p"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="5_th40n"]
+[ext_resource type="PackedScene" path="res://Scenes/MendCard.tscn" id="6_x0y14"]
+[ext_resource type="PackedScene" path="res://Scenes/BurstCard.tscn" id="7_lh2bj"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_b5w53")
+puzzle_date = "2025-06-28"
+previous_puzzle_scene = "uid://22qg6umkm3la"
+next_puzzle_scene = "uid://cfi7xdmxjrcqp"
+enemy_health = 11
+enemy_name = "Stirge"
+enemy_icon_texture = ExtResource("2_iqpcn")
+player_health = 1
+player_energy = 6
+card_scenes = [ExtResource("3_x87m5"), ExtResource("4_ffw4p"), ExtResource("3_x87m5"), ExtResource("5_th40n"), ExtResource("6_x0y14"), ExtResource("7_lh2bj")]

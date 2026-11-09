@@ -1,0 +1,21 @@
+[gd_scene load_steps=9 format=3 uid="uid://1r42fxd26mv"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_yoseb"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/dwarven-miner.png" id="2_gir3r"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="3_e2q68"]
+[ext_resource type="PackedScene" path="res://Scenes/IgniteCard.tscn" id="4_21g2q"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="5_hkhqg"]
+[ext_resource type="PackedScene" path="res://Scenes/PotionCard.tscn" id="6_4kfcq"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="7_r5x1x"]
+[ext_resource type="PackedScene" path="res://Scenes/ShieldCard.tscn" id="8_4qa3k"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_yoseb")
+puzzle_date = "2025-11-27"
+previous_puzzle_scene = "uid://clg62ddi2lkn6"
+next_puzzle_scene = "uid://87i3vpxdai3o"
+enemy_health = 18
+enemy_name = "Dwarven Miner"
+enemy_icon_texture = ExtResource("2_gir3r")
+player_energy = 10
+card_scenes = [ExtResource("3_e2q68"), ExtResource("4_21g2q"), ExtResource("5_hkhqg"), ExtResource("6_4kfcq"), ExtResource("7_r5x1x"), ExtResource("7_r5x1x"), ExtResource("8_4qa3k")]

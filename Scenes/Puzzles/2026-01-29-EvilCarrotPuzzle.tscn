@@ -1,0 +1,23 @@
+[gd_scene load_steps=10 format=3 uid="uid://f4argynqhqr2"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_77s64"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/evil-carrot.png" id="2_fnd7r"]
+[ext_resource type="PackedScene" path="res://Scenes/EmptyfistCard.tscn" id="3_40wkt"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="4_rk6y7"]
+[ext_resource type="PackedScene" path="res://Scenes/ShovelCard.tscn" id="5_ci3xp"]
+[ext_resource type="PackedScene" path="res://Scenes/CleaveCard.tscn" id="6_rtiew"]
+[ext_resource type="PackedScene" path="res://Scenes/BerserkCard.tscn" id="7_cku4h"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="8_rbrwy"]
+[ext_resource type="PackedScene" path="res://Scenes/CooperationCard.tscn" id="9_k24el"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_77s64")
+puzzle_date = "2026-01-29"
+previous_puzzle_scene = "uid://cj207rkfxv5rr"
+next_puzzle_scene = "uid://qf7t82wuwtyd"
+enemy_health = 46
+enemy_name = "Evil Carrot"
+enemy_icon_texture = ExtResource("2_fnd7r")
+player_health = 6
+player_energy = 4
+card_scenes = [ExtResource("3_40wkt"), ExtResource("4_rk6y7"), ExtResource("5_ci3xp"), ExtResource("6_rtiew"), ExtResource("7_cku4h"), ExtResource("8_rbrwy"), ExtResource("9_k24el")]

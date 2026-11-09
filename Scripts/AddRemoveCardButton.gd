@@ -33,7 +33,7 @@ func _on_option_button_item_selected(index):
 		card_preview.hide()
 		set_text("+")
 	else:
-		var card = load("res://Scenes/%sCard.scn" % card_name).instantiate()
+		var card = load("res://Scenes/%sCard.tscn" % card_name).instantiate()
 		card_preview.set_card(card)
 		card_preview.show()
 		set_text("")

@@ -1,0 +1,23 @@
+[gd_scene load_steps=10 format=3 uid="uid://bdbh0vbp2ffxv"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_6xr0y"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/cursed-campfire.png" id="2_hns3d"]
+[ext_resource type="PackedScene" path="res://Scenes/SparkCard.tscn" id="3_ja86n"]
+[ext_resource type="PackedScene" path="res://Scenes/ScrapCard.tscn" id="4_s56uu"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="5_6oja7"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="6_io0j6"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="7_gd67j"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="8_8rk01"]
+[ext_resource type="PackedScene" path="res://Scenes/WasteCard.tscn" id="9_meku2"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_6xr0y")
+puzzle_date = "2025-11-21"
+previous_puzzle_scene = "uid://bevd53grtuqj"
+next_puzzle_scene = "uid://ofr363xl2ub2"
+enemy_health = 20
+enemy_name = "Cursed Campfire"
+enemy_icon_texture = ExtResource("2_hns3d")
+player_health = 1
+player_energy = 3
+card_scenes = [ExtResource("3_ja86n"), ExtResource("4_s56uu"), ExtResource("5_6oja7"), ExtResource("6_io0j6"), ExtResource("7_gd67j"), ExtResource("8_8rk01"), ExtResource("9_meku2")]

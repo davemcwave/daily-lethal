@@ -128,7 +128,7 @@ def calculate_progression(puzzle_data):
             for puzzle_name, cards in remaining_puzzles.items():
                 blocking_cards = get_blocking_cards(cards, learned_cards)
                 if blocking_cards:
-                    clean_name = puzzle_name.replace('.scn', '')
+                    clean_name = puzzle_name.replace('.tscn', '')
                     print(f"  {clean_name} - blocked by: {', '.join(blocking_cards)}")
             break
 
@@ -152,7 +152,7 @@ def print_progression(progression):
     for i, tier_puzzles in enumerate(progression):
         print(f"═══ TIER {i + 1} ═══ ({len(tier_puzzles)} puzzles)")
         for puzzle_name in tier_puzzles:
-            clean_name = puzzle_name.replace('.scn', '')
+            clean_name = puzzle_name.replace('.tscn', '')
             print(f"  • {clean_name}")
         print()
 
@@ -263,7 +263,7 @@ def generate_html_graph(progression):
             <div class="puzzles">
 """
         for puzzle_name in tier_puzzles:
-            clean_name = puzzle_name.replace('.scn', '')
+            clean_name = puzzle_name.replace('.tscn', '')
             html += f'                <div class="puzzle"><div class="puzzle-name">{clean_name}</div></div>\n'
 
         html += """            </div>
@@ -314,8 +314,8 @@ def generate_dependency_graph(puzzle_data):
 def puzzle_name_to_image_path(puzzle_name):
     """Convert puzzle name to image path"""
     # Extract the creature name from the puzzle filename
-    # e.g., "2025-04-23-EvilRobot-Puzzle.scn" -> "evil-robot"
-    clean_name = puzzle_name.replace('.scn', '').replace('-Puzzle', '').replace('Puzzle', '')
+    # e.g., "2025-04-23-EvilRobot-Puzzle.tscn" -> "evil-robot"
+    clean_name = puzzle_name.replace('.tscn', '').replace('-Puzzle', '').replace('Puzzle', '')
 
     # Remove date prefix (YYYY-MM-DD-)
     import re
@@ -345,7 +345,7 @@ def generate_network_graph(puzzle_data, progression):
     # Create nodes
     nodes = []
     for puzzle_name in puzzle_data.keys():
-        clean_name = puzzle_name.replace('.scn', '')
+        clean_name = puzzle_name.replace('.tscn', '')
         tier = puzzle_tiers.get(puzzle_name, 0)
         provides = puzzle_provides.get(puzzle_name, [])
         image_path = puzzle_name_to_image_path(puzzle_name)

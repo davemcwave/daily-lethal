@@ -12,7 +12,7 @@ func _ready() -> void:
 	
 func create_damage_effect_inputs() -> void:
 	for input_name in ['Damage Amount', 'Increase Damage Multiplier']:
-		var effect_input: EffectInput = load("res://Scenes/EffectInput.scn").instantiate()
+		var effect_input: EffectInput = load("res://Scenes/EffectInput.tscn").instantiate()
 		effect_input.set_input_name(input_name)
 		effect_inputs.add_child(effect_input)
 

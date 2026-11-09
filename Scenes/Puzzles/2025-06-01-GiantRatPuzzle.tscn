@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://p734smciiwu1"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_h5m3v"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/Giant Rat.png" id="2_72ysc"]
+[ext_resource type="PackedScene" path="res://Scenes/MendCard.tscn" id="3_bgu7p"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="4_bdwa8"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="5_r845g"]
+[ext_resource type="PackedScene" path="res://Scenes/SurgeCard.tscn" id="6_fql5q"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_h5m3v")
+puzzle_date = "2025-06-01"
+previous_puzzle_scene = "uid://qcbls3dqbu7s"
+next_puzzle_scene = "uid://12hohbjwbnav"
+enemy_health = 8
+enemy_name = "Giant Rat"
+enemy_icon_texture = ExtResource("2_72ysc")
+player_health = 5
+player_energy = 2
+card_scenes = [ExtResource("3_bgu7p"), ExtResource("4_bdwa8"), ExtResource("5_r845g"), ExtResource("6_fql5q"), ExtResource("5_r845g"), ExtResource("3_bgu7p")]
+card_solution = [ExtResource("6_fql5q"), ExtResource("3_bgu7p"), ExtResource("3_bgu7p"), ExtResource("4_bdwa8"), ExtResource("5_r845g"), ExtResource("5_r845g")]
+dialogue_lines = ["[b][shake rate=2.0 level=2 connected=5]GGGREEEEEEEEEHHHHH RAHHHH GRRR GRRR REEEEEEEEEEEEEEEEEKKKKKRA!!!!![/shake][/b]
+", "[b][shake rate=2.0 level=2 connected=5]Used to only require one rat and BOOM, the plague wiped everyone. Now everyone survives?
+ 
+\"Hand sanitizer\"? Seriously?![/shake][/b]
+"]
+enemy_hurt_lines = ["[b]REEEK![/b]", "[b]SQUEEEEE![/b]"]
+enemy_hurt_line_chance = 0.75

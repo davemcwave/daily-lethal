@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://d3htefxh6iono"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_po34o"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/leeta-256x256.svg" id="2_iuur6"]
+[ext_resource type="PackedScene" path="res://Scenes/CleanseCard.tscn" id="3_kb1p2"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="4_na10y"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="5_ijqeb"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="6_q1cjv"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="7_ebk8l"]
+[ext_resource type="PackedScene" path="res://Scenes/ShovelCard.tscn" id="8_mkuxa"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_po34o")
+puzzle_date = "2026-02-18"
+previous_puzzle_scene = "uid://dexfs1vlx7quy"
+next_puzzle_scene = "uid://dkyhh7hq21hqh"
+enemy_health = 51
+enemy_name = "Banshee"
+enemy_icon_texture = ExtResource("2_iuur6")
+player_health = 1
+player_energy = 10
+card_scenes = [ExtResource("3_kb1p2"), ExtResource("4_na10y"), ExtResource("5_ijqeb"), ExtResource("6_q1cjv"), ExtResource("7_ebk8l"), ExtResource("8_mkuxa")]

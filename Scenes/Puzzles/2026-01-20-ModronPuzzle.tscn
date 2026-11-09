@@ -1,0 +1,20 @@
+[gd_scene load_steps=8 format=3 uid="uid://dr1i5isqvnwtu"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_vwg7o"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/modron.png" id="2_hg2i4"]
+[ext_resource type="PackedScene" path="res://Scenes/InspirationCard.tscn" id="3_gfj8k"]
+[ext_resource type="PackedScene" path="res://Scenes/EmptyfistCard.tscn" id="4_h7laf"]
+[ext_resource type="PackedScene" path="res://Scenes/SurgeCard.tscn" id="5_fjs7m"]
+[ext_resource type="PackedScene" path="res://Scenes/CauterizeCard.tscn" id="6_e1m4h"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="7_v43kl"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_vwg7o")
+puzzle_date = "2026-01-20"
+previous_puzzle_scene = "uid://cnvvo0ut85fm2"
+next_puzzle_scene = "uid://8vavdygw2yxk"
+enemy_health = 12
+enemy_name = "Modron"
+enemy_icon_texture = ExtResource("2_hg2i4")
+player_energy = 0
+card_scenes = [ExtResource("3_gfj8k"), ExtResource("4_h7laf"), ExtResource("5_fjs7m"), ExtResource("6_e1m4h"), ExtResource("7_v43kl"), ExtResource("3_gfj8k"), ExtResource("4_h7laf")]

@@ -457,7 +457,12 @@ func load_story_progress() -> void:
 	if data is Dictionary and data.has("completed_puzzles"):
 		completed_story_puzzles.clear()
 		for puzzle_path in data["completed_puzzles"]:
-			completed_story_puzzles.append(puzzle_path)
+			# Saves made before scenes were converted to text store ".scn" paths.
+			var migrated_path: String = puzzle_path
+			if migrated_path.ends_with(".scn"):
+				migrated_path = migrated_path.get_basename() + ".tscn"
+			if migrated_path not in completed_story_puzzles:
+				completed_story_puzzles.append(migrated_path)
 
 func set_puzzle_date(new_puzzle_date: String) -> void:
 	puzzle_date = new_puzzle_date
@@ -587,7 +592,7 @@ func get_all_buff_scenes() -> Array[Resource]:
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
-			if file_name.ends_with("Buff.scn") and not dir.current_is_dir() and file_name != "Card.scn":
+			if file_name.ends_with("Buff.tscn") and not dir.current_is_dir() and file_name != "Card.tscn":
 				var scene_path = "res://Scenes/" + file_name
 				var packed_scene = load(scene_path)
 				buff_scenes.append(packed_scene)
@@ -602,7 +607,7 @@ func get_all_card_effect_scenes() -> Array[Resource]:
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
-			if file_name.ends_with("CardEffect.scn") and not dir.current_is_dir() and file_name != "Card.scn":
+			if file_name.ends_with("CardEffect.tscn") and not dir.current_is_dir() and file_name != "Card.tscn":
 				var scene_path = "res://Scenes/" + file_name
 				var packed_scene = load(scene_path)
 				scenes.append(packed_scene)
@@ -618,7 +623,7 @@ func get_all_card_scenes() -> Array[Resource]:
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
-			if file_name.ends_with("Card.scn") and not dir.current_is_dir():
+			if file_name.ends_with("Card.tscn") and not dir.current_is_dir():
 				var scene_path = "res://Scenes/" + file_name
 				var packed_scene = load(scene_path)
 				scenes.append(packed_scene)

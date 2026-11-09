@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=3 uid="uid://4lkqq6s33ntv"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_mf00b"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/decrepit-mouse.png" id="2_oxrfq"]
+[ext_resource type="PackedScene" path="res://Scenes/EmptyfistCard.tscn" id="3_vaelp"]
+[ext_resource type="PackedScene" path="res://Scenes/BurstCard.tscn" id="4_ngbuq"]
+[ext_resource type="PackedScene" path="res://Scenes/BargainCard.tscn" id="5_l4u3l"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_mf00b")
+puzzle_date = "2025-08-11"
+previous_puzzle_scene = "uid://bpuuggyvpid7f"
+next_puzzle_scene = "uid://cduowjmbm358o"
+enemy_health = 9
+enemy_name = "Decrepit Mouse"
+enemy_icon_texture = ExtResource("2_oxrfq")
+player_health = 1
+player_energy = 4
+card_scenes = [ExtResource("3_vaelp"), ExtResource("4_ngbuq"), ExtResource("5_l4u3l"), ExtResource("4_ngbuq"), ExtResource("4_ngbuq")]

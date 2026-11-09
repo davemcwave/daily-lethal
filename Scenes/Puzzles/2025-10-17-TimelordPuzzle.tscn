@@ -1,0 +1,21 @@
+[gd_scene load_steps=8 format=3 uid="uid://qbc3rae3xigk"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_axqhe"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/time-lord.png" id="2_l78au"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="3_p0nhy"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="4_vtt34"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="5_ucerv"]
+[ext_resource type="PackedScene" path="res://Scenes/IgniteCard.tscn" id="6_g55af"]
+[ext_resource type="PackedScene" path="res://Scenes/VenomCard.tscn" id="7_u7vu4"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_axqhe")
+puzzle_date = "2025-10-17"
+previous_puzzle_scene = "uid://0bte0dm76h6p"
+next_puzzle_scene = "uid://cwojdg7f7gffi"
+enemy_health = 111
+enemy_name = "Time Lord"
+enemy_icon_texture = ExtResource("2_l78au")
+player_health = 1
+player_energy = 20
+card_scenes = [ExtResource("3_p0nhy"), ExtResource("4_vtt34"), ExtResource("5_ucerv"), ExtResource("6_g55af"), ExtResource("7_u7vu4")]

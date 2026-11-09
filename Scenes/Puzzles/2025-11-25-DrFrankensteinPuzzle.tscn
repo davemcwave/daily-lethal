@@ -1,0 +1,22 @@
+[gd_scene load_steps=8 format=3 uid="uid://c5y76547j0e6x"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_hopw0"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/drfrankenstein.png" id="2_djyvo"]
+[ext_resource type="PackedScene" path="res://Scenes/WoundCard.tscn" id="3_yqo5v"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="4_167ao"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="5_mlivu"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="6_7m6hb"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="7_t1biw"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_hopw0")
+puzzle_date = "2025-11-25"
+previous_puzzle_scene = "uid://ofr363xl2ub2"
+next_puzzle_scene = "uid://clg62ddi2lkn6"
+enemy_health = 18
+enemy_name = "Dr. Frankenstein"
+enemy_icon_texture = ExtResource("2_djyvo")
+player_health = 1
+player_energy = 6
+card_scenes = [ExtResource("3_yqo5v"), ExtResource("4_167ao"), ExtResource("5_mlivu"), ExtResource("6_7m6hb"), ExtResource("7_t1biw")]
+card_solution = [ExtResource("3_yqo5v"), ExtResource("6_7m6hb"), ExtResource("5_mlivu"), ExtResource("5_mlivu"), ExtResource("7_t1biw"), ExtResource("7_t1biw"), ExtResource("7_t1biw"), ExtResource("4_167ao")]

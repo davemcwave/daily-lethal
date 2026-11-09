@@ -1,0 +1,20 @@
+[gd_scene load_steps=9 format=3 uid="uid://b6rg1lvqa2ahx"]
+
+[ext_resource type="Script" path="res://Scripts/AllCardsTestPuzzle.gd" id="1_1d25g"]
+[ext_resource type="PackedScene" path="res://Scenes/GambitCard.tscn" id="2_8tolg"]
+[ext_resource type="PackedScene" path="res://Scenes/SlashCard.tscn" id="3_rx34u"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="4_e88xv"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="5_23wqj"]
+[ext_resource type="PackedScene" path="res://Scenes/FragmentCard.tscn" id="6_08s7a"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="7_xghww"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="8_4pls8"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_1d25g")
+puzzle_date = "2025-07-11"
+enemy_health = 50
+enemy_name = "Test"
+player_health = 20
+player_energy = 20
+card_scenes = [ExtResource("2_8tolg"), ExtResource("3_rx34u"), ExtResource("4_e88xv"), ExtResource("5_23wqj"), ExtResource("5_23wqj"), ExtResource("6_08s7a"), ExtResource("7_xghww")]
+card_solution = [ExtResource("8_4pls8")]

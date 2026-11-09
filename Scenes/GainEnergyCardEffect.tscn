@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://q4ox4mnghsl1"]
+
+[ext_resource type="Script" path="res://Scripts/GainEnergyCardEffects.gd" id="1_f14h1"]
+[ext_resource type="PackedScene" path="res://Scenes/GainEnergyCardEffectPanel.tscn" id="2_dtcbx"]
+
+[node name="GainEnergyCardEffect" type="Node2D"]
+script = ExtResource("1_f14h1")
+effect_name = "Gain Energy"
+effect_description = "Gain additional energy"
+effect_panel = ExtResource("2_dtcbx")

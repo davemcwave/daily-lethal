@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://c7samjlgaman5"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_0hksa"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/leeta-256x256.svg" id="2_eknc1"]
+[ext_resource type="PackedScene" path="res://Scenes/SnipeCard.tscn" id="3_au6d7"]
+[ext_resource type="PackedScene" path="res://Scenes/TargetCard.tscn" id="4_2hdy0"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="5_p3mcs"]
+[ext_resource type="PackedScene" path="res://Scenes/WasteCard.tscn" id="6_75eph"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="7_5pap0"]
+[ext_resource type="PackedScene" path="res://Scenes/TributeCard.tscn" id="8_elbob"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_0hksa")
+puzzle_date = "2026-02-10"
+previous_puzzle_scene = "uid://f0fwf5d2ouet"
+next_puzzle_scene = "uid://dhg3ikvqv8jlv"
+enemy_health = 12
+enemy_name = "Gunslinger"
+enemy_icon_texture = ExtResource("2_eknc1")
+player_health = 4
+player_energy = 3
+card_scenes = [ExtResource("3_au6d7"), ExtResource("4_2hdy0"), ExtResource("5_p3mcs"), ExtResource("6_75eph"), ExtResource("7_5pap0"), ExtResource("8_elbob"), ExtResource("8_elbob")]

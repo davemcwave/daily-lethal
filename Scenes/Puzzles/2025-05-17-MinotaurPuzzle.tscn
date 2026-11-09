@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://sxtqemm8qg4x"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_3c7in"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/minotaur.png" id="2_5s86c"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="3_fwrqq"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="4_gfdtn"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="5_rptg4"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="6_dbdt7"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="7_iyx51"]
+[ext_resource type="PackedScene" path="res://Scenes/BurstCard.tscn" id="8_0utmi"]
+
+[node name="MinotaurPuzzle" type="Node"]
+script = ExtResource("1_3c7in")
+puzzle_date = "2025-05-17"
+previous_puzzle_scene = "uid://qm8h6cmjnbb1"
+next_puzzle_scene = "uid://du1l35swhd5kt"
+enemy_health = 30
+enemy_name = "Minotaur"
+enemy_icon_texture = ExtResource("2_5s86c")
+player_energy = 8
+card_scenes = [ExtResource("3_fwrqq"), ExtResource("4_gfdtn"), ExtResource("5_rptg4"), ExtResource("6_dbdt7"), ExtResource("5_rptg4"), ExtResource("7_iyx51"), ExtResource("8_0utmi")]
+card_solution = [ExtResource("6_dbdt7"), ExtResource("3_fwrqq"), ExtResource("7_iyx51"), ExtResource("7_iyx51"), ExtResource("5_rptg4"), ExtResource("4_gfdtn"), ExtResource("5_rptg4"), ExtResource("8_0utmi")]

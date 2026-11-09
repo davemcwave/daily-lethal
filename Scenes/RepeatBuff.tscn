@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqnla4cphkbp6"]
+
+[ext_resource type="Script" path="res://Scripts/RepeatBuff.gd" id="1_g2lso"]
+
+[node name="RepeatBuff" type="Node2D"]
+script = ExtResource("1_g2lso")
+buff_name = "Repeat"
+buff_description = "Plays the next card twice"
+color = Color(0.54902, 0, 0.54902, 1)
+activated_once_per_turn = true

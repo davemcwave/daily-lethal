@@ -77,7 +77,7 @@ func get_puzzles() -> Array:
 	while true:
 		var file = dir.get_next()
 		if file == "": break
-		if file.ends_with(".scn"):
+		if file.ends_with(".tscn"):
 			var scene_path = "res://Scenes/Puzzles/" + file
 			var scene = load(scene_path)			
 			if scene == null:
@@ -155,7 +155,7 @@ func resolve_puzzle(card_play_delay_seconds: float = 1.25) -> void:
 		write_result_to_file('%s:  FAIL'  % puzzle.scene_file_path)
 	
 	await get_tree().create_timer(0.25).timeout
-	get_tree().change_scene_to_file("res://Scenes/Scene0Desktop.scn")
+	get_tree().change_scene_to_file("res://Scenes/Scene0Desktop.tscn")
 	
 func _wait_for_cards_choose_area(cards_choose_area: CardsChooseArea) -> void:
 	var attempts := 0

@@ -1,0 +1,21 @@
+[gd_scene load_steps=8 format=3 uid="uid://cwojdg7f7gffi"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_h6gbc"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/charger.png" id="2_8pbr0"]
+[ext_resource type="PackedScene" path="res://Scenes/InspirationCard.tscn" id="3_uecik"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="4_rww2p"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="5_7nxp0"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="6_i6k7l"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="7_06sed"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_h6gbc")
+puzzle_date = "2025-10-20"
+previous_puzzle_scene = "uid://qbc3rae3xigk"
+next_puzzle_scene = "uid://dflkwoa8gq586"
+enemy_health = 23
+enemy_name = "Charger"
+enemy_icon_texture = ExtResource("2_8pbr0")
+player_health = 1
+player_energy = 3
+card_scenes = [ExtResource("3_uecik"), ExtResource("4_rww2p"), ExtResource("5_7nxp0"), ExtResource("6_i6k7l"), ExtResource("6_i6k7l"), ExtResource("3_uecik"), ExtResource("7_06sed")]

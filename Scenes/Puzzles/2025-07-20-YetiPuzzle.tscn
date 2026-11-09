@@ -1,0 +1,20 @@
+[gd_scene load_steps=8 format=3 uid="uid://ctuh1r8jy2elb"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_8fkpm"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/yeti.png" id="2_dn181"]
+[ext_resource type="PackedScene" path="res://Scenes/LungeCard.tscn" id="3_wnvmh"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="4_sfunp"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="5_ruksu"]
+[ext_resource type="PackedScene" path="res://Scenes/TargetCard.tscn" id="6_14k8o"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="7_jjbc1"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_8fkpm")
+puzzle_date = "2025-07-20"
+previous_puzzle_scene = "uid://blyey2xb0osjt"
+next_puzzle_scene = "uid://b45ciqphte2cr"
+enemy_health = 17
+enemy_name = "Yeti"
+enemy_icon_texture = ExtResource("2_dn181")
+player_energy = 7
+card_scenes = [ExtResource("3_wnvmh"), ExtResource("4_sfunp"), ExtResource("5_ruksu"), ExtResource("6_14k8o"), ExtResource("7_jjbc1")]

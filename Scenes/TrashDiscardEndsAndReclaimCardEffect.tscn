@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://xembml0ufcby"]
+
+[ext_resource type="Script" path="res://Scripts/TrashDiscardEndsAndReclaimCardEffect.gd" id="1_2imo3"]
+
+[node name="TrashDiscardEndsAndReclaimCardEffect" type="Node2D"]
+script = ExtResource("1_2imo3")

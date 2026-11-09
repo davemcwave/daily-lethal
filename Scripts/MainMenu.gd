@@ -29,13 +29,13 @@ func _on_button_mouse_exited(button: Button) -> void:
 func _on_tutorial_button_pressed():
 	$"/root/Background".set_show_tutorial(true)
 	$"/root/Background".set_from_story_view(true)
-	$"/root/Background".set_puzzle_scene("res://Scenes/Puzzles/Tutorial-Puzzle.scn")
-	get_tree().change_scene_to_file("res://Scenes/Scene0Desktop.scn")
+	$"/root/Background".set_puzzle_scene("res://Scenes/Puzzles/Tutorial-Puzzle.tscn")
+	get_tree().change_scene_to_file("res://Scenes/Scene0Desktop.tscn")
 
 
 func _on_play_button_pressed():
 	$"/root/Background".set_show_tutorial(false)
-	get_tree().change_scene_to_file("res://Scenes/StoryView.scn")
+	get_tree().change_scene_to_file("res://Scenes/StoryView.tscn")
 
 
 func _on_discord_button_pressed():

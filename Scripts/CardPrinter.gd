@@ -1,7 +1,7 @@
 extends Node
 class_name CardPrinter
 
-## Prints all cards and their effects from Scenes/*Card.scn files
+## Prints all cards and their effects from Scenes/*Card.tscn files
 ## Usage: Add this node to your scene and call print_all_cards() or run in _ready()
 
 @export var print_on_ready: bool = false
@@ -39,8 +39,8 @@ func find_all_card_files() -> Array[String]:
 	var file_name = dir.get_next()
 
 	while file_name != "":
-		# Match files that end with "Card.scn"
-		if not dir.current_is_dir() and file_name.ends_with("Card.scn"):
+		# Match files that end with "Card.tscn"
+		if not dir.current_is_dir() and file_name.ends_with("Card.tscn"):
 			card_files.append(cards_directory + file_name)
 
 		file_name = dir.get_next()

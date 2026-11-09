@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7h5fhqwqcx6x"]
+
+[ext_resource type="Script" path="res://Scripts/BuffSearcher.gd" id="1_2nga2"]
+
+[node name="BuffSearcher" type="Node"]
+script = ExtResource("1_2nga2")

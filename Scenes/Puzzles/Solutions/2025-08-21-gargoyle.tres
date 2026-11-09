@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="CardSolutionResource" load_steps=8 format=3 uid="uid://yia6652g8ymh"]
 
-[ext_resource type="PackedScene" uid="uid://bwjb01igdh18r" path="res://Scenes/EchoCard.scn" id="1_dp6nr"]
-[ext_resource type="PackedScene" uid="uid://cyaoopurvntvh" path="res://Scenes/HauntCard.scn" id="2_qogmc"]
-[ext_resource type="PackedScene" uid="uid://brwf4mv0a45c0" path="res://Scenes/ReviveCard.scn" id="3_t7tbm"]
-[ext_resource type="PackedScene" uid="uid://bidrui0yghql8" path="res://Scenes/WoundCard.scn" id="4_vuokw"]
-[ext_resource type="PackedScene" uid="uid://dl4l48y3acorh" path="res://Scenes/ReboundCard.scn" id="5_5cqv8"]
-[ext_resource type="PackedScene" uid="uid://bahsukhwsj148" path="res://Scenes/EmptyfistCard.scn" id="6_5i1l8"]
+[ext_resource type="PackedScene" uid="uid://bwjb01igdh18r" path="res://Scenes/EchoCard.tscn" id="1_dp6nr"]
+[ext_resource type="PackedScene" uid="uid://cyaoopurvntvh" path="res://Scenes/HauntCard.tscn" id="2_qogmc"]
+[ext_resource type="PackedScene" uid="uid://brwf4mv0a45c0" path="res://Scenes/ReviveCard.tscn" id="3_t7tbm"]
+[ext_resource type="PackedScene" uid="uid://bidrui0yghql8" path="res://Scenes/WoundCard.tscn" id="4_vuokw"]
+[ext_resource type="PackedScene" uid="uid://dl4l48y3acorh" path="res://Scenes/ReboundCard.tscn" id="5_5cqv8"]
+[ext_resource type="PackedScene" uid="uid://bahsukhwsj148" path="res://Scenes/EmptyfistCard.tscn" id="6_5i1l8"]
 [ext_resource type="Script" uid="uid://cugpgmdtsumrl" path="res://Scripts/CardSolutionResource.gd" id="7_comv6"]
 
 [resource]

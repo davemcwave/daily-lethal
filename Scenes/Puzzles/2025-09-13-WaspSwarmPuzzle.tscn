@@ -1,0 +1,20 @@
+[gd_scene load_steps=7 format=3 uid="uid://cqn3vfp1amox7"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_w2xjv"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/wasps.png" id="2_hqj4x"]
+[ext_resource type="PackedScene" path="res://Scenes/VenomCard.tscn" id="3_sy00n"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="4_2qnm3"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="5_vy47i"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="6_ndrx6"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_w2xjv")
+puzzle_date = "2025-09-13"
+previous_puzzle_scene = "uid://4xuqveytcyvp"
+next_puzzle_scene = "uid://cqtyke51qpi32"
+enemy_health = 90
+enemy_name = "Wasp Swarm"
+enemy_icon_texture = ExtResource("2_hqj4x")
+player_health = 1
+player_energy = 11
+card_scenes = [ExtResource("3_sy00n"), ExtResource("4_2qnm3"), ExtResource("4_2qnm3"), ExtResource("4_2qnm3"), ExtResource("4_2qnm3"), ExtResource("5_vy47i"), ExtResource("6_ndrx6")]

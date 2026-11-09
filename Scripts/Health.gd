@@ -18,7 +18,7 @@ func _ready():
 	update_text()
 
 func create_damage_label(hurt_amount: int, damage_message: String = "") -> void:
-	var damage_label: RichTextLabel = load("res://Scenes/DamageLabel.scn").instantiate()
+	var damage_label: RichTextLabel = load("res://Scenes/DamageLabel.tscn").instantiate()
 	damage_label.set_damage(hurt_amount, damage_message)
 	scene.add_child(damage_label)
 	damage_label.global_position = global_position

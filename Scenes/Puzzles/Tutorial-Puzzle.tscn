@@ -1,0 +1,18 @@
+[gd_scene load_steps=6 format=3 uid="uid://oy4d20l6x2or"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_r4h1n"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/target-dummy.png" id="2_r7kcu"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="3_tgl3f"]
+[ext_resource type="PackedScene" path="res://Scenes/SlashCard.tscn" id="4_8gx2h"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="5_grbps"]
+
+[node name="Puzzle" type="Node"]
+script = ExtResource("1_r4h1n")
+next_puzzle_scene = "uid://cdweegj8o7m48"
+enemy_health = 6
+enemy_name = "Tutorial Dummy"
+enemy_icon_texture = ExtResource("2_r7kcu")
+player_energy = 7
+card_scenes = [ExtResource("3_tgl3f"), ExtResource("4_8gx2h"), ExtResource("5_grbps")]
+initial_draw_amount = 3
+dialogue_first = "Enemy"

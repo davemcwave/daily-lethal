@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://b8ajuu7rr1ccc"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_qctnn"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/flame-imp.png" id="2_cnfp3"]
+[ext_resource type="PackedScene" path="res://Scenes/LungeCard.tscn" id="3_k8tac"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="4_kyg4l"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="5_hjunn"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="6_l0820"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="7_hmqx4"]
+[ext_resource type="PackedScene" path="res://Scenes/BargainCard.tscn" id="8_mklhx"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_qctnn")
+puzzle_date = "2025-05-25"
+previous_puzzle_scene = "uid://du1l35swhd5kt"
+next_puzzle_scene = "uid://qcbls3dqbu7s"
+enemy_health = 12
+enemy_name = "Flame Imp"
+enemy_icon_texture = ExtResource("2_cnfp3")
+player_energy = 3
+card_scenes = [ExtResource("3_k8tac"), ExtResource("4_kyg4l"), ExtResource("5_hjunn"), ExtResource("6_l0820"), ExtResource("7_hmqx4"), ExtResource("8_mklhx"), ExtResource("3_k8tac")]
+card_solution = [ExtResource("8_mklhx"), ExtResource("6_l0820"), ExtResource("7_hmqx4"), ExtResource("3_k8tac"), ExtResource("4_kyg4l"), ExtResource("7_hmqx4"), ExtResource("3_k8tac"), ExtResource("5_hjunn"), ExtResource("3_k8tac"), ExtResource("3_k8tac"), ExtResource("3_k8tac"), ExtResource("3_k8tac")]

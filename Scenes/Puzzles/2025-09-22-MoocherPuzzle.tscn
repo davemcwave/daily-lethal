@@ -1,0 +1,21 @@
+[gd_scene load_steps=8 format=3 uid="uid://dt44o4jtj1br3"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_a43e2"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/moocher.png" id="2_c35rv"]
+[ext_resource type="PackedScene" path="res://Scenes/BargainCard.tscn" id="3_mjbs7"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="4_vbmfa"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="5_p8yin"]
+[ext_resource type="PackedScene" path="res://Scenes/BurstCard.tscn" id="6_vb56k"]
+[ext_resource type="PackedScene" path="res://Scenes/ScrapCard.tscn" id="7_nf7n1"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_a43e2")
+puzzle_date = "2025-09-22"
+previous_puzzle_scene = "uid://bfxjwutyattww"
+next_puzzle_scene = "uid://elwudqt6mvud"
+enemy_health = 40
+enemy_name = "Moocher"
+enemy_icon_texture = ExtResource("2_c35rv")
+player_health = 1
+player_energy = 1
+card_scenes = [ExtResource("3_mjbs7"), ExtResource("4_vbmfa"), ExtResource("5_p8yin"), ExtResource("6_vb56k"), ExtResource("7_nf7n1")]

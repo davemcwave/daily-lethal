@@ -1,0 +1,24 @@
+[gd_scene load_steps=10 format=3 uid="uid://coc02rxb3ycg4"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_a5swb"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/gelatinous-cube.png" id="2_f5hcl"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="3_1ggfe"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="4_tgcrl"]
+[ext_resource type="PackedScene" path="res://Scenes/GiftCard.tscn" id="5_v65uy"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="6_c36m0"]
+[ext_resource type="PackedScene" path="res://Scenes/BurstCard.tscn" id="7_lfr54"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="8_wm2lh"]
+[ext_resource type="PackedScene" path="res://Scenes/SurgeCard.tscn" id="9_fl8fj"]
+
+[node name="Puzzle" type="Node"]
+script = ExtResource("1_a5swb")
+puzzle_date = "2025-05-10"
+previous_puzzle_scene = "uid://cp3kiv3r56uxj"
+next_puzzle_scene = "uid://b4ww4gmxjfgtv"
+enemy_health = 21
+enemy_name = "Gelatinous Cube"
+enemy_icon_texture = ExtResource("2_f5hcl")
+eye_1_position = Vector2(425, 110)
+eye_2_position = Vector2(452, 112)
+card_scenes = [ExtResource("3_1ggfe"), ExtResource("4_tgcrl"), ExtResource("5_v65uy"), ExtResource("6_c36m0"), ExtResource("7_lfr54"), ExtResource("8_wm2lh"), ExtResource("9_fl8fj")]
+card_solution = [ExtResource("8_wm2lh"), ExtResource("9_fl8fj"), ExtResource("9_fl8fj"), ExtResource("4_tgcrl"), ExtResource("5_v65uy"), ExtResource("6_c36m0"), ExtResource("3_1ggfe"), ExtResource("7_lfr54")]

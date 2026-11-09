@@ -1,0 +1,20 @@
+[gd_scene load_steps=8 format=3 uid="uid://cqowg7osqaegc"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_8e5n8"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/ghost-pirate.png" id="2_ja42i"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="3_ebydp"]
+[ext_resource type="PackedScene" path="res://Scenes/LungeCard.tscn" id="4_3xe0n"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="5_owj72"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="6_ffok0"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="7_oekgb"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_8e5n8")
+puzzle_date = "2025-11-11"
+previous_puzzle_scene = "uid://15fjibfujpjl"
+next_puzzle_scene = "uid://ctk5sxxkjeue6"
+enemy_health = 50
+enemy_name = "Ghost Pirate"
+enemy_icon_texture = ExtResource("2_ja42i")
+player_energy = 11
+card_scenes = [ExtResource("3_ebydp"), ExtResource("3_ebydp"), ExtResource("4_3xe0n"), ExtResource("5_owj72"), ExtResource("3_ebydp"), ExtResource("6_ffok0"), ExtResource("7_oekgb")]

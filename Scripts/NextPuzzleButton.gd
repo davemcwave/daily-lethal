@@ -38,7 +38,7 @@ func is_web_platform() -> bool:
 func load_puzzle_locally(puzzle_scene_path: String) -> void:
 	var background: Background = get_tree().get_root().get_node("/root/Background")
 	background.set_puzzle_scene(puzzle_scene_path)
-	var main_scene_path := "res://Scenes/Scene0.scn" if OS.has_feature("mobile") else "res://Scenes/Scene0Desktop.scn"
+	var main_scene_path := "res://Scenes/Scene0.tscn" if OS.has_feature("mobile") else "res://Scenes/Scene0Desktop.tscn"
 	get_tree().change_scene_to_file(main_scene_path)
 
 func open_window_in_same_tab(url: String) -> void:

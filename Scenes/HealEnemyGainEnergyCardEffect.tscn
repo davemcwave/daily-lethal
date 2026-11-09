@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://gys536o4ldym"]
+
+[ext_resource type="Script" path="res://Scripts/HealEnemyGainEnergyCardEffect.gd" id="1_7t1f5"]
+
+[node name="HealEnemyGainEnergyCardEffect" type="Node2D"]
+script = ExtResource("1_7t1f5")
+effect_name = "Heal Enemy Gain Energy"
+effect_description = "Heal enemy to full health, gain energy equal to amount healed"

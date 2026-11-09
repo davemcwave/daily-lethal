@@ -1,0 +1,20 @@
+[gd_scene load_steps=9 format=3 uid="uid://ch70ipjtdvs2b"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_gwfjq"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/radiant-slug.png" id="2_2wcgw"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="3_kjek1"]
+[ext_resource type="PackedScene" path="res://Scenes/SpearCard.tscn" id="4_j88sq"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="5_jxevb"]
+[ext_resource type="PackedScene" path="res://Scenes/LungeCard.tscn" id="6_6nx5u"]
+[ext_resource type="PackedScene" path="res://Scenes/BargainCard.tscn" id="7_rqhnk"]
+[ext_resource type="PackedScene" path="res://Scenes/CapacitorCard.tscn" id="8_vjsqy"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_gwfjq")
+puzzle_date = "2026-01-05"
+previous_puzzle_scene = "uid://d1m18018ij06j"
+next_puzzle_scene = "uid://do7nth5ef41js"
+enemy_name = "Radiant Slug"
+enemy_icon_texture = ExtResource("2_2wcgw")
+player_health = 1
+card_scenes = [ExtResource("3_kjek1"), ExtResource("4_j88sq"), ExtResource("5_jxevb"), ExtResource("6_6nx5u"), ExtResource("7_rqhnk"), ExtResource("8_vjsqy")]

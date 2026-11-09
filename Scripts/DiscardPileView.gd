@@ -34,7 +34,7 @@ func remove_all_discard_label() -> void:
 				card_child.queue_free()
 
 func add_position_label_to_card(card: Card, text: String) -> void:
-	var discard_pile_view_panel_text = load("res://Scenes/DiscardPileViewText.scn").instantiate()
+	var discard_pile_view_panel_text = load("res://Scenes/DiscardPileViewText.tscn").instantiate()
 	discard_pile_view_panel_text.set_text(text)
 	card.add_child(discard_pile_view_panel_text)
 	discard_pile_view_panel_text.set_position(Vector2(3.0, -5.0))
@@ -43,7 +43,7 @@ func add_bottom_of_discard_label() -> void:
 	if grid_container.get_child_count() <= 0:
 		return
 		
-	var discard_pile_view_panel_text = load("res://Scenes/DiscardPileViewText.scn").instantiate()
+	var discard_pile_view_panel_text = load("res://Scenes/DiscardPileViewText.tscn").instantiate()
 	discard_pile_view_panel_text.set_text("Bottom of Discard")
 	var card_bottom_of_discard = grid_container.get_child(0)
 	card_bottom_of_discard.add_child(discard_pile_view_panel_text)
@@ -53,7 +53,7 @@ func add_top_of_discard_label() -> void:
 	if grid_container.get_child_count() <= 0:
 		return
 		
-	var discard_pile_view_panel_text = load("res://Scenes/DiscardPileViewText.scn").instantiate()
+	var discard_pile_view_panel_text = load("res://Scenes/DiscardPileViewText.tscn").instantiate()
 	discard_pile_view_panel_text.set_text("Top of Discard")
 	var card_top_of_discard = grid_container.get_children().back()
 	card_top_of_discard.add_child(discard_pile_view_panel_text)

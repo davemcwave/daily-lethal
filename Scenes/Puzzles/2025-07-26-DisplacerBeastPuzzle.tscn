@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://colr7y27i7j63"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_atu72"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/displacer.png" id="2_vg70m"]
+[ext_resource type="PackedScene" path="res://Scenes/TargetCard.tscn" id="3_7h8un"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="4_q80rp"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="5_bbft5"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="6_r5fd5"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="7_okld2"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="8_mnxyn"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_atu72")
+puzzle_date = "2025-07-26"
+previous_puzzle_scene = "uid://bli5eefphcq1s"
+next_puzzle_scene = "uid://beihlgj6o6d5i"
+enemy_health = 37
+enemy_name = "Displacer Beast"
+enemy_icon_texture = ExtResource("2_vg70m")
+player_health = 1
+player_energy = 15
+card_scenes = [ExtResource("3_7h8un"), ExtResource("4_q80rp"), ExtResource("5_bbft5"), ExtResource("6_r5fd5"), ExtResource("7_okld2"), ExtResource("8_mnxyn"), ExtResource("8_mnxyn")]

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://tt8pfi4e6x6s"]
+
+[ext_resource type="Script" path="res://Scripts/SharpenBasedOnCardsPlayedCardEffect.gd" id="1_2x4ka"]
+
+[node name="SharpenBasedOnCardsPlayedCardEffect" type="Node2D"]
+script = ExtResource("1_2x4ka")
+buff_scene = "uid://bwpfxrgdwe5gw"
+buff_auto_target = "Player"
+effect_name = "Sharpen Based On Cards Played"
+effect_description = "Apply Sharp count equal to number of cards played"

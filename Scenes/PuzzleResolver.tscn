@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvg4jr3epxwq5"]
+
+[ext_resource type="Script" path="res://Scripts/PuzzleResolver.gd" id="1_0hosk"]
+
+[node name="PuzzleResolver" type="Node"]
+script = ExtResource("1_0hosk")
+time_scale_speed = 10.0

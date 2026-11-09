@@ -1,0 +1,20 @@
+[gd_scene load_steps=8 format=3 uid="uid://8k266qpd2isj"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_arhp5"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/viper.png" id="2_rtf2k"]
+[ext_resource type="PackedScene" path="res://Scenes/FangCard.tscn" id="3_yuc1d"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="4_wcie3"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="5_032g0"]
+[ext_resource type="PackedScene" path="res://Scenes/InspirationCard.tscn" id="6_12p6u"]
+[ext_resource type="PackedScene" path="res://Scenes/WoundCard.tscn" id="7_tmscg"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_arhp5")
+puzzle_date = "2026-01-26"
+previous_puzzle_scene = "uid://ic64m5nabha"
+next_puzzle_scene = "uid://cj207rkfxv5rr"
+enemy_health = 28
+enemy_name = "Viper"
+enemy_icon_texture = ExtResource("2_rtf2k")
+player_energy = 1
+card_scenes = [ExtResource("3_yuc1d"), ExtResource("3_yuc1d"), ExtResource("4_wcie3"), ExtResource("5_032g0"), ExtResource("6_12p6u"), ExtResource("7_tmscg"), ExtResource("7_tmscg")]

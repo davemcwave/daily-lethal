@@ -1,0 +1,21 @@
+[gd_scene load_steps=9 format=3 uid="uid://butsnj0uttmmq"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_m1y5f"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/assassin.png" id="2_2y16f"]
+[ext_resource type="PackedScene" path="res://Scenes/BurstCard.tscn" id="3_7fd4k"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="4_n28wi"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="5_wn8a4"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="6_c0ytx"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="7_b7j1j"]
+[ext_resource type="PackedScene" path="res://Scenes/TargetCard.tscn" id="8_inr0m"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_m1y5f")
+puzzle_date = "2025-09-03"
+previous_puzzle_scene = "uid://b87ubb1n8av3g"
+next_puzzle_scene = "uid://dk43dreai6xq"
+enemy_health = 30
+enemy_name = "Assassin"
+enemy_icon_texture = ExtResource("2_2y16f")
+player_health = 1
+card_scenes = [ExtResource("3_7fd4k"), ExtResource("4_n28wi"), ExtResource("4_n28wi"), ExtResource("5_wn8a4"), ExtResource("6_c0ytx"), ExtResource("7_b7j1j"), ExtResource("8_inr0m")]

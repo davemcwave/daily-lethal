@@ -1,0 +1,20 @@
+[gd_scene load_steps=7 format=3 uid="uid://ddqsq6mj20b47"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_atl1w"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/car-battery.png" id="2_02kxy"]
+[ext_resource type="PackedScene" path="res://Scenes/IgniteCard.tscn" id="3_vy12v"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="4_j7rxl"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="5_vdkh1"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="6_khat1"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_atl1w")
+puzzle_date = "2025-11-04"
+previous_puzzle_scene = "uid://46vyrf6e8frw"
+next_puzzle_scene = "uid://bkrkew68ssshq"
+enemy_health = 80
+enemy_name = "Car Battery"
+enemy_icon_texture = ExtResource("2_02kxy")
+player_health = 8
+player_energy = 10
+card_scenes = [ExtResource("3_vy12v"), ExtResource("4_j7rxl"), ExtResource("5_vdkh1"), ExtResource("6_khat1"), ExtResource("5_vdkh1"), ExtResource("4_j7rxl"), ExtResource("3_vy12v")]

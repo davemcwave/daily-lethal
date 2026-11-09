@@ -11,7 +11,7 @@ func _ready():
 	while true:
 		var file = dir.get_next()
 		if file == "": break
-		if file.ends_with(".scn"):
+		if file.ends_with(".tscn"):
 			var scene_path = "res://Scenes/Puzzles/" + file
 			var scene = load(scene_path)
 			if scene == null:

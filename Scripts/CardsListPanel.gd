@@ -14,7 +14,7 @@ func get_card_scenes() -> Array:
 	while true:
 		var file = dir.get_next()
 		if file == "": break
-		if file.ends_with("Card.scn"):
+		if file.ends_with("Card.tscn"):
 			var scene_path = "res://Scenes/" + file
 			#var scene = load(scene_path)
 			card_scenes.append(scene_path)
@@ -31,7 +31,7 @@ func populate_card_list() -> void:
 			continue
 			
 		var card: Card = load(card_scene).instantiate()
-		var card_select_button: CardSelectButton = load("res://Scenes/CardSelectButton.scn").instantiate()
+		var card_select_button: CardSelectButton = load("res://Scenes/CardSelectButton.tscn").instantiate()
 		card_select_button.set_card(card)
 		card_list_container.add_child(card_select_button)
 		card_select_button.connect('pressed', _on_card_select_button_pressed.bind(card_select_button))

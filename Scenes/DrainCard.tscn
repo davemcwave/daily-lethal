@@ -1,0 +1,220 @@
+[gd_scene load_steps=15 format=3 uid="uid://dc3rxr48ihy7p"]
+
+[ext_resource type="Script" path="res://Scripts/DrainCard.gd" id="1_kxwml"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Medium.ttf" id="2_uvyak"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Bold.ttf" id="3_8400y"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/bolt-white.png" id="4_k10io"]
+[ext_resource type="PackedScene" path="res://Scenes/GradientBackground.tscn" id="5_ru85o"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/fangs.png" id="6_x002e"]
+[ext_resource type="PackedScene" path="res://Scenes/HealDamageCardEffect.tscn" id="7_ajb6w"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qfa7s"]
+bg_color = Color(0.433266, 0.433266, 0.433266, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5uxdr"]
+bg_color = Color(0.169245, 0.169245, 0.169245, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vby6p"]
+bg_color = Color(0.548094, 0.00210453, 0.154114, 1)
+border_width_left = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_5e6bo"]
+offsets = PackedFloat32Array(0.18, 0.915423)
+colors = PackedColorArray(0.54902, 0.00392157, 0.152941, 1, 0, 0.55, 0.0641667, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_oyka0"]
+gradient = SubResource("Gradient_5e6bo")
+fill_from = Vector2(0, 0.5)
+fill_to = Vector2(1, 0.5)
+metadata/_snap_enabled = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0631c"]
+bg_color = Color(0.169245, 0.169245, 0.169245, 1)
+border_width_left = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5uxdr"]
+size = Vector2(110, 149)
+
+[node name="DrainCard" type="Panel" node_paths=PackedStringArray("card_effects")]
+custom_minimum_size = Vector2(120, 160)
+offset_left = 8.0
+offset_top = 456.0
+offset_right = 128.0
+offset_bottom = 616.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qfa7s")
+script = ExtResource("1_kxwml")
+card_effects = [NodePath("HealDamageCardEffect")]
+card_name = "Drain"
+energy_cost = 2
+card_description = "Deal 1 damage. Gain HP equal to the damage dealt."
+
+[node name="TitlePanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 7.0
+offset_top = 8.0
+offset_right = -7.0
+offset_bottom = 32.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5uxdr")
+
+[node name="Title" type="RichTextLabel" parent="TitlePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("2_uvyak")
+theme_override_fonts/bold_font = ExtResource("3_8400y")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[center]Slash[/center]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnergyPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 7.0
+offset_top = 8.0
+offset_right = -87.0
+offset_bottom = 32.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5uxdr")
+
+[node name="Energy" type="RichTextLabel" parent="EnergyPanel"]
+clip_contents = false
+layout_mode = 2
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 12.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("2_uvyak")
+theme_override_fonts/bold_font = ExtResource("3_8400y")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[center]2[/center]"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="EnergyPanel"]
+layout_mode = 2
+offset_left = 10.0
+offset_top = 7.0
+offset_right = 22.0
+offset_bottom = 19.0
+texture = ExtResource("4_k10io")
+expand_mode = 1
+
+[node name="IconPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 32.0
+offset_right = -7.0
+offset_bottom = -56.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vby6p")
+
+[node name="GradientBackground" parent="IconPanel" instance=ExtResource("5_ru85o")]
+layout_mode = 1
+offset_left = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+texture = SubResource("GradientTexture2D_oyka0")
+
+[node name="Icon" type="TextureRect" parent="IconPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -24.0
+offset_right = 25.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_x002e")
+expand_mode = 1
+
+[node name="DescriptionPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 7.0
+offset_top = 104.0
+offset_right = -7.0
+offset_bottom = 152.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0631c")
+
+[node name="Title" type="RichTextLabel" parent="DescriptionPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("2_uvyak")
+theme_override_fonts/bold_font = ExtResource("3_8400y")
+theme_override_font_sizes/normal_font_size = 10
+bbcode_enabled = true
+text = "[center]Deal 1 damage. Lose 1 health. [/center]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(14, 14)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(45, 64.5)
+shape = SubResource("RectangleShape2D_5uxdr")
+
+[node name="HealDamageCardEffect" parent="." instance=ExtResource("7_ajb6w")]
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

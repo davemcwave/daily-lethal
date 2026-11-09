@@ -1,0 +1,85 @@
+[gd_scene load_steps=8 format=3 uid="uid://c513pw5e2bup1"]
+
+[ext_resource type="Script" path="res://Scripts/PlayPuzzleButton.gd" id="1_q4e16"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/ogre.png" id="2_pptwb"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/skull-face.png" id="3_m4u0k"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/circle.svg" id="4_gb2n6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a471e"]
+bg_color = Color(0.120418, 0.120418, 0.120418, 0.658824)
+corner_radius_top_left = 45
+corner_radius_top_right = 45
+corner_radius_bottom_right = 45
+corner_radius_bottom_left = 45
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ynudm"]
+bg_color = Color(0.61339, 0.61339, 0.61339, 0.658824)
+corner_radius_top_left = 45
+corner_radius_top_right = 45
+corner_radius_bottom_right = 45
+corner_radius_bottom_left = 45
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b7rke"]
+bg_color = Color(0.6, 0.6, 0.6, 0.603922)
+corner_radius_top_left = 45
+corner_radius_top_right = 45
+corner_radius_bottom_right = 45
+corner_radius_bottom_left = 45
+
+[node name="PlayPuzzleButton" type="Button"]
+offset_left = 136.0
+offset_top = 384.0
+offset_right = 224.0
+offset_bottom = 472.0
+pivot_offset = Vector2(44, 44)
+theme_override_styles/hover = SubResource("StyleBoxFlat_a471e")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ynudm")
+theme_override_styles/normal = SubResource("StyleBoxFlat_b7rke")
+script = ExtResource("1_q4e16")
+puzzle_scene = "uid://cdweegj8o7m48"
+
+[node name="EnemyIcon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_pptwb")
+expand_mode = 1
+
+[node name="DifficultyContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -9.0
+offset_right = 1.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = -1
+alignment = 1
+
+[node name="DifficultyIcon" type="TextureRect" parent="DifficultyContainer"]
+self_modulate = Color(0.829963, 0.234691, 0.248875, 1)
+custom_minimum_size = Vector2(12.855, 2.29)
+layout_mode = 2
+texture = ExtResource("3_m4u0k")
+expand_mode = 1
+
+[node name="StatusBG" type="TextureRect" parent="DifficultyContainer/DifficultyIcon"]
+self_modulate = Color(0.772882, 0.288569, 0.296433, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_gb2n6")
+expand_mode = 1
+metadata/_edit_lock_ = true

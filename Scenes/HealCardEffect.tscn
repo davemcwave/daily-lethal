@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxossqdd7cskj"]
+
+[ext_resource type="Script" path="res://Scripts/HealCardEffect.gd" id="1_cqvsv"]
+
+[node name="HealCardEffect" type="Node2D"]
+script = ExtResource("1_cqvsv")
+effect_name = "Heal"
+effect_description = "Increase player health amount"
+effect_short_description = "Heal 2 HP"
+effect_color = Color(0, 0.55, 0.0641667, 1)

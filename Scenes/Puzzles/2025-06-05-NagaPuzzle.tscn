@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://gblivu8v54sf"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_554ie"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/naga2.png" id="2_n4kuy"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="3_48q2g"]
+[ext_resource type="PackedScene" path="res://Scenes/BurstCard.tscn" id="4_ldlxf"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="5_0sbrv"]
+[ext_resource type="PackedScene" path="res://Scenes/ScrapCard.tscn" id="6_3qg1g"]
+[ext_resource type="PackedScene" path="res://Scenes/GiftCard.tscn" id="7_rdv8p"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="8_qpnim"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_554ie")
+puzzle_date = "2025-06-05"
+previous_puzzle_scene = "uid://12hohbjwbnav"
+next_puzzle_scene = "uid://dljpqovqutjqf"
+enemy_health = 35
+enemy_name = "Naga"
+enemy_icon_texture = ExtResource("2_n4kuy")
+player_energy = 7
+card_scenes = [ExtResource("3_48q2g"), ExtResource("4_ldlxf"), ExtResource("5_0sbrv"), ExtResource("6_3qg1g"), ExtResource("7_rdv8p"), ExtResource("8_qpnim")]
+card_solution = [ExtResource("6_3qg1g"), ExtResource("8_qpnim"), ExtResource("5_0sbrv"), ExtResource("3_48q2g"), ExtResource("5_0sbrv"), ExtResource("3_48q2g"), ExtResource("6_3qg1g"), ExtResource("8_qpnim"), ExtResource("5_0sbrv"), ExtResource("3_48q2g"), ExtResource("5_0sbrv"), ExtResource("3_48q2g"), ExtResource("6_3qg1g"), ExtResource("8_qpnim"), ExtResource("5_0sbrv"), ExtResource("3_48q2g"), ExtResource("5_0sbrv"), ExtResource("3_48q2g"), ExtResource("6_3qg1g"), ExtResource("8_qpnim"), ExtResource("3_48q2g"), ExtResource("6_3qg1g"), ExtResource("8_qpnim"), ExtResource("5_0sbrv"), ExtResource("4_ldlxf"), ExtResource("7_rdv8p"), ExtResource("4_ldlxf")]

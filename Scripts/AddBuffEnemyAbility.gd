@@ -1,7 +1,7 @@
 extends EnemyAbility
 class_name AddBuffEnemyAbility
 
-@export_file("*.scn") var buff_scene
+@export_file("*.tscn") var buff_scene
 @export var buff: Buff = null
 
 func activate() -> bool:

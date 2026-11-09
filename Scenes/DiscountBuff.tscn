@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bc0iug1u2ieku"]
+
+[ext_resource type="Script" path="res://Scripts/DiscountBuff.gd" id="1_i3bkf"]
+
+[node name="DiscountBuff" type="Node2D"]
+script = ExtResource("1_i3bkf")
+buff_name = "Discount"
+buff_description = "Reduces the cost of the next card played by 1"
+wait_for_activated_signal = false
+color = Color(0.145098, 0.396078, 1, 1)
+activated_once_per_turn = true

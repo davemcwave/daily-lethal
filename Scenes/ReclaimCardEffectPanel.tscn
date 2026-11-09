@@ -1,0 +1,144 @@
+[gd_scene load_steps=8 format=3 uid="uid://d2y35ujp4x2r5"]
+
+[ext_resource type="Script" path="res://Scripts/ReclaimCardEffectPanel.gd" id="1_fwcbl"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/circle.svg" id="2_rjkxn"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Medium.ttf" id="3_4m5mh"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Bold.ttf" id="4_l16rc"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Regular.ttf" id="5_m8cfi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ir7hb"]
+bg_color = Color(0.55, 0, 0.55, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ye4qw"]
+bg_color = Color(0.278431, 0.0588235, 0.278431, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="ReclaimCardEffectPanel" type="Panel"]
+custom_minimum_size = Vector2(200, 150)
+theme_override_styles/panel = SubResource("StyleBoxFlat_ir7hb")
+script = ExtResource("1_fwcbl")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+self_modulate = Color(0.878431, 0.0156863, 0.278431, 1)
+layout_mode = 1
+offset_left = 10.0
+offset_top = 12.0
+offset_right = 26.0
+offset_bottom = 28.0
+texture = ExtResource("2_rjkxn")
+expand_mode = 1
+
+[node name="Title" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 26.0
+offset_top = 12.0
+offset_right = -30.0
+offset_bottom = -118.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("3_4m5mh")
+theme_override_fonts/bold_font = ExtResource("4_l16rc")
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/normal_font_size = 14
+theme_override_font_sizes/bold_font_size = 14
+bbcode_enabled = true
+text = "[b]Reclaim[/b]"
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="CardAmountLabel" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(17, 16)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 49.0
+offset_right = -107.0
+offset_bottom = -78.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_4m5mh")
+theme_override_fonts/bold_font = ExtResource("4_l16rc")
+theme_override_font_sizes/bold_italics_font_size = 16
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+bbcode_enabled = true
+text = "[b][center]Card Amount[/center][/b]"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="CardAmountInput" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 93.0
+offset_top = 48.0
+offset_right = 147.375
+offset_bottom = 71.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_m8cfi")
+theme_override_font_sizes/font_size = 12
+text = "3"
+caret_blink = true
+
+[node name="BottomTopLabel" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(17, 16)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 80.0
+offset_right = -112.0
+offset_bottom = -46.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_4m5mh")
+theme_override_fonts/bold_font = ExtResource("4_l16rc")
+theme_override_font_sizes/bold_italics_font_size = 16
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+bbcode_enabled = true
+text = "[b][center]Discard Pile[/center][/b]"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="Top" type="Button" parent="."]
+layout_mode = 0
+offset_left = 93.0
+offset_top = 80.0
+offset_right = 141.0
+offset_bottom = 104.0
+theme_override_fonts/font = ExtResource("4_l16rc")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_ye4qw")
+text = "Top"
+
+[node name="Bottom" type="Button" parent="."]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 80.0
+offset_right = 196.0
+offset_bottom = 104.0
+theme_override_fonts/font = ExtResource("4_l16rc")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_ye4qw")
+disabled = true
+text = "Bottom"

@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="CardSolutionResource" load_steps=8 format=3]
 
-[ext_resource type="PackedScene" path="res://Scenes/InspirationCard.scn" id="1_kdmo4"]
-[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.scn" id="2_c44h3"]
-[ext_resource type="PackedScene" path="res://Scenes/EchoCard.scn" id="3_7hpoj"]
-[ext_resource type="PackedScene" path="res://Scenes/HauntCard.scn" id="4_7kr41"]
-[ext_resource type="PackedScene" path="res://Scenes/ShovelCard.scn" id="5_7pf3b"]
-[ext_resource type="PackedScene" path="res://Scenes/LungeCard.scn" id="6_ykgqk"]
+[ext_resource type="PackedScene" path="res://Scenes/InspirationCard.tscn" id="1_kdmo4"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="2_c44h3"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="3_7hpoj"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="4_7kr41"]
+[ext_resource type="PackedScene" path="res://Scenes/ShovelCard.tscn" id="5_7pf3b"]
+[ext_resource type="PackedScene" path="res://Scenes/LungeCard.tscn" id="6_ykgqk"]
 [ext_resource type="Script" path="res://Scripts/CardSolutionResource.gd" id="7_lppuc"]
 
 [resource]

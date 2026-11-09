@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cx8w4n2xwa30p"]
+
+[ext_resource type="Script" path="res://Scripts/ModifyAttackBuff.gd" id="1_d2unc"]
+
+[node name="ModifyAttackBuff" type="Node2D"]
+script = ExtResource("1_d2unc")
+activation_type = 1

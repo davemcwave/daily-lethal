@@ -1,0 +1,21 @@
+[gd_scene load_steps=8 format=3 uid="uid://dmlggn0o374nl"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_7os3c"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/leeta-256x256.svg" id="2_dmcf6"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="3_7maqp"]
+[ext_resource type="PackedScene" path="res://Scenes/FangCard.tscn" id="4_e4q32"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="5_yar0k"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="6_sh5ap"]
+[ext_resource type="PackedScene" path="res://Scenes/SharpenCard.tscn" id="7_xnbyq"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_7os3c")
+puzzle_date = "2026-02-13"
+previous_puzzle_scene = "uid://cp1f4oee2x11q"
+next_puzzle_scene = "uid://c17ny8rb5ppob"
+enemy_health = 24
+enemy_name = "Blacksmith"
+enemy_icon_texture = ExtResource("2_dmcf6")
+player_health = 2
+player_energy = 17
+card_scenes = [ExtResource("3_7maqp"), ExtResource("3_7maqp"), ExtResource("4_e4q32"), ExtResource("5_yar0k"), ExtResource("6_sh5ap"), ExtResource("7_xnbyq"), ExtResource("7_xnbyq")]

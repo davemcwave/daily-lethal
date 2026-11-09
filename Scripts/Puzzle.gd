@@ -3,8 +3,8 @@ class_name Puzzle
 
 @export_group("Puzzle")
 @export var puzzle_date: String = "2025-01-09"
-@export_file("*.scn") var previous_puzzle_scene
-@export_file("*.scn") var next_puzzle_scene
+@export_file("*.tscn") var previous_puzzle_scene
+@export_file("*.tscn") var next_puzzle_scene
 @export var randomize_cards: bool = false
 @export var random_card_count: int = 6
 @export_enum("Normal", "Nightmare") var difficulty: String = "Normal"

@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cuc4qxd5hb6u"]
+
+[ext_resource type="Script" path="res://Scripts/CriticalBuff.gd" id="1_6pw77"]
+
+[node name="CriticalBuff" type="Node2D"]
+script = ExtResource("1_6pw77")
+buff_name = "Critical"
+buff_description = "The next time you deal damage, double the damage amount. Will not activate if 0 damage is dealt."
+activation_type = 6
+wait_for_activated_signal = false
+color = Color(0.763655, 0.325858, 9.62615e-08, 1)
+activated_once_per_turn = true
+single_turn_repeat = true

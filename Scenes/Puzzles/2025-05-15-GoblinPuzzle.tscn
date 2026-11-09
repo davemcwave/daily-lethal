@@ -1,0 +1,21 @@
+[gd_scene load_steps=8 format=3 uid="uid://qm8h6cmjnbb1"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_dkb5s"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/goblin.png" id="2_njm12"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="3_epk2q"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="4_rx25c"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="5_2qdaw"]
+[ext_resource type="PackedScene" path="res://Scenes/BargainCard.tscn" id="6_kph3a"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="7_q47eu"]
+
+[node name="GoblinPuzzle" type="Node"]
+script = ExtResource("1_dkb5s")
+puzzle_date = "2025-05-15"
+previous_puzzle_scene = "uid://b4ww4gmxjfgtv"
+next_puzzle_scene = "uid://sxtqemm8qg4x"
+enemy_health = 18
+enemy_name = "Goblin"
+enemy_icon_texture = ExtResource("2_njm12")
+player_energy = 1
+card_scenes = [ExtResource("3_epk2q"), ExtResource("4_rx25c"), ExtResource("3_epk2q"), ExtResource("5_2qdaw"), ExtResource("6_kph3a"), ExtResource("7_q47eu")]
+card_solution = [ExtResource("6_kph3a"), ExtResource("3_epk2q"), ExtResource("3_epk2q"), ExtResource("7_q47eu"), ExtResource("5_2qdaw"), ExtResource("4_rx25c"), ExtResource("4_rx25c")]

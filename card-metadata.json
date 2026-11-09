@@ -2,61 +2,61 @@
   {
     "color": "#C35300",
     "energy": 2,
-    "file": "res://Scenes/AcuminateCard.scn",
+    "file": "res://Scenes/AcuminateCard.tscn",
     "name": "Acuminate"
   },
   {
     "color": "#8C008C",
     "energy": 1,
-    "file": "res://Scenes/ArmoryCard.scn",
+    "file": "res://Scenes/ArmoryCard.tscn",
     "name": "Armory"
   },
   {
     "color": "#8C0127",
     "energy": 1,
-    "file": "res://Scenes/BalanceCard.scn",
+    "file": "res://Scenes/BalanceCard.tscn",
     "name": "Balance"
   },
   {
     "color": "#002A8C",
     "energy": 1,
-    "file": "res://Scenes/BargainCard.scn",
+    "file": "res://Scenes/BargainCard.tscn",
     "name": "Bargain"
   },
   {
     "color": "#C35300",
     "energy": 3,
-    "file": "res://Scenes/BerserkCard.scn",
+    "file": "res://Scenes/BerserkCard.tscn",
     "name": "Berserk"
   },
   {
     "color": "#8C0127",
     "energy": 1,
-    "file": "res://Scenes/BurnoutCard.scn",
+    "file": "res://Scenes/BurnoutCard.tscn",
     "name": "Slash"
   },
   {
     "color": "#8C0127",
     "energy": 2,
-    "file": "res://Scenes/BurstCard.scn",
+    "file": "res://Scenes/BurstCard.tscn",
     "name": "Burst"
   },
   {
     "color": "#002A8C",
     "energy": 0,
-    "file": "res://Scenes/CapacitorCard.scn",
+    "file": "res://Scenes/CapacitorCard.tscn",
     "name": "Capacitor"
   },
   {
     "color": "#8C0127",
     "energy": 1,
-    "file": "res://Scenes/Card.scn",
+    "file": "res://Scenes/Card.tscn",
     "name": "Slash"
   },
   {
     "color": "#008C10",
     "energy": 0,
-    "file": "res://Scenes/CauterizeCard.scn",
+    "file": "res://Scenes/CauterizeCard.tscn",
     "name": "Cauterize",
     "colors": [
       "#008C10"
@@ -65,7 +65,7 @@
   {
     "color": "#8C008C",
     "energy": 0,
-    "file": "res://Scenes/CleanseCard.scn",
+    "file": "res://Scenes/CleanseCard.tscn",
     "name": "Cleanse",
     "colors": [
       "#8C008C"
@@ -74,7 +74,7 @@
   {
     "color": "#8C0127",
     "energy": 4,
-    "file": "res://Scenes/CleaveCard.scn",
+    "file": "res://Scenes/CleaveCard.tscn",
     "name": "Cleave",
     "colors": [
       "#8C0127"
@@ -83,19 +83,19 @@
   {
     "color": "#002A8C",
     "energy": 0,
-    "file": "res://Scenes/CooperationCard.scn",
+    "file": "res://Scenes/CooperationCard.tscn",
     "name": "Cooperate"
   },
   {
     "color": "#8C0127",
     "energy": 1,
-    "file": "res://Scenes/CorrodeCard.scn",
+    "file": "res://Scenes/CorrodeCard.tscn",
     "name": "Corrode"
   },
   {
     "color": "#8C0127",
     "energy": 2,
-    "file": "res://Scenes/DrainCard.scn",
+    "file": "res://Scenes/DrainCard.tscn",
     "name": "Drain",
     "colors": [
       "#8C0127",
@@ -105,19 +105,19 @@
   {
     "color": "#8C008C",
     "energy": 2,
-    "file": "res://Scenes/EchoCard.scn",
+    "file": "res://Scenes/EchoCard.tscn",
     "name": "Echo"
   },
   {
     "color": "#8C0127",
     "energy": 0,
-    "file": "res://Scenes/EmptyfistCard.scn",
+    "file": "res://Scenes/EmptyfistCard.tscn",
     "name": "Empty Fist"
   },
   {
     "color": "#002A8C",
     "energy": 1,
-    "file": "res://Scenes/ExchangeCard.scn",
+    "file": "res://Scenes/ExchangeCard.tscn",
     "name": "Exchange",
     "colors": [
       "#002A8C",
@@ -127,37 +127,37 @@
   {
     "color": "#8C0127",
     "energy": 0,
-    "file": "res://Scenes/FangCard.scn",
+    "file": "res://Scenes/FangCard.tscn",
     "name": "Fang"
   },
   {
     "color": "#8C0127",
     "energy": 1,
-    "file": "res://Scenes/FlurryCard.scn",
+    "file": "res://Scenes/FlurryCard.tscn",
     "name": "Flurry"
   },
   {
     "color": "#002A8C",
     "energy": 0,
-    "file": "res://Scenes/FocusCard.scn",
+    "file": "res://Scenes/FocusCard.tscn",
     "name": "Focus"
   },
   {
     "color": "#C35300",
     "energy": 1,
-    "file": "res://Scenes/ForgeCard.scn",
+    "file": "res://Scenes/ForgeCard.tscn",
     "name": "Forge"
   },
   {
     "color": "#C35300",
     "energy": 1,
-    "file": "res://Scenes/FragmentCard.scn",
+    "file": "res://Scenes/FragmentCard.tscn",
     "name": "Fragment"
   },
   {
     "color": "#C35300",
     "energy": 1,
-    "file": "res://Scenes/FrenzyCard.scn",
+    "file": "res://Scenes/FrenzyCard.tscn",
     "name": "Frenzy",
     "colors": [
       "#C35300"
@@ -166,13 +166,13 @@
   {
     "color": "#8C008C",
     "energy": 1,
-    "file": "res://Scenes/GambitCard.scn",
+    "file": "res://Scenes/GambitCard.tscn",
     "name": "Gambit"
   },
   {
     "color": "#002A8C",
     "energy": 1,
-    "file": "res://Scenes/GiftCard.scn",
+    "file": "res://Scenes/GiftCard.tscn",
     "name": "Gift",
     "colors": [
       "#002A8C"
@@ -181,7 +181,7 @@
   {
     "color": "#C35300",
     "energy": 1,
-    "file": "res://Scenes/HauntCard.scn",
+    "file": "res://Scenes/HauntCard.tscn",
     "name": "Haunt",
     "colors": [
       "#C35300",
@@ -191,37 +191,37 @@
   {
     "color": "#8C0127",
     "energy": 3,
-    "file": "res://Scenes/HeartbeatCard.scn",
+    "file": "res://Scenes/HeartbeatCard.tscn",
     "name": "Heartbeat"
   },
   {
     "color": "#8C008C",
     "energy": 1,
-    "file": "res://Scenes/HungerCard.scn",
+    "file": "res://Scenes/HungerCard.tscn",
     "name": "Hunger"
   },
   {
     "color": "#8C008C",
     "energy": 1,
-    "file": "res://Scenes/IgniteCard.scn",
+    "file": "res://Scenes/IgniteCard.tscn",
     "name": "Ignite"
   },
   {
     "color": "#8C0127",
     "energy": 0,
-    "file": "res://Scenes/InitiateCard.scn",
+    "file": "res://Scenes/InitiateCard.tscn",
     "name": "Snipe"
   },
   {
     "color": "#002A8C",
     "energy": 0,
-    "file": "res://Scenes/InspirationCard.scn",
+    "file": "res://Scenes/InspirationCard.tscn",
     "name": "Inspiration"
   },
   {
     "color": "#8C0127",
     "energy": 1,
-    "file": "res://Scenes/LungeCard.scn",
+    "file": "res://Scenes/LungeCard.tscn",
     "name": "Lunge",
     "colors": [
       "#8C0127",
@@ -231,31 +231,31 @@
   {
     "color": "#002A8C",
     "energy": 1,
-    "file": "res://Scenes/MartyrCard.scn",
+    "file": "res://Scenes/MartyrCard.tscn",
     "name": "Martyr"
   },
   {
     "color": "#008C10",
     "energy": 1,
-    "file": "res://Scenes/MendCard.scn",
+    "file": "res://Scenes/MendCard.tscn",
     "name": "Mend"
   },
   {
     "color": "#002A8C",
     "energy": 1,
-    "file": "res://Scenes/OverloadCard.scn",
+    "file": "res://Scenes/OverloadCard.tscn",
     "name": "Overload"
   },
   {
     "color": "#8C0127",
     "energy": 1,
-    "file": "res://Scenes/PartingShotCard.scn",
+    "file": "res://Scenes/PartingShotCard.tscn",
     "name": "Parting Shot"
   },
   {
     "color": "#8C0127",
     "energy": 2,
-    "file": "res://Scenes/PotionCard.scn",
+    "file": "res://Scenes/PotionCard.tscn",
     "name": "Potion",
     "colors": [
       "#8C0127",
@@ -265,43 +265,43 @@
   {
     "color": "#8C0127",
     "energy": 3,
-    "file": "res://Scenes/PoundCard.scn",
+    "file": "res://Scenes/PoundCard.tscn",
     "name": "Pound"
   },
   {
     "color": "#C35300",
     "energy": 1,
-    "file": "res://Scenes/RageCard.scn",
+    "file": "res://Scenes/RageCard.tscn",
     "name": "Rage"
   },
   {
     "color": "#8C008C",
     "energy": 1,
-    "file": "res://Scenes/ReboundCard.scn",
+    "file": "res://Scenes/ReboundCard.tscn",
     "name": "Rebound"
   },
   {
     "color": "#8C008C",
     "energy": 3,
-    "file": "res://Scenes/ReverberateCard.scn",
+    "file": "res://Scenes/ReverberateCard.tscn",
     "name": "Reverberate"
   },
   {
     "color": "#8C008C",
     "energy": 1,
-    "file": "res://Scenes/ReviveCard.scn",
+    "file": "res://Scenes/ReviveCard.tscn",
     "name": "Revive"
   },
   {
     "color": "#C35300",
     "energy": 1,
-    "file": "res://Scenes/ScorchCard.scn",
+    "file": "res://Scenes/ScorchCard.tscn",
     "name": "Scorch"
   },
   {
     "color": "#002A8C",
     "energy": 0,
-    "file": "res://Scenes/ScrapCard.scn",
+    "file": "res://Scenes/ScrapCard.tscn",
     "name": "Scrap",
     "colors": [
       "#002A8C",
@@ -311,79 +311,79 @@
   {
     "color": "#8C008C",
     "energy": 3,
-    "file": "res://Scenes/SeanceCard.scn",
+    "file": "res://Scenes/SeanceCard.tscn",
     "name": "Seance"
   },
   {
     "color": "#C35300",
     "energy": 1,
-    "file": "res://Scenes/SharpenCard.scn",
+    "file": "res://Scenes/SharpenCard.tscn",
     "name": "Sharpen"
   },
   {
     "color": "#008C10",
     "energy": 1,
-    "file": "res://Scenes/ShieldCard.scn",
+    "file": "res://Scenes/ShieldCard.tscn",
     "name": "Shield"
   },
   {
     "color": "#8C0127",
     "energy": 3,
-    "file": "res://Scenes/ShovelCard.scn",
+    "file": "res://Scenes/ShovelCard.tscn",
     "name": "Shovel"
   },
   {
     "color": "#8C0127",
     "energy": 1,
-    "file": "res://Scenes/SlashCard.scn",
+    "file": "res://Scenes/SlashCard.tscn",
     "name": "Slash"
   },
   {
     "color": "#8C0127",
     "energy": 0,
-    "file": "res://Scenes/SnipeCard.scn",
+    "file": "res://Scenes/SnipeCard.tscn",
     "name": "Snipe"
   },
   {
     "color": "#8C0127",
     "energy": 1,
-    "file": "res://Scenes/SparkCard.scn",
+    "file": "res://Scenes/SparkCard.tscn",
     "name": "Spark"
   },
   {
     "color": "#8C0127",
     "energy": 2,
-    "file": "res://Scenes/SpearCard.scn",
+    "file": "res://Scenes/SpearCard.tscn",
     "name": "Spear"
   },
   {
     "color": "#002A8C",
     "energy": 0,
-    "file": "res://Scenes/SurgeCard.scn",
+    "file": "res://Scenes/SurgeCard.tscn",
     "name": "Surge"
   },
   {
     "color": "#C35300",
     "energy": 1,
-    "file": "res://Scenes/TargetCard.scn",
+    "file": "res://Scenes/TargetCard.tscn",
     "name": "Target"
   },
   {
     "color": "#8C0127",
     "energy": 0,
-    "file": "res://Scenes/ThunderboltCard.scn",
+    "file": "res://Scenes/ThunderboltCard.tscn",
     "name": "Thunderbolt"
   },
   {
     "color": "#8C008C",
     "energy": 1,
-    "file": "res://Scenes/TraceCard.scn",
+    "file": "res://Scenes/TraceCard.tscn",
     "name": "Trace"
   },
   {
     "color": "#002A8C",
     "energy": 1,
-    "file": "res://Scenes/TributeCard.scn",
+    "file": "res://Scenes/TributeCard.tscn",
     "name": "Tribute",
     "colors": [
       "#002A8C",
@@ -393,19 +393,19 @@
   {
     "color": "#C35300",
     "energy": 1,
-    "file": "res://Scenes/VenomCard.scn",
+    "file": "res://Scenes/VenomCard.tscn",
     "name": "Venom"
   },
   {
     "color": "#8C008C",
     "energy": 0,
-    "file": "res://Scenes/WasteCard.scn",
+    "file": "res://Scenes/WasteCard.tscn",
     "name": "Waste"
   },
   {
     "color": "#C35300",
     "energy": 1,
-    "file": "res://Scenes/WoundCard.scn",
+    "file": "res://Scenes/WoundCard.tscn",
     "name": "Wound"
   }
 ]

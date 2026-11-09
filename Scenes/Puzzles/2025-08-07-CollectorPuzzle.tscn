@@ -1,0 +1,23 @@
+[gd_scene load_steps=10 format=3 uid="uid://c1qgpg8cj7s4u"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_0iqk1"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/collector.png" id="2_ssbx3"]
+[ext_resource type="PackedScene" path="res://Scenes/InspirationCard.tscn" id="3_d2llx"]
+[ext_resource type="PackedScene" path="res://Scenes/ShieldCard.tscn" id="4_y81dt"]
+[ext_resource type="PackedScene" path="res://Scenes/EmptyfistCard.tscn" id="5_fiof6"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="6_gs5cj"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="7_1v2ag"]
+[ext_resource type="PackedScene" path="res://Scenes/PotionCard.tscn" id="8_fmdak"]
+[ext_resource type="PackedScene" path="res://Scenes/TargetCard.tscn" id="9_ys57o"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_0iqk1")
+puzzle_date = "2025-08-07"
+previous_puzzle_scene = "uid://x8pm05022sxj"
+next_puzzle_scene = "uid://bpuuggyvpid7f"
+enemy_health = 14
+enemy_name = "Collector"
+enemy_icon_texture = ExtResource("2_ssbx3")
+player_health = 1
+player_energy = 2
+card_scenes = [ExtResource("3_d2llx"), ExtResource("4_y81dt"), ExtResource("5_fiof6"), ExtResource("6_gs5cj"), ExtResource("7_1v2ag"), ExtResource("8_fmdak"), ExtResource("9_ys57o")]

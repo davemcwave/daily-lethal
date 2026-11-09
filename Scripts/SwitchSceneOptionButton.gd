@@ -5,7 +5,7 @@ var puzzle_map = {}
 func _ready():
 	var puzzle_index: int = 0
 	for puzzle_scene in get_files_in_folder("res://Scenes/Puzzles"):
-		var puzzle_name = puzzle_scene.split("/")[-1].split(".scn")[0]
+		var puzzle_name = puzzle_scene.split("/")[-1].split(".tscn")[0]
 		puzzle_map[puzzle_index] = {"scene": puzzle_scene, "name": puzzle_name}
 		add_item(puzzle_name, puzzle_index)
 		puzzle_index += 1

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bu3mghjyvkdtp"]
+
+[ext_resource type="Script" path="res://Scripts/AddBuffEnemyAbility.gd" id="1_s5m0c"]
+
+[node name="AddBuffEnemyAbility" type="Node"]
+script = ExtResource("1_s5m0c")

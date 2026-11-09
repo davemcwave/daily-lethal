@@ -1,0 +1,20 @@
+[gd_scene load_steps=8 format=3 uid="uid://cl507nkrwaa3n"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_okakn"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/void-monster.png" id="2_855vi"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="3_kqgx0"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="4_ok686"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="5_nvfxe"]
+[ext_resource type="PackedScene" path="res://Scenes/BurstCard.tscn" id="6_smihg"]
+[ext_resource type="PackedScene" path="res://Scenes/SurgeCard.tscn" id="7_cmo5r"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_okakn")
+puzzle_date = "2025-09-17"
+previous_puzzle_scene = "uid://cqtyke51qpi32"
+next_puzzle_scene = "uid://bfxjwutyattww"
+enemy_health = 16
+enemy_name = "Void Creature"
+enemy_icon_texture = ExtResource("2_855vi")
+player_health = 5
+card_scenes = [ExtResource("3_kqgx0"), ExtResource("4_ok686"), ExtResource("5_nvfxe"), ExtResource("5_nvfxe"), ExtResource("5_nvfxe"), ExtResource("6_smihg"), ExtResource("7_cmo5r")]

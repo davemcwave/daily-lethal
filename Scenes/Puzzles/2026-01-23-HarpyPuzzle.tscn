@@ -1,0 +1,20 @@
+[gd_scene load_steps=8 format=3 uid="uid://ic64m5nabha"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_f47qn"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/harpy.png" id="2_0ovw8"]
+[ext_resource type="PackedScene" path="res://Scenes/SlashCard.tscn" id="3_xx8fv"]
+[ext_resource type="PackedScene" path="res://Scenes/ScrapCard.tscn" id="4_qyya0"]
+[ext_resource type="PackedScene" path="res://Scenes/TributeCard.tscn" id="5_4ulwb"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="6_tlftg"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="7_7c7en"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_f47qn")
+puzzle_date = "2026-01-23"
+previous_puzzle_scene = "uid://8vavdygw2yxk"
+next_puzzle_scene = "uid://8k266qpd2isj"
+enemy_name = "Harpy"
+enemy_icon_texture = ExtResource("2_0ovw8")
+player_health = 1
+player_energy = 0
+card_scenes = [ExtResource("3_xx8fv"), ExtResource("4_qyya0"), ExtResource("5_4ulwb"), ExtResource("6_tlftg"), ExtResource("7_7c7en")]

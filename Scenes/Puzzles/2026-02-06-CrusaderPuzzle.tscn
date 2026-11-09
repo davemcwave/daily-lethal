@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://dmwvhtbx1qwyc"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_y210h"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/leeta-256x256.svg" id="2_gc4pp"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="3_0qqrv"]
+[ext_resource type="PackedScene" path="res://Scenes/FrenzyCard.tscn" id="4_rt0gd"]
+[ext_resource type="PackedScene" path="res://Scenes/ArmoryCard.tscn" id="5_ksk1v"]
+[ext_resource type="PackedScene" path="res://Scenes/DrainCard.tscn" id="6_qpeko"]
+[ext_resource type="PackedScene" path="res://Scenes/BerserkCard.tscn" id="7_rhyaf"]
+[ext_resource type="PackedScene" path="res://Scenes/BurstCard.tscn" id="8_wgccc"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_y210h")
+puzzle_date = "2026-02-06"
+previous_puzzle_scene = "uid://caxhwp4066cbx"
+next_puzzle_scene = "uid://f0fwf5d2ouet"
+enemy_health = 54
+enemy_name = "Crusader"
+enemy_icon_texture = ExtResource("2_gc4pp")
+player_health = 2
+player_energy = 20
+card_scenes = [ExtResource("3_0qqrv"), ExtResource("4_rt0gd"), ExtResource("5_ksk1v"), ExtResource("6_qpeko"), ExtResource("6_qpeko"), ExtResource("7_rhyaf"), ExtResource("8_wgccc")]

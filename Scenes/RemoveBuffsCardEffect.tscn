@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://byfxa6jyhatd7"]
+
+[ext_resource type="Script" path="res://Scripts/RemoveBuffsCardEffect.gd" id="1_u3hn1"]
+
+[node name="RemoveBuffsCardEffect" type="Node2D"]
+script = ExtResource("1_u3hn1")
+buff_auto_target = "Player"
+effect_name = "Remove Buffs"
+effect_description = "Removes current buffs applied to player"

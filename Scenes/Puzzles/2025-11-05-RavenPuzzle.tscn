@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://bkrkew68ssshq"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_5g1s8"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/raven.png" id="2_iqeh3"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="3_1iyhg"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="4_yel5j"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="5_0xwal"]
+[ext_resource type="PackedScene" path="res://Scenes/SurgeCard.tscn" id="6_lbjk1"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="7_w1008"]
+[ext_resource type="PackedScene" path="res://Scenes/WasteCard.tscn" id="8_iir14"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_5g1s8")
+puzzle_date = "2025-11-05"
+previous_puzzle_scene = "uid://ddqsq6mj20b47"
+next_puzzle_scene = "uid://coehkhmbws06b"
+enemy_health = 26
+enemy_name = "Raven"
+enemy_icon_texture = ExtResource("2_iqeh3")
+player_health = 1
+player_energy = 13
+card_scenes = [ExtResource("3_1iyhg"), ExtResource("4_yel5j"), ExtResource("5_0xwal"), ExtResource("6_lbjk1"), ExtResource("6_lbjk1"), ExtResource("7_w1008"), ExtResource("8_iir14")]

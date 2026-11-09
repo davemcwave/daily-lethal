@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://baafjc2fqks2o"]
+
+[ext_resource type="Script" path="res://Scripts/CardsChooseAreaCopyToHandAction.gd" id="1_fcvua"]
+
+[node name="CardsChooseAreaCopyToHandAction" type="Node"]
+script = ExtResource("1_fcvua")

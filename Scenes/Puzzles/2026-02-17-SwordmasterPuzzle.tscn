@@ -1,0 +1,22 @@
+[gd_scene load_steps=10 format=3 uid="uid://dexfs1vlx7quy"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_bhgpj"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/leeta-256x256.svg" id="2_ftumc"]
+[ext_resource type="PackedScene" path="res://Scenes/SharpenCard.tscn" id="3_vvuhg"]
+[ext_resource type="PackedScene" path="res://Scenes/SlashCard.tscn" id="4_iq5lf"]
+[ext_resource type="PackedScene" path="res://Scenes/VenomCard.tscn" id="5_pe48w"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="6_320o5"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="7_2fu4j"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="8_7rs06"]
+[ext_resource type="PackedScene" path="res://Scenes/FangCard.tscn" id="9_pb6mc"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_bhgpj")
+puzzle_date = "2026-02-17"
+previous_puzzle_scene = "uid://c17ny8rb5ppob"
+next_puzzle_scene = "uid://d3htefxh6iono"
+enemy_health = 12
+enemy_name = "Swordmaster"
+enemy_icon_texture = ExtResource("2_ftumc")
+player_health = 2
+card_scenes = [ExtResource("3_vvuhg"), ExtResource("4_iq5lf"), ExtResource("5_pe48w"), ExtResource("6_320o5"), ExtResource("7_2fu4j"), ExtResource("8_7rs06"), ExtResource("9_pb6mc")]

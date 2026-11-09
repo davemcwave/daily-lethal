@@ -1,0 +1,20 @@
+[gd_scene load_steps=7 format=3 uid="uid://dacjdo3mmhcqs"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_tp6bn"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/giant-bat.png" id="2_xfrmc"]
+[ext_resource type="PackedScene" path="res://Scenes/FangCard.tscn" id="3_2bhy4"]
+[ext_resource type="PackedScene" path="res://Scenes/MendCard.tscn" id="4_521h8"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="5_scs3t"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="6_j16i0"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_tp6bn")
+puzzle_date = "2025-10-30"
+previous_puzzle_scene = "uid://dkeghhhsemxml"
+next_puzzle_scene = "uid://b7xh40p353elw"
+enemy_health = 5
+enemy_name = "Giant Bat"
+enemy_icon_texture = ExtResource("2_xfrmc")
+player_health = 1
+player_energy = 6
+card_scenes = [ExtResource("3_2bhy4"), ExtResource("4_521h8"), ExtResource("5_scs3t"), ExtResource("6_j16i0"), ExtResource("5_scs3t")]

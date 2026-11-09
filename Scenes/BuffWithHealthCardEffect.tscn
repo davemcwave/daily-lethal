@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bumxf8papm6o"]
+
+[ext_resource type="Script" path="res://Scripts/BuffWithHealthCardEffect.gd" id="1_1ivti"]
+
+[node name="BuffWithHealthCardEffect" type="Node2D"]
+script = ExtResource("1_1ivti")
+effect_name = "Buffs with Health Amount"
+effect_description = "Apply Buffs based on Health Amount"

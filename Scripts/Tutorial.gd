@@ -166,7 +166,7 @@ func hide_tutorial() -> void:
 func _on_no_button_pressed():
 	background.set_show_tutorial(false)
 	hide_tutorial()
-	get_tree().change_scene_to_file("res://Scenes/StoryView.scn")
+	get_tree().change_scene_to_file("res://Scenes/StoryView.tscn")
 
 func _on_play_button_pressed():
 	enemy.disconnect("died", _on_enemy_died)
@@ -176,7 +176,7 @@ func _on_play_button_pressed():
 	var background: Background = get_tree().get_root().get_node("/root/Background")
 	background.set_puzzle_scene(next_puzzle_scene)
 	background.set_from_story_view(true)
-	get_tree().change_scene_to_file("res://Scenes/Scene0Desktop.scn")
+	get_tree().change_scene_to_file("res://Scenes/Scene0Desktop.tscn")
 
 
 func _on_restart_button_pressed():

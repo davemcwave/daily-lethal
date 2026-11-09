@@ -1,0 +1,22 @@
+[gd_scene load_steps=8 format=3 uid="uid://ljjkeiqb57ej"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_r2gra"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/rat-king.png" id="2_lcbla"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="3_4echi"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="4_4gwj0"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="5_scrro"]
+[ext_resource type="PackedScene" path="res://Scenes/ShieldCard.tscn" id="6_us086"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="7_0e214"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_r2gra")
+puzzle_date = "2025-11-13"
+previous_puzzle_scene = "uid://cqowg7osqaegc"
+next_puzzle_scene = "uid://pxcc7juwb0oj"
+enemy_health = 12
+enemy_name = "Rat King"
+enemy_icon_texture = ExtResource("2_lcbla")
+player_health = 4
+player_energy = 2
+card_scenes = [ExtResource("3_4echi"), ExtResource("4_4gwj0"), ExtResource("5_scrro"), ExtResource("5_scrro"), ExtResource("6_us086"), ExtResource("7_0e214")]
+card_solution = [ExtResource("6_us086"), ExtResource("3_4echi"), ExtResource("4_4gwj0"), ExtResource("5_scrro"), ExtResource("5_scrro"), ExtResource("5_scrro"), ExtResource("7_0e214"), ExtResource("7_0e214"), ExtResource("7_0e214")]

@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://du1l35swhd5kt"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_v4nr8"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/ogre.png" id="2_kl2j3"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="3_j5hqd"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="4_bpsju"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="5_nv75w"]
+[ext_resource type="PackedScene" path="res://Scenes/BargainCard.tscn" id="6_gnx0t"]
+[ext_resource type="PackedScene" path="res://Scenes/BurstCard.tscn" id="7_7vmea"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="8_xxryc"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_v4nr8")
+puzzle_date = "2025-05-20"
+previous_puzzle_scene = "uid://sxtqemm8qg4x"
+next_puzzle_scene = "uid://b8ajuu7rr1ccc"
+enemy_health = 28
+enemy_name = "Ogre"
+enemy_icon_texture = ExtResource("2_kl2j3")
+player_energy = 2
+card_scenes = [ExtResource("3_j5hqd"), ExtResource("4_bpsju"), ExtResource("5_nv75w"), ExtResource("3_j5hqd"), ExtResource("5_nv75w"), ExtResource("6_gnx0t"), ExtResource("7_7vmea"), ExtResource("8_xxryc")]
+card_solution = [ExtResource("6_gnx0t"), ExtResource("3_j5hqd"), ExtResource("3_j5hqd"), ExtResource("4_bpsju"), ExtResource("3_j5hqd"), ExtResource("4_bpsju"), ExtResource("4_bpsju"), ExtResource("5_nv75w"), ExtResource("5_nv75w"), ExtResource("8_xxryc"), ExtResource("7_7vmea")]

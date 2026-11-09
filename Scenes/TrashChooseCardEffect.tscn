@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bv5jexo5rxex7"]
+
+[ext_resource type="Script" path="res://Scripts/TrashChooseCardEffect.gd" id="1_mlfj0"]
+
+[node name="TrashChooseCardEffect" type="Node2D"]
+script = ExtResource("1_mlfj0")
+effect_name = "Trash Cards"
+effect_description = "Trash chosen cards from discard pile"

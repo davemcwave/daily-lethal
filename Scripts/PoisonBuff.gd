@@ -2,7 +2,7 @@ extends Buff
 class_name PoisonBuff
 
 func activate(context: Dictionary = {}) -> bool:
-	var vulnerable_debuff_scene = load("res://Scenes/VulnerableDebuff.scn")
+	var vulnerable_debuff_scene = load("res://Scenes/VulnerableDebuff.tscn")
 	var current_damage_amount: int = context['current_damage_amount']
 	for i in range(current_damage_amount):
 		var vulnerable_debuff = vulnerable_debuff_scene.instantiate()

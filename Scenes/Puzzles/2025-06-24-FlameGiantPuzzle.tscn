@@ -1,0 +1,29 @@
+[gd_scene load_steps=11 format=3 uid="uid://cmimehgldtet6"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_wkxc1"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/flame-giant.png" id="2_ierq1"]
+[ext_resource type="PackedScene" path="res://Scenes/BargainCard.tscn" id="3_shy3f"]
+[ext_resource type="PackedScene" path="res://Scenes/LungeCard.tscn" id="4_qcp27"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="5_vkgyi"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="6_n7sej"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="7_at1lf"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="8_aoemj"]
+[ext_resource type="Script" path="res://Scripts/CardSolutionResource.gd" id="9_32hqd"]
+
+[sub_resource type="Resource" id="Resource_hj4js"]
+script = ExtResource("9_32hqd")
+card_scenes = Array[PackedScene]([ExtResource("3_shy3f"), ExtResource("7_at1lf"), ExtResource("5_vkgyi"), ExtResource("7_at1lf"), ExtResource("5_vkgyi"), ExtResource("3_shy3f"), ExtResource("5_vkgyi"), ExtResource("7_at1lf"), ExtResource("8_aoemj"), ExtResource("8_aoemj"), ExtResource("5_vkgyi"), ExtResource("8_aoemj"), ExtResource("5_vkgyi"), ExtResource("8_aoemj"), ExtResource("5_vkgyi"), ExtResource("5_vkgyi"), ExtResource("8_aoemj"), ExtResource("5_vkgyi"), ExtResource("8_aoemj"), ExtResource("5_vkgyi"), ExtResource("8_aoemj"), ExtResource("5_vkgyi"), ExtResource("5_vkgyi"), ExtResource("8_aoemj"), ExtResource("5_vkgyi"), ExtResource("8_aoemj"), ExtResource("5_vkgyi"), ExtResource("4_qcp27"), ExtResource("5_vkgyi"), ExtResource("4_qcp27"), ExtResource("5_vkgyi"), ExtResource("4_qcp27"), ExtResource("5_vkgyi"), ExtResource("4_qcp27"), ExtResource("5_vkgyi"), ExtResource("4_qcp27"), ExtResource("5_vkgyi"), ExtResource("4_qcp27"), ExtResource("5_vkgyi"), ExtResource("4_qcp27"), ExtResource("5_vkgyi"), ExtResource("4_qcp27"), ExtResource("5_vkgyi"), ExtResource("4_qcp27"), ExtResource("5_vkgyi"), ExtResource("4_qcp27")])
+hand_indices = Array[int]([])
+step_types = Array[int]([])
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_wkxc1")
+puzzle_date = "2025-06-24"
+previous_puzzle_scene = "uid://do2u7rq3ti871"
+next_puzzle_scene = "uid://22qg6umkm3la"
+enemy_health = 100
+enemy_name = "Flame Giant"
+enemy_icon_texture = ExtResource("2_ierq1")
+player_energy = 3
+card_scenes = [ExtResource("3_shy3f"), ExtResource("4_qcp27"), ExtResource("5_vkgyi"), ExtResource("6_n7sej"), ExtResource("7_at1lf"), ExtResource("8_aoemj")]
+card_solution_resource = SubResource("Resource_hj4js")

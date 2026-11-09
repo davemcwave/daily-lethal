@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://b5chn8h186gy7"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_2ixgo"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/crawler.png" id="2_prfq5"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="3_u80kw"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="4_wkc1v"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="5_8igj7"]
+[ext_resource type="PackedScene" path="res://Scenes/LungeCard.tscn" id="6_jo0kc"]
+[ext_resource type="PackedScene" path="res://Scenes/ShovelCard.tscn" id="7_2mx6b"]
+[ext_resource type="PackedScene" path="res://Scenes/InspirationCard.tscn" id="8_6duq8"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_2ixgo")
+puzzle_date = "2025-07-16"
+previous_puzzle_scene = "uid://boayusvvioqn3"
+next_puzzle_scene = "uid://blyey2xb0osjt"
+enemy_health = 29
+enemy_name = "Crawler"
+enemy_icon_texture = ExtResource("2_prfq5")
+player_health = 2
+player_energy = 6
+card_scenes = [ExtResource("3_u80kw"), ExtResource("4_wkc1v"), ExtResource("5_8igj7"), ExtResource("6_jo0kc"), ExtResource("7_2mx6b"), ExtResource("4_wkc1v"), ExtResource("8_6duq8")]

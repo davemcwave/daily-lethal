@@ -1,0 +1,23 @@
+[gd_scene load_steps=10 format=3 uid="uid://clmin13th6cx8"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_hmvki"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/speed-elf.png" id="2_ejqru"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="3_ljnvq"]
+[ext_resource type="PackedScene" path="res://Scenes/SlashCard.tscn" id="4_ijm6p"]
+[ext_resource type="PackedScene" path="res://Scenes/TargetCard.tscn" id="5_tpwws"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="6_ctuq6"]
+[ext_resource type="PackedScene" path="res://Scenes/TributeCard.tscn" id="7_58fqs"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="8_l6fes"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="9_vwh0r"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_hmvki")
+puzzle_date = "2025-12-04"
+previous_puzzle_scene = "uid://i674fjb7in30"
+next_puzzle_scene = "uid://mq3jnd4eh6oy"
+enemy_health = 24
+enemy_name = "Speed Elf"
+enemy_icon_texture = ExtResource("2_ejqru")
+player_health = 1
+player_energy = 2
+card_scenes = [ExtResource("3_ljnvq"), ExtResource("4_ijm6p"), ExtResource("5_tpwws"), ExtResource("6_ctuq6"), ExtResource("7_58fqs"), ExtResource("8_l6fes"), ExtResource("9_vwh0r")]

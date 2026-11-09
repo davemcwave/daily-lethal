@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://2xy1qwq6f3w2"]
+
+[ext_resource type="Script" path="res://Scripts/ShowAuthorCardEffect.gd" id="1_2nnf6"]
+
+[node name="ShowAuthorCardEffect" type="Node2D"]
+script = ExtResource("1_2nnf6")
+effect_name = "Community Card"
+effect_description = "This card was designed by a community member"

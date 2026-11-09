@@ -1,0 +1,21 @@
+[gd_scene load_steps=9 format=3 uid="uid://c17ny8rb5ppob"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_cq3no"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/leeta-256x256.svg" id="2_1it0h"]
+[ext_resource type="PackedScene" path="res://Scenes/CooperationCard.tscn" id="3_y2lw8"]
+[ext_resource type="PackedScene" path="res://Scenes/ExchangeCard.tscn" id="4_6ncro"]
+[ext_resource type="PackedScene" path="res://Scenes/HeartbeatCard.tscn" id="5_3bmst"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="6_0mo3y"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="7_igwnm"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="8_mmr38"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_cq3no")
+puzzle_date = "2026-02-16"
+previous_puzzle_scene = "uid://dmlggn0o374nl"
+enemy_health = 25
+enemy_name = "Moon Elemental"
+enemy_icon_texture = ExtResource("2_1it0h")
+player_health = 4
+player_energy = 4
+card_scenes = [ExtResource("3_y2lw8"), ExtResource("4_6ncro"), ExtResource("5_3bmst"), ExtResource("6_0mo3y"), ExtResource("7_igwnm"), ExtResource("8_mmr38")]

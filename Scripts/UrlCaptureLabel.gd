@@ -99,7 +99,7 @@ func get_cards_from_test_puzzle() -> Array:
 		var card_path_two_words = card_path_no_png.split("-")
 		var card_first_word = card_path_two_words[0].capitalize()
 		var card_second_word = card_path_two_words[1].capitalize()
-		var card_scene_path = "res://Scenes/%s%s.scn" % [card_first_word, card_second_word]
+		var card_scene_path = "res://Scenes/%s%s.tscn" % [card_first_word, card_second_word]
 		var card_packed_scene = load(card_scene_path)
 		
 		card_scene_paths.append(card_scene_path)
@@ -263,7 +263,7 @@ func create_custom_cards() -> Array:
 	for card_index in custom_cards_data.size():
 		var card_data = custom_cards_data[card_index]
 		print("DEBUG: Processing card_data: %s" % str(card_data).substr(0, 50))
-		var card: Card = load("res://Scenes/Card.scn").instantiate()
+		var card: Card = load("res://Scenes/Card.tscn").instantiate()
 		print("DEBUG: Instantiated card: %s" % (card if card else "NULL"))
 		if card:
 			_configure_card(card, card_data)
@@ -345,7 +345,7 @@ func _create_effect_from_data(effect_data: Dictionary):
 
 	match effect_type:
 		"DamageCardEffect":
-			var effect_scene = load("res://Scenes/DamageCardEffect.scn")
+			var effect_scene = load("res://Scenes/DamageCardEffect.tscn")
 			if effect_scene:
 				var effect = effect_scene.instantiate()
 				effect.damage_amount = int(params.get("damage", 1))
@@ -356,7 +356,7 @@ func _create_effect_from_data(effect_data: Dictionary):
 			return null
 
 		"HealCardEffect":
-			var effect_scene = load("res://Scenes/HealCardEffect.scn")
+			var effect_scene = load("res://Scenes/HealCardEffect.tscn")
 			if effect_scene:
 				var effect = effect_scene.instantiate()
 				effect.heal_amount = int(params.get("heal", 1))
@@ -365,7 +365,7 @@ func _create_effect_from_data(effect_data: Dictionary):
 			return null
 
 		"DrawCardEffect":
-			var effect_scene = load("res://Scenes/DrawCardEffect.scn")
+			var effect_scene = load("res://Scenes/DrawCardEffect.tscn")
 			if effect_scene:
 				var effect = effect_scene.instantiate()
 				effect.draw_amount = int(params.get("count", 1))
@@ -374,7 +374,7 @@ func _create_effect_from_data(effect_data: Dictionary):
 			return null
 
 		"EnergyCardEffect":
-			var effect_scene = load("res://Scenes/GainEnergyCardEffect.scn")
+			var effect_scene = load("res://Scenes/GainEnergyCardEffect.tscn")
 			if effect_scene:
 				var effect = effect_scene.instantiate()
 				effect.additional_energy_amount = int(params.get("energy", 1))
@@ -413,7 +413,7 @@ func _create_effect_from_data(effect_data: Dictionary):
 			return _create_debuff_effect(debuff_name, debuff_stacks, template_values)
 
 		"DiscardCardEffect":
-			var effect_scene = load("res://Scenes/DiscardCardEffect.scn")
+			var effect_scene = load("res://Scenes/DiscardCardEffect.tscn")
 			if effect_scene:
 				var effect = effect_scene.instantiate()
 				effect.max_discard_amount = int(params.get("count", 1))
@@ -422,7 +422,7 @@ func _create_effect_from_data(effect_data: Dictionary):
 			return null
 
 		"SelfDamageCardEffect":
-			var effect_scene = load("res://Scenes/ReduceHealthCardEffect.scn")
+			var effect_scene = load("res://Scenes/ReduceHealthCardEffect.tscn")
 			if effect_scene:
 				var effect = effect_scene.instantiate()
 				effect.reduce_amount = int(params.get("damage", 1))
@@ -432,16 +432,16 @@ func _create_effect_from_data(effect_data: Dictionary):
 			return null
 
 		"CreateCardEffect":
-			var effect_scene = load("res://Scenes/CreateCardCardEffect.scn")
+			var effect_scene = load("res://Scenes/CreateCardCardEffect.tscn")
 			if effect_scene == null:
-				push_warning("Could not load CreateCardCardEffect.scn")
+				push_warning("Could not load CreateCardCardEffect.tscn")
 				return null
 			var create_effect: CardEffect = effect_scene.instantiate()
 			var card_scene_path: String = params.get("card_to_create_scene", params.get("card_scene", ""))
 			if card_scene_path.is_empty():
 				var legacy_card_name: String = params.get("card_name", "")
 				if not legacy_card_name.is_empty():
-					card_scene_path = "res://Scenes/%s.scn" % legacy_card_name
+					card_scene_path = "res://Scenes/%s.tscn" % legacy_card_name
 			if not card_scene_path.is_empty():
 				var card_scene = load(card_scene_path)
 				if card_scene is PackedScene:
@@ -463,39 +463,39 @@ func _create_effect_from_data(effect_data: Dictionary):
 
 func _create_buff_effect(buff_name: String, target: String = "", buff_params: Dictionary = {}) -> CardEffect:
 	# Load the base BuffCardEffect scene
-	var buff_card_effect_scene = load("res://Scenes/BuffCardEffect.scn")
+	var buff_card_effect_scene = load("res://Scenes/BuffCardEffect.tscn")
 	if buff_card_effect_scene == null:
-		push_warning("Could not load BuffCardEffect.scn")
+		push_warning("Could not load BuffCardEffect.tscn")
 		return null
 
 	var effect: BuffCardEffect = buff_card_effect_scene.instantiate()
 
 	# Map buff names to their scene paths
 	var buff_scene_map = {
-		"Blood": "res://Scenes/BloodBuff.scn",
-		# "Buff": "res://Scenes/Buff.scn",
-		"Charge": "res://Scenes/ChargeBuff.scn",
-		"Copy": "res://Scenes/CopyBuff.scn",
-		# "Corrode": "res://Scenes/CorrodeBuff.scn",
-		"Critical": "res://Scenes/CriticalBuff.scn",
-		# "Debuff": "res://Scenes/Debuff.scn",
-		"Discount": "res://Scenes/DiscountBuff.scn",
-		"Doom": "res://Scenes/DoomBuff.scn",
-		"Free": "res://Scenes/FreeBuff.scn",
-		"Lifesteal": "res://Scenes/LifestealBuff.scn",
-		# "ModifyAttackBuff": "res://Scenes/ModifyAttackBuff.scn",
-		"Poison": "res://Scenes/PoisonBuff.scn",
-		"Regen": "res://Scenes/RegenBuff.scn",
-		"Repeat": "res://Scenes/RepeatBuff.scn",
-		# "Retaliate": "res://Scenes/RetaliateBuff.scn",
-		"Return": "res://Scenes/ReturnCardToHandBuff.scn",
-		"Sharp": "res://Scenes/SharpBuff.scn",
-		"Block": "res://Scenes/ShieldBuff.scn",
-		"Trash": "res://Scenes/TrashBuff.scn",
-		"Vulnerable": "res://Scenes/VulnerableDebuff.scn",
+		"Blood": "res://Scenes/BloodBuff.tscn",
+		# "Buff": "res://Scenes/Buff.tscn",
+		"Charge": "res://Scenes/ChargeBuff.tscn",
+		"Copy": "res://Scenes/CopyBuff.tscn",
+		# "Corrode": "res://Scenes/CorrodeBuff.tscn",
+		"Critical": "res://Scenes/CriticalBuff.tscn",
+		# "Debuff": "res://Scenes/Debuff.tscn",
+		"Discount": "res://Scenes/DiscountBuff.tscn",
+		"Doom": "res://Scenes/DoomBuff.tscn",
+		"Free": "res://Scenes/FreeBuff.tscn",
+		"Lifesteal": "res://Scenes/LifestealBuff.tscn",
+		# "ModifyAttackBuff": "res://Scenes/ModifyAttackBuff.tscn",
+		"Poison": "res://Scenes/PoisonBuff.tscn",
+		"Regen": "res://Scenes/RegenBuff.tscn",
+		"Repeat": "res://Scenes/RepeatBuff.tscn",
+		# "Retaliate": "res://Scenes/RetaliateBuff.tscn",
+		"Return": "res://Scenes/ReturnCardToHandBuff.tscn",
+		"Sharp": "res://Scenes/SharpBuff.tscn",
+		"Block": "res://Scenes/ShieldBuff.tscn",
+		"Trash": "res://Scenes/TrashBuff.tscn",
+		"Vulnerable": "res://Scenes/VulnerableDebuff.tscn",
 	}
 
-	var buff_scene_path = buff_scene_map.get(buff_name, "res://Scenes/ShieldBuff.scn")
+	var buff_scene_path = buff_scene_map.get(buff_name, "res://Scenes/ShieldBuff.tscn")
 	effect.set_buff_scene(buff_scene_path)
 	var target_from_card_lab: String = "Enemy" if buff_name in ["Corrode", "Vulnerable"] else "Player"
 	effect.set_buff_auto_target(target_from_card_lab)
@@ -508,13 +508,13 @@ func _create_buff_effect(buff_name: String, target: String = "", buff_params: Di
 
 func _create_debuff_effect(debuff_name: String, stacks: int = 1, template_values: Dictionary = {}):
 	var debuff_scene_map = {
-		"Vulnerable": "res://Scenes/VulnerableDebuff.scn",
+		"Vulnerable": "res://Scenes/VulnerableDebuff.tscn",
 	}
 
-	var debuff_scene_path = debuff_scene_map.get(debuff_name, "res://Scenes/VulnerableDebuff.scn")
-	var debuff_card_effect_scene = load("res://Scenes/DebuffCardEffect.scn")
+	var debuff_scene_path = debuff_scene_map.get(debuff_name, "res://Scenes/VulnerableDebuff.tscn")
+	var debuff_card_effect_scene = load("res://Scenes/DebuffCardEffect.tscn")
 	if debuff_card_effect_scene == null:
-		push_warning("Could not load DebuffCardEffect.scn")
+		push_warning("Could not load DebuffCardEffect.tscn")
 		return null
 
 	stacks = max(1, stacks)

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://0j4gfpl5a3oo"]
+
+[ext_resource type="Script" path="res://Scripts/DrawCardEffect.gd" id="1_4jjw1"]
+
+[node name="DrawCardEffect" type="Node2D"]
+script = ExtResource("1_4jjw1")
+effect_name = "Draw"
+effect_description = "Draw cards"

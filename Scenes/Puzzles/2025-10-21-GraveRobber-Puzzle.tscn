@@ -1,0 +1,23 @@
+[gd_scene load_steps=8 format=3 uid="uid://dflkwoa8gq586"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_tn55a"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/grave-robber.png" id="2_vmt6r"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="3_i0qgr"]
+[ext_resource type="PackedScene" path="res://Scenes/ScrapCard.tscn" id="4_oxl3n"]
+[ext_resource type="PackedScene" path="res://Scenes/TributeCard.tscn" id="5_3pu1y"]
+[ext_resource type="PackedScene" path="res://Scenes/ShovelCard.tscn" id="6_n1tsf"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="7_y23tg"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_tn55a")
+puzzle_date = "2025-10-21"
+previous_puzzle_scene = "uid://cwojdg7f7gffi"
+next_puzzle_scene = "uid://nfimimq7d0sn"
+enemy_health = 11
+enemy_name = "Grave Robber"
+enemy_icon_texture = ExtResource("2_vmt6r")
+player_health = 1
+player_energy = 1
+card_scenes = [ExtResource("3_i0qgr"), ExtResource("3_i0qgr"), ExtResource("3_i0qgr"), ExtResource("4_oxl3n"), ExtResource("5_3pu1y"), ExtResource("6_n1tsf"), ExtResource("7_y23tg")]
+dialogue_first = "Enemy"
+dialogue_lines = ["[b][shake rate=2.0 level=1 connected=1]I noticed.[/shake][/b]", "[b][shake rate=2.0 level=1 connected=1]I only TAKE from the dead.[/shake][/b]"]

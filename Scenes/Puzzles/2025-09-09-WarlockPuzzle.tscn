@@ -1,0 +1,23 @@
+[gd_scene load_steps=10 format=3 uid="uid://cxgi2hfmbaoct"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_6he7a"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/warlock.png" id="2_s1gu7"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="3_epp1v"]
+[ext_resource type="PackedScene" path="res://Scenes/ExchangeCard.tscn" id="4_qifnu"]
+[ext_resource type="PackedScene" path="res://Scenes/HeartbeatCard.tscn" id="5_brgc8"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="6_c77ak"]
+[ext_resource type="PackedScene" path="res://Scenes/PotionCard.tscn" id="7_qg5n7"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="8_smuts"]
+[ext_resource type="PackedScene" path="res://Scenes/TargetCard.tscn" id="9_h7hrk"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_6he7a")
+puzzle_date = "2025-09-09"
+previous_puzzle_scene = "uid://tyxgateo25x4"
+next_puzzle_scene = "uid://4xuqveytcyvp"
+enemy_health = 31
+enemy_name = "Warlock"
+enemy_icon_texture = ExtResource("2_s1gu7")
+player_health = 12
+player_energy = 2
+card_scenes = [ExtResource("3_epp1v"), ExtResource("4_qifnu"), ExtResource("5_brgc8"), ExtResource("6_c77ak"), ExtResource("7_qg5n7"), ExtResource("8_smuts"), ExtResource("9_h7hrk")]

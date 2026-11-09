@@ -1,0 +1,22 @@
+[gd_scene load_steps=8 format=3 uid="uid://dn63lkrvd1gj5"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_vjred"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/mushroom.png" id="2_56vv4"]
+[ext_resource type="PackedScene" path="res://Scenes/CapacitorCard.tscn" id="3_nb4uy"]
+[ext_resource type="PackedScene" path="res://Scenes/CleaveCard.tscn" id="4_dxtdw"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="5_6rqo2"]
+[ext_resource type="PackedScene" path="res://Scenes/SlashCard.tscn" id="6_kb1mp"]
+[ext_resource type="PackedScene" path="res://Scenes/SpearCard.tscn" id="7_pafm6"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_vjred")
+puzzle_date = "2025-12-01"
+previous_puzzle_scene = "uid://87i3vpxdai3o"
+next_puzzle_scene = "uid://b84gfqfhyty6w"
+enemy_health = 5
+enemy_name = "Mushroom"
+enemy_icon_texture = ExtResource("2_56vv4")
+player_health = 1
+player_energy = 1
+card_scenes = [ExtResource("3_nb4uy"), ExtResource("3_nb4uy"), ExtResource("3_nb4uy"), ExtResource("4_dxtdw"), ExtResource("5_6rqo2"), ExtResource("6_kb1mp"), ExtResource("7_pafm6")]
+card_solution = [ExtResource("3_nb4uy"), ExtResource("6_kb1mp"), ExtResource("3_nb4uy"), ExtResource("7_pafm6"), ExtResource("3_nb4uy"), ExtResource("5_6rqo2"), ExtResource("4_dxtdw")]

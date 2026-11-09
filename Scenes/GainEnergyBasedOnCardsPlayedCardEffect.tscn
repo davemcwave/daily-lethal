@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwg7smdxh5ipk"]
+
+[ext_resource type="Script" path="res://Scripts/GainEnergyBasedOnCardsPlayedCardEffect.gd" id="1_e28ml"]
+
+[node name="GainEnergyBasedOnCardsPlayedCardEffect" type="Node2D"]
+script = ExtResource("1_e28ml")
+effect_name = "Gain Energy Based On Cards Played"
+effect_description = "Gain additional energy equal to cards played"

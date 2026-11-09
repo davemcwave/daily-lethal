@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="CardSolutionResource" load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.scn" id="1_eh48i"]
-[ext_resource type="PackedScene" path="res://Scenes/RageCard.scn" id="2_lvxph"]
-[ext_resource type="PackedScene" path="res://Scenes/VenomCard.scn" id="3_e3hhu"]
-[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.scn" id="4_q4ep5"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="1_eh48i"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="2_lvxph"]
+[ext_resource type="PackedScene" path="res://Scenes/VenomCard.tscn" id="3_e3hhu"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="4_q4ep5"]
 [ext_resource type="Script" path="res://Scripts/CardSolutionResource.gd" id="5_yty1o"]
 
 [resource]

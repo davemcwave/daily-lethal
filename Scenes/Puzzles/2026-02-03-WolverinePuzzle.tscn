@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://b2nom0vo7m7p8"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_hi4hp"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/leeta-256x256.svg" id="2_rpkd0"]
+[ext_resource type="PackedScene" path="res://Scenes/BerserkCard.tscn" id="3_cmwe3"]
+[ext_resource type="PackedScene" path="res://Scenes/DrainCard.tscn" id="4_6jo2c"]
+[ext_resource type="PackedScene" path="res://Scenes/FrenzyCard.tscn" id="5_ikcgv"]
+[ext_resource type="PackedScene" path="res://Scenes/HeartbeatCard.tscn" id="6_pkd2k"]
+[ext_resource type="PackedScene" path="res://Scenes/SharpenCard.tscn" id="7_cl27a"]
+[ext_resource type="PackedScene" path="res://Scenes/InspirationCard.tscn" id="8_e8uks"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_hi4hp")
+puzzle_date = "2026-02-03"
+previous_puzzle_scene = "uid://w8nck21rq80i"
+next_puzzle_scene = "uid://0btrof7mwvsn"
+enemy_health = 36
+enemy_name = "Wolverine"
+enemy_icon_texture = ExtResource("2_rpkd0")
+player_health = 4
+player_energy = 4
+card_scenes = [ExtResource("3_cmwe3"), ExtResource("4_6jo2c"), ExtResource("5_ikcgv"), ExtResource("6_pkd2k"), ExtResource("7_cl27a"), ExtResource("8_e8uks"), ExtResource("8_e8uks")]

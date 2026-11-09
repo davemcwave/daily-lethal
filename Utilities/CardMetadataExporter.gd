@@ -24,7 +24,7 @@ func _collect_card_metadata() -> Array:
 	dir.list_dir_begin()
 	var entry := dir.get_next()
 	while entry != "":
-		if not dir.current_is_dir() and entry.ends_with("Card.scn"):
+		if not dir.current_is_dir() and entry.ends_with("Card.tscn"):
 			var scene_path := "%s/%s" % [cards_root_dir, entry]
 			var packed_scene: PackedScene = load(scene_path)
 			if packed_scene:

@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://12hohbjwbnav"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_to5ko"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/mimic.png" id="2_sl1g1"]
+[ext_resource type="PackedScene" path="res://Scenes/SnipeCard.tscn" id="3_fqeuy"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="4_wxids"]
+[ext_resource type="PackedScene" path="res://Scenes/BurstCard.tscn" id="5_hnrvc"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="6_avscu"]
+[ext_resource type="PackedScene" path="res://Scenes/TributeCard.tscn" id="7_k21xo"]
+[ext_resource type="PackedScene" path="res://Scenes/SurgeCard.tscn" id="8_biib4"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_to5ko")
+puzzle_date = "2025-06-03"
+previous_puzzle_scene = "uid://p734smciiwu1"
+next_puzzle_scene = "uid://gblivu8v54sf"
+enemy_health = 19
+enemy_name = "Mimic"
+enemy_icon_texture = ExtResource("2_sl1g1")
+player_energy = 2
+card_scenes = [ExtResource("3_fqeuy"), ExtResource("4_wxids"), ExtResource("5_hnrvc"), ExtResource("6_avscu"), ExtResource("7_k21xo"), ExtResource("8_biib4")]
+card_solution = [ExtResource("7_k21xo"), ExtResource("4_wxids"), ExtResource("6_avscu"), ExtResource("3_fqeuy"), ExtResource("3_fqeuy"), ExtResource("8_biib4"), ExtResource("5_hnrvc")]

@@ -1,0 +1,20 @@
+[gd_scene load_steps=8 format=3 uid="uid://blyey2xb0osjt"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_dnywy"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/beholder.png" id="2_umssq"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="3_vkw4q"]
+[ext_resource type="PackedScene" path="res://Scenes/InspirationCard.tscn" id="4_lsn3t"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="5_vuwsx"]
+[ext_resource type="PackedScene" path="res://Scenes/SurgeCard.tscn" id="6_j2367"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="7_kb8tm"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_dnywy")
+puzzle_date = "2025-07-18"
+previous_puzzle_scene = "uid://b5chn8h186gy7"
+next_puzzle_scene = "uid://ctuh1r8jy2elb"
+enemy_health = 13
+enemy_name = "Beholder"
+enemy_icon_texture = ExtResource("2_umssq")
+player_energy = 3
+card_scenes = [ExtResource("3_vkw4q"), ExtResource("4_lsn3t"), ExtResource("5_vuwsx"), ExtResource("3_vkw4q"), ExtResource("6_j2367"), ExtResource("7_kb8tm"), ExtResource("7_kb8tm")]

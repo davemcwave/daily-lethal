@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://n0ar37dhn175"]
+
+[ext_resource type="Script" path="res://Scripts/PuzzleRetriever.gd" id="1_qorx2"]
+
+[node name="PuzzleRetriever" type="Node"]
+script = ExtResource("1_qorx2")

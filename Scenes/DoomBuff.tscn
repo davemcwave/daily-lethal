@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjq0151e0pts8"]
+
+[ext_resource type="Script" path="res://Scripts/DoomBuff.gd" id="1_qjswc"]
+
+[node name="DoomBuff" type="Node2D"]
+script = ExtResource("1_qjswc")
+buff_name = "Doom"
+buff_description = "Reduces by 1 every time you play a card. When this reaches 0, you die."
+unlimited_uses = true
+color = Color(0.809594, 0.0115925, 0.242971, 1)
+freed_manually = true

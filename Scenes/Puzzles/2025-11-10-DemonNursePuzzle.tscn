@@ -1,0 +1,19 @@
+[gd_scene load_steps=8 format=3 uid="uid://15fjibfujpjl"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_qshq2"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/demon-nurse.png" id="2_rhfuw"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="3_nltnn"]
+[ext_resource type="PackedScene" path="res://Scenes/PotionCard.tscn" id="4_k8dg6"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="5_7idmv"]
+[ext_resource type="PackedScene" path="res://Scenes/ScrapCard.tscn" id="6_clifx"]
+[ext_resource type="PackedScene" path="res://Scenes/ShieldCard.tscn" id="7_klvej"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_qshq2")
+puzzle_date = "2025-11-10"
+previous_puzzle_scene = "uid://by8lmagy2fxob"
+next_puzzle_scene = "uid://cqowg7osqaegc"
+enemy_name = "Demon Nurse"
+enemy_icon_texture = ExtResource("2_rhfuw")
+player_energy = 2
+card_scenes = [ExtResource("3_nltnn"), ExtResource("4_k8dg6"), ExtResource("4_k8dg6"), ExtResource("5_7idmv"), ExtResource("6_clifx"), ExtResource("6_clifx"), ExtResource("7_klvej")]

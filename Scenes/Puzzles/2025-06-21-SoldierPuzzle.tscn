@@ -1,0 +1,22 @@
+[gd_scene load_steps=8 format=3 uid="uid://do2u7rq3ti871"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_1ylru"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/soldier2.png" id="2_a1kos"]
+[ext_resource type="PackedScene" path="res://Scenes/LungeCard.tscn" id="3_mu1ma"]
+[ext_resource type="PackedScene" path="res://Scenes/SlashCard.tscn" id="4_ccj6q"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="5_qwit1"]
+[ext_resource type="PackedScene" path="res://Scenes/BargainCard.tscn" id="6_f1i08"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="7_pv2m0"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_1ylru")
+puzzle_date = "2025-06-21"
+previous_puzzle_scene = "uid://c6j04r6rw5fe8"
+next_puzzle_scene = "uid://cmimehgldtet6"
+enemy_health = 30
+enemy_name = "Soldier"
+enemy_icon_texture = ExtResource("2_a1kos")
+player_health = 1
+player_energy = 2
+card_scenes = [ExtResource("3_mu1ma"), ExtResource("4_ccj6q"), ExtResource("3_mu1ma"), ExtResource("5_qwit1"), ExtResource("6_f1i08"), ExtResource("4_ccj6q"), ExtResource("7_pv2m0")]
+card_solution = [ExtResource("6_f1i08"), ExtResource("5_qwit1"), ExtResource("7_pv2m0"), ExtResource("5_qwit1"), ExtResource("6_f1i08"), ExtResource("3_mu1ma"), ExtResource("3_mu1ma"), ExtResource("4_ccj6q"), ExtResource("4_ccj6q")]

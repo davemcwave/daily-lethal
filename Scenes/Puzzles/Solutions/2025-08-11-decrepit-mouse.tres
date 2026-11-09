@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="CardSolutionResource" load_steps=5 format=3 uid="uid://ul7ls30j30kw"]
 
-[ext_resource type="PackedScene" uid="uid://cwnvcvfble8c5" path="res://Scenes/BargainCard.scn" id="1_4mnvn"]
-[ext_resource type="PackedScene" uid="uid://o03mwjov2e8v" path="res://Scenes/BurstCard.scn" id="2_dhwlg"]
-[ext_resource type="PackedScene" uid="uid://bahsukhwsj148" path="res://Scenes/EmptyfistCard.scn" id="3_tijh2"]
+[ext_resource type="PackedScene" uid="uid://cwnvcvfble8c5" path="res://Scenes/BargainCard.tscn" id="1_4mnvn"]
+[ext_resource type="PackedScene" uid="uid://o03mwjov2e8v" path="res://Scenes/BurstCard.tscn" id="2_dhwlg"]
+[ext_resource type="PackedScene" uid="uid://bahsukhwsj148" path="res://Scenes/EmptyfistCard.tscn" id="3_tijh2"]
 [ext_resource type="Script" uid="uid://cugpgmdtsumrl" path="res://Scripts/CardSolutionResource.gd" id="4_rxb2u"]
 
 [resource]

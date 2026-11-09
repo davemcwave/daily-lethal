@@ -3,7 +3,7 @@ extends Control
 func add_debuff(debuff: Debuff) -> void:
 	if _try_merge_existing_debuff(debuff):
 		return
-	var debuff_panel: Panel = load("res://Scenes/DebuffPanel.scn").instantiate()
+	var debuff_panel: Panel = load("res://Scenes/DebuffPanel.tscn").instantiate()
 	debuff_panel.set_text(debuff.get_debuff_name())
 	debuff_panel.set_debuff(debuff)
 	add_child(debuff_panel)

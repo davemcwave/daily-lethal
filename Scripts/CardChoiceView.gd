@@ -39,7 +39,7 @@ func set_card_preview(card: Card) -> void:
 	
 	var card_effect_count: int = 0
 	for card_effect: CardEffect in card_effects_to_choose_from:
-		var card_effect_choice_button: CardEffectChoiceButton = load("res://Scenes/CardEffectChoiceButton.scn").instantiate()
+		var card_effect_choice_button: CardEffectChoiceButton = load("res://Scenes/CardEffectChoiceButton.tscn").instantiate()
 		card_effect_choice_button.set_button_text(card_effect.get_effect_short_description())
 		card_effect_choice_button.set_card_effect(card_effect)
 		
@@ -49,7 +49,7 @@ func set_card_preview(card: Card) -> void:
 		$CardEffectChoicesContainer.add_child(card_effect_choice_button)
 		card_effect_choice_button.connect("pressed", select_card_effect.bind(card_effect_choice_button.get_card_effect()))
 		if card_effect_count < card_effects_to_choose_from.size() - 1:
-			var card_effect_choice_conditional_label: CardEffectChoiceConditionLabel = load("res://Scenes/CardEffectChoiceConditionalLabel.scn").instantiate()
+			var card_effect_choice_conditional_label: CardEffectChoiceConditionLabel = load("res://Scenes/CardEffectChoiceConditionalLabel.tscn").instantiate()
 			$CardEffectChoicesContainer.add_child(card_effect_choice_conditional_label)
 		
 		card_effect_count += 1

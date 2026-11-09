@@ -56,7 +56,7 @@ func find_all_puzzle_files() -> Array[String]:
 	var file_name = dir.get_next()
 
 	while file_name != "":
-		if not dir.current_is_dir() and file_name.ends_with(".scn"):
+		if not dir.current_is_dir() and file_name.ends_with(".tscn"):
 			puzzle_files.append(puzzles_directory + file_name)
 
 		file_name = dir.get_next()

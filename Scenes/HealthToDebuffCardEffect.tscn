@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://disvmxphf8xt0"]
+
+[ext_resource type="Script" path="res://Scripts/HealthToDebuffCardEffect.gd" id="1_bnbo0"]
+
+[node name="HealthToDebuffCardEffect" type="Node2D"]
+script = ExtResource("1_bnbo0")
+effect_name = "Health To Debuff"
+effect_description = "Reduce health. Inflict debuffs equal to the amount of health lost."

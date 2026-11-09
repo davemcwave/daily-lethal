@@ -1,0 +1,23 @@
+[gd_scene load_steps=9 format=3 uid="uid://bevd53grtuqj"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_45tiq"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/pufferfish.png" id="2_aiesv"]
+[ext_resource type="PackedScene" path="res://Scenes/BurstCard.tscn" id="3_7fdxj"]
+[ext_resource type="PackedScene" path="res://Scenes/EmptyfistCard.tscn" id="4_xy3tv"]
+[ext_resource type="PackedScene" path="res://Scenes/SurgeCard.tscn" id="5_a3mqk"]
+[ext_resource type="PackedScene" path="res://Scenes/TributeCard.tscn" id="6_npjix"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="7_hskab"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="8_2c1uo"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_45tiq")
+puzzle_date = "2025-11-20"
+previous_puzzle_scene = "uid://jhkcfktkposw"
+next_puzzle_scene = "uid://bllsr81tms7i7"
+enemy_health = 23
+enemy_name = "Pufferfish"
+enemy_icon_texture = ExtResource("2_aiesv")
+player_health = 1
+player_energy = 0
+card_scenes = [ExtResource("3_7fdxj"), ExtResource("4_xy3tv"), ExtResource("5_a3mqk"), ExtResource("6_npjix"), ExtResource("6_npjix"), ExtResource("7_hskab"), ExtResource("8_2c1uo")]
+card_solution = [ExtResource("5_a3mqk"), ExtResource("6_npjix"), ExtResource("8_2c1uo"), ExtResource("6_npjix"), ExtResource("7_hskab"), ExtResource("3_7fdxj"), ExtResource("4_xy3tv"), ExtResource("3_7fdxj")]

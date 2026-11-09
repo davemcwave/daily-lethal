@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxx6caxnpjl87"]
+
+[ext_resource type="Script" path="res://Scripts/VulnerableDebuff.gd" id="1_ows13"]
+
+[node name="VulnerableDebuff" type="Node2D"]
+script = ExtResource("1_ows13")
+debuff_name = "Vulnerable"
+debuff_description = "Whenever this target takes damage, they take an additional 1 damage."

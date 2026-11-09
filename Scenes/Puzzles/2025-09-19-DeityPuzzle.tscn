@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://bfxjwutyattww"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_f3ska"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/deity.png" id="2_kw2f5"]
+[ext_resource type="PackedScene" path="res://Scenes/SnipeCard.tscn" id="3_wm6ph"]
+[ext_resource type="PackedScene" path="res://Scenes/WoundCard.tscn" id="4_6n25m"]
+[ext_resource type="PackedScene" path="res://Scenes/BurstCard.tscn" id="5_xj8p7"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="6_nsn3g"]
+[ext_resource type="PackedScene" path="res://Scenes/TributeCard.tscn" id="7_gio85"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="8_bfodk"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_f3ska")
+puzzle_date = "2025-09-19"
+previous_puzzle_scene = "uid://cl507nkrwaa3n"
+next_puzzle_scene = "uid://dt44o4jtj1br3"
+enemy_health = 16
+enemy_name = "Deity"
+enemy_icon_texture = ExtResource("2_kw2f5")
+player_health = 1
+player_energy = 1
+card_scenes = [ExtResource("3_wm6ph"), ExtResource("4_6n25m"), ExtResource("5_xj8p7"), ExtResource("6_nsn3g"), ExtResource("7_gio85"), ExtResource("7_gio85"), ExtResource("8_bfodk")]

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://xfunt13ilusi"]
+
+[ext_resource type="Script" path="res://Scripts/EnergyBasedDamageCardEffect.gd" id="1_jmycg"]
+
+[node name="EnergyBasedDamageCardEffect" type="Node2D"]
+script = ExtResource("1_jmycg")
+effect_name = "Energy-Based Damage"
+effect_description = "Do damage relative to a certain amount of energy"

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dp57kw80gb4ks" path="res://bg.png" id="1_wt43d"]
 [ext_resource type="FontFile" uid="uid://dwo8xle1kx2ha" path="res://Assets/Fonts/Quicksand/static/Quicksand-Medium.ttf" id="2_pb3bn"]
 [ext_resource type="FontFile" uid="uid://biw8kuuj8rwa8" path="res://Assets/Fonts/Quicksand/static/Quicksand-Bold.ttf" id="3_1k3mi"]
-[ext_resource type="Material" uid="uid://da4t47a4d0fda" path="res://Resources/WobbleMaterial.res" id="4_1k3mi"]
+[ext_resource type="Material" uid="uid://da4t47a4d0fda" path="res://Resources/WobbleMaterial.tres" id="4_1k3mi"]
 [ext_resource type="Texture2D" uid="uid://iq3ggtrrqtb3" path="res://Assets/Textures/leetha-512x512.png" id="4_pb3bn"]
 [ext_resource type="Texture2D" uid="uid://cha22ueuqxhw2" path="res://Assets/Textures/cardswhite.png" id="7_be8xu"]
 [ext_resource type="Texture2D" uid="uid://brnlgbccy74r3" path="res://Assets/Textures/house-white.png" id="8_63abb"]

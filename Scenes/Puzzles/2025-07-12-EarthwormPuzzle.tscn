@@ -1,0 +1,21 @@
+[gd_scene load_steps=8 format=3 uid="uid://du76dm6nj35pw"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_hmjqg"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/earthworm.png" id="2_36cts"]
+[ext_resource type="PackedScene" path="res://Scenes/ShovelCard.tscn" id="3_30prp"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="4_co7ru"]
+[ext_resource type="PackedScene" path="res://Scenes/SurgeCard.tscn" id="5_k51gt"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="6_iyuw0"]
+[ext_resource type="PackedScene" path="res://Scenes/ScrapCard.tscn" id="7_w8nti"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_hmjqg")
+puzzle_date = "2025-07-12"
+previous_puzzle_scene = "uid://5ldo8rhfo50g"
+next_puzzle_scene = "uid://boayusvvioqn3"
+enemy_health = 13
+enemy_name = "Earthworm"
+enemy_icon_texture = ExtResource("2_36cts")
+player_health = 1
+player_energy = 3
+card_scenes = [ExtResource("3_30prp"), ExtResource("4_co7ru"), ExtResource("5_k51gt"), ExtResource("6_iyuw0"), ExtResource("7_w8nti")]

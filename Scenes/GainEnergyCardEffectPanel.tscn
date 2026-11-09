@@ -1,0 +1,98 @@
+[gd_scene load_steps=6 format=3 uid="uid://faup1nc7mwgm"]
+
+[ext_resource type="Script" path="res://Scripts/GainEnergyCardEffectPanel.gd" id="1_xj8im"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/circle.svg" id="2_ga1uc"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Medium.ttf" id="3_fmnp5"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Bold.ttf" id="4_qpok1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_okgif"]
+bg_color = Color(0, 0.164706, 0.54902, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
+
+[node name="GainEnergyCardEffectPanel" type="Panel"]
+custom_minimum_size = Vector2(200, 150)
+theme_override_styles/panel = SubResource("StyleBoxFlat_okgif")
+script = ExtResource("1_xj8im")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+self_modulate = Color(0.878431, 0.0156863, 0.278431, 1)
+layout_mode = 1
+offset_left = 10.0
+offset_top = 12.0
+offset_right = 26.0
+offset_bottom = 28.0
+texture = ExtResource("2_ga1uc")
+expand_mode = 1
+
+[node name="Title" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 26.0
+offset_top = 12.0
+offset_right = -30.0
+offset_bottom = -118.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("3_fmnp5")
+theme_override_fonts/bold_font = ExtResource("4_qpok1")
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/normal_font_size = 14
+theme_override_font_sizes/bold_font_size = 14
+bbcode_enabled = true
+text = "[b]Gain Energy[/b]"
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="EnergyLabel" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(17, 16)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -94.0
+offset_top = -11.0
+offset_right = 26.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_fmnp5")
+theme_override_fonts/bold_font = ExtResource("4_qpok1")
+theme_override_font_sizes/bold_italics_font_size = 16
+theme_override_font_sizes/normal_font_size = 10
+theme_override_font_sizes/bold_font_size = 12
+bbcode_enabled = true
+text = "[b][center]Additional Energy[/center][/b]"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnergyInput" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 21.0
+offset_top = -10.0
+offset_right = 90.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_qpok1")
+theme_override_font_sizes/font_size = 12
+placeholder_text = "1"
+alignment = 1

@@ -1,0 +1,20 @@
+[gd_scene load_steps=7 format=3 uid="uid://dpgae7hbbpg21"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_tkf6s"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/vending-machine.png" id="2_82x44"]
+[ext_resource type="PackedScene" path="res://Scenes/ArmoryCard.tscn" id="3_ursoq"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="4_2kkxn"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="5_s6p58"]
+[ext_resource type="PackedScene" path="res://Scenes/CapacitorCard.tscn" id="6_ess5a"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_tkf6s")
+puzzle_date = "2026-01-07"
+previous_puzzle_scene = "uid://do7nth5ef41js"
+next_puzzle_scene = "uid://dwvg31t1qnfhb"
+enemy_health = 14
+enemy_name = "Vending Machine"
+enemy_icon_texture = ExtResource("2_82x44")
+player_health = 1
+player_energy = 6
+card_scenes = [ExtResource("3_ursoq"), ExtResource("3_ursoq"), ExtResource("4_2kkxn"), ExtResource("5_s6p58"), ExtResource("6_ess5a"), ExtResource("6_ess5a")]
