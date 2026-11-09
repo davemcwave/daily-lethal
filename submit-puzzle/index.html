@@ -50,6 +50,13 @@
     .description.solution-ok {
       color: #7ddc7d;
     }
+    @keyframes solution-flash {
+      0%, 50%, 100% { background-color: #fff; box-shadow: 0 0 0 0 rgba(125, 220, 125, 0); }
+      25%, 75% { background-color: #d7f8d7; box-shadow: 0 0 0 4px rgba(125, 220, 125, 0.7); }
+    }
+    #solutionOrderField.solution-flash {
+      animation: solution-flash 2s ease-in-out;
+    }
     .manual-solution-toggle {
       display: flex;
       align-items: center;
@@ -412,7 +419,7 @@
       <input type="text" name="solution_order" id="solutionOrderField" placeholder="Beat your puzzle with 🧪 Test Puzzle below" readonly />
       <input type="hidden" name="solution_steps" id="solutionStepsField" />
       <input type="hidden" name="solution_source" id="solutionSourceField" value="recorded" />
-      <div class="description" id="solutionStatus">Press 🧪 Test Puzzle and beat your puzzle. Your winning moves fill in here automatically.</div>
+      <div class="description" id="solutionStatus">Your winning moves fill in here automatically.</div>
       <label class="description manual-solution-toggle" for="manualSolutionToggle">
         <input type="checkbox" id="manualSolutionToggle" /> I'll type my solution myself
       </label>
@@ -695,6 +702,14 @@
       return ['cards', 'php', 'pnrg', 'ehp', 'enemy_buffs'].map(k => params.get(k) || '').join('|');
     }
 
+    // Slow double pulse so the creator sees their solution just arrived.
+    function flashSolutionField(field) {
+      field.classList.remove('solution-flash');
+      void field.offsetWidth; // restart the animation if it's already played
+      field.classList.add('solution-flash');
+      field.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
     function isManualSolution() {
       const toggle = document.getElementById('manualSolutionToggle');
       return !!(toggle && toggle.checked);
@@ -726,14 +741,18 @@
       capturedSolution = saved && selectedCards.length > 0 && puzzleSetupKey(saved.search) === puzzleSetupKey(currentSearch)
         ? saved : null;
       if (capturedSolution) {
+        const changed = orderField.value !== capturedSolution.text;
         orderField.value = capturedSolution.text;
+        if (changed) {
+          flashSolutionField(orderField);
+        }
         stepsField.value = JSON.stringify(capturedSolution.steps);
         status.textContent = '✓ Recorded from your winning test playthrough.';
         status.className = 'description solution-ok';
       } else {
         orderField.value = '';
         stepsField.value = '';
-        status.textContent = 'Press 🧪 Test Puzzle and beat your puzzle. Your winning moves fill in here automatically.';
+        status.textContent = 'Your winning moves fill in here automatically.';
         status.className = 'description';
       }
     }
