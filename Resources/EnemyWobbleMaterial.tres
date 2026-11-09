@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://b1dw8du8wrnwe"]
 
-[ext_resource type="Shader" path="res://Scripts/Shaders/Wobble.gdshader" id="1_n5k5c"]
+[ext_resource type="Shader" uid="uid://b5vbi2j1mcjdd" path="res://Scripts/Shaders/Wobble.gdshader" id="1_n5k5c"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_xaydi"]
 resource_local_to_scene = true
