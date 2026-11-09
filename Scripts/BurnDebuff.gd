@@ -34,7 +34,7 @@ func activate() -> void:
 	if skip_next_activation:
 		skip_next_activation = false
 		return
-	target.hurt(burn_count, true)
+	await target.hurt(burn_count, true)
 	burn_count -= 1
 	if is_instance_valid(debuff_panel):
 		await debuff_panel.blink()

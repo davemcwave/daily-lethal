@@ -89,7 +89,7 @@ func hurt(amount: int) -> void:
 		#scene.check_game_over()
 		
 		if amount > 0:
-			buffs_container.activate_buffs(Buff.ActivationType.OnHurt)
+			await buffs_container.activate_buffs(Buff.ActivationType.OnHurt)
 		
 func is_dead() -> bool:
 	return dead

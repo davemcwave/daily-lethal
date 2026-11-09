@@ -184,10 +184,11 @@ func activate_on_play_buffs() -> void:
 	
 func activate_on_hurt_buffs() -> void:
 	animating = true
-	for buff: Buff in get_buffs():
-		if buff.is_activated_on_target_hurt():
+	for buff: Buff in get_buffs().duplicate():
+		if is_instance_valid(buff) and not buff.is_queued_for_deletion() and buff.is_activated_on_target_hurt():
 			await get_tree().create_timer(0.25).timeout
-			buff.activate()
+			if is_instance_valid(buff) and not buff.is_queued_for_deletion():
+				await buff.activate()
 	animating = false
 	
 func activate_on_hurt_debuffs() -> void:
@@ -259,15 +260,15 @@ func get_random_hurt_line() -> String:
 	hurt_lines_bag.shuffle()
 	return hurt_lines_bag.pop_back()
 	
+## Awaiting hurt() waits for everything this hit triggers (on-hurt buffs and
+## debuffs, and whatever those trigger) so chains resolve in order. The death
+## animation and game-over check run separately (_finish_hurt) because they wait
+## for all cards to finish playing, which would deadlock the card awaiting this.
 func hurt(hurt_amount: int, hurt_from_card: bool = true) -> void:
 	health -= hurt_amount
-	
+
 	create_damage_label(hurt_amount)
-	
-	if hurt_from_card and hurt_amount > 0:
-		activate_on_hurt_buffs()
-		activate_on_hurt_debuffs()
-	
+
 	if hurt_amount > 0:
 		audio_handler.play_sfx("HurtSFX")
 		custom_camera.add_trauma(0.2)
@@ -278,9 +279,16 @@ func hurt(hurt_amount: int, hurt_from_card: bool = true) -> void:
 		
 	shake_briefly()
 	blink_white()
-	
+
 	update_health_bar()
-	
+
+	if hurt_from_card and hurt_amount > 0:
+		await activate_on_hurt_buffs()
+		await activate_on_hurt_debuffs()
+
+	_finish_hurt()
+
+func _finish_hurt() -> void:
 	if health <= 0:
 		audio_handler.play_sfx("WinSFX")
 		

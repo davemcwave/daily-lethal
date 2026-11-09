@@ -53,7 +53,7 @@ func deal_damage(damage_amount: int, context: Dictionary = {}, apply_buffs: bool
 	if apply_buffs and damage_amount > 0:			
 		await buffs_container.activate_buffs(Buff.ActivationType.OnDealDamage, context)
 		damage_amount = context['current_damage_amount']
-	target.hurt(damage_amount)
+	await target.hurt(damage_amount)
 
 func get_context() -> Dictionary:
 	return context

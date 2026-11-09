@@ -75,7 +75,7 @@ func activate(context: Dictionary = {}) -> bool:
 
 	var target_to_hit: Node = get_other_target()
 	for i in range(current_damage_amount):
-		target_to_hit.hurt(1)
+		await target_to_hit.hurt(1)
 		await get_tree().create_timer(0.07).timeout
 
 	# We own removal (unlimited_uses, so the container won't free us).

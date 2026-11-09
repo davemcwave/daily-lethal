@@ -11,7 +11,7 @@ func get_damage_amount() -> int:
 	return damage_amount
 
 func activate(context: Dictionary = {}) -> bool:
-	target.hurt(damage_amount)
+	await target.hurt(damage_amount)
 	return super.activate()
 	
 	
