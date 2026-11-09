@@ -1,6 +1,31 @@
 {
   "puzzles": [
     {
+      "id": "2026-11-13",
+      "release_at": "2026-11-13T00:00:00-04:00",
+      "title": "Vulcanus"
+    },
+    {
+      "id": "2026-11-12",
+      "release_at": "2026-11-12T00:00:00-04:00",
+      "title": "Headless Horseman"
+    },
+    {
+      "id": "2026-11-11",
+      "release_at": "2026-11-11T00:00:00-04:00",
+      "title": "Cosmic Comet"
+    },
+    {
+      "id": "2026-11-10",
+      "release_at": "2026-11-10T00:00:00-04:00",
+      "title": "Punisher"
+    },
+    {
+      "id": "2026-11-09",
+      "release_at": "2026-11-09T00:00:00-04:00",
+      "title": "Stormchaser"
+    },
+    {
       "id": "2026-08-28",
       "release_at": "2026-08-28T00:00:00-04:00",
       "title": "Angel of Revelation"
