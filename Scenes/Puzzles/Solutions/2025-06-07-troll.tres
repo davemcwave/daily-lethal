@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="CardSolutionResource" load_steps=8 format=3]
 
-[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.scn" id="1_73ofl"]
-[ext_resource type="PackedScene" path="res://Scenes/LungeCard.scn" id="2_xh8jn"]
-[ext_resource type="PackedScene" path="res://Scenes/SurgeCard.scn" id="3_e6xpq"]
-[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.scn" id="4_n7jj1"]
-[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.scn" id="5_c54so"]
-[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.scn" id="6_cac8g"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="1_73ofl"]
+[ext_resource type="PackedScene" path="res://Scenes/LungeCard.tscn" id="2_xh8jn"]
+[ext_resource type="PackedScene" path="res://Scenes/SurgeCard.tscn" id="3_e6xpq"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="4_n7jj1"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="5_c54so"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="6_cac8g"]
 [ext_resource type="Script" path="res://Scripts/CardSolutionResource.gd" id="7_4dnpt"]
 
 [resource]

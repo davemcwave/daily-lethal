@@ -1,0 +1,19 @@
+[gd_scene load_steps=7 format=3 uid="uid://ca7ufyoy6kd43"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_il8yq"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/hydra.png" id="2_7rja5"]
+[ext_resource type="PackedScene" path="res://Scenes/FangCard.tscn" id="3_lnu3l"]
+[ext_resource type="PackedScene" path="res://Scenes/InspirationCard.tscn" id="4_18ncw"]
+[ext_resource type="PackedScene" path="res://Scenes/HeartbeatCard.tscn" id="5_t7xar"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="6_84dfr"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_il8yq")
+puzzle_date = "2025-11-18"
+previous_puzzle_scene = "uid://xh8ae1xaop7j"
+next_puzzle_scene = "uid://jhkcfktkposw"
+enemy_name = "Hydra"
+enemy_icon_texture = ExtResource("2_7rja5")
+player_health = 4
+player_energy = 7
+card_scenes = [ExtResource("3_lnu3l"), ExtResource("4_18ncw"), ExtResource("5_t7xar"), ExtResource("6_84dfr"), ExtResource("6_84dfr"), ExtResource("6_84dfr"), ExtResource("6_84dfr")]

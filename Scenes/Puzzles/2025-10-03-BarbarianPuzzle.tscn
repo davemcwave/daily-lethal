@@ -1,0 +1,23 @@
+[gd_scene load_steps=10 format=3 uid="uid://djtb6kd5civ30"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_irt3y"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/barbarian.png" id="2_tr6bv"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="3_aus8i"]
+[ext_resource type="PackedScene" path="res://Scenes/LungeCard.tscn" id="4_nc4bw"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="5_dscge"]
+[ext_resource type="PackedScene" path="res://Scenes/VenomCard.tscn" id="6_htows"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="7_1b8gx"]
+[ext_resource type="PackedScene" path="res://Scenes/TargetCard.tscn" id="8_mqhw3"]
+[ext_resource type="PackedScene" path="res://Scenes/EmptyfistCard.tscn" id="9_wmq4l"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_irt3y")
+puzzle_date = "2025-10-03"
+previous_puzzle_scene = "uid://d4b3g2osj81xm"
+next_puzzle_scene = "uid://l4mib1pmr8cj"
+enemy_health = 42
+enemy_name = "Barbarian"
+enemy_icon_texture = ExtResource("2_tr6bv")
+card_scenes = [ExtResource("3_aus8i"), ExtResource("4_nc4bw"), ExtResource("5_dscge"), ExtResource("6_htows"), ExtResource("7_1b8gx"), ExtResource("8_mqhw3"), ExtResource("9_wmq4l")]
+dialogue_first = "Enemy"
+dialogue_lines = ["[b][shake rate=2.0 level=1 connected=1]That's the usual plan...[/shake][/b]", "[b][shake rate=2.0 level=1 connected=1]I'll die fighting![/shake][/b]"]

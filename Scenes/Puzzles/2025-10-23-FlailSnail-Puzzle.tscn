@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://dy65h4rsh3qcv"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_ns8f7"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/flail-snail.png" id="2_p15pl"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="3_kfgyt"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="4_7l0k3"]
+[ext_resource type="PackedScene" path="res://Scenes/PotionCard.tscn" id="5_cttii"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="6_mxmlt"]
+[ext_resource type="PackedScene" path="res://Scenes/WasteCard.tscn" id="7_at0ue"]
+[ext_resource type="PackedScene" path="res://Scenes/FangCard.tscn" id="8_o3pmi"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_ns8f7")
+puzzle_date = "2025-10-23"
+previous_puzzle_scene = "uid://nfimimq7d0sn"
+next_puzzle_scene = "uid://vpsplprh66am"
+enemy_health = 7
+enemy_name = "Flail Snail"
+enemy_icon_texture = ExtResource("2_p15pl")
+player_health = 4
+player_energy = 2
+card_scenes = [ExtResource("3_kfgyt"), ExtResource("3_kfgyt"), ExtResource("4_7l0k3"), ExtResource("5_cttii"), ExtResource("6_mxmlt"), ExtResource("7_at0ue"), ExtResource("8_o3pmi")]

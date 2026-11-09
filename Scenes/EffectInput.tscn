@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7a87i4r0w85y"]
+
+[ext_resource type="Script" path="res://Scripts/EffectInput.gd" id="1_eyfj1"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Medium.ttf" id="2_42kxm"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Bold.ttf" id="3_30xmy"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Regular.ttf" id="4_7gl2g"]
+
+[node name="EffectInput" type="HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+offset_right = 238.0
+offset_bottom = 35.0
+size_flags_horizontal = 3
+script = ExtResource("1_eyfj1")
+
+[node name="EffectInputName" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("2_42kxm")
+theme_override_fonts/bold_font = ExtResource("3_30xmy")
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+bbcode_enabled = true
+text = "[b]Damage Amount: [/b]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EffectInputValue" type="LineEdit" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_7gl2g")
+theme_override_font_sizes/font_size = 12
+alignment = 1
+caret_blink = true

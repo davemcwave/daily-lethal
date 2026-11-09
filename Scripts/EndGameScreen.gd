@@ -26,6 +26,14 @@ func _ready():
 	if not background.is_test_puzzle() or not background.get_puzzle_date().is_empty():
 		background.mark_puzzle_completed(background.get_puzzle_date())
 	background.save_played_cards_solution()
+	background.publish_test_puzzle_solution()
+
+	# A creator testing their own puzzle from /submit-puzzle: the Share button
+	# becomes "Use this solution", which takes them back to the (now filled-in) form.
+	if background.is_creator_test_puzzle():
+		$ShareButton/TextureRect.hide()
+		$ShareButton.add_theme_font_size_override("font_size", 20)
+		$ShareButton.set_text("USE THIS SOLUTION")
 
 	if background.is_from_story_view():
 		background.mark_story_puzzle_completed(background.get_puzzle_scene())
@@ -42,12 +50,15 @@ func _on_play_again_button_pressed():
 	background.clear()
 	
 	if is_web_platform():
-		var next_scene_path := "res://Scenes/Scene0Desktop.scn" if should_use_desktop_layout else "res://Scenes/Scene0.scn"
+		var next_scene_path := "res://Scenes/Scene0Desktop.tscn" if should_use_desktop_layout else "res://Scenes/Scene0.tscn"
 		get_tree().change_scene_to_file(next_scene_path)
 	else:
 		change_to_main_scene()
 
 func _on_share_button_pressed():
+	if background.is_creator_test_puzzle():
+		_return_to_submit_page()
+		return
 	DisplayServer.clipboard_set(share_text)
 	$ShareButton/TextureRect.hide()
 	$ShareButton.set_text("   COPIED!")
@@ -57,10 +68,26 @@ func _on_share_button_pressed():
 	$ShareButton.set_text("   SHARE")
 	$ShareButton/TextureRect.show()
 
+func _return_to_submit_page() -> void:
+	# The test tab was opened by the submit page's "Test Puzzle" button, so go back
+	# to that tab (it fills in the solution when it regains focus) and close this one.
+	if not is_web_platform():
+		return
+	JavaScriptBridge.eval("""
+		(function() {
+			if (window.opener && !window.opener.closed) {
+				window.opener.focus();
+				window.close();
+			} else {
+				window.location.href = '/submit-puzzle/';
+			}
+		})();
+	""", true)
+
 func _on_get_tomorrow_button_pressed():
 	if background.is_from_story_view():
 		background.clear()
-		get_tree().change_scene_to_file("res://Scenes/StoryView.scn")
+		get_tree().change_scene_to_file("res://Scenes/StoryView.tscn")
 		return
 
 	var next_puzzle_scene = background.get_next_puzzle_scene()
@@ -102,7 +129,7 @@ func is_web_platform() -> bool:
 	return Engine.has_singleton("JavaScriptBridge") and OS.has_feature("web")
 
 func change_to_main_scene() -> void:
-	var main_scene_path := "res://Scenes/Scene0.scn" if OS.has_feature("mobile") else "res://Scenes/Scene0Desktop.scn"
+	var main_scene_path := "res://Scenes/Scene0.tscn" if OS.has_feature("mobile") else "res://Scenes/Scene0Desktop.tscn"
 	get_tree().change_scene_to_file(main_scene_path)
 
 func _get_next_daily_puzzle_date(current_date: String) -> String:

@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://bq5dvwvfq64hq"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_my177"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/wraith.png" id="2_i1cpa"]
+[ext_resource type="PackedScene" path="res://Scenes/CauterizeCard.tscn" id="3_8u3km"]
+[ext_resource type="PackedScene" path="res://Scenes/InspirationCard.tscn" id="4_fwci6"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="5_s3luc"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="6_y3vhq"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="7_odi04"]
+[ext_resource type="PackedScene" path="res://Scenes/ArmoryCard.tscn" id="8_anebs"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_my177")
+puzzle_date = "2025-12-11"
+previous_puzzle_scene = "uid://dc1fyk3gb0c0w"
+next_puzzle_scene = "uid://d1m18018ij06j"
+enemy_health = 12
+enemy_name = "Wraith"
+enemy_icon_texture = ExtResource("2_i1cpa")
+player_health = 4
+player_energy = 1
+card_scenes = [ExtResource("3_8u3km"), ExtResource("4_fwci6"), ExtResource("5_s3luc"), ExtResource("6_y3vhq"), ExtResource("7_odi04"), ExtResource("8_anebs")]

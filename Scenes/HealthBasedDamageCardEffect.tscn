@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfmijj17yksmw"]
+
+[ext_resource type="Script" path="res://Scripts/HealthBasedDamageCardEffect.gd" id="1_mkkqd"]
+
+[node name="HealthBasedDamageCardEffect" type="Node2D"]
+script = ExtResource("1_mkkqd")
+effect_name = "Health-Based Damage"
+effect_description = "Do damage relative to the player's HP"

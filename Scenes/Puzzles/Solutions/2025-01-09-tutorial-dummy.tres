@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CardSolutionResource" load_steps=4 format=3]
 
-[ext_resource type="PackedScene" path="res://Scenes/PoundCard.scn" id="1_cttyv"]
-[ext_resource type="PackedScene" path="res://Scenes/SlashCard.scn" id="2_ikcr6"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="1_cttyv"]
+[ext_resource type="PackedScene" path="res://Scenes/SlashCard.tscn" id="2_ikcr6"]
 [ext_resource type="Script" path="res://Scripts/CardSolutionResource.gd" id="3_oatgk"]
 
 [resource]

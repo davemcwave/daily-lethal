@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://0bte0dm76h6p"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_lf1qi"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/pterosaur.png" id="2_6tn01"]
+[ext_resource type="PackedScene" path="res://Scenes/BargainCard.tscn" id="3_x8k81"]
+[ext_resource type="PackedScene" path="res://Scenes/InspirationCard.tscn" id="4_6s4vf"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="5_xbtjn"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="6_itegd"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="7_h6d2g"]
+[ext_resource type="PackedScene" path="res://Scenes/TargetCard.tscn" id="8_kjaro"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_lf1qi")
+puzzle_date = "2025-10-16"
+previous_puzzle_scene = "uid://bn4ctc268xbrl"
+next_puzzle_scene = "uid://qbc3rae3xigk"
+enemy_health = 32
+enemy_name = "Pterosaur"
+enemy_icon_texture = ExtResource("2_6tn01")
+player_health = 1
+player_energy = 8
+card_scenes = [ExtResource("3_x8k81"), ExtResource("4_6s4vf"), ExtResource("5_xbtjn"), ExtResource("6_itegd"), ExtResource("7_h6d2g"), ExtResource("8_kjaro")]

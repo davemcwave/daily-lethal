@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://qcbls3dqbu7s"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_h0shc"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/kobold.png" id="2_48v2e"]
+[ext_resource type="PackedScene" path="res://Scenes/BargainCard.tscn" id="3_mbmy4"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="4_vcy4s"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="5_gdn47"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="6_aonrt"]
+[ext_resource type="PackedScene" path="res://Scenes/LungeCard.tscn" id="7_1wpuf"]
+[ext_resource type="PackedScene" path="res://Scenes/SurgeCard.tscn" id="8_bb5gg"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_h0shc")
+puzzle_date = "2025-05-29"
+previous_puzzle_scene = "uid://b8ajuu7rr1ccc"
+next_puzzle_scene = "uid://p734smciiwu1"
+enemy_health = 28
+enemy_name = "Kobold"
+enemy_icon_texture = ExtResource("2_48v2e")
+player_energy = 1
+card_scenes = [ExtResource("3_mbmy4"), ExtResource("4_vcy4s"), ExtResource("5_gdn47"), ExtResource("6_aonrt"), ExtResource("7_1wpuf"), ExtResource("8_bb5gg")]
+card_solution = [ExtResource("8_bb5gg"), ExtResource("3_mbmy4"), ExtResource("6_aonrt"), ExtResource("4_vcy4s"), ExtResource("7_1wpuf"), ExtResource("5_gdn47")]

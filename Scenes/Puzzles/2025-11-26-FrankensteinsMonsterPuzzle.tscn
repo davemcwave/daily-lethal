@@ -1,0 +1,22 @@
+[gd_scene load_steps=8 format=3 uid="uid://clg62ddi2lkn6"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_47q4l"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/frankesteins-monster.png" id="2_r6dqm"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="3_ovrxi"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="4_5ojvs"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="5_io5ri"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="6_4ysvq"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="7_wu1ny"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_47q4l")
+puzzle_date = "2025-11-26"
+previous_puzzle_scene = "uid://c5y76547j0e6x"
+next_puzzle_scene = "uid://1r42fxd26mv"
+enemy_health = 22
+enemy_name = "Frankenstein's Monster"
+enemy_icon_texture = ExtResource("2_r6dqm")
+player_health = 1
+player_energy = 6
+card_scenes = [ExtResource("3_ovrxi"), ExtResource("4_5ojvs"), ExtResource("5_io5ri"), ExtResource("6_4ysvq"), ExtResource("7_wu1ny")]
+card_solution = [ExtResource("4_5ojvs"), ExtResource("3_ovrxi"), ExtResource("3_ovrxi"), ExtResource("5_io5ri"), ExtResource("6_4ysvq"), ExtResource("7_wu1ny"), ExtResource("6_4ysvq"), ExtResource("7_wu1ny")]

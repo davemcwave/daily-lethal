@@ -1,0 +1,203 @@
+[gd_scene load_steps=12 format=3 uid="uid://bffopa27dqaca"]
+
+[ext_resource type="Script" path="res://Scripts/ShovelCard.gd" id="1_g6gfo"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Medium.ttf" id="2_gkgvm"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Bold.ttf" id="3_nl7c4"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/bolt-white.png" id="4_gb6j8"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/shovel.png" id="5_3jkol"]
+[ext_resource type="PackedScene" path="res://Scenes/DiscardPileBasedDamageCardEffect.tscn" id="6_25t8j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qfa7s"]
+bg_color = Color(0.433266, 0.433266, 0.433266, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5uxdr"]
+bg_color = Color(0.169245, 0.169245, 0.169245, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vby6p"]
+bg_color = Color(0.54902, 0.00392157, 0.152941, 1)
+border_width_left = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0631c"]
+bg_color = Color(0.169245, 0.169245, 0.169245, 1)
+border_width_left = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5uxdr"]
+size = Vector2(110, 149)
+
+[node name="ShovelCard" type="Panel" node_paths=PackedStringArray("card_effects")]
+custom_minimum_size = Vector2(120, 160)
+offset_left = 8.0
+offset_top = 456.0
+offset_right = 128.0
+offset_bottom = 616.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qfa7s")
+script = ExtResource("1_g6gfo")
+card_effects = [NodePath("DiscardPileBasedDamageCardEffect")]
+card_name = "Shovel"
+energy_cost = 3
+card_description = "Deal damage equal to the number of cards in discard pile"
+
+[node name="TitlePanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 7.0
+offset_top = 8.0
+offset_right = -7.0
+offset_bottom = 32.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5uxdr")
+
+[node name="Title" type="RichTextLabel" parent="TitlePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("2_gkgvm")
+theme_override_fonts/bold_font = ExtResource("3_nl7c4")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[center]Slash[/center]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnergyPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 7.0
+offset_top = 8.0
+offset_right = -87.0
+offset_bottom = 32.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5uxdr")
+
+[node name="Energy" type="RichTextLabel" parent="EnergyPanel"]
+clip_contents = false
+layout_mode = 2
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 12.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("2_gkgvm")
+theme_override_fonts/bold_font = ExtResource("3_nl7c4")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[center]2[/center]"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="EnergyPanel"]
+layout_mode = 2
+offset_left = 10.0
+offset_top = 7.0
+offset_right = 22.0
+offset_bottom = 19.0
+texture = ExtResource("4_gb6j8")
+expand_mode = 1
+
+[node name="IconPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 32.0
+offset_right = -7.0
+offset_bottom = -56.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vby6p")
+
+[node name="Icon" type="TextureRect" parent="IconPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -24.0
+offset_right = 25.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_3jkol")
+expand_mode = 1
+
+[node name="DescriptionPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 7.0
+offset_top = 104.0
+offset_right = -7.0
+offset_bottom = 152.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0631c")
+
+[node name="Title" type="RichTextLabel" parent="DescriptionPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("2_gkgvm")
+theme_override_fonts/bold_font = ExtResource("3_nl7c4")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center]Deal 1 damage. Lose 1 health. [/center]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(14, 14)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(45, 64.5)
+shape = SubResource("RectangleShape2D_5uxdr")
+
+[node name="DiscardPileBasedDamageCardEffect" parent="." instance=ExtResource("6_25t8j")]
+increase_damage_effect = false
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

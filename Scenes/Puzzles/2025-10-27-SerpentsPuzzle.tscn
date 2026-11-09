@@ -1,0 +1,23 @@
+[gd_scene load_steps=10 format=3 uid="uid://dx2cyre0pwwws"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_26if8"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/serpents.png" id="2_1vbmk"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="3_2ti48"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="4_w75v5"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="5_t0n5e"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="6_xbwb1"]
+[ext_resource type="PackedScene" path="res://Scenes/VenomCard.tscn" id="7_6nx2x"]
+[ext_resource type="PackedScene" path="res://Scenes/BurstCard.tscn" id="8_bfc4x"]
+[ext_resource type="PackedScene" path="res://Scenes/SurgeCard.tscn" id="9_1o641"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_26if8")
+puzzle_date = "2025-10-27"
+previous_puzzle_scene = "uid://vpsplprh66am"
+next_puzzle_scene = "uid://0bdu4ykdajjl"
+enemy_health = 49
+enemy_name = "Serpents"
+enemy_icon_texture = ExtResource("2_1vbmk")
+player_health = 7
+player_energy = 7
+card_scenes = [ExtResource("3_2ti48"), ExtResource("4_w75v5"), ExtResource("5_t0n5e"), ExtResource("6_xbwb1"), ExtResource("7_6nx2x"), ExtResource("8_bfc4x"), ExtResource("9_1o641")]

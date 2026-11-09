@@ -1,0 +1,22 @@
+[gd_scene load_steps=10 format=3 uid="uid://c2ga6r7ayntgd"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_jxscn"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/alchemist.png" id="2_3f2d1"]
+[ext_resource type="PackedScene" path="res://Scenes/TargetCard.tscn" id="3_tpvuo"]
+[ext_resource type="PackedScene" path="res://Scenes/PotionCard.tscn" id="4_v8ft5"]
+[ext_resource type="PackedScene" path="res://Scenes/HeartbeatCard.tscn" id="5_os7jh"]
+[ext_resource type="PackedScene" path="res://Scenes/FangCard.tscn" id="6_o5v2s"]
+[ext_resource type="PackedScene" path="res://Scenes/InspirationCard.tscn" id="7_fg36o"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="8_8pj4b"]
+[ext_resource type="PackedScene" path="res://Scenes/MendCard.tscn" id="9_8rx7a"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_jxscn")
+puzzle_date = "2025-08-23"
+previous_puzzle_scene = "uid://bau2j7lmwvll5"
+next_puzzle_scene = "uid://457elgs8i6wt"
+enemy_health = 14
+enemy_name = "Alchemist"
+enemy_icon_texture = ExtResource("2_3f2d1")
+player_energy = 4
+card_scenes = [ExtResource("3_tpvuo"), ExtResource("4_v8ft5"), ExtResource("5_os7jh"), ExtResource("6_o5v2s"), ExtResource("7_fg36o"), ExtResource("8_8pj4b"), ExtResource("9_8rx7a")]

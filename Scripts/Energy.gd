@@ -73,7 +73,7 @@ func update_energy_text() -> void:
 	energy_amount_text.set_text(get_text_template() % energy_amount)
 
 func create_add_energy_label(amount: int, message: String = "") -> void:
-	var add_energy_label: RichTextLabel = load("res://Scenes/AddEnergyLabel.scn").instantiate()
+	var add_energy_label: RichTextLabel = load("res://Scenes/AddEnergyLabel.tscn").instantiate()
 	add_energy_label.set_energy_amount(amount, message)
 	scene.add_child(add_energy_label)
 	add_energy_label.global_position = global_position

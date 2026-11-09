@@ -72,7 +72,7 @@ func _ready():
 	
 	set_energy_text(energy_cost)
 	
-	$IconPanel/Icon.material = load("res://Resources/WobbleMaterial.res")
+	$IconPanel/Icon.material = load("res://Resources/WobbleMaterial.tres")
 	add_to_group("Cards")
 	#connect("played", scene._on_card_played.bind(self))
 	
@@ -83,7 +83,7 @@ func _ready():
 func add_gradient_background(new_colors: PackedColorArray) -> void:
 	if has_gradient_background():
 		get_node("IconPanel/GradientBackground").queue_free()
-	var gradient_background: GradientBackground = load("res://Scenes/GradientBackground.scn").instantiate()
+	var gradient_background: GradientBackground = load("res://Scenes/GradientBackground.tscn").instantiate()
 	gradient_background.set_colors(new_colors)
 	$IconPanel.add_child(gradient_background)
 	$IconPanel.move_child(gradient_background,0)
@@ -161,7 +161,7 @@ func is_grabbed() -> bool:
 	return state == State.Grabbed
 	
 func show_choosing_button() -> void:
-	var choosing_button: ChoosingButton = load("res://Scenes/ChoosingButton.scn").instantiate()
+	var choosing_button: ChoosingButton = load("res://Scenes/ChoosingButton.tscn").instantiate()
 	choosing_button.set_icon(cards_choose_area.get_choose_type())
 	add_child(choosing_button)
 	set_state(State.Chosen)
@@ -348,7 +348,6 @@ func can_play() -> bool:
 		and can_pay_cost(energy_cost)
 
 func can_play_for_resolver() -> bool:
-	print(not enemy.is_animating(), not buffs_container.is_animating(), can_pay_cost(energy_cost))
 	if card_play_area != null and not card_play_area.is_useable():
 		return false
 	if scene != null and scene.is_card_resolving():
@@ -490,6 +489,11 @@ func handle_sfx() -> void:
 	
 	
 func begin_play_resolution() -> void:
+	# Record the play before its effects run, so picks/effect choices it triggers
+	# (even ones Reverberate, Burst or Overload trigger) attach to this card.
+	var background = get_node_or_null("/root/Background")
+	if background != null:
+		background.record_solution_play(get_scene_file_path())
 	if card_play_area != null:
 		card_play_area.set_useable(false)
 	if scene != null:

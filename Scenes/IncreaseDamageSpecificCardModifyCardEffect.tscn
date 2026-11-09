@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvnw4r0r34x5d"]
+
+[ext_resource type="Script" path="res://Scripts/IncreaseDamageSpecificCardModifyCardEffect.gd" id="1_doono"]
+
+[node name="IncreaseDamageModifyCardEffect" type="Node2D"]
+script = ExtResource("1_doono")
+effect_name = "Increase Specific Card Damage"
+effect_description = "Increase specific [b][color=red]damage[/color][/b] cards by 1 damage"

@@ -1,18 +1,18 @@
 {
-	"2025-04-23-EvilRobot-Puzzle.scn": [
+	"2025-04-23-EvilRobot-Puzzle.tscn": [
 		"Echo",
 		"Slash",
 		"Wound",
 		"Wound"
 	],
-	"2025-04-24-SeaMonster-Puzzle.scn": [
+	"2025-04-24-SeaMonster-Puzzle.tscn": [
 		"Surge",
 		"Echo",
 		"Pound",
 		"Slash",
 		"Surge"
 	],
-	"2025-04-25-Bloodthorn-Puzzle.scn": [
+	"2025-04-25-Bloodthorn-Puzzle.tscn": [
 		"Shield",
 		"Flurry",
 		"Echo",
@@ -22,7 +22,7 @@
 		"Surge",
 		"Slash"
 	],
-	"2025-05-02-DrBonez-Puzzle.scn": [
+	"2025-05-02-DrBonez-Puzzle.tscn": [
 		"Thunderbolt",
 		"Gift",
 		"Wound",
@@ -30,14 +30,14 @@
 		"Slash",
 		"Slash"
 	],
-	"2025-05-04-Werewolf-Puzzle.scn": [
+	"2025-05-04-Werewolf-Puzzle.tscn": [
 		"Rebound",
 		"Rage",
 		"Flurry",
 		"Echo",
 		"Slash"
 	],
-	"2025-05-05-Leech-Puzzle.scn": [
+	"2025-05-05-Leech-Puzzle.tscn": [
 		"Burst",
 		"Rebound",
 		"Rebound",
@@ -45,7 +45,7 @@
 		"Surge",
 		"Wound"
 	],
-	"2025-05-10-GelatinousCube-Puzzle.scn": [
+	"2025-05-10-GelatinousCube-Puzzle.tscn": [
 		"Echo",
 		"Rage",
 		"Gift",
@@ -54,7 +54,7 @@
 		"Rebound",
 		"Surge"
 	],
-	"2025-05-13-KrakenPuzzle.scn": [
+	"2025-05-13-KrakenPuzzle.tscn": [
 		"Echo",
 		"Thunderbolt",
 		"Flurry",
@@ -63,7 +63,7 @@
 		"Scrap",
 		"Overload"
 	],
-	"2025-05-15-GoblinPuzzle.scn": [
+	"2025-05-15-GoblinPuzzle.tscn": [
 		"Rage",
 		"Flurry",
 		"Rage",
@@ -71,7 +71,7 @@
 		"Bargain",
 		"Overload"
 	],
-	"2025-05-17-MinotaurPuzzle.scn": [
+	"2025-05-17-MinotaurPuzzle.tscn": [
 		"Rebound",
 		"Overload",
 		"Pound",
@@ -80,7 +80,7 @@
 		"Flurry",
 		"Burst"
 	],
-	"2025-05-20-OgrePuzzle.scn": [
+	"2025-05-20-OgrePuzzle.tscn": [
 		"Rebound",
 		"Overload",
 		"Pound",
@@ -90,7 +90,7 @@
 		"Burst",
 		"Echo"
 	],
-	"2025-05-25-FlameImpPuzzle.scn": [
+	"2025-05-25-FlameImpPuzzle.tscn": [
 		"Lunge",
 		"Revive",
 		"Rebound",
@@ -99,7 +99,7 @@
 		"Bargain",
 		"Lunge"
 	],
-	"2025-05-29-KoboldPuzzle.scn": [
+	"2025-05-29-KoboldPuzzle.tscn": [
 		"Bargain",
 		"Haunt",
 		"Flurry",
@@ -107,7 +107,7 @@
 		"Lunge",
 		"Surge"
 	],
-	"2025-06-01-GiantRatPuzzle.scn": [
+	"2025-06-01-GiantRatPuzzle.tscn": [
 		"Mend",
 		"Martyr",
 		"Pound",
@@ -115,7 +115,7 @@
 		"Pound",
 		"Mend"
 	],
-	"2025-06-03-MimicPuzzle.scn": [
+	"2025-06-03-MimicPuzzle.tscn": [
 		"Snipe",
 		"Haunt",
 		"Burst",
@@ -123,7 +123,7 @@
 		"Tribute",
 		"Surge"
 	],
-	"2025-06-05-NagaPuzzle.scn": [
+	"2025-06-05-NagaPuzzle.tscn": [
 		"Revive",
 		"Burst",
 		"Rebound",
@@ -131,7 +131,7 @@
 		"Gift",
 		"Flurry"
 	],
-	"2025-06-07-TrollPuzzle.scn": [
+	"2025-06-07-TrollPuzzle.tscn": [
 		"Thunderbolt",
 		"Martyr",
 		"Lunge",
@@ -140,7 +140,7 @@
 		"Overload",
 		"Surge"
 	],
-	"2025-06-09-CloakerPuzzle.scn": [
+	"2025-06-09-CloakerPuzzle.tscn": [
 		"Martyr",
 		"Pound",
 		"Lunge",
@@ -148,7 +148,7 @@
 		"Echo",
 		"Lunge"
 	],
-	"2025-06-11-CyclopsPuzzle.scn": [
+	"2025-06-11-CyclopsPuzzle.tscn": [
 		"Trace",
 		"Burst",
 		"Rebound",
@@ -156,7 +156,7 @@
 		"Rebound",
 		"Thunderbolt"
 	],
-	"2025-06-13-GeniePuzzle.scn": [
+	"2025-06-13-GeniePuzzle.tscn": [
 		"Rage",
 		"Snipe",
 		"Rebound",
@@ -164,7 +164,7 @@
 		"Overload",
 		"Burst"
 	],
-	"2025-06-15-MummyPuzzle.scn": [
+	"2025-06-15-MummyPuzzle.tscn": [
 		"Inspiration",
 		"Martyr",
 		"Pound",
@@ -172,7 +172,7 @@
 		"Lunge",
 		"Echo"
 	],
-	"2025-06-17-AnimatedArmorPuzzle.scn": [
+	"2025-06-17-AnimatedArmorPuzzle.tscn": [
 		"Martyr",
 		"Inspiration",
 		"Mend",
@@ -180,7 +180,7 @@
 		"Echo",
 		"Lunge"
 	],
-	"2025-06-19-SaplingPuzzle.scn": [
+	"2025-06-19-SaplingPuzzle.tscn": [
 		"Tribute",
 		"Gift",
 		"Thunderbolt",
@@ -189,7 +189,7 @@
 		"Pound",
 		"Lunge"
 	],
-	"2025-06-21-SoldierPuzzle.scn": [
+	"2025-06-21-SoldierPuzzle.tscn": [
 		"Lunge",
 		"Slash",
 		"Lunge",
@@ -198,7 +198,7 @@
 		"Slash",
 		"Revive"
 	],
-	"2025-06-24-FlameGiantPuzzle.scn": [
+	"2025-06-24-FlameGiantPuzzle.tscn": [
 		"Bargain",
 		"Lunge",
 		"Revive",
@@ -206,14 +206,14 @@
 		"Trace",
 		"Rage"
 	],
-	"2025-06-26-OozePuzzle.scn": [
+	"2025-06-26-OozePuzzle.tscn": [
 		"Shovel",
 		"Lunge",
 		"Slash",
 		"Revive",
 		"Trace"
 	],
-	"2025-06-28-Puzzle.scn": [
+	"2025-06-28-Puzzle.tscn": [
 		"Fang",
 		"Rage",
 		"Fang",
@@ -221,7 +221,7 @@
 		"Mend",
 		"Burst"
 	],
-	"2025-06-30-GolemPuzzle.scn": [
+	"2025-06-30-GolemPuzzle.tscn": [
 		"Surge",
 		"Tribute",
 		"Revive",
@@ -230,7 +230,7 @@
 		"Lunge",
 		"Slash"
 	],
-	"2025-07-02-WidowPuzzle.scn": [
+	"2025-07-02-WidowPuzzle.tscn": [
 		"Shield",
 		"Pound",
 		"Echo",
@@ -239,7 +239,7 @@
 		"Lunge",
 		"Scrap"
 	],
-	"2025-07-04-VampirePuzzle.scn": [
+	"2025-07-04-VampirePuzzle.tscn": [
 		"Martyr",
 		"Shield",
 		"Fang",
@@ -248,14 +248,14 @@
 		"Echo",
 		"Echo"
 	],
-	"2025-07-06-CreepingVinePuzzle.scn": [
+	"2025-07-06-CreepingVinePuzzle.tscn": [
 		"Martyr",
 		"Bargain",
 		"Pound",
 		"Fang",
 		"Mend"
 	],
-	"2025-07-08-EarthElementalPuzzle.scn": [
+	"2025-07-08-EarthElementalPuzzle.tscn": [
 		"Burst",
 		"Echo",
 		"Inspiration",
@@ -263,7 +263,7 @@
 		"Surge",
 		"Fang"
 	],
-	"2025-07-10-HellHoundPuzzle.scn": [
+	"2025-07-10-HellHoundPuzzle.tscn": [
 		"Burst",
 		"Gift",
 		"Martyr",
@@ -271,14 +271,14 @@
 		"Mend",
 		"Surge"
 	],
-	"2025-07-12-EarthwormPuzzle.scn": [
+	"2025-07-12-EarthwormPuzzle.tscn": [
 		"Shovel",
 		"Trace",
 		"Surge",
 		"Rebound",
 		"Scrap"
 	],
-	"2025-07-14-MadScientistPuzzle.scn": [
+	"2025-07-14-MadScientistPuzzle.tscn": [
 		"Burst",
 		"Inspiration",
 		"Martyr",
@@ -287,7 +287,7 @@
 		"Fang",
 		"Fang"
 	],
-	"2025-07-16-CrawlerPuzzle.scn": [
+	"2025-07-16-CrawlerPuzzle.tscn": [
 		"Overload",
 		"Echo",
 		"Haunt",
@@ -296,7 +296,7 @@
 		"Echo",
 		"Inspiration"
 	],
-	"2025-07-18-BeholderPuzzle.scn": [
+	"2025-07-18-BeholderPuzzle.tscn": [
 		"Thunderbolt",
 		"Inspiration",
 		"Martyr",
@@ -305,14 +305,14 @@
 		"Overload",
 		"Overload"
 	],
-	"2025-07-20-YetiPuzzle.scn": [
+	"2025-07-20-YetiPuzzle.tscn": [
 		"Lunge",
 		"Pound",
 		"Echo",
 		"Target",
 		"Trace"
 	],
-	"2025-07-22-SnipeBirdPuzzle.scn": [
+	"2025-07-22-SnipeBirdPuzzle.tscn": [
 		"Slash",
 		"Haunt",
 		"Snipe",
@@ -321,7 +321,7 @@
 		"Tribute",
 		"Surge"
 	],
-	"2025-07-24-TentaclePiratePuzzle.scn": [
+	"2025-07-24-TentaclePiratePuzzle.tscn": [
 		"Target",
 		"Snipe",
 		"Tribute",
@@ -330,7 +330,7 @@
 		"Surge",
 		"Gift"
 	],
-	"2025-07-26-DisplacerBeastPuzzle.scn": [
+	"2025-07-26-DisplacerBeastPuzzle.tscn": [
 		"Target",
 		"Haunt",
 		"Echo",
@@ -339,7 +339,7 @@
 		"Pound",
 		"Pound"
 	],
-	"2025-07-28-LightningElementalPuzzle.scn": [
+	"2025-07-28-LightningElementalPuzzle.tscn": [
 		"Scrap",
 		"Overload",
 		"Thunderbolt",
@@ -347,7 +347,7 @@
 		"Thunderbolt",
 		"Pound"
 	],
-	"2025-07-30-ThunderbirdPuzzle.scn": [
+	"2025-07-30-ThunderbirdPuzzle.tscn": [
 		"Echo",
 		"Thunderbolt",
 		"Tribute",
@@ -356,14 +356,14 @@
 		"Fang",
 		"Rebound"
 	],
-	"2025-08-01-GravediggerPuzzle.scn": [
+	"2025-08-01-GravediggerPuzzle.tscn": [
 		"Shovel",
 		"Shovel",
 		"Revive",
 		"Gift",
 		"Trace"
 	],
-	"2025-08-03-NogglePuzzle.scn": [
+	"2025-08-03-NogglePuzzle.tscn": [
 		"Martyr",
 		"Bargain",
 		"Revive",
@@ -371,7 +371,7 @@
 		"Mend",
 		"Flurry"
 	],
-	"2025-08-05-ManaImpPuzzle.scn": [
+	"2025-08-05-ManaImpPuzzle.tscn": [
 		"Echo",
 		"Empty Fist",
 		"Haunt",
@@ -380,7 +380,7 @@
 		"Revive",
 		"Rebound"
 	],
-	"2025-08-07-CollectorPuzzle.scn": [
+	"2025-08-07-CollectorPuzzle.tscn": [
 		"Inspiration",
 		"Shield",
 		"Empty Fist",
@@ -389,7 +389,7 @@
 		"Potion",
 		"Target"
 	],
-	"2025-08-09-DemogorgonPuzzle.scn": [
+	"2025-08-09-DemogorgonPuzzle.tscn": [
 		"Lunge",
 		"Trace",
 		"Revive",
@@ -398,21 +398,21 @@
 		"Rage",
 		"Potion"
 	],
-	"2025-08-11-DecrepitMousePuzzle.scn": [
+	"2025-08-11-DecrepitMousePuzzle.tscn": [
 		"Empty Fist",
 		"Burst",
 		"Bargain",
 		"Burst",
 		"Burst"
 	],
-	"2025-08-13-OrigamiPuzzle.scn": [
+	"2025-08-13-OrigamiPuzzle.tscn": [
 		"Empty Fist",
 		"Echo",
 		"Fang",
 		"Flurry",
 		"Fang"
 	],
-	"2025-08-15-DustDroidPuzzle.scn": [
+	"2025-08-15-DustDroidPuzzle.tscn": [
 		"Overload",
 		"Overload",
 		"Surge",
@@ -421,7 +421,7 @@
 		"Overload",
 		"Surge"
 	],
-	"2025-08-17-FunambulistPuzzle.scn": [
+	"2025-08-17-FunambulistPuzzle.tscn": [
 		"Haunt",
 		"Heartbeat",
 		"Martyr",
@@ -430,7 +430,7 @@
 		"Thunderbolt",
 		"Thunderbolt"
 	],
-	"2025-08-19-TentacleCultistPuzzle.scn": [
+	"2025-08-19-TentacleCultistPuzzle.tscn": [
 		"Rage",
 		"Lunge",
 		"Lunge",
@@ -438,7 +438,7 @@
 		"Tribute",
 		"Rebound"
 	],
-	"2025-08-21-GargoylePuzzle.scn": [
+	"2025-08-21-GargoylePuzzle.tscn": [
 		"Empty Fist",
 		"Echo",
 		"Wound",
@@ -446,7 +446,7 @@
 		"Revive",
 		"Haunt"
 	],
-	"2025-08-23-AlchemistPuzzle.scn": [
+	"2025-08-23-AlchemistPuzzle.tscn": [
 		"Target",
 		"Potion",
 		"Heartbeat",
@@ -455,7 +455,7 @@
 		"Revive",
 		"Mend"
 	],
-	"2025-08-25-MerfolkPuzzle.scn": [
+	"2025-08-25-MerfolkPuzzle.tscn": [
 		"Potion",
 		"Overload",
 		"Heartbeat",
@@ -464,7 +464,7 @@
 		"Revive",
 		"Martyr"
 	],
-	"2025-08-27-ScarecrowPuzzle.scn": [
+	"2025-08-27-ScarecrowPuzzle.tscn": [
 		"Flurry",
 		"Ignite",
 		"Ignite",
@@ -473,7 +473,7 @@
 		"Scrap",
 		"Trace"
 	],
-	"2025-08-29-WitchPuzzle.scn": [
+	"2025-08-29-WitchPuzzle.tscn": [
 		"Echo",
 		"Venom",
 		"Snipe",
@@ -482,7 +482,7 @@
 		"Gift",
 		"Echo"
 	],
-	"2025-08-31-RocPuzzle.scn": [
+	"2025-08-31-RocPuzzle.tscn": [
 		"Venom",
 		"Ignite",
 		"Ignite",
@@ -491,13 +491,13 @@
 		"Overload",
 		"Scrap"
 	],
-	"2025-09-01-BeetlePuzzle.scn": [
+	"2025-09-01-BeetlePuzzle.tscn": [
 		"Empty Fist",
 		"Wound",
 		"Revive",
 		"Rebound"
 	],
-	"2025-09-03-AssassinPuzzle.scn": [
+	"2025-09-03-AssassinPuzzle.tscn": [
 		"Burst",
 		"Echo",
 		"Echo",
@@ -506,7 +506,7 @@
 		"Thunderbolt",
 		"Target"
 	],
-	"2025-09-05-DirewolfPuzzle.scn": [
+	"2025-09-05-DirewolfPuzzle.tscn": [
 		"Echo",
 		"Fang",
 		"Mend",
@@ -515,7 +515,7 @@
 		"Scrap",
 		"Target"
 	],
-	"2025-09-07-FlumphPuzzle.scn": [
+	"2025-09-07-FlumphPuzzle.tscn": [
 		"Bargain",
 		"Exchange",
 		"Gift",
@@ -524,7 +524,7 @@
 		"Overload",
 		"Scrap"
 	],
-	"2025-09-09-WarlockPuzzle.scn": [
+	"2025-09-09-WarlockPuzzle.tscn": [
 		"Echo",
 		"Exchange",
 		"Heartbeat",
@@ -533,12 +533,12 @@
 		"Revive",
 		"Target"
 	],
-	"2025-09-11-SnowmanPuzzle.scn": [
+	"2025-09-11-SnowmanPuzzle.tscn": [
 		"Rebound",
 		"Trace",
 		"Burst"
 	],
-	"2025-09-13-WaspSwarmPuzzle.scn": [
+	"2025-09-13-WaspSwarmPuzzle.tscn": [
 		"Venom",
 		"Rebound",
 		"Rebound",
@@ -547,7 +547,7 @@
 		"Flurry",
 		"Rage"
 	],
-	"2025-09-15-GiantWurmPuzzle.scn": [
+	"2025-09-15-GiantWurmPuzzle.tscn": [
 		"Echo",
 		"Empty Fist",
 		"Haunt",
@@ -556,7 +556,7 @@
 		"Slash",
 		"Venom"
 	],
-	"2025-09-17-VoidCreaturePuzzle.scn": [
+	"2025-09-17-VoidCreaturePuzzle.tscn": [
 		"Trace",
 		"Rebound",
 		"Thunderbolt",
@@ -565,7 +565,7 @@
 		"Burst",
 		"Surge"
 	],
-	"2025-09-19-DeityPuzzle.scn": [
+	"2025-09-19-DeityPuzzle.tscn": [
 		"Snipe",
 		"Wound",
 		"Burst",
@@ -574,14 +574,14 @@
 		"Tribute",
 		"Trace"
 	],
-	"2025-09-22-MoocherPuzzle.scn": [
+	"2025-09-22-MoocherPuzzle.tscn": [
 		"Bargain",
 		"Rebound",
 		"Revive",
 		"Burst",
 		"Scrap"
 	],
-	"2025-09-23-RedeyePuzzle.scn": [
+	"2025-09-23-RedeyePuzzle.tscn": [
 		"Fang",
 		"Snipe",
 		"Heartbeat",
@@ -590,7 +590,7 @@
 		"Pound",
 		"Lunge"
 	],
-	"2025-09-24-FirebugPuzzle.scn": [
+	"2025-09-24-FirebugPuzzle.tscn": [
 		"Ignite",
 		"Bargain",
 		"Rebound",
@@ -599,7 +599,7 @@
 		"Overload",
 		"Ignite"
 	],
-	"2025-09-25-LichPuzzle.scn": [
+	"2025-09-25-LichPuzzle.tscn": [
 		"Exchange",
 		"Rebound",
 		"Rebound",
@@ -608,7 +608,7 @@
 		"Heartbeat",
 		"Inspiration"
 	],
-	"2025-09-26-PoltergeistPuzzle.scn": [
+	"2025-09-26-PoltergeistPuzzle.tscn": [
 		"Echo",
 		"Haunt",
 		"Rage",
@@ -617,7 +617,7 @@
 		"Tribute",
 		"Tribute"
 	],
-	"2025-09-29-ChupacabraPuzzle.scn": [
+	"2025-09-29-ChupacabraPuzzle.tscn": [
 		"Heartbeat",
 		"Heartbeat",
 		"Martyr",
@@ -626,7 +626,7 @@
 		"Shield",
 		"Target"
 	],
-	"2025-09-30-ArtificerPuzzle.scn": [
+	"2025-09-30-ArtificerPuzzle.tscn": [
 		"Bargain",
 		"Ignite",
 		"Thunderbolt",
@@ -634,7 +634,7 @@
 		"Spark",
 		"Revive"
 	],
-	"2025-10-01-BuzzsawDroidPuzzle.scn": [
+	"2025-10-01-BuzzsawDroidPuzzle.tscn": [
 		"Echo",
 		"Martyr",
 		"Pound",
@@ -643,7 +643,7 @@
 		"Snipe",
 		"Thunderbolt"
 	],
-	"2025-10-02-RedDragonPuzzle.scn": [
+	"2025-10-02-RedDragonPuzzle.tscn": [
 		"Bargain",
 		"Gift",
 		"Haunt",
@@ -652,7 +652,7 @@
 		"Revive",
 		"Rebound"
 	],
-	"2025-10-03-BarbarianPuzzle.scn": [
+	"2025-10-03-BarbarianPuzzle.tscn": [
 		"Flurry",
 		"Lunge",
 		"Rage",
@@ -661,7 +661,7 @@
 		"Target",
 		"Empty Fist"
 	],
-	"2025-10-06-GiftmanPuzzle.scn": [
+	"2025-10-06-GiftmanPuzzle.tscn": [
 		"Gift",
 		"Gift",
 		"Gift",
@@ -670,7 +670,7 @@
 		"Shovel",
 		"Shovel"
 	],
-	"2025-10-07-PorcupinePuzzle.scn": [
+	"2025-10-07-PorcupinePuzzle.tscn": [
 		"Inspiration",
 		"Heartbeat",
 		"Exchange",
@@ -679,7 +679,7 @@
 		"Bargain",
 		"Fang"
 	],
-	"2025-10-08-FiendPuzzle.scn": [
+	"2025-10-08-FiendPuzzle.tscn": [
 		"Bargain",
 		"Martyr",
 		"Potion",
@@ -688,7 +688,7 @@
 		"Rebound",
 		"Fang"
 	],
-	"2025-10-09-SparkGiantPuzzle.scn": [
+	"2025-10-09-SparkGiantPuzzle.tscn": [
 		"Ignite",
 		"Ignite",
 		"Ignite",
@@ -696,7 +696,7 @@
 		"Bargain",
 		"Inspiration"
 	],
-	"2025-10-10-ShoggothPuzzle.scn": [
+	"2025-10-10-ShoggothPuzzle.tscn": [
 		"Burst",
 		"Echo",
 		"Reverberate",
@@ -705,7 +705,7 @@
 		"Surge",
 		"Wound"
 	],
-	"2025-10-13-CherubPuzzle.scn": [
+	"2025-10-13-CherubPuzzle.tscn": [
 		"Inspiration",
 		"Heartbeat",
 		"Empty Fist",
@@ -713,7 +713,7 @@
 		"Rebound",
 		"Exchange"
 	],
-	"2025-10-14-PinkyPuzzle.scn": [
+	"2025-10-14-PinkyPuzzle.tscn": [
 		"Echo",
 		"Haunt",
 		"Martyr",
@@ -722,7 +722,7 @@
 		"Target",
 		"Tribute"
 	],
-	"2025-10-15-WaterDrakePuzzle.scn": [
+	"2025-10-15-WaterDrakePuzzle.tscn": [
 		"Ignite",
 		"Reverberate",
 		"Ignite",
@@ -730,7 +730,7 @@
 		"Bargain",
 		"Lunge"
 	],
-	"2025-10-16-PterosaurPuzzle.scn": [
+	"2025-10-16-PterosaurPuzzle.tscn": [
 		"Bargain",
 		"Inspiration",
 		"Rebound",
@@ -738,14 +738,14 @@
 		"Thunderbolt",
 		"Target"
 	],
-	"2025-10-17-TimelordPuzzle.scn": [
+	"2025-10-17-TimelordPuzzle.tscn": [
 		"Echo",
 		"Trace",
 		"Reverberate",
 		"Ignite",
 		"Venom"
 	],
-	"2025-10-20-ChargerPuzzle.scn": [
+	"2025-10-20-ChargerPuzzle.tscn": [
 		"Inspiration",
 		"Reverberate",
 		"Rebound",
@@ -754,7 +754,7 @@
 		"Inspiration",
 		"Thunderbolt"
 	],
-	"2025-10-21-GraveRobber-Puzzle.scn": [
+	"2025-10-21-GraveRobber-Puzzle.tscn": [
 		"Revive",
 		"Revive",
 		"Revive",
@@ -763,7 +763,7 @@
 		"Shovel",
 		"Haunt"
 	],
-	"2025-10-22-PinkSlime-Puzzle.scn": [
+	"2025-10-22-PinkSlime-Puzzle.tscn": [
 		"Shovel",
 		"Snipe",
 		"Snipe",
@@ -772,7 +772,7 @@
 		"Waste",
 		"Wound"
 	],
-	"2025-10-23-FlailSnail-Puzzle.scn": [
+	"2025-10-23-FlailSnail-Puzzle.tscn": [
 		"Martyr",
 		"Martyr",
 		"Reverberate",
@@ -781,7 +781,7 @@
 		"Waste",
 		"Fang"
 	],
-	"2025-10-24-TimeDemon-Puzzle.scn": [
+	"2025-10-24-TimeDemon-Puzzle.tscn": [
 		"Bargain",
 		"Haunt",
 		"Pound",
@@ -790,7 +790,7 @@
 		"Revive",
 		"Revive"
 	],
-	"2025-10-27-SerpentsPuzzle.scn": [
+	"2025-10-27-SerpentsPuzzle.tscn": [
 		"Haunt",
 		"Flurry",
 		"Echo",
@@ -799,7 +799,7 @@
 		"Burst",
 		"Surge"
 	],
-	"2025-10-28-IceGolemPuzzle.scn": [
+	"2025-10-28-IceGolemPuzzle.tscn": [
 		"Echo",
 		"Empty Fist",
 		"Flurry",
@@ -808,7 +808,7 @@
 		"Rage",
 		"Shovel"
 	],
-	"2025-10-29-FairyPuzzle.scn": [
+	"2025-10-29-FairyPuzzle.tscn": [
 		"Rebound",
 		"Reverberate",
 		"Exchange",
@@ -816,14 +816,14 @@
 		"Scrap",
 		"Inspiration"
 	],
-	"2025-10-30-GiantBatPuzzle.scn": [
+	"2025-10-30-GiantBatPuzzle.tscn": [
 		"Fang",
 		"Mend",
 		"Trace",
 		"Reverberate",
 		"Trace"
 	],
-	"2025-10-31-ZombiePuzzle.scn": [
+	"2025-10-31-ZombiePuzzle.tscn": [
 		"Snipe",
 		"Revive",
 		"Revive",
@@ -832,14 +832,14 @@
 		"Haunt",
 		"Waste"
 	],
-	"2025-11-03-LeprechaunPuzzle.scn": [
+	"2025-11-03-LeprechaunPuzzle.tscn": [
 		"Pound",
 		"Wound",
 		"Shield",
 		"Martyr",
 		"Revive"
 	],
-	"2025-11-04-CarBatteryPuzzle.scn": [
+	"2025-11-04-CarBatteryPuzzle.tscn": [
 		"Ignite",
 		"Overload",
 		"Revive",
@@ -848,7 +848,7 @@
 		"Overload",
 		"Ignite"
 	],
-	"2025-11-05-RavenPuzzle.scn": [
+	"2025-11-05-RavenPuzzle.tscn": [
 		"Haunt",
 		"Overload",
 		"Reverberate",
@@ -857,7 +857,7 @@
 		"Thunderbolt",
 		"Waste"
 	],
-	"2025-11-06-BlueDragonPuzzle.scn": [
+	"2025-11-06-BlueDragonPuzzle.tscn": [
 		"Haunt",
 		"Flurry",
 		"Reverberate",
@@ -865,7 +865,7 @@
 		"Wound",
 		"Venom"
 	],
-	"2025-11-07-BigfootPuzzle.scn": [
+	"2025-11-07-BigfootPuzzle.tscn": [
 		"Venom",
 		"Ignite",
 		"Empty Fist",
@@ -874,7 +874,7 @@
 		"Reverberate",
 		"Ignite"
 	],
-	"2025-11-10-DemonNursePuzzle.scn": [
+	"2025-11-10-DemonNursePuzzle.tscn": [
 		"Martyr",
 		"Potion",
 		"Potion",
@@ -883,7 +883,7 @@
 		"Scrap",
 		"Shield"
 	],
-	"2025-11-11-GhostPiratePuzzle.scn": [
+	"2025-11-11-GhostPiratePuzzle.tscn": [
 		"Haunt",
 		"Haunt",
 		"Lunge",
@@ -892,7 +892,7 @@
 		"Rebound",
 		"Echo"
 	],
-	"2025-11-12-DelversPuzzle.scn": [
+	"2025-11-12-DelversPuzzle.tscn": [
 		"Snipe",
 		"Surge",
 		"Scrap",
@@ -901,7 +901,7 @@
 		"Surge",
 		"Shovel"
 	],
-	"2025-11-13-RatKingPuzzle.scn": [
+	"2025-11-13-RatKingPuzzle.tscn": [
 		"Martyr",
 		"Trace",
 		"Reverberate",
@@ -909,7 +909,7 @@
 		"Shield",
 		"Pound"
 	],
-	"2025-11-14-CannoneerPuzzle.scn": [
+	"2025-11-14-CannoneerPuzzle.tscn": [
 		"Rebound",
 		"Rebound",
 		"Rebound",
@@ -918,14 +918,14 @@
 		"Snipe",
 		"Burst"
 	],
-	"2025-11-17-TargetDummyPuzzle.scn": [
+	"2025-11-17-TargetDummyPuzzle.tscn": [
 		"Martyr",
 		"Inspiration",
 		"Reverberate",
 		"Potion",
 		"Thunderbolt"
 	],
-	"2025-11-18-HydraPuzzle.scn": [
+	"2025-11-18-HydraPuzzle.tscn": [
 		"Fang",
 		"Inspiration",
 		"Heartbeat",
@@ -934,7 +934,7 @@
 		"Rebound",
 		"Rebound"
 	],
-	"2025-11-19-GiantEelPuzzle.scn": [
+	"2025-11-19-GiantEelPuzzle.tscn": [
 		"Empty Fist",
 		"Thunderbolt",
 		"Pound",
@@ -943,7 +943,7 @@
 		"Overload",
 		"Venom"
 	],
-	"2025-11-20-PufferfishPuzzle.scn": [
+	"2025-11-20-PufferfishPuzzle.tscn": [
 		"Burst",
 		"Empty Fist",
 		"Surge",
@@ -952,7 +952,7 @@
 		"Trace",
 		"Haunt"
 	],
-	"2025-11-21-CursedCampfirePuzzle.scn": [
+	"2025-11-21-CursedCampfirePuzzle.tscn": [
 		"Spark",
 		"Scrap",
 		"Reverberate",
@@ -961,27 +961,27 @@
 		"Trace",
 		"Waste"
 	],
-	"2025-11-24-MantisShrimpPuzzle.scn": [
+	"2025-11-24-MantisShrimpPuzzle.tscn": [
 		"Haunt",
 		"Flurry",
 		"Reverberate",
 		"Rage"
 	],
-	"2025-11-25-DrFrankensteinPuzzle.scn": [
+	"2025-11-25-DrFrankensteinPuzzle.tscn": [
 		"Wound",
 		"Thunderbolt",
 		"Reverberate",
 		"Trace",
 		"Overload"
 	],
-	"2025-11-26-FrankensteinsMonsterPuzzle.scn": [
+	"2025-11-26-FrankensteinsMonsterPuzzle.tscn": [
 		"Haunt",
 		"Trace",
 		"Reverberate",
 		"Overload",
 		"Thunderbolt"
 	],
-	"2025-11-27-DwarvenMinerPuzzle.scn": [
+	"2025-11-27-DwarvenMinerPuzzle.tscn": [
 		"Echo",
 		"Ignite",
 		"Martyr",
@@ -990,7 +990,7 @@
 		"Reverberate",
 		"Shield"
 	],
-	"2025-11-28-MonkPuzzle.scn": [
+	"2025-11-28-MonkPuzzle.tscn": [
 		"Empty Fist",
 		"Echo",
 		"Echo",
@@ -999,7 +999,7 @@
 		"Exchange",
 		"Exchange"
 	],
-	"2025-12-01-MushroomPuzzle.scn": [
+	"2025-12-01-MushroomPuzzle.tscn": [
 		"Capacitor",
 		"Capacitor",
 		"Capacitor",
@@ -1008,11 +1008,11 @@
 		"Slash",
 		"Spear"
 	],
-	"2025-12-02-FungiPuzzle.scn": [
+	"2025-12-02-FungiPuzzle.tscn": [
 		"Rebound",
 		"Armory"
 	],
-	"2025-12-03-TermitesPuzzle.scn": [
+	"2025-12-03-TermitesPuzzle.tscn": [
 		"Echo",
 		"Echo",
 		"Echo",
@@ -1021,7 +1021,7 @@
 		"Venom",
 		"Flurry"
 	],
-	"2025-12-04-SpeedElfPuzzle.scn": [
+	"2025-12-04-SpeedElfPuzzle.tscn": [
 		"Thunderbolt",
 		"Slash",
 		"Target",
@@ -1030,7 +1030,7 @@
 		"Trace",
 		"Reverberate"
 	],
-	"2025-12-05-TitanPuzzle.scn": [
+	"2025-12-05-TitanPuzzle.tscn": [
 		"Heartbeat",
 		"Capacitor",
 		"Exchange",
@@ -1038,13 +1038,13 @@
 		"Reverberate",
 		"Revive"
 	],
-	"2025-12-08-BanditPuzzle.scn": [
+	"2025-12-08-BanditPuzzle.tscn": [
 		"Exchange",
 		"Spear",
 		"Wound",
 		"Wound"
 	],
-	"2025-12-09-LivingShadowPuzzle.scn": [
+	"2025-12-09-LivingShadowPuzzle.tscn": [
 		"Cauterize",
 		"Heartbeat",
 		"Mend",
@@ -1052,7 +1052,7 @@
 		"Mend",
 		"Mend"
 	],
-	"2025-12-10-AdditionSignPuzle.scn": [
+	"2025-12-10-AdditionSignPuzle.tscn": [
 		"Venom",
 		"Slash",
 		"Spear",
@@ -1060,7 +1060,7 @@
 		"Cleave",
 		"Armory"
 	],
-	"2025-12-11-WraithPuzzle.scn": [
+	"2025-12-11-WraithPuzzle.tscn": [
 		"Cauterize",
 		"Inspiration",
 		"Martyr",
@@ -1068,7 +1068,7 @@
 		"Trace",
 		"Armory"
 	],
-	"2025-12-12-OwlbearPuzzle.scn": [
+	"2025-12-12-OwlbearPuzzle.tscn": [
 		"Rebound",
 		"Revive",
 		"Capacitor",
@@ -1076,7 +1076,7 @@
 		"Fang",
 		"Cauterize"
 	],
-	"2026-01-05-RadiantSlugPuzzle.scn": [
+	"2026-01-05-RadiantSlugPuzzle.tscn": [
 		"Echo",
 		"Spear",
 		"Thunderbolt",
@@ -1084,14 +1084,14 @@
 		"Bargain",
 		"Capacitor"
 	],
-	"2026-01-06-BlackKnightPuzzle.scn": [
+	"2026-01-06-BlackKnightPuzzle.tscn": [
 		"Armory",
 		"Armory",
 		"Echo",
 		"Target",
 		"Wound"
 	],
-	"2026-01-07-VendingMachinePuzzle.scn": [
+	"2026-01-07-VendingMachinePuzzle.tscn": [
 		"Armory",
 		"Armory",
 		"Rage",
@@ -1099,21 +1099,21 @@
 		"Capacitor",
 		"Capacitor"
 	],
-	"2026-01-08-GiantCrabPuzzle.scn": [
+	"2026-01-08-GiantCrabPuzzle.tscn": [
 		"Armory",
 		"Echo",
 		"Overload",
 		"Overload",
 		"Reverberate"
 	],
-	"2026-01-09-PaladinPuzzle.scn": [
+	"2026-01-09-PaladinPuzzle.tscn": [
 		"Cauterize",
 		"Inspiration",
 		"Trace",
 		"Revive",
 		"Thunderbolt"
 	],
-	"2026-01-13-AncientTreePuzzle.scn": [
+	"2026-01-13-AncientTreePuzzle.tscn": [
 		"Bargain",
 		"Thunderbolt",
 		"Lunge",
@@ -1122,7 +1122,7 @@
 		"Capacitor",
 		"Capacitor"
 	],
-	"2026-01-14-WeatherWitchPuzzle.scn": [
+	"2026-01-14-WeatherWitchPuzzle.tscn": [
 		"Armory",
 		"Capacitor",
 		"Capacitor",
@@ -1131,7 +1131,7 @@
 		"Target",
 		"Thunderbolt"
 	],
-	"2026-01-15-ElderPuzzle.scn": [
+	"2026-01-15-ElderPuzzle.tscn": [
 		"Echo",
 		"Reverberate",
 		"Scrap",
@@ -1140,7 +1140,7 @@
 		"Rage",
 		"Rage"
 	],
-	"2026-01-16-GreenDragonPuzzle.scn": [
+	"2026-01-16-GreenDragonPuzzle.tscn": [
 		"Flurry",
 		"Wound",
 		"Gift",
@@ -1149,14 +1149,14 @@
 		"Rebound",
 		"Reverberate"
 	],
-	"2026-01-19-ScorpionPuzzle.scn": [
+	"2026-01-19-ScorpionPuzzle.tscn": [
 		"Venom",
 		"Cleanse",
 		"Cleave",
 		"Slash",
 		"Slash"
 	],
-	"2026-01-20-ModronPuzzle.scn": [
+	"2026-01-20-ModronPuzzle.tscn": [
 		"Inspiration",
 		"Empty Fist",
 		"Surge",
@@ -1165,14 +1165,14 @@
 		"Inspiration",
 		"Empty Fist"
 	],
-	"2026-01-21-ButlerPuzzle.scn": [
+	"2026-01-21-ButlerPuzzle.tscn": [
 		"Revive",
 		"Echo",
 		"Spark",
 		"Reverberate",
 		"Inspiration"
 	],
-	"2026-01-22-AxebeakPuzzle.scn": [
+	"2026-01-22-AxebeakPuzzle.tscn": [
 		"Cauterize",
 		"Overload",
 		"Scrap",
@@ -1181,14 +1181,14 @@
 		"Wound",
 		"Cleave"
 	],
-	"2026-01-23-HarpyPuzzle.scn": [
+	"2026-01-23-HarpyPuzzle.tscn": [
 		"Slash",
 		"Scrap",
 		"Tribute",
 		"Trace",
 		"Revive"
 	],
-	"2026-01-26-ViperPuzzle.scn": [
+	"2026-01-26-ViperPuzzle.tscn": [
 		"Fang",
 		"Fang",
 		"Flurry",
@@ -1197,7 +1197,7 @@
 		"Wound",
 		"Wound"
 	],
-	"2026-01-27-WarriorPuzzle.scn": [
+	"2026-01-27-WarriorPuzzle.tscn": [
 		"Armory",
 		"Flurry",
 		"Flurry",
@@ -1205,14 +1205,14 @@
 		"Sharpen",
 		"Gift"
 	],
-	"2026-01-28-NinjaPuzzle.scn": [
+	"2026-01-28-NinjaPuzzle.tscn": [
 		"Cooperate",
 		"Flurry",
 		"Rage",
 		"Target",
 		"Thunderbolt"
 	],
-	"2026-01-29-EvilCarrotPuzzle.scn": [
+	"2026-01-29-EvilCarrotPuzzle.tscn": [
 		"Empty Fist",
 		"Flurry",
 		"Shovel",
@@ -1221,7 +1221,7 @@
 		"Rebound",
 		"Cooperate"
 	],
-	"2026-01-30-HammerheadPuzzle.scn": [
+	"2026-01-30-HammerheadPuzzle.tscn": [
 		"Target",
 		"Berserk",
 		"Sharpen",
@@ -1230,7 +1230,7 @@
 		"Empty Fist",
 		"Slash"
 	],
-	"2026-02-02-CarniverousPlantPuzzle.scn": [
+	"2026-02-02-CarniverousPlantPuzzle.tscn": [
 		"Drain",
 		"Potion",
 		"Berserk",
@@ -1239,7 +1239,7 @@
 		"Fang",
 		"Fang"
 	],
-	"2026-02-03-WolverinePuzzle.scn": [
+	"2026-02-03-WolverinePuzzle.tscn": [
 		"Berserk",
 		"Drain",
 		"Frenzy",
@@ -1248,18 +1248,18 @@
 		"Inspiration",
 		"Inspiration"
 	],
-	"Puzzle.scn": [
+	"Puzzle.tscn": [
 		"Focus",
 		"Focus",
 		"Focus"
 	],
-	"TestPuzzle.scn": [
+	"TestPuzzle.tscn": [
 		"Rebound",
 		"Snipe",
 		"Reverberate",
 		"Scrap"
 	],
-	"Tutorial-Puzzle.scn": [
+	"Tutorial-Puzzle.tscn": [
 		"Echo",
 		"Slash",
 		"Wound"

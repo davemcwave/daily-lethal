@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cs8w3kn12erv4"]
+
+[ext_resource type="Script" path="res://Scripts/DamageIfDiscardEmptyCardEffect.gd" id="1_uqx2g"]
+
+[node name="DamageIfDiscardEmptyCardEffect" type="Node2D"]
+script = ExtResource("1_uqx2g")
+effect_name = "Damage If Discard Empty"
+effect_description = "Deal damage if discard pile is empty"

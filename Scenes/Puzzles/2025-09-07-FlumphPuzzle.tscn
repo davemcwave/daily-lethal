@@ -1,0 +1,23 @@
+[gd_scene load_steps=10 format=3 uid="uid://tyxgateo25x4"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_x38e5"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/flumph.png" id="2_pv2kg"]
+[ext_resource type="PackedScene" path="res://Scenes/BargainCard.tscn" id="3_p6k7b"]
+[ext_resource type="PackedScene" path="res://Scenes/ExchangeCard.tscn" id="4_r3kbr"]
+[ext_resource type="PackedScene" path="res://Scenes/GiftCard.tscn" id="5_un5hb"]
+[ext_resource type="PackedScene" path="res://Scenes/HeartbeatCard.tscn" id="6_g82kb"]
+[ext_resource type="PackedScene" path="res://Scenes/InspirationCard.tscn" id="7_4dsml"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="8_ndpra"]
+[ext_resource type="PackedScene" path="res://Scenes/ScrapCard.tscn" id="9_08dw6"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_x38e5")
+puzzle_date = "2025-09-07"
+previous_puzzle_scene = "uid://dk43dreai6xq"
+next_puzzle_scene = "uid://cxgi2hfmbaoct"
+enemy_health = 7
+enemy_name = "Flumph"
+enemy_icon_texture = ExtResource("2_pv2kg")
+player_health = 2
+player_energy = 0
+card_scenes = [ExtResource("3_p6k7b"), ExtResource("4_r3kbr"), ExtResource("5_un5hb"), ExtResource("6_g82kb"), ExtResource("7_4dsml"), ExtResource("8_ndpra"), ExtResource("9_08dw6")]

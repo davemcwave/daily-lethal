@@ -1,0 +1,24 @@
+[gd_scene load_steps=10 format=3 uid="uid://c6j04r6rw5fe8"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_4ep01"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/acorn-lethal.png" id="2_4qipb"]
+[ext_resource type="PackedScene" path="res://Scenes/TributeCard.tscn" id="3_pcb7l"]
+[ext_resource type="PackedScene" path="res://Scenes/GiftCard.tscn" id="4_sob7w"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="5_tyvsv"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="6_oaeg5"]
+[ext_resource type="PackedScene" path="res://Scenes/ScrapCard.tscn" id="7_7oofv"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="8_i3ok3"]
+[ext_resource type="PackedScene" path="res://Scenes/LungeCard.tscn" id="9_bf34r"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_4ep01")
+puzzle_date = "2025-06-19"
+previous_puzzle_scene = "uid://b8bojsoeb6s5d"
+next_puzzle_scene = "uid://do2u7rq3ti871"
+enemy_health = 12
+enemy_name = "Sapling"
+enemy_icon_texture = ExtResource("2_4qipb")
+player_health = 1
+player_energy = 2
+card_scenes = [ExtResource("3_pcb7l"), ExtResource("4_sob7w"), ExtResource("5_tyvsv"), ExtResource("6_oaeg5"), ExtResource("7_7oofv"), ExtResource("8_i3ok3"), ExtResource("9_bf34r")]
+card_solution = [ExtResource("3_pcb7l"), ExtResource("6_oaeg5"), ExtResource("8_i3ok3"), ExtResource("8_i3ok3"), ExtResource("7_7oofv"), ExtResource("4_sob7w"), ExtResource("9_bf34r"), ExtResource("5_tyvsv")]

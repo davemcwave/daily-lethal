@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5kln2pn60plr"]
+
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Medium.ttf" id="1_268l5"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Bold.ttf" id="2_35ohu"]
+[ext_resource type="Script" path="res://Scripts/EnemyHurtText.gd" id="3_4iww1"]
+
+[node name="EnemyHurtText" type="RichTextLabel"]
+anchors_preset = -1
+anchor_left = 0.423
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 49.9199
+offset_top = -166.0
+offset_right = 35.9999
+offset_bottom = -142.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.984314, 0.72549, 0.321569, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/normal_font = ExtResource("1_268l5")
+theme_override_fonts/bold_font = ExtResource("2_35ohu")
+theme_override_font_sizes/bold_font_size = 18
+bbcode_enabled = true
+text = "[b]Ouech![/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_4iww1")

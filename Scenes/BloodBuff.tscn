@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bf50t8ela3l16"]
+
+[ext_resource type="Script" path="res://Scripts/BloodBuff.gd" id="1_i2tvi"]
+
+[node name="BloodBuff" type="Node2D"]
+script = ExtResource("1_i2tvi")
+buff_name = "Blood"
+buff_description = "Cards cost health instead of energy to play"
+wait_for_activated_signal = false
+color = Color(0.145098, 0.396078, 1, 1)
+activated_once_per_turn = true

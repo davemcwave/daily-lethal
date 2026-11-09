@@ -1,0 +1,20 @@
+[gd_scene load_steps=7 format=3 uid="uid://wkahhiiufh7o"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_jlf0a"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/ancient-tree.png" id="2_xoh1u"]
+[ext_resource type="PackedScene" path="res://Scenes/BargainCard.tscn" id="3_jn5do"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="4_em4qm"]
+[ext_resource type="PackedScene" path="res://Scenes/LungeCard.tscn" id="5_w2teo"]
+[ext_resource type="PackedScene" path="res://Scenes/CapacitorCard.tscn" id="6_gcme3"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_jlf0a")
+puzzle_date = "2026-01-13"
+previous_puzzle_scene = "uid://byp6oim23577e"
+next_puzzle_scene = "uid://rhim2lmxkv28"
+enemy_health = 6
+enemy_name = "Ancient Tree"
+enemy_icon_texture = ExtResource("2_xoh1u")
+player_health = 1
+player_energy = 1
+card_scenes = [ExtResource("3_jn5do"), ExtResource("4_em4qm"), ExtResource("5_w2teo"), ExtResource("5_w2teo"), ExtResource("5_w2teo"), ExtResource("6_gcme3"), ExtResource("6_gcme3")]

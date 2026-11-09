@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://csd6i15nawx2s"]
+
+[ext_resource type="Script" path="res://Scripts/BurnDebuff.gd" id="1_2qq1t"]
+
+[node name="BurnDebuff" type="Node2D"]
+script = ExtResource("1_2qq1t")
+debuff_name = "Burn"
+debuff_description = "Whenever you play a card, deal damage equal to Burn amount, then remove 1 Burn."
+unlimited_uses = false

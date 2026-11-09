@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cb4cskct44poh"]
+
+[ext_resource type="Script" path="res://Scripts/RetaliateBuff.gd" id="1_qgn7n"]
+
+[node name="RetaliateBuff" type="Node2D"]
+script = ExtResource("1_qgn7n")
+buff_name = "Retaliate"
+buff_description = "Hurts the attacker when attacked"
+activation_type = 2
+unlimited_uses = true
+color = Color(0, 0.164706, 0.54902, 1)

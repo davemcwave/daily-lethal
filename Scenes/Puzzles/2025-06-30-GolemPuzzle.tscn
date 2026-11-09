@@ -1,0 +1,23 @@
+[gd_scene load_steps=10 format=3 uid="uid://cfi7xdmxjrcqp"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_uwpw6"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/sleeping-golem.png" id="2_c5784"]
+[ext_resource type="PackedScene" path="res://Scenes/SurgeCard.tscn" id="3_6djjn"]
+[ext_resource type="PackedScene" path="res://Scenes/TributeCard.tscn" id="4_yfyd2"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="5_pqft1"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="6_u2wpq"]
+[ext_resource type="PackedScene" path="res://Scenes/SnipeCard.tscn" id="7_owqpg"]
+[ext_resource type="PackedScene" path="res://Scenes/LungeCard.tscn" id="8_bltao"]
+[ext_resource type="PackedScene" path="res://Scenes/SlashCard.tscn" id="9_m1bns"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_uwpw6")
+puzzle_date = "2025-06-30"
+previous_puzzle_scene = "uid://boly4kt8qm3ox"
+next_puzzle_scene = "uid://cf5dvi5m6onv3"
+enemy_health = 6
+enemy_name = "Rock Golem"
+enemy_icon_texture = ExtResource("2_c5784")
+player_health = 1
+player_energy = 0
+card_scenes = [ExtResource("3_6djjn"), ExtResource("4_yfyd2"), ExtResource("5_pqft1"), ExtResource("6_u2wpq"), ExtResource("7_owqpg"), ExtResource("8_bltao"), ExtResource("9_m1bns")]

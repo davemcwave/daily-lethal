@@ -1,0 +1,23 @@
+[gd_scene load_steps=10 format=3 uid="uid://bli5eefphcq1s"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_rboxx"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/tentacle-pirate.png" id="2_yjv61"]
+[ext_resource type="PackedScene" path="res://Scenes/TargetCard.tscn" id="3_vovx1"]
+[ext_resource type="PackedScene" path="res://Scenes/SnipeCard.tscn" id="4_pm660"]
+[ext_resource type="PackedScene" path="res://Scenes/TributeCard.tscn" id="5_kq643"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="6_igptm"]
+[ext_resource type="PackedScene" path="res://Scenes/BurstCard.tscn" id="7_b0vg4"]
+[ext_resource type="PackedScene" path="res://Scenes/SurgeCard.tscn" id="8_fbo68"]
+[ext_resource type="PackedScene" path="res://Scenes/GiftCard.tscn" id="9_fnyav"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_rboxx")
+puzzle_date = "2025-07-24"
+previous_puzzle_scene = "uid://b45ciqphte2cr"
+next_puzzle_scene = "uid://colr7y27i7j63"
+enemy_health = 14
+enemy_name = "Tentacle Pirate"
+enemy_icon_texture = ExtResource("2_yjv61")
+player_health = 1
+player_energy = 1
+card_scenes = [ExtResource("3_vovx1"), ExtResource("4_pm660"), ExtResource("5_kq643"), ExtResource("6_igptm"), ExtResource("7_b0vg4"), ExtResource("8_fbo68"), ExtResource("9_fnyav")]

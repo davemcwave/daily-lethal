@@ -1,0 +1,22 @@
+[gd_scene load_steps=8 format=3 uid="uid://cp3kiv3r56uxj"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_usgh8"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/leech2.png" id="2_n8b66"]
+[ext_resource type="PackedScene" path="res://Scenes/BurstCard.tscn" id="3_1mioc"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="4_yoikr"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="5_a74ny"]
+[ext_resource type="PackedScene" path="res://Scenes/SurgeCard.tscn" id="6_wr1rh"]
+[ext_resource type="PackedScene" path="res://Scenes/WoundCard.tscn" id="7_4lgs1"]
+
+[node name="Puzzle" type="Node"]
+script = ExtResource("1_usgh8")
+puzzle_date = "2025-05-05"
+previous_puzzle_scene = "uid://o4msbmfsgm6d"
+next_puzzle_scene = "uid://coc02rxb3ycg4"
+enemy_health = 24
+enemy_name = "Leech"
+enemy_icon_texture = ExtResource("2_n8b66")
+player_health = 1
+player_energy = 8
+card_scenes = [ExtResource("3_1mioc"), ExtResource("4_yoikr"), ExtResource("4_yoikr"), ExtResource("5_a74ny"), ExtResource("6_wr1rh"), ExtResource("7_4lgs1")]
+card_solution = [ExtResource("7_4lgs1"), ExtResource("4_yoikr"), ExtResource("4_yoikr"), ExtResource("6_wr1rh"), ExtResource("6_wr1rh"), ExtResource("4_yoikr"), ExtResource("3_1mioc"), ExtResource("5_a74ny"), ExtResource("3_1mioc")]

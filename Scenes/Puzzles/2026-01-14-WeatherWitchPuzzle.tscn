@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://rhim2lmxkv28"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_a3vyr"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/weather-witch.png" id="2_s0o3v"]
+[ext_resource type="PackedScene" path="res://Scenes/ArmoryCard.tscn" id="3_x40wg"]
+[ext_resource type="PackedScene" path="res://Scenes/CapacitorCard.tscn" id="4_fnct3"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="5_5224g"]
+[ext_resource type="PackedScene" path="res://Scenes/ShieldCard.tscn" id="6_phst4"]
+[ext_resource type="PackedScene" path="res://Scenes/TargetCard.tscn" id="7_kjxhm"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="8_6c2ia"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_a3vyr")
+puzzle_date = "2026-01-14"
+previous_puzzle_scene = "uid://wkahhiiufh7o"
+next_puzzle_scene = "uid://b8nahk6yuhkcx"
+enemy_health = 30
+enemy_name = "Weather Witch"
+enemy_icon_texture = ExtResource("2_s0o3v")
+player_health = 4
+player_energy = 10
+card_scenes = [ExtResource("3_x40wg"), ExtResource("4_fnct3"), ExtResource("4_fnct3"), ExtResource("5_5224g"), ExtResource("6_phst4"), ExtResource("7_kjxhm"), ExtResource("8_6c2ia")]

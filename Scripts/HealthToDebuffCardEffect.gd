@@ -1,6 +1,6 @@
 extends CardEffect
 
-@export_file("*.scn") var debuff_scene
+@export_file("*.tscn") var debuff_scene
 @export var target: Node = null
 @onready var health: Health = get_tree().get_root().get_node("Scene/Health")
 

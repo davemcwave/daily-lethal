@@ -16,16 +16,16 @@ config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/show_image=false
 config/icon="uid://iq3ggtrrqtb3"
 config/windows_native_icon="res://Assets/Textures/lethal-last-turn-icon.ico"
-run/main_scene.web_desktop_build="res://Scenes/Scene0Desktop.scn"
-run/main_scene.web_build="res://Scenes/Scene0.scn"
+run/main_scene.web_desktop_build="res://Scenes/Scene0Desktop.tscn"
+run/main_scene.web_build="res://Scenes/Scene0.tscn"
 
 [autoload]
 
-Background="*res://Scenes/Background.scn"
-EmailHandler="*res://Scenes/EmailHandler.scn"
-AudioHandler="*res://Scenes/AudioHandler.scn"
-DialogHandler="*res://Scenes/DialogHandler.scn"
-PuzzleResolver="*res://Scenes/PuzzleResolver.scn"
+Background="*res://Scenes/Background.tscn"
+EmailHandler="*res://Scenes/EmailHandler.tscn"
+AudioHandler="*res://Scenes/AudioHandler.tscn"
+DialogHandler="*res://Scenes/DialogHandler.tscn"
+PuzzleResolver="*res://Scenes/PuzzleResolver.tscn"
 
 [display]
 
@@ -34,6 +34,10 @@ window/size/viewport_height=540
 window/stretch/mode="canvas_items"
 window/size/viewport_width.web_build=360
 window/size/viewport_height.web_build=640
+
+[editor]
+
+export/convert_text_resources_to_binary=false
 
 [input]
 

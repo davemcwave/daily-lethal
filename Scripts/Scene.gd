@@ -12,7 +12,7 @@ signal card_count_incremented
 @onready var deck: Deck = get_node("Deck")
 @onready var hand: Hand = get_node("HandScrollContainer/Hand")
 @onready var audio_handler = get_node("/root/AudioHandler")
-@export_file("*.scn") var puzzle_scene
+@export_file("*.tscn") var puzzle_scene
 @export var override_puzzle_date: bool = false
 @export var show_intro_banner: bool = true
 var starting_card_amount: int = 3
@@ -63,7 +63,7 @@ func _is_desktop_layout_scene() -> bool:
 		var current_scene = get_tree().current_scene
 		if current_scene != null and current_scene.has_method("get_scene_file_path"):
 			packed_scene_path = current_scene.get_scene_file_path()
-	return packed_scene_path.ends_with("Scene0Desktop.scn")
+	return packed_scene_path.ends_with("Scene0Desktop.tscn")
 
 func notify_card_started_playing(card: Card) -> void:
 	resolving_cards += 1
@@ -157,7 +157,7 @@ func get_latest_releasable_puzzle() -> String:
 	var latest_time := 0
 
 	for path: String in path_list:
-		if not path.ends_with(".scn"):
+		if not path.ends_with(".tscn"):
 			continue
 			
 		var filename = path.get_file()
@@ -203,7 +203,7 @@ func get_now_timestamp():
 	
 func get_puzzle_scene_that_starts_with(puzzle_name_prefix: String) -> String:
 	for puzzle_scene in get_files_in_folder("res://Scenes/Puzzles"):
-		var puzzle_name: String = puzzle_scene.split("/")[-1].split(".scn")[0]
+		var puzzle_name: String = puzzle_scene.split("/")[-1].split(".tscn")[0]
 		if puzzle_name.begins_with(puzzle_name_prefix):
 			return puzzle_scene
 	return ""
@@ -212,7 +212,7 @@ func puzzle_exists_with_date(date: String) -> bool:
 	var path_list: Array = get_files_in_folder("res://Scenes/Puzzles")
 
 	for path: String in path_list:
-		if not path.ends_with(".scn"):
+		if not path.ends_with(".tscn"):
 			continue
 			
 		var filename = path.get_file()
@@ -282,6 +282,10 @@ func set_puzzle(new_puzzle: Puzzle) -> void:
 	
 	background.set_puzzle_date(effective_puzzle_date)
 	background.set_is_test_puzzle(puzzle.is_test_puzzle())
+	# "?cards=" with no date in the path = a creator testing a puzzle from /submit-puzzle
+	# (daily URL puzzles are /<date>?cards=...). The placeholder puzzle's own date
+	# ends up in background's puzzle date, so it can't be used to tell them apart.
+	background.set_is_creator_test_puzzle(puzzle.is_test_puzzle() and url_capturer != null and not url_capturer.has_puzzle_date())
 	$Enemy.set_max_health($URLCapturer.get_energy_health_from_test_puzzle() if puzzle.is_test_puzzle() else puzzle.get_enemy_health())
 	$Enemy.set_health($URLCapturer.get_energy_health_from_test_puzzle() if puzzle.is_test_puzzle() else puzzle.get_enemy_health())
 	$Enemy.set_enemy_name($URLCapturer.get_enemy_name_from_test_puzzle() if puzzle.is_test_puzzle() else puzzle.get_enemy_name())
@@ -296,7 +300,7 @@ func set_puzzle(new_puzzle: Puzzle) -> void:
 		
 	$"/root/Background".set_enemy_texture(puzzle.get_enemy_icon_texture())
 	for enemy_buff: Buff in puzzle.get_enemy_buffs():
-		var buff_panel: BuffPanel = load("res://Scenes/BuffPanel.scn").instantiate()
+		var buff_panel: BuffPanel = load("res://Scenes/BuffPanel.tscn").instantiate()
 		$Enemy/EnemyBuffsContainer.add_child(buff_panel)
 		buff_panel.set_buff(enemy_buff)
 		var target = $Health if puzzle.get_enemy_buff_target() == 'Player' else $Enemy
@@ -451,8 +455,8 @@ func _apply_card_order_to_hand() -> void:
 
 func _apply_url_enemy_buffs() -> void:
 	var buff_scene_map := {
-		"Retaliate": "res://Scenes/RetaliateBuff.scn",
-		"Doom": "res://Scenes/DoomBuff.scn",
+		"Retaliate": "res://Scenes/RetaliateBuff.tscn",
+		"Doom": "res://Scenes/DoomBuff.tscn",
 	}
 	for buff_data in url_capturer.get_enemy_buffs_from_url():
 		var buff_name: String = buff_data.get("name", "")
@@ -477,7 +481,7 @@ func _apply_url_enemy_buffs() -> void:
 				buff.activation_type = Buff.ActivationType.OnCardPlay
 				if params.has("value"):
 					buff.set_turns_left(int(params["value"]))
-		var buff_panel: BuffPanel = load("res://Scenes/BuffPanel.scn").instantiate()
+		var buff_panel: BuffPanel = load("res://Scenes/BuffPanel.tscn").instantiate()
 		$Enemy/EnemyBuffsContainer.add_child(buff_panel)
 		buff_panel.set_buff(buff)
 		buff.set_target($Health)
@@ -489,7 +493,7 @@ func get_all_card_scenes() -> Array[Resource]:
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
-			if file_name.ends_with("Card.scn") and not dir.current_is_dir() and file_name != "Card.scn":
+			if file_name.ends_with("Card.tscn") and not dir.current_is_dir() and file_name != "Card.tscn":
 				var scene_path = "res://Scenes/" + file_name
 				var packed_scene = load(scene_path)
 				card_scenes.append(packed_scene)
@@ -621,7 +625,7 @@ func check_game_over_because_of_enemy() -> void:
 		if health.is_dead():
 			$CanvasLayer/DeadPanel.appear()
 		else:
-			get_tree().change_scene_to_file("res://Scenes/EndGameScreen.scn")
+			get_tree().change_scene_to_file("res://Scenes/EndGameScreen.tscn")
 
 	checking_for_game_over = false
 func check_game_over() -> void:
@@ -655,6 +659,6 @@ func check_game_over() -> void:
 		if health.is_dead():
 			$CanvasLayer/DeadPanel.appear()
 		else:
-			get_tree().change_scene_to_file("res://Scenes/EndGameScreen.scn")
+			get_tree().change_scene_to_file("res://Scenes/EndGameScreen.tscn")
 
 	checking_for_game_over = false

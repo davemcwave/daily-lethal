@@ -1,0 +1,19 @@
+[gd_scene load_steps=7 format=3 uid="uid://b67j0vpb8i0kk"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_84gnd"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/roc-fat.png" id="2_6nhf7"]
+[ext_resource type="PackedScene" path="res://Scenes/VenomCard.tscn" id="3_vuldu"]
+[ext_resource type="PackedScene" path="res://Scenes/IgniteCard.tscn" id="4_dapvx"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="5_ys6cm"]
+[ext_resource type="PackedScene" path="res://Scenes/ScrapCard.tscn" id="6_7g8bm"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_84gnd")
+puzzle_date = "2025-08-31"
+previous_puzzle_scene = "uid://dv0kxdwvrddfh"
+next_puzzle_scene = "uid://b87ubb1n8av3g"
+enemy_health = 31
+enemy_name = "Roc"
+enemy_icon_texture = ExtResource("2_6nhf7")
+player_health = 13
+card_scenes = [ExtResource("3_vuldu"), ExtResource("4_dapvx"), ExtResource("4_dapvx"), ExtResource("4_dapvx"), ExtResource("4_dapvx"), ExtResource("5_ys6cm"), ExtResource("6_7g8bm")]

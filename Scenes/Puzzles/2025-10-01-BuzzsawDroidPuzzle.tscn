@@ -1,0 +1,23 @@
+[gd_scene load_steps=10 format=3 uid="uid://b0qj80tf2q3e6"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_6ur57"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/buzzsaw-droid.png" id="2_rrxuy"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="3_u2ean"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="4_o3jjp"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="5_aj8td"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="6_ms7ec"]
+[ext_resource type="PackedScene" path="res://Scenes/ScrapCard.tscn" id="7_8bld4"]
+[ext_resource type="PackedScene" path="res://Scenes/SnipeCard.tscn" id="8_0ib2x"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="9_8vq8s"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_6ur57")
+puzzle_date = "2025-10-01"
+previous_puzzle_scene = "uid://bodcrw8i4ntmt"
+next_puzzle_scene = "uid://d4b3g2osj81xm"
+enemy_health = 15
+enemy_name = "Buzzsaw Droid"
+enemy_icon_texture = ExtResource("2_rrxuy")
+player_health = 11
+player_energy = 2
+card_scenes = [ExtResource("3_u2ean"), ExtResource("4_o3jjp"), ExtResource("5_aj8td"), ExtResource("6_ms7ec"), ExtResource("7_8bld4"), ExtResource("8_0ib2x"), ExtResource("9_8vq8s")]

@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="CardSolutionResource" load_steps=8 format=3]
 
-[ext_resource type="PackedScene" path="res://Scenes/HauntCard.scn" id="1_sskdc"]
-[ext_resource type="PackedScene" path="res://Scenes/EchoCard.scn" id="2_iqtjj"]
-[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.scn" id="3_xrsb5"]
-[ext_resource type="PackedScene" path="res://Scenes/CooperationCard.scn" id="4_ct3hu"]
-[ext_resource type="PackedScene" path="res://Scenes/ExchangeCard.scn" id="5_070jq"]
-[ext_resource type="PackedScene" path="res://Scenes/HeartbeatCard.scn" id="6_bnfcl"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="1_sskdc"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="2_iqtjj"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="3_xrsb5"]
+[ext_resource type="PackedScene" path="res://Scenes/CooperationCard.tscn" id="4_ct3hu"]
+[ext_resource type="PackedScene" path="res://Scenes/ExchangeCard.tscn" id="5_070jq"]
+[ext_resource type="PackedScene" path="res://Scenes/HeartbeatCard.tscn" id="6_bnfcl"]
 [ext_resource type="Script" path="res://Scripts/CardSolutionResource.gd" id="7_dbof4"]
 
 [resource]

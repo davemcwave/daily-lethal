@@ -1,0 +1,123 @@
+[gd_scene load_steps=7 format=3 uid="uid://bawb20xxxjuro"]
+
+[ext_resource type="Script" path="res://Scripts/BuffCardEffectPanel.gd" id="1_bln41"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/circle.svg" id="2_cynep"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Medium.ttf" id="3_lnpee"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Bold.ttf" id="4_qp6bm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ir7hb"]
+bg_color = Color(0.55, 0, 0.55, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="Theme" id="Theme_nwcq8"]
+default_font = ExtResource("4_qp6bm")
+default_font_size = 10
+
+[node name="BuffCardEffectPanel" type="Panel"]
+custom_minimum_size = Vector2(200, 150)
+theme_override_styles/panel = SubResource("StyleBoxFlat_ir7hb")
+script = ExtResource("1_bln41")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+self_modulate = Color(0.878431, 0.0156863, 0.278431, 1)
+layout_mode = 1
+offset_left = 10.0
+offset_top = 12.0
+offset_right = 26.0
+offset_bottom = 28.0
+texture = ExtResource("2_cynep")
+expand_mode = 1
+
+[node name="Title" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 26.0
+offset_top = 12.0
+offset_right = -30.0
+offset_bottom = -118.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("3_lnpee")
+theme_override_fonts/bold_font = ExtResource("4_qp6bm")
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/normal_font_size = 14
+theme_override_font_sizes/bold_font_size = 14
+bbcode_enabled = true
+text = "[b]Add Buff[/b]"
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="BuffLabel" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(17, 16)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 48.0
+offset_right = -152.0
+offset_bottom = -82.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_lnpee")
+theme_override_fonts/bold_font = ExtResource("4_qp6bm")
+theme_override_font_sizes/bold_italics_font_size = 16
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+bbcode_enabled = true
+text = "[b][center]Buff:[/center][/b]"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BuffOptionMenu" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 48.0
+offset_right = 176.0
+offset_bottom = 68.0
+theme = SubResource("Theme_nwcq8")
+
+[node name="BuffCountLabel" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(17, 16)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 104.0
+offset_right = -144.0
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_lnpee")
+theme_override_fonts/bold_font = ExtResource("4_qp6bm")
+theme_override_font_sizes/bold_italics_font_size = 16
+theme_override_font_sizes/normal_font_size = 10
+theme_override_font_sizes/bold_font_size = 12
+bbcode_enabled = true
+text = "[b][center]Count:[/center][/b]"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtCountInput" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 96.0
+offset_right = 176.0
+offset_bottom = 127.0
+placeholder_text = "2"

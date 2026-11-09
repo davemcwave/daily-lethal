@@ -1,0 +1,21 @@
+[gd_scene load_steps=8 format=3 uid="uid://bpndqotfccsr"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_1dguo"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/tentacle-cultist.png" id="2_4exug"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="3_qls15"]
+[ext_resource type="PackedScene" path="res://Scenes/LungeCard.tscn" id="4_l5ysr"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="5_xuxdd"]
+[ext_resource type="PackedScene" path="res://Scenes/TributeCard.tscn" id="6_semj0"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="7_abjyg"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_1dguo")
+puzzle_date = "2025-08-19"
+previous_puzzle_scene = "uid://bsqt2q44eqy5q"
+next_puzzle_scene = "uid://bau2j7lmwvll5"
+enemy_health = 8
+enemy_name = "Tentacle Cultist"
+enemy_icon_texture = ExtResource("2_4exug")
+player_health = 10
+player_energy = 2
+card_scenes = [ExtResource("3_qls15"), ExtResource("4_l5ysr"), ExtResource("4_l5ysr"), ExtResource("5_xuxdd"), ExtResource("6_semj0"), ExtResource("7_abjyg")]

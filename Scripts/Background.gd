@@ -333,6 +333,56 @@ const ENEMY_DIFFICULTIES := {
 
 func _ready() -> void:
 	load_story_progress()
+	_apply_puzzle_cmdline_arg()
+
+## Off the web there is no window.location, so URL puzzles ("?cards=...") are
+## fed in here instead; URLCapturer reads these when JavaScriptBridge has nothing.
+var url_override_path: String = ""
+var url_override_search: String = ""
+const URL_PUZZLES_FILE := "res://custom-redirects.json"
+
+func set_url_override(path: String, search: String) -> void:
+	url_override_path = path
+	url_override_search = search
+
+## Looks up a URL puzzle by date in custom-redirects.json. Returns "" if missing.
+func get_url_puzzle_search(date: String) -> String:
+	if not FileAccess.file_exists(URL_PUZZLES_FILE):
+		return ""
+	var redirects = JSON.parse_string(FileAccess.get_file_as_string(URL_PUZZLES_FILE))
+	if redirects is Dictionary and redirects.has(date):
+		return str(redirects[date])
+	return ""
+
+## Dev helpers:
+##   godot --path . -- --puzzle=demogorgon   first scene puzzle whose file name contains the text
+##   godot --path . -- --url=2026-03-10      URL puzzle for that date (from custom-redirects.json)
+##   godot --path . -- "--url=?cards=..."    a creator test puzzle, as opened by /submit-puzzle
+func _apply_puzzle_cmdline_arg() -> void:
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--url="):
+			var date := arg.trim_prefix("--url=")
+			if date.begins_with("?"):
+				# A raw "?cards=..." query, like the submit page's Test Puzzle button opens.
+				set_url_override("/", date)
+				print("Starting on creator test puzzle: " + date.left(60))
+				return
+			var search := get_url_puzzle_search(date)
+			if search.is_empty():
+				push_warning("No URL puzzle for --url=%s" % date)
+			else:
+				set_url_override("/" + date, search)
+				print("Starting on URL puzzle: " + date)
+			return
+		if not arg.begins_with("--puzzle="):
+			continue
+		var query := arg.trim_prefix("--puzzle=").to_lower()
+		for file in DirAccess.get_files_at("res://Scenes/Puzzles/"):
+			if file.ends_with(".tscn") and file.to_lower().contains(query):
+				set_puzzle_scene("res://Scenes/Puzzles/" + file)
+				print("Starting on puzzle: " + file)
+				return
+		push_warning("No puzzle matches --puzzle=%s" % query)
 
 var attempts = 0
 var best_card_count: int = 0
@@ -349,6 +399,8 @@ var recorded_card_scene_paths: Array[String] = []
 var recorded_card_hand_indices: Array[int] = []
 var recorded_card_step_types: Array[int] = []
 var recorded_card_instance_ids: Array[int] = []
+## The same playthrough as structured steps (card, picks, effect choices).
+var recorded_solution_steps: Array = []
 
 const SOLUTION_STEP_TYPE_PLAY := 0
 const SOLUTION_STEP_TYPE_CHOOSE_HAND := 1
@@ -457,13 +509,20 @@ func load_story_progress() -> void:
 	if data is Dictionary and data.has("completed_puzzles"):
 		completed_story_puzzles.clear()
 		for puzzle_path in data["completed_puzzles"]:
-			completed_story_puzzles.append(puzzle_path)
+			# Saves made before scenes were converted to text store ".scn" paths.
+			var migrated_path: String = puzzle_path
+			if migrated_path.ends_with(".scn"):
+				migrated_path = migrated_path.get_basename() + ".tscn"
+			if migrated_path not in completed_story_puzzles:
+				completed_story_puzzles.append(migrated_path)
 
 func set_puzzle_date(new_puzzle_date: String) -> void:
 	puzzle_date = new_puzzle_date
 	
 func get_puzzle_date() -> String:
 	return puzzle_date
+
+var puzzle_is_creator_test: bool = false
 
 func set_is_test_puzzle(is_test: bool) -> void:
 	puzzle_is_test = is_test
@@ -493,6 +552,12 @@ func record_played_card_scene_path(card_scene_path: String, hand_index: int = -1
 	recorded_card_step_types.append(SOLUTION_STEP_TYPE_PLAY)
 	recorded_card_instance_ids.append(card_instance_id)
 
+## Called by Card.begin_play_resolution() at the start of every card play.
+func record_solution_play(card_scene_path: String) -> void:
+	if card_scene_path.is_empty():
+		return
+	recorded_solution_steps.append({"card": _solution_card_key(card_scene_path)})
+
 func record_cards_choose_selection(card_scene_path: String, source_index: int, step_type: int) -> void:
 	if card_scene_path.is_empty():
 		return
@@ -500,18 +565,117 @@ func record_cards_choose_selection(card_scene_path: String, source_index: int, s
 	recorded_card_hand_indices.append(source_index)
 	recorded_card_step_types.append(step_type)
 	recorded_card_instance_ids.append(-1)
+	# A pick belongs to the card that opened the chooser (the last card played).
+	if not recorded_solution_steps.is_empty():
+		var step: Dictionary = recorded_solution_steps[-1]
+		if not step.has("picks"):
+			step["picks"] = []
+		step["picks"].append(_solution_card_key(card_scene_path))
+
+## Called when a card chooser is confirmed, so "picked nothing" is recorded as [].
+func record_chooser_answered() -> void:
+	if not recorded_solution_steps.is_empty() and not recorded_solution_steps[-1].has("picks"):
+		recorded_solution_steps[-1]["picks"] = []
+
+## Called by CardChoiceView when the player picks one of a card's effects
+## (e.g. Potion: heal or damage).
+func record_effect_choice(card_effect: CardEffect) -> void:
+	if card_effect == null or recorded_solution_steps.is_empty():
+		return
+	var effect_key := card_effect.get_effect_short_description()
+	var script: Script = card_effect.get_script()
+	if script != null:
+		# "res://Scripts/HealCardEffect.gd" -> "heal"
+		effect_key = script.resource_path.get_file().get_basename().to_lower().trim_suffix("cardeffect")
+	var step: Dictionary = recorded_solution_steps[-1]
+	if not step.has("effect"):
+		step["effect"] = []
+	step["effect"].append(effect_key)
 
 func clear_recorded_card_solutions() -> void:
 	recorded_card_scene_paths.clear()
 	recorded_card_hand_indices.clear()
 	recorded_card_step_types.clear()
 	recorded_card_instance_ids.clear()
+	recorded_solution_steps.clear()
+
+## The winning playthrough as steps in Tests/puzzle_solutions.json format:
+## [{"card": "Armory", "picks": ["Slash", "Cleave"]}, {"card": "Potion", "effect": "damage"}, ...]
+func get_recorded_solution_steps() -> Array:
+	var steps: Array = []
+	for step: Dictionary in recorded_solution_steps:
+		var copy := step.duplicate(true)
+		if copy.has("effect") and copy["effect"].size() == 1:
+			copy["effect"] = copy["effect"][0]
+		steps.append(copy)
+	return steps
+
+## Human-readable version, e.g. "Potion -> damage, Armory (Slash, Cleave), Slash".
+func get_recorded_solution_text() -> String:
+	var parts: Array[String] = []
+	for step: Dictionary in recorded_solution_steps:
+		var text: String = step["card"]
+		if step.has("picks"):
+			text += " (%s)" % (", ".join(step["picks"]) if not step["picks"].is_empty() else "nothing")
+		if step.has("effect"):
+			text += " -> " + ", ".join(step["effect"])
+		parts.append(text)
+	return ", ".join(parts)
+
+func _solution_card_key(card_scene_path: String) -> String:
+	# "res://Scenes/EmptyfistCard.tscn" -> "Emptyfist" (matches the scene file).
+	return card_scene_path.get_file().get_basename().trim_suffix("Card")
+
+const TEST_SOLUTION_STORAGE_KEY := "lethal_test_solution"
+
+## True when a creator is testing a puzzle they built on /submit-puzzle: a
+## "?cards=" puzzle with no date in the URL path (set by Scene.set_puzzle).
+## Daily URL puzzles (/2026-03-10?cards=...) have one.
+func is_creator_test_puzzle() -> bool:
+	return puzzle_is_creator_test
+
+func set_is_creator_test_puzzle(value: bool) -> void:
+	puzzle_is_creator_test = value
+	if value:
+		print("Creator test puzzle: the winning solution will be sent to the submit page.")
+
+## Called on the win screen. For a test puzzle (one built on /submit-puzzle and
+## opened with "Test"), hands the winning solution to the submit page through
+## localStorage so the creator never has to type it.
+func publish_test_puzzle_solution() -> void:
+	if not is_test_puzzle() or recorded_solution_steps.is_empty():
+		return
+	var payload := {
+		"search": "",
+		"steps": get_recorded_solution_steps(),
+		"text": get_recorded_solution_text(),
+		"saved_at": Time.get_unix_time_from_system(),
+	}
+	if not is_web_platform():
+		print("Captured test-puzzle solution: " + payload["text"])
+		print("Captured test-puzzle steps: " + JSON.stringify(payload["steps"]))
+		return
+	if not is_creator_test_puzzle():
+		return  # a daily URL puzzle, not someone testing a puzzle they built
+	var search = JavaScriptBridge.eval("window.location.search")
+	payload["search"] = str(search) if search != null else ""
+	# JSON.stringify twice: the outer one makes a safe JS string literal.
+	JavaScriptBridge.eval("localStorage.setItem('%s', %s);" % [TEST_SOLUTION_STORAGE_KEY, JSON.stringify(JSON.stringify(payload))], true)
 
 func set_card_solution_slugs(new_slugs: Array[String]) -> void:
 	card_solution_slugs = new_slugs.duplicate()
 
 func save_played_cards_solution() -> void:
 	if recorded_card_scene_paths.is_empty():
+		return
+	# URL puzzles ("?cards=") run on a placeholder scene puzzle, so the slugs
+	# point at that placeholder's solution file; their solutions live in
+	# Tests/puzzle_solutions.json instead.
+	if is_test_puzzle():
+		return
+	# Don't overwrite recorded solutions while the resolver is replaying them.
+	var puzzle_resolver = get_node_or_null("/root/PuzzleResolver")
+	if puzzle_resolver != null and puzzle_resolver.is_active():
 		return
 	var resource_path: String = get_solution_resource_path()
 	if resource_path.is_empty():
@@ -587,7 +751,7 @@ func get_all_buff_scenes() -> Array[Resource]:
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
-			if file_name.ends_with("Buff.scn") and not dir.current_is_dir() and file_name != "Card.scn":
+			if file_name.ends_with("Buff.tscn") and not dir.current_is_dir() and file_name != "Card.tscn":
 				var scene_path = "res://Scenes/" + file_name
 				var packed_scene = load(scene_path)
 				buff_scenes.append(packed_scene)
@@ -602,7 +766,7 @@ func get_all_card_effect_scenes() -> Array[Resource]:
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
-			if file_name.ends_with("CardEffect.scn") and not dir.current_is_dir() and file_name != "Card.scn":
+			if file_name.ends_with("CardEffect.tscn") and not dir.current_is_dir() and file_name != "Card.tscn":
 				var scene_path = "res://Scenes/" + file_name
 				var packed_scene = load(scene_path)
 				scenes.append(packed_scene)
@@ -618,7 +782,7 @@ func get_all_card_scenes() -> Array[Resource]:
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
-			if file_name.ends_with("Card.scn") and not dir.current_is_dir():
+			if file_name.ends_with("Card.tscn") and not dir.current_is_dir():
 				var scene_path = "res://Scenes/" + file_name
 				var packed_scene = load(scene_path)
 				scenes.append(packed_scene)

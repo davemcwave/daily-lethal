@@ -1,7 +1,7 @@
 extends Button
 class_name PlayPuzzleButton
 
-@export_file("*.scn") var puzzle_scene
+@export_file("*.tscn") var puzzle_scene
 @export var next_buttons: Array[PlayPuzzleButton] = []
 @onready var enemy_icon = $EnemyIcon
 @onready var difficulty_container = $DifficultyContainer
@@ -65,7 +65,7 @@ func appear(duration: float = 0.25) -> bool:
 func _on_button_pressed() -> void:
 	background.set_puzzle_scene(puzzle_scene)
 	background.set_from_story_view(true)
-	get_tree().change_scene_to_file("res://Scenes/Scene0Desktop.scn")
+	get_tree().change_scene_to_file("res://Scenes/Scene0Desktop.tscn")
 
 func get_next_buttons() -> Array[PlayPuzzleButton]:
 	return next_buttons

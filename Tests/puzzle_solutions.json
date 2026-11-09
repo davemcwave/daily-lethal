@@ -1,0 +1,8448 @@
+{
+ "_about": "Solutions replayed by the puzzle test runner (Scripts/PuzzleResolver.gd) for URL puzzles (custom-redirects.json) and scene puzzles with no recorded solution. Built from Formspree submissions; `source` is the submitted text, `cleaned` a hand-cleaned version when the parser couldn't read it. Each step plays `card`; `picks` answers the chooser it opens ([] = nothing), `effect` answers an effect choice (heal/damage; a list for repeats, e.g. Echo + Potion), `copy` picks a Trace copy (true) or the original (false). A `skip` string excludes the puzzle and says why.",
+ "puzzles": {
+  "2025-08-23": {
+   "kind": "scene",
+   "scene": "2025-08-23-AlchemistPuzzle.tscn",
+   "source": "Fang, Inspiration, Potion (for damage), Revive, Inspiration, Potion (for health), Mend, Target, Heartbeat",
+   "steps": [
+    {
+     "card": "Fang"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Potion",
+     "effect": "damage"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Potion",
+     "effect": "heal"
+    },
+    {
+     "card": "Mend"
+    },
+    {
+     "card": "Target"
+    },
+    {
+     "card": "Heartbeat"
+    }
+   ]
+  },
+  "2025-08-25": {
+   "kind": "scene",
+   "scene": "2025-08-25-MerfolkPuzzle.tscn",
+   "source": "Potion - Punch - Overload - Echo - Revive - Martyr - Punch - Overload - Potion - Echo - Heartbeat",
+   "steps": [
+    {
+     "card": "Potion",
+     "effect": "heal"
+    },
+    {
+     "card": "Heartbeat"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Heartbeat"
+    },
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Emptyfist"
+    }
+   ],
+   "cleaned": "Potion -> heal, Heartbeat, Overload, Revive, Overload, Heartbeat, Martyr, Echo, Emptyfist",
+   "note": "Solution provided by David (the submitted one left the enemy at 6 HP)."
+  },
+  "2025-09-09": {
+   "kind": "scene",
+   "scene": "2025-09-09-WarlockPuzzle.tscn",
+   "source": "Exchange, Target, Potion (+2hp), Echo, Revive, Target, Potion, Overload, Exchange, Echo, Heartbeat",
+   "steps": [
+    {
+     "card": "Exchange"
+    },
+    {
+     "card": "Target"
+    },
+    {
+     "card": "Potion",
+     "effect": "heal"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Target"
+    },
+    {
+     "card": "Potion"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Exchange"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Heartbeat"
+    }
+   ]
+  },
+  "2025-09-23": {
+   "kind": "scene",
+   "scene": "2025-09-23-RedeyePuzzle.tscn",
+   "source": "Snipe, Heartbeat, Fang, Lunge, Pound, Burst, Empty Fist",
+   "steps": [
+    {
+     "card": "Snipe"
+    },
+    {
+     "card": "Heartbeat"
+    },
+    {
+     "card": "Fang"
+    },
+    {
+     "card": "Lunge"
+    },
+    {
+     "card": "Pound"
+    },
+    {
+     "card": "Burst"
+    },
+    {
+     "card": "Emptyfist"
+    }
+   ]
+  },
+  "2025-09-24": {
+   "kind": "scene",
+   "scene": "2025-09-24-FirebugPuzzle.tscn",
+   "source": "Bargain, Rebound, Ignite, Rebound, Ignite, Rebound, Ignite, Ignite, Ignite, Spark, Overload, Spark, Spark, Spark, Spark, Spark, Spark, Spark, Spark, Spark",
+   "steps": [
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    }
+   ]
+  },
+  "2025-09-26": {
+   "kind": "scene",
+   "scene": "2025-09-26-PoltergeistPuzzle.tscn",
+   "source": "Tribute, Echo, Tribute, Rage, Haunt, Target, Snipe",
+   "steps": [
+    {
+     "card": "Tribute"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Tribute"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Target"
+    },
+    {
+     "card": "Snipe"
+    }
+   ]
+  },
+  "2025-09-29": {
+   "kind": "scene",
+   "scene": "2025-09-29-ChupacabraPuzzle.tscn",
+   "source": "Rebound, Target, Target, Block, Mend, Martyr, Heartbeat, Heartbeat",
+   "steps": [
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Target"
+    },
+    {
+     "card": "Target"
+    },
+    {
+     "card": "Shield"
+    },
+    {
+     "card": "Mend"
+    },
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Heartbeat"
+    },
+    {
+     "card": "Heartbeat"
+    }
+   ],
+   "cleaned": "Rebound, Target, Target, Shield, Mend, Martyr, Heartbeat, Heartbeat"
+  },
+  "2025-09-30": {
+   "kind": "scene",
+   "scene": "2025-09-30-ArtificerPuzzle.tscn",
+   "source": "Bargain, Ignite, Revive, Bargain, Ignite, Spark x 4, Target, Spark, Thunderbolt",
+   "steps": [
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Target"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Thunderbolt"
+    }
+   ]
+  },
+  "2025-10-01": {
+   "kind": "scene",
+   "scene": "2025-10-01-BuzzsawDroidPuzzle.tscn",
+   "source": "Snipe, Martyr, Pound, Echo, Revive, Scrap (discarding Snipe), Martyr, Echo, Pound, Thunderbolt",
+   "steps": [
+    {
+     "card": "Snipe"
+    },
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Pound"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Scrap",
+     "picks": [
+      "Snipe"
+     ]
+    },
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Pound"
+    },
+    {
+     "card": "Thunderbolt"
+    }
+   ]
+  },
+  "2025-10-02": {
+   "kind": "scene",
+   "scene": "2025-10-02-RedDragonPuzzle.tscn",
+   "source": "Bargain, Haunt, Revive, Bargain, Haunt, Flurry, Gift, Pound",
+   "steps": [
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Flurry"
+    },
+    {
+     "card": "Gift"
+    },
+    {
+     "card": "Pound"
+    }
+   ]
+  },
+  "2025-10-03": {
+   "kind": "scene",
+   "scene": "2025-10-03-BarbarianPuzzle.tscn",
+   "source": "Venom, Rage, Trace, Flurry, Lunge, Flurry, Target, Empty Fist",
+   "steps": [
+    {
+     "card": "Venom"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Flurry"
+    },
+    {
+     "card": "Lunge"
+    },
+    {
+     "card": "Flurry"
+    },
+    {
+     "card": "Target"
+    },
+    {
+     "card": "Emptyfist"
+    }
+   ]
+  },
+  "2025-10-06": {
+   "kind": "scene",
+   "scene": "2025-10-06-GiftmanPuzzle.tscn",
+   "source": "Gift, Pound, Gift, Gift, Shovel, Gift, Shovel",
+   "steps": [
+    {
+     "card": "Gift"
+    },
+    {
+     "card": "Pound"
+    },
+    {
+     "card": "Gift"
+    },
+    {
+     "card": "Gift"
+    },
+    {
+     "card": "Shovel"
+    },
+    {
+     "card": "Gift"
+    },
+    {
+     "card": "Shovel"
+    }
+   ]
+  },
+  "2025-10-07": {
+   "kind": "scene",
+   "scene": "2025-10-07-PorcupinePuzzle.tscn",
+   "source": "Snipe, Fang, Inspiration, Bargain, Exchange, Mend, Heartbeat",
+   "steps": [
+    {
+     "card": "Snipe"
+    },
+    {
+     "card": "Fang"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Exchange"
+    },
+    {
+     "card": "Mend"
+    },
+    {
+     "card": "Heartbeat"
+    }
+   ]
+  },
+  "2025-10-08": {
+   "kind": "scene",
+   "scene": "2025-10-08-FiendPuzzle.tscn",
+   "source": "Rebound, Slash, Martyr , Potion, Slash, Revive. Slash, Potion  (No fang was used in this solution, that is just to complete the witcher vibe, potion, slash hehe)",
+   "steps": [
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Potion",
+     "effect": "damage"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Potion",
+     "effect": "damage"
+    },
+    {
+     "card": "Slash"
+    }
+   ],
+   "cleaned": "Bargain, Slash, Potion -> damage, Revive, Rebound, Slash, Martyr, Potion -> damage, Slash",
+   "note": "Solution provided by David (the submitted one ran out of energy for the last Potion); Potion choices found by the runner."
+  },
+  "2025-10-09": {
+   "kind": "scene",
+   "scene": "2025-10-09-SparkGiantPuzzle.tscn",
+   "source": "Ignite, ignite, spark, inspiration, spark, bargain, spark, spark, burst",
+   "steps": [
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Burst"
+    }
+   ]
+  },
+  "2025-10-10": {
+   "kind": "scene",
+   "scene": "2025-10-10-ShoggothPuzzle.tscn",
+   "source": "Surge, Wound, Revive, Wound, Surge, Surge, Echo, Burst, Reverberate, Surge, Surge, Echo, Burst",
+   "steps": [
+    {
+     "card": "Surge"
+    },
+    {
+     "card": "Wound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Wound"
+    },
+    {
+     "card": "Surge"
+    },
+    {
+     "card": "Surge"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Burst"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Surge"
+    },
+    {
+     "card": "Surge"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Burst"
+    }
+   ]
+  },
+  "2025-10-13": {
+   "kind": "scene",
+   "scene": "2025-10-13-CherubPuzzle.tscn",
+   "source": "Exchange, Revive, Exchange, Rebound, Empty Fist, Empty Fist, Inspiration, Heartbeat",
+   "steps": [
+    {
+     "card": "Exchange"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Exchange"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Emptyfist"
+    },
+    {
+     "card": "Emptyfist"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Heartbeat"
+    }
+   ]
+  },
+  "2025-10-14": {
+   "kind": "scene",
+   "scene": "2025-10-14-PinkyPuzzle.tscn",
+   "source": "Target, Rage, Martyr, Haunt, Tribute, Repeat, Potion",
+   "steps": [
+    {
+     "card": "Target"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Tribute"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Potion"
+    }
+   ],
+   "cleaned": "Target, Rage, Martyr, Haunt, Tribute, Echo, Potion"
+  },
+  "2025-10-16": {
+   "kind": "scene",
+   "scene": "2025-10-16-PterosaurPuzzle.tscn",
+   "source": "Rebound, Reverberate, Inspiration, Inspiration, Inspiration, Bargain, Reverberate, Target, Thunderbolt",
+   "steps": [
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Target"
+    },
+    {
+     "card": "Thunderbolt"
+    }
+   ]
+  },
+  "2025-10-17": {
+   "kind": "scene",
+   "scene": "2025-10-17-TimelordPuzzle.tscn",
+   "source": "Trace, Ignite, Echo, Reverberate, Ignite (3 times), Spark (4 times), Venom, Spark (8 times)",
+   "steps": [
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Venom"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    }
+   ]
+  },
+  "2025-10-21": {
+   "kind": "scene",
+   "scene": "2025-10-21-GraveRobber-Puzzle.tscn",
+   "source": "Scrap, Revive, Scrap, Revive, Scrap, Shovel, Revive, Tribute, Haunt, Shovel",
+   "steps": [
+    {
+     "card": "Scrap"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Scrap"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Scrap"
+    },
+    {
+     "card": "Shovel"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Tribute"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Shovel"
+    }
+   ]
+  },
+  "2025-10-22": {
+   "kind": "scene",
+   "scene": "2025-10-22-PinkSlime-Puzzle.tscn",
+   "source": "Snipe, Wound, Shovel, Waste (trashing any 2 cards), Tribute, Waste (trashing the other 2 cards), Snipe",
+   "steps": [
+    {
+     "card": "Snipe"
+    },
+    {
+     "card": "Wound"
+    },
+    {
+     "card": "Shovel"
+    },
+    {
+     "card": "Waste"
+    },
+    {
+     "card": "Tribute"
+    },
+    {
+     "card": "Waste"
+    },
+    {
+     "card": "Snipe"
+    }
+   ],
+   "cleaned": "Snipe, Wound, Shovel, Waste, Tribute, Waste, Snipe",
+   "note": "Waste picks unspecified (\"any 2 cards\"); the runner searches them."
+  },
+  "2025-10-23": {
+   "kind": "scene",
+   "scene": "2025-10-23-FlailSnail-Puzzle.tscn",
+   "source": "martyr trace potion potion waste martyr reverberate fang",
+   "steps": [
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Potion"
+    },
+    {
+     "card": "Potion"
+    },
+    {
+     "card": "Waste"
+    },
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Fang"
+    }
+   ]
+  },
+  "2025-10-24": {
+   "kind": "scene",
+   "scene": "2025-10-24-TimeDemon-Puzzle.tscn",
+   "source": "(Bargain, Revive)*(some big number, 13 I think), (Haunt, X, Revive) for X in [Bargain, Rebound, Rebound], (Haunt, Revive)*2, Haunt, Pound",
+   "steps": [
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Pound"
+    }
+   ],
+   "cleaned": "(Bargain, Revive) x13, Haunt, Bargain, Revive, Haunt, Rebound, Revive, Haunt, Rebound, Revive, (Haunt, Revive) x2, Haunt, Pound",
+   "note": "Submitter wasn't sure of the repeat count (\"13 I think\")."
+  },
+  "2025-10-28": {
+   "kind": "scene",
+   "scene": "2025-10-28-IceGolemPuzzle.tscn",
+   "source": "Gift, Rage, Potion, Echo, Flurry, Shovel, Empty Fist",
+   "steps": [
+    {
+     "card": "Gift"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Potion"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Flurry"
+    },
+    {
+     "card": "Shovel"
+    },
+    {
+     "card": "Emptyfist"
+    }
+   ]
+  },
+  "2025-10-29": {
+   "kind": "scene",
+   "scene": "2025-10-29-FairyPuzzle.tscn",
+   "source": "Rebound, Reverberate, Inspiration, Scrap, Exchange, Scrap, Reverberate",
+   "steps": [
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Scrap"
+    },
+    {
+     "card": "Exchange"
+    },
+    {
+     "card": "Scrap"
+    },
+    {
+     "card": "Reverberate"
+    }
+   ]
+  },
+  "2025-10-30": {
+   "kind": "scene",
+   "scene": "2025-10-30-GiantBatPuzzle.tscn",
+   "source": "Trace x 6, Reverberate x 6, Mend x 4, Fang x 3, Mend, Trace, Fang x 2",
+   "steps": [
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Mend"
+    },
+    {
+     "card": "Mend"
+    },
+    {
+     "card": "Mend"
+    },
+    {
+     "card": "Mend"
+    },
+    {
+     "card": "Fang"
+    },
+    {
+     "card": "Fang"
+    },
+    {
+     "card": "Fang"
+    },
+    {
+     "card": "Mend"
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Fang"
+    },
+    {
+     "card": "Fang"
+    }
+   ]
+  },
+  "2025-10-31": {
+   "kind": "scene",
+   "scene": "2025-10-31-ZombiePuzzle.tscn",
+   "source": "Snipe, Haunt, Revive, Snipe, Haunt, Revive, Echo, Haunt, Waste(Echo, Haunt), Echo, Snipe",
+   "steps": [
+    {
+     "card": "Snipe"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Snipe"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Waste",
+     "picks": [
+      "Echo",
+      "Haunt"
+     ]
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Snipe"
+    }
+   ]
+  },
+  "2025-11-03": {
+   "kind": "scene",
+   "scene": "2025-11-03-LeprechaunPuzzle.tscn",
+   "source": "Wound, Martyr, Pound, Revive, Martyr, Shield, Pound",
+   "steps": [
+    {
+     "card": "Wound"
+    },
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Pound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Shield"
+    },
+    {
+     "card": "Pound"
+    }
+   ]
+  },
+  "2025-11-04": {
+   "kind": "scene",
+   "scene": "2025-11-04-CarBatteryPuzzle.tscn",
+   "source": "Ignite x2, Revive, Ignite x2, Revive, Ignite x2, Spark, Overload, Spark x8, Overload, Spark x3, Thunderbolt",
+   "steps": [
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Thunderbolt"
+    }
+   ]
+  },
+  "2025-11-05": {
+   "kind": "scene",
+   "scene": "2025-11-05-RavenPuzzle.tscn",
+   "source": "Haunt, Surge, Surge, Overload, Waste (trashing Haunt and Surge), Reverberate, Thunderbolt",
+   "steps": [
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Surge"
+    },
+    {
+     "card": "Surge"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Waste",
+     "picks": [
+      "Haunt",
+      "Surge"
+     ]
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Thunderbolt"
+    }
+   ]
+  },
+  "2025-11-06": {
+   "kind": "scene",
+   "scene": "2025-11-06-BlueDragonPuzzle.tscn",
+   "source": "Haunt, Reverberate, Wound, Venom, Flurry, Reverberate",
+   "steps": [
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Wound"
+    },
+    {
+     "card": "Venom"
+    },
+    {
+     "card": "Flurry"
+    },
+    {
+     "card": "Reverberate"
+    }
+   ]
+  },
+  "2025-11-10": {
+   "kind": "scene",
+   "scene": "2025-11-10-DemonNursePuzzle.tscn",
+   "source": "Scrap (discarding Scrap), Shield, Martyr, Pound, Potion (choosing damage), Potion (choosing damage)",
+   "steps": [
+    {
+     "card": "Scrap",
+     "picks": [
+      "Scrap"
+     ]
+    },
+    {
+     "card": "Shield"
+    },
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Pound"
+    },
+    {
+     "card": "Potion",
+     "effect": "damage"
+    },
+    {
+     "card": "Potion",
+     "effect": "damage"
+    }
+   ]
+  },
+  "2025-11-11": {
+   "kind": "scene",
+   "scene": "2025-11-11-GhostPiratePuzzle.tscn",
+   "source": "Haunt, haunt, haunt, echo, rebound, lunge, lunge, lunge, revive, rebound, lunge, lunge",
+   "steps": [
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Lunge"
+    },
+    {
+     "card": "Lunge"
+    },
+    {
+     "card": "Lunge"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Lunge"
+    },
+    {
+     "card": "Lunge"
+    }
+   ]
+  },
+  "2025-11-17": {
+   "kind": "scene",
+   "scene": "2025-11-17-TargetDummyPuzzle.tscn",
+   "source": "Inspiration, Martyr, Potion - Damage, Reverberate, Thunderbolt",
+   "steps": [
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Potion",
+     "effect": "damage"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Thunderbolt"
+    }
+   ]
+  },
+  "2025-11-19": {
+   "kind": "scene",
+   "scene": "2025-11-19-GiantEelPuzzle.tscn",
+   "source": "Venom, Bargain, Pound, Empty Fist, Lunge, Overload, Thunderbolt",
+   "steps": [
+    {
+     "card": "Venom"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Pound"
+    },
+    {
+     "card": "Emptyfist"
+    },
+    {
+     "card": "Lunge"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Thunderbolt"
+    }
+   ]
+  },
+  "2025-11-21": {
+   "kind": "scene",
+   "scene": "2025-11-21-CursedCampfirePuzzle.tscn",
+   "source": "Rebound,Trace, Trace multiple times, scrap x2 discard haunt and waste. trace, reverberate, then some order of reverberate and spark to do damage",
+   "skip": "Waiting on a human: Too vague: how many Traces, and the Reverberate/Spark order?",
+   "steps": []
+  },
+  "2025-11-27": {
+   "kind": "scene",
+   "scene": "2025-11-27-DwarvenMinerPuzzle.tscn",
+   "source": "Martyr, Potion (for hp), Ignite, Shield, Echo, Reverberate (with the Potion being 1 hp and 1 dmg pick), Reverberate, Spark x 6",
+   "steps": [
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Potion",
+     "effect": "heal"
+    },
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Shield"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Reverberate",
+     "effect": [
+      "heal",
+      "damage"
+     ]
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    }
+   ],
+   "cleaned": "Martyr, Potion -> heal, Ignite, Shield, Echo, Reverberate -> (heal, damage), Reverberate, Spark x6"
+  },
+  "2025-12-02": {
+   "kind": "scene",
+   "scene": "2025-12-02-FungiPuzzle.tscn",
+   "source": "Armory -> Pound & Spear, Pound, Rebound, Spear, Spear //OR// Rebound, Armory -> Slash & Spear, Armory -> Slash & Spear, Slash, Slash, Spear, Spear",
+   "steps": [
+    {
+     "card": "Armory",
+     "picks": [
+      "Pound",
+      "Spear"
+     ]
+    },
+    {
+     "card": "Pound"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Spear"
+    },
+    {
+     "card": "Spear"
+    },
+    {
+     "card": "Armory",
+     "picks": [
+      "Slash",
+      "Spear"
+     ]
+    },
+    {
+     "card": "Armory",
+     "picks": [
+      "Slash",
+      "Spear"
+     ]
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Spear"
+    },
+    {
+     "card": "Spear"
+    }
+   ],
+   "cleaned": "Armory(Pound, Spear), Pound, Rebound, Spear, Spear, Armory(Slash, Spear), Armory(Slash, Spear), Slash, Slash, Spear, Spear",
+   "note": "Submitted with an alternative (\"Spear //OR// Rebound\"); using Spear."
+  },
+  "2025-12-04": {
+   "kind": "scene",
+   "scene": "2025-12-04-SpeedElfPuzzle.tscn",
+   "source": "Slash, Overload, Tribute, Trace, Reverberate, Reverberate, Target, Thunderbolt",
+   "steps": [
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Tribute"
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Target"
+    },
+    {
+     "card": "Thunderbolt"
+    }
+   ]
+  },
+  "2025-12-05": {
+   "kind": "scene",
+   "scene": "2025-12-05-TitanPuzzle.tscn",
+   "source": "Capacitor, Heartbeat, Exchange, Reverberate, Echo, Revive, Echo, Heartbeat, Exchange, Reverberate, Echo, Heartbeat",
+   "steps": [
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Heartbeat"
+    },
+    {
+     "card": "Exchange"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Heartbeat"
+    },
+    {
+     "card": "Exchange"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Heartbeat"
+    }
+   ]
+  },
+  "2025-12-10": {
+   "kind": "scene",
+   "scene": "2025-12-10-AdditionSignPuzle.tscn",
+   "source": "Armory -> Slash & Cleave, Venom, Cleave, Cleave, Pound, Spear, Slash, Slash",
+   "steps": [
+    {
+     "card": "Armory",
+     "picks": [
+      "Slash",
+      "Cleave"
+     ]
+    },
+    {
+     "card": "Venom"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Pound"
+    },
+    {
+     "card": "Spear"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Slash"
+    }
+   ]
+  },
+  "2025-12-11": {
+   "kind": "scene",
+   "scene": "2025-12-11-WraithPuzzle.tscn",
+   "source": "Inspiration, Cauterize, Martyr, Reverberate, Armory -> Slash & Cleave, Trace, Cleave, Cleave, Slash",
+   "steps": [
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Armory",
+     "picks": [
+      "Slash",
+      "Cleave"
+     ]
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Slash"
+    }
+   ]
+  },
+  "2025-12-12": {
+   "kind": "scene",
+   "scene": "2025-12-12-OwlbearPuzzle.tscn",
+   "source": "Rage, Rebound, Revive, Rage, Rebound, Revive, Rage, Rebound, Revive, Rage, Rebound, Revive, Rage, Cauterize, Capacitor, Fang, Rebound, Revive, Rebound, Revive, Capacitor, Fang, Rebound, Revive, Rebound, Revive, Capacitor, Fang, Rebound, Revive, Rebound, Revive, Rebound, Revive, Rebound, Revive, Cauterize, Capacitor, Fang, Rebound, Revive, Rebound, Revive, Rebound, Revive, Cauterize, Capacitor, Fang, Rebound, Revive, Rebound, Revive, Rebound, Revive, Rebound, Revive, Rage, Cauterize, Capacitor, Fang, Rebound, Revive, Rebound, Revive, Rebound, RevivRe, Cauterize, Capacitor, Fang, Rebound, Revive, Rebound, Revive, Rebound, Revive, Rebound, Revive, age, Cauterize, Capacitor, Fang, Rebound, Revive, Rebound, Revive, Rebound, Revive, Rebound, Revive, Rage, Cauterize, Capacitor, Fang, Rebound, Revive, Rebound, Revive, Rebound, Revive, Cauterize, Capacitor, Fang, Rebound, Revive, Rebound, Revive, Rebound, Revive, Cauterize, Rebound, Revive, Cauterize, Fang, Rebound, Revive, Fang, Revive, Rebound, Fang, Fang ",
+   "steps": [
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Fang"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Fang"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Fang"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Fang"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Fang"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Fang"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Fang"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Fang"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Fang"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Fang"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Fang"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Fang"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Fang"
+    },
+    {
+     "card": "Fang"
+    }
+   ],
+   "skip": "Submitted solution runs out of energy at step 57 of 120."
+  },
+  "2026-01-05": {
+   "kind": "scene",
+   "scene": "2026-01-05-RadiantSlugPuzzle.tscn",
+   "source": "Capacitor, Bargain, Lunge, Echo, Spear, Thunderbolt",
+   "steps": [
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Lunge"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Spear"
+    },
+    {
+     "card": "Thunderbolt"
+    }
+   ]
+  },
+  "2026-01-06": {
+   "kind": "scene",
+   "scene": "2026-01-06-BlackKnightPuzzle.tscn",
+   "source": "Echo, Target, Wound, Armory (picking Cleave, Slash), Armory (picking Cleave, Spear), Cleave, Cleave, Slash, Spear",
+   "steps": [
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Target"
+    },
+    {
+     "card": "Wound"
+    },
+    {
+     "card": "Armory",
+     "picks": [
+      "Cleave",
+      "Slash"
+     ]
+    },
+    {
+     "card": "Armory",
+     "picks": [
+      "Cleave",
+      "Spear"
+     ]
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Spear"
+    }
+   ]
+  },
+  "2026-01-07": {
+   "kind": "scene",
+   "scene": "2026-01-07-VendingMachinePuzzle.tscn",
+   "source": "Armory(Slash, Pound), Armory(Spear, Pound), Rage, Capacitor, Capacitor, Slash, Echo, Pound, Spear, Pound",
+   "steps": [
+    {
+     "card": "Armory",
+     "picks": [
+      "Slash",
+      "Pound"
+     ]
+    },
+    {
+     "card": "Armory",
+     "picks": [
+      "Spear",
+      "Pound"
+     ]
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Pound"
+    },
+    {
+     "card": "Spear"
+    },
+    {
+     "card": "Pound"
+    }
+   ]
+  },
+  "2026-01-08": {
+   "kind": "scene",
+   "scene": "2026-01-08-GiantCrabPuzzle.tscn",
+   "source": "Amory (picking Slash, Cleave), Echo, Reverberate (Armory picks are Slash, Spear, Slash Spear), Overload, Cleave, Slash, Overload, Spear, Spear, Slash, Slash",
+   "steps": [
+    {
+     "card": "Armory",
+     "picks": [
+      "Slash",
+      "Cleave"
+     ]
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Reverberate",
+     "picks": [
+      "Slash",
+      "Spear",
+      "Slash",
+      "Spear"
+     ]
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Spear"
+    },
+    {
+     "card": "Spear"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Slash"
+    }
+   ],
+   "cleaned": "Armory(Slash, Cleave), Echo, Reverberate(Slash, Spear, Slash, Spear), Overload, Cleave, Slash, Overload, Spear, Spear, Slash, Slash"
+  },
+  "2026-01-09": {
+   "kind": "scene",
+   "scene": "2026-01-09-PaladinPuzzle.tscn",
+   "source": "Cauterize, Inspiration, Trace, Revive, Trace, Revive, Revive, Cauterize, Inspiration, Trace, Revive, Trace, Revive, Revive, Revive, Trace, Cauterize, Cauterize, Inspiration, Revive, Revive, Revive, Revive, Trace, Inspiration, Revive, Revive, Trace, Cauterize, Cauterize, Cauterize, Revive, Cauterize, Cauterize, Inspiration, Revive, Revive, Cauterize, Cauterize, Revive, Cauterize, Cauterize, Revive, Cauterize, Cauterize, Inspiration, Inspiration, Thunderbolt",
+   "steps": [
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Thunderbolt"
+    }
+   ]
+  },
+  "2026-01-13": {
+   "kind": "scene",
+   "scene": "2026-01-13-AncientTreePuzzle.tscn",
+   "source": "Capacitor, Capacitor, Bargain, Lunge, Lunge, Lunge, Thunderbolt",
+   "steps": [
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Lunge"
+    },
+    {
+     "card": "Lunge"
+    },
+    {
+     "card": "Lunge"
+    },
+    {
+     "card": "Thunderbolt"
+    }
+   ]
+  },
+  "2026-01-14": {
+   "kind": "scene",
+   "scene": "2026-01-14-WeatherWitchPuzzle.tscn",
+   "source": "Capacitor, Capacitor, Shield, Armory (picking Cleave and Pound), Martyr, Cleave, Pound, Target, Thunderbolt",
+   "steps": [
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Shield"
+    },
+    {
+     "card": "Armory",
+     "picks": [
+      "Cleave",
+      "Pound"
+     ]
+    },
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Pound"
+    },
+    {
+     "card": "Target"
+    },
+    {
+     "card": "Thunderbolt"
+    }
+   ]
+  },
+  "2026-01-19": {
+   "kind": "scene",
+   "scene": "2026-01-19-ScorpionPuzzle.tscn",
+   "source": "Venom, Cleave, Cleanse, Slash, Slash",
+   "steps": [
+    {
+     "card": "Venom"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Cleanse"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Slash"
+    }
+   ]
+  },
+  "2026-01-20": {
+   "kind": "scene",
+   "scene": "2026-01-20-ModronPuzzle.tscn",
+   "source": "Empty Fist, Empty Fist, Cauterize, Inspiration, Inspiration, Surge, Thunderbolt",
+   "steps": [
+    {
+     "card": "Emptyfist"
+    },
+    {
+     "card": "Emptyfist"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Surge"
+    },
+    {
+     "card": "Thunderbolt"
+    }
+   ]
+  },
+  "2026-01-21": {
+   "kind": "scene",
+   "scene": "2026-01-21-ButlerPuzzle.tscn",
+   "source": "Echo, Spark, Revive, Echo, Spark, Inspiration, Reverberate, Inspiration, Echo, Spark",
+   "steps": [
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Spark"
+    }
+   ]
+  },
+  "2026-01-22": {
+   "kind": "scene",
+   "scene": "2026-01-22-AxebeakPuzzle.tscn",
+   "source": "Cauterize, Wound, Scrap (Cleave), Rebound, Overload, Overload, Armory (Pound, Cleave), Pound, Cleave",
+   "steps": [
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Wound"
+    },
+    {
+     "card": "Scrap",
+     "picks": [
+      "Cleave"
+     ]
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Armory",
+     "picks": [
+      "Pound",
+      "Cleave"
+     ]
+    },
+    {
+     "card": "Pound"
+    },
+    {
+     "card": "Cleave"
+    }
+   ]
+  },
+  "2026-01-26": {
+   "kind": "scene",
+   "scene": "2026-01-26-ViperPuzzle.tscn",
+   "source": "Haunt, Fang, Inspiration, Wound, Wound, Fang, Flurry",
+   "steps": [
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Fang"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Wound"
+    },
+    {
+     "card": "Wound"
+    },
+    {
+     "card": "Fang"
+    },
+    {
+     "card": "Flurry"
+    }
+   ]
+  },
+  "2026-01-28": {
+   "kind": "scene",
+   "scene": "2026-01-28-NinjaPuzzle.tscn",
+   "source": "Rage, Flurry, Flurry, Cooperation, Target, Thunderbolt",
+   "steps": [
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Flurry"
+    },
+    {
+     "card": "Flurry"
+    },
+    {
+     "card": "Cooperation"
+    },
+    {
+     "card": "Target"
+    },
+    {
+     "card": "Thunderbolt"
+    }
+   ],
+   "skip": "Submitted solution: Flurry not in hand at step 3."
+  },
+  "2026-01-29": {
+   "kind": "scene",
+   "scene": "2026-01-29-EvilCarrotPuzzle.tscn",
+   "source": "Berserk, Rebound, Empty Fist, Cooperate, Flurry, Cleave, Shovel, Empty Fist",
+   "steps": [
+    {
+     "card": "Berserk"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Emptyfist"
+    },
+    {
+     "card": "Cooperation"
+    },
+    {
+     "card": "Flurry"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Shovel"
+    },
+    {
+     "card": "Emptyfist"
+    }
+   ],
+   "skip": "Submitted solution is 1 energy short for Shovel at step 7."
+  },
+  "2026-01-30": {
+   "kind": "scene",
+   "scene": "2026-01-30-HammerheadPuzzle.tscn",
+   "source": "Target, Empty fist, Cooperate, Berserk, Sharpen, Flurry, Slash",
+   "steps": [
+    {
+     "card": "Target"
+    },
+    {
+     "card": "Emptyfist"
+    },
+    {
+     "card": "Cooperation"
+    },
+    {
+     "card": "Berserk"
+    },
+    {
+     "card": "Sharpen"
+    },
+    {
+     "card": "Flurry"
+    },
+    {
+     "card": "Slash"
+    }
+   ]
+  },
+  "2026-02-02": {
+   "kind": "scene",
+   "scene": "2026-02-02-CarniverousPlantPuzzle.tscn",
+   "source": "Drain, Potion(Heal), Berserk, Reverberate, Heartbeat, Fang, Fang",
+   "steps": [
+    {
+     "card": "Drain"
+    },
+    {
+     "card": "Potion",
+     "effect": "heal"
+    },
+    {
+     "card": "Berserk"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Heartbeat"
+    },
+    {
+     "card": "Fang"
+    },
+    {
+     "card": "Fang"
+    }
+   ]
+  },
+  "2026-02-05": {
+   "kind": "scene",
+   "scene": "2026-02-05-JackFrostPuzzle.tscn",
+   "source": "Armory (Slash + Cleave), Scrap (Tribute), Waste (Scrap), Martyr, Echo, Reverberate (Pound + Cleave) x2, Cleave x3, Pound, Slash",
+   "steps": [
+    {
+     "card": "Armory",
+     "picks": [
+      "Slash",
+      "Cleave"
+     ]
+    },
+    {
+     "card": "Scrap",
+     "picks": [
+      "Tribute"
+     ]
+    },
+    {
+     "card": "Waste",
+     "picks": [
+      "Scrap"
+     ]
+    },
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Reverberate",
+     "picks": [
+      "Pound",
+      "Cleave",
+      "Pound",
+      "Cleave"
+     ]
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Pound"
+    },
+    {
+     "card": "Slash"
+    }
+   ],
+   "cleaned": "Armory(Slash, Cleave), Scrap(Tribute), Waste(Scrap), Martyr, Echo, Reverberate(Pound, Cleave, Pound, Cleave), Cleave x3, Pound, Slash",
+   "note": "\"Reverberate (Pound + Cleave) x2\" = one Reverberate replaying Armory twice."
+  },
+  "2026-02-06": {
+   "kind": "scene",
+   "scene": "2026-02-06-CrusaderPuzzle.tscn",
+   "source": "Burst, Drain, Drain, Armory, Berserk, Cleave, Spear, Frenzy, Reverberate",
+   "steps": [
+    {
+     "card": "Burst"
+    },
+    {
+     "card": "Drain"
+    },
+    {
+     "card": "Drain"
+    },
+    {
+     "card": "Armory"
+    },
+    {
+     "card": "Berserk"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Spear"
+    },
+    {
+     "card": "Frenzy"
+    },
+    {
+     "card": "Reverberate"
+    }
+   ]
+  },
+  "2026-02-11": {
+   "kind": "scene",
+   "scene": "2026-02-11-CockatricePuzzle.tscn",
+   "source": "Trace, Revive, Trace, Revive, Trace, Spark, Revive, Revive, (Spark, Revive)",
+   "steps": [
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Revive"
+    }
+   ],
+   "skip": "Submitted solution leaves the enemy at 19 HP; ending \"(Spark, Revive)\" unclear."
+  },
+  "2026-02-12": {
+   "kind": "scene",
+   "scene": "2026-02-12-PunchingBagPuzzle.tscn",
+   "source": "Frenzy, Revive, Thunderbolt, Cooperation, Thunderbolt, Cooperation, Reverberate, Frenzy, Thunderbolt, Cooperation, Thunderbolt",
+   "steps": [
+    {
+     "card": "Frenzy"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Thunderbolt"
+    },
+    {
+     "card": "Cooperation"
+    },
+    {
+     "card": "Thunderbolt"
+    },
+    {
+     "card": "Cooperation"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Frenzy"
+    },
+    {
+     "card": "Thunderbolt"
+    },
+    {
+     "card": "Cooperation"
+    },
+    {
+     "card": "Thunderbolt"
+    }
+   ]
+  },
+  "2026-02-13": {
+   "kind": "scene",
+   "scene": "2026-02-13-BlacksmithPuzzle.tscn",
+   "source": "Echo, Echo, Reverberate, Sharpen, Sharpen, Revive, Sharpen, Sharpen, Reverberate, Sharpen, Sharpen, Fang",
+   "steps": [
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Sharpen"
+    },
+    {
+     "card": "Sharpen"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Sharpen"
+    },
+    {
+     "card": "Sharpen"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Sharpen"
+    },
+    {
+     "card": "Sharpen"
+    },
+    {
+     "card": "Fang"
+    }
+   ]
+  },
+  "2026-02-17": {
+   "kind": "scene",
+   "scene": "2026-02-17-SwordmasterPuzzle.tscn",
+   "source": "Rage, Vemom, Slash, Overload, Sharpen, Fang, Pound",
+   "steps": [
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Venom"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Sharpen"
+    },
+    {
+     "card": "Fang"
+    },
+    {
+     "card": "Pound"
+    }
+   ]
+  },
+  "2026-02-18": {
+   "kind": "scene",
+   "scene": "2026-02-18-BansheePuzzle.tscn",
+   "source": "Echo, Trace, Reverberate, Haunt, Haunt, Cleanse, Reverberate, Shovel, Shovel, Shovel",
+   "steps": [
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Cleanse"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Shovel"
+    },
+    {
+     "card": "Shovel"
+    },
+    {
+     "card": "Shovel"
+    }
+   ]
+  },
+  "2026-02-19": {
+   "kind": "scene",
+   "scene": "2026-02-19-CircuitBreakerPuzzle.tscn",
+   "source": "Ignite, Ignite, Reverberate, Cauterize, Frenzy, Spark (x2), Overload, Venom, Spark (x6)",
+   "steps": [
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Frenzy"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Venom"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    }
+   ]
+  },
+  "2026-02-20": {
+   "kind": "scene",
+   "scene": "2026-02-20-MadHatterPuzzle.tscn",
+   "source": "Potion (hp), Potion (hp), Revive, Potion (hp), Berserk, Overload, Flurry, Reverberate, Overload, Potion (dmg), Potion (dmg), Flurry",
+   "steps": [
+    {
+     "card": "Potion",
+     "effect": "heal"
+    },
+    {
+     "card": "Potion",
+     "effect": "heal"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Potion",
+     "effect": "heal"
+    },
+    {
+     "card": "Berserk"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Flurry"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Potion",
+     "effect": "damage"
+    },
+    {
+     "card": "Potion",
+     "effect": "damage"
+    },
+    {
+     "card": "Flurry"
+    }
+   ]
+  },
+  "2026-02-23": {
+   "kind": "url",
+   "enemy_name": "Boxer",
+   "source": "Exchange, Martyr, Cauterize, Frenzy, Pound, Pound, Pound",
+   "steps": [
+    {
+     "card": "Exchange"
+    },
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Frenzy"
+    },
+    {
+     "card": "Pound"
+    },
+    {
+     "card": "Pound"
+    },
+    {
+     "card": "Pound"
+    }
+   ]
+  },
+  "2026-02-24": {
+   "kind": "url",
+   "enemy_name": "Sterilizing Flames",
+   "source": "Cauterize, Cleanse, Cauterize, Frenzy, Drain, Rebound, Heartbeat, Heartbeat",
+   "steps": [
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Cleanse"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Frenzy"
+    },
+    {
+     "card": "Drain"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Heartbeat"
+    },
+    {
+     "card": "Heartbeat"
+    }
+   ]
+  },
+  "2026-02-25": {
+   "kind": "url",
+   "enemy_name": "Enlightened Angel",
+   "source": "Cauterize, Reverberate, Inspiration (x2), Revive, Exchange, Inspiration (x2), Heartbeat",
+   "steps": [
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Exchange"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Heartbeat"
+    }
+   ]
+  },
+  "2026-02-26": {
+   "kind": "url",
+   "enemy_name": "Shrine Spirit",
+   "source": "Tribute, Haunt, Slash, Cooperate, Slash, Revive, Cooperate, Revive, Slash, Revive, Slash, Revive, Slash, Revive, Slash",
+   "steps": [
+    {
+     "card": "Tribute"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Cooperation"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Cooperation"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Slash"
+    }
+   ]
+  },
+  "2026-02-27": {
+   "kind": "url",
+   "enemy_name": "Fractal",
+   "source": "Trace, Trace, Trace, Trace, Trace, Trace, Reverberate, Reverberate, Trash(Reverberate, Reverberate), Reverberate, Reverberate, Reverberate, Reverberate, Reverberate(Reverberate, Reverberate)(Reverberate, Reverberate), Tribute, Snipe, Tribute, Snipe, Snipe",
+   "skip": "Waiting on a human: What is Trash(Reverberate, Reverberate): the Waste card?",
+   "steps": []
+  },
+  "2026-03-02": {
+   "kind": "url",
+   "enemy_name": "Soup",
+   "source": "Amory, Drain, Martyr, Cleave, Potion, Slash",
+   "steps": [
+    {
+     "card": "Armory"
+    },
+    {
+     "card": "Drain"
+    },
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Potion"
+    },
+    {
+     "card": "Slash"
+    }
+   ]
+  },
+  "2026-03-03": {
+   "kind": "url",
+   "enemy_name": "Potion Dealer",
+   "source": "Potion -> Healing, Berserk, Inspiration, Potion -> Damage, Heartbeat, Empty Fist",
+   "steps": [
+    {
+     "card": "Potion",
+     "effect": "heal"
+    },
+    {
+     "card": "Berserk"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Potion",
+     "effect": "damage"
+    },
+    {
+     "card": "Heartbeat"
+    },
+    {
+     "card": "Emptyfist"
+    }
+   ]
+  },
+  "2026-03-04": {
+   "kind": "url",
+   "enemy_name": "Wind Elemental",
+   "source": "Target, Thunderbolt, Cooperate, Target, Revive, Thunderbolt, Cooperate, Target, Thunderbolt",
+   "steps": [
+    {
+     "card": "Target"
+    },
+    {
+     "card": "Thunderbolt"
+    },
+    {
+     "card": "Cooperation"
+    },
+    {
+     "card": "Target"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Thunderbolt"
+    },
+    {
+     "card": "Cooperation"
+    },
+    {
+     "card": "Target"
+    },
+    {
+     "card": "Thunderbolt"
+    }
+   ]
+  },
+  "2026-03-05": {
+   "kind": "url",
+   "enemy_name": "Vampiric Thrall",
+   "source": "Martyr, Rebound, Sharp, Sharp, Martyr, Drain, Slash",
+   "steps": [
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Sharpen"
+    },
+    {
+     "card": "Sharpen"
+    },
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Drain"
+    },
+    {
+     "card": "Slash"
+    }
+   ]
+  },
+  "2026-03-06": {
+   "kind": "url",
+   "enemy_name": "Tyrant",
+   "source": "Solution: (Bargain, Revive) x23, (Shield, Revive) x6, (Martyr, Revive, Cleave, Revive) x3",
+   "steps": [
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Shield"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Shield"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Shield"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Shield"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Shield"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Shield"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Revive"
+    }
+   ]
+  },
+  "2026-03-09": {
+   "kind": "url",
+   "enemy_name": "Vampire hunter",
+   "source": "Rage, Target, Sharpen, Drain, Drain, Heartbeat",
+   "steps": [
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Target"
+    },
+    {
+     "card": "Sharpen"
+    },
+    {
+     "card": "Drain"
+    },
+    {
+     "card": "Drain"
+    },
+    {
+     "card": "Heartbeat"
+    }
+   ]
+  },
+  "2026-03-10": {
+   "kind": "url",
+   "enemy_name": "Salesman",
+   "source": "Flurry, Rage, Cooperation, Berserk, Empty Fist, Empty Fist",
+   "steps": [
+    {
+     "card": "Flurry"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Cooperation"
+    },
+    {
+     "card": "Berserk"
+    },
+    {
+     "card": "Emptyfist"
+    },
+    {
+     "card": "Emptyfist"
+    }
+   ]
+  },
+  "2026-03-11": {
+   "kind": "url",
+   "enemy_name": "Viking",
+   "source": "Drain, cauterize, frenzy, inspiration, berserk, flurry",
+   "steps": [
+    {
+     "card": "Drain"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Frenzy"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Berserk"
+    },
+    {
+     "card": "Flurry"
+    }
+   ]
+  },
+  "2026-03-12": {
+   "kind": "url",
+   "enemy_name": "Griffin",
+   "source": "Cauterize, bezerk, potion(damage), drain, martyr, heartbeat, fang",
+   "steps": [
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Berserk"
+    },
+    {
+     "card": "Potion",
+     "effect": "damage"
+    },
+    {
+     "card": "Drain"
+    },
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Heartbeat"
+    },
+    {
+     "card": "Fang"
+    }
+   ]
+  },
+  "2026-03-13": {
+   "kind": "url",
+   "enemy_name": "Walking Minefield",
+   "source": "(Armory, Rebound, Revive, (Echo, Rebound, Revive, Scrap -> [Armory weapon]) x2) x2, Armory, Echo, Rebound, Revive, Scrap -> [Armory weapon], Scrap -> [Armory weapon], Revive, Scrap -> [Armory weapon], Echo, Rebound, Shovel, Shovel, Shovel",
+   "steps": [
+    {
+     "card": "Armory"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Armory"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Armory"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Scrap"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Scrap"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Scrap"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Scrap"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Scrap"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Scrap"
+    },
+    {
+     "card": "Scrap",
+     "picks": [
+      "Revive"
+     ]
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Rebound"
+    }
+   ],
+   "cleaned": "(Armory, Rebound, Revive) x2, Armory, (Echo, Rebound, Revive, Scrap) x6, Scrap(Revive), Echo, Rebound",
+   "note": "Solution provided by David. Armory picks and the first six Scrap discards aren't stated; the runner searches them.",
+   "skip": "Needs Armory picks, Scrap discards and the damage source for David's sequence."
+  },
+  "2026-03-16": {
+   "enemy_name": "Mercenary",
+   "author": "Benmus",
+   "source": "armory, armory, exchange, scrap, scrap, cleave, cleave, thunder bolt, empty fist",
+   "steps": [
+    {
+     "card": "Armory",
+     "picks": [
+      "Cleave"
+     ]
+    },
+    {
+     "card": "Armory",
+     "picks": [
+      "Cleave"
+     ]
+    },
+    {
+     "card": "Exchange"
+    },
+    {
+     "card": "Scrap",
+     "picks": []
+    },
+    {
+     "card": "Scrap",
+     "picks": []
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Thunderbolt"
+    },
+    {
+     "card": "Emptyfist"
+    }
+   ],
+   "note": "Choices found by the runner's search (not in the submitted text).",
+   "kind": "url"
+  },
+  "2026-03-17": {
+   "kind": "url",
+   "enemy_name": "Octopus",
+   "source": "Snipe, Armory, Armory, Armory, (Choose Cleave and pound every time), Cleave, Cleave, Cleave, Pound, Pound, Pound, Cooperation, Thunderbolt, Cleave",
+   "steps": [
+    {
+     "card": "Snipe"
+    },
+    {
+     "card": "Armory",
+     "picks": [
+      "Cleave",
+      "Pound"
+     ]
+    },
+    {
+     "card": "Armory",
+     "picks": [
+      "Cleave",
+      "Pound"
+     ]
+    },
+    {
+     "card": "Armory",
+     "picks": [
+      "Cleave",
+      "Pound"
+     ]
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Pound"
+    },
+    {
+     "card": "Pound"
+    },
+    {
+     "card": "Pound"
+    },
+    {
+     "card": "Cooperation"
+    },
+    {
+     "card": "Thunderbolt"
+    },
+    {
+     "card": "Cleave"
+    }
+   ],
+   "cleaned": "Snipe, Armory(Cleave, Pound), Armory(Cleave, Pound), Armory(Cleave, Pound), Cleave, Cleave, Cleave, Pound, Pound, Pound, Cooperation, Thunderbolt, Cleave",
+   "skip": "Runs out of energy for the last Cleave; Armory picks may be read wrong."
+  },
+  "2026-03-18": {
+   "kind": "url",
+   "enemy_name": "Pixie",
+   "source": "Cauterize, Thunderbolt, Inspiration, Revive, Exchange, Inspiration, Thunderbolt",
+   "steps": [
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Thunderbolt"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Exchange"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Thunderbolt"
+    }
+   ]
+  },
+  "2026-03-19": {
+   "kind": "url",
+   "enemy_name": "Sun Elemental",
+   "source": "Armory (Pick Spear and Slash), Slash, Exchange, Rage, Cooperate, Revive, Rage, Spear, Cooperate, Target, Cleave",
+   "steps": [
+    {
+     "card": "Armory",
+     "picks": [
+      "Spear",
+      "Slash"
+     ]
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Exchange"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Cooperation"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Spear"
+    },
+    {
+     "card": "Cooperation"
+    },
+    {
+     "card": "Target"
+    },
+    {
+     "card": "Cleave"
+    }
+   ]
+  },
+  "2026-03-20": {
+   "kind": "url",
+   "enemy_name": "Toad",
+   "source": "Inspiration, Armory, Revive, Inspiration, Armory, Slash, Capacitator, Burst, Spear, Spear, Target, Burst",
+   "steps": [
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Armory"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Armory"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Burst"
+    },
+    {
+     "card": "Spear"
+    },
+    {
+     "card": "Spear"
+    },
+    {
+     "card": "Target"
+    },
+    {
+     "card": "Burst"
+    }
+   ]
+  },
+  "2026-03-23": {
+   "kind": "url",
+   "enemy_name": "Soldier's Phantom",
+   "source": "Rebound, Haunt, Haunt, Reverberate, Snipe, Snipe, Snipe",
+   "steps": [
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Snipe"
+    },
+    {
+     "card": "Snipe"
+    },
+    {
+     "card": "Snipe"
+    }
+   ]
+  },
+  "2026-03-24": {
+   "kind": "url",
+   "enemy_name": "Explosioneer",
+   "source": "Spark, Capacitor, Capacitor, Spark, Spark, Spark, Spark",
+   "steps": [
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    }
+   ]
+  },
+  "2026-03-25": {
+   "kind": "url",
+   "enemy_name": "Candlemaker",
+   "source": "Scrap (Discard Ignite), Rebound, Reverberate, Reverberate, Spark, Spark, Spark, Spark",
+   "steps": [
+    {
+     "card": "Scrap",
+     "picks": [
+      "Ignite"
+     ]
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    }
+   ]
+  },
+  "2026-03-26": {
+   "kind": "url",
+   "enemy_name": "Fiber-Optic Cable Snake",
+   "source": "Trace, Reverberate, Overload, Overload, Waste -> Reverberate, Overload, Reverberate, Thunderbolt",
+   "steps": [
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Waste",
+     "picks": [
+      "Reverberate"
+     ]
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Thunderbolt"
+    }
+   ]
+  },
+  "2026-03-27": {
+   "kind": "url",
+   "enemy_name": "Limbo Bar",
+   "source": "Martyr, Armory -> Pound & Cleave, Cleave, Cauterize, Balance, Cauterize, Balance, Armory -> Pound & Cleave, Pound, Pound, Cleave",
+   "steps": [
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Armory",
+     "picks": [
+      "Pound",
+      "Cleave"
+     ]
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Balance"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Balance"
+    },
+    {
+     "card": "Armory",
+     "picks": [
+      "Pound",
+      "Cleave"
+     ]
+    },
+    {
+     "card": "Pound"
+    },
+    {
+     "card": "Pound"
+    },
+    {
+     "card": "Cleave"
+    }
+   ]
+  },
+  "2026-03-31": {
+   "kind": "url",
+   "enemy_name": "Stew",
+   "source": "Potion -> damage, Armory -> (Slash, Cleave), Slash, Target, Martyr, Cleave",
+   "steps": [
+    {
+     "card": "Potion",
+     "effect": "damage"
+    },
+    {
+     "card": "Armory",
+     "picks": [
+      "Slash",
+      "Cleave"
+     ]
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Target"
+    },
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Cleave"
+    }
+   ]
+  },
+  "2026-04-01": {
+   "kind": "url",
+   "enemy_name": "Wisp",
+   "source": "Scorch Scorch Scorch Revive Scorch Revive Scorch Revive Scorch Revive Scorch Scorch Revive Scorch Scorch",
+   "steps": [
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Scorch"
+    }
+   ]
+  },
+  "2026-04-02": {
+   "kind": "url",
+   "enemy_name": "The Alphabet Song",
+   "source": "Berserk, Flurry, Gift, Cleave, Armory -> Slash & Pound, Slash, Pound",
+   "steps": [
+    {
+     "card": "Berserk"
+    },
+    {
+     "card": "Flurry"
+    },
+    {
+     "card": "Gift"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Armory",
+     "picks": [
+      "Slash",
+      "Pound"
+     ]
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Pound"
+    }
+   ]
+  },
+  "2026-04-03": {
+   "kind": "url",
+   "enemy_name": "Monk",
+   "source": "Armoury (Spear & Cleave), Spear, Surge, Sharpen, Target, Gift, Cleave, Cooperate, Balance",
+   "steps": [
+    {
+     "card": "Armory",
+     "picks": [
+      "Spear",
+      "Cleave"
+     ]
+    },
+    {
+     "card": "Spear"
+    },
+    {
+     "card": "Surge"
+    },
+    {
+     "card": "Sharpen"
+    },
+    {
+     "card": "Target"
+    },
+    {
+     "card": "Gift"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Cooperation"
+    },
+    {
+     "card": "Balance"
+    }
+   ]
+  },
+  "2026-04-06": {
+   "kind": "url",
+   "enemy_name": "Backstreet Thug",
+   "source": "Sharpen, Venom, Flurry, Flurry",
+   "steps": [
+    {
+     "card": "Sharpen"
+    },
+    {
+     "card": "Venom"
+    },
+    {
+     "card": "Flurry"
+    },
+    {
+     "card": "Flurry"
+    }
+   ]
+  },
+  "2026-04-07": {
+   "kind": "url",
+   "enemy_name": "Wizard",
+   "source": "Potion -> Heal, Potion -> Heal, Potion -> Damage, Balance, Balance, Potion -> Damage, Potion -> Damage",
+   "steps": [
+    {
+     "card": "Potion",
+     "effect": "heal"
+    },
+    {
+     "card": "Potion",
+     "effect": "heal"
+    },
+    {
+     "card": "Potion",
+     "effect": "damage"
+    },
+    {
+     "card": "Balance"
+    },
+    {
+     "card": "Balance"
+    },
+    {
+     "card": "Potion",
+     "effect": "damage"
+    },
+    {
+     "card": "Potion",
+     "effect": "damage"
+    }
+   ]
+  },
+  "2026-04-08": {
+   "kind": "url",
+   "enemy_name": "Chanter",
+   "source": "Balance, Cauterize, Rebound, Overload, Overload, Reverberate",
+   "steps": [
+    {
+     "card": "Balance"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Reverberate"
+    }
+   ]
+  },
+  "2026-04-09": {
+   "kind": "url",
+   "enemy_name": "Specimen",
+   "source": "Potion(Heal), Rebound, Revive, Potion(Heal), Capacitor, Balance, Rebound, Revive, Rebound, Revive, Rebound, Revive, Surge, Balance, Revive, Surge, Balance, Rebound, Potion(Damage), Potion(Damage)",
+   "steps": [
+    {
+     "card": "Potion",
+     "effect": "heal"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Potion",
+     "effect": "heal"
+    },
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Balance"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Surge"
+    },
+    {
+     "card": "Balance"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Surge"
+    },
+    {
+     "card": "Balance"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Potion",
+     "effect": "damage"
+    },
+    {
+     "card": "Potion",
+     "effect": "damage"
+    }
+   ]
+  },
+  "2026-04-10": {
+   "kind": "url",
+   "enemy_name": "Adamantine Golem",
+   "source": "Amory (picking Slash, Cleave), Ignite, Reverberate (picking Slash, Cleave twice for the Armories), Revive, Ignite, Forge, Venom, Cleave, Reverberate, Cleave, Forge, Venom, Cleave, Overload, Cleave, Ignite, Slash, Slash, Slash, Spark, Spark, Spark, Spark, Spark, Spark",
+   "steps": [
+    {
+     "card": "Armory",
+     "picks": [
+      "Slash",
+      "Cleave"
+     ]
+    },
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Reverberate",
+     "picks": [
+      "Slash",
+      "Cleave",
+      "Slash",
+      "Cleave"
+     ]
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Forge"
+    },
+    {
+     "card": "Venom"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Forge"
+    },
+    {
+     "card": "Venom"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    }
+   ],
+   "cleaned": "Armory(Slash, Cleave), Ignite, Reverberate(Slash, Cleave, Slash, Cleave), Revive, Ignite, Forge, Venom, Cleave, Reverberate, Cleave, Forge, Venom, Cleave, Overload, Cleave, Ignite, Slash, Slash, Slash, Spark, Spark, Spark, Spark, Spark, Spark"
+  },
+  "2026-04-13": {
+   "kind": "url",
+   "enemy_name": "Count of Monte Cristo",
+   "source": "Cleave, Cleave, Rage, Reverberate, Reverberate",
+   "steps": [
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Reverberate"
+    }
+   ]
+  },
+  "2026-04-14": {
+   "kind": "url",
+   "enemy_name": "Snail",
+   "source": "[Using initial letters] BSCR, SRCR, SRSRCR, SRSRSRCR, SRSRSRSRSRS",
+   "steps": [
+    {
+     "card": "Berserk"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Cooperation"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Cooperation"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Cooperation"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Cooperation"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Slash"
+    }
+   ],
+   "cleaned": "Berserk, Slash, Cooperation, Revive, Slash, Revive, Cooperation, Revive, Slash, Revive, Slash, Revive, Cooperation, Revive, Slash, Revive, Slash, Revive, Slash, Revive, Cooperation, Revive, Slash, Revive, Slash, Revive, Slash, Revive, Slash, Revive, Slash",
+   "skip": "Letter-code solution leaves the enemy at 4 HP; decoding may be wrong."
+  },
+  "2026-04-15": {
+   "kind": "url",
+   "enemy_name": "Mouse",
+   "source": "Trace, Echo, Trace, Echo, Echo, Echo, Cauterize, Cauterize, Cauterize, Balance",
+   "steps": [
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Balance"
+    }
+   ]
+  },
+  "2026-04-16": {
+   "kind": "url",
+   "enemy_name": "Sculptor",
+   "source": "trace revive trace revive[copy] trace revive[copy] trace haunt revive[copy] haunt[copy] trace revive[copy] haunt[copy] haunt forge revive[copy] haunt revive[notcopy] haunt revive haunt thunderbolt revive revive revive revive revive haunt revive haunt revive haunt",
+   "steps": [
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Revive",
+     "copy": true
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Revive",
+     "copy": true
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Revive",
+     "copy": true
+    },
+    {
+     "card": "Haunt",
+     "copy": true
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Revive",
+     "copy": true
+    },
+    {
+     "card": "Haunt",
+     "copy": true
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Forge"
+    },
+    {
+     "card": "Revive",
+     "copy": true
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Revive",
+     "copy": false
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Thunderbolt"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Haunt"
+    }
+   ]
+  },
+  "2026-04-17": {
+   "kind": "url",
+   "enemy_name": "The Plaintiff",
+   "source": "Cauterize, Balance, RebRev x2, Cauterize, RebRev, Cooperate, Cauterize, Balance, RebRev x2, Cauterize, RebRev x2, Cooperate, Cauterize, Balance, RebRev x2, Cauterize, RebRev x2, Cooperate, Balance, RebRev, Cauterize Balance (39)",
+   "steps": [
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Balance"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Cooperation"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Balance"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Cooperation"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Balance"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Cooperation"
+    },
+    {
+     "card": "Balance"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Balance"
+    }
+   ],
+   "cleaned": "Cauterize, Balance, RebRev x2, Cauterize, RebRev, Cooperate, Cauterize, Balance, RebRev x2, Cauterize, RebRev x2, Cooperate, Cauterize, Balance, RebRev x2, Cauterize, RebRev x2, Cooperate, Balance, RebRev, Cauterize, Balance"
+  },
+  "2026-04-20": {
+   "kind": "url",
+   "enemy_name": "Vermillion Slime",
+   "source": "Potion -> Healing, Target, Martyr, Cleave",
+   "steps": [
+    {
+     "card": "Potion",
+     "effect": "heal"
+    },
+    {
+     "card": "Target"
+    },
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Cleave"
+    }
+   ]
+  },
+  "2026-04-21": {
+   "kind": "url",
+   "enemy_name": "Animated Tree",
+   "source": "Ignite, 0-damage Spark, Ignite, 0-damage Spark, Ignite, 0-damage Spark, Target, 3-damage Spark",
+   "steps": [
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Target"
+    },
+    {
+     "card": "Spark"
+    }
+   ],
+   "skip": "Needs the runner to pick Sparks by damage (\"0-damage Spark\"); player dies."
+  },
+  "2026-04-22": {
+   "kind": "url",
+   "enemy_name": "The Judge",
+   "source": "Balance, Balance, Cauterize, Capacitor, Rebound, Reverberate, Reverberate (7)",
+   "steps": [
+    {
+     "card": "Balance"
+    },
+    {
+     "card": "Balance"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Reverberate"
+    }
+   ]
+  },
+  "2026-04-23": {
+   "kind": "url",
+   "enemy_name": "Copycat",
+   "source": "Echo, Mend, Potion(Heal), Echo, Balance, Cleave, Cleave",
+   "steps": [
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Mend"
+    },
+    {
+     "card": "Potion",
+     "effect": "heal"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Balance"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Cleave"
+    }
+   ]
+  },
+  "2026-04-24": {
+   "kind": "url",
+   "enemy_name": "Glacial Mirror",
+   "source": "(Enemy should have Retaliate) Heartbeat, Cauterize, Cooperate, Revive, Cauterize, Revive, Forge, Cooperate, Reverberate, Revive, Cooperate, Cauterize, Reverberate, Cauterize, Revive, Forge, Reverberate, Forge (18)",
+   "steps": [
+    {
+     "card": "Heartbeat"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Cooperation"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Forge"
+    },
+    {
+     "card": "Cooperation"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Cooperation"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Forge"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Forge"
+    }
+   ]
+  },
+  "2026-04-27": {
+   "kind": "url",
+   "enemy_name": "Kappa",
+   "source": "Target, Cleave, Spear, Empty Fist",
+   "steps": [
+    {
+     "card": "Target"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Spear"
+    },
+    {
+     "card": "Emptyfist"
+    }
+   ]
+  },
+  "2026-04-28": {
+   "kind": "url",
+   "enemy_name": "Undead",
+   "source": "Scrap (Discard Shovel), Trace, Revive, Revive… (Repeat until enough revives are in discard) Scrap, Revive, Revive, Scrap, Shovel (note: this is not the best solution but the easiest to write down)",
+   "skip": "Repeat count unknown; tried (Trace, Revive, Revive), (Trace, Revive) and (Revive) loops x1-20 and all run out of energy by step 8, so the loop must rely on 0-cost Trace copies in a way the text doesn't say.",
+   "steps": []
+  },
+  "2026-04-29": {
+   "kind": "url",
+   "enemy_name": "Sparky Sparky Boom Boom Man",
+   "source": "Ignite (x2), Trace, Reverberate (x2), Spark (x4), Overload, Spark (x2), Forge, Spark (x6)",
+   "steps": [
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Forge"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    }
+   ]
+  },
+  "2026-04-30": {
+   "kind": "url",
+   "enemy_name": "Underworld Gatekeeper",
+   "source": "Rebound, Scorch, Scorch, Revive, Rebound, Scorch, Scorch, Armory -> (Cleave, Pound), Cleave, Pound",
+   "steps": [
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Armory",
+     "picks": [
+      "Cleave",
+      "Pound"
+     ]
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Pound"
+    }
+   ]
+  },
+  "2026-05-01": {
+   "kind": "url",
+   "enemy_name": "Supermassive Fusion Core",
+   "source": "Ignite, Reverberate, Forge, Burst, Thunderbolt, Surge, Overload, Spark x6",
+   "steps": [
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Forge"
+    },
+    {
+     "card": "Burst"
+    },
+    {
+     "card": "Thunderbolt"
+    },
+    {
+     "card": "Surge"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    }
+   ]
+  },
+  "2026-05-04": {
+   "kind": "url",
+   "enemy_name": "Flaming Boomerang",
+   "source": "Echo, Echo, Ignite, Spark, Rebound, Spark, Spark, Spark, Spark",
+   "steps": [
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    }
+   ]
+  },
+  "2026-05-05": {
+   "kind": "url",
+   "enemy_name": "Fun guy",
+   "source": "armoury(1&2) slash revive slash spear armoury(1&3) slash pound",
+   "steps": [
+    {
+     "card": "Armory",
+     "picks": [
+      "Slash",
+      "Spear"
+     ]
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Spear"
+    },
+    {
+     "card": "Armory",
+     "picks": [
+      "Slash",
+      "Pound"
+     ]
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Pound"
+    }
+   ],
+   "cleaned": "Armory(Slash, Spear), Slash, Revive, Slash, Spear, Armory(Slash, Pound), Slash, Pound"
+  },
+  "2026-05-06": {
+   "kind": "url",
+   "enemy_name": "Baby Hydra",
+   "source": "Trace, Exchange, Rage, Rage, Rage, Exchange, Trace, Empty Fist, Empty Fist",
+   "steps": [
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Exchange"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Exchange"
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Emptyfist"
+    },
+    {
+     "card": "Emptyfist"
+    }
+   ]
+  },
+  "2026-05-07": {
+   "kind": "url",
+   "enemy_name": "Flesh Golem",
+   "source": "Wound, Rebound, Revive, Wound, Rebound, Revive, Wound, Scorch, Rebound, Revive, Rebound, Scorch, Scorch, Revive, Rebound, Scorch, Scorch",
+   "steps": [
+    {
+     "card": "Wound"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Wound"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Wound"
+    },
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Scorch"
+    }
+   ]
+  },
+  "2026-05-08": {
+   "kind": "url",
+   "enemy_name": "Volcanic Mirror",
+   "source": "(Enemy has Retaliate) (Capacitor, Revive) x3, (Rage, Revive) x4, Flurry, Rage, Forge, Revive, Rage, Forge, Capacitor, Reverberate, Rage, Revive, Rage, Forge, Reverberate, Capacitor (28)",
+   "steps": [
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Flurry"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Forge"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Forge"
+    },
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Forge"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Capacitor"
+    }
+   ]
+  },
+  "2026-05-11": {
+   "kind": "url",
+   "enemy_name": "Pigman",
+   "source": "Scorch, Scorch, Scorch, Scorch, Bargain, Thunderbolt",
+   "steps": [
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Thunderbolt"
+    }
+   ]
+  },
+  "2026-05-12": {
+   "kind": "url",
+   "enemy_name": "Centipede",
+   "source": "Forge scorch spear scorch revive spear scorch",
+   "steps": [
+    {
+     "card": "Forge"
+    },
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Spear"
+    },
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Spear"
+    },
+    {
+     "card": "Scorch"
+    }
+   ]
+  },
+  "2026-05-13": {
+   "kind": "url",
+   "enemy_name": "Lover",
+   "source": "Forge Heartbeat revive heartbeat scorch scorch forge",
+   "steps": [
+    {
+     "card": "Forge"
+    },
+    {
+     "card": "Heartbeat"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Heartbeat"
+    },
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Forge"
+    }
+   ]
+  },
+  "2026-05-14": {
+   "kind": "url",
+   "enemy_name": "Popped Corn",
+   "source": "(Enemy has retaliate) forge, cleave, scrap (inspiration), revive, revive, scrap (inspiration), revive, inspiration, cleave, scrap",
+   "steps": [
+    {
+     "card": "Forge"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Scrap",
+     "picks": [
+      "Inspiration"
+     ]
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Scrap",
+     "picks": [
+      "Inspiration"
+     ]
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Scrap"
+    }
+   ]
+  },
+  "2026-05-15": {
+   "enemy_name": "Toxichest",
+   "author": "potatomato",
+   "source": "Armory (Spear, Pound), Rebound, Rage, Rage, Revive, Rebound, Rage, Venom, Spear, Pound, Rebound, Flurry, Flurry",
+   "steps": [
+    {
+     "card": "Armory",
+     "picks": [
+      "Spear",
+      "Pound"
+     ]
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Venom"
+    },
+    {
+     "card": "Spear"
+    },
+    {
+     "card": "Pound"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Flurry"
+    },
+    {
+     "card": "Flurry"
+    }
+   ],
+   "skip": "Submitted solution doesn't win (no third Rebound at step 13); correct solution unknown.",
+   "kind": "url"
+  },
+  "2026-05-18": {
+   "kind": "url",
+   "enemy_name": "Biologist",
+   "source": "Exchange, Potion (heal), Balance, Drain, Heartbeat",
+   "steps": [
+    {
+     "card": "Exchange"
+    },
+    {
+     "card": "Potion",
+     "effect": "heal"
+    },
+    {
+     "card": "Balance"
+    },
+    {
+     "card": "Drain"
+    },
+    {
+     "card": "Heartbeat"
+    }
+   ]
+  },
+  "2026-05-19": {
+   "kind": "url",
+   "enemy_name": "Ghoul",
+   "source": "Inspiration, Echo, Reverberate, Rage, Drain, Heartbeat",
+   "steps": [
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Drain"
+    },
+    {
+     "card": "Heartbeat"
+    }
+   ]
+  },
+  "2026-05-20": {
+   "kind": "url",
+   "enemy_name": "Corn Kernel",
+   "source": "Forge, rebound, balance, balance, revive, balance, rebound, scrap, scrap",
+   "steps": [
+    {
+     "card": "Forge"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Balance"
+    },
+    {
+     "card": "Balance"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Balance"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Scrap"
+    },
+    {
+     "card": "Scrap"
+    }
+   ]
+  },
+  "2026-05-21": {
+   "kind": "url",
+   "enemy_name": "Trashman",
+   "source": "Revive, Waste -> nothing, Waste -> nothing, Revive, Waste -> nothing, Waste -> nothing, Revive, Waste -> nothing, Waste -> nothing, Shovel",
+   "steps": [
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Waste",
+     "picks": []
+    },
+    {
+     "card": "Waste",
+     "picks": []
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Waste",
+     "picks": []
+    },
+    {
+     "card": "Waste",
+     "picks": []
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Waste",
+     "picks": []
+    },
+    {
+     "card": "Waste",
+     "picks": []
+    },
+    {
+     "card": "Shovel"
+    }
+   ]
+  },
+  "2026-06-22": {
+   "kind": "url",
+   "enemy_name": "Loiterer",
+   "source": "Echo, Echo, Rebound, Parting Shot, Parting Shot, Parting Shot",
+   "steps": [
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Partingshot"
+    },
+    {
+     "card": "Partingshot"
+    },
+    {
+     "card": "Partingshot"
+    }
+   ]
+  },
+  "2026-06-23": {
+   "kind": "url",
+   "enemy_name": "Shield man",
+   "source": "Haunt, Martyr, Reverberate, Rage, Inspiration, Fragment, Parting Shot",
+   "steps": [
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Fragment"
+    },
+    {
+     "card": "Partingshot"
+    }
+   ]
+  },
+  "2026-06-24": {
+   "kind": "url",
+   "enemy_name": "Guerilla Warrior",
+   "source": "Cleave, Rebound, Burst, Burst, Shovel, Seance, Rebound, Burst, Burst",
+   "steps": [
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Burst"
+    },
+    {
+     "card": "Burst"
+    },
+    {
+     "card": "Shovel"
+    },
+    {
+     "card": "Seance"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Burst"
+    },
+    {
+     "card": "Burst"
+    }
+   ]
+  },
+  "2026-06-25": {
+   "kind": "url",
+   "enemy_name": "Divine Fletcher",
+   "source": "Rebound x6, Flurry, Rebound, Acuminate, Rebound, Acuminate, Acuminate, Rebound, Flurry, Rebound, Flurry, Flurry",
+   "steps": [
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Flurry"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Acuminate"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Acuminate"
+    },
+    {
+     "card": "Acuminate"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Flurry"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Flurry"
+    },
+    {
+     "card": "Flurry"
+    }
+   ]
+  },
+  "2026-06-26": {
+   "kind": "url",
+   "enemy_name": "Wayward Spirit",
+   "source": "(Armory -> (Slash, Spear)) x2, Slash x2, Spear x2, Seance, Armory -> (Slash, Spear), Slash x3, Spear x2, Seance, Armory -> (Slash, Spear), Slash x4, Spear x2",
+   "steps": [
+    {
+     "card": "Armory",
+     "picks": [
+      "Slash",
+      "Spear"
+     ]
+    },
+    {
+     "card": "Armory",
+     "picks": [
+      "Slash",
+      "Spear"
+     ]
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Spear"
+    },
+    {
+     "card": "Spear"
+    },
+    {
+     "card": "Seance"
+    },
+    {
+     "card": "Armory",
+     "picks": [
+      "Slash",
+      "Spear"
+     ]
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Spear"
+    },
+    {
+     "card": "Spear"
+    },
+    {
+     "card": "Seance"
+    },
+    {
+     "card": "Armory",
+     "picks": [
+      "Slash",
+      "Spear"
+     ]
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Spear"
+    },
+    {
+     "card": "Spear"
+    }
+   ]
+  },
+  "2026-06-29": {
+   "kind": "url",
+   "enemy_name": "Cave Snatcher",
+   "source": "Echo, Scrap -> (Burst, Cleave), Echo, Shovel",
+   "steps": [
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Scrap",
+     "picks": [
+      "Burst",
+      "Cleave"
+     ]
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Shovel"
+    }
+   ]
+  },
+  "2026-06-30": {
+   "kind": "url",
+   "enemy_name": "Glass Golem",
+   "source": "Scrap -> Potion, Wound, Fragment, Tribute, Shield, Heartbeat",
+   "steps": [
+    {
+     "card": "Scrap",
+     "picks": [
+      "Potion"
+     ]
+    },
+    {
+     "card": "Wound"
+    },
+    {
+     "card": "Fragment"
+    },
+    {
+     "card": "Tribute"
+    },
+    {
+     "card": "Shield"
+    },
+    {
+     "card": "Heartbeat"
+    }
+   ]
+  },
+  "2026-07-01": {
+   "kind": "url",
+   "enemy_name": "Plasmavore",
+   "source": "Rage, Echo, Drain, Heartbeat, Flurry, Seance, Drain, Echo, Heartbeat",
+   "steps": [
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Drain"
+    },
+    {
+     "card": "Heartbeat"
+    },
+    {
+     "card": "Flurry"
+    },
+    {
+     "card": "Seance"
+    },
+    {
+     "card": "Drain"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Heartbeat"
+    }
+   ]
+  },
+  "2026-07-02": {
+   "kind": "url",
+   "enemy_name": "Siren",
+   "source": "Exchange, Spark, Echo, Trace, Shield, Seance, [Shield, Echo, Trace, Spark, Seance]×3, Echo, Shield, Trace, Spark, Spark, Seance, Shield, Trace, Spark, Spark",
+   "steps": [
+    {
+     "card": "Exchange"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Shield"
+    },
+    {
+     "card": "Seance"
+    },
+    {
+     "card": "Shield"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Seance"
+    },
+    {
+     "card": "Shield"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Seance"
+    },
+    {
+     "card": "Shield"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Seance"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Shield"
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Seance"
+    },
+    {
+     "card": "Shield"
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    }
+   ]
+  },
+  "2026-07-03": {
+   "kind": "url",
+   "enemy_name": "Tar Elemental",
+   "source": "(Potion -> Healing, Rebound, Revive) x2, Venom, Potion -> Damage, Spark, Rebound, Revive, Rebound, Spark, Spark, Revive, Rebound, Spark, Spark",
+   "steps": [
+    {
+     "card": "Potion",
+     "effect": "heal"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Potion",
+     "effect": "heal"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Venom"
+    },
+    {
+     "card": "Potion",
+     "effect": "damage"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    }
+   ]
+  },
+  "2026-07-06": {
+   "kind": "url",
+   "enemy_name": "Origami Tiger",
+   "source": "Wound, Spear, Pound, Fragment, Cleave",
+   "steps": [
+    {
+     "card": "Wound"
+    },
+    {
+     "card": "Spear"
+    },
+    {
+     "card": "Pound"
+    },
+    {
+     "card": "Fragment"
+    },
+    {
+     "card": "Cleave"
+    }
+   ]
+  },
+  "2026-07-07": {
+   "kind": "url",
+   "enemy_name": "Giant Spider",
+   "source": "Lunge, Echo, Reverberate, Lunge, Cleave",
+   "steps": [
+    {
+     "card": "Lunge"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Lunge"
+    },
+    {
+     "card": "Cleave"
+    }
+   ]
+  },
+  "2026-07-08": {
+   "kind": "url",
+   "enemy_name": "Giant Toad",
+   "source": "Venom, Pound, Pound, Fragment, Haunt, Seance, Fragment, Pound, Pound",
+   "steps": [
+    {
+     "card": "Venom"
+    },
+    {
+     "card": "Pound"
+    },
+    {
+     "card": "Pound"
+    },
+    {
+     "card": "Fragment"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Seance"
+    },
+    {
+     "card": "Fragment"
+    },
+    {
+     "card": "Pound"
+    },
+    {
+     "card": "Pound"
+    }
+   ]
+  },
+  "2026-07-09": {
+   "kind": "url",
+   "enemy_name": "Giant Clam",
+   "source": "Acuminate, [Partingshot, Rebound, Gambit(Rebound, Partingshot)]×2, Partingshot, Rebound, Gambit(Rebound, Acuminate), Rebound, Acuminate, Acuminate, Gambit(Rebound, Partingshot), Rebound, Partingshot, Partingshot",
+   "steps": [
+    {
+     "card": "Acuminate"
+    },
+    {
+     "card": "Partingshot"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Rebound",
+      "Partingshot"
+     ]
+    },
+    {
+     "card": "Partingshot"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Rebound",
+      "Partingshot"
+     ]
+    },
+    {
+     "card": "Partingshot"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Rebound",
+      "Acuminate"
+     ]
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Acuminate"
+    },
+    {
+     "card": "Acuminate"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Rebound",
+      "Partingshot"
+     ]
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Partingshot"
+    },
+    {
+     "card": "Partingshot"
+    }
+   ]
+  },
+  "2026-07-10": {
+   "kind": "url",
+   "enemy_name": "Jellyfish",
+   "source": "Shield, Heartbeat, Revive, Shield, Heartbeat, Haunt, Fragment, [Gambit (Revive, Shield), Shield, Revive, Shield]×3, Gambit(Haunt, Heartbeat), Haunt, Heartbeat",
+   "steps": [
+    {
+     "card": "Shield"
+    },
+    {
+     "card": "Heartbeat"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Shield"
+    },
+    {
+     "card": "Heartbeat"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Fragment"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Revive",
+      "Shield"
+     ]
+    },
+    {
+     "card": "Shield"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Shield"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Revive",
+      "Shield"
+     ]
+    },
+    {
+     "card": "Shield"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Shield"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Revive",
+      "Shield"
+     ]
+    },
+    {
+     "card": "Shield"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Shield"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Haunt",
+      "Heartbeat"
+     ]
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Heartbeat"
+    }
+   ]
+  },
+  "2026-07-14": {
+   "kind": "url",
+   "enemy_name": "Saboteur",
+   "source": "Rebound, Haunt, Haunt, Inspiration, Slash, Gambit -> (Rebound, Slash), Rebound, Slash, Slash",
+   "steps": [
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Rebound",
+      "Slash"
+     ]
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Slash"
+    }
+   ]
+  },
+  "2026-07-15": {
+   "kind": "url",
+   "enemy_name": "Doom Broom",
+   "source": "Exchange, Wound, Fang, Fang, Fang, Shield, Parting Shot",
+   "steps": [
+    {
+     "card": "Exchange"
+    },
+    {
+     "card": "Wound"
+    },
+    {
+     "card": "Fang"
+    },
+    {
+     "card": "Fang"
+    },
+    {
+     "card": "Fang"
+    },
+    {
+     "card": "Shield"
+    },
+    {
+     "card": "Partingshot"
+    }
+   ]
+  },
+  "2026-07-16": {
+   "kind": "url",
+   "enemy_name": "Urchin",
+   "source": "Sharpen, Flurry, Fragment, Pound, Frenzy, Thunderbolt",
+   "steps": [
+    {
+     "card": "Sharpen"
+    },
+    {
+     "card": "Flurry"
+    },
+    {
+     "card": "Fragment"
+    },
+    {
+     "card": "Pound"
+    },
+    {
+     "card": "Frenzy"
+    },
+    {
+     "card": "Thunderbolt"
+    }
+   ]
+  },
+  "2026-07-17": {
+   "kind": "url",
+   "enemy_name": "Zeus",
+   "source": "Thunderbolt, Scrap (Forge), Bargain, Lunge, Gambit, [Gambit(Bargain, Gambit), Bargain]×13, [Gambit (Lunge, Gambit), Lunge]×4, Gambit(Forge, Gambit), Forge, Gambit(Thunderbolt, Gambit), Thunderbolt, Gambit (Lunge, Gambit), Lunge, Gambit (Lunge, Gambit), Lunge, Gambit(Scrap, Thunderbolt), Thunderbolt",
+   "steps": [
+    {
+     "card": "Thunderbolt"
+    },
+    {
+     "card": "Scrap",
+     "picks": [
+      "Forge"
+     ]
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Lunge"
+    },
+    {
+     "card": "Gambit"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Bargain",
+      "Gambit"
+     ]
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Bargain",
+      "Gambit"
+     ]
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Bargain",
+      "Gambit"
+     ]
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Bargain",
+      "Gambit"
+     ]
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Bargain",
+      "Gambit"
+     ]
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Bargain",
+      "Gambit"
+     ]
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Bargain",
+      "Gambit"
+     ]
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Bargain",
+      "Gambit"
+     ]
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Bargain",
+      "Gambit"
+     ]
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Bargain",
+      "Gambit"
+     ]
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Bargain",
+      "Gambit"
+     ]
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Bargain",
+      "Gambit"
+     ]
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Bargain",
+      "Gambit"
+     ]
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Lunge",
+      "Gambit"
+     ]
+    },
+    {
+     "card": "Lunge"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Lunge",
+      "Gambit"
+     ]
+    },
+    {
+     "card": "Lunge"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Lunge",
+      "Gambit"
+     ]
+    },
+    {
+     "card": "Lunge"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Lunge",
+      "Gambit"
+     ]
+    },
+    {
+     "card": "Lunge"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Forge",
+      "Gambit"
+     ]
+    },
+    {
+     "card": "Forge"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Thunderbolt",
+      "Gambit"
+     ]
+    },
+    {
+     "card": "Thunderbolt"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Lunge",
+      "Gambit"
+     ]
+    },
+    {
+     "card": "Lunge"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Lunge",
+      "Gambit"
+     ]
+    },
+    {
+     "card": "Lunge"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Scrap",
+      "Thunderbolt"
+     ]
+    },
+    {
+     "card": "Thunderbolt"
+    }
+   ]
+  },
+  "2026-07-20": {
+   "kind": "url",
+   "enemy_name": "Gremlin",
+   "source": "Snipe, Haunt, Shovel, Burst, Parting Shot",
+   "steps": [
+    {
+     "card": "Snipe"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Shovel"
+    },
+    {
+     "card": "Burst"
+    },
+    {
+     "card": "Partingshot"
+    }
+   ]
+  },
+  "2026-07-21": {
+   "kind": "url",
+   "enemy_name": "Anti-Hero",
+   "source": "Capacitor, Potion -> Healing, Heartbeat, Revive, Fragment, Berserk, Potion -> Healing, Exchange, Heartbeat",
+   "steps": [
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Potion",
+     "effect": "heal"
+    },
+    {
+     "card": "Heartbeat"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Fragment"
+    },
+    {
+     "card": "Berserk"
+    },
+    {
+     "card": "Potion",
+     "effect": "heal"
+    },
+    {
+     "card": "Exchange"
+    },
+    {
+     "card": "Heartbeat"
+    }
+   ]
+  },
+  "2026-07-22": {
+   "kind": "url",
+   "enemy_name": "Gambler",
+   "source": "Reverberate, Gambit×4, Shovel, [Gambit(2 bottom Gambits), Gambit]×2, Gambit(Reverberate, Gambit), Gambit, Reverberate",
+   "steps": [
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Gambit"
+    },
+    {
+     "card": "Gambit"
+    },
+    {
+     "card": "Gambit"
+    },
+    {
+     "card": "Gambit"
+    },
+    {
+     "card": "Shovel"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Gambit"
+     ]
+    },
+    {
+     "card": "Gambit"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Gambit"
+     ]
+    },
+    {
+     "card": "Gambit"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Reverberate",
+      "Gambit"
+     ]
+    },
+    {
+     "card": "Gambit"
+    },
+    {
+     "card": "Reverberate"
+    }
+   ]
+  },
+  "2026-07-23": {
+   "kind": "url",
+   "enemy_name": "Blade Dancer",
+   "source": "Scrap(Armory), Venom, Tribute, Echo, Reverberate(Slash, Spear)(Slash, Spear), Spear, Spear, Slash, Slash",
+   "steps": [
+    {
+     "card": "Scrap",
+     "picks": [
+      "Armory"
+     ]
+    },
+    {
+     "card": "Venom"
+    },
+    {
+     "card": "Tribute"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Reverberate",
+     "picks": [
+      "Slash",
+      "Spear",
+      "Slash",
+      "Spear"
+     ]
+    },
+    {
+     "card": "Spear"
+    },
+    {
+     "card": "Spear"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Slash"
+    }
+   ],
+   "cleaned": "Scrap(Armory), Venom, Tribute, Echo, Reverberate(Slash, Spear, Slash, Spear), Spear, Spear, Slash, Slash"
+  },
+  "2026-07-24": {
+   "kind": "url",
+   "enemy_name": "Ascended Loiterer",
+   "source": "original Echo, original Trace, original Revive, original Trace, (Trace copy) x3, original Echo, Revive copy, Trace copy, original Echo, Trace copy, (Echo copy) x2, Trace copy, (Echo copy) x4, Trace copy, original Parting Shot, (Parting Shot copy) x2",
+   "steps": [
+    {
+     "card": "Echo",
+     "copy": false
+    },
+    {
+     "card": "Trace",
+     "copy": false
+    },
+    {
+     "card": "Revive",
+     "copy": false
+    },
+    {
+     "card": "Trace",
+     "copy": false
+    },
+    {
+     "card": "Trace",
+     "copy": true
+    },
+    {
+     "card": "Trace",
+     "copy": true
+    },
+    {
+     "card": "Trace",
+     "copy": true
+    },
+    {
+     "card": "Echo",
+     "copy": false
+    },
+    {
+     "card": "Revive",
+     "copy": true
+    },
+    {
+     "card": "Trace",
+     "copy": true
+    },
+    {
+     "card": "Echo",
+     "copy": false
+    },
+    {
+     "card": "Trace",
+     "copy": true
+    },
+    {
+     "card": "Echo",
+     "copy": true
+    },
+    {
+     "card": "Echo",
+     "copy": true
+    },
+    {
+     "card": "Trace",
+     "copy": true
+    },
+    {
+     "card": "Echo",
+     "copy": true
+    },
+    {
+     "card": "Echo",
+     "copy": true
+    },
+    {
+     "card": "Echo",
+     "copy": true
+    },
+    {
+     "card": "Echo",
+     "copy": true
+    },
+    {
+     "card": "Trace",
+     "copy": true
+    },
+    {
+     "card": "Partingshot",
+     "copy": false
+    },
+    {
+     "card": "Partingshot",
+     "copy": true
+    },
+    {
+     "card": "Partingshot",
+     "copy": true
+    }
+   ]
+  },
+  "2026-07-27": {
+   "kind": "url",
+   "enemy_name": "Headbanger",
+   "source": "Venom, Cleave, Tribute, Thunderbolt, Flurry",
+   "steps": [
+    {
+     "card": "Venom"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Tribute"
+    },
+    {
+     "card": "Thunderbolt"
+    },
+    {
+     "card": "Flurry"
+    }
+   ]
+  },
+  "2026-07-28": {
+   "kind": "url",
+   "enemy_name": "Resplendent Slime",
+   "source": "Mend, Rebound, Reverberate, Gift, Reverberate, Rage, Rage, Rage, Flurry",
+   "steps": [
+    {
+     "card": "Mend"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Gift"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Rage"
+    },
+    {
+     "card": "Flurry"
+    }
+   ]
+  },
+  "2026-07-29": {
+   "kind": "url",
+   "enemy_name": "Supersharp Garbage Bin",
+   "source": "Haunt, Reverberate, Fragment, Sharpen, Tribute, Acuminate, Snipe",
+   "steps": [
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Fragment"
+    },
+    {
+     "card": "Sharpen"
+    },
+    {
+     "card": "Tribute"
+    },
+    {
+     "card": "Acuminate"
+    },
+    {
+     "card": "Snipe"
+    }
+   ]
+  },
+  "2026-07-30": {
+   "kind": "url",
+   "enemy_name": "Ritualist",
+   "source": "Not sure if this is a bug or not. Martyr, Cauterize, Reverberate, Frenzy, Thunderbolt, Empty Fist, Parting Shot",
+   "steps": [
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Frenzy"
+    },
+    {
+     "card": "Thunderbolt"
+    },
+    {
+     "card": "Emptyfist"
+    },
+    {
+     "card": "Partingshot"
+    }
+   ],
+   "cleaned": "Martyr, Cauterize, Reverberate, Frenzy, Thunderbolt, Empty Fist, Parting Shot",
+   "note": "Submitter wrote \"Not sure if this is a bug or not.\" before the solution."
+  },
+  "2026-07-31": {
+   "kind": "url",
+   "enemy_name": "Occult Experimenter",
+   "source": "Snipe, Haunt, Revive, Snipe, Haunt, Revive, Haunt, Waste -> Haunt, Snipe",
+   "steps": [
+    {
+     "card": "Snipe"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Snipe"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Waste",
+     "picks": [
+      "Haunt"
+     ]
+    },
+    {
+     "card": "Snipe"
+    }
+   ]
+  },
+  "2026-08-03": {
+   "kind": "url",
+   "enemy_name": "Samurai",
+   "source": "Slash, Slash, Slash, Slash, Acuminate, Slash, Slash",
+   "steps": [
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Acuminate"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Slash"
+    }
+   ]
+  },
+  "2026-08-04": {
+   "kind": "url",
+   "enemy_name": "Spined Scorpion",
+   "source": "Venom, Echo, Cleave, Echo, Potion -> Healing x2, Flurry",
+   "steps": [
+    {
+     "card": "Venom"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Potion",
+     "effect": [
+      "heal",
+      "heal"
+     ]
+    },
+    {
+     "card": "Flurry"
+    }
+   ],
+   "cleaned": "Venom, Echo, Cleave, Echo, Potion -> (heal, heal), Flurry"
+  },
+  "2026-08-05": {
+   "kind": "url",
+   "enemy_name": "Treant",
+   "source": "Scrap(Shield), Waste(Scrap), Reverberate, Martyr, Cleave, Cleave",
+   "steps": [
+    {
+     "card": "Scrap",
+     "picks": [
+      "Shield"
+     ]
+    },
+    {
+     "card": "Waste",
+     "picks": [
+      "Scrap"
+     ]
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Cleave"
+    }
+   ]
+  },
+  "2026-08-06": {
+   "kind": "url",
+   "enemy_name": "Plague Doctor",
+   "source": "Haunt, Cleanse, Capacitor, Revive, Capacitor, Haunt, Cleanse, Acuminate, Shovel",
+   "steps": [
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Cleanse"
+    },
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Cleanse"
+    },
+    {
+     "card": "Acuminate"
+    },
+    {
+     "card": "Shovel"
+    }
+   ]
+  },
+  "2026-08-07": {
+   "kind": "url",
+   "enemy_name": "Frost Giant",
+   "source": "Seance, [Ignite, Spark, Scrap(Spark), Potion(Heal), Venom, Gambit (Seance, Ignite), Ignite, Spark, Seance, Spark, Scrap (Ignite), Potion(Heal), Venom, Spark, Gambit( Seance, top Spark), Spark, Seance] x3, where final potion attack",
+   "skip": "Waiting on a human: Does only the final Potion pick damage?",
+   "steps": []
+  },
+  "2026-08-10": {
+   "kind": "url",
+   "enemy_name": "Torchbearer",
+   "source": "Echo, Scorch, Slash, Spear, Pound, Cleave",
+   "steps": [
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Spear"
+    },
+    {
+     "card": "Pound"
+    },
+    {
+     "card": "Cleave"
+    }
+   ]
+  },
+  "2026-08-11": {
+   "kind": "url",
+   "enemy_name": "Silk Road Trader",
+   "source": "Cauterize, Capacitor, Cleave, Slash, Balance, Pound, Spear",
+   "steps": [
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Balance"
+    },
+    {
+     "card": "Pound"
+    },
+    {
+     "card": "Spear"
+    }
+   ]
+  },
+  "2026-08-12": {
+   "kind": "url",
+   "enemy_name": "Blood Knight",
+   "source": "Pound, Cauterize, Berserk, Wound, Flurry",
+   "steps": [
+    {
+     "card": "Pound"
+    },
+    {
+     "card": "Cauterize"
+    },
+    {
+     "card": "Berserk"
+    },
+    {
+     "card": "Wound"
+    },
+    {
+     "card": "Flurry"
+    }
+   ]
+  },
+  "2026-08-13": {
+   "kind": "url",
+   "enemy_name": "Cerberus",
+   "source": "Scrap(Seance), Bargain, Lunge, Martyr, Seance, Lunge, Bargain, Seance, Lunge, Partingshot",
+   "steps": [
+    {
+     "card": "Scrap",
+     "picks": [
+      "Seance"
+     ]
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Lunge"
+    },
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Seance"
+    },
+    {
+     "card": "Lunge"
+    },
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Seance"
+    },
+    {
+     "card": "Lunge"
+    },
+    {
+     "card": "Partingshot"
+    }
+   ]
+  },
+  "2026-08-14": {
+   "kind": "url",
+   "enemy_name": "Orange Dragon",
+   "source": "Bargain, Rebound, Reverberate, Rebound, Reverberate x2, Sharpen x4, Flurry, Rebound, Reverberate x2",
+   "steps": [
+    {
+     "card": "Bargain"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Sharpen"
+    },
+    {
+     "card": "Sharpen"
+    },
+    {
+     "card": "Sharpen"
+    },
+    {
+     "card": "Sharpen"
+    },
+    {
+     "card": "Flurry"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Reverberate"
+    }
+   ]
+  },
+  "2026-08-17": {
+   "kind": "url",
+   "enemy_name": "Fire Mage",
+   "source": "Forge, Cleave, Scorch, Mend, Mend, Mend",
+   "steps": [
+    {
+     "card": "Forge"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Mend"
+    },
+    {
+     "card": "Mend"
+    },
+    {
+     "card": "Mend"
+    }
+   ]
+  },
+  "2026-08-18": {
+   "kind": "url",
+   "enemy_name": "Regretful Dead",
+   "source": "Snipe, Haunt, Revive, Snipe, Haunt, Revive, Snipe, Haunt, Revive, Snipe",
+   "steps": [
+    {
+     "card": "Snipe"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Snipe"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Snipe"
+    },
+    {
+     "card": "Haunt"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Snipe"
+    }
+   ]
+  },
+  "2026-08-19": {
+   "kind": "url",
+   "enemy_name": "Ponderer",
+   "source": "Snipe, Partingshot, Emptyfist, Balance, Inspiration, Gambit(Balance, Partingshot), Balance, Partingshot",
+   "steps": [
+    {
+     "card": "Snipe"
+    },
+    {
+     "card": "Partingshot"
+    },
+    {
+     "card": "Emptyfist"
+    },
+    {
+     "card": "Balance"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Balance",
+      "Partingshot"
+     ]
+    },
+    {
+     "card": "Balance"
+    },
+    {
+     "card": "Partingshot"
+    }
+   ]
+  },
+  "2026-08-20": {
+   "kind": "url",
+   "enemy_name": "Vengeful Ghost",
+   "source": "Potion(Heal), Heartbeat, Burst, Target, Potion(Heal), Seance, Target, Burst, Heartbeat, Seance, Target, Burst",
+   "steps": [
+    {
+     "card": "Potion",
+     "effect": "heal"
+    },
+    {
+     "card": "Heartbeat"
+    },
+    {
+     "card": "Burst"
+    },
+    {
+     "card": "Target"
+    },
+    {
+     "card": "Potion",
+     "effect": "heal"
+    },
+    {
+     "card": "Seance"
+    },
+    {
+     "card": "Target"
+    },
+    {
+     "card": "Burst"
+    },
+    {
+     "card": "Heartbeat"
+    },
+    {
+     "card": "Seance"
+    },
+    {
+     "card": "Target"
+    },
+    {
+     "card": "Burst"
+    }
+   ]
+  },
+  "2026-08-21": {
+   "kind": "url",
+   "enemy_name": "Fuchsia Dragon",
+   "source": "Venom, Rebound, Reverberate, Rebound, Reverberate, Exchange, Reverberate, Flurry x2, Rebound, Reverberate, Flurry x3, Exchange, Reverberate",
+   "steps": [
+    {
+     "card": "Venom"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Exchange"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Flurry"
+    },
+    {
+     "card": "Flurry"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Flurry"
+    },
+    {
+     "card": "Flurry"
+    },
+    {
+     "card": "Flurry"
+    },
+    {
+     "card": "Exchange"
+    },
+    {
+     "card": "Reverberate"
+    }
+   ]
+  },
+  "2026-08-24": {
+   "kind": "url",
+   "enemy_name": "Sword Juggler",
+   "source": "Slash, Rebound, Revive, Slash, Rebound, Revive, Rebound, Slash, Slash, Revive, Rebound, Slash, Slash",
+   "steps": [
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Slash"
+    }
+   ]
+  },
+  "2026-08-25": {
+   "kind": "url",
+   "enemy_name": "Salamander",
+   "source": "Rebound, Scorch, Scorch, Scorch, Rebound, Scorch, Rebound, Scorch, Scorch",
+   "steps": [
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Scorch"
+    },
+    {
+     "card": "Scorch"
+    }
+   ]
+  },
+  "2026-08-26": {
+   "kind": "url",
+   "enemy_name": "Haunted Window",
+   "source": "Haunt, Frenzy, Fragment, Potion(H), Martyr, Reberverate, Gambit(Fragment and Reverb), Fragments, Reverb, damage, damage",
+   "skip": "Waiting on a human: Is 'Reverb, damage, damage' Reverberate replaying Potion, damage twice?",
+   "steps": []
+  },
+  "2026-08-27": {
+   "kind": "url",
+   "enemy_name": "Terminator",
+   "source": "Surge, Overload, Martyr, Echo, Revive, Surge, Martyr, Echo, Overload, Reverberate, Martyr, Echo, Overload, Balance",
+   "steps": [
+    {
+     "card": "Surge"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Surge"
+    },
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Martyr"
+    },
+    {
+     "card": "Echo"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Balance"
+    }
+   ]
+  },
+  "2026-08-28": {
+   "kind": "url",
+   "enemy_name": "Angel of Revelation",
+   "source": "Armory -> (Slash, Cleave), Venom, Scrap -> Seance, Reverberate -> (Slash, Cleave, Slash, Spear), Cleave x2, Spear, Slash x3, Overload, Gambit -> (Reverberate, Seance), Reverberate, Seance, Cleave, Slash, Overload, Cleave, Spear, Slash, Slash, Gambit -> (Overload, Seance), Overload, Seance, Cleave, Spear, Slash x3, Gambit -> (Cleave, Seance), Cleave, Seance, Slash x3, Gambit -> (Slash, Slash), Slash, Slash",
+   "steps": [
+    {
+     "card": "Armory",
+     "picks": [
+      "Slash",
+      "Cleave"
+     ]
+    },
+    {
+     "card": "Venom"
+    },
+    {
+     "card": "Scrap",
+     "picks": [
+      "Seance"
+     ]
+    },
+    {
+     "card": "Reverberate",
+     "picks": [
+      "Slash",
+      "Cleave",
+      "Slash",
+      "Spear"
+     ]
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Spear"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Reverberate",
+      "Seance"
+     ]
+    },
+    {
+     "card": "Reverberate"
+    },
+    {
+     "card": "Seance"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Spear"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Overload",
+      "Seance"
+     ]
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Seance"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Spear"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Cleave",
+      "Seance"
+     ]
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Seance"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Gambit",
+     "picks": [
+      "Slash",
+      "Slash"
+     ]
+    },
+    {
+     "card": "Slash"
+    },
+    {
+     "card": "Slash"
+    }
+   ]
+  },
+  "2026-11-09": {
+   "kind": "url",
+   "enemy_name": "Stormchaser",
+   "source": "Capacitor, Cleave, Target, Thunderbolt",
+   "steps": [
+    {
+     "card": "Capacitor"
+    },
+    {
+     "card": "Cleave"
+    },
+    {
+     "card": "Target"
+    },
+    {
+     "card": "Thunderbolt"
+    }
+   ]
+  },
+  "2026-11-10": {
+   "kind": "url",
+   "enemy_name": "Punisher",
+   "source": "Burst, Snipe, Exchange, Empty Fist, Overload, Revive, Empty Fist, Overload, Thunderbolt",
+   "steps": [
+    {
+     "card": "Burst"
+    },
+    {
+     "card": "Snipe"
+    },
+    {
+     "card": "Exchange"
+    },
+    {
+     "card": "Emptyfist"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Emptyfist"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Thunderbolt"
+    }
+   ]
+  },
+  "2026-11-11": {
+   "kind": "url",
+   "enemy_name": "Cosmic Comet",
+   "source": "Inspiration, Revive, Inspiration, Revive, Inspiration, Revive, Inspiration, Burst, Revive, Burst",
+   "steps": [
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Inspiration"
+    },
+    {
+     "card": "Burst"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Burst"
+    }
+   ]
+  },
+  "2026-11-12": {
+   "kind": "url",
+   "enemy_name": "Headless Horseman",
+   "source": "Trace, original Revive, Trace, copied Revive, Trace, original Haunt, original Revive, Trace, copied Haunt, copied Haunt, original Haunt, copied Revive, copied Haunt, Trace, original Parting Shot, copied Parting Shot",
+   "steps": [
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Revive",
+     "copy": false
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Revive",
+     "copy": true
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Haunt",
+     "copy": false
+    },
+    {
+     "card": "Revive",
+     "copy": false
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Haunt",
+     "copy": true
+    },
+    {
+     "card": "Haunt",
+     "copy": true
+    },
+    {
+     "card": "Haunt",
+     "copy": false
+    },
+    {
+     "card": "Revive",
+     "copy": true
+    },
+    {
+     "card": "Haunt",
+     "copy": true
+    },
+    {
+     "card": "Trace"
+    },
+    {
+     "card": "Partingshot",
+     "copy": false
+    },
+    {
+     "card": "Partingshot",
+     "copy": true
+    }
+   ]
+  },
+  "2026-11-13": {
+   "kind": "url",
+   "enemy_name": "Vulcanus",
+   "source": "Ignite, Rebound, Revive, (Overload, Rebound, Revive) x2, Ignite, Rebound, Revive, Overload, Rebound, Revive, Ignite, Spark x6, Revive, Spark, Overload, Spark, Rebound, Seance, Spark x6, Revive, Spark x2, Overload, Seance, Spark, Revive, Spark x5, Seance, Spark x4",
+   "steps": [
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Ignite"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Rebound"
+    },
+    {
+     "card": "Seance"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Overload"
+    },
+    {
+     "card": "Seance"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Revive"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Seance"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    },
+    {
+     "card": "Spark"
+    }
+   ]
+  }
+ }
+}

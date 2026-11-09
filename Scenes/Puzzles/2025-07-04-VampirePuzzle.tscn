@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://bow8hr8s4mg1n"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_oduoy"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/vampire.png" id="2_1jhsu"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="3_x5h12"]
+[ext_resource type="PackedScene" path="res://Scenes/ShieldCard.tscn" id="4_16rbi"]
+[ext_resource type="PackedScene" path="res://Scenes/FangCard.tscn" id="5_22qvf"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="6_lxpg6"]
+[ext_resource type="PackedScene" path="res://Scenes/ScrapCard.tscn" id="7_ch707"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="8_6khu5"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_oduoy")
+puzzle_date = "2025-07-04"
+previous_puzzle_scene = "uid://cf5dvi5m6onv3"
+next_puzzle_scene = "uid://moopo2n5irv4"
+enemy_health = 4
+enemy_name = "Vampire"
+enemy_icon_texture = ExtResource("2_1jhsu")
+player_health = 1
+player_energy = 4
+card_scenes = [ExtResource("3_x5h12"), ExtResource("4_16rbi"), ExtResource("5_22qvf"), ExtResource("6_lxpg6"), ExtResource("7_ch707"), ExtResource("8_6khu5"), ExtResource("8_6khu5")]

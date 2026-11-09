@@ -1,0 +1,21 @@
+[gd_scene load_steps=8 format=3 uid="uid://8vavdygw2yxk"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_0xs6s"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/butler.png" id="2_d548a"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="3_gu68s"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="4_ud3y6"]
+[ext_resource type="PackedScene" path="res://Scenes/SparkCard.tscn" id="5_2imnp"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="6_oxljg"]
+[ext_resource type="PackedScene" path="res://Scenes/InspirationCard.tscn" id="7_5km0d"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_0xs6s")
+puzzle_date = "2026-01-21"
+previous_puzzle_scene = "uid://dr1i5isqvnwtu"
+next_puzzle_scene = "uid://che13diauw32k"
+enemy_health = 15
+enemy_name = "Butler"
+enemy_icon_texture = ExtResource("2_d548a")
+player_health = 2
+player_energy = 7
+card_scenes = [ExtResource("3_gu68s"), ExtResource("4_ud3y6"), ExtResource("5_2imnp"), ExtResource("6_oxljg"), ExtResource("7_5km0d")]

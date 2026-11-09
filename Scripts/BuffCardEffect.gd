@@ -1,7 +1,7 @@
 extends CardEffect
 class_name BuffCardEffect
 
-@export_file("*.scn") var buff_scene
+@export_file("*.tscn") var buff_scene
 @export var buff_node: Buff = null
 var buff: Buff = null
 @export_enum("Player", "Enemy") var buff_auto_target: String

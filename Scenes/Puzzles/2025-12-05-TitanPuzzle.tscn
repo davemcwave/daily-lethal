@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://mq3jnd4eh6oy"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_vysej"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/titan.png" id="2_xmra8"]
+[ext_resource type="PackedScene" path="res://Scenes/HeartbeatCard.tscn" id="3_pkvt4"]
+[ext_resource type="PackedScene" path="res://Scenes/CapacitorCard.tscn" id="4_5doxe"]
+[ext_resource type="PackedScene" path="res://Scenes/ExchangeCard.tscn" id="5_dngy4"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="6_6nb0n"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="7_rcmtt"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="8_t5bvb"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_vysej")
+puzzle_date = "2025-12-05"
+previous_puzzle_scene = "uid://clmin13th6cx8"
+next_puzzle_scene = "uid://djq377ar2fnho"
+enemy_health = 66
+enemy_name = "Titan"
+enemy_icon_texture = ExtResource("2_xmra8")
+player_health = 11
+player_energy = 10
+card_scenes = [ExtResource("3_pkvt4"), ExtResource("4_5doxe"), ExtResource("5_dngy4"), ExtResource("6_6nb0n"), ExtResource("7_rcmtt"), ExtResource("8_t5bvb")]

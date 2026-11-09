@@ -1,0 +1,21 @@
+[gd_scene load_steps=9 format=3 uid="uid://b8nahk6yuhkcx"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_ah0sc"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/elder.png" id="2_xtcub"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="3_5rm0u"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="4_gfkby"]
+[ext_resource type="PackedScene" path="res://Scenes/ScrapCard.tscn" id="5_ycu1a"]
+[ext_resource type="PackedScene" path="res://Scenes/CleaveCard.tscn" id="6_kae2q"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="7_limit"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="8_hlchk"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_ah0sc")
+puzzle_date = "2026-01-15"
+previous_puzzle_scene = "uid://rhim2lmxkv28"
+next_puzzle_scene = "uid://by02n1ya1vjs"
+enemy_health = 13
+enemy_name = "Elder"
+enemy_icon_texture = ExtResource("2_xtcub")
+player_energy = 3
+card_scenes = [ExtResource("3_5rm0u"), ExtResource("4_gfkby"), ExtResource("5_ycu1a"), ExtResource("6_kae2q"), ExtResource("7_limit"), ExtResource("8_hlchk"), ExtResource("8_hlchk")]

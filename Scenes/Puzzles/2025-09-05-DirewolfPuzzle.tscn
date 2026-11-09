@@ -1,0 +1,23 @@
+[gd_scene load_steps=10 format=3 uid="uid://dk43dreai6xq"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_0um1l"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/direwolf.png" id="2_d3gtu"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="3_elmia"]
+[ext_resource type="PackedScene" path="res://Scenes/FangCard.tscn" id="4_amb3s"]
+[ext_resource type="PackedScene" path="res://Scenes/MendCard.tscn" id="5_5bodn"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="6_h772n"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="7_33enc"]
+[ext_resource type="PackedScene" path="res://Scenes/ScrapCard.tscn" id="8_mx1x5"]
+[ext_resource type="PackedScene" path="res://Scenes/TargetCard.tscn" id="9_j4q7m"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_0um1l")
+puzzle_date = "2025-09-05"
+previous_puzzle_scene = "uid://butsnj0uttmmq"
+next_puzzle_scene = "uid://tyxgateo25x4"
+enemy_health = 4
+enemy_name = "Dire Wolf"
+enemy_icon_texture = ExtResource("2_d3gtu")
+player_health = 1
+player_energy = 4
+card_scenes = [ExtResource("3_elmia"), ExtResource("4_amb3s"), ExtResource("5_5bodn"), ExtResource("6_h772n"), ExtResource("7_33enc"), ExtResource("8_mx1x5"), ExtResource("9_j4q7m")]

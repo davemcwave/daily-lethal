@@ -1,0 +1,21 @@
+[gd_scene load_steps=8 format=3 uid="uid://rku0vux5pndj"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_yx1pk"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/ninja.png" id="2_bv5it"]
+[ext_resource type="PackedScene" path="res://Scenes/CooperationCard.tscn" id="3_sfw33"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="4_qya0n"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="5_wi4by"]
+[ext_resource type="PackedScene" path="res://Scenes/TargetCard.tscn" id="6_np020"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="7_xeaa1"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_yx1pk")
+puzzle_date = "2026-01-28"
+previous_puzzle_scene = "uid://cj207rkfxv5rr"
+next_puzzle_scene = "uid://qf7t82wuwtyd"
+enemy_health = 12
+enemy_name = "Ninja"
+enemy_icon_texture = ExtResource("2_bv5it")
+player_health = 1
+player_energy = 3
+card_scenes = [ExtResource("3_sfw33"), ExtResource("4_qya0n"), ExtResource("5_wi4by"), ExtResource("6_np020"), ExtResource("7_xeaa1")]

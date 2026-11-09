@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://coqg7l4klv45e"]
+
+[ext_resource type="Script" path="res://Scripts/ActivateCardCardEffect.gd" id="1_b7hfx"]
+
+[node name="ActivateCardCardEffect" type="Node2D"]
+script = ExtResource("1_b7hfx")
+effect_name = "Activate Card"
+effect_description = "Activate another card's effects"
+effect_short_description = "Activate another card's effects"

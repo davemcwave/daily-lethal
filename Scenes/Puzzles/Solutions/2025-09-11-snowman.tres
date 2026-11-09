@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="CardSolutionResource" load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://Scenes/TraceCard.scn" id="1_8h67s"]
-[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.scn" id="2_1ta0s"]
-[ext_resource type="PackedScene" path="res://Scenes/BurstCard.scn" id="3_e2w63"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="1_8h67s"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="2_1ta0s"]
+[ext_resource type="PackedScene" path="res://Scenes/BurstCard.tscn" id="3_e2w63"]
 [ext_resource type="Script" path="res://Scripts/CardSolutionResource.gd" id="4_d5ldy"]
 
 [resource]

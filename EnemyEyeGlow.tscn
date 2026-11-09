@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvcmj3nnu4qux"]
+
+[sub_resource type="Shader" id="Shader_mec7s"]
+code = "shader_type canvas_item;
+render_mode blend_add;
+uniform vec4 glow_color : source_color = vec4(1.0, 0.9, 0.5, 1.0);
+uniform float intensity : hint_range(0.0, 5.0) = 1.5;
+uniform float spread : hint_range(0.1, 2.0) = 1.0;
+uniform float pulse_speed : hint_range(0.0, 10.0) = 1.0;
+void fragment() {
+    vec2 centered_uv = UV - vec2(0.5);
+    float dist = length(centered_uv) * spread;
+    float alpha = max(0.0, 1.0 - dist);
+    alpha *= (1.0 + 0.2 * sin(TIME * pulse_speed));
+    alpha = clamp(alpha * intensity, 0.0, 1.0);
+    COLOR = glow_color * alpha;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1emvs"]
+shader = SubResource("Shader_mec7s")
+shader_parameter/glow_color = Color(0.717647, 0.180392, 0.192157, 1)
+shader_parameter/intensity = 1.25
+shader_parameter/spread = 2.0
+shader_parameter/pulse_speed = 4.0
+
+[node name="EnemyEyeGlow" type="ColorRect"]
+top_level = true
+material = SubResource("ShaderMaterial_1emvs")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 426.0
+offset_top = 110.0
+offset_right = -527.0
+offset_bottom = -423.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvtuxr8yv0yoq"]
+
+[ext_resource type="Script" path="res://Scripts/CardsChooseAreaTrashAction.gd" id="1_d8cnb"]
+
+[node name="CardsChooseAreaTrashAction" type="Node"]
+script = ExtResource("1_d8cnb")

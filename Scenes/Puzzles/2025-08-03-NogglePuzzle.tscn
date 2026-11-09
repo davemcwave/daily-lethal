@@ -1,0 +1,21 @@
+[gd_scene load_steps=9 format=3 uid="uid://cielqklaa1hmw"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_7vous"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/noggle.png" id="2_gto8q"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="3_bpn3l"]
+[ext_resource type="PackedScene" path="res://Scenes/BargainCard.tscn" id="4_naak3"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="5_fssvo"]
+[ext_resource type="PackedScene" path="res://Scenes/BurstCard.tscn" id="6_gpxqx"]
+[ext_resource type="PackedScene" path="res://Scenes/MendCard.tscn" id="7_64y2w"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="8_qjvfn"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_7vous")
+puzzle_date = "2025-08-03"
+previous_puzzle_scene = "uid://bk5asu48uk5rl"
+next_puzzle_scene = "uid://x8pm05022sxj"
+enemy_name = "Noggle"
+enemy_icon_texture = ExtResource("2_gto8q")
+player_health = 1
+player_energy = 1
+card_scenes = [ExtResource("3_bpn3l"), ExtResource("4_naak3"), ExtResource("5_fssvo"), ExtResource("6_gpxqx"), ExtResource("7_64y2w"), ExtResource("8_qjvfn")]

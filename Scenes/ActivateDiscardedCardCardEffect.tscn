@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ciufpv75fw38o"]
+
+[ext_resource type="Script" path="res://Scenes/ActivateDiscardedCardCardEffect.gd" id="1_ax2rs"]
+
+[node name="ActivateDiscardedCardCardEffect" type="Node2D"]
+script = ExtResource("1_ax2rs")
+effect_name = "Activate Discarded Card"
+effect_description = "Activate top or bottom card of discard pile"

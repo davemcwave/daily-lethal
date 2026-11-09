@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://dha1hnci1jm3h"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_g1rnv"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/poltergeist.png" id="2_rkq2v"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="3_dgxpf"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="4_14882"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="5_7vdfq"]
+[ext_resource type="PackedScene" path="res://Scenes/SnipeCard.tscn" id="6_j5fpo"]
+[ext_resource type="PackedScene" path="res://Scenes/TargetCard.tscn" id="7_tdnf3"]
+[ext_resource type="PackedScene" path="res://Scenes/TributeCard.tscn" id="8_vwv1k"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_g1rnv")
+puzzle_date = "2025-09-26"
+previous_puzzle_scene = "uid://bxpxusq3rjfg3"
+next_puzzle_scene = "uid://dxgkjemm4qabj"
+enemy_health = 9
+enemy_name = "Poltergeist"
+enemy_icon_texture = ExtResource("2_rkq2v")
+player_health = 1
+player_energy = 1
+card_scenes = [ExtResource("3_dgxpf"), ExtResource("4_14882"), ExtResource("5_7vdfq"), ExtResource("6_j5fpo"), ExtResource("7_tdnf3"), ExtResource("8_vwv1k"), ExtResource("8_vwv1k")]

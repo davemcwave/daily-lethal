@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxkycg0elpsf6"]
+
+[ext_resource type="Script" path="res://Scripts/RegenBuff.gd" id="1_kwvsl"]
+
+[node name="RegenBuff" type="Node2D"]
+script = ExtResource("1_kwvsl")
+buff_name = "Regen"
+buff_description = "Gain 1 HP after next card is played"
+color = Color(0, 0.54902, 0.0627451, 1)
+activated_once_per_turn = true

@@ -1,0 +1,20 @@
+[gd_scene load_steps=7 format=3 uid="uid://do7nth5ef41js"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_apmt8"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/black-knight.png" id="2_i8klk"]
+[ext_resource type="PackedScene" path="res://Scenes/ArmoryCard.tscn" id="3_v1rin"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="4_dhdqf"]
+[ext_resource type="PackedScene" path="res://Scenes/TargetCard.tscn" id="5_fmjxa"]
+[ext_resource type="PackedScene" path="res://Scenes/WoundCard.tscn" id="6_6en37"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_apmt8")
+puzzle_date = "2026-01-06"
+previous_puzzle_scene = "uid://ch70ipjtdvs2b"
+next_puzzle_scene = "uid://dpgae7hbbpg21"
+enemy_health = 29
+enemy_name = "Black Knight"
+enemy_icon_texture = ExtResource("2_i8klk")
+player_health = 23
+player_energy = 17
+card_scenes = [ExtResource("3_v1rin"), ExtResource("3_v1rin"), ExtResource("4_dhdqf"), ExtResource("5_fmjxa"), ExtResource("6_6en37")]

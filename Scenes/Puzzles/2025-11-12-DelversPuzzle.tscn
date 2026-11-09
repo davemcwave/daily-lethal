@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://ctk5sxxkjeue6"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_3lyi7"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/delvers.png" id="2_f5ho8"]
+[ext_resource type="PackedScene" path="res://Scenes/SnipeCard.tscn" id="3_ssxn4"]
+[ext_resource type="PackedScene" path="res://Scenes/SurgeCard.tscn" id="4_sbsj3"]
+[ext_resource type="PackedScene" path="res://Scenes/ScrapCard.tscn" id="5_qbn6v"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="6_ybu78"]
+[ext_resource type="PackedScene" path="res://Scenes/TributeCard.tscn" id="7_gg3qn"]
+[ext_resource type="PackedScene" path="res://Scenes/ShovelCard.tscn" id="8_f3no4"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_3lyi7")
+puzzle_date = "2025-11-12"
+previous_puzzle_scene = "uid://cqowg7osqaegc"
+next_puzzle_scene = "uid://ljjkeiqb57ej"
+enemy_name = "Delvers"
+enemy_icon_texture = ExtResource("2_f5ho8")
+player_health = 1
+player_energy = 1
+card_scenes = [ExtResource("3_ssxn4"), ExtResource("4_sbsj3"), ExtResource("5_qbn6v"), ExtResource("6_ybu78"), ExtResource("7_gg3qn"), ExtResource("4_sbsj3"), ExtResource("8_f3no4")]
+card_solution = [ExtResource("7_gg3qn"), ExtResource("3_ssxn4"), ExtResource("8_f3no4"), ExtResource("4_sbsj3"), ExtResource("5_qbn6v"), ExtResource("6_ybu78")]

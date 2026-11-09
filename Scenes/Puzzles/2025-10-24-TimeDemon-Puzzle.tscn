@@ -1,0 +1,20 @@
+[gd_scene load_steps=8 format=3 uid="uid://vpsplprh66am"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_qgdyc"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/time-demon.png" id="2_8peeo"]
+[ext_resource type="PackedScene" path="res://Scenes/BargainCard.tscn" id="3_wxixa"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="4_uu4mm"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="5_3yspr"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="6_rd5bq"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="7_ix4sj"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_qgdyc")
+puzzle_date = "2025-10-24"
+previous_puzzle_scene = "uid://dy65h4rsh3qcv"
+next_puzzle_scene = "uid://dx2cyre0pwwws"
+enemy_health = 22
+enemy_name = "Time Demon"
+enemy_icon_texture = ExtResource("2_8peeo")
+player_energy = 3
+card_scenes = [ExtResource("3_wxixa"), ExtResource("4_uu4mm"), ExtResource("5_3yspr"), ExtResource("6_rd5bq"), ExtResource("6_rd5bq"), ExtResource("7_ix4sj"), ExtResource("7_ix4sj")]

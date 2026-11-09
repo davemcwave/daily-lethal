@@ -1,0 +1,22 @@
+[gd_scene load_steps=10 format=3 uid="uid://che13diauw32k"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_gltlb"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/axebeak.png" id="2_ayamh"]
+[ext_resource type="PackedScene" path="res://Scenes/CauterizeCard.tscn" id="3_dbn6f"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="4_0jc7b"]
+[ext_resource type="PackedScene" path="res://Scenes/ScrapCard.tscn" id="5_3uecy"]
+[ext_resource type="PackedScene" path="res://Scenes/ArmoryCard.tscn" id="6_2y0yo"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="7_vpxav"]
+[ext_resource type="PackedScene" path="res://Scenes/WoundCard.tscn" id="8_tuwwc"]
+[ext_resource type="PackedScene" path="res://Scenes/CleaveCard.tscn" id="9_fhwuf"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_gltlb")
+puzzle_date = "2026-01-22"
+previous_puzzle_scene = "uid://8vavdygw2yxk"
+next_puzzle_scene = "uid://ic64m5nabha"
+enemy_health = 11
+enemy_name = "Axebeak"
+enemy_icon_texture = ExtResource("2_ayamh")
+player_energy = 1
+card_scenes = [ExtResource("3_dbn6f"), ExtResource("4_0jc7b"), ExtResource("5_3uecy"), ExtResource("6_2y0yo"), ExtResource("7_vpxav"), ExtResource("8_tuwwc"), ExtResource("9_fhwuf")]

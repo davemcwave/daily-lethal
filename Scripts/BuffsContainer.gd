@@ -30,7 +30,7 @@ func is_animating() -> bool:
 func add_buff(new_buff: Buff) -> void:
 	if _try_merge_existing_buff(new_buff):
 		return
-	var buff_panel: BuffPanel = load("res://Scenes/BuffPanel.scn").instantiate()
+	var buff_panel: BuffPanel = load("res://Scenes/BuffPanel.tscn").instantiate()
 	buff_panel.set_buff(new_buff)
 	
 	print("%s buff being added" % new_buff.get_buff_name())

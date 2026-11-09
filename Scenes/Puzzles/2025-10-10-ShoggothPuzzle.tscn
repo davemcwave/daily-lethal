@@ -1,0 +1,24 @@
+[gd_scene load_steps=9 format=3 uid="uid://brkkt2gbwfves"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_w3o8e"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/shoggoth.png" id="2_uxhbp"]
+[ext_resource type="PackedScene" path="res://Scenes/BurstCard.tscn" id="3_afvww"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="4_i25r0"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="5_hih6l"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="6_5lbod"]
+[ext_resource type="PackedScene" path="res://Scenes/SurgeCard.tscn" id="7_au7tj"]
+[ext_resource type="PackedScene" path="res://Scenes/WoundCard.tscn" id="8_jl2ek"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_w3o8e")
+puzzle_date = "2025-10-10"
+previous_puzzle_scene = "uid://bphi8p1dc13gg"
+next_puzzle_scene = "uid://bj2o7yxwbq8cb"
+enemy_health = 46
+enemy_name = "Shoggoth"
+enemy_icon_texture = ExtResource("2_uxhbp")
+player_health = 1
+player_energy = 9
+card_scenes = [ExtResource("3_afvww"), ExtResource("4_i25r0"), ExtResource("5_hih6l"), ExtResource("6_5lbod"), ExtResource("7_au7tj"), ExtResource("7_au7tj"), ExtResource("8_jl2ek")]
+dialogue_first = "Enemy"
+dialogue_lines = ["[b][shake rate=2.0 level=1 connected=1]Endings are my speciality.[/shake][/b]", "[b][shake rate=2.0 level=1 connected=1]ENDLESS...... HUNGER!!![/shake][/b]"]

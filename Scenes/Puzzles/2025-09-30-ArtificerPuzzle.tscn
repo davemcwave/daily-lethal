@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://bodcrw8i4ntmt"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_sy3j8"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/artificer.png" id="2_fe4u0"]
+[ext_resource type="PackedScene" path="res://Scenes/BargainCard.tscn" id="3_0prvv"]
+[ext_resource type="PackedScene" path="res://Scenes/IgniteCard.tscn" id="4_ni365"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="5_lvdfd"]
+[ext_resource type="PackedScene" path="res://Scenes/TargetCard.tscn" id="6_3yl4n"]
+[ext_resource type="PackedScene" path="res://Scenes/SparkCard.tscn" id="7_ljr6n"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="8_snbjk"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_sy3j8")
+puzzle_date = "2025-09-30"
+previous_puzzle_scene = "uid://dxgkjemm4qabj"
+next_puzzle_scene = "uid://b0qj80tf2q3e6"
+enemy_health = 17
+enemy_name = "Artificer"
+enemy_icon_texture = ExtResource("2_fe4u0")
+player_health = 1
+player_energy = 8
+card_scenes = [ExtResource("3_0prvv"), ExtResource("4_ni365"), ExtResource("5_lvdfd"), ExtResource("6_3yl4n"), ExtResource("7_ljr6n"), ExtResource("8_snbjk")]

@@ -1,0 +1,19 @@
+[gd_scene load_steps=7 format=3 uid="uid://bk5asu48uk5rl"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_lsxio"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/gravedigger.png" id="2_dt88e"]
+[ext_resource type="PackedScene" path="res://Scenes/ShovelCard.tscn" id="3_gdyqa"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="4_ow7di"]
+[ext_resource type="PackedScene" path="res://Scenes/GiftCard.tscn" id="5_tcsmw"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="6_si7ll"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_lsxio")
+puzzle_date = "2025-08-01"
+previous_puzzle_scene = "uid://cl87bjgxfldq3"
+next_puzzle_scene = "uid://cielqklaa1hmw"
+enemy_health = 8
+enemy_name = "Gravedigger"
+enemy_icon_texture = ExtResource("2_dt88e")
+player_energy = 3
+card_scenes = [ExtResource("3_gdyqa"), ExtResource("3_gdyqa"), ExtResource("4_ow7di"), ExtResource("5_tcsmw"), ExtResource("6_si7ll")]

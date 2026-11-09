@@ -1,0 +1,29 @@
+[gd_scene load_steps=10 format=3 uid="uid://iur67agkk6gr"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_ccuhw"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/thorn-root-256x256.png" id="2_3l8vp"]
+[ext_resource type="PackedScene" path="res://Scenes/ShieldCard.tscn" id="3_vbs4x"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="4_n6wye"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="5_fmaec"]
+[ext_resource type="PackedScene" path="res://Scenes/FocusCard.tscn" id="6_jd1k6"]
+[ext_resource type="PackedScene" path="res://Scenes/SurgeCard.tscn" id="7_slviu"]
+[ext_resource type="PackedScene" path="res://Scenes/SlashCard.tscn" id="8_rdsxl"]
+[ext_resource type="PackedScene" path="res://Scenes/RetaliateBuff.tscn" id="9_0f7g3"]
+
+[node name="Puzzle" type="Node" node_paths=PackedStringArray("enemy_buffs")]
+script = ExtResource("1_ccuhw")
+puzzle_date = "2025-04-25"
+previous_puzzle_scene = "uid://bmhwx6r6etcv6"
+next_puzzle_scene = "uid://bjplnuf2sgvrr"
+enemy_health = 8
+enemy_name = "Bloodthorn"
+enemy_icon_texture = ExtResource("2_3l8vp")
+enemy_buffs = [NodePath("RetaliateBuff")]
+player_health = 7
+player_energy = 6
+card_scenes = [ExtResource("3_vbs4x"), ExtResource("4_n6wye"), ExtResource("5_fmaec"), ExtResource("6_jd1k6"), ExtResource("6_jd1k6"), ExtResource("5_fmaec"), ExtResource("7_slviu"), ExtResource("8_rdsxl")]
+card_solution = [ExtResource("6_jd1k6"), ExtResource("5_fmaec"), ExtResource("6_jd1k6"), ExtResource("7_slviu"), ExtResource("3_vbs4x"), ExtResource("5_fmaec"), ExtResource("4_n6wye"), ExtResource("8_rdsxl")]
+initial_draw_amount = 5
+
+[node name="RetaliateBuff" parent="." instance=ExtResource("9_0f7g3")]
+activation_type = 3

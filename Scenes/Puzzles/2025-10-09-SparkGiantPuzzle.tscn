@@ -1,0 +1,20 @@
+[gd_scene load_steps=7 format=3 uid="uid://bphi8p1dc13gg"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_hs8vf"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/spark-golem.png" id="2_6xwx3"]
+[ext_resource type="PackedScene" path="res://Scenes/IgniteCard.tscn" id="3_5aqr2"]
+[ext_resource type="PackedScene" path="res://Scenes/BurstCard.tscn" id="4_frdlm"]
+[ext_resource type="PackedScene" path="res://Scenes/BargainCard.tscn" id="5_u4cil"]
+[ext_resource type="PackedScene" path="res://Scenes/InspirationCard.tscn" id="6_focdu"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_hs8vf")
+puzzle_date = "2025-10-09"
+previous_puzzle_scene = "uid://dpxfygrevu6fn"
+next_puzzle_scene = "uid://brkkt2gbwfves"
+enemy_health = 14
+enemy_name = "Spark Golem"
+enemy_icon_texture = ExtResource("2_6xwx3")
+player_health = 1
+player_energy = 3
+card_scenes = [ExtResource("3_5aqr2"), ExtResource("3_5aqr2"), ExtResource("3_5aqr2"), ExtResource("4_frdlm"), ExtResource("5_u4cil"), ExtResource("6_focdu")]

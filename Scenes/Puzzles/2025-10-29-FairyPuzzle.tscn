@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://dkeghhhsemxml"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_2tube"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/fairy.png" id="2_t46sv"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="3_dcpia"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="4_jvnsf"]
+[ext_resource type="PackedScene" path="res://Scenes/ExchangeCard.tscn" id="5_w01ir"]
+[ext_resource type="PackedScene" path="res://Scenes/HeartbeatCard.tscn" id="6_vdsph"]
+[ext_resource type="PackedScene" path="res://Scenes/ScrapCard.tscn" id="7_1f6lg"]
+[ext_resource type="PackedScene" path="res://Scenes/InspirationCard.tscn" id="8_k54my"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_2tube")
+puzzle_date = "2025-10-29"
+previous_puzzle_scene = "uid://0bdu4ykdajjl"
+next_puzzle_scene = "uid://dacjdo3mmhcqs"
+enemy_health = 12
+enemy_name = "Fairy"
+enemy_icon_texture = ExtResource("2_t46sv")
+player_health = 1
+player_energy = 6
+card_scenes = [ExtResource("3_dcpia"), ExtResource("4_jvnsf"), ExtResource("5_w01ir"), ExtResource("6_vdsph"), ExtResource("7_1f6lg"), ExtResource("8_k54my")]

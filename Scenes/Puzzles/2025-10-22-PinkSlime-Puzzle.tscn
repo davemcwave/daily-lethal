@@ -1,0 +1,20 @@
+[gd_scene load_steps=8 format=3 uid="uid://nfimimq7d0sn"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_ruxcc"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/pink-slime.png" id="2_b5b10"]
+[ext_resource type="PackedScene" path="res://Scenes/ShovelCard.tscn" id="3_2wa81"]
+[ext_resource type="PackedScene" path="res://Scenes/SnipeCard.tscn" id="4_ir2xq"]
+[ext_resource type="PackedScene" path="res://Scenes/TributeCard.tscn" id="5_ia0ta"]
+[ext_resource type="PackedScene" path="res://Scenes/WasteCard.tscn" id="6_nf3v7"]
+[ext_resource type="PackedScene" path="res://Scenes/WoundCard.tscn" id="7_fgro8"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_ruxcc")
+puzzle_date = "2025-10-22"
+previous_puzzle_scene = "uid://dflkwoa8gq586"
+next_puzzle_scene = "uid://dy65h4rsh3qcv"
+enemy_health = 8
+enemy_name = "Pink Slime"
+enemy_icon_texture = ExtResource("2_b5b10")
+player_health = 1
+card_scenes = [ExtResource("3_2wa81"), ExtResource("4_ir2xq"), ExtResource("4_ir2xq"), ExtResource("5_ia0ta"), ExtResource("6_nf3v7"), ExtResource("6_nf3v7"), ExtResource("7_fgro8")]

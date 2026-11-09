@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://cqomyl6ai4vhd"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_84wwj"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/earth-elemental.png" id="2_twqrh"]
+[ext_resource type="PackedScene" path="res://Scenes/BurstCard.tscn" id="3_jbxbg"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="4_cou01"]
+[ext_resource type="PackedScene" path="res://Scenes/InspirationCard.tscn" id="5_5mc41"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="6_jalkx"]
+[ext_resource type="PackedScene" path="res://Scenes/SurgeCard.tscn" id="7_2ugl2"]
+[ext_resource type="PackedScene" path="res://Scenes/FangCard.tscn" id="8_r8ny3"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_84wwj")
+puzzle_date = "2025-07-08"
+previous_puzzle_scene = "uid://moopo2n5irv4"
+next_puzzle_scene = "uid://5ldo8rhfo50g"
+enemy_health = 22
+enemy_name = "Earth Elemental"
+enemy_icon_texture = ExtResource("2_twqrh")
+player_health = 4
+player_energy = 4
+card_scenes = [ExtResource("3_jbxbg"), ExtResource("4_cou01"), ExtResource("5_5mc41"), ExtResource("6_jalkx"), ExtResource("7_2ugl2"), ExtResource("8_r8ny3")]

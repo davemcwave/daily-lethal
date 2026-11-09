@@ -1,0 +1,21 @@
+[gd_scene load_steps=8 format=3 uid="uid://xh8ae1xaop7j"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_cms2n"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/target-dummy.png" id="2_ftmtp"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="3_cxfxq"]
+[ext_resource type="PackedScene" path="res://Scenes/InspirationCard.tscn" id="4_432eh"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="5_guaav"]
+[ext_resource type="PackedScene" path="res://Scenes/PotionCard.tscn" id="6_5i0te"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="7_qggga"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_cms2n")
+puzzle_date = "2025-11-17"
+previous_puzzle_scene = "uid://pxcc7juwb0oj"
+next_puzzle_scene = "uid://ca7ufyoy6kd43"
+enemy_health = 9
+enemy_name = "Target Dummy"
+enemy_icon_texture = ExtResource("2_ftmtp")
+player_health = 7
+player_energy = 1
+card_scenes = [ExtResource("3_cxfxq"), ExtResource("4_432eh"), ExtResource("5_guaav"), ExtResource("6_5i0te"), ExtResource("7_qggga")]

@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://bpuuggyvpid7f"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_yi30i"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/demogorgon.png" id="2_rqn5x"]
+[ext_resource type="PackedScene" path="res://Scenes/LungeCard.tscn" id="3_fkyqs"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="4_q7yjd"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="5_ihilm"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="6_eiml8"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="7_5fw8n"]
+[ext_resource type="PackedScene" path="res://Scenes/PotionCard.tscn" id="8_qlhtj"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_yi30i")
+puzzle_date = "2025-08-09"
+previous_puzzle_scene = "uid://c1qgpg8cj7s4u"
+next_puzzle_scene = "uid://4lkqq6s33ntv"
+enemy_health = 36
+enemy_name = "Demogorgon"
+enemy_icon_texture = ExtResource("2_rqn5x")
+player_health = 1
+player_energy = 4
+card_scenes = [ExtResource("3_fkyqs"), ExtResource("4_q7yjd"), ExtResource("5_ihilm"), ExtResource("6_eiml8"), ExtResource("6_eiml8"), ExtResource("7_5fw8n"), ExtResource("8_qlhtj")]

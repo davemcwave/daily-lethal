@@ -1,0 +1,109 @@
+[gd_scene load_steps=20 format=3 uid="uid://dntgfeq78fnr3"]
+
+[ext_resource type="Script" path="res://Scripts/AudioHandler.gd" id="1_3t1fy"]
+[ext_resource type="AudioStream" path="res://Assets/Audio/SFX/byo.wav" id="2_makhu"]
+[ext_resource type="AudioStream" path="res://Assets/Audio/SFX/bwee.wav" id="3_7x7sh"]
+[ext_resource type="AudioStream" path="res://Assets/Audio/SFX/Hit4.wav" id="4_auhj4"]
+[ext_resource type="AudioStream" path="res://Assets/Audio/SFX/error_005.ogg" id="5_htk7n"]
+[ext_resource type="AudioStream" path="res://Assets/Audio/SFX/Hit3.wav" id="6_2fcv2"]
+[ext_resource type="AudioStream" path="res://Assets/Audio/SFX/trash.wav" id="7_xujou"]
+[ext_resource type="AudioStream" path="res://Assets/Audio/SFX/back_004.ogg" id="8_b27kw"]
+[ext_resource type="AudioStream" path="res://Assets/Audio/SFX/confirmation_002.ogg" id="9_ckoqb"]
+[ext_resource type="AudioStream" path="res://Assets/Audio/SFX/error_007.ogg" id="10_j8kqx"]
+[ext_resource type="AudioStream" path="res://Assets/Audio/SFX/heal.wav" id="11_lbnrh"]
+[ext_resource type="AudioStream" path="res://Assets/Audio/SFX/dink.wav" id="12_qhrmw"]
+[ext_resource type="AudioStream" path="res://Assets/Audio/SFX/deep.wav" id="13_w0jsv"]
+[ext_resource type="AudioStream" path="res://Assets/Audio/SFX/dialog_sounds/Bfxr/Blip0.wav" id="14_msl6p"]
+[ext_resource type="AudioStream" path="res://Assets/Audio/SFX/dialog_sounds/Bfxr/Blip1.wav" id="15_f8rth"]
+[ext_resource type="AudioStream" path="res://Assets/Audio/SFX/dialog_sounds/Bfxr/Blip2.wav" id="16_fbmy8"]
+[ext_resource type="AudioStream" path="res://Assets/Audio/SFX/dialog_sounds/Bfxr/Blip3.wav" id="17_6sh44"]
+[ext_resource type="AudioStream" path="res://Assets/Audio/SFX/dialog_sounds/Bfxr/Blip.wav" id="18_eo463"]
+[ext_resource type="AudioStream" path="res://Assets/Audio/OST/urodela v2_3(Loop).wav" id="19_itrl8"]
+
+[node name="AudioHandler" type="Node" node_paths=PackedStringArray("mute_sfx")]
+script = ExtResource("1_3t1fy")
+mute_all = true
+mute_sfx = []
+
+[node name="DrawSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_makhu")
+volume_db = -10.0
+
+[node name="GrabSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_7x7sh")
+volume_db = -10.0
+pitch_scale = 0.75
+
+[node name="PlaySFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_auhj4")
+volume_db = -5.0
+pitch_scale = 0.75
+
+[node name="HurtSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_htk7n")
+volume_db = -15.0
+pitch_scale = 1.5
+
+[node name="HitSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_2fcv2")
+volume_db = -5.0
+
+[node name="DiscardSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_xujou")
+volume_db = -5.0
+
+[node name="Discard2SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_xujou")
+volume_db = -5.0
+pitch_scale = 1.25
+
+[node name="PlayerHurtSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_b27kw")
+volume_db = -15.0
+
+[node name="WinSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_ckoqb")
+volume_db = -20.0
+
+[node name="LoseSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_j8kqx")
+volume_db = -20.0
+
+[node name="HealSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_lbnrh")
+volume_db = -15.0
+pitch_scale = 1.5
+
+[node name="AddBuffSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_qhrmw")
+volume_db = -10.0
+pitch_scale = 1.5
+
+[node name="EnhanceOtherCardsSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_w0jsv")
+volume_db = -15.0
+
+[node name="Dialog0SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_msl6p")
+volume_db = -15.0
+
+[node name="Dialog1SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_f8rth")
+volume_db = -15.0
+
+[node name="Dialog2SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_fbmy8")
+volume_db = -15.0
+
+[node name="Dialog3SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_6sh44")
+volume_db = -15.0
+
+[node name="Dialog4SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_eo463")
+volume_db = -15.0
+
+[node name="BGMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_itrl8")
+volume_db = -20.0
+pitch_scale = 1.2

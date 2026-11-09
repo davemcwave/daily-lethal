@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbxesr6ingru4"]
+
+[ext_resource type="Script" path="res://Scripts/CreateCardCardEffect.gd" id="1_xxygl"]
+
+[node name="CreateCardCardEffect" type="Node2D"]
+script = ExtResource("1_xxygl")
+effect_name = "Add New Card"
+effect_description = "Add new card to hand"

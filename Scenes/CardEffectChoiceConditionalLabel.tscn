@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7wvlep7610al"]
+
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Regular.ttf" id="1_l5p03"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Bold.ttf" id="2_c576i"]
+[ext_resource type="Script" path="res://Scripts/CardEffectchoiceConditionalLabel.gd" id="3_67e4f"]
+
+[node name="CardEffectChoiceConditionalLabel" type="RichTextLabel"]
+custom_minimum_size = Vector2(50, 35)
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("1_l5p03")
+theme_override_fonts/bold_font = ExtResource("2_c576i")
+theme_override_font_sizes/bold_font_size = 32
+bbcode_enabled = true
+text = "[shake rate=2.0 level=3 connected=1][center][b]OR[/b][/center][/shake]"
+scroll_active = false
+script = ExtResource("3_67e4f")

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://claxknewmo8rv"]
+
+[ext_resource type="Script" path="res://Scripts/CorrodeBuff.gd" id="1_imwl3"]
+
+[node name="CorrodeBuff" type="Node2D"]
+script = ExtResource("1_imwl3")
+buff_name = "Corrode"
+buff_description = "Any attack cards used against this enemy are trashed."
+activation_type = 3
+unlimited_uses = true
+color = Color(0.55, 0, 0.55, 1)

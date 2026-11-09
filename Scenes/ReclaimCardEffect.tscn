@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bblxm8mwigp57"]
+
+[ext_resource type="Script" path="res://Scripts/ReclaimCardEffect.gd" id="1_kohag"]
+[ext_resource type="PackedScene" path="res://Scenes/ReclaimCardEffectPanel.tscn" id="2_2u3tn"]
+
+[node name="ReclaimCardEffect" type="Node2D"]
+script = ExtResource("1_kohag")
+reclaim_direction = 1
+effect_name = "Reclaim"
+effect_description = "Move cards from discard pile to hand"
+effect_panel = ExtResource("2_2u3tn")

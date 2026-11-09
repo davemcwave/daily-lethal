@@ -1,0 +1,21 @@
+[gd_scene load_steps=9 format=3 uid="uid://b45ciqphte2cr"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_sak4l"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/snipe-bird.png" id="2_1fh6u"]
+[ext_resource type="PackedScene" path="res://Scenes/SlashCard.tscn" id="3_fqdwf"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="4_rty3u"]
+[ext_resource type="PackedScene" path="res://Scenes/SnipeCard.tscn" id="5_f2mrq"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="6_asj68"]
+[ext_resource type="PackedScene" path="res://Scenes/TributeCard.tscn" id="7_y080f"]
+[ext_resource type="PackedScene" path="res://Scenes/SurgeCard.tscn" id="8_k61br"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_sak4l")
+puzzle_date = "2025-07-22"
+previous_puzzle_scene = "uid://ctuh1r8jy2elb"
+next_puzzle_scene = "uid://bli5eefphcq1s"
+enemy_health = 25
+enemy_name = "Snipe Bird"
+enemy_icon_texture = ExtResource("2_1fh6u")
+player_energy = 3
+card_scenes = [ExtResource("3_fqdwf"), ExtResource("4_rty3u"), ExtResource("5_f2mrq"), ExtResource("6_asj68"), ExtResource("5_f2mrq"), ExtResource("7_y080f"), ExtResource("8_k61br")]

@@ -1,6 +1,6 @@
 extends CardEffect
 
-@export_file("*.scn") var debuff_scene
+@export_file("*.tscn") var debuff_scene
 @export var stacks: int = 1
 @export var target: Node = null
 var debuff_template: Debuff = null

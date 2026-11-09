@@ -1,0 +1,21 @@
+[gd_scene load_steps=9 format=3 uid="uid://b3fonr5pqxyhd"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_dckh2"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/leeta-256x256.svg" id="2_f8s22"]
+[ext_resource type="PackedScene" path="res://Scenes/BerserkCard.tscn" id="3_kmjch"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="4_v5epn"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="5_l87tk"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="6_0d7xm"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="7_tfqwa"]
+[ext_resource type="PackedScene" path="res://Scenes/PotionCard.tscn" id="8_b7638"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_dckh2")
+puzzle_date = "2026-02-20"
+previous_puzzle_scene = "uid://dkyhh7hq21hqh"
+enemy_health = 60
+enemy_name = "Mad Hatter"
+enemy_icon_texture = ExtResource("2_f8s22")
+player_health = 1
+player_energy = 11
+card_scenes = [ExtResource("3_kmjch"), ExtResource("4_v5epn"), ExtResource("5_l87tk"), ExtResource("6_0d7xm"), ExtResource("7_tfqwa"), ExtResource("8_b7638"), ExtResource("8_b7638")]

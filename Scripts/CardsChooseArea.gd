@@ -213,6 +213,10 @@ func _find_index_by_reference(collection: Array, card_reference: Card) -> int:
 
 func _on_action_button_pressed() -> void:
 	cards_chosen.clear()
+	# Record that this chooser was answered, even if nothing was picked.
+	var background = get_node_or_null("/root/Background")
+	if background != null:
+		background.record_chooser_answered()
 	for card: Card in cards_container.get_children():
 		if card.is_chosen():
 			var card_in_hand: Card = get_card_with_id(card.get_id())

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2mdlj2asshsg"]
+
+[ext_resource type="Script" path="res://Scripts/DialogHandler.gd" id="1_a5d4o"]
+
+[node name="DialogHandler" type="Node"]
+script = ExtResource("1_a5d4o")
+dialog_play_delay = 0.5

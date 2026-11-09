@@ -1,7 +1,7 @@
 extends Control
 
 func add_buff(buff: Buff) -> void:
-	var buff_panel: BuffPanel = load("res://Scenes/BuffPanel.scn").instantiate()
+	var buff_panel: BuffPanel = load("res://Scenes/BuffPanel.tscn").instantiate()
 	#buff_panel.set_text(buff.get_buff_name())
 	buff_panel.set_buff(buff)
 	add_child(buff_panel)

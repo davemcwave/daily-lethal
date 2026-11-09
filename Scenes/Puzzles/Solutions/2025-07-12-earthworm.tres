@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="CardSolutionResource" load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://Scenes/ScrapCard.scn" id="1_g2jjv"]
-[ext_resource type="PackedScene" path="res://Scenes/TraceCard.scn" id="3_e87ga"]
-[ext_resource type="PackedScene" path="res://Scenes/ShovelCard.scn" id="4_pyotb"]
-[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.scn" id="5_plwng"]
+[ext_resource type="PackedScene" path="res://Scenes/ScrapCard.tscn" id="1_g2jjv"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="3_e87ga"]
+[ext_resource type="PackedScene" path="res://Scenes/ShovelCard.tscn" id="4_pyotb"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="5_plwng"]
 [ext_resource type="Script" path="res://Scripts/CardSolutionResource.gd" id="6_iivo4"]
 
 [resource]

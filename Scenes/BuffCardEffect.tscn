@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bi206uhdjeinf"]
+
+[ext_resource type="Script" path="res://Scripts/BuffCardEffect.gd" id="1_w3nxp"]
+[ext_resource type="PackedScene" path="res://Scenes/BuffCardEffectPanel.tscn" id="2_0f35r"]
+
+[node name="BuffCardEffect" type="Node2D"]
+script = ExtResource("1_w3nxp")
+effect_name = "Buff"
+effect_description = "Buff player "
+effect_panel = ExtResource("2_0f35r")

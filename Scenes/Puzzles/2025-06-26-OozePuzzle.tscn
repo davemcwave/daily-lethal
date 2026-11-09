@@ -1,0 +1,19 @@
+[gd_scene load_steps=8 format=3 uid="uid://22qg6umkm3la"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_v5cw1"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/OOZE-TRANS.png" id="2_8m184"]
+[ext_resource type="PackedScene" path="res://Scenes/ShovelCard.tscn" id="3_6ovye"]
+[ext_resource type="PackedScene" path="res://Scenes/LungeCard.tscn" id="4_2v17h"]
+[ext_resource type="PackedScene" path="res://Scenes/SlashCard.tscn" id="5_pt1en"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="6_okbqv"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="7_3s7j2"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_v5cw1")
+puzzle_date = "2025-06-26"
+previous_puzzle_scene = "uid://cmimehgldtet6"
+next_puzzle_scene = "uid://boly4kt8qm3ox"
+enemy_health = 12
+enemy_name = "Ooze"
+enemy_icon_texture = ExtResource("2_8m184")
+card_scenes = [ExtResource("3_6ovye"), ExtResource("4_2v17h"), ExtResource("5_pt1en"), ExtResource("6_okbqv"), ExtResource("7_3s7j2")]

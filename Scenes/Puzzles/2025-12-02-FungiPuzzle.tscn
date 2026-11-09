@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://b84gfqfhyty6w"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_w8kud"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/fungi.png" id="2_sitie"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="3_6ofg7"]
+[ext_resource type="PackedScene" path="res://Scenes/ArmoryCard.tscn" id="4_l4s68"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_w8kud")
+puzzle_date = "2025-12-02"
+previous_puzzle_scene = "uid://dn63lkrvd1gj5"
+next_puzzle_scene = "uid://i674fjb7in30"
+enemy_name = "Fungi"
+enemy_icon_texture = ExtResource("2_sitie")
+eye_1_position = Vector2(443, 123)
+eye_2_position = Vector2(473, 123)
+player_health = 1
+player_energy = 9
+card_scenes = [ExtResource("3_6ofg7"), ExtResource("4_l4s68")]

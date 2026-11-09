@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://chsghvyx51yr7"]
+
+[ext_resource type="Script" path="res://Scripts/ChooseReclaimCardEffect.gd" id="1_cq7aj"]
+
+[node name="ChooseReclaimCardEffect" type="Node2D"]
+script = ExtResource("1_cq7aj")

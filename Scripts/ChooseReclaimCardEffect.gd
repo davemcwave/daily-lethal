@@ -41,7 +41,7 @@ func apply() -> bool:
 	cards_choose_area.set_action_name("Reclaim")
 	cards_choose_area.set_choose_up_to_amount(choose_up_to_amount)
 	cards_choose_area.set_max_card_choose_amount(effective_max)
-	var reclaim_action = load("res://Scenes/CardsChooseAreaReclaimAction.scn").instantiate()
+	var reclaim_action = load("res://Scenes/CardsChooseAreaReclaimAction.tscn").instantiate()
 	cards_choose_area.set_cards_choose_area_action(reclaim_action)
 	cards_choose_area.set_source_card(get_parent() if get_parent() is Card else null)
 	cards_choose_area.activate(CardsChooseArea.ChooseType.Good, CardsChooseArea.PopulateCardsType.FromDiscard)

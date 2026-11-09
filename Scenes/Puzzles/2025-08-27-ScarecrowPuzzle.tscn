@@ -1,0 +1,24 @@
+[gd_scene load_steps=8 format=3 uid="uid://bqhm2wtcf7auo"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_wvjbi"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/scarecrow.png" id="2_sv7tj"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="3_0bh1c"]
+[ext_resource type="PackedScene" path="res://Scenes/IgniteCard.tscn" id="4_m2kw5"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="5_hxiw1"]
+[ext_resource type="PackedScene" path="res://Scenes/ScrapCard.tscn" id="6_dlxx6"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="7_5jgap"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_wvjbi")
+puzzle_date = "2025-08-27"
+previous_puzzle_scene = "uid://457elgs8i6wt"
+next_puzzle_scene = "uid://dv0kxdwvrddfh"
+enemy_health = 35
+enemy_name = "Scarecrow"
+enemy_icon_texture = ExtResource("2_sv7tj")
+player_health = 1
+player_energy = 11
+card_scenes = [ExtResource("3_0bh1c"), ExtResource("4_m2kw5"), ExtResource("4_m2kw5"), ExtResource("4_m2kw5"), ExtResource("5_hxiw1"), ExtResource("6_dlxx6"), ExtResource("7_5jgap")]
+dialogue_first = "Enemy"
+dialogue_lines = ["[b][shake rate=2.0 level=1 connected=1]...Definitely not. I better get rid of this guy quick, he's freaking me out.[/shake][/b]", "[b][shake rate=2.0 level=1 connected=1]THE GRIM REAPER....... YOU THINK YOU'RE SCARIER THAN ME?![/shake][/b]"]
+death_line = "I will HAUNT you, Grim Reaper."

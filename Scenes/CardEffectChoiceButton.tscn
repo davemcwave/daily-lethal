@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://dfm8d3yf71g6c"]
+
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Bold.ttf" id="1_lb1jo"]
+[ext_resource type="Script" path="res://Scripts/CardEffectChoiceButton.gd" id="2_drlyl"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Regular.ttf" id="3_a6b2a"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tfoha"]
+resource_local_to_scene = true
+bg_color = Color(0.105882, 0.768627, 0.427451, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_size = 2
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_af3mq"]
+resource_local_to_scene = true
+bg_color = Color(0.54902, 0.00392157, 0.152941, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_size = 2
+shadow_offset = Vector2(5, 5)
+
+[node name="CardEffectChoiceButton" type="Button"]
+custom_minimum_size = Vector2(250, 40)
+offset_right = 352.0
+offset_bottom = 64.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_lb1jo")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/hover = SubResource("StyleBoxFlat_tfoha")
+theme_override_styles/normal = SubResource("StyleBoxFlat_af3mq")
+script = ExtResource("2_drlyl")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("3_a6b2a")
+theme_override_fonts/bold_font = ExtResource("1_lb1jo")
+theme_override_font_sizes/bold_font_size = 32
+bbcode_enabled = true
+text = "[shake rate=10.0 level=3 connected=1][center][b]Deal 3 Damage[/b][/center][/shake]"
+scroll_active = false

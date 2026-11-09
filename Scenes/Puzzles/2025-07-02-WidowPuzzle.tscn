@@ -1,0 +1,21 @@
+[gd_scene load_steps=10 format=3 uid="uid://cf5dvi5m6onv3"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_h4ctr"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/Widow.png" id="2_fygda"]
+[ext_resource type="PackedScene" path="res://Scenes/ShieldCard.tscn" id="3_w7i67"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="4_nb5up"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="5_1qiek"]
+[ext_resource type="PackedScene" path="res://Scenes/GiftCard.tscn" id="6_sluyq"]
+[ext_resource type="PackedScene" path="res://Scenes/FangCard.tscn" id="7_a3j0j"]
+[ext_resource type="PackedScene" path="res://Scenes/LungeCard.tscn" id="8_nx4ef"]
+[ext_resource type="PackedScene" path="res://Scenes/ScrapCard.tscn" id="9_v3qv8"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_h4ctr")
+puzzle_date = "2025-07-02"
+previous_puzzle_scene = "uid://cfi7xdmxjrcqp"
+next_puzzle_scene = "uid://bow8hr8s4mg1n"
+enemy_name = "Weaver"
+enemy_icon_texture = ExtResource("2_fygda")
+player_health = 1
+card_scenes = [ExtResource("3_w7i67"), ExtResource("4_nb5up"), ExtResource("5_1qiek"), ExtResource("6_sluyq"), ExtResource("7_a3j0j"), ExtResource("8_nx4ef"), ExtResource("9_v3qv8")]

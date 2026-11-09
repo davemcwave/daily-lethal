@@ -1,0 +1,728 @@
+[gd_scene load_steps=26 format=3 uid="uid://bq48wjxpd3jh2"]
+
+[ext_resource type="Texture2D" path="res://bg.png" id="1_txkxn"]
+[ext_resource type="Script" path="res://Scripts/CardsListPanel.gd" id="2_faf01"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Medium.ttf" id="3_us5le"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Bold.ttf" id="4_v8jbk"]
+[ext_resource type="Script" path="res://Scripts/EditCardPanel.gd" id="5_qu6sg"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Regular.ttf" id="6_xoftk"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-SemiBold.ttf" id="7_8nsld"]
+[ext_resource type="Script" path="res://Scripts/CardIconUploadButton.gd" id="8_goyk5"]
+[ext_resource type="Script" path="res://Scripts/EffectsPanel.gd" id="9_22cfe"]
+[ext_resource type="PackedScene" path="res://Scenes/NewEffectPanelButton.tscn" id="10_o351d"]
+[ext_resource type="Script" path="res://Scripts/CardEditorCardPreviewPanel.gd" id="11_r0joi"]
+[ext_resource type="Material" path="res://Resources/WobbleMaterial.tres" id="12_vcmb1"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/sword.png" id="13_jmb8t"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/bolt-white.png" id="14_xodqr"]
+[ext_resource type="Script" path="res://Scripts/ExtraDescriptions.gd" id="15_vmmae"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1y462"]
+bg_color = Color(0.12549, 0.160784, 0.168627, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tmod5"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5sgsm"]
+bg_color = Color(0.168176, 0.173692, 0.179208, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hf6l8"]
+bg_color = Color(0.0582987, 0.0664343, 0.069146, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_acibx"]
+bg_color = Color(0.169245, 0.169245, 0.169245, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_onv0p"]
+bg_color = Color(0.548094, 0.00210453, 0.154114, 1)
+border_width_left = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_3v80l"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.27, 0.78)
+colors = PackedColorArray(0, 0.164706, 0.54902, 1, 0.0641667, 0.55, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_njmxi"]
+gradient = SubResource("Gradient_3v80l")
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.5, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3baqr"]
+bg_color = Color(0.169245, 0.169245, 0.169245, 1)
+border_width_left = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vivc4"]
+bg_color = Color(0.169245, 0.169245, 0.169245, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[node name="CardEditorView" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BGRepeat" type="TextureRect" parent="."]
+self_modulate = Color(1, 1, 1, 0.0823529)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -24.0
+offset_right = 8166.0
+offset_bottom = 4797.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.105193, 0.105193)
+mouse_filter = 2
+texture = ExtResource("1_txkxn")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="CardsListPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 56.0
+offset_right = 176.0
+offset_bottom = -28.0
+grow_vertical = 2
+script = ExtResource("2_faf01")
+
+[node name="Title" type="RichTextLabel" parent="CardsListPanel"]
+self_modulate = Color(1, 1, 1, 0.133333)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 8.0
+offset_bottom = -416.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_us5le")
+theme_override_fonts/bold_font = ExtResource("4_v8jbk")
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+bbcode_enabled = true
+text = "[center][b][shake rate=5.0 level=5 connected=1]Card List[/shake][/b][/center]"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CardsListPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CardsListPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 47.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CardsListPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="EditCardPanel" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 189.0
+offset_top = 24.0
+offset_right = 645.0
+offset_bottom = -28.0
+grow_vertical = 2
+script = ExtResource("5_qu6sg")
+
+[node name="Title" type="RichTextLabel" parent="EditCardPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_right = -5.0
+offset_bottom = -440.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_us5le")
+theme_override_fonts/bold_font = ExtResource("4_v8jbk")
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+bbcode_enabled = true
+text = "[center][b]Edit Card[/b][/center]"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TabContainer" type="TabContainer" parent="EditCardPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1y462")
+current_tab = 0
+
+[node name="Card" type="Panel" parent="EditCardPanel/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="CardNameLabel" type="RichTextLabel" parent="EditCardPanel/TabContainer/Card"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = 33.0
+offset_right = -253.0
+offset_bottom = -408.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_us5le")
+theme_override_fonts/bold_font = ExtResource("4_v8jbk")
+theme_override_font_sizes/bold_italics_font_size = 16
+theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/bold_font_size = 14
+bbcode_enabled = true
+text = "[b]Card Name[/b]"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="CardNameInput" type="LineEdit" parent="EditCardPanel/TabContainer/Card"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 57.0
+offset_right = 203.0
+offset_bottom = 88.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_xoftk")
+text = "Slash"
+caret_blink = true
+
+[node name="CardCostLabel" type="RichTextLabel" parent="EditCardPanel/TabContainer/Card"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 219.0
+offset_top = 33.0
+offset_right = -53.0
+offset_bottom = -408.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_us5le")
+theme_override_fonts/bold_font = ExtResource("4_v8jbk")
+theme_override_font_sizes/bold_italics_font_size = 16
+theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/bold_font_size = 14
+bbcode_enabled = true
+text = "[b]Energy Cost[/b]"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="CardCostInput" type="LineEdit" parent="EditCardPanel/TabContainer/Card"]
+layout_mode = 0
+offset_left = 219.0
+offset_top = 57.0
+offset_right = 288.0
+offset_bottom = 88.0
+
+[node name="CardCostUp" type="Button" parent="EditCardPanel/TabContainer/Card"]
+layout_mode = 0
+offset_left = 291.0
+offset_top = 57.0
+offset_right = 307.0
+offset_bottom = 73.0
+
+[node name="Polygon2D" type="Polygon2D" parent="EditCardPanel/TabContainer/Card/CardCostUp"]
+position = Vector2(3, 3)
+scale = Vector2(0.645639, 0.645639)
+polygon = PackedVector2Array(8, 2, 2, 12, 14, 12)
+
+[node name="CardCostDown" type="Button" parent="EditCardPanel/TabContainer/Card"]
+layout_mode = 0
+offset_left = 291.0
+offset_top = 69.0
+offset_right = 307.0
+offset_bottom = 85.0
+
+[node name="Polygon2D" type="Polygon2D" parent="EditCardPanel/TabContainer/Card/CardCostDown"]
+polygon = PackedVector2Array(4, 4, 12, 4, 8, 11)
+
+[node name="Card DescriptionLabel" type="RichTextLabel" parent="EditCardPanel/TabContainer/Card"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = 113.0
+offset_right = -253.0
+offset_bottom = -320.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_us5le")
+theme_override_fonts/bold_font = ExtResource("4_v8jbk")
+theme_override_font_sizes/bold_italics_font_size = 16
+theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/bold_font_size = 14
+bbcode_enabled = true
+text = "[b]Description[/b]"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="CardDescriptionInput" type="TextEdit" parent="EditCardPanel/TabContainer/Card"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 137.0
+offset_right = 427.0
+offset_bottom = 257.0
+theme_override_fonts/font = ExtResource("6_xoftk")
+text = "Activate the card at the bottom of the discard twice. Trash that card. Cannot apply to another Reverberate."
+wrap_mode = 1
+
+[node name="CardColorLabel" type="RichTextLabel" parent="EditCardPanel/TabContainer/Card"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = 289.0
+offset_right = -285.0
+offset_bottom = -144.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_us5le")
+theme_override_fonts/bold_font = ExtResource("4_v8jbk")
+theme_override_font_sizes/bold_italics_font_size = 16
+theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/bold_font_size = 14
+bbcode_enabled = true
+text = "[b]Color[/b]"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="CardColorButtons" type="Control" parent="EditCardPanel/TabContainer/Card"]
+anchors_preset = 0
+offset_left = 19.0
+offset_top = 313.0
+offset_right = 19.0
+offset_bottom = 313.0
+mouse_filter = 2
+
+[node name="RedColorButton" type="Button" parent="EditCardPanel/TabContainer/Card/CardColorButtons"]
+self_modulate = Color(0.54902, 0.00392157, 0.152941, 1)
+layout_mode = 0
+offset_left = 3.0
+offset_top = 1.0
+offset_right = 27.0
+offset_bottom = 25.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_tmod5")
+
+[node name="BlueColorButton" type="Button" parent="EditCardPanel/TabContainer/Card/CardColorButtons"]
+self_modulate = Color(0, 0.164706, 0.54902, 1)
+layout_mode = 0
+offset_left = 35.0
+offset_top = 1.0
+offset_right = 59.0
+offset_bottom = 25.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_tmod5")
+
+[node name="PurpleColorButton" type="Button" parent="EditCardPanel/TabContainer/Card/CardColorButtons"]
+self_modulate = Color(0.54902, 0, 0.54902, 1)
+layout_mode = 0
+offset_left = 67.0
+offset_top = 1.0
+offset_right = 91.0
+offset_bottom = 25.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_tmod5")
+
+[node name="OrangeColorButton" type="Button" parent="EditCardPanel/TabContainer/Card/CardColorButtons"]
+self_modulate = Color(0.764706, 0.32549, 0, 1)
+layout_mode = 0
+offset_left = 99.0
+offset_top = 1.0
+offset_right = 123.0
+offset_bottom = 25.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_tmod5")
+
+[node name="GreenColorButton" type="Button" parent="EditCardPanel/TabContainer/Card/CardColorButtons"]
+self_modulate = Color(0, 0.54902, 0.0627451, 1)
+layout_mode = 0
+offset_left = 131.0
+offset_top = 1.0
+offset_right = 155.0
+offset_bottom = 25.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_tmod5")
+
+[node name="CardIconLabel" type="RichTextLabel" parent="EditCardPanel/TabContainer/Card"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 219.0
+offset_top = 289.0
+offset_right = -189.0
+offset_bottom = -144.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_us5le")
+theme_override_fonts/bold_font = ExtResource("4_v8jbk")
+theme_override_font_sizes/bold_italics_font_size = 16
+theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/bold_font_size = 14
+bbcode_enabled = true
+text = "[b]Image[/b]"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="CardIconUploadButton" type="Button" parent="EditCardPanel/TabContainer/Card"]
+layout_mode = 0
+offset_left = 219.0
+offset_top = 313.0
+offset_right = 339.0
+offset_bottom = 345.0
+theme_override_fonts/font = ExtResource("7_8nsld")
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_5sgsm")
+text = "Upload Image"
+script = ExtResource("8_goyk5")
+
+[node name="FileDialog" type="FileDialog" parent="EditCardPanel/TabContainer/Card/CardIconUploadButton"]
+title = "Open a File"
+position = Vector2i(165, 95)
+ok_button_text = "Open"
+file_mode = 0
+use_native_dialog = true
+
+[node name="Effects" type="Panel" parent="EditCardPanel/TabContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("9_22cfe")
+metadata/_tab_index = 1
+
+[node name="GridContainer" type="GridContainer" parent="EditCardPanel/TabContainer/Effects"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -211.0
+offset_top = -187.5
+offset_right = 208.0
+offset_bottom = 143.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 14
+theme_override_constants/v_separation = 14
+columns = 2
+
+[node name="NewEffectPanelButton" parent="EditCardPanel/TabContainer/Effects/GridContainer" instance=ExtResource("10_o351d")]
+layout_mode = 2
+
+[node name="NewEffectPanelButton4" parent="EditCardPanel/TabContainer/Effects/GridContainer" instance=ExtResource("10_o351d")]
+layout_mode = 2
+
+[node name="NewEffectPanelButton2" parent="EditCardPanel/TabContainer/Effects/GridContainer" instance=ExtResource("10_o351d")]
+layout_mode = 2
+
+[node name="NewEffectPanelButton3" parent="EditCardPanel/TabContainer/Effects/GridContainer" instance=ExtResource("10_o351d")]
+layout_mode = 2
+
+[node name="TopButtonPanel" type="Panel" parent="."]
+layout_mode = 2
+offset_left = 189.0
+offset_top = 440.0
+offset_right = 645.0
+offset_bottom = 512.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_hf6l8")
+
+[node name="SaveCardButton" type="Button" parent="."]
+layout_mode = 2
+offset_left = 537.0
+offset_top = 462.0
+offset_right = 625.0
+offset_bottom = 494.0
+theme_override_fonts/font = ExtResource("7_8nsld")
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_5sgsm")
+text = "Save Card"
+
+[node name="DeleteCardButton" type="Button" parent="."]
+layout_mode = 2
+offset_left = 206.0
+offset_top = 462.0
+offset_right = 294.0
+offset_bottom = 494.0
+theme_override_fonts/font = ExtResource("7_8nsld")
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_5sgsm")
+text = "Delete Card"
+
+[node name="CardPreviewPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 656.0
+offset_top = 55.0
+offset_right = 928.0
+offset_bottom = -28.0
+grow_vertical = 2
+script = ExtResource("11_r0joi")
+
+[node name="Title" type="RichTextLabel" parent="CardPreviewPanel"]
+self_modulate = Color(1, 1, 1, 0.133333)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 8.0
+offset_bottom = -416.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_us5le")
+theme_override_fonts/bold_font = ExtResource("4_v8jbk")
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+bbcode_enabled = true
+text = "[center][b][shake rate=5.0 level=5 connected=1]Preview[/shake][/b][/center]"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CardPreview" type="Panel" parent="CardPreviewPanel"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 34.0
+offset_top = 105.0
+offset_right = 234.0
+offset_bottom = -85.0
+grow_vertical = 2
+
+[node name="TitlePanel" type="Panel" parent="CardPreviewPanel/CardPreview"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 7.0
+offset_top = 8.0
+offset_right = -7.0
+offset_bottom = 58.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_acibx")
+
+[node name="Title" type="RichTextLabel" parent="CardPreviewPanel/CardPreview/TitlePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 57.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_us5le")
+theme_override_fonts/bold_font = ExtResource("4_v8jbk")
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "[center]Slash[/center]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="IconPanel" type="Panel" parent="CardPreviewPanel/CardPreview"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 58.0
+offset_right = -7.0
+offset_bottom = -82.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_onv0p")
+
+[node name="GradientBackground" type="TextureRect" parent="CardPreviewPanel/CardPreview/IconPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_njmxi")
+expand_mode = 1
+
+[node name="Icon" type="TextureRect" parent="CardPreviewPanel/CardPreview/IconPanel"]
+material = ExtResource("12_vcmb1")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -41.5
+offset_top = -42.5
+offset_right = 41.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("13_jmb8t")
+expand_mode = 1
+
+[node name="DescriptionPanel" type="Panel" parent="CardPreviewPanel/CardPreview"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 7.0
+offset_top = 185.0
+offset_right = -7.0
+offset_bottom = 259.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3baqr")
+
+[node name="Title" type="RichTextLabel" parent="CardPreviewPanel/CardPreview/DescriptionPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_right = -5.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_us5le")
+theme_override_fonts/bold_font = ExtResource("4_v8jbk")
+theme_override_font_sizes/normal_font_size = 14
+bbcode_enabled = true
+text = "[center]Deal 2 damage[/center]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnergyPanel" type="Panel" parent="CardPreviewPanel/CardPreview"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 7.0
+offset_top = 8.0
+offset_right = -136.0
+offset_bottom = 58.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vivc4")
+
+[node name="Energy" type="RichTextLabel" parent="CardPreviewPanel/CardPreview/EnergyPanel"]
+clip_contents = false
+layout_mode = 2
+offset_left = 6.0
+offset_top = 3.0
+offset_right = 33.0
+offset_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_us5le")
+theme_override_fonts/bold_font = ExtResource("4_v8jbk")
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "[center]2[/center]"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="CardPreviewPanel/CardPreview/EnergyPanel"]
+layout_mode = 2
+offset_left = 25.0
+offset_top = 18.0
+offset_right = 41.0
+offset_bottom = 35.0
+texture = ExtResource("14_xodqr")
+expand_mode = 1
+
+[node name="ExtraDescriptions" type="VBoxContainer" parent="CardPreviewPanel/CardPreview"]
+layout_mode = 0
+offset_left = 181.0
+offset_right = 269.0
+offset_bottom = 272.0
+script = ExtResource("15_vmmae")
+
+[connection signal="text_changed" from="EditCardPanel/TabContainer/Card/CardNameInput" to="EditCardPanel" method="_on_card_name_input_text_changed"]
+[connection signal="text_changed" from="EditCardPanel/TabContainer/Card/CardCostInput" to="EditCardPanel" method="_on_card_cost_input_text_changed"]
+[connection signal="text_changed" from="EditCardPanel/TabContainer/Card/CardDescriptionInput" to="EditCardPanel" method="_on_card_description_input_text_changed"]
+[connection signal="pressed" from="EditCardPanel/TabContainer/Card/CardIconUploadButton" to="EditCardPanel/TabContainer/Card/CardIconUploadButton" method="_on_pressed"]
+[connection signal="file_selected" from="EditCardPanel/TabContainer/Card/CardIconUploadButton/FileDialog" to="EditCardPanel" method="_on_file_dialog_file_selected"]

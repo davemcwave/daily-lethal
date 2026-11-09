@@ -1,0 +1,21 @@
+[gd_scene load_steps=8 format=3 uid="uid://f0fwf5d2ouet"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_mvsso"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/leeta-256x256.svg" id="2_pxsla"]
+[ext_resource type="PackedScene" path="res://Scenes/ExchangeCard.tscn" id="3_eiint"]
+[ext_resource type="PackedScene" path="res://Scenes/FangCard.tscn" id="4_l8cj5"]
+[ext_resource type="PackedScene" path="res://Scenes/CooperationCard.tscn" id="5_ddbjq"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="6_hvewg"]
+[ext_resource type="PackedScene" path="res://Scenes/PotionCard.tscn" id="7_m526u"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_mvsso")
+puzzle_date = "2026-02-09"
+previous_puzzle_scene = "uid://dmwvhtbx1qwyc"
+next_puzzle_scene = "uid://c7samjlgaman5"
+enemy_health = 5
+enemy_name = "Worg"
+enemy_icon_texture = ExtResource("2_pxsla")
+player_health = 6
+player_energy = 0
+card_scenes = [ExtResource("3_eiint"), ExtResource("4_l8cj5"), ExtResource("5_ddbjq"), ExtResource("4_l8cj5"), ExtResource("6_hvewg"), ExtResource("7_m526u")]

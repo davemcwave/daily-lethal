@@ -1,0 +1,77 @@
+[gd_scene load_steps=7 format=3 uid="uid://caeapcfyjl2ey"]
+
+[ext_resource type="Script" path="res://Scripts/DebuffPanel.gd" id="1_27vuf"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Medium.ttf" id="2_ewgsf"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Bold.ttf" id="3_mt73b"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/infinity.png" id="4_u7e2i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ubnjo"]
+resource_local_to_scene = true
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j0g5b"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+
+[node name="DebuffPanel" type="Panel"]
+modulate = Color(0.717647, 0.180392, 0.192157, 1)
+z_index = 99
+z_as_relative = false
+custom_minimum_size = Vector2(0, 15)
+offset_left = -73.0
+offset_bottom = 15.0
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_ubnjo")
+script = ExtResource("1_27vuf")
+
+[node name="DebuffText" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_ewgsf")
+theme_override_fonts/bold_font = ExtResource("3_mt73b")
+theme_override_font_sizes/normal_font_size = 10
+theme_override_font_sizes/bold_font_size = 10
+bbcode_enabled = true
+text = "[center][b]Vulnerable[/b][/center]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UnlimitedPanel" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 27.0
+offset_top = -10.0
+offset_right = 48.0
+offset_bottom = 2.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_j0g5b")
+
+[node name="Icon" type="TextureRect" parent="UnlimitedPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_u7e2i")
+expand_mode = 1
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

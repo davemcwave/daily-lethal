@@ -1,0 +1,23 @@
+[gd_scene load_steps=10 format=3 uid="uid://elwudqt6mvud"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_54b2h"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/redeye.png" id="2_pxmaw"]
+[ext_resource type="PackedScene" path="res://Scenes/FangCard.tscn" id="3_qcwwr"]
+[ext_resource type="PackedScene" path="res://Scenes/SnipeCard.tscn" id="4_2a3q0"]
+[ext_resource type="PackedScene" path="res://Scenes/HeartbeatCard.tscn" id="5_j87go"]
+[ext_resource type="PackedScene" path="res://Scenes/EmptyfistCard.tscn" id="6_mf8dn"]
+[ext_resource type="PackedScene" path="res://Scenes/BurstCard.tscn" id="7_rx4tb"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="8_0h3ap"]
+[ext_resource type="PackedScene" path="res://Scenes/LungeCard.tscn" id="9_a34h3"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_54b2h")
+puzzle_date = "2025-09-23"
+previous_puzzle_scene = "uid://dt44o4jtj1br3"
+next_puzzle_scene = "uid://djgtyi7n3gwf8"
+enemy_health = 25
+enemy_name = "Redeye"
+enemy_icon_texture = ExtResource("2_pxmaw")
+player_health = 9
+player_energy = 8
+card_scenes = [ExtResource("3_qcwwr"), ExtResource("4_2a3q0"), ExtResource("5_j87go"), ExtResource("6_mf8dn"), ExtResource("7_rx4tb"), ExtResource("8_0h3ap"), ExtResource("9_a34h3")]

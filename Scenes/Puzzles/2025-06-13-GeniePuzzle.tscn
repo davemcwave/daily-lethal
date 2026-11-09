@@ -1,0 +1,21 @@
+[gd_scene load_steps=8 format=3 uid="uid://dqrsnicv7mdy4"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_0jsl7"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/genie.png" id="2_cdsgi"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="3_jdt3f"]
+[ext_resource type="PackedScene" path="res://Scenes/InitiateCard.tscn" id="4_sym81"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="5_sctxv"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="6_0h8bo"]
+[ext_resource type="PackedScene" path="res://Scenes/BurstCard.tscn" id="7_gbn28"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_0jsl7")
+puzzle_date = "2025-06-13"
+previous_puzzle_scene = "uid://cyqai10g1njux"
+next_puzzle_scene = "uid://bj48n6xsr8b4n"
+enemy_health = 16
+enemy_name = "Genie"
+enemy_icon_texture = ExtResource("2_cdsgi")
+player_health = 5
+card_scenes = [ExtResource("3_jdt3f"), ExtResource("4_sym81"), ExtResource("5_sctxv"), ExtResource("3_jdt3f"), ExtResource("6_0h8bo"), ExtResource("7_gbn28")]
+card_solution = [ExtResource("4_sym81"), ExtResource("3_jdt3f"), ExtResource("3_jdt3f"), ExtResource("6_0h8bo"), ExtResource("5_sctxv"), ExtResource("7_gbn28"), ExtResource("7_gbn28")]

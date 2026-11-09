@@ -1,0 +1,20 @@
+[gd_scene load_steps=8 format=3 uid="uid://beihlgj6o6d5i"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_gr1ea"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/lightning-elemental.png" id="2_ubk22"]
+[ext_resource type="PackedScene" path="res://Scenes/ScrapCard.tscn" id="3_vxki6"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="4_e5pnf"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="5_330ln"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="6_gdarr"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="7_pj4nx"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_gr1ea")
+puzzle_date = "2025-07-28"
+previous_puzzle_scene = "uid://colr7y27i7j63"
+next_puzzle_scene = "uid://cl87bjgxfldq3"
+enemy_health = 7
+enemy_name = "Lightning Elemental"
+enemy_icon_texture = ExtResource("2_ubk22")
+player_energy = 1
+card_scenes = [ExtResource("3_vxki6"), ExtResource("4_e5pnf"), ExtResource("5_330ln"), ExtResource("6_gdarr"), ExtResource("5_330ln"), ExtResource("7_pj4nx")]

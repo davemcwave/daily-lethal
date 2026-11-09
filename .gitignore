@@ -12,3 +12,6 @@ discord_forum_scraper.py
 formspree*
 forum_data.json
 community_card_ideas.md
+# Godot editor temp files
+*.tmp
+*.depren

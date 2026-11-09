@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgckxlasfknaw"]
+
+[ext_resource type="Script" path="res://Scripts/ReduceHealthCardEffect.gd" id="1_7jewq"]
+
+[node name="ReduceHealthCardEffect" type="Node2D"]
+script = ExtResource("1_7jewq")
+effect_name = "Reduce Health"
+effect_description = "Reduce player's health"

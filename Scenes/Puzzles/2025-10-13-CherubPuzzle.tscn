@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://bj2o7yxwbq8cb"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_78wrl"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/cherub.png" id="2_jpnsk"]
+[ext_resource type="PackedScene" path="res://Scenes/InspirationCard.tscn" id="3_vklos"]
+[ext_resource type="PackedScene" path="res://Scenes/HeartbeatCard.tscn" id="4_akq0o"]
+[ext_resource type="PackedScene" path="res://Scenes/EmptyfistCard.tscn" id="5_40h30"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="6_gix8g"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="7_8mnvk"]
+[ext_resource type="PackedScene" path="res://Scenes/ExchangeCard.tscn" id="8_elt2v"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_78wrl")
+puzzle_date = "2025-10-13"
+previous_puzzle_scene = "uid://brkkt2gbwfves"
+next_puzzle_scene = "uid://bt85rmyf61qpl"
+enemy_health = 8
+enemy_name = "Cherub"
+enemy_icon_texture = ExtResource("2_jpnsk")
+player_health = 4
+player_energy = 2
+card_scenes = [ExtResource("3_vklos"), ExtResource("4_akq0o"), ExtResource("5_40h30"), ExtResource("6_gix8g"), ExtResource("7_8mnvk"), ExtResource("8_elt2v")]

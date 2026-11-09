@@ -1,0 +1,655 @@
+[gd_scene load_steps=38 format=3 uid="uid://clhwhuadvmuvq"]
+
+[ext_resource type="Script" path="res://Scripts/EndGameScreen.gd" id="1_1tgj3"]
+[ext_resource type="Material" path="res://Resources/WobbleMaterial.tres" id="2_mukxf"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/banner.png" id="3_it2x3"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Medium.ttf" id="4_btkjv"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Bold.ttf" id="5_w23rj"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/robot.png" id="6_6kgip"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/share.png" id="7_daqbr"]
+[ext_resource type="Script" path="res://Scripts/DiscordButton.gd" id="8_fenta"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/Discord-Symbol-White.png" id="9_ldt48"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/repeatwhite.png" id="10_81sty"]
+[ext_resource type="Script" path="res://Scripts/ArchiveButton.gd" id="11_011kw"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/open-book-white.png" id="12_t5anv"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/cardswhite.png" id="13_lnf4f"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/mail-white.png" id="14_e1gu4"]
+[ext_resource type="Script" path="res://Scripts/EmailSubscribeButton.gd" id="15_5y5gm"]
+[ext_resource type="Shader" path="res://Scripts/Shaders/Wobble.gdshader" id="16_tmhph"]
+
+[sub_resource type="Shader" id="Shader_moklb"]
+code = "shader_type canvas_item;
+
+uniform sampler2D flowMap; //Displacement map
+uniform float strength;    //Force of the effect
+uniform float speed;       //Speed of the effect
+uniform int frames : hint_range(1, 10); //Frames of the effect
+
+//Returns a value between 0 and 1 depending of the frames -> exemple: frames = 4, frame 1 = 0.25
+float clock(float time){
+	float fframes = float(frames);
+	return floor(mod(time * speed, fframes)) / fframes;
+}
+
+void fragment(){
+	float c = clock(TIME); //Get clock frame
+	vec4 offset = texture(flowMap, vec2(UV.x + c, UV.y + c)) * strength; //Get offset
+	//COLOR = texture(TEXTURE, vec2(UV.x,UV.y) + normal.xy); //Apply offset
+	COLOR = texture(TEXTURE, vec2(UV.x,UV.y) + offset.xy - vec2(0.5,0.5)*strength); //We need to remove the displacement
+}
+
+
+
+// TEST CLOCK
+/*
+void fragment(){
+	float c = clock(TIME);
+	COLOR = vec4( c, c, c, 1);
+}
+*/
+"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1y7xt"]
+resource_local_to_scene = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ptsh3"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_1y7xt")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bequm"]
+resource_local_to_scene = true
+shader = SubResource("Shader_moklb")
+shader_parameter/flowMap = SubResource("NoiseTexture2D_ptsh3")
+shader_parameter/strength = 0.01
+shader_parameter/speed = 2.0
+shader_parameter/frames = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d5mxn"]
+bg_color = Color(0.997332, 0.864229, 0.68063, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w3iu4"]
+bg_color = Color(0.648978, 0.444184, 0.0609158, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v6mt1"]
+bg_color = Color(0.984314, 0.72549, 0.321569, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_poqn2"]
+bg_color = Color(0.732614, 0.783906, 0.991135, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0e8ag"]
+bg_color = Color(0.161866, 0.15008, 0.61171, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g27xe"]
+bg_color = Color(0.345098, 0.396078, 0.94902, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7si7r"]
+bg_color = Color(0.239347, 0.239347, 0.239347, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hgaa2"]
+bg_color = Color(0.078815, 0.078815, 0.078815, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ckpcr"]
+bg_color = Color(0, 0, 0, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1y7xt"]
+bg_color = Color(0.571777, 0.741499, 0.961383, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ptsh3"]
+bg_color = Color(0.0610525, 0.204989, 0.377187, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_moklb"]
+bg_color = Color(0.2028, 0.46254, 0.78, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bequm"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n8l6f"]
+bg_color = Color(0, 0, 0, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_moklb"]
+resource_local_to_scene = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1y7xt"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_moklb")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ptsh3"]
+resource_local_to_scene = true
+shader = ExtResource("16_tmhph")
+shader_parameter/flowMap = SubResource("NoiseTexture2D_1y7xt")
+shader_parameter/strength = 0.025
+shader_parameter/speed = 2.0
+shader_parameter/frames = 3
+
+[node name="EndGameScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1tgj3")
+
+[node name="Banner" type="TextureRect" parent="."]
+material = ExtResource("2_mukxf")
+layout_mode = 0
+offset_left = 344.0
+offset_top = -32.0
+offset_right = 616.0
+offset_bottom = 128.0
+texture = ExtResource("3_it2x3")
+expand_mode = 1
+
+[node name="TitleText" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -3.0
+offset_top = 18.0
+offset_right = -3.0
+offset_bottom = 78.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_btkjv")
+theme_override_fonts/bold_font = ExtResource("5_w23rj")
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 48
+bbcode_enabled = true
+text = "[center][b][shake rate=10.0 level=5 connected=1]Victory![/shake][/b][/center]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnemyIcon" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_bequm")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -214.0
+offset_right = 100.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_6kgip")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -31.0
+offset_bottom = 112.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 5
+
+[node name="SummaryText" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_btkjv")
+theme_override_fonts/bold_font = ExtResource("5_w23rj")
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[center][b]Found lethal...[/b][/center]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AttemptText" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_btkjv")
+theme_override_fonts/bold_font = ExtResource("5_w23rj")
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 24
+bbcode_enabled = true
+text = "[center][b]IN [color=green]3[/color] ATTEMPTS[/b][/center]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BestAttemptText" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_btkjv")
+theme_override_fonts/bold_font = ExtResource("5_w23rj")
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 24
+bbcode_enabled = true
+text = "[center][b]WITH [color=gold]4[/color] CARDS ON YOUR BEST ATTEMPT[/b][/center]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShareButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -116.0
+offset_top = 77.0
+offset_right = 116.0
+offset_bottom = 132.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_w23rj")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/hover = SubResource("StyleBoxFlat_d5mxn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_w3iu4")
+theme_override_styles/normal = SubResource("StyleBoxFlat_v6mt1")
+text = "   SHARE"
+
+[node name="TextureRect" type="TextureRect" parent="ShareButton"]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 12.0
+offset_right = 79.0
+offset_bottom = 36.0
+mouse_filter = 2
+texture = ExtResource("7_daqbr")
+expand_mode = 1
+
+[node name="DiscordButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -116.0
+offset_top = 139.0
+offset_right = 116.0
+offset_bottom = 194.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_w23rj")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/hover = SubResource("StyleBoxFlat_poqn2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0e8ag")
+theme_override_styles/normal = SubResource("StyleBoxFlat_g27xe")
+text = "    JOIN DISCORD"
+script = ExtResource("8_fenta")
+
+[node name="TextureRect" type="TextureRect" parent="DiscordButton"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 14.0
+offset_right = 44.0
+offset_bottom = 35.0
+mouse_filter = 2
+texture = ExtResource("9_ldt48")
+expand_mode = 1
+
+[node name="PlayAgainButton" type="Button" parent="."]
+layout_mode = 1
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 125.0
+offset_bottom = 33.0
+theme_override_fonts/font = ExtResource("5_w23rj")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/hover = SubResource("StyleBoxFlat_7si7r")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hgaa2")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ckpcr")
+text = "    PLAY AGAIN"
+
+[node name="TextureRect2" type="TextureRect" parent="PlayAgainButton"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 5.0
+offset_right = 20.0
+offset_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource("10_81sty")
+expand_mode = 1
+
+[node name="ArchiveButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -128.0
+offset_top = 5.0
+offset_right = -11.0
+offset_bottom = 30.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("5_w23rj")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/hover = SubResource("StyleBoxFlat_7si7r")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hgaa2")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ckpcr")
+text = "    ARCHIVE"
+script = ExtResource("11_011kw")
+
+[node name="TextureRect2" type="TextureRect" parent="ArchiveButton"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 5.0
+offset_right = 29.0
+offset_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource("12_t5anv")
+expand_mode = 1
+
+[node name="GetTomorrowButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -116.0
+offset_top = 202.0
+offset_right = 116.0
+offset_bottom = 258.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_w23rj")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/hover = SubResource("StyleBoxFlat_1y7xt")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ptsh3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_moklb")
+text = "    NEXT PUZZLE"
+
+[node name="TextureRect3" type="TextureRect" parent="GetTomorrowButton"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 48.0
+offset_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource("13_lnf4f")
+expand_mode = 1
+
+[node name="SubscribeButton" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 304.0
+offset_top = 584.0
+offset_right = 360.0
+offset_bottom = 640.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_bequm")
+
+[node name="TextureRect" type="TextureRect" parent="SubscribeButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_e1gu4")
+expand_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="Overlay" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.117647, 0.180392, 0.192157, 1)
+
+[node name="TitleText" type="RichTextLabel" parent="Overlay"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -96.0
+offset_bottom = -56.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_btkjv")
+theme_override_fonts/bold_font = ExtResource("5_w23rj")
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 32
+bbcode_enabled = true
+text = "[center][b][shake rate=3.0 level=5 connected=1]Never miss a puzzle.[/shake][/b][/center]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SubtitleText" type="RichTextLabel" parent="Overlay"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -48.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_btkjv")
+theme_override_fonts/bold_font = ExtResource("5_w23rj")
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 16
+bbcode_enabled = true
+text = "[center][b][center][b][shake rate=1.0 level=2 connected=1]Get every puzzle in your inbox.[/shake][/b][/center]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EmailSubscribeButton" type="Button" parent="Overlay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.5
+offset_top = 24.0
+offset_right = 58.5
+offset_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_w23rj")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/hover = SubResource("StyleBoxFlat_7si7r")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hgaa2")
+theme_override_styles/normal = SubResource("StyleBoxFlat_n8l6f")
+text = "Subscribe"
+script = ExtResource("15_5y5gm")
+
+[node name="NoThanksButton" type="Button" parent="Overlay"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -56.0
+offset_top = -36.0
+offset_right = 61.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("5_w23rj")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/hover = SubResource("StyleBoxFlat_7si7r")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hgaa2")
+theme_override_styles/normal = SubResource("StyleBoxFlat_n8l6f")
+text = "No Thanks"
+
+[node name="ExitButton" type="Button" parent="Overlay"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -54.0
+offset_top = 17.0
+offset_right = -24.0
+offset_bottom = 47.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("5_w23rj")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/hover = SubResource("StyleBoxFlat_7si7r")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hgaa2")
+theme_override_styles/normal = SubResource("StyleBoxFlat_n8l6f")
+text = "X"
+
+[node name="EmailTextInput" type="LineEdit" parent="Overlay"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 56.0
+offset_top = -16.0
+offset_right = -56.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_w23rj")
+theme_override_font_sizes/font_size = 12
+placeholder_text = "thepuzzlemaster42@gmail.com"
+alignment = 1
+caret_blink = true
+
+[node name="SubscribeHelpText" type="RichTextLabel" parent="Overlay"]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = 385.0
+offset_right = -2.0
+offset_bottom = 402.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.498287, 0.431308, 1)
+theme_override_fonts/normal_font = ExtResource("4_btkjv")
+theme_override_fonts/bold_font = ExtResource("5_w23rj")
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+bbcode_enabled = true
+text = "[center][b]Please provide an email.[/b][/center]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="Overlay"]
+material = SubResource("ShaderMaterial_ptsh3")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -152.0
+offset_right = 20.0
+offset_bottom = -112.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_e1gu4")
+expand_mode = 1
+
+[connection signal="pressed" from="ShareButton" to="." method="_on_share_button_pressed"]
+[connection signal="pressed" from="DiscordButton" to="DiscordButton" method="_on_pressed"]
+[connection signal="pressed" from="PlayAgainButton" to="." method="_on_play_again_button_pressed"]
+[connection signal="pressed" from="ArchiveButton" to="ArchiveButton" method="_on_pressed"]
+[connection signal="pressed" from="GetTomorrowButton" to="." method="_on_get_tomorrow_button_pressed"]
+[connection signal="pressed" from="Overlay/EmailSubscribeButton" to="Overlay/EmailSubscribeButton" method="_on_pressed"]
+[connection signal="pressed" from="Overlay/NoThanksButton" to="." method="_on_no_thanks_button_pressed"]
+[connection signal="pressed" from="Overlay/ExitButton" to="." method="_on_no_thanks_button_pressed"]
+[connection signal="text_submitted" from="Overlay/EmailTextInput" to="Overlay/EmailSubscribeButton" method="_on_email_text_input_text_submitted"]

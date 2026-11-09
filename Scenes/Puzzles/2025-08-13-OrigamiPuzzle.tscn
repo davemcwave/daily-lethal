@@ -1,0 +1,19 @@
+[gd_scene load_steps=7 format=3 uid="uid://cduowjmbm358o"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_lh7b2"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/origami.png" id="2_wgw1n"]
+[ext_resource type="PackedScene" path="res://Scenes/EmptyfistCard.tscn" id="3_7s78n"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="4_y1ffe"]
+[ext_resource type="PackedScene" path="res://Scenes/FangCard.tscn" id="5_hjst4"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="6_uy2nj"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_lh7b2")
+puzzle_date = "2025-08-13"
+previous_puzzle_scene = "uid://cduowjmbm358o"
+next_puzzle_scene = "uid://d055b5megp6x5"
+enemy_health = 11
+enemy_name = "Origami"
+enemy_icon_texture = ExtResource("2_wgw1n")
+player_energy = 3
+card_scenes = [ExtResource("3_7s78n"), ExtResource("4_y1ffe"), ExtResource("5_hjst4"), ExtResource("6_uy2nj"), ExtResource("5_hjst4")]

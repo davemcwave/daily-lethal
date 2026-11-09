@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dhbo2ob7hc0nm"]
+
+[ext_resource type="Script" path="res://Scripts/GradientBackground.gd" id="1_3dikd"]
+
+[sub_resource type="Gradient" id="Gradient_ju71g"]
+offsets = PackedFloat32Array(0.42, 0.63)
+colors = PackedColorArray(0.763655, 0.325858, 9.62615e-08, 1, 0.55, 0, 0.55, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_s50sa"]
+gradient = SubResource("Gradient_ju71g")
+fill_to = Vector2(1, 1)
+metadata/_snap_enabled = true
+
+[node name="GradientBackground" type="TextureRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_s50sa")
+expand_mode = 1
+script = ExtResource("1_3dikd")

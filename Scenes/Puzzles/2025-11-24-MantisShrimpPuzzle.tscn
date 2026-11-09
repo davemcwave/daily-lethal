@@ -1,0 +1,21 @@
+[gd_scene load_steps=7 format=3 uid="uid://ofr363xl2ub2"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_5m7xq"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/mantis-shrimp.png" id="2_hd2kh"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="3_enmll"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="4_clgt2"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="5_tui16"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="6_w07g6"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_5m7xq")
+puzzle_date = "2025-11-24"
+previous_puzzle_scene = "uid://bdbh0vbp2ffxv"
+next_puzzle_scene = "uid://dfejmnuv2xasb"
+enemy_health = 33
+enemy_name = "Mantis Shrimp"
+enemy_icon_texture = ExtResource("2_hd2kh")
+player_health = 5
+player_energy = 6
+card_scenes = [ExtResource("3_enmll"), ExtResource("4_clgt2"), ExtResource("5_tui16"), ExtResource("6_w07g6")]
+card_solution = [ExtResource("3_enmll"), ExtResource("6_w07g6"), ExtResource("5_tui16"), ExtResource("4_clgt2")]

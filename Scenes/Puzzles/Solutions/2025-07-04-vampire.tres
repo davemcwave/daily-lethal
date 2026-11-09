@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="CardSolutionResource" load_steps=7 format=3 uid="uid://d0asvcy1fkdv3"]
 
-[ext_resource type="PackedScene" uid="uid://ch2nusykqg02r" path="res://Scenes/ScrapCard.scn" id="1_kwd8o"]
-[ext_resource type="PackedScene" uid="uid://buxwquwarhtc6" path="res://Scenes/RageCard.scn" id="2_bm4vp"]
-[ext_resource type="PackedScene" uid="uid://bwjb01igdh18r" path="res://Scenes/EchoCard.scn" id="3_gnbst"]
-[ext_resource type="PackedScene" uid="uid://dm54uep8farnm" path="res://Scenes/ShieldCard.scn" id="4_vlk17"]
-[ext_resource type="PackedScene" uid="uid://g0h6rcx6ql5o" path="res://Scenes/FangCard.scn" id="5_1gpx5"]
+[ext_resource type="PackedScene" uid="uid://ch2nusykqg02r" path="res://Scenes/ScrapCard.tscn" id="1_kwd8o"]
+[ext_resource type="PackedScene" uid="uid://buxwquwarhtc6" path="res://Scenes/RageCard.tscn" id="2_bm4vp"]
+[ext_resource type="PackedScene" uid="uid://bwjb01igdh18r" path="res://Scenes/EchoCard.tscn" id="3_gnbst"]
+[ext_resource type="PackedScene" uid="uid://dm54uep8farnm" path="res://Scenes/ShieldCard.tscn" id="4_vlk17"]
+[ext_resource type="PackedScene" uid="uid://g0h6rcx6ql5o" path="res://Scenes/FangCard.tscn" id="5_1gpx5"]
 [ext_resource type="Script" uid="uid://cugpgmdtsumrl" path="res://Scripts/CardSolutionResource.gd" id="6_a1h11"]
 
 [resource]

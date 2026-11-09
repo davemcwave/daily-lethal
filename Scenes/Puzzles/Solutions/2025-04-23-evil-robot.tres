@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="CardSolutionResource" load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://Scenes/WoundCard.scn" id="1_1f0ar"]
-[ext_resource type="PackedScene" path="res://Scenes/EchoCard.scn" id="2_idfnb"]
-[ext_resource type="PackedScene" path="res://Scenes/SlashCard.scn" id="3_qp5mn"]
+[ext_resource type="PackedScene" path="res://Scenes/WoundCard.tscn" id="1_1f0ar"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="2_idfnb"]
+[ext_resource type="PackedScene" path="res://Scenes/SlashCard.tscn" id="3_qp5mn"]
 [ext_resource type="Script" path="res://Scripts/CardSolutionResource.gd" id="4_k8ut2"]
 
 [resource]

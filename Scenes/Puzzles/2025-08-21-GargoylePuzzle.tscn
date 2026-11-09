@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://bau2j7lmwvll5"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_ouinh"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/gargoyle.png" id="2_bwuhn"]
+[ext_resource type="PackedScene" path="res://Scenes/EmptyfistCard.tscn" id="3_tj4o0"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="4_np35k"]
+[ext_resource type="PackedScene" path="res://Scenes/WoundCard.tscn" id="5_epeeh"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="6_vfc0b"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="7_m28fm"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="8_7gaia"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_ouinh")
+puzzle_date = "2025-08-21"
+previous_puzzle_scene = "uid://bpndqotfccsr"
+next_puzzle_scene = "uid://c2ga6r7ayntgd"
+enemy_health = 18
+enemy_name = "Gargoyle"
+enemy_icon_texture = ExtResource("2_bwuhn")
+player_health = 5
+player_energy = 9
+card_scenes = [ExtResource("3_tj4o0"), ExtResource("4_np35k"), ExtResource("5_epeeh"), ExtResource("6_vfc0b"), ExtResource("7_m28fm"), ExtResource("8_7gaia")]

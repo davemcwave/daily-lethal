@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwpfxrgdwe5gw"]
+
+[ext_resource type="Script" path="res://Scripts/SharpBuff.gd" id="1_gwn75"]
+
+[node name="SharpBuff" type="Node2D"]
+script = ExtResource("1_gwn75")
+buff_name = "Sharp"
+buff_description = "Damage increased by the number of stacks of Sharp you have. Lose 1  Sharp after every card played."
+activation_type = 1
+extra_activation_types = [0]
+unlimited_uses = true
+color = Color(0.763655, 0.325858, 9.62615e-08, 1)

@@ -2,7 +2,7 @@ extends CardEffect
 class_name RemoveBuffsCardEffect
 
 @export var remove_all_buffs: bool = false
-@export_file("*.scn") var buff_scenes
+@export_file("*.tscn") var buff_scenes
 @export_enum("Player", "Enemy") var buff_auto_target: String
 var buff_color: Color = Color.WHITE
 

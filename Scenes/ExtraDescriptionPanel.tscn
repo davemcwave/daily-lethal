@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://brkfcqyiibclm"]
+
+[ext_resource type="Script" path="res://Scripts/ExtraDescriptionPanel.gd" id="1_c2h8v"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Medium.ttf" id="2_y6ypn"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-SemiBold.ttf" id="3_fgjug"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Bold.ttf" id="4_4kdg0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xh8xc"]
+bg_color = Color(0.169245, 0.169245, 0.169245, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="ExtraDescriptionPanel" type="Panel"]
+custom_minimum_size = Vector2(91, 100)
+offset_right = 91.0
+offset_bottom = 93.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xh8xc")
+script = ExtResource("1_c2h8v")
+
+[node name="ExtraDescription" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_right = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("2_y6ypn")
+theme_override_fonts/italics_font = ExtResource("3_fgjug")
+theme_override_fonts/bold_font = ExtResource("4_4kdg0")
+theme_override_font_sizes/italics_font_size = 10
+theme_override_font_sizes/normal_font_size = 10
+theme_override_font_sizes/bold_font_size = 10
+bbcode_enabled = true
+text = "[center]HellowHellowHellowHellowHellowHellow[/center]"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,23 @@
+[gd_scene load_steps=10 format=3 uid="uid://0bdu4ykdajjl"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_xvbdx"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/ice-golem.png" id="2_njfrc"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="3_penkw"]
+[ext_resource type="PackedScene" path="res://Scenes/EmptyfistCard.tscn" id="4_bqv2h"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="5_rrj1a"]
+[ext_resource type="PackedScene" path="res://Scenes/GiftCard.tscn" id="6_jwf7x"]
+[ext_resource type="PackedScene" path="res://Scenes/PotionCard.tscn" id="7_2rtgr"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="8_wmx48"]
+[ext_resource type="PackedScene" path="res://Scenes/ShovelCard.tscn" id="9_4ps3m"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_xvbdx")
+puzzle_date = "2025-10-28"
+previous_puzzle_scene = "uid://dx2cyre0pwwws"
+next_puzzle_scene = "uid://dkeghhhsemxml"
+enemy_health = 25
+enemy_name = "Ice Golem"
+enemy_icon_texture = ExtResource("2_njfrc")
+player_health = 1
+player_energy = 9
+card_scenes = [ExtResource("3_penkw"), ExtResource("4_bqv2h"), ExtResource("5_rrj1a"), ExtResource("6_jwf7x"), ExtResource("7_2rtgr"), ExtResource("8_wmx48"), ExtResource("9_4ps3m")]

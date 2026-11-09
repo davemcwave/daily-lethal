@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8bwnoyj05ahe"]
+
+[ext_resource type="Script" path="res://Scripts/ShieldBuff.gd" id="1_clujn"]
+
+[node name="ShieldBuff" type="Node2D"]
+script = ExtResource("1_clujn")
+buff_name = "Block"
+buff_description = "Prevents the target from taking damage"
+activation_type = 4
+color = Color(0, 0.55, 0.0641667, 1)
+activated_once_per_turn = true

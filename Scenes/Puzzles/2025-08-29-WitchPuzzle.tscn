@@ -1,0 +1,22 @@
+[gd_scene load_steps=9 format=3 uid="uid://dv0kxdwvrddfh"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_ieehq"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/witch2.png" id="2_p563q"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="3_ws0yg"]
+[ext_resource type="PackedScene" path="res://Scenes/VenomCard.tscn" id="4_k53es"]
+[ext_resource type="PackedScene" path="res://Scenes/SnipeCard.tscn" id="5_jxefh"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="6_88lsk"]
+[ext_resource type="PackedScene" path="res://Scenes/EmptyfistCard.tscn" id="7_0w5bc"]
+[ext_resource type="PackedScene" path="res://Scenes/GiftCard.tscn" id="8_r06my"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_ieehq")
+puzzle_date = "2025-08-29"
+previous_puzzle_scene = "uid://bqhm2wtcf7auo"
+next_puzzle_scene = "uid://b67j0vpb8i0kk"
+enemy_health = 12
+enemy_name = "Witch"
+enemy_icon_texture = ExtResource("2_p563q")
+player_health = 1
+player_energy = 6
+card_scenes = [ExtResource("3_ws0yg"), ExtResource("4_k53es"), ExtResource("5_jxefh"), ExtResource("6_88lsk"), ExtResource("7_0w5bc"), ExtResource("8_r06my"), ExtResource("3_ws0yg")]

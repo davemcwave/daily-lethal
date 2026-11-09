@@ -15,7 +15,7 @@ func get_buff_scenes() -> Array:
 	while true:
 		var file = dir.get_next()
 		if file == "": break
-		if file.ends_with("Buff.scn"):
+		if file.ends_with("Buff.tscn"):
 			var scene_path = "res://Scenes/" + file
 			#var scene = load(scene_path)
 			card_scenes.append(scene_path)

@@ -1,0 +1,21 @@
+[gd_scene load_steps=8 format=3 uid="uid://b7xh40p353elw"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_uavn3"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/zombie.png" id="2_y4k7h"]
+[ext_resource type="PackedScene" path="res://Scenes/SnipeCard.tscn" id="3_k3q81"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="4_nwp3j"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="5_w7jlu"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="6_hjv6b"]
+[ext_resource type="PackedScene" path="res://Scenes/WasteCard.tscn" id="7_66cef"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_uavn3")
+puzzle_date = "2025-10-31"
+previous_puzzle_scene = "uid://dacjdo3mmhcqs"
+next_puzzle_scene = "uid://46vyrf6e8frw"
+enemy_health = 35
+enemy_name = "Zombie"
+enemy_icon_texture = ExtResource("2_y4k7h")
+player_health = 1
+player_energy = 9
+card_scenes = [ExtResource("3_k3q81"), ExtResource("4_nwp3j"), ExtResource("4_nwp3j"), ExtResource("5_w7jlu"), ExtResource("5_w7jlu"), ExtResource("6_hjv6b"), ExtResource("7_66cef")]

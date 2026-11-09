@@ -1,0 +1,23 @@
+[gd_scene load_steps=10 format=3 uid="uid://x8pm05022sxj"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_erfhf"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/mana-imp.png" id="2_nff1r"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="3_0rg7a"]
+[ext_resource type="PackedScene" path="res://Scenes/EmptyfistCard.tscn" id="4_mhbem"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="5_mbik4"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="6_mul4c"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="7_7kujj"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="8_styul"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="9_uc7o6"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_erfhf")
+puzzle_date = "2025-08-05"
+previous_puzzle_scene = "uid://cielqklaa1hmw"
+next_puzzle_scene = "uid://c1qgpg8cj7s4u"
+enemy_health = 48
+enemy_name = "Mana Imp"
+enemy_icon_texture = ExtResource("2_nff1r")
+player_health = 4
+player_energy = 13
+card_scenes = [ExtResource("3_0rg7a"), ExtResource("4_mhbem"), ExtResource("5_mbik4"), ExtResource("6_mul4c"), ExtResource("7_7kujj"), ExtResource("8_styul"), ExtResource("9_uc7o6")]

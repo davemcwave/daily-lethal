@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b7h87kdyv3h7n"]
+
+[ext_resource type="Shader" path="res://Scripts/Shaders/Shake.gdshader" id="1_dq6uf"]
+
+[resource]
+shader = ExtResource("1_dq6uf")
+shader_parameter/hit_effect = 0.509
+shader_parameter/shake_intensity = 1.0

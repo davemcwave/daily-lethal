@@ -2,7 +2,7 @@ extends Panel
 class_name BuffPanel
 
 @onready var center_description: CenterDescription = get_tree().get_root().get_node("Scene/CanvasLayer/CenterDescription")
-@export_file("*.scn") var buff_scene
+@export_file("*.tscn") var buff_scene
 @export var buff: Buff
 var _blinking: bool = false
 var _base_modulate: Color

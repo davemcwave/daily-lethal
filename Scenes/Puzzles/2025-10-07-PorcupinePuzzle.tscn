@@ -1,0 +1,22 @@
+[gd_scene load_steps=10 format=3 uid="uid://eu8eitbukbt"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_whmn4"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/porcupine.png" id="2_jmy1p"]
+[ext_resource type="PackedScene" path="res://Scenes/InspirationCard.tscn" id="3_x3s1g"]
+[ext_resource type="PackedScene" path="res://Scenes/HeartbeatCard.tscn" id="4_goqta"]
+[ext_resource type="PackedScene" path="res://Scenes/ExchangeCard.tscn" id="5_xuyhv"]
+[ext_resource type="PackedScene" path="res://Scenes/SnipeCard.tscn" id="6_p85r3"]
+[ext_resource type="PackedScene" path="res://Scenes/MendCard.tscn" id="7_ftd01"]
+[ext_resource type="PackedScene" path="res://Scenes/BargainCard.tscn" id="8_i7djd"]
+[ext_resource type="PackedScene" path="res://Scenes/FangCard.tscn" id="9_xj46d"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_whmn4")
+puzzle_date = "2025-10-07"
+previous_puzzle_scene = "uid://l4mib1pmr8cj"
+next_puzzle_scene = "uid://dpxfygrevu6fn"
+enemy_health = 12
+enemy_name = "Porcupine"
+enemy_icon_texture = ExtResource("2_jmy1p")
+player_energy = 6
+card_scenes = [ExtResource("3_x3s1g"), ExtResource("4_goqta"), ExtResource("5_xuyhv"), ExtResource("6_p85r3"), ExtResource("7_ftd01"), ExtResource("8_i7djd"), ExtResource("9_xj46d")]

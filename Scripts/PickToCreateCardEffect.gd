@@ -9,7 +9,7 @@ class_name PickToCreateCardEffect
 func apply() -> bool:
 	cards_choose_area.set_action_name("Add to hand")
 	cards_choose_area.set_max_card_choose_amount(max_pick_amount)
-	var copy_to_hand_action = load("res://Scenes/CardsChooseAreaCopyToHandAction.scn").instantiate()
+	var copy_to_hand_action = load("res://Scenes/CardsChooseAreaCopyToHandAction.tscn").instantiate()
 	cards_choose_area.set_cards_choose_area_action(copy_to_hand_action)
 	
 	card_creator.set_card_scenes(card_scenes)

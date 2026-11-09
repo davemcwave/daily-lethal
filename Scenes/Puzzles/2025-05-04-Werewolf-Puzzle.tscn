@@ -1,0 +1,22 @@
+[gd_scene load_steps=8 format=3 uid="uid://o4msbmfsgm6d"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_wvjjf"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/ww-removebg-preview.png" id="2_7wuii"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="3_scdit"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="4_pwug1"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="5_6d4d1"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="6_rbfqe"]
+[ext_resource type="PackedScene" path="res://Scenes/SlashCard.tscn" id="7_vwmdo"]
+
+[node name="Puzzle" type="Node"]
+script = ExtResource("1_wvjjf")
+puzzle_date = "2025-05-04"
+previous_puzzle_scene = "uid://bjplnuf2sgvrr"
+next_puzzle_scene = "uid://cp3kiv3r56uxj"
+enemy_health = 22
+enemy_name = "Werewolf"
+enemy_icon_texture = ExtResource("2_7wuii")
+player_health = 1
+player_energy = 7
+card_scenes = [ExtResource("3_scdit"), ExtResource("4_pwug1"), ExtResource("5_6d4d1"), ExtResource("6_rbfqe"), ExtResource("7_vwmdo")]
+card_solution = [ExtResource("3_scdit"), ExtResource("4_pwug1"), ExtResource("4_pwug1"), ExtResource("6_rbfqe"), ExtResource("5_6d4d1"), ExtResource("7_vwmdo")]

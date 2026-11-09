@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhg3ikvqv8jlv"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_3m1ru"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/leeta-256x256.svg" id="2_wpxfk"]
+[ext_resource type="PackedScene" path="res://Scenes/TraceCard.tscn" id="3_ov6dp"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="4_bu2ay"]
+[ext_resource type="PackedScene" path="res://Scenes/SparkCard.tscn" id="5_s7pwf"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_3m1ru")
+puzzle_date = "2026-02-11"
+previous_puzzle_scene = "uid://c7samjlgaman5"
+next_puzzle_scene = "uid://cp1f4oee2x11q"
+enemy_health = 20
+enemy_name = "Cockatrice"
+enemy_icon_texture = ExtResource("2_wpxfk")
+player_health = 20
+player_energy = 6
+card_scenes = [ExtResource("3_ov6dp"), ExtResource("4_bu2ay"), ExtResource("5_s7pwf")]

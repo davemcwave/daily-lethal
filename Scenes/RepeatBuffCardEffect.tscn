@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://benby4luqft1e"]
+
+[ext_resource type="Script" path="res://Scripts/RepeatCardEffect.gd" id="1_gj4vp"]
+
+[node name="RepeatCardEffect" type="Node2D"]
+script = ExtResource("1_gj4vp")
+buff_scene = "uid://dqnla4cphkbp6"
+effect_name = "Repeat"
+effect_description = "Repeats the last card's effect"

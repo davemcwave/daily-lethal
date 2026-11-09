@@ -1,0 +1,21 @@
+[gd_scene load_steps=9 format=3 uid="uid://d1m18018ij06j"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_82q0h"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/owlbear.png" id="2_o3iug"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="3_g540h"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="4_46trq"]
+[ext_resource type="PackedScene" path="res://Scenes/CapacitorCard.tscn" id="5_qvmxj"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="6_lfmp0"]
+[ext_resource type="PackedScene" path="res://Scenes/FangCard.tscn" id="7_6k6wn"]
+[ext_resource type="PackedScene" path="res://Scenes/CauterizeCard.tscn" id="8_ejui7"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_82q0h")
+puzzle_date = "2025-12-12"
+previous_puzzle_scene = "uid://bq5dvwvfq64hq"
+enemy_health = 40
+enemy_name = "Owlbear"
+enemy_icon_texture = ExtResource("2_o3iug")
+player_health = 5
+player_energy = 13
+card_scenes = [ExtResource("3_g540h"), ExtResource("4_46trq"), ExtResource("5_qvmxj"), ExtResource("6_lfmp0"), ExtResource("7_6k6wn"), ExtResource("8_ejui7")]

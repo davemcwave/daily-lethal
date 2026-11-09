@@ -1,0 +1,23 @@
+[gd_scene load_steps=8 format=3 uid="uid://bxpxusq3rjfg3"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_x2s6s"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/lich.png" id="2_nm6tj"]
+[ext_resource type="PackedScene" path="res://Scenes/ExchangeCard.tscn" id="3_u7ov5"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="4_d6nk1"]
+[ext_resource type="PackedScene" path="res://Scenes/MendCard.tscn" id="5_obne4"]
+[ext_resource type="PackedScene" path="res://Scenes/HeartbeatCard.tscn" id="6_sfrwb"]
+[ext_resource type="PackedScene" path="res://Scenes/InspirationCard.tscn" id="7_qp1w3"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_x2s6s")
+puzzle_date = "2025-09-25"
+previous_puzzle_scene = "uid://djgtyi7n3gwf8"
+next_puzzle_scene = "uid://dha1hnci1jm3h"
+enemy_health = 12
+enemy_name = "Lich"
+enemy_icon_texture = ExtResource("2_nm6tj")
+player_health = 7
+player_energy = 6
+card_scenes = [ExtResource("3_u7ov5"), ExtResource("4_d6nk1"), ExtResource("4_d6nk1"), ExtResource("4_d6nk1"), ExtResource("5_obne4"), ExtResource("6_sfrwb"), ExtResource("7_qp1w3")]
+dialogue_first = "Enemy"
+dialogue_lines = ["[b][shake rate=2.0 level=1 connected=1]I'm going to kill you in 1 turn.[/shake][/b]", "[b][shake rate=2.0 level=1 connected=1]You're going to kill me, Grim Reaper? Do you know how long \"eternity\" is? I don't die.[/shake][/b]"]

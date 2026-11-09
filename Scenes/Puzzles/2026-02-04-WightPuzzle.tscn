@@ -1,0 +1,21 @@
+[gd_scene load_steps=9 format=3 uid="uid://0btrof7mwvsn"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_v4ucj"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/leeta-256x256.svg" id="2_xjph7"]
+[ext_resource type="PackedScene" path="res://Scenes/BerserkCard.tscn" id="3_pf5tu"]
+[ext_resource type="PackedScene" path="res://Scenes/DrainCard.tscn" id="4_k2q8c"]
+[ext_resource type="PackedScene" path="res://Scenes/FlurryCard.tscn" id="5_tl24x"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="6_ww8cr"]
+[ext_resource type="PackedScene" path="res://Scenes/SharpenCard.tscn" id="7_x5ird"]
+[ext_resource type="PackedScene" path="res://Scenes/TargetCard.tscn" id="8_8ltl6"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_v4ucj")
+puzzle_date = "2026-02-04"
+previous_puzzle_scene = "uid://b2nom0vo7m7p8"
+next_puzzle_scene = "uid://caxhwp4066cbx"
+enemy_health = 73
+enemy_name = "Wight"
+enemy_icon_texture = ExtResource("2_xjph7")
+player_energy = 15
+card_scenes = [ExtResource("3_pf5tu"), ExtResource("4_k2q8c"), ExtResource("4_k2q8c"), ExtResource("5_tl24x"), ExtResource("6_ww8cr"), ExtResource("7_x5ird"), ExtResource("8_8ltl6")]

@@ -1,0 +1,22 @@
+[gd_scene load_steps=10 format=3 uid="uid://dpxfygrevu6fn"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_lf8w2"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/fiend.png" id="2_oefix"]
+[ext_resource type="PackedScene" path="res://Scenes/BargainCard.tscn" id="3_ijiuk"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="4_h1iet"]
+[ext_resource type="PackedScene" path="res://Scenes/PotionCard.tscn" id="5_0w3ns"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="6_jpgpp"]
+[ext_resource type="PackedScene" path="res://Scenes/SlashCard.tscn" id="7_alxil"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="8_eic4w"]
+[ext_resource type="PackedScene" path="res://Scenes/FangCard.tscn" id="9_ohdyo"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_lf8w2")
+puzzle_date = "2025-10-08"
+previous_puzzle_scene = "uid://eu8eitbukbt"
+next_puzzle_scene = "uid://bphi8p1dc13gg"
+enemy_health = 12
+enemy_name = "Fiend"
+enemy_icon_texture = ExtResource("2_oefix")
+player_health = 4
+card_scenes = [ExtResource("3_ijiuk"), ExtResource("4_h1iet"), ExtResource("5_0w3ns"), ExtResource("6_jpgpp"), ExtResource("7_alxil"), ExtResource("8_eic4w"), ExtResource("9_ohdyo")]

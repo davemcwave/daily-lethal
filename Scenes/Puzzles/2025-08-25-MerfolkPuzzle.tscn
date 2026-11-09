@@ -1,0 +1,22 @@
+[gd_scene load_steps=10 format=3 uid="uid://457elgs8i6wt"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_jjj6t"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/merfolk.png" id="2_cvata"]
+[ext_resource type="PackedScene" path="res://Scenes/PotionCard.tscn" id="3_devug"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="4_hprat"]
+[ext_resource type="PackedScene" path="res://Scenes/HeartbeatCard.tscn" id="5_jwky2"]
+[ext_resource type="PackedScene" path="res://Scenes/EmptyfistCard.tscn" id="6_3jo0g"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="7_nq08p"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="8_ss2iv"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="9_l21g4"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_jjj6t")
+puzzle_date = "2025-08-25"
+previous_puzzle_scene = "uid://c2ga6r7ayntgd"
+next_puzzle_scene = "uid://bqhm2wtcf7auo"
+enemy_health = 16
+enemy_name = "Merfolk"
+enemy_icon_texture = ExtResource("2_cvata")
+player_energy = 6
+card_scenes = [ExtResource("3_devug"), ExtResource("4_hprat"), ExtResource("5_jwky2"), ExtResource("6_3jo0g"), ExtResource("7_nq08p"), ExtResource("8_ss2iv"), ExtResource("9_l21g4")]

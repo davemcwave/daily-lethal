@@ -1,0 +1,23 @@
+[gd_scene load_steps=8 format=3 uid="uid://87i3vpxdai3o"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_mk4ls"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/monk.png" id="2_gk5g1"]
+[ext_resource type="PackedScene" path="res://Scenes/EmptyfistCard.tscn" id="3_hc5m4"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="4_4o3bv"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="5_ris2q"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="6_0c25b"]
+[ext_resource type="PackedScene" path="res://Scenes/ExchangeCard.tscn" id="7_52xlw"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_mk4ls")
+puzzle_date = "2025-11-28"
+previous_puzzle_scene = "uid://1r42fxd26mv"
+next_puzzle_scene = "uid://dn63lkrvd1gj5"
+enemy_health = 3
+enemy_name = "Monk"
+enemy_icon_texture = ExtResource("2_gk5g1")
+player_health = 13
+player_energy = 13
+card_scenes = [ExtResource("3_hc5m4"), ExtResource("4_4o3bv"), ExtResource("4_4o3bv"), ExtResource("5_ris2q"), ExtResource("6_0c25b"), ExtResource("7_52xlw"), ExtResource("7_52xlw")]
+dialogue_first = "Enemy"
+dialogue_lines = ["[b][shake rate=2.0 level=1 connected=1]................................................[/shake][/b]", "[b][shake rate=2.0 level=1 connected=1]Grim Reaper. How many must you kill to keep the balance?[/shake][/b]"]

@@ -1,0 +1,148 @@
+[gd_scene load_steps=9 format=3 uid="uid://cotgwxgvlus2o"]
+
+[ext_resource type="FontFile" path="res://Assets/Fonts/Quicksand/static/Quicksand-Bold.ttf" id="1_tr7eq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kucni"]
+bg_color = Color(0.54902, 0.00392157, 0.152941, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g080r"]
+bg_color = Color(0.763655, 0.325858, 9.62615e-08, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_njmxi"]
+bg_color = Color(0, 0.55, 0.0641667, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 1
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6uhfh"]
+bg_color = Color(0.55, 0, 0.55, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 1
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jxqst"]
+bg_color = Color(0, 0.164706, 0.54902, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 1
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ray30"]
+bg_color = Color(0.763655, 0.325858, 9.62615e-08, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 1
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4mth7"]
+bg_color = Color(0, 0.164706, 0.54902, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 1
+shadow_offset = Vector2(1, 1)
+
+[node name="CardEffectButtonsContainer" type="ScrollContainer"]
+custom_minimum_size = Vector2(200, 150)
+horizontal_scroll_mode = 0
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 2
+
+[node name="DealDamageCardEffectButton" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(100, 25)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_tr7eq")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_kucni")
+text = "Deal Damage"
+
+[node name="AddBuffCardEffectButton" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(100, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("1_tr7eq")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_g080r")
+text = "Add Buff"
+
+[node name="HealCardEffectButton" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(100, 25)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_tr7eq")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_njmxi")
+text = "Heal"
+
+[node name="DiscardCardEffectButton" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(100, 25)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_tr7eq")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_6uhfh")
+text = "Discard"
+
+[node name="TrashCardEffectButton" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(100, 25)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_tr7eq")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_6uhfh")
+text = "Trash
+"
+
+[node name="ReclaimCardEffectButton" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(100, 25)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_tr7eq")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_6uhfh")
+text = "Reclaim"
+
+[node name="EnergyCardEffectButton" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(100, 25)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_tr7eq")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_jxqst")
+text = "Gain Energy"
+
+[node name="IncreaseDamageCardEffectButton" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(100, 25)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_tr7eq")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_ray30")
+text = "Increase Damage"
+
+[node name="SwapHealthAndEnergyCardEffectButton" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(100, 25)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_tr7eq")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_4mth7")
+text = "Swap 
+Health & Energy"

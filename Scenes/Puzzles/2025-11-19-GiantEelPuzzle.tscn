@@ -1,0 +1,23 @@
+[gd_scene load_steps=10 format=3 uid="uid://jhkcfktkposw"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_jfxri"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/giant-eel.png" id="2_8rf02"]
+[ext_resource type="PackedScene" path="res://Scenes/EmptyfistCard.tscn" id="3_ckq86"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="4_4ca6v"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="5_ccbxe"]
+[ext_resource type="PackedScene" path="res://Scenes/LungeCard.tscn" id="6_tjq6q"]
+[ext_resource type="PackedScene" path="res://Scenes/BargainCard.tscn" id="7_t1kyc"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="8_imdw4"]
+[ext_resource type="PackedScene" path="res://Scenes/VenomCard.tscn" id="9_rwj3g"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_jfxri")
+puzzle_date = "2025-11-19"
+previous_puzzle_scene = "uid://ca7ufyoy6kd43"
+next_puzzle_scene = "uid://bevd53grtuqj"
+enemy_health = 20
+enemy_name = "Giant Eel"
+enemy_icon_texture = ExtResource("2_8rf02")
+player_health = 1
+player_energy = 4
+card_scenes = [ExtResource("3_ckq86"), ExtResource("4_4ca6v"), ExtResource("5_ccbxe"), ExtResource("6_tjq6q"), ExtResource("7_t1kyc"), ExtResource("8_imdw4"), ExtResource("9_rwj3g")]

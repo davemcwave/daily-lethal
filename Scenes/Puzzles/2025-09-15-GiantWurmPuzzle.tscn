@@ -1,0 +1,22 @@
+[gd_scene load_steps=10 format=3 uid="uid://cqtyke51qpi32"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_gm2xm"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/giant-wurm.png" id="2_as4ri"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="3_th8iy"]
+[ext_resource type="PackedScene" path="res://Scenes/EmptyfistCard.tscn" id="4_1dput"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="5_5fd2s"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="6_3n8q2"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="7_dw3ra"]
+[ext_resource type="PackedScene" path="res://Scenes/SlashCard.tscn" id="8_qm4yi"]
+[ext_resource type="PackedScene" path="res://Scenes/VenomCard.tscn" id="9_523va"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_gm2xm")
+puzzle_date = "2025-09-15"
+previous_puzzle_scene = "uid://cqn3vfp1amox7"
+next_puzzle_scene = "uid://cl507nkrwaa3n"
+enemy_health = 43
+enemy_name = "Giant Wurm"
+enemy_icon_texture = ExtResource("2_as4ri")
+player_energy = 10
+card_scenes = [ExtResource("3_th8iy"), ExtResource("4_1dput"), ExtResource("5_5fd2s"), ExtResource("6_3n8q2"), ExtResource("7_dw3ra"), ExtResource("8_qm4yi"), ExtResource("9_523va")]

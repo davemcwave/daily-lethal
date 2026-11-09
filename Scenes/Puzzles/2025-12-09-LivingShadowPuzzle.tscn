@@ -1,0 +1,20 @@
+[gd_scene load_steps=6 format=3 uid="uid://skavpev0h3ie"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_gweqp"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/living-shadow.png" id="2_4j65r"]
+[ext_resource type="PackedScene" path="res://Scenes/CauterizeCard.tscn" id="3_wkr43"]
+[ext_resource type="PackedScene" path="res://Scenes/HeartbeatCard.tscn" id="4_mg74x"]
+[ext_resource type="PackedScene" path="res://Scenes/MendCard.tscn" id="5_uxpoc"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_gweqp")
+puzzle_date = "2025-12-09"
+previous_puzzle_scene = "uid://djq377ar2fnho"
+next_puzzle_scene = "uid://dc1fyk3gb0c0w"
+enemy_health = 7
+enemy_name = "Living Shadow"
+enemy_icon_texture = ExtResource("2_4j65r")
+player_health = 2
+player_energy = 7
+card_scenes = [ExtResource("3_wkr43"), ExtResource("4_mg74x"), ExtResource("5_uxpoc"), ExtResource("5_uxpoc"), ExtResource("5_uxpoc"), ExtResource("5_uxpoc")]
+card_solution = [ExtResource("5_uxpoc"), ExtResource("3_wkr43"), ExtResource("5_uxpoc"), ExtResource("5_uxpoc"), ExtResource("5_uxpoc"), ExtResource("4_mg74x")]

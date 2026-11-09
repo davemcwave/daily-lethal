@@ -1,0 +1,20 @@
+[gd_scene load_steps=9 format=3 uid="uid://w8nck21rq80i"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_gggo8"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/leeta-256x256.svg" id="2_g1uab"]
+[ext_resource type="PackedScene" path="res://Scenes/DrainCard.tscn" id="3_uqeg6"]
+[ext_resource type="PackedScene" path="res://Scenes/PotionCard.tscn" id="4_6ibif"]
+[ext_resource type="PackedScene" path="res://Scenes/BerserkCard.tscn" id="5_kcnxx"]
+[ext_resource type="PackedScene" path="res://Scenes/ReverberateCard.tscn" id="6_h6bjn"]
+[ext_resource type="PackedScene" path="res://Scenes/HeartbeatCard.tscn" id="7_wbxf4"]
+[ext_resource type="PackedScene" path="res://Scenes/FangCard.tscn" id="8_q6q2k"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_gggo8")
+puzzle_date = "2026-02-02"
+previous_puzzle_scene = "uid://qf7t82wuwtyd"
+enemy_health = 33
+enemy_name = "Carnivorous Plant"
+enemy_icon_texture = ExtResource("2_g1uab")
+player_energy = 13
+card_scenes = [ExtResource("3_uqeg6"), ExtResource("4_6ibif"), ExtResource("5_kcnxx"), ExtResource("6_h6bjn"), ExtResource("7_wbxf4"), ExtResource("8_q6q2k"), ExtResource("8_q6q2k")]

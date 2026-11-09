@@ -1,0 +1,21 @@
+[gd_scene load_steps=9 format=3 uid="uid://dxgkjemm4qabj"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_uuvri"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/chupacabra.png" id="2_s14rr"]
+[ext_resource type="PackedScene" path="res://Scenes/HeartbeatCard.tscn" id="3_ww4rh"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="4_24fjk"]
+[ext_resource type="PackedScene" path="res://Scenes/MendCard.tscn" id="5_ado54"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="6_jlxw3"]
+[ext_resource type="PackedScene" path="res://Scenes/ShieldCard.tscn" id="7_gyjhk"]
+[ext_resource type="PackedScene" path="res://Scenes/TargetCard.tscn" id="8_goji6"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_uuvri")
+puzzle_date = "2025-09-29"
+previous_puzzle_scene = "uid://dha1hnci1jm3h"
+next_puzzle_scene = "uid://bodcrw8i4ntmt"
+enemy_health = 16
+enemy_name = "Chupacabra"
+enemy_icon_texture = ExtResource("2_s14rr")
+player_energy = 6
+card_scenes = [ExtResource("3_ww4rh"), ExtResource("3_ww4rh"), ExtResource("4_24fjk"), ExtResource("5_ado54"), ExtResource("6_jlxw3"), ExtResource("7_gyjhk"), ExtResource("8_goji6")]

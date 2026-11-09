@@ -1,0 +1,18 @@
+[gd_scene load_steps=6 format=3 uid="uid://d055b5megp6x5"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_1qh18"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/dust-droid.png" id="2_0gjv7"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="3_svkwt"]
+[ext_resource type="PackedScene" path="res://Scenes/SurgeCard.tscn" id="4_ny6it"]
+[ext_resource type="PackedScene" path="res://Scenes/ThunderboltCard.tscn" id="5_6jlvt"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_1qh18")
+puzzle_date = "2025-08-15"
+previous_puzzle_scene = "uid://cduowjmbm358o"
+next_puzzle_scene = "uid://bsqt2q44eqy5q"
+enemy_health = 15
+enemy_name = "Dust Droid"
+enemy_icon_texture = ExtResource("2_0gjv7")
+player_energy = 3
+card_scenes = [ExtResource("3_svkwt"), ExtResource("3_svkwt"), ExtResource("4_ny6it"), ExtResource("5_6jlvt"), ExtResource("3_svkwt"), ExtResource("3_svkwt"), ExtResource("4_ny6it")]

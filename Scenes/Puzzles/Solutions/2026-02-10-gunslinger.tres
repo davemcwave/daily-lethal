@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="CardSolutionResource" load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://Scenes/SnipeCard.scn" id="1_rfxfk"]
-[ext_resource type="PackedScene" path="res://Scenes/HauntCard.scn" id="2_q71bj"]
-[ext_resource type="PackedScene" path="res://Scenes/TargetCard.scn" id="3_65ngv"]
-[ext_resource type="PackedScene" path="res://Scenes/TributeCard.scn" id="4_u2j72"]
-[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.scn" id="5_ypj3p"]
+[ext_resource type="PackedScene" path="res://Scenes/SnipeCard.tscn" id="1_rfxfk"]
+[ext_resource type="PackedScene" path="res://Scenes/HauntCard.tscn" id="2_q71bj"]
+[ext_resource type="PackedScene" path="res://Scenes/TargetCard.tscn" id="3_65ngv"]
+[ext_resource type="PackedScene" path="res://Scenes/TributeCard.tscn" id="4_u2j72"]
+[ext_resource type="PackedScene" path="res://Scenes/ReviveCard.tscn" id="5_ypj3p"]
 [ext_resource type="Script" path="res://Scripts/CardSolutionResource.gd" id="6_r7li2"]
 
 [resource]

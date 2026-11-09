@@ -1,0 +1,20 @@
+[gd_scene load_steps=7 format=3 uid="uid://djgtyi7n3gwf8"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_kdg02"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/firebug.svg" id="2_chx2r"]
+[ext_resource type="PackedScene" path="res://Scenes/IgniteCard.tscn" id="3_nxljk"]
+[ext_resource type="PackedScene" path="res://Scenes/BargainCard.tscn" id="4_laxrd"]
+[ext_resource type="PackedScene" path="res://Scenes/ReboundCard.tscn" id="5_v5inx"]
+[ext_resource type="PackedScene" path="res://Scenes/OverloadCard.tscn" id="6_hrwtw"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_kdg02")
+puzzle_date = "2025-09-24"
+previous_puzzle_scene = "uid://elwudqt6mvud"
+next_puzzle_scene = "uid://bxpxusq3rjfg3"
+enemy_health = 45
+enemy_name = "Firebug"
+enemy_icon_texture = ExtResource("2_chx2r")
+player_health = 10
+player_energy = 8
+card_scenes = [ExtResource("3_nxljk"), ExtResource("4_laxrd"), ExtResource("5_v5inx"), ExtResource("5_v5inx"), ExtResource("5_v5inx"), ExtResource("6_hrwtw"), ExtResource("3_nxljk")]

@@ -1,0 +1,20 @@
+[gd_scene load_steps=8 format=3 uid="uid://bcetax4843ich"]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle.gd" id="1_p7wuy"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/cloaker.png" id="2_hieiu"]
+[ext_resource type="PackedScene" path="res://Scenes/MartyrCard.tscn" id="3_6d6vf"]
+[ext_resource type="PackedScene" path="res://Scenes/PoundCard.tscn" id="4_re64g"]
+[ext_resource type="PackedScene" path="res://Scenes/LungeCard.tscn" id="5_s8an0"]
+[ext_resource type="PackedScene" path="res://Scenes/RageCard.tscn" id="6_bd25u"]
+[ext_resource type="PackedScene" path="res://Scenes/EchoCard.tscn" id="7_hftk8"]
+
+[node name="TestPuzzle" type="Node"]
+script = ExtResource("1_p7wuy")
+puzzle_date = "2025-06-09"
+previous_puzzle_scene = "uid://dljpqovqutjqf"
+next_puzzle_scene = "uid://cyqai10g1njux"
+enemy_health = 14
+enemy_name = "Cloaker"
+enemy_icon_texture = ExtResource("2_hieiu")
+card_scenes = [ExtResource("3_6d6vf"), ExtResource("4_re64g"), ExtResource("5_s8an0"), ExtResource("6_bd25u"), ExtResource("7_hftk8"), ExtResource("5_s8an0")]
+card_solution = [ExtResource("6_bd25u"), ExtResource("3_6d6vf"), ExtResource("5_s8an0"), ExtResource("5_s8an0"), ExtResource("7_hftk8"), ExtResource("4_re64g")]
