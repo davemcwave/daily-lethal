@@ -5,6 +5,8 @@ class_name CreateCardCardEffect
 @onready var hand: Hand = get_tree().get_root().get_node('Scene/HandScrollContainer/Hand')
 
 func apply() -> bool:
+	if card_to_create_scene == null:
+		return super.apply()  # no card chosen: the effect does nothing
 	var card: Card = card_to_create_scene.instantiate()
 	hand.add_card(card)
 	await hand.reorder_cards_by_x_position()

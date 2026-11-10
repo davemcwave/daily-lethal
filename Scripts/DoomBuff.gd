@@ -33,3 +33,7 @@ func activate(context: Dictionary = {}) -> bool:
 
 func should_show_unlimited_panel() -> bool:
 	return false
+
+## X in the text: turns_left.
+func get_description_number() -> int:
+	return turns_left

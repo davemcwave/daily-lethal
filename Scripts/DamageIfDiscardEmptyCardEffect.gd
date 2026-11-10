@@ -14,3 +14,6 @@ func apply() -> bool:
 	var apply_result: bool = await super.apply()
 	set_damage_amount(previous_damage_amount)
 	return apply_result
+
+func get_preview_damage_amount() -> int:
+	return damage_amount if discard_panel.is_empty() else 0

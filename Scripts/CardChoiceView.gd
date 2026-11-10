@@ -25,7 +25,9 @@ func set_card_preview(card: Card) -> void:
 	$CardPreview/IconPanel/Icon.set_texture(card.get_icon_texture())
 	$CardPreview/IconPanel.get("theme_override_styles/panel").bg_color = card.get_background_color()
 	$TitleText.get("theme_override_styles/normal").bg_color = card.get_background_color()
-	
+	if $CardPreview.has_method("_fit_text"):
+		$CardPreview._fit_text.call_deferred()  # long names and descriptions shrink to fit
+
 	if card.has_gradient_background():
 		set_gradient_background_texture(card.get_gradient_background_texture())
 	else:
@@ -43,8 +45,11 @@ func set_card_preview(card: Card) -> void:
 		card_effect_choice_button.set_button_text(card_effect.get_effect_short_description())
 		card_effect_choice_button.set_card_effect(card_effect)
 		
-		if card_effect.get_effect_color() != null:
-			card_effect_choice_button.set_color(card_effect.get_effect_color())
+		# Effects without a color of their own (black, the default) use the card's.
+		var button_color: Color = card_effect.get_effect_color()
+		if button_color == Color(0, 0, 0, 1) or button_color.a == 0.0:
+			button_color = card.get_background_color()
+		card_effect_choice_button.set_color(button_color)
 		
 		$CardEffectChoicesContainer.add_child(card_effect_choice_button)
 		card_effect_choice_button.connect("pressed", select_card_effect.bind(card_effect_choice_button.get_card_effect()))

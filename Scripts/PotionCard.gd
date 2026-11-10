@@ -8,8 +8,11 @@ func play():
 	scene.increment_card_count()
 	scene.add_card_played(self)
 	set_state(State.Playing)
+	if not pay_cost_after_effects:
+		pay_cost(energy_cost)
 	await apply_card_effects()
-	pay_cost(energy_cost)
+	if pay_cost_after_effects:
+		pay_cost(energy_cost)
 	#scene.set_last_card_effects(self)
 	scene.set_last_card_effects_directly(self, [$PlayerChooseEffectCardEffect, ])
 	await buffs_container.activate_buffs(Buff.ActivationType.OnCardPlay)

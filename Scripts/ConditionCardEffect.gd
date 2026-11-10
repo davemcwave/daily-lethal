@@ -1,7 +1,7 @@
 extends CardEffect
 class_name ConditionCardEffect
 
-@export_enum("Health", "Energy", "CardsPlayed", "DicardPile") var condition_object: String = "Health"
+@export_enum("Health", "Energy", "CardsPlayed", "DiscardPile") var condition_object: String = "Health"
 @export var threshold_amount: int = 3
 @export_enum("LessThan", "GreaterThan", "EqualTo") var condition: String = "LessThan"
 
@@ -23,8 +23,10 @@ func apply() -> bool:
 		condition_function = energy.get_energy_amount
 	elif condition_object == "CardsPlayed":
 		condition_function = cards_played.get_cards_played_count
-	elif condition_object == "DiscardPile":
+	elif condition_object in ["DiscardPile", "DicardPile"]:  # old misspelling still works
 		condition_function = discard_panel.get_card_count
+	if not condition_function.is_valid() or get_child_count() == 0 or not (get_child(0) is CardEffect):
+		return super.apply()  # nothing to check, or no inner effect
 	
 	var child_card_effect: CardEffect = get_child(0)
 	if (
@@ -32,6 +34,6 @@ func apply() -> bool:
 		(condition == "GreaterThan" and condition_function.call() > threshold_amount) or \
 		(condition == "EqualTo" and condition_function.call() == threshold_amount)
 	):
-		child_card_effect.apply()
+		await child_card_effect.apply()
 
 	return super.apply()

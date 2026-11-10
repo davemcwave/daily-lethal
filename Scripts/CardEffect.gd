@@ -24,8 +24,12 @@ func get_wait_for_effect_applied() -> bool:
 func get_card_effect_panel() -> PackedScene:
 	return effect_panel
 	
+## The effect in a few words (the Pick 1 effect buttons). Effects without their
+## own get one made from their type and settings ("Heal 3", "Draw 2").
 func get_effect_short_description() -> String:
-	return effect_short_description
+	if not effect_short_description.strip_edges().is_empty():
+		return effect_short_description
+	return EffectRegistry.short_text(self)
 	
 func does_require_player_input() -> bool:
 	return requires_player_input

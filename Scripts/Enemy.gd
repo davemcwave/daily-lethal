@@ -45,6 +45,25 @@ func _ready():
 	
 	original_material = $EnemyIcon.material.duplicate()
 
+	# All the enemy's statuses in one column, like yours: debuffs on top, its buffs
+	# (Retaliate, Corrode) right under them, in the order they react.
+	var debuffs: Control = $DebuffContainer
+	debuffs.sort_children.connect(_stack_status_columns)
+	debuffs.child_exiting_tree.connect(func(_c): _stack_status_columns.call_deferred())
+	_stack_status_columns()
+
+## Puts the enemy's buffs column right under its debuffs column (both scenes).
+func _stack_status_columns() -> void:
+	var debuffs: Control = $DebuffContainer
+	var buffs: Control = $EnemyBuffsContainer
+	buffs.size.x = DebuffPanel.WIDTH  # its buffs as wide as every other status box
+	var shown :=debuffs.get_children().filter(func(c): return c is Control and c.visible and not c.is_queued_for_deletion())
+	var height := 0.0
+	if not shown.is_empty():
+		var gap: int = debuffs.get_theme_constant("v_separation") if debuffs is GridContainer else debuffs.get_theme_constant("separation")
+		height = debuffs.get_combined_minimum_size().y + gap
+	buffs.position = Vector2(debuffs.position.x, debuffs.position.y + height)
+
 func get_difficulty() -> String:
 	return difficulty
 
@@ -132,6 +151,10 @@ func add_debuff(new_debuff: Debuff) -> void:
 func add_buff(new_buff: Buff) -> void:
 	if new_buff.get_parent() != self:
 		add_child(new_buff)
+	# A buff put on the enemy mid-play (by a card) starts reacting with the next
+	# card, like yours do (activate_on_play_buffs).
+	if scene != null:
+		new_buff.set_meta(Debuff.ADDED_ON_PLAY, scene.get_card_count())
 			
 	new_buff.set_target(self)
 			
@@ -177,6 +200,8 @@ func activate_on_play_buffs() -> void:
 	animating = true
 	for buff: Buff in get_buffs().duplicate():
 		if is_instance_valid(buff) and not buff.is_queued_for_deletion() and buff.is_activated_on_card_play():
+			if scene != null and buff.get_meta(Debuff.ADDED_ON_PLAY, -1) == scene.get_card_count() and scene.get_card_count() > 0:
+				continue  # put on during this play: it waits for the next card
 			await get_tree().create_timer(0.25).timeout
 			if is_instance_valid(buff) and not buff.is_queued_for_deletion():
 				await buff.activate()
@@ -191,6 +216,18 @@ func activate_on_hurt_buffs() -> void:
 				await buff.activate()
 	animating = false
 	
+## React step of an attack (after it has landed): the enemy's buffs that respond
+## to being attacked (Retaliate hurts you, Corrode trashes the attacker), once per
+## attack effect. context["damage_dealt"] is what the attack did.
+func activate_react_buffs(context: Dictionary) -> void:
+	animating = true
+	for buff: Buff in get_buffs().duplicate():
+		if is_instance_valid(buff) and not buff.is_queued_for_deletion() and buff.matches_activation_type(Buff.ActivationType.React):
+			await get_tree().create_timer(0.25).timeout
+			if is_instance_valid(buff) and not buff.is_queued_for_deletion():
+				await buff.activate(context)
+	animating = false
+
 func activate_on_hurt_debuffs() -> void:
 	animating = true
 	for debuff in get_debuffs().duplicate():
@@ -203,8 +240,8 @@ func activate_on_card_play_debuffs(do_not_activate: Array = []) -> void:
 	animating = true
 	for debuff: Debuff in get_debuffs().duplicate():
 		if is_instance_valid(debuff) and not debuff.is_queued_for_deletion() and debuff.is_activated_on_card_play():
-			if do_not_activate.has(debuff):
-				continue
+			if do_not_activate.has(debuff) or debuff.get_meta(Debuff.ADDED_ON_PLAY, -1) == scene.get_card_count():
+				continue  # put on by this play's card: it waits for the next card
 			await get_tree().create_timer(0.25).timeout
 			if is_instance_valid(debuff) and not debuff.is_queued_for_deletion():
 				await debuff.activate()
@@ -265,6 +302,10 @@ func get_random_hurt_line() -> String:
 ## animation and game-over check run separately (_finish_hurt) because they wait
 ## for all cards to finish playing, which would deadlock the card awaiting this.
 func hurt(hurt_amount: int, hurt_from_card: bool = true) -> void:
+	# Deal damage step: Vulnerable adds to every hit (each Splinter piece, each Burn
+	# tick), as part of that hit's number.
+	if hurt_from_card and hurt_amount > 0:
+		hurt_amount += get_incoming_damage_bonus()
 	health -= hurt_amount
 
 	create_damage_label(hurt_amount)
@@ -287,6 +328,14 @@ func hurt(hurt_amount: int, hurt_from_card: bool = true) -> void:
 		await activate_on_hurt_debuffs()
 
 	_finish_hurt()
+
+## What the enemy's debuffs add to each hit (Vulnerable: 1 per stack).
+func get_incoming_damage_bonus() -> int:
+	var bonus := 0
+	for debuff in get_debuffs():
+		if is_instance_valid(debuff) and not debuff.is_queued_for_deletion():
+			bonus += debuff.get_incoming_damage_bonus()
+	return bonus
 
 func _finish_hurt() -> void:
 	if health <= 0:

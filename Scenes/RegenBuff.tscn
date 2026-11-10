@@ -5,6 +5,6 @@
 [node name="RegenBuff" type="Node2D"]
 script = ExtResource("1_kwvsl")
 buff_name = "Regen"
-buff_description = "Gain 1 HP after next card is played"
+buff_description = "Gain {heal_amount} HP after [the next card is played|each of the next X cards played]"
 color = Color(0, 0.54902, 0.0627451, 1)
 activated_once_per_turn = true

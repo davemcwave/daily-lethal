@@ -5,7 +5,7 @@
 [node name="ReturnCardToHandBuff" type="Node2D"]
 script = ExtResource("1_eg0ww")
 buff_name = "Return"
-buff_description = "Return next card played to hand"
+buff_description = "Return the next [card|X cards] played to hand"
 activation_type = 5
 color = Color(0.54902, 0, 0.54902, 1)
 activated_once_per_turn = true

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Card Lab - Daily Lethal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="Daily Lethal Card Lab" />
+  <meta property="og:description" content="Build your own cards, test them, and share them with a code." />
+  <meta property="og:image" content="https://playlethal.fun/banner-1200x630.png" />
+  <meta property="og:url" content="https://playlethal.fun/card-lab" />
+  <link rel="icon" href="/Assets/Textures/letha-180x180.png" type="image/png" />
+  <script>
+    // The Card Lab is part of the game: open the desktop web build (it's laid out
+    // for a wide screen) and tell it to start in the Card Lab. It needs a mouse,
+    // so phones and tablets get a message instead. The game makes the same check
+    // (Background.card_lab_available).
+    var touchOnly = false;
+    try {
+      touchOnly = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+        (matchMedia("(pointer: coarse)").matches && !matchMedia("(any-pointer: fine)").matches);
+    } catch (err) {}
+    if (!touchOnly) {
+      location.replace("/desktop/?card_lab=1");
+    }
+  </script>
+  <style>
+    body { background: #1f2c30; color: #fff; font-family: sans-serif; text-align: center; padding: 3rem 16px; line-height: 1.5; }
+    a { color: #ffce4e; }
+    .phone { display: none; }
+    body.touch .phone { display: block; }
+    body.touch .opening { display: none; }
+  </style>
+</head>
+<body>
+  <script>if (touchOnly) document.body.className = "touch";</script>
+  <p class="opening">Opening the Card Lab… <a href="/desktop/?card_lab=1">Click here</a> if nothing happens.</p>
+  <div class="phone">
+    <h1>Card Lab</h1>
+    <p>The Card Lab needs a computer with a mouse. Open <b>playlethal.fun/card-lab</b> there to build your own cards.</p>
+    <p><a href="/">Play today's puzzle</a></p>
+  </div>
+</body>
+</html>

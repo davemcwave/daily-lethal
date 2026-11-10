@@ -5,8 +5,9 @@
 [node name="ChargeBuff" type="Node2D"]
 script = ExtResource("1_irf7u")
 buff_name = "Charge"
-buff_description = "Next attack gains you energy instead of dealing damage"
+buff_description = "Next [attack gains|X attacks gain] you energy instead of dealing damage"
 activation_type = 1
+priority = 3
 color = Color(0.145098, 0.396078, 1, 1)
 activated_once_per_turn = true
 single_turn_repeat = true

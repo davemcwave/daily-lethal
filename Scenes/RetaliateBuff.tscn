@@ -5,7 +5,7 @@
 [node name="RetaliateBuff" type="Node2D"]
 script = ExtResource("1_qgn7n")
 buff_name = "Retaliate"
-buff_description = "Hurts the attacker when attacked"
-activation_type = 2
+buff_description = "Hurts the attacker for X damage when attacked."
+activation_type = 7
 unlimited_uses = true
 color = Color(0, 0.164706, 0.54902, 1)

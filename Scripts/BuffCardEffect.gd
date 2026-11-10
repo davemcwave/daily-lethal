@@ -4,10 +4,11 @@ class_name BuffCardEffect
 @export_file("*.tscn") var buff_scene
 @export var buff_node: Buff = null
 var buff: Buff = null
-@export_enum("Player", "Enemy") var buff_auto_target: String
+@export_enum("Player", "Enemy") var buff_auto_target: String = "Player"  # empty used to mean Player too
 @export var defer_add_until_after_card_play: bool = false
 var buff_color: Color = Color.WHITE
-var buff_params: Dictionary = {}
+## Settings applied to the buff (e.g. {"sharp_count": 3}); custom cards set these.
+@export var buff_params: Dictionary = {}
 var card_lab_template_values: Dictionary = {}
 @export var card_lab_buff_name: String = ""
 @export var card_lab_buff_stacks: int = 1
@@ -27,7 +28,7 @@ func get_effect_name() -> String:
 		return buff.get_buff_name()
 	#
 func get_effect_description() -> String:
-	return buff.get_buff_description()
+	return buff.get_buff_description() if buff != null else ""
 	
 func set_buff_color(new_buff_color: Color) -> void:
 	buff_color = new_buff_color
@@ -67,8 +68,13 @@ func get_buff() -> Buff:
 func reset_buff() -> void:
 	if buff_node != null:
 		buff = buff_node
-	else:
+	elif buff_scene is String and ResourceLoader.exists(buff_scene):
 		buff = load(buff_scene).instantiate()
+	else:
+		# No buff chosen (a custom card left "Choose..."): the effect does nothing.
+		buff = null
+		push_warning("%s: no buff chosen; this effect does nothing" % name)
+		return
 	if buff != null:
 		_apply_params_to_buff(buff, buff_params)
 
@@ -80,6 +86,8 @@ func reset_buff() -> void:
 		buff.set_target(get_tree().get_root().get_node("Scene/Health")) 
 	
 func apply() -> bool:
+	if buff == null:
+		return super.apply()  # no buff chosen
 	audio_handler.play_sfx("AddBuffSFX")
 	audio_handler.increase_pitch_scale("AddBuffSFX", 0.25)
 
@@ -112,15 +120,22 @@ func _deferred_add_enemy_buff(enemy, buff_instance: Buff) -> void:
 func _apply_params_to_buff(target_buff: Buff, params: Dictionary) -> void:
 	if target_buff == null or params.is_empty():
 		return
+	# Only the buff's own plain settings (numbers, true/false, text, colors): card
+	# data must never set a script, node or resource through here.
 	var property_lookup := {}
 	for property in target_buff.get_property_list():
-		property_lookup[property.name] = true
+		if property.usage & PROPERTY_USAGE_SCRIPT_VARIABLE and property.type in [TYPE_INT, TYPE_FLOAT, TYPE_BOOL, TYPE_STRING, TYPE_COLOR]:
+			property_lookup[property.name] = property.type
 
 	for key in params.keys():
 		var value = params[key]
 		if property_lookup.has(key):
+			# Card data comes from JSON: numbers arrive as floats, colors as "#rrggbb".
+			match property_lookup[key]:
+				TYPE_INT:
+					value = int(value)
+				TYPE_COLOR:
+					if value is String:
+						value = Color.html(value)
 			target_buff.set(key, value)
-		else:
-			var setter_name = "set_%s" % key
-			if target_buff.has_method(setter_name):
-				target_buff.call(setter_name, value)
+		# Anything else is ignored (no set_<name>() fallback: that could reach set_script).

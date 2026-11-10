@@ -39,3 +39,16 @@ func activate(context: Dictionary = {}) -> bool:
 	elif activation_type == ActivationType.OnCardPlay:
 		reduce_sharp_count()
 	return super.activate(context)
+
+func preview_attack(context: Dictionary) -> Dictionary:
+	context["current_damage_amount"] += sharp_count
+	return {"op": "+", "value": sharp_count, "name": "sharp"}
+
+## No infinity sign: unlimited_uses only means this buff manages its own count;
+## it counts itself down (Sharp 3 -> 2 -> 1), so it isn't infinite.
+func should_show_unlimited_panel() -> bool:
+	return false
+
+## X in the text: sharp_count.
+func get_description_number() -> int:
+	return sharp_count

@@ -24,6 +24,26 @@ func _ready() -> void:
 		sfx_value_label.text = str(int(hit_sfx.volume_db)) + " dB"
 
 	mute_checkbox.button_pressed = audio_handler.mute_all
+	_add_damage_math_row()
+
+## "Show Damage Math": a row like Mute's, under it (the panel grows to fit).
+func _add_damage_math_row() -> void:
+	var background = get_node_or_null("/root/Background")
+	if background == null:
+		return
+	var mute_row: HBoxContainer = $Panel/VBoxContainer/MuteContainer
+	var row: HBoxContainer = mute_row.duplicate(Node.DUPLICATE_GROUPS | Node.DUPLICATE_SCRIPTS)  # not Mute's signal
+	row.name = "DamageMathContainer"
+	mute_row.add_sibling(row)
+	var box: CheckBox = row.get_node("MuteCheckBox")
+	box.button_pressed = background.show_damage_math
+	box.toggled.connect(func(on: bool): background.set_show_damage_math(on))
+	var label: RichTextLabel = row.get_node("MuteLabel")
+	label.custom_minimum_size.x = 220
+	label.text = "[shake rate=2.0 level=2 connected=1]Show Damage Math[/shake]"
+	var panel: Panel = $Panel
+	panel.offset_top -= 25
+	panel.offset_bottom += 25
 
 func _on_music_slider_value_changed(value: float) -> void:
 	var bg_music = audio_handler.get_node_or_null("BGMusic")

@@ -185,12 +185,17 @@ func set_cards_chosen(new_cards_chosen: Array[Card]) -> void:
 func get_cards_chosen() -> Array[Card]:
 	return cards_chosen
 
+## The hand cards a hand chooser offers: not the card being played (it stays in
+## the hand until it's discarded). Recorded picks index into this list.
+func get_choosable_hand_cards() -> Array:
+	return hand.get_cards().filter(func(c): return c is Card and c.is_in_hand())
+
 func _get_selection_index(card_reference: Card) -> int:
 	if card_reference == null:
 		return -1
 	match populate_cards_type:
 		PopulateCardsType.FromHand:
-			return _find_index_by_reference(hand.get_cards(), card_reference)
+			return _find_index_by_reference(get_choosable_hand_cards(), card_reference)
 		PopulateCardsType.FromDiscard:
 			return _find_index_by_reference(discard_pile.get_cards(), card_reference)
 		PopulateCardsType.FromCreate:

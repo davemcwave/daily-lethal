@@ -143,9 +143,9 @@ expand_mode = 1
 [node name="TutorialButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 104.0
-offset_top = 248.0
+offset_top = 216.0
 offset_right = 224.0
-offset_bottom = 296.0
+offset_bottom = 264.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("6_8um5k")
 theme_override_font_sizes/font_size = 35
@@ -175,9 +175,9 @@ vertical_alignment = 1
 [node name="PlayButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 104.0
-offset_top = 312.0
+offset_top = 272.0
 offset_right = 224.0
-offset_bottom = 360.0
+offset_bottom = 320.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("6_8um5k")
 theme_override_font_sizes/font_size = 35
@@ -204,12 +204,43 @@ fit_content = true
 scroll_active = false
 vertical_alignment = 1
 
+[node name="CardLabButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 328.0
+offset_right = 264.0
+offset_bottom = 376.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_8um5k")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/hover = SubResource("StyleBoxEmpty_fh7cp")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_8e205")
+theme_override_styles/normal = SubResource("StyleBoxFlat_koqhg")
+
+[node name="Text" type="RichTextLabel" parent="CardLabButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("6_xim88")
+theme_override_fonts/bold_font = ExtResource("6_8um5k")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+bbcode_enabled = true
+text = "[shake rate=2.0 level=2 connected=1]Card Lab[/shake]"
+fit_content = true
+scroll_active = false
+vertical_alignment = 1
+
 [node name="DiscordButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 104.0
-offset_top = 376.0
+offset_top = 384.0
 offset_right = 232.0
-offset_bottom = 424.0
+offset_bottom = 432.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("6_8um5k")
 theme_override_font_sizes/font_size = 35
@@ -278,5 +309,6 @@ expand_mode = 1
 
 [connection signal="pressed" from="TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="CardLabButton" to="." method="_on_card_lab_button_pressed"]
 [connection signal="pressed" from="DiscordButton" to="." method="_on_discord_button_pressed"]
 [connection signal="pressed" from="OptionsButton" to="." method="_on_options_button_pressed"]

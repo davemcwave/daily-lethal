@@ -1,0 +1,21 @@
+[
+ {"name": "Lab Strike", "energy": 1, "description": "Deal 3 damage.", "description_template": "Deal {{effect0.damage_amount}} damage.",
+  "colors": ["#C0392B"], "icon": "sword",
+  "effects": [{"type": "DamageCardEffect", "params": {"damage": 3, "target_name": "Enemy", "increase_damage_effect": true, "increase_damage_effect_for_player": false, "increase_damage_multiplier": 1, "modifiable": true}}]},
+ {"name": "Lab Mend", "energy": 0, "description": "Heal 2. Draw 1.", "colors": ["#27AE60", "#2ECC71"], "icon": "Assets/Textures/heart-white.png",
+  "effects": [{"type": "HealCardEffect", "params": {"heal": 2, "target_name": "Player"}}, {"type": "DrawCardEffect", "params": {"count": 1}}]},
+ {"name": "Lab Charge", "energy": 0, "description": "Gain 2 energy. Lose 1 health.", "color": "#F39C12",
+  "effects": [{"type": "EnergyCardEffect", "params": {"energy": 2}}, {"type": "SelfDamageCardEffect", "params": {"damage": 1}}]},
+ {"name": "Lab Guard", "energy": 1, "description": "Block 1.",
+  "effects": [{"type": "BuffCardEffect", "params": {"buff": "Block", "stacks": 1, "target": "Player"}}]},
+ {"name": "Lab Hone", "energy": 1, "description": "Sharp 2.",
+  "effects": [{"type": "BuffCardEffect", "params": {"buff": "Sharp", "stacks": 2, "target": "Player", "sharp_count": 2}}]},
+ {"name": "Lab Toxin", "energy": 1, "description": "Poison 3.",
+  "effects": [{"type": "DebuffCardEffect", "params": {"debuff": "Poison", "stacks": 3}}]},
+ {"name": "Lab Purge", "energy": 0, "description": "Discard 1.",
+  "effects": [{"type": "DiscardCardEffect", "params": {"count": 1}}]},
+ {"name": "Lab Forge", "energy": 1, "description": "Create a Slash.",
+  "effects": [{"type": "CreateCardEffect", "params": {"card_to_create_scene": "res://Scenes/SlashCard.tscn", "card_label": "Slash"}}]},
+ {"name": "Lab Note", "energy": 2, "description": "Just text.",
+  "effects": [{"type": "CustomCardEffect", "params": {"text": "Something happens."}}]}
+]

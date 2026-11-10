@@ -59,6 +59,7 @@ card_effects = [NodePath("HealthBasedDamageCardEffect"), NodePath("ShowAuthorCar
 card_name = "Heartbeat"
 energy_cost = 3
 card_description = "Deal damage equal to your hp"
+pay_cost_after_effects = true
 
 [node name="TitlePanel" type="Panel" parent="."]
 layout_mode = 1
@@ -199,6 +200,7 @@ position = Vector2(45, 64.5)
 shape = SubResource("RectangleShape2D_5uxdr")
 
 [node name="HealthBasedDamageCardEffect" parent="." instance=ExtResource("6_qsplr")]
+increase_damage_effect = false
 
 [node name="ShowAuthorCardEffect" parent="." instance=ExtResource("7_pcc6c")]
 effect_description = "This card was designed by a community member: [color=gold]moribam[/color]"

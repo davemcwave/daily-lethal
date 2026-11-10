@@ -6,7 +6,7 @@
 script = ExtResource("1_dqakr")
 energy_cost_copy = 0
 buff_name = "Copy"
-buff_description = "Makes a 0-cost copy of the next card played in hand"
+buff_description = "Makes a 0-cost copy of the next [card|X cards] played in hand"
 activation_type = 5
 color = Color(0.54902, 0, 0.54902, 1)
 activated_once_per_turn = true

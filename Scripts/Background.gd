@@ -331,9 +331,134 @@ const ENEMY_DIFFICULTIES := {
 	"Paladin": Difficulty.VERY_HARD,
 }
 
+## Options saved on this device (user://settings.cfg).
+const SETTINGS_PATH := "user://settings.cfg"
+## Options > Show damage math: the math beside an attack held over the play area.
+## On by default; players can turn it off.
+var show_damage_math: bool = true
+
+func set_show_damage_math(on: bool) -> void:
+	show_damage_math = on
+	var settings := ConfigFile.new()
+	settings.load(SETTINGS_PATH)  # keep any other settings
+	settings.set_value("display", "show_damage_math", on)
+	settings.save(SETTINGS_PATH)
+
+func _load_settings() -> void:
+	var settings := ConfigFile.new()
+	if settings.load(SETTINGS_PATH) == OK:
+		show_damage_math = settings.get_value("display", "show_damage_math", true)
+	if "--show-damage-math" in OS.get_cmdline_user_args():
+		show_damage_math = true  # dev: on for this run only, not saved
+
 func _ready() -> void:
+	_load_settings()
 	load_story_progress()
 	_apply_puzzle_cmdline_arg()
+	_open_card_lab_from_url()
+	_schedule_screenshot()
+
+## Card Builder (Scenes/Builder/CardBuilder.tscn): the card being built survives
+## a "Try it" trip to a test puzzle; a "Back to Card Lab" button stays on top of
+## the puzzle (and its win/lose screens) until pressed.
+const CARD_BUILDER_SCENE := "res://Scenes/Builder/CardBuilder.tscn"
+const GAME_SCENE := "res://Scenes/Scene0Desktop.tscn"
+var card_builder_definition: Dictionary = {}
+## All the Card Lab's custom cards (card_builder_definition is the one open).
+var card_builder_cards: Array = []
+var card_builder_current: int = 0
+## The builder's "Try it" settings (HP, energy, enemy HP, copies, other cards).
+var card_builder_try_settings: Dictionary = {}
+var card_builder_trying: bool = false
+var _builder_back_layer: CanvasLayer = null
+
+## True only in a browser whose only pointer is a touch screen (phones, tablets,
+## iPads, which say they're a Mac). Touch laptops have a fine pointer too.
+const _TOUCH_ONLY_JS := "matchMedia('(pointer: coarse)').matches && !matchMedia('(any-pointer: fine)').matches"
+
+## The Card Lab is laid out for a wide screen with a mouse (drag to reorder,
+## right-click, hover). Off in the mobile web build and on phones and tablets;
+## card-lab/index.html makes the same check before opening the game.
+func card_lab_available() -> bool:
+	if OS.has_feature("web_build") or OS.has_feature("web_android") or OS.has_feature("web_ios"):
+		return false
+	if OS.has_feature("web") and Engine.has_singleton("JavaScriptBridge"):
+		return not bool(JavaScriptBridge.eval(_TOUCH_ONLY_JS, true))
+	return true
+
+## playlethal.fun/card-lab opens the web build with ?card_lab=1: go straight to
+## the Card Lab instead of a puzzle (where it's available; otherwise the game
+## opens as usual).
+func _open_card_lab_from_url() -> void:
+	if not OS.has_feature("web") or not card_lab_available():
+		return
+	var search = JavaScriptBridge.eval("window.location.search", true)
+	if search is String and "card_lab" in search:
+		get_tree().change_scene_to_file.call_deferred(CARD_BUILDER_SCENE)
+
+## Opens a test puzzle (a "?cards=..." query) from the Card Builder.
+func start_card_builder_try(search: String) -> void:
+	set_url_override("/", search)
+	card_builder_trying = true
+	_show_builder_back_button()
+	get_tree().change_scene_to_file(GAME_SCENE)
+
+func return_to_card_builder() -> void:
+	card_builder_trying = false
+	set_url_override("", "")
+	clear()
+	if _builder_back_layer != null:
+		_builder_back_layer.queue_free()
+		_builder_back_layer = null
+	get_tree().change_scene_to_file(CARD_BUILDER_SCENE)
+
+func _show_builder_back_button() -> void:
+	if _builder_back_layer != null:
+		return
+	# A child of this autoload, so it survives the scene changes during the puzzle.
+	_builder_back_layer = CanvasLayer.new()
+	_builder_back_layer.layer = 100
+	add_child(_builder_back_layer)
+	var button := Button.new()
+	button.text = "‹  Back to Card Lab"
+	button.add_theme_font_override("font", load("res://Assets/Fonts/Quicksand/static/Quicksand-Bold.ttf"))
+	button.add_theme_font_size_override("font_size", 13)
+	for state in ["normal", "hover", "pressed", "focus"]:
+		var box := StyleBoxFlat.new()
+		box.bg_color = Color("#18181b") if state != "hover" else Color("#3f3f46")
+		box.border_color = Color("#3f3f46")
+		box.set_border_width_all(1)
+		box.set_corner_radius_all(6)
+		box.content_margin_left = 12
+		box.content_margin_right = 12
+		box.content_margin_top = 6
+		box.content_margin_bottom = 6
+		button.add_theme_stylebox_override(state, box)
+	for color_name in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
+		button.add_theme_color_override(color_name, Color("#fafafa"))
+	# Top right, below the puzzle's banner (and the win screen's Archive button).
+	button.anchor_left = 1.0
+	button.anchor_right = 1.0
+	button.offset_right = -12
+	button.offset_top = 64
+	button.grow_horizontal = Control.GROW_DIRECTION_BEGIN
+	button.pressed.connect(return_to_card_builder)
+	_builder_back_layer.add_child(button)
+
+## Dev helper: --screenshot=<path.png> saves the screen after loading, then quits.
+func _schedule_screenshot() -> void:
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--screenshot="):
+			var path := arg.trim_prefix("--screenshot=")
+			var frames := 90
+			for other in OS.get_cmdline_user_args():
+				if other.begins_with("--screenshot-frames="):  # wait longer, e.g. for the deal
+					frames = maxi(1, other.trim_prefix("--screenshot-frames=").to_int())
+			for i in frames:
+				await get_tree().process_frame
+			get_viewport().get_texture().get_image().save_png(path)
+			print("Saved screenshot to " + path)
+			get_tree().quit()
 
 ## Off the web there is no window.location, so URL puzzles ("?cards=...") are
 ## fed in here instead; URLCapturer reads these when JavaScriptBridge has nothing.
@@ -610,15 +735,18 @@ func get_recorded_solution_steps() -> Array:
 		steps.append(copy)
 	return steps
 
-## Human-readable version, e.g. "Potion -> damage, Armory (Slash, Cleave), Slash".
+## Human-readable version, e.g. "Potion (Damage), Armory (Slash, Cleave), Slash".
 func get_recorded_solution_text() -> String:
 	var parts: Array[String] = []
 	for step: Dictionary in recorded_solution_steps:
-		var text: String = step["card"]
+		var choices: Array[String] = []
 		if step.has("picks"):
-			text += " (%s)" % (", ".join(step["picks"]) if not step["picks"].is_empty() else "nothing")
-		if step.has("effect"):
-			text += " -> " + ", ".join(step["effect"])
+			choices.append(", ".join(step["picks"]) if not step["picks"].is_empty() else "nothing")
+		for effect_key in step.get("effect", []):
+			choices.append(str(effect_key).capitalize())
+		var text: String = step["card"]
+		if not choices.is_empty():
+			text += " (%s)" % ", ".join(choices)
 		parts.append(text)
 	return ", ".join(parts)
 
@@ -676,6 +804,11 @@ func save_played_cards_solution() -> void:
 	# Don't overwrite recorded solutions while the resolver is replaying them.
 	var puzzle_resolver = get_node_or_null("/root/PuzzleResolver")
 	if puzzle_resolver != null and puzzle_resolver.is_active():
+		return
+	# Opt-in: a dev run only records a win when started with --record-solution
+	# (godot --path . -- --puzzle=roc --record-solution). Otherwise playing a puzzle
+	# to try it would overwrite its reference solution.
+	if not "--record-solution" in OS.get_cmdline_user_args():
 		return
 	var resource_path: String = get_solution_resource_path()
 	if resource_path.is_empty():

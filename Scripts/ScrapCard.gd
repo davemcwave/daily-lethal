@@ -15,12 +15,13 @@ func play():
 	
 	pay_cost(energy_cost)
 	scene.set_last_card_effects(self)
+	# Exception to the usual order (effects, then discard): Scrap goes to the
+	# discard pile first, so the card it discards lands on top of it. Released
+	# puzzles depend on that order (Grave Robber, Cerberus: Revive/Seance take
+	# the top of the pile).
 	await discard()
-	
 	await apply_card_effects()
-	
 	await buffs_container.activate_buffs(Buff.ActivationType.OnCardPlay)
 	await enemy.activate_on_card_play_debuffs()
-	
 	scene.check_game_over()
 	finish_play_resolution()

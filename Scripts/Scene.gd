@@ -24,6 +24,7 @@ var last_card_played: Card = null
 var checking_for_game_over: bool = false
 var game_over: bool = false
 var resolving_cards: int = 0
+var resolving_card_stack: Array[Card] = []  # cards mid-play, outermost first
 var puzzle: Puzzle = null
 var card_play_history_paths: Array[String] = []
 @onready var url_capturer: URLCapturer = $URLCapturer
@@ -67,9 +68,19 @@ func _is_desktop_layout_scene() -> bool:
 
 func notify_card_started_playing(card: Card) -> void:
 	resolving_cards += 1
+	resolving_card_stack.append(card)
 
 func notify_card_finished_playing(card: Card) -> void:
 	resolving_cards = max(resolving_cards - 1, 0)
+	resolving_card_stack.erase(card)
+
+## The card being played right now (the innermost, when one card plays another).
+## Unlike get_last_card_played(), which only updates after a card's effects run.
+func get_resolving_card() -> Card:
+	for i in range(resolving_card_stack.size() - 1, -1, -1):
+		if is_instance_valid(resolving_card_stack[i]):
+			return resolving_card_stack[i]
+	return null
 
 func is_card_resolving() -> bool:
 	return resolving_cards > 0
@@ -324,6 +335,8 @@ func set_puzzle(new_puzzle: Puzzle) -> void:
 	var existing_card_index: int = 0
 	for card_scene in card_scenes:
 		var card: Card = card_scene.instantiate()
+		if puzzle_resolver.is_rebuilding_cards():
+			card = puzzle_resolver.rebuild_card(card)  # test runner: play its data-built twin
 		if puzzle.is_test_puzzle():
 			card.set_meta("card_order_token", "E%d" % existing_card_index)
 			card.set_meta("card_order_source", "existing")

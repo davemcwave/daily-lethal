@@ -8,8 +8,13 @@ class_name PlayerChooseEffectCardEffect
 var selected_card_effect = null
 	
 func apply() -> bool:
+	if card_effects_to_choose_from.is_empty():
+		return super.apply()  # nothing to choose from: don't open an empty choice screen
 	await get_tree().create_timer(0.25).timeout
-	card_choice_view.set_card_preview(card_for_preview)
+	# Built-in Potion points card_for_preview at itself; a card built from data
+	# can't hold a node reference, so show the card this effect is on.
+	var preview_card: Card = card_for_preview if card_for_preview != null else get_parent() as Card
+	card_choice_view.set_card_preview(preview_card)
 	card_choice_view.show()
 	await card_choice_view.finished_selecting_card_effect
 	selected_card_effect = card_choice_view.get_selected_card_effect()

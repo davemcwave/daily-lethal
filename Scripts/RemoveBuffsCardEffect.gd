@@ -3,7 +3,7 @@ class_name RemoveBuffsCardEffect
 
 @export var remove_all_buffs: bool = false
 @export_file("*.tscn") var buff_scenes
-@export_enum("Player", "Enemy") var buff_auto_target: String
+@export_enum("Player", "Enemy") var buff_auto_target: String = "Player"  # empty used to mean Player too
 var buff_color: Color = Color.WHITE
 
 func apply() -> bool:
@@ -13,7 +13,12 @@ func apply() -> bool:
 	if remove_all_buffs:
 		await buffs_container.remove_all_buffs()
 	else:
-		for buff_scene in buff_scenes:
+		# buff_scenes is one file path (an @export_file); older data may hold a list.
+		var paths: Array = buff_scenes if buff_scenes is Array \
+			else ([buff_scenes] if buff_scenes is String and not buff_scenes.is_empty() else [])
+		for buff_scene in paths:
+			if not ResourceLoader.exists(str(buff_scene)):
+				continue
 			var buff_to_remove: Buff = load(buff_scene).instantiate()
 			
 			for buff: Buff in buffs_container.get_buffs(buff_to_remove.get_activation_type()):

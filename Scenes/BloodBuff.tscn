@@ -5,7 +5,7 @@
 [node name="BloodBuff" type="Node2D"]
 script = ExtResource("1_i2tvi")
 buff_name = "Blood"
-buff_description = "Cards cost health instead of energy to play"
+buff_description = "The next [card costs|X cards cost] health instead of energy to play"
 wait_for_activated_signal = false
 color = Color(0.145098, 0.396078, 1, 1)
 activated_once_per_turn = true

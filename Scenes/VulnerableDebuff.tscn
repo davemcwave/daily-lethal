@@ -5,4 +5,4 @@
 [node name="VulnerableDebuff" type="Node2D"]
 script = ExtResource("1_ows13")
 debuff_name = "Vulnerable"
-debuff_description = "Whenever this target takes damage, they take an additional 1 damage."
+debuff_description = "Whenever this target takes damage, they take an additional X damage."

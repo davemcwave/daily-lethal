@@ -13,7 +13,7 @@
 script = ExtResource("1_1fr4h")
 puzzle_date = "2026-02-19"
 previous_puzzle_scene = "uid://d3htefxh6iono"
-enemy_health = 48
+enemy_health = 52
 enemy_name = "Circuit Breaker"
 enemy_icon_texture = ExtResource("2_u5gmf")
 player_energy = 9

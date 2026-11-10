@@ -7,7 +7,7 @@ enum ConditionType {
 	EqualTo
 }
 
-@export var condition_type = ConditionType.EqualTo
+@export var condition_type: ConditionType = ConditionType.EqualTo
 @export var comparison_value: int = 0
 @export var if_false_damage_amount: int = 0
 
@@ -39,3 +39,14 @@ func apply() -> bool:
 	var apply_result: bool = await super.apply()
 	set_damage_amount(previous_damage_amount)
 	return apply_result
+
+func get_preview_damage_amount() -> int:
+	var energy_amount: int = _preview_energy_after_cost()
+	match condition_type:
+		ConditionType.EqualTo:
+			return damage_amount if energy_amount == comparison_value else if_false_damage_amount
+		ConditionType.LessThan:
+			return damage_amount if energy_amount < comparison_value else if_false_damage_amount
+		ConditionType.GreaterThan:
+			return damage_amount if energy_amount > comparison_value else if_false_damage_amount
+	return damage_amount

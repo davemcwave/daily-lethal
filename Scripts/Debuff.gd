@@ -6,6 +6,10 @@ class_name Debuff
 @export var unlimited_uses: bool = true
 
 enum ActivationType {OnHurt, OnAttack, OnCardPlay}
+
+## Meta set by DebuffCardEffect: the card count of the play that put this status
+## on. An on-play status doesn't react to that play (it waits for the next card).
+const ADDED_ON_PLAY := &"added_on_play"
 @export var activation_type: ActivationType
 
 var target: Enemy = null
@@ -29,8 +33,12 @@ func set_debuff_description(new_debuff_description: String) -> void:
 func get_debuff_name() -> String:
 	return debuff_name
 	
+## The text with X filled in by this debuff's number (Vulnerable 3: +3 per hit).
 func get_debuff_description() -> String:
-	return debuff_description
+	return Buff.fill_x(debuff_description, get_description_number(), self)
+
+func get_description_number() -> int:
+	return 1
 	
 func get_target() -> Enemy:
 	return target
@@ -56,6 +64,16 @@ func can_merge_with(other_debuff: Debuff) -> bool:
 func merge_with(other_debuff: Debuff) -> void:
 	pass
 
+## Extra damage this debuff adds to each hit its target takes from a card (part
+## of the hit's number, not a separate hit). Vulnerable: 1 per stack.
+func get_incoming_damage_bonus() -> int:
+	return 0
+
 # TO BE OVERWRITTEN
 func activate() -> void:
 	return
+
+## Whether this debuff would act if `card` were played now (Burn ticks on every
+## card played). Vulnerable comes from the damage preview instead.
+func would_act_on_card(card: Card) -> bool:
+	return is_activated_on_card_play()

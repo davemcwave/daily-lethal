@@ -76,7 +76,11 @@ func apply() -> bool:
 		return false
 	var debuff_instance: Debuff = debuff_template.duplicate(DUPLICATE_USE_INSTANTIATION)
 	debuff_instance.set_stacks(stacks)
-	print(target)
+	# A status a card puts on the enemy starts reacting with the next card, not
+	# the one that put it there (Enemy.activate_on_card_play_debuffs). Stacks
+	# merged into a status already there don't change that one.
+	if scene != null:
+		debuff_instance.set_meta(Debuff.ADDED_ON_PLAY, scene.get_card_count())
 	target.add_debuff(debuff_instance)
 	return super.apply()
 

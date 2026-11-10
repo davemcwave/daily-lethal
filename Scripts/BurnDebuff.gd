@@ -45,3 +45,7 @@ func activate() -> void:
 		queue_free()
 	else:
 		debuff_panel.update_text()
+
+## X in the text: burn_count.
+func get_description_number() -> int:
+	return burn_count

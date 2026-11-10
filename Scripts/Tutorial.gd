@@ -105,12 +105,12 @@ func step_5() -> void:
 func step_6() -> void:
 	set_blur_position(0.55, 0.5)
 	set_blur_scale(0.205,0.115)
-	await say("[b]The 🗲 symbol is energy. The 🗲 symbol on the card is the cost to play it. The 🗲 symbol in the middle of the screen is how much energy you have.[/b]", PanelPosition.Top)
+	await say("[b]The [img width=16 height=16 color=#fcbf56]res://Assets/Textures/bolt-white.png[/img] symbol is energy. The [img width=16 height=16 color=#fcbf56]res://Assets/Textures/bolt-white.png[/img] symbol on the card is the cost to play it. The [img width=16 height=16 color=#fcbf56]res://Assets/Textures/bolt-white.png[/img] symbol in the middle of the screen is how much energy you have.[/b]", PanelPosition.Top)
 	
 func step_7() -> void:
 	set_blur_position(0.55, 0.5)
 	set_blur_scale(0.205,0.115)
-	await say("[b]The ♥ symbol is your health. Death is good unless you die. So make sure this doesn't go to 0.[/b]", PanelPosition.Top)
+	await say("[b]The [img width=16 height=16 color=#c43335]res://Assets/Textures/heart-white.png[/img] symbol is your health. Death is good unless you die. So make sure this doesn't go to 0.[/b]", PanelPosition.Top)
 	
 func step_8() -> void:
 	blur.hide()
