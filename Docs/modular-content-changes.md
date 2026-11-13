@@ -119,9 +119,9 @@ a new attack.
 - **Live damage numbers:** while you hold an attack over the play area, the number on the
   card changes to the total it will actually deal, Vulnerable and Splinter included. It
   turns gold when something changes it.
-- **"Deal 3 damage" in red:** on damage cards. When the attack will be converted, it changes
-  to what it becomes: "Apply 3 Vulnerable" (Poison), "Apply 3 Burn" (Flame), "Gain 3 energy"
-  (Charge).
+- **Converted attacks say what they become:** when a status will convert the attack,
+  "Deal 3 damage" changes, in a new color, to "Apply 3 Vulnerable" (Poison), "Apply 3 Burn"
+  (Flame) or "Gain 3 energy" (Charge).
 - **Show the math:** turn on **Options → Show Damage Math** to see, beside a held attack, how
   its damage is worked out, one step per line.
 - **Statuses light up:** every status box (yours and the enemy's) that will react to the card

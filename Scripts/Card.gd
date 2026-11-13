@@ -144,7 +144,9 @@ func set_state(new_state: State) -> void:
 		return
 		
 	state = new_state
-	
+	if new_state != State.Grabbed:
+		_stop_damage_preview()  # played, dropped or discarded: the math panel goes at once
+
 	emit_signal("changed_state", state)
 
 func set_can_show_choosing_button(new_can_show_choosing_button: bool) -> void:
@@ -506,6 +508,7 @@ func handle_sfx() -> void:
 	
 	
 func begin_play_resolution() -> void:
+	_stop_damage_preview()  # the card is being played: no math panel left behind
 	# Record the play before its effects run, so picks/effect choices it triggers
 	# (even ones Reverberate, Burst or Overload trigger) attach to this card.
 	var background = get_node_or_null("/root/Background")
@@ -856,7 +859,9 @@ func get_damage_preview() -> Dictionary:
 		if is_instance_valid(panel) and is_instance_valid(panel.get_buff()) and panel.get_buff().scene_file_path.ends_with("RepeatBuff.tscn"):
 			repeat_panel = panel
 	result["repeats"] = repeat_panel != null
-	for effect in card_effects:
+	# get_card_effects() includes the options of a choice (Potion: damage or heal), so a
+	# chosen attack gets the same preview as any other.
+	for effect in get_card_effects():
 		if not (effect is DamageCardEffect) or effect.target_name != "Enemy":
 			continue
 		result["has_attack"] = true
@@ -912,7 +917,7 @@ func get_damage_preview() -> Dictionary:
 ## parentheses, with the running total, ending in the damage:
 ##   4 (base) » +2 (sharp) = 6 » x2 (critical) = 12 » +1 (vulnerable) = 13 damage
 ##   4 (base) » x2 (critical) = 8 » 8 hits of 1 (splinter) » +1 each (vulnerable) = 16 damage » heal 16 (lifesteal)
-##   3 (base) » 3 Vulnerable (poison)
+##   5 (base) converts to 5 Vulnerable (poison)
 func _damage_formula(steps: Array, dealt: int, shown: int, hit_count: int = 1, per_hit: int = 0) -> String:
 	var name_of := func(name: String) -> String:
 		return "[color=#9fb0b6](%s)[/color]" % name
@@ -935,7 +940,8 @@ func _damage_formula(steps: Array, dealt: int, shown: int, hit_count: int = 1, p
 					# Joins the line before: "5 (base) converts to 5 hits of 1 (splinter)"
 					segments.append(["converts to %d hits of 1 %s%%s" % [hit_count, name_of.call("splinter")], SPLIT])
 				else:
-					segments.append(["%s %s" % [step["text"], name_of.call(step["name"])], CONVERTED])  # "3 Vulnerable (poison)"
+					# Joins the line before: "5 (base) converts to 5 Vulnerable (poison)"
+					segments.append(["converts to %s %s" % [step["text"], name_of.call(step["name"])], CONVERTED])
 			"each":
 				segments.append(["+%d each hit %s%%s" % [step["value"], name_of.call(step["name"])], dealt])
 			"after":
@@ -963,8 +969,10 @@ func _damage_formula(steps: Array, dealt: int, shown: int, hit_count: int = 1, p
 				parts.append(split_text)
 			else:
 				parts[parts.size() - 1] += " " + split_text
+		elif total == CONVERTED and not parts.is_empty():
+			parts[parts.size() - 1] += " " + text  # on the same line as the amount it converts
 		elif total < 0:
-			parts.append(text)  # conversion, reaction: no running total
+			parts.append(text)  # reaction: no running total
 		elif i == last and dealt > 0:
 			parts.append(text % (" = [b][color=#fbbf24]%d damage[/color][/b]" % dealt))
 		elif i == 0:
@@ -1040,6 +1048,12 @@ func _hide_damage_preview() -> void:
 		_damage_preview_label.hide()
 	_hide_damage_preview_highlights()
 
+## Hides the math panel and status highlights now (not on the next text update, which
+## may not come once the card is played and on its way to the discard pile).
+func _stop_damage_preview() -> void:
+	_formula_showing = false
+	_hide_damage_preview()
+
 func _hide_damage_preview_highlights() -> void:
 	for panel in _damage_preview_panels:
 		if is_instance_valid(panel) and panel.has_method("set_highlighted"):
@@ -1113,43 +1127,28 @@ const CONVERTED_PHRASES := {
 	"poison": ["Apply", "Vulnerable", "#e67e22"],
 }
 
-## Damage cards: "Deal 3 damage" in red. When the attack will be converted (Charge,
-## Flame, Poison), the first one becomes what it turns into: "Apply 3 Vulnerable",
-## "Gain 3 energy". Cards without "Deal N damage" ("Deal damage equal to your HP")
-## get the word "damage" in red.
+## Damage cards keep their own text (the number in red, as the card writes it). Only
+## when the attack will be converted (Charge, Flame, Poison) does the first "Deal N
+## damage" change, into what it turns into, in that status's color: "Apply 3
+## Vulnerable", "Gain 3 energy". Cards without "Deal N damage" ("Deal damage equal
+## to your HP") get the word "damage" replaced the same way.
 static func _color_damage_words(text: String, converted: String) -> String:
+	if not CONVERTED_PHRASES.has(converted):
+		return text
+	var to: Array = CONVERTED_PHRASES[converted]
 	var phrase := RegEx.create_from_string("\\b([Dd]eal) ((?:\\[[^\\]]*\\])*\\d+(?:\\[[^\\]]*\\])*) damage\\b")
-	var found_phrases := phrase.search_all(text)
-	if not found_phrases.is_empty():
-		var result := ""
-		var at := 0
-		for i in found_phrases.size():
-			var found: RegExMatch = found_phrases[i]
-			var verb := found.get_string(1)
-			var number := found.get_string(2)
-			var piece := "[color=red]%s %s damage[/color]" % [verb, number]
-			if i == 0 and CONVERTED_PHRASES.has(converted):
-				var to: Array = CONVERTED_PHRASES[converted]
-				var new_verb: String = to[0] if verb.begins_with("D") else to[0].to_lower()
-				piece = "[color=%s]%s %s %s[/color]" % [to[2], new_verb, number, to[1]]
-			result += text.substr(at, found.get_start() - at) + piece
-			at = found.get_end()
-		return result + text.substr(at)
+	var found := phrase.search(text)
+	if found != null:
+		var verb := found.get_string(1)
+		var new_verb: String = to[0] if verb.begins_with("D") else to[0].to_lower()
+		var piece := "[color=%s]%s %s %s[/color]" % [to[2], new_verb, found.get_string(2), to[1]]
+		return text.substr(0, found.get_start()) + piece + text.substr(found.get_end())
 	var pattern := RegEx.create_from_string("\\[[^\\]]*\\]|\\b(damage)\\b")
-	var out := ""
-	var last := 0
-	var first := true
-	for found in pattern.search_all(text):
-		if found.get_string(1).is_empty():
+	for word in pattern.search_all(text):
+		if word.get_string(1).is_empty():
 			continue  # a tag
-		var word := "[color=red]damage[/color]"
-		if first and CONVERTED_PHRASES.has(converted):
-			var to: Array = CONVERTED_PHRASES[converted]
-			word = "[color=%s]%s[/color]" % [to[2], to[1]]
-		first = false
-		out += text.substr(last, found.get_start(1) - last) + word
-		last = found.get_end(1)
-	return out + text.substr(last)
+		return text.substr(0, word.get_start(1)) + "[color=%s]%s[/color]" % [to[2], to[1]] + text.substr(word.get_end(1))
+	return text
 
 static func _replace_first_number(text: String, number: int, replacement: String) -> String:
 	var pattern := RegEx.create_from_string("\\[[^\\]]*\\]|(?<![\\d.])(\\d+)(?![\\d.])")
@@ -1166,7 +1165,7 @@ func _is_over_play_area() -> bool:
 
 ## The card's first damage effect aimed at the enemy, or null.
 func _first_enemy_damage_effect() -> DamageCardEffect:
-	for effect in card_effects:
+	for effect in get_card_effects():  # includes a choice's options (Potion)
 		if effect is DamageCardEffect and effect.target_name == "Enemy":
 			return effect
 	return null
@@ -1205,13 +1204,17 @@ func _show_damage_math() -> bool:
 func _place_damage_math() -> void:
 	if _damage_preview_label == null:
 		return
+	# Below the card, centred on it, so it fits narrow (mobile) screens as well as
+	# desktop; above the card when there's no room below. Kept on screen.
 	var card_rect := get_global_rect()
 	var view := get_viewport_rect().size
 	var box := _damage_preview_label.size
-	var x := card_rect.end.x + 8.0
-	if x + box.x > view.x - 4.0:
-		x = card_rect.position.x - box.x - 8.0
-	var y := clampf(card_rect.position.y, 4.0, maxf(4.0, view.y - box.y - 4.0))
+	var x := card_rect.get_center().x - box.x / 2.0
+	x = clampf(x, 4.0, maxf(4.0, view.x - box.x - 4.0))
+	var y := card_rect.end.y + 6.0
+	if y + box.y > view.y - 4.0:
+		y = card_rect.position.y - box.y - 6.0
+	y = clampf(y, 4.0, maxf(4.0, view.y - box.y - 4.0))
 	_damage_preview_label.global_position = Vector2(x, y)
 
 ## No scrollbar on a card's description: text that doesn't fit (Overload's,

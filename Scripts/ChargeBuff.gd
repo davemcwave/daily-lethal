@@ -13,4 +13,4 @@ func activate(context: Dictionary = {}) -> bool:
 
 func preview_attack(context: Dictionary) -> Dictionary:
 	context["deal_damage"] = false
-	return {"op": "to", "text": "+%d energy" % context["current_damage_amount"], "name": "charge"}
+	return {"op": "to", "text": "%d energy" % context["current_damage_amount"], "name": "charge"}
