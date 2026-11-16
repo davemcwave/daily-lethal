@@ -18,6 +18,12 @@ func _ready():
 			'puzzle_url': share_url,
 		}
 	)
+	# A custom puzzle from the Library has no page of its own: share its code instead, to
+	# import in the Library.
+	var archive_id: String = str(background.archive_puzzle_id) if background.is_from_archive() else ""
+	if archive_id.begins_with("custom:"):
+		var code := CustomLibrary.share_code([], [archive_id.trim_prefix("custom:")])
+		share_text = share_text.get_slice("\nPlay puzzle", 0) + "\n" + ShareCode.share_message(code)
 
 	$VBoxContainer/AttemptText.set_text("[center][b]IN [color=green]%d[/color] ATTEMPT%s[/b][/center]" % [background.attempts, attempt_plural.to_upper()])
 	$VBoxContainer/BestAttemptText.set_text("[center][b]WITH [color=gold]%d[/color] CARDS PLAYED[/b][/center]" % background.best_card_count)

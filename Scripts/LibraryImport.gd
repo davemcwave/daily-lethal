@@ -50,9 +50,10 @@ static func open(parent: Control, scene: String) -> void:
 	edit.add_theme_font_size_override("font_size", 11)
 	edit.placeholder_text = ShareCode.PREFIX_V3 + "..."
 	var clipboard := DisplayServer.clipboard_get().strip_edges()
+	var found := ShareCode.find_code(clipboard)  # a bare code, or one inside a shared message
 	for prefix in [ShareCode.PREFIX_V3, ShareCode.PREFIX, ShareCode.PREFIX_V1]:
-		if clipboard.begins_with(prefix):
-			edit.text = clipboard
+		if found.begins_with(prefix):
+			edit.text = found
 	box.add_child(edit)
 	var status := _label("", FONT_MEDIUM, 12, Color("#f87171"))
 	status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART

@@ -73,8 +73,18 @@ static func encode(cards, puzzle: Dictionary) -> String:
 ## Returns {"cards": [card, ...], "card": the first card,
 ## "puzzle": {..., "copies", "card_copies": [one per card], "other_cards": [scene paths]}}
 ## or {"error": "why it can't be read"}.
+## "Use share code LETHAL3-... at https://playlethal.fun/library": how a shared custom
+## puzzle is posted (the win screen's Share). Import code reads the code back out of it.
+static func share_message(code: String) -> String:
+	return "Use share code %s at https://playlethal.fun/library" % code
+
+## The share code in a pasted message (words around it are left out), or the text as it is.
+static func find_code(text: String) -> String:
+	var found := RegEx.create_from_string("LETHAL[0-9]+-[A-Za-z0-9_=-]+").search(text)
+	return found.get_string() if found != null else text
+
 static func decode(code: String) -> Dictionary:
-	var text := code.strip_edges()
+	var text := find_code(code).strip_edges()
 	# Pasted from chat it may have line breaks or spaces in it.
 	for whitespace in ["\n", "\r", " ", "\t", "`"]:
 		text = text.replace(whitespace, "")
@@ -190,7 +200,7 @@ static func encode_library(cards: Array, puzzles: Array) -> String:
 ## {"cards": [{"def", "author"}], "puzzles": [{"name", "author", "hp", "energy", "enemy_hp", "hand"}]}
 ## or {"error": "..."}. Older codes become their cards plus one puzzle (their test hand).
 static func decode_library(code: String) -> Dictionary:
-	var text := code.strip_edges()
+	var text := find_code(code).strip_edges()
 	for whitespace in ["\n", "\r", " ", "\t", "`"]:
 		text = text.replace(whitespace, "")
 	if text.is_empty():
