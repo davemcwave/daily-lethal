@@ -6,7 +6,7 @@ extends Button
 const SECONDS_PER_DAY := 24 * 60 * 60
 
 func _ready():
-	if background.is_from_story_view():
+	if background.is_from_story_view() or background.is_from_archive():
 		hide()
 		
 func _on_pressed() -> void:

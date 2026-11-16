@@ -261,6 +261,15 @@ func show_card_preview() -> void:
 		var extra_description: String = "%s %s" % [card_effect_name, card_effect_description]
 		card_preview.add_extra_description(extra_description)
 		card_effect_names.append(card_effect_name)
+	# Keywords the text uses that no effect above explains (e.g. Seance's "Trash").
+	var explained: Array[String] = []
+	for shown in card_effect_names:
+		# "[center][b]Vulnerable 1:[/b][/center]" -> "vulnerable"
+		explained.append(shown.replace("[center][b]", "").replace(":[/b][/center]", "").rstrip("0123456789 ").to_lower())
+	for keyword_entry in Keywords.find_in(card_description):
+		if str(keyword_entry[0]).to_lower() in explained:
+			continue
+		card_preview.add_extra_description("[center][b]%s:[/b][/center] [center]%s[/center]" % keyword_entry)
 	card_preview.set_background_color(get_background_color())
 	card_preview.set_description(_current_description_text())
 	_card_preview_is_mine = true
@@ -466,7 +475,8 @@ func get_first_damage_card_effect() -> DamageCardEffect:
 	
 func apply_card_effects() -> bool:
 	for card_effect in card_effects:
-		if card_effect_delay > 0.0:
+		# The "designed by" credit shows nothing during play: don't pause for it.
+		if card_effect_delay > 0.0 and not _is_author_credit(card_effect):
 			await get_tree().create_timer(card_effect_delay).timeout
 		
 		var card_effect_result = await card_effect.apply()
@@ -481,6 +491,10 @@ func apply_card_effects() -> bool:
 		queue_free()
 		
 	return true
+
+func _is_author_credit(card_effect) -> bool:
+	var effect_script = card_effect.get_script() if card_effect != null else null
+	return effect_script != null and effect_script.resource_path.ends_with("ShowAuthorCardEffect.gd")
 
 func is_choice_card() -> bool:
 	for child in get_children():

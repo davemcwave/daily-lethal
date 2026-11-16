@@ -4,11 +4,33 @@ extends Node
 @onready var original_pitch_scales = {}
 @export var mute_sfx = get_children()
 
+## Options > Mute All and the Music / SFX volumes, saved on this device.
+const SETTINGS_PATH := "user://settings.cfg"
+
 func _ready() -> void:
 	save_original_pitch_scales()
-	
+	_load_audio_settings()
+
 	if not mute_all:
 		play_sfx("BGMusic", 1)
+
+func _load_audio_settings() -> void:
+	var settings := ConfigFile.new()
+	if settings.load(SETTINGS_PATH) != OK:
+		return
+	mute_all = settings.get_value("audio", "mute_all", mute_all)
+	if settings.has_section_key("audio", "music_db") and has_node("BGMusic"):
+		$BGMusic.volume_db = settings.get_value("audio", "music_db")
+	if settings.has_section_key("audio", "sfx_db"):
+		for child in get_children():
+			if child is AudioStreamPlayer and child.name != "BGMusic":
+				child.volume_db = settings.get_value("audio", "sfx_db")
+
+func save_audio_setting(key: String, value) -> void:
+	var settings := ConfigFile.new()
+	settings.load(SETTINGS_PATH)  # keep the other settings
+	settings.set_value("audio", key, value)
+	settings.save(SETTINGS_PATH)
 
 func save_original_pitch_scales() -> void:
 	for child in get_children():
@@ -17,7 +39,7 @@ func save_original_pitch_scales() -> void:
 			original_pitch_scales[sfx_node] = sfx_node.pitch_scale
 	
 func play_sfx(node_name: String, pitch_scale: float = -1.0, volume_db: float = -999) -> void:
-	if mute_all:
+	if mute_all or OS.has_feature("web"):  # the web builds are always silent (the Windows build has sound)
 		return
 	
 	if get_node(node_name) in mute_sfx:

@@ -3,14 +3,16 @@ extends Button
 @onready var background = $"/root/Background"
 
 func _ready():
-	if background.is_from_story_view():
+	if background.is_from_story_view() or background.is_from_archive():
 		if has_node("Label"):
 			$Label.set_text("[center][b]Puzzles[/b][/center]")
 		else:
 			set_text("    PUZZLES")
 
 func _on_pressed(): 
-	if background.is_web_platform():
+	if background.is_from_archive():
+		get_tree().change_scene_to_file(background.ARCHIVE_SCENE)
+	elif background.is_web_platform():
 		var base_url = JavaScriptBridge.eval("window.location.origin", true)
 		open_window_in_same_tab(base_url + "/archive")
 	elif background.is_from_story_view():

@@ -18,12 +18,14 @@ func _ready():
 	path_name = JavaScriptBridge.eval("window.location.pathname")
 	search = JavaScriptBridge.eval("window.location.search")
 	# Off the web (editor, desktop, test runner) there is no URL; use the one
-	# Background was given via --url= or by the puzzle test runner. A Card Lab
-	# test puzzle uses it on the web too (the page's own URL is /card-lab).
+	# Background was given via --url= or by the puzzle test runner. A puzzle started
+	# inside the game (a Puzzle Lab test, a Library puzzle) uses it on the web too: the
+	# page's own address is /desktop/?puzzle_lab=1 or ?library=1. A Library scene puzzle
+	# has none, so Scene falls back to Background's puzzle scene.
 	var background = get_node_or_null("/root/Background")
 	var no_url: bool = (search == null or str(search).is_empty()) and not OS.has_feature("web")
-	var card_lab_test: bool = background != null and background.card_builder_trying
-	if (no_url or card_lab_test) and background != null and not background.url_override_search.is_empty():
+	var in_game: bool = background != null and (background.card_builder_trying or background.is_from_archive())
+	if background != null and (in_game or (no_url and not background.url_override_search.is_empty())):
 		path_name = background.url_override_path
 		search = background.url_override_search
 	puzzle_creator_name = _get_query_param("puzzle_creator")

@@ -344,16 +344,28 @@ func set_show_damage_math(on: bool) -> void:
 	settings.set_value("display", "show_damage_math", on)
 	settings.save(SETTINGS_PATH)
 
+## Whether this player has been shown the tutorial (Play shows it first if not).
+var tutorial_seen: bool = false
+
+func set_tutorial_seen() -> void:
+	tutorial_seen = true
+	var settings := ConfigFile.new()
+	settings.load(SETTINGS_PATH)  # keep any other settings
+	settings.set_value("progress", "tutorial_seen", true)
+	settings.save(SETTINGS_PATH)
+
 func _load_settings() -> void:
 	var settings := ConfigFile.new()
 	if settings.load(SETTINGS_PATH) == OK:
 		show_damage_math = settings.get_value("display", "show_damage_math", true)
+		tutorial_seen = settings.get_value("progress", "tutorial_seen", false)
 	if "--show-damage-math" in OS.get_cmdline_user_args():
 		show_damage_math = true  # dev: on for this run only, not saved
 
 func _ready() -> void:
 	_load_settings()
 	load_story_progress()
+	load_archive_progress()
 	_apply_puzzle_cmdline_arg()
 	_open_card_lab_from_url()
 	_schedule_screenshot()
@@ -370,6 +382,12 @@ var card_builder_current: int = 0
 ## The builder's "Try it" settings (HP, energy, enemy HP, copies, other cards).
 var card_builder_try_settings: Dictionary = {}
 var card_builder_trying: bool = false
+## Custom card definitions the Library sent to edit (Edit in Card Lab); the Card Lab adds them.
+var card_lab_incoming: Array = []
+## A Library puzzle sent to the Puzzle Lab (Edit in Puzzle Lab): ShareCode.decode()'s Lab shape.
+var card_lab_incoming_puzzle: Dictionary = {}
+## A note for the Library to show once (e.g. after importing a share code).
+var library_notice: String = ""
 var _builder_back_layer: CanvasLayer = null
 
 ## True only in a browser whose only pointer is a touch screen (phones, tablets,
@@ -386,15 +404,27 @@ func card_lab_available() -> bool:
 		return not bool(JavaScriptBridge.eval(_TOUCH_ONLY_JS, true))
 	return true
 
-## playlethal.fun/card-lab opens the web build with ?card_lab=1: go straight to
-## the Card Lab instead of a puzzle (where it's available; otherwise the game
-## opens as usual).
+## The web pages open the desktop web build at a screen instead of a puzzle:
+## playlethal.fun/puzzle-lab -> ?puzzle_lab=1 (the old /card-lab's ?card_lab=1 too) opens
+## the Puzzle Lab (where it's available: it needs a mouse); /library -> ?library=1 opens
+## the Library.
 func _open_card_lab_from_url() -> void:
-	if not OS.has_feature("web") or not card_lab_available():
+	if not OS.has_feature("web"):
 		return
 	var search = JavaScriptBridge.eval("window.location.search", true)
-	if search is String and "card_lab" in search:
+	if not search is String:
+		return
+	var flags := {}
+	for pair in str(search).trim_prefix("?").split("&", false):
+		flags[pair.split("=")[0]] = true
+	if (flags.has("puzzle_lab") or flags.has("card_lab")) and card_lab_available():
 		get_tree().change_scene_to_file.call_deferred(CARD_BUILDER_SCENE)
+	elif flags.has("library"):
+		get_tree().change_scene_to_file.call_deferred(ARCHIVE_SCENE)
+
+## The web build's way back to the site (it has no main menu): its home page.
+func open_site_home() -> void:
+	JavaScriptBridge.eval("window.location.href = '/';", true)
 
 ## Opens a test puzzle (a "?cards=..." query) from the Card Builder.
 func start_card_builder_try(search: String) -> void:
@@ -420,7 +450,7 @@ func _show_builder_back_button() -> void:
 	_builder_back_layer.layer = 100
 	add_child(_builder_back_layer)
 	var button := Button.new()
-	button.text = "‹  Back to Card Lab"
+	button.text = "‹  Back to Puzzle Lab"
 	button.add_theme_font_override("font", load("res://Assets/Fonts/Quicksand/static/Quicksand-Bold.ttf"))
 	button.add_theme_font_size_override("font_size", 13)
 	for state in ["normal", "hover", "pressed", "focus"]:
@@ -592,9 +622,17 @@ func mark_story_puzzle_completed(puzzle_scene_path: String) -> void:
 	if puzzle_scene_path.is_empty():
 		return
 	last_completed_story_puzzle = puzzle_scene_path
-	if puzzle_scene_path not in completed_story_puzzles:
+	last_completed_story_puzzle_was_new = puzzle_scene_path not in completed_story_puzzles
+	if last_completed_story_puzzle_was_new:
 		completed_story_puzzles.append(puzzle_scene_path)
 		save_story_progress()
+
+## True if the last story win was the first time that puzzle was beaten (a replay
+## doesn't replay the story map's "world complete" sequence).
+var last_completed_story_puzzle_was_new: bool = false
+
+func was_last_story_win_new() -> bool:
+	return last_completed_story_puzzle_was_new
 
 func get_last_completed_story_puzzle() -> String:
 	return last_completed_story_puzzle
@@ -607,6 +645,113 @@ func is_story_puzzle_completed(puzzle_scene_path: String) -> bool:
 
 func get_completed_story_puzzles() -> Array[String]:
 	return completed_story_puzzles.duplicate()
+
+## The story puzzle being played (its id in Data/story_worlds.json: a scene path,
+## "url:<date>" or "story:<name>"), or "" outside story mode.
+var story_puzzle_id: String = ""
+var story_puzzle_entry: Dictionary = {}
+
+func get_story_puzzle_id() -> String:
+	return story_puzzle_id
+
+func is_playing_story_puzzle() -> bool:
+	return not story_puzzle_id.is_empty()
+
+## The story puzzle's "dialog" from Data/story_worlds.json ({} if it has none):
+## {"first": "Enemy"|"Player", "lines": [...], "death": "..."} (hurt lines are off).
+func get_story_dialog() -> Dictionary:
+	var dialog = story_puzzle_entry.get("dialog", {})
+	return dialog if dialog is Dictionary else {}
+
+## Starts a story puzzle from its Data/story_worlds.json entry. Scene puzzles load
+## their scene; the others are "?cards=..." queries, fed in like a --url= puzzle.
+func start_story_puzzle(entry: Dictionary) -> void:
+	story_puzzle_id = str(entry.get("id", ""))
+	story_puzzle_entry = entry
+	from_archive = false
+	set_from_story_view(true)
+	set_show_tutorial(false)
+	clear()
+	if entry.has("scene"):
+		set_url_override("", "")
+		set_puzzle_scene(str(entry["scene"]))
+	else:
+		# A released puzzle keeps its date (so it also counts as played in the archive).
+		var path := "/" + str(entry["date"]) if entry.has("date") else "/story"
+		set_url_override(path, str(entry.get("search", "")))
+		set_puzzle_scene("")
+	get_tree().change_scene_to_file(GAME_SCENE)
+
+## ---- Puzzle Archive (desktop): every released daily puzzle, from Data/puzzle_archive.json.
+const ARCHIVE_SCENE := "res://Scenes/ArchiveView.tscn"
+const ARCHIVE_PROGRESS_PATH := "user://archive_progress.save"
+var from_archive: bool = false
+var archive_puzzle_id: String = ""
+var completed_archive_puzzles: Array[String] = []
+## Cards ticked in the archive's card filter when it opens (the Cards screen's "Puzzles with this card").
+var archive_preset_cards: Array = []
+## The archive's current (filtered, sorted) list, so the win screen's NEXT PUZZLE plays the next one.
+var archive_queue: Array = []
+
+func get_archive_next_entry() -> Dictionary:
+	for i in archive_queue.size():
+		if str(archive_queue[i].get("id", "")) == archive_puzzle_id:
+			return archive_queue[i + 1] if i + 1 < archive_queue.size() else {}
+	return {}
+
+func is_from_archive() -> bool:
+	return from_archive
+
+## Plays an archive entry ({"id": "daily:<date>", "date", "scene" or "search"}).
+func start_archive_puzzle(entry: Dictionary) -> void:
+	leave_story_puzzle()
+	set_from_story_view(false)
+	set_show_tutorial(false)
+	from_archive = true
+	archive_puzzle_id = str(entry.get("id", ""))
+	clear()
+	if entry.has("scene"):
+		set_url_override("", "")
+		set_puzzle_scene(str(entry["scene"]))
+	else:
+		# A custom puzzle has no date: it plays like the Card Lab's test puzzle.
+		set_url_override("/" + ("" if entry.get("custom", false) else str(entry.get("date", ""))), str(entry.get("search", "")))
+		set_puzzle_scene("")
+	get_tree().change_scene_to_file(GAME_SCENE)
+
+## Back in the archive (or the main menu): forget the puzzle that was played.
+func leave_archive_puzzle() -> void:
+	from_archive = false
+	archive_puzzle_id = ""
+	if not card_builder_trying:
+		set_url_override("", "")
+
+func mark_archive_puzzle_completed() -> void:
+	if archive_puzzle_id.is_empty() or archive_puzzle_id in completed_archive_puzzles:
+		return
+	completed_archive_puzzles.append(archive_puzzle_id)
+	var file := FileAccess.open(ARCHIVE_PROGRESS_PATH, FileAccess.WRITE)
+	if file != null:
+		file.store_string(JSON.stringify({"completed": completed_archive_puzzles}))
+
+func is_archive_puzzle_completed(id: String) -> bool:
+	return id in completed_archive_puzzles
+
+func load_archive_progress() -> void:
+	if not FileAccess.file_exists(ARCHIVE_PROGRESS_PATH):
+		return
+	var data = JSON.parse_string(FileAccess.get_file_as_string(ARCHIVE_PROGRESS_PATH))
+	if data is Dictionary and data.get("completed") is Array:
+		completed_archive_puzzles.clear()
+		for id in data["completed"]:
+			completed_archive_puzzles.append(str(id))
+
+## Back on the story map (or the main menu): forget the puzzle that was played.
+func leave_story_puzzle() -> void:
+	story_puzzle_id = ""
+	story_puzzle_entry = {}
+	if not card_builder_trying:
+		set_url_override("", "")
 
 func save_story_progress() -> void:
 	var save_path := "user://story_progress.save"
@@ -636,6 +781,11 @@ func load_story_progress() -> void:
 		for puzzle_path in data["completed_puzzles"]:
 			# Saves made before scenes were converted to text store ".scn" paths.
 			var migrated_path: String = puzzle_path
+			# The old story map stored its buttons' "uid://..." puzzle references.
+			if migrated_path.begins_with("uid://"):
+				var uid := ResourceUID.text_to_id(migrated_path)
+				if uid != ResourceUID.INVALID_ID and ResourceUID.has_id(uid):
+					migrated_path = ResourceUID.get_id_path(uid)
 			if migrated_path.ends_with(".scn"):
 				migrated_path = migrated_path.get_basename() + ".tscn"
 			if migrated_path not in completed_story_puzzles:

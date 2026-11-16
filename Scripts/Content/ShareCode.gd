@@ -80,13 +80,15 @@ static func decode(code: String) -> Dictionary:
 		text = text.replace(whitespace, "")
 	if text.is_empty():
 		return {"error": "Paste a share code first."}
+	if text.begins_with(PREFIX_V3):
+		return _lab_shape(decode_library(text))
 	var version := 0
 	if text.begins_with(PREFIX):
 		version = 2
 	elif text.begins_with(PREFIX_V1):
 		version = 1
 	else:
-		return {"error": "That isn't a Card Lab share code (they start with %s)." % PREFIX}
+		return {"error": "That isn't a Daily Lethal share code (they start with %s)." % PREFIX}
 	if text.length() > MAX_CODE_LENGTH:
 		return {"error": "That code is too long."}
 	var damaged := {"error": "That code is damaged. Copy it again, all of it."}
@@ -159,6 +161,132 @@ static func decode(code: String) -> Dictionary:
 		result["unknown_cards"] = unknown  # e.g. from a newer version of the game
 	return result
 
+# ---------------------------------------------------------------- library codes (LETHAL3)
+
+## LETHAL3: any number of custom cards and custom puzzles, for the Custom Library.
+##   {"c": [<card>, ...], "ca": [author per card], "z": [<puzzle>, ...]}
+##   <puzzle> = {"n": name, "a": author, "p": [hp, energy, enemy_hp], "h": hand}
+##   hand: in order; an int is the custom card c[int], a String a built-in card by name.
+## A puzzle's custom cards are always in "c", so importing a puzzle brings its cards.
+const PREFIX_V3 := "LETHAL3-"
+const MAX_LIBRARY_CARDS := 60
+const MAX_LIBRARY_PUZZLES := 40
+const MAX_HAND := 30
+const MAX_TEXT := 40
+
+## cards: [{"def": card definition, "author": "..."}]
+## puzzles: [{"name", "author", "hp", "energy", "enemy_hp", "hand": [int (index into cards) or built-in name]}]
+static func encode_library(cards: Array, puzzles: Array) -> String:
+	var data := {"c": cards.map(func(card): return _pack_card(card["def"])),
+				 "ca": cards.map(func(card): return str(card.get("author", ""))), "z": []}
+	for puzzle in puzzles:
+		data["z"].append({"n": str(puzzle.get("name", "")), "a": str(puzzle.get("author", "")),
+			"p": [int(puzzle.get("hp", 10)), int(puzzle.get("energy", 5)), int(puzzle.get("enemy_hp", 20))],
+			"h": puzzle.get("hand", []), "d": int(puzzle.get("difficulty", 0))})
+	var packed := JSON.stringify(data).to_utf8_buffer().compress(FileAccess.COMPRESSION_DEFLATE)
+	return PREFIX_V3 + _to_base64url(packed)
+
+## Any share code (LETHAL3, or an older Card Lab code) as
+## {"cards": [{"def", "author"}], "puzzles": [{"name", "author", "hp", "energy", "enemy_hp", "hand"}]}
+## or {"error": "..."}. Older codes become their cards plus one puzzle (their test hand).
+static func decode_library(code: String) -> Dictionary:
+	var text := code.strip_edges()
+	for whitespace in ["\n", "\r", " ", "\t", "`"]:
+		text = text.replace(whitespace, "")
+	if text.is_empty():
+		return {"error": "Paste a share code first."}
+	if not text.begins_with(PREFIX_V3):
+		var old := decode(text)
+		if old.has("error"):
+			return {"error": old["error"].replace(PREFIX, PREFIX_V3)}
+		var hand: Array = []
+		for entry in hand_from(old["puzzle"], old["cards"].size()):
+			hand.append(entry if entry is int else EffectRegistry.scene_name(entry))
+		return {"cards": old["cards"].map(func(card): return {"def": card, "author": ""}),
+				"puzzles": [{"name": "Shared puzzle", "author": "", "hp": old["puzzle"]["hp"], "energy": old["puzzle"]["energy"],
+							 "enemy_hp": old["puzzle"]["enemy_hp"], "hand": hand}]}
+	if text.length() > MAX_CODE_LENGTH * 4:
+		return {"error": "That code is too long."}
+	var damaged := {"error": "That code is damaged. Copy it again, all of it."}
+	var packed := _from_base64url(text.substr(PREFIX_V3.length()))
+	if packed.is_empty():
+		return damaged
+	var raw := packed.decompress_dynamic(MAX_JSON_BYTES * 4, FileAccess.COMPRESSION_DEFLATE)
+	var data = JSON.parse_string(raw.get_string_from_utf8()) if not raw.is_empty() else null
+	if not (data is Dictionary):
+		return damaged
+	var cards: Array = []
+	var packed_cards = data.get("c", [])
+	var authors = data.get("ca", [])
+	if packed_cards is Array:
+		for i in mini(packed_cards.size(), MAX_LIBRARY_CARDS):
+			var card = _unpack_card(packed_cards[i])
+			if card is Dictionary:
+				var author = authors[i] if authors is Array and i < authors.size() else ""
+				cards.append({"def": card, "author": _clean_text(author)})
+	var puzzles: Array = []
+	var packed_puzzles = data.get("z", [])
+	if packed_puzzles is Array:
+		for entry in packed_puzzles.slice(0, MAX_LIBRARY_PUZZLES):
+			if not (entry is Dictionary):
+				continue
+			var numbers = entry.get("p", [])
+			numbers = numbers if numbers is Array else []
+			var hand: Array = []
+			var hand_data = entry.get("h", [])
+			for token in (hand_data if hand_data is Array else []).slice(0, MAX_HAND):
+				if (token is int or token is float) and int(token) >= 0 and int(token) < cards.size():
+					hand.append(int(token))
+				elif token is String:
+					var path := EffectRegistry.allowed_scene_path("card_scene", token)
+					if not path.is_empty():
+						hand.append(EffectRegistry.scene_name(path))
+			if hand.is_empty():
+				continue
+			puzzles.append({"name": _clean_text(entry.get("n", "")) if not _clean_text(entry.get("n", "")).is_empty() else "Shared puzzle",
+				"author": _clean_text(entry.get("a", "")),
+				"hp": _number(numbers[0] if numbers.size() > 0 else null, 10, 1, MAX_NUMBER),
+				"energy": _number(numbers[1] if numbers.size() > 1 else null, 5, 0, MAX_NUMBER),
+				"enemy_hp": _number(numbers[2] if numbers.size() > 2 else null, 20, 1, MAX_NUMBER),
+				"difficulty": _number(entry.get("d", 0), 0, 0, 5),
+				"hand": hand})
+	if cards.is_empty() and puzzles.is_empty():
+		return damaged
+	return {"cards": cards, "puzzles": puzzles}
+
+## A LETHAL3 code in the Card Lab's shape (what decode() returns): its first MAX_CUSTOM_CARDS
+## cards, and its first puzzle as the Test hand (else one copy of each card).
+static func _lab_shape(library: Dictionary) -> Dictionary:
+	if library.has("error"):
+		return library
+	var cards: Array = library["cards"].slice(0, MAX_CUSTOM_CARDS).map(func(card): return card["def"])
+	if cards.is_empty():
+		return {"error": "That code has no custom cards to edit. Add it to your Library instead."}
+	var puzzle: Dictionary = library["puzzles"][0] if not library["puzzles"].is_empty() else {"hand": range(cards.size())}
+	var copies: Array = []
+	copies.resize(cards.size())
+	copies.fill(0)
+	var other_cards: Array = []
+	var order: Array = []
+	for token in puzzle["hand"]:
+		if token is int and token < cards.size():
+			copies[token] += 1
+			order.append(token)
+		elif token is String:
+			var path := EffectRegistry.allowed_scene_path("card_scene", token)
+			if not path.is_empty():
+				order.append(-1 - other_cards.size())
+				other_cards.append(path)
+	return {"cards": cards, "card": cards[0], "puzzle": {
+		"hp": int(puzzle.get("hp", 10)), "energy": int(puzzle.get("energy", 5)), "enemy_hp": int(puzzle.get("enemy_hp", 20)),
+		"copies": copies[0], "card_copies": copies, "other_cards": other_cards, "order": order,
+		"name": str(puzzle.get("name", "")), "author": str(puzzle.get("author", "")),
+		"difficulty": int(puzzle.get("difficulty", 0))}}
+
+## Names and authors from a code: plain text (no BBCode brackets), trimmed, kept short.
+static func _clean_text(value) -> String:
+	return str(value).replace("[", "").replace("]", "").strip_edges().left(MAX_TEXT)
+
 # ---------------------------------------------------------------- hand order
 
 ## The test hand as a list, in order: an int is one copy of the int-th custom
@@ -170,7 +298,7 @@ static func hand_from(settings: Dictionary, card_count: int, default_others: Arr
 	var listed = settings.get("card_copies", [])
 	for i in card_count:
 		var count = listed[i] if listed is Array and i < listed.size() else settings.get("copies", 1)
-		copies.append(_number(count, 1, 1, MAX_COPIES))
+		copies.append(_number(count, 1, 0, MAX_COPIES))  # 0: in the Lab but not in this puzzle's hand
 	var others: Array = settings.get("other_cards", default_others)
 	others = others.duplicate() if others is Array else []
 	var order = settings.get("order")

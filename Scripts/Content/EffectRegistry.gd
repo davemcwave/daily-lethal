@@ -251,6 +251,10 @@ static func create_effect(definition: Dictionary, siblings: Array = []) -> CardE
 			var resources: Array = effect.get(param_name).duplicate()
 			resources.clear()
 			for entry in (value if value is Array else []):
+				if entry is Dictionary:
+					if param_name == "card_scenes":  # a custom card (its definition), e.g. in Pick to Create
+						resources.append(CustomCardScene.new(entry))
+					continue
 				var path := allowed_scene_path(param_name, str(entry))
 				if not path.is_empty():
 					resources.append(load(path))
@@ -265,6 +269,32 @@ static func create_effect(definition: Dictionary, siblings: Array = []) -> CardE
 		if child != null:
 			effect.add_child(child, true)
 	return effect
+
+## A card definition without the custom cards stored inside it (Pick to Create's custom
+## choices keep only built-in names): a custom card held by another holds no more, so
+## nothing nests forever (a card that creates itself, say).
+static func without_embedded_cards(definition: Dictionary) -> Dictionary:
+	var copy: Dictionary = definition.duplicate(true)
+	copy["effects"] = _strip_effects(copy.get("effects", []))
+	if (copy["effects"] as Array).is_empty() and not definition.has("effects"):
+		copy.erase("effects")
+	return copy
+
+static func _strip_effects(effects) -> Array:
+	var stripped: Array = []
+	for effect in (effects if effects is Array else []):
+		if not effect is Dictionary:
+			stripped.append(effect)
+			continue
+		var params = effect.get("params", {})
+		if params is Dictionary:
+			for key in params:
+				if params[key] is Array:
+					params[key] = params[key].filter(func(entry): return not entry is Dictionary) 						if params[key].all(func(entry): return not entry is Dictionary or not entry.has("type")) 						else _strip_effects(params[key])  # an effects list (e.g. a choice's effects)
+		if effect.has("children"):
+			effect["children"] = _strip_effects(effect["children"])
+		stripped.append(effect)
+	return stripped
 
 ## The definition of an effect instance (inverse of create_effect).
 static func describe_effect(effect: Node) -> Dictionary:
@@ -403,7 +433,9 @@ static func _serialize(info: Dictionary, value):
 		KIND_RESOURCES:
 			var names: Array = []
 			for item in value:
-				if item is Resource:
+				if item is CustomCardScene:
+					names.append(item.definition.duplicate(true))
+				elif item is Resource:
 					var name := scene_name(item.resource_path)
 					if not name.is_empty():
 						names.append(name)

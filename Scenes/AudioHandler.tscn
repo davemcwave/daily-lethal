@@ -22,7 +22,7 @@
 
 [node name="AudioHandler" type="Node" node_paths=PackedStringArray("mute_sfx")]
 script = ExtResource("1_3t1fy")
-mute_all = true
+mute_all = false
 mute_sfx = []
 
 [node name="DrawSFX" type="AudioStreamPlayer" parent="."]

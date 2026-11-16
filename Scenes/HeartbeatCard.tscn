@@ -203,6 +203,6 @@ shape = SubResource("RectangleShape2D_5uxdr")
 increase_damage_effect = false
 
 [node name="ShowAuthorCardEffect" parent="." instance=ExtResource("7_pcc6c")]
-effect_description = "This card was designed by a community member: [color=gold]moribam[/color]"
+effect_description = "This card was designed by a community member: [color=gold]Moribam[/color]"
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]

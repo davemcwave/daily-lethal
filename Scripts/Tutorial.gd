@@ -168,15 +168,12 @@ func _on_no_button_pressed():
 	hide_tutorial()
 	get_tree().change_scene_to_file("res://Scenes/StoryView.tscn")
 
+## Tutorial done: on to the story map (its first world opens with the first puzzle).
 func _on_play_button_pressed():
 	enemy.disconnect("died", _on_enemy_died)
 	background.set_show_tutorial(false)
 	hide_tutorial()
-	var next_puzzle_scene = scene.get_puzzle().get_next_puzzle_scene()
-	var background: Background = get_tree().get_root().get_node("/root/Background")
-	background.set_puzzle_scene(next_puzzle_scene)
-	background.set_from_story_view(true)
-	get_tree().change_scene_to_file("res://Scenes/Scene0Desktop.tscn")
+	get_tree().change_scene_to_file("res://Scenes/StoryView.tscn")
 
 
 func _on_restart_button_pressed():

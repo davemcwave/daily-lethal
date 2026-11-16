@@ -13,6 +13,9 @@ extends Node
 ##     --report=path.json     also write a JSON report (absolute or res:// path)
 ##     --speed=10             Engine.time_scale while resolving (default 10)
 ##     --timeout=20           real seconds before a puzzle attempt is failed as hung
+##     --story                only the story mode's puzzles (Data/story_worlds.json), in story
+##                            order, including the ones made for the story (their solution is
+##                            in the story file)
 ##   Prompts a recording has no answer for (effect choices, chooser picks in old
 ##   recordings) are searched: up to 64 combinations (--max-choices=N) are tried per puzzle, and a
 ##   pass reports the choices that worked.
@@ -31,6 +34,8 @@ const STEP_TYPE_CLOSE_CHOOSER := 12   # close the open chooser with nothing pick
 const URL_PUZZLES_PATH := "res://custom-redirects.json"
 const URL_SOLUTIONS_PATH := "res://Tests/puzzle_solutions.json"
 const URL_ENTRY_PREFIX := "url:"
+## Story mode's worlds; --story tests their puzzles.
+const STORY_DATA_PATH := "res://Data/story_worlds.json"
 
 const GAME_SCENE_PATH := "res://Scenes/Scene0Desktop.tscn"
 const PUZZLES_DIR := "res://Scenes/Puzzles/"
@@ -465,6 +470,9 @@ func _start_cli_mode(args: PackedStringArray) -> void:
 
 	_load_url_puzzles()
 	var to_run: Array[String] = []
+	var story_mode := "--story" in args
+	if story_mode:
+		to_run = _story_entries(only_filters)
 	if not effect_smoke_mode.is_empty():
 		# "buffs": the Buff effect once per buff the Card Lab offers ("Buff@Sharp"),
 		# plus "Buff@none" (no buff chosen) to compare against.
@@ -521,7 +529,10 @@ func _start_cli_mode(args: PackedStringArray) -> void:
 		set_process(true)
 		_ensure_game_scene.call_deferred()
 		return
-	for path in _list_puzzle_paths():
+	var scene_paths: Array[String] = []
+	if not story_mode:
+		scene_paths = _list_puzzle_paths()
+	for path in scene_paths:
 		if path.get_file() in CLI_EXCLUDED_PUZZLE_FILES:
 			continue
 		var file_key := path.get_file().to_lower()
@@ -547,7 +558,7 @@ func _start_cli_mode(args: PackedStringArray) -> void:
 			_add_result(path, "SKIP", "no recorded or submitted solution", 0, 0)
 
 	# URL puzzles: every date in custom-redirects.json.
-	var dates: Array = url_puzzles.keys()
+	var dates: Array = [] if story_mode else url_puzzles.keys()
 	dates.sort()
 	for date in dates:
 		var entry: String = URL_ENTRY_PREFIX + date
@@ -575,6 +586,48 @@ func _start_cli_mode(args: PackedStringArray) -> void:
 		return
 	set_process(true)
 	_ensure_game_scene.call_deferred()
+
+## --story: every puzzle of Data/story_worlds.json, in story order. Scene and released URL
+## puzzles use their usual solutions; puzzles made for the story carry theirs in the
+## story file and are added as URL entries ("url:story-<name>").
+func _story_entries(only_filters: Array[String]) -> Array[String]:
+	var entries: Array[String] = []
+	var parsed = JSON.parse_string(FileAccess.get_file_as_string(STORY_DATA_PATH))
+	if not parsed is Dictionary:
+		push_error("No story data at " + STORY_DATA_PATH)
+		return entries
+	for world in parsed.get("worlds", []):
+		for puzzle_entry in world.get("puzzles", []):
+			var enemy := str(puzzle_entry.get("enemy", ""))
+			var key := enemy.to_lower().replace(" ", "")
+			if not only_filters.is_empty() and not only_filters.any(func(f): return key.contains(f) or str(world.get("name", "")).to_lower().contains(f)):
+				continue
+			if puzzle_entry.has("scene"):
+				var path := str(puzzle_entry["scene"])
+				var puzzle: Puzzle = load(path).instantiate()
+				var has_recorded: bool = not puzzle.get_card_solution().is_empty()
+				puzzle.free()
+				var submitted: Dictionary = url_solutions.get(path.get_file().left(10), {})
+				if has_recorded or (not submitted.is_empty() and not submitted.has("skip")):
+					entries.append(path)
+				else:
+					_add_result(path, "SKIP", str(submitted.get("skip", "no recorded or submitted solution")), 0, 0)
+			elif puzzle_entry.has("date"):
+				var date := str(puzzle_entry["date"])
+				if url_solutions.has(date) and not url_solutions[date].has("skip"):
+					url_puzzles[date] = str(puzzle_entry.get("search", url_puzzles.get(date, "")))
+					entries.append(URL_ENTRY_PREFIX + date)
+				else:
+					_add_result(URL_ENTRY_PREFIX + date, "SKIP", str(url_solutions.get(date, {}).get("skip", "no solution in Tests/puzzle_solutions.json")), 0, 0)
+			else:
+				var story_key := "story-" + enemy.to_lower().replace(" ", "-")
+				url_puzzles[story_key] = str(puzzle_entry.get("search", ""))
+				url_solutions[story_key] = {"enemy_name": enemy, "steps": puzzle_entry.get("solution", [])}
+				if (puzzle_entry.get("solution", []) as Array).is_empty():
+					_add_result(URL_ENTRY_PREFIX + story_key, "SKIP", "no solution in the story file", 0, 0)
+				else:
+					entries.append(URL_ENTRY_PREFIX + story_key)
+	return entries
 
 func _split_filter(value: String) -> Array[String]:
 	var out: Array[String] = []
@@ -715,6 +768,8 @@ func _display_name(entry: String) -> String:
 		return "%s (%s)" % [entry, effect_smoke_mode]
 	if _is_url_entry(entry):
 		var date := _url_date(entry)
+		if date.begins_with("story-"):
+			return "story: %s" % str(url_solutions.get(date, {}).get("enemy_name", date))
 		var enemy := ""
 		if url_solutions.has(date):
 			enemy = str(url_solutions[date].get("enemy_name", ""))
@@ -824,7 +879,8 @@ func _resolve_puzzle_cli(card_play_delay_seconds: float) -> void:
 				_finish_puzzle(run_id, "FAIL", "step %d/%d: solution names a card that doesn't exist" % [i + 1, step_count], i, step_count)
 				return
 			card_name = _card_name_of(card_scene, "?")
-		elif step_type == STEP_TYPE_PLAY and step_data.get("card_scene", null) == null:
+		elif step_type == STEP_TYPE_PLAY and step_data.get("card_scene", null) == null and not _hand_has_card_named(scene, card_name):
+			# (A custom card has no scene: it's found in the hand by its name.)
 			_finish_puzzle(run_id, "FAIL", "step %d/%d: no card scene for '%s'" % [i + 1, step_count, card_name], i, step_count)
 			return
 		current_step_label = "step %d/%d (%s %s)" % [i + 1, step_count, _step_type_name(step_type), card_name]
@@ -1234,6 +1290,13 @@ func _smoke_changes(before: Dictionary, after: Dictionary) -> Array:
 		if before.has(key) and str(before[key]) != str(after[key]):
 			changes.append("%s %s -> %s" % [key, before[key], after[key]])
 	return changes
+
+## A card with this name is in the hand (custom cards have no scene to look up).
+func _hand_has_card_named(scene: Scene, card_name: String) -> bool:
+	for card in scene.get_node("HandScrollContainer/Hand").get_cards():
+		if card is Card and card.get_card_name() == card_name:
+			return true
+	return false
 
 func _run_step(run_id: int, scene: Scene, step_type: int, card_name: String, target_index: int, close_after: bool = true, step_data: Dictionary = {}) -> String:
 	var hand: Hand = scene.get_node("HandScrollContainer/Hand")

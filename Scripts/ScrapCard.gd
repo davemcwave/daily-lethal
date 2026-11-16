@@ -1,7 +1,7 @@
 extends Card
 
 func update_description_panel() -> void:
-	card_description = "Discard 1 card. Gain 2 energy."
+	card_description = "[color=purple]Discard[/color] 1 card. Gain 2 energy."
 	$DescriptionPanel/Title.set_text("[center][shake rate=2.0 level=1 connected=1]%s[/shake][/center]" % card_description)
 
 func play():

@@ -315,6 +315,7 @@ func hurt(hurt_amount: int, hurt_from_card: bool = true) -> void:
 		custom_camera.add_trauma(0.2)
 		audio_handler.increase_pitch_scale("HurtSFX", 0.05)
 	
+	# Hurt lines are off (too distracting); only DialogHandler.enabled turns them on.
 	if dialog_handler.is_enabled() and randf() <= hurt_line_chance:
 		create_hurt_text(get_random_hurt_line())
 		
@@ -342,7 +343,9 @@ func _finish_hurt() -> void:
 		audio_handler.play_sfx("WinSFX")
 		
 		if not death_line.is_empty():
-			await create_hurt_text(death_line)
+			# Last words go in the enemy's dialog box (the flying words where there is none).
+			if not await scene.show_enemy_line(death_line):
+				await create_hurt_text(death_line)
 			
 		await get_tree().create_timer(0.75).timeout
 		#await fade_away($EnemyIcon)
@@ -380,7 +383,7 @@ func is_dead() -> bool:
 	return dead
 	
 func set_death_line(new_death_line: String) -> void:
-	death_line = new_death_line
+	death_line = "" if OS.has_feature("web") else new_death_line  # no dialog on the web builds
 	
 func die() -> void:
 	#$DefeatIcon.show()

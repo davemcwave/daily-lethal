@@ -208,7 +208,7 @@ vertical_alignment = 1
 layout_mode = 0
 offset_left = 104.0
 offset_top = 328.0
-offset_right = 264.0
+offset_right = 304.0
 offset_bottom = 376.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("6_8um5k")
@@ -230,8 +230,9 @@ theme_override_fonts/bold_font = ExtResource("6_8um5k")
 theme_override_font_sizes/normal_font_size = 32
 theme_override_font_sizes/bold_font_size = 32
 bbcode_enabled = true
-text = "[shake rate=2.0 level=2 connected=1]Card Lab[/shake]"
+text = "[shake rate=2.0 level=2 connected=1]Puzzle Lab[/shake]"
 fit_content = true
+autowrap_mode = 0
 scroll_active = false
 vertical_alignment = 1
 

@@ -25,6 +25,7 @@ const C_MUTED := Color("#a1a1aa")
 const C_PRIMARY := Color("#fafafa")
 const C_PRIMARY_TEXT := Color("#18181b")
 const C_ACCENT := Color("#3f3f46")
+const C_DANGER := Color("#dc2626")
 ## The card colors, by what a card of that color does (the built-in cards' colors,
 ## as in the web Card Lab's CUSTOM_CARD_COLORS in puzzle-lab/index.html, minus Sky
 ## Blue, which no card uses).
@@ -55,7 +56,7 @@ const HAND_SLOT_PAD := 3.0  # room for the outline and the "×" around each card
 const HAND_SLOT_SIZE := Vector2(120, 160) * HAND_CARD_SCALE + Vector2(HAND_SLOT_PAD, HAND_SLOT_PAD) * 2
 var cards: Array = []
 var current_card := 0
-var card_tabs: HFlowContainer
+var card_tabs: HBoxContainer  # a tab per custom card, across the top of the editor
 var show_advanced := false
 ## Which tab and which effect panel are open; static so they survive a test puzzle trip.
 static var _current_tab := 0
@@ -63,10 +64,15 @@ static var _current_tab := 0
 ## card data" at the bottom of the Effects tab. Everything else is editable
 ## without it, nested effects included.
 const DATA_TAB := 2
+const TEST_TAB := 1  # its own tab in the strip, not part of a card
 static var _show_card_data := false
 static var _open_effect := 0
 var copy_button: Button
-var share_button: Button
+
+var library_button: Button
+var puzzle_name_edit: LineEdit  # the test puzzle's name, for sharing and the Library
+var author_edit: LineEdit       # "Your name": the author of your cards and puzzles
+var difficulty_pick: OptionButton  # the puzzle's difficulty: 0 not set, 1-5 skulls
 var import_layer: Control = null
 var icon_button: Button  # the card's icon; opens the icon picker
 var icon_layer: Control = null  # the icon picker, while it's open
@@ -75,6 +81,13 @@ var import_edit: TextEdit
 var import_status: Label
 var share_status: Label
 var tab_bar: HBoxContainer
+var tab_bar_holder: Control       # the Effects | Data switch; only shown with the card data
+var body: HBoxContainer            # the open card: its face and fields, and its effects
+var test_panel: PanelContainer     # the Test puzzle tab's page (full width, instead of body)
+var card_strip: Control           # the card tabs (only on Custom Cards)
+var cards_mode_button: Button      # the two main tabs: Custom Cards | Custom Puzzle
+var puzzles_mode_button: Button
+ # the Test puzzle tab, at the right end of the tab strip
 
 var name_edit: LineEdit
 var energy_edit: LineEdit
@@ -139,6 +152,8 @@ func _ready() -> void:
 			for card_name in arg.trim_prefix("--try-cards=").split(",", false):
 				hand.append("res://Scenes/%sCard.tscn" % card_name.strip_edges().capitalize())
 			_rebuild_hand()
+	_take_incoming(background)
+	_take_incoming_puzzle(background)
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--import-code="):  # dev: open the import box with a code pasted in
 			_open_import()
@@ -222,25 +237,68 @@ func _build_layout() -> void:
 	divider.custom_minimum_size = Vector2(1, 0)
 	divider_holder.add_child(divider)
 	top_bar.add_child(divider_holder)
-	var title := _label("Card Lab", 18, C_TEXT, true)
+	var title := _label("Puzzle Lab", 18, C_TEXT, true)
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	top_bar.add_child(title)
-	var import_button := _button("Import code", _open_import)
-	import_button.tooltip_text = "Load a card and test puzzle someone shared with you"
-	top_bar.add_child(import_button)
-	share_button = _button("Share code", _on_share)
-	share_button.tooltip_text = "Copy a code with your card and test puzzle, for someone else to import"
-	top_bar.add_child(share_button)
+	top_bar.add_child(_button("Go to Library", _on_go_to_library))
+	library_button = _button("Save to Library", _on_save_to_library)
+	library_button.tooltip_text = "Save your cards and this test puzzle to your Library (Library > Puzzles and Cards, marked Custom)"
+	top_bar.add_child(library_button)
 	var play_button := _button("Play test  ›", _on_try_it, true)
 	play_button.custom_minimum_size = Vector2(120, 0)
 	top_bar.add_child(play_button)
 
-	var body := HBoxContainer.new()
+	# The two main tabs: Custom Cards (a tab per card below) and Custom Puzzle (the test puzzle).
+	var mode_bg := PanelContainer.new()
+	mode_bg.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	mode_bg.add_theme_stylebox_override("panel", _box(C_BG, C_BORDER, 6, 2))
+	page.add_child(mode_bg)
+	var mode_bar := HBoxContainer.new()
+	mode_bar.add_theme_constant_override("separation", 2)
+	mode_bg.add_child(mode_bar)
+	var mode_group := ButtonGroup.new()
+	cards_mode_button = _tab_button("Custom Cards", mode_group)
+	cards_mode_button.custom_minimum_size.x = 130
+	cards_mode_button.pressed.connect(func(): _open_card(current_card))
+	mode_bar.add_child(cards_mode_button)
+	puzzles_mode_button = _tab_button("Custom Puzzle", mode_group)
+	puzzles_mode_button.custom_minimum_size.x = 130
+	puzzles_mode_button.pressed.connect(func(): _show_tab(TEST_TAB))
+	mode_bar.add_child(puzzles_mode_button)
+
+	# Which custom card you're editing: a tab per card (each with its own "×"), then "+".
+	var strip := PanelContainer.new()
+	card_strip = strip
+	var line := StyleBoxFlat.new()
+	line.bg_color = Color(0, 0, 0, 0)
+	line.border_color = C_BORDER
+	line.border_width_bottom = 1
+	strip.add_theme_stylebox_override("panel", line)
+	page.add_child(strip)
+	var strip_scroll := ScrollContainer.new()
+	strip_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	strip_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_SHOW_NEVER
+	strip.add_child(strip_scroll)
+	card_tabs = HBoxContainer.new()
+	card_tabs.add_theme_constant_override("separation", 2)
+	strip_scroll.add_child(card_tabs)
+	strip_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	strip.remove_child(strip_scroll)
+	var strip_row := HBoxContainer.new()
+	strip.add_child(strip_row)
+	strip_row.add_child(strip_scroll)
+
+	body = HBoxContainer.new()
 	body.add_theme_constant_override("separation", 12)
 	body.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	page.add_child(body)
+	test_panel = PanelContainer.new()
+	test_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	test_panel.add_theme_stylebox_override("panel", _box(C_PAGE_PANEL, C_BORDER, 8, 10))
+	page.add_child(test_panel)
 	_build_card_side(body)
 	_build_tabs(body)
+	_apply_view()
 
 ## Left: the card, big, with its own fields right under it.
 func _build_card_side(parent: Container) -> void:
@@ -255,12 +313,6 @@ func _build_card_side(parent: Container) -> void:
 	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	box.add_theme_constant_override("separation", 6)
 	scroll.add_child(box)
-
-	# Which custom card you're editing: one chip per card, plus "+ Card".
-	card_tabs = HFlowContainer.new()
-	card_tabs.add_theme_constant_override("h_separation", 4)
-	card_tabs.add_theme_constant_override("v_separation", 4)
-	box.add_child(card_tabs)
 
 	var preview_holder := CenterContainer.new()
 	box.add_child(preview_holder)
@@ -337,6 +389,7 @@ func _build_tabs(parent: Container) -> void:
 	tab_bg.add_theme_stylebox_override("panel", _box(C_BG, C_BORDER, 6, 2))
 	tab_bg.add_child(tab_bar)
 	box.add_child(tab_bg)
+	tab_bar_holder = tab_bg
 	var pages := []
 	var group := ButtonGroup.new()
 	for tab_index in TABS.size():
@@ -348,8 +401,16 @@ func _build_tabs(parent: Container) -> void:
 		page_box.size_flags_vertical = Control.SIZE_EXPAND_FILL
 		page_box.add_theme_constant_override("separation", 8)
 		page_scroll.add_child(page_box)
-		box.add_child(page_scroll)
 		pages.append(page_scroll)
+		if tab_index == TEST_TAB:
+			# The test puzzle isn't part of a card: its own tab in the strip, its own page.
+			test_panel.add_child(page_scroll)
+			var placeholder := Button.new()  # keeps tab_bar's child indexes matching TABS
+			placeholder.visible = false
+			tab_bar.add_child(placeholder)
+			_build_test_page(page_box)
+			continue
+		box.add_child(page_scroll)
 		var tab := _tab_button(TABS[tab_index], group)
 		tab_bar.add_child(tab)
 		tab.toggled.connect(func(on):
@@ -363,12 +424,36 @@ func _build_tabs(parent: Container) -> void:
 	if _current_tab == DATA_TAB and not _show_card_data:
 		_current_tab = 0
 	tab_bar.get_child(DATA_TAB).visible = _show_card_data
+	tab_bar_holder.visible = _show_card_data
+	var card_page := _current_tab if _current_tab != TEST_TAB else 0
 	for tab_index in TABS.size():
-		pages[tab_index].visible = tab_index == _current_tab
-	tab_bar.get_child(_current_tab).button_pressed = true
+		if tab_index != TEST_TAB:
+			pages[tab_index].visible = tab_index == card_page
+	var keep := _current_tab
+	tab_bar.get_child(card_page).button_pressed = true
+	_current_tab = keep  # pressing the button above sets it; the Test puzzle tab may be the one open
 
+## Opens a page: the Test puzzle tab, or a page of the open card (Effects, Data).
 func _show_tab(tab_index: int) -> void:
-	tab_bar.get_child(tab_index).button_pressed = true  # the group switches the pages
+	if tab_index == TEST_TAB:
+		_current_tab = TEST_TAB
+	else:
+		tab_bar.get_child(tab_index).button_pressed = true  # the group switches the pages
+		_current_tab = tab_index
+	_apply_view()
+	_rebuild_card_tabs()
+
+## The Test puzzle tab shows its page in place of the card's.
+func _apply_view() -> void:
+	if body == null or test_panel == null:
+		return
+	body.visible = _current_tab != TEST_TAB
+	test_panel.visible = _current_tab == TEST_TAB
+	if _current_tab == TEST_TAB and _hand_dirty:
+		_rebuild_hand()
+	card_strip.visible = _current_tab != TEST_TAB
+	cards_mode_button.set_pressed_no_signal(_current_tab != TEST_TAB)
+	puzzles_mode_button.set_pressed_no_signal(_current_tab == TEST_TAB)
 
 func _tab_button(text: String, group: ButtonGroup) -> Button:
 	var tab := Button.new()
@@ -416,8 +501,8 @@ func _build_effects_page(page_box: VBoxContainer) -> void:
 		_show_card_data = not _show_card_data
 		data_toggle.text = "Hide card data" if _show_card_data else "Show card data"
 		tab_bar.get_child(DATA_TAB).visible = _show_card_data
-		if _show_card_data:
-			_show_tab(DATA_TAB))
+		tab_bar_holder.visible = _show_card_data
+		_show_tab(DATA_TAB if _show_card_data else 0))
 	page_box.add_child(data_toggle)
 
 func _build_test_page(page_box: VBoxContainer) -> void:
@@ -425,6 +510,21 @@ func _build_test_page(page_box: VBoxContainer) -> void:
 	share_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	share_status.visible = false
 	page_box.add_child(share_status)
+	puzzle_name_edit = LineEdit.new()
+	puzzle_name_edit.placeholder_text = "Training Dummy"
+	puzzle_name_edit.max_length = ShareCode.MAX_TEXT
+	puzzle_name_edit.text_changed.connect(func(_t): _save_try_settings())
+	page_box.add_child(_row("Puzzle name", puzzle_name_edit, 110))
+	author_edit = LineEdit.new()
+	author_edit.placeholder_text = "Your name, shown on your cards and puzzles"
+	author_edit.max_length = ShareCode.MAX_TEXT
+	author_edit.text_changed.connect(func(_t): _save_try_settings())
+	page_box.add_child(_row("Author", author_edit, 110))
+	difficulty_pick = OptionButton.new()
+	for label in ["Not set", "1 skull: Very Easy", "2 skulls: Easy", "3 skulls: Medium", "4 skulls: Hard", "5 skulls: Very Hard"]:
+		difficulty_pick.add_item(label)
+	difficulty_pick.item_selected.connect(func(_i): _save_try_settings())
+	page_box.add_child(_row("Difficulty", difficulty_pick, 110))
 	test_hp = _number_edit(10, true, func(_v): _save_try_settings())
 	test_energy = _number_edit(5, true, func(_v): _save_try_settings())
 	test_enemy_hp = _number_edit(20, true, func(_v): _save_try_settings())
@@ -647,7 +747,7 @@ const MAX_NESTING := 4
 ## effects use _open_effect.
 static var _open_nested := {}
 
-## One effect: a one-line summary ("Buff · Sharp 3") that opens to its settings.
+## One effect: a one-line summary ("Buff: Sharp 3") that opens to its settings.
 ## One panel per list is open at a time, so several effects still fit on screen.
 ## list_key is "" for the card's own effects, else the path to the nested list
 ## ("0/children", "0/card_effects_to_choose_from/1/children", ...).
@@ -815,7 +915,7 @@ static func _status_word(text: String) -> String:
 	var whole_word := RegEx.create_from_string("\\bBuff\\b")
 	return whole_word.sub(text, "Status", true)
 
-## "Buff · Sharp 3", "Damage · 3", "Create Card · Slash": the type plus the
+## "Buff: Sharp 3", "Damage 3", "Create Card: Slash": the type plus the
 ## settings this card changed, for a closed effect panel.
 func _effect_summary(effect: Dictionary) -> String:
 	var type: String = str(effect.get("type", "?"))
@@ -843,9 +943,9 @@ func _effect_summary(effect: Dictionary) -> String:
 	if parts.is_empty():
 		return summary
 	var details := " ".join(parts.slice(0, 3))
-	# "Damage 3" reads better than "Damage · 3" when the number is the effect's own amount.
+	# "Damage 3" reads better than "Damage: 3" when the number is the effect's own amount.
 	var reads_on := details.is_valid_int() or details.begins_with("up to ")
-	return summary + (" " if reads_on else "  ·  ") + details
+	return summary + (" " if reads_on else ": ") + details
 
 ## A number with its setting's name, unless the name just repeats the effect's:
 ## Damage's damage_amount -> "3", Discard's max_discard_amount -> "Max Discard 1".
@@ -952,7 +1052,8 @@ func _param_editor(info: Dictionary, value, on_change: Callable) -> Control:
 			line.text_changed.connect(on_change)
 			return line
 		EffectRegistry.KIND_RESOURCES:
-			return _resource_list_picker(EffectRegistry.get_resource_choices(info["name"]), value if value is Array else [], on_change)
+			return _resource_list_picker(EffectRegistry.get_resource_choices(info["name"]), value if value is Array else [], on_change,
+				info["name"] == "card_scenes")
 		EffectRegistry.KIND_COLOR:
 			var picker := ColorPickerButton.new()
 			picker.custom_minimum_size = Vector2(0, 22)
@@ -985,43 +1086,93 @@ func _is_choice(choice: Dictionary, value: String) -> bool:
 ## A list of cards (e.g. Pick To Create's options): removable chips plus a picker.
 ##   [Slash ×] [Spear ×]
 ##   [Pound          v] [Add]
-func _resource_list_picker(choices: Array, current: Array, on_change: Callable) -> Control:
+func _resource_list_picker(choices: Array, current: Array, on_change: Callable, with_custom := false) -> Control:
+	# Entries: a built-in card's id ("Slash"), or (with_custom, a list of cards) one of your
+	# cards as its definition, kept up to date by _sync_embedded_cards.
 	var box := VBoxContainer.new()
 	box.add_theme_constant_override("separation", 4)
 	var chips := HFlowContainer.new()
 	chips.add_theme_constant_override("h_separation", 4)
 	chips.add_theme_constant_override("v_separation", 4)
 	box.add_child(chips)
-	var names: Array = []
+	var entries: Array = []
 	for entry in current:
+		if entry is Dictionary:
+			if with_custom:
+				entries.append(entry)
+			continue
 		for choice: Dictionary in choices:
 			if _is_choice(choice, str(entry)):
-				names.append(choice["id"])
-	for i in names.size():
-		var label: String = str(names[i]).capitalize()
+				entries.append(choice["id"])
+	for i in entries.size():
+		var entry = entries[i]
+		var label: String = ("%s (yours)" % entry.get("name", "Custom Card")) if entry is Dictionary else str(entry).capitalize()
 		chips.add_child(_button(label + "  ×", func():
-			var updated := names.duplicate()
+			var updated := entries.duplicate()
 			updated.remove_at(i)
 			on_change.call(updated)
 			_rebuild_effects_ui.call_deferred()))
-	if names.is_empty():
+	if entries.is_empty():
 		chips.add_child(_hint("None yet."))
 	var add_row := HBoxContainer.new()
 	add_row.add_theme_constant_override("separation", 4)
 	var picker := OptionButton.new()
 	picker.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	if with_custom and not cards.is_empty():
+		picker.add_separator("Your cards")
+		for i in cards.size():
+			picker.add_item(str(cards[i].get("name", "Card %d" % (i + 1))))
+			picker.set_item_metadata(picker.item_count - 1, {"custom": i})
+		picker.add_separator("Built-in cards")
 	for choice: Dictionary in choices:
 		picker.add_item(choice["label"])
+		picker.set_item_metadata(picker.item_count - 1, {"builtin": choice["id"]})
+	for at in picker.item_count:  # start on the first card, not a heading
+		if not picker.is_item_separator(at):
+			picker.select(at)
+			break
 	add_row.add_child(picker)
 	add_row.add_child(_button("Add", func():
-		if picker.selected < 0:
+		if picker.selected < 0 or picker.is_item_separator(picker.selected):
 			return
-		var updated := names.duplicate()
-		updated.append(choices[picker.selected]["id"])
+		var pick: Dictionary = picker.get_item_metadata(picker.selected)
+		var updated := entries.duplicate()
+		if pick.has("custom"):
+			cards[current_card] = definition
+			updated.append(EffectRegistry.without_embedded_cards(cards[int(pick["custom"])]))
+		else:
+			updated.append(pick["builtin"])
 		on_change.call(updated)
 		_rebuild_effects_ui.call_deferred()))
 	box.add_child(add_row)
 	return box
+
+## Your cards held inside other cards (Pick to Create's choices) follow your edits: each
+## copy is replaced by the card with that name as it is now.
+func _sync_embedded_cards() -> void:
+	var latest := {}
+	for card in cards:
+		latest[str(card.get("name", ""))] = card
+	for card in cards:
+		_sync_effects(card.get("effects", []), latest)
+
+func _sync_effects(effects, latest: Dictionary) -> void:
+	for effect in (effects if effects is Array else []):
+		if not effect is Dictionary:
+			continue
+		var params = effect.get("params", {})
+		if params is Dictionary:
+			for key in params:
+				if not params[key] is Array:
+					continue
+				var list: Array = params[key]
+				for at in list.size():
+					var entry = list[at]
+					if entry is Dictionary and entry.has("type"):
+						_sync_effects([entry], latest)  # an effects list
+					elif entry is Dictionary and latest.has(str(entry.get("name", ""))):
+						list[at] = EffectRegistry.without_embedded_cards(latest[str(entry["name"])])
+		_sync_effects(effect.get("children", []), latest)
 
 
 # ---------------------------------------------------------------- editing
@@ -1209,15 +1360,100 @@ func _on_copy_json() -> void:
 
 # ---------------------------------------------------------------- share codes
 
-## Copies a code with the card and the Test hand settings (ShareCode.gd).
-func _on_share() -> void:
+func _puzzle_name() -> String:
+	var name := puzzle_name_edit.text.strip_edges()
+	return name if not name.is_empty() else "Training Dummy"
+
+## Your cards and the Test hand in ShareCode.decode_library's shape: each card with you
+## as its author, and the Test hand as one named puzzle.
+func _lab_as_library() -> Dictionary:
 	_save_try_settings()
 	cards[current_card] = definition
-	DisplayServer.clipboard_set(ShareCode.encode(cards, _try_settings()))
-	share_button.text = "Code copied"
+	_fit_hand()
+	var author := author_edit.text.strip_edges()
+	var puzzle_hand: Array = []
+	for entry in hand:
+		puzzle_hand.append(entry if entry is int else EffectRegistry.scene_name(entry))
+	return {"cards": cards.map(func(card): return {"def": card, "author": author}),
+			"puzzles": [{"name": _puzzle_name(), "author": author, "hp": _number_value(test_hp, 10),
+						 "energy": _number_value(test_energy, 5), "enemy_hp": _number_value(test_enemy_hp, 20),
+						 "difficulty": difficulty_pick.selected, "hand": puzzle_hand}]}
+
+## Saves your cards and the Test hand (as a puzzle) to the Library.
+## Cards or a puzzle with the same names already in the Library: ask before overwriting them.
+func _on_save_to_library() -> void:
+	var lab := _lab_as_library()
+	var found := CustomLibrary.conflicts(lab, true)
+	if found["cards"].is_empty() and found["puzzles"].is_empty():
+		_save_to_library(lab)
+		return
+	var total: int = found["cards"].size() + found["puzzles"].size()
+	_confirm("Overwrite %s?" % ("it" if total == 1 else "them"),
+		"Your Library already has %s. Overwrite %s with this version, or cancel and rename yours." % [
+			CustomLibrary.describe_conflicts(found), "it" if total == 1 else "them"],
+		"Overwrite", func(): _save_to_library(lab))
+
+func _save_to_library(lab: Dictionary) -> void:
+	var result := CustomLibrary.save(lab, true)
+	var parts: Array = []
+	if result["puzzles"] > 0:
+		parts.append("1 new puzzle")
+	if result["replaced"] > 0:
+		parts.append("puzzle overwritten")
+	if result["cards"] > 0:
+		parts.append(_count(result["cards"], "new card"))
+	if result["updated"] > 0:
+		parts.append(_count(result["updated"], "card") + " overwritten")
+	library_button.text = "Saved" if not parts.is_empty() else "Already saved"
+	share_status.visible = true
+	share_status.text = ("Saved to your Library: %s. Share it from the Library, where it's marked Custom." % ", ".join(parts)) \
+		if not parts.is_empty() else "Already in your Library, unchanged."
 	get_tree().create_timer(1.5).timeout.connect(func():
-		if is_instance_valid(share_button):
-			share_button.text = "Share code")
+		if is_instance_valid(library_button):
+			library_button.text = "Save to Library")
+
+## A box over the page asking to confirm (the confirm button is red).
+func _confirm(title: String, text: String, confirm_text: String, on_confirm: Callable) -> void:
+	var layer := Control.new()
+	layer.set_anchors_preset(Control.PRESET_FULL_RECT)
+	layer.z_index = 60
+	add_child(layer)
+	var dim := ColorRect.new()
+	dim.color = Color(0, 0, 0, 0.6)
+	dim.set_anchors_preset(Control.PRESET_FULL_RECT)
+	dim.gui_input.connect(func(event):
+		if event is InputEventMouseButton and event.pressed:
+			layer.queue_free())
+	layer.add_child(dim)
+	var center := CenterContainer.new()
+	center.set_anchors_preset(Control.PRESET_FULL_RECT)
+	center.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	layer.add_child(center)
+	var panel := PanelContainer.new()
+	panel.custom_minimum_size = Vector2(400, 0)
+	panel.add_theme_stylebox_override("panel", _box(C_CARD, C_BORDER, 8, 16))
+	center.add_child(panel)
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 12)
+	panel.add_child(box)
+	box.add_child(_label(title, 16, C_TEXT, true))
+	box.add_child(_hint(text))
+	var buttons := HBoxContainer.new()
+	buttons.add_theme_constant_override("separation", 6)
+	buttons.alignment = BoxContainer.ALIGNMENT_END
+	box.add_child(buttons)
+	buttons.add_child(_button("Cancel", layer.queue_free))
+	var confirm := _button(confirm_text, func():
+		layer.queue_free()
+		on_confirm.call())
+	for state in ["normal", "hover", "pressed"]:
+		confirm.add_theme_stylebox_override(state, _box(C_DANGER if state != "hover" else C_DANGER.lightened(0.1), C_DANGER, 6, 6))
+	for state in ["font_color", "font_hover_color", "font_pressed_color"]:
+		confirm.add_theme_color_override(state, Color.WHITE)
+	buttons.add_child(confirm)
+
+func _count(n: int, noun: String) -> String:
+	return "%d %s%s" % [n, noun, "" if n == 1 else "s"]
 
 ## A box over the page to paste a code into, filled in from the clipboard when
 ## it already holds one.
@@ -1245,27 +1481,36 @@ func _open_import() -> void:
 	var box := VBoxContainer.new()
 	box.add_theme_constant_override("separation", 10)
 	panel.add_child(box)
-	box.add_child(_label("Import a shared card", 16, C_TEXT, true))
-	box.add_child(_hint("Paste a share code. Add puts its cards next to yours; Replace swaps your cards and Test hand for the shared ones."))
+	box.add_child(_label("Import a share code", 16, C_TEXT, true))
+	box.add_child(_hint("Paste a share code. Save it to your Library (just the cards, or the cards and their puzzles; a puzzle always brings its cards), or open it here to edit."))
 	import_edit = TextEdit.new()
 	import_edit.custom_minimum_size = Vector2(0, 110)
 	import_edit.wrap_mode = TextEdit.LINE_WRAPPING_BOUNDARY
 	import_edit.add_theme_font_size_override("font_size", 11)
-	import_edit.placeholder_text = ShareCode.PREFIX + "..."
+	import_edit.placeholder_text = ShareCode.PREFIX_V3 + "..."
 	var clipboard := DisplayServer.clipboard_get().strip_edges()
-	if clipboard.begins_with(ShareCode.PREFIX) or clipboard.begins_with(ShareCode.PREFIX_V1):
+	if clipboard.begins_with(ShareCode.PREFIX_V3) or clipboard.begins_with(ShareCode.PREFIX) or clipboard.begins_with(ShareCode.PREFIX_V1):
 		import_edit.text = clipboard
 	box.add_child(import_edit)
 	import_status = _label("", 11, Color("#f87171"))
 	import_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	box.add_child(import_status)
+	box.add_child(_label("SAVE TO YOUR LIBRARY", 11, C_MUTED, true))
+	var library_row := HBoxContainer.new()
+	library_row.add_theme_constant_override("separation", 6)
+	box.add_child(library_row)
+	library_row.add_child(_button("Cards and puzzles", _on_import_library.bind(true), true))
+	library_row.add_child(_button("Cards only", _on_import_library.bind(false)))
+	box.add_child(_label("OPEN IN THE CARD LAB", 11, C_MUTED, true))
 	var buttons := HBoxContainer.new()
 	buttons.add_theme_constant_override("separation", 6)
-	buttons.alignment = BoxContainer.ALIGNMENT_END
 	box.add_child(buttons)
-	buttons.add_child(_button("Cancel", _close_import))
+	buttons.add_child(_button("Add to my cards", _on_import_add))
 	buttons.add_child(_button("Replace all", _on_import))
-	buttons.add_child(_button("Add to my cards", _on_import_add, true))
+	var spacer := Control.new()
+	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	buttons.add_child(spacer)
+	buttons.add_child(_button("Cancel", _close_import))
 	import_edit.grab_focus()
 
 # ---------------------------------------------------------------- icon picker
@@ -1383,6 +1628,19 @@ func _close_icon_picker() -> void:
 		icon_layer.queue_free()
 		icon_layer = null
 
+## Adds a code's cards (and, with include_puzzles, its puzzles) to the Library.
+func _on_import_library(include_puzzles: bool) -> void:
+	var result := ShareCode.decode_library(import_edit.text)
+	if result.has("error"):
+		import_status.text = result["error"]
+		return
+	var added := CustomLibrary.save(result, include_puzzles)
+	_close_import()
+	share_status.visible = true
+	_show_tab(1)
+	share_status.text = "Added to your Library: %s%s. Find them in Library, marked Custom." % [
+		_count(added["cards"], "new card"), (", " + _count(added["puzzles"], "new puzzle")) if include_puzzles else ""]
+
 func _close_import() -> void:
 	if import_layer != null:
 		import_layer.queue_free()
@@ -1390,6 +1648,34 @@ func _close_import() -> void:
 
 ## Adds the shared cards after yours (as many as there's room for), each in the
 ## hand as many times as the code has it. Your cards and Test hand settings stay.
+## Cards the Library sent (Edit in Card Lab): open one already here, else add it (and deal it
+## once in the Test hand) if there's room.
+func _take_incoming(background) -> void:
+	if background == null or background.card_lab_incoming.is_empty():
+		return
+	var incoming: Array = background.card_lab_incoming
+	background.card_lab_incoming = []
+	cards[current_card] = definition
+	for def in incoming:
+		if not def is Dictionary or def.is_empty():
+			continue
+		var key := JSON.stringify(def, "", true)
+		var at := -1
+		for i in cards.size():
+			if JSON.stringify(cards[i], "", true) == key:
+				at = i
+		if at == -1:
+			if cards.size() >= MAX_CARDS:
+				share_status.visible = true
+				share_status.text = "The Puzzle Lab holds %d cards. Remove one, then open the card from the Library again." % MAX_CARDS
+				continue
+			cards.append(def.duplicate(true))
+			at = cards.size() - 1
+			hand.append(at)
+		_open_card(at)
+	_save_try_settings()
+	_rebuild_hand()
+
 func _on_import_add() -> void:
 	var result := ShareCode.decode(import_edit.text)
 	if result.has("error"):
@@ -1397,7 +1683,7 @@ func _on_import_add() -> void:
 		return
 	var room := MAX_CARDS - cards.size()
 	if room <= 0:
-		import_status.text = "You have %d cards, the most the Card Lab holds. Remove one first, or Replace all." % MAX_CARDS
+		import_status.text = "You have %d cards, the most the Puzzle Lab holds. Remove one first, or Replace all." % MAX_CARDS
 		return
 	cards[current_card] = definition
 	var shared: Array = result["cards"]
@@ -1416,13 +1702,63 @@ func _on_import_add() -> void:
 	share_status.visible = true
 	share_status.text = "Added %s." % ", ".join(names)
 	if added < shared.size():
-		share_status.text += " No room for %d more (the Card Lab holds %d)." % [shared.size() - added, MAX_CARDS]
+		share_status.text += " No room for %d more (the Puzzle Lab holds %d)." % [shared.size() - added, MAX_CARDS]
 
 func _on_import() -> void:
 	var result := ShareCode.decode(import_edit.text)
 	if result.has("error"):
 		import_status.text = result["error"]
 		return
+	_close_import()
+	_replace_lab(result)
+	if result.has("unknown_cards"):
+		share_status.visible = true
+		share_status.text = "Left out cards this version doesn't have: " + ", ".join(result["unknown_cards"])
+	else:
+		var what := "\"%s\"" % definition.get("name", "Custom Card") if cards.size() == 1 else "%d cards" % cards.size()
+		share_status.visible = true
+		share_status.text = "Imported %s. Press Play test to try it." % what
+
+## A puzzle sent from the Library (Edit in Puzzle Lab). When the Lab has cards that aren't
+## saved in the Library, asks before replacing them.
+func _take_incoming_puzzle(background) -> void:
+	if background == null or background.card_lab_incoming_puzzle.is_empty():
+		return
+	var incoming: Dictionary = background.card_lab_incoming_puzzle
+	background.card_lab_incoming_puzzle = {}
+	var title := str(incoming["puzzle"].get("name", "this puzzle"))
+	var open_it := func():
+		_replace_lab(incoming)
+		share_status.visible = true
+		share_status.text = "Opened \"%s\" from your Library. Save to Library again to keep your changes." % title
+	var unsaved := _unsaved_lab_cards()
+	if unsaved.is_empty():
+		open_it.call()
+		return
+	var names: Array = unsaved.map(func(n): return "\"%s\"" % n)
+	_confirm("Replace the Puzzle Lab?",
+		"%s %s saved to your Library. Opening \"%s\" replaces everything in the Puzzle Lab." % [
+			", ".join(names), "isn't" if names.size() == 1 else "aren't", title],
+		"Replace", open_it)
+
+## The Lab's cards that aren't in the Library as they are now (a fresh starter card doesn't count).
+func _unsaved_lab_cards() -> Array:
+	cards[current_card] = definition
+	var starter := _starter_definition()
+	var unsaved: Array = []
+	for card in cards:
+		var plain: Dictionary = card.duplicate(true)
+		plain["name"] = starter.get("name", "")
+		if JSON.stringify(plain, "", true) == JSON.stringify(starter, "", true):
+			continue
+		var saved := CustomLibrary.card_named(str(card.get("name", "")))
+		if saved.is_empty() or JSON.stringify(saved["def"], "", true) != JSON.stringify(card, "", true):
+			unsaved.append(str(card.get("name", "Custom Card")))
+	return unsaved
+
+## Puts a decoded share (ShareCode.decode's Lab shape: cards and one puzzle) in the Lab,
+## in place of what's there, and opens its Custom Puzzle tab.
+func _replace_lab(result: Dictionary) -> void:
 	cards = result["cards"]
 	current_card = 0
 	definition = cards[0]
@@ -1435,15 +1771,8 @@ func _on_import() -> void:
 	_load_try_settings()
 	_load_definition_into_ui()
 	_refresh()
-	_close_import()
-	_show_tab(1)  # Test hand: what came with it, next to Play test
-	if result.has("unknown_cards"):
-		share_status.visible = true
-		share_status.text = "Left out cards this version doesn't have: " + ", ".join(result["unknown_cards"])
-	else:
-		var what := "\"%s\"" % definition.get("name", "Custom Card") if cards.size() == 1 else "%d cards" % cards.size()
-		share_status.visible = true
-		share_status.text = "Imported %s. Press Play test to try it." % what
+	_save_try_settings()
+	_show_tab(TEST_TAB)  # the Custom Puzzle tab: what came with it, next to Play test
 
 
 # ---------------------------------------------------------------- preview & try
@@ -1457,10 +1786,16 @@ func _refresh() -> void:
 	preview_card = CardFactory.create_card(definition)
 	preview_card.update_description_panel()
 	preview.set_card(preview_card)
-	json_edit.text = JSON.stringify(definition, "  ", false)
 	cards[current_card] = definition
+	_sync_embedded_cards()
+	json_edit.text = JSON.stringify(definition, "  ", false)
 	_rebuild_card_tabs()
-	_rebuild_hand()
+	# The hand is slow to rebuild (every card in it is made again): only when it's on screen,
+	# else when the Custom Puzzle tab opens. Editing a card would lag otherwise (the web most).
+	if _current_tab == TEST_TAB:
+		_rebuild_hand()
+	else:
+		_hand_dirty = true
 	var background = get_node_or_null("/root/Background")
 	if background != null:
 		background.card_builder_definition = definition.duplicate(true)
@@ -1469,31 +1804,105 @@ func _refresh() -> void:
 
 # ---------------------------------------------------------------- several cards
 
-## The chips above the preview: each custom card by name (the open one lit),
-## "×" on the open one when there's more than one, and "+ Card".
+## The tabs across the top: one per custom card (the open one joined to the page below),
+## each with its own "×" (first click: a red "Delete?", second click deletes; moving away
+## cancels), then "+" for another card. Right-click a tab for its menu too.
 func _rebuild_card_tabs() -> void:
 	if card_tabs == null:
 		return
 	for child in card_tabs.get_children():
 		child.queue_free()
 	for i in cards.size():
+		var open := i == current_card and _current_tab != TEST_TAB
 		var card_name := str(cards[i].get("name", "Card %d" % (i + 1)))
-		if card_name.length() > 14:
-			card_name = card_name.left(13) + "…"
-		var chip := _button(card_name, func(): _select_card(i), i == current_card)
-		chip.tooltip_text = "Edit this card (right-click to delete)"
-		chip.gui_input.connect(func(event):
-			if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
-				_open_card_menu(i))
-		card_tabs.add_child(chip)
-	if cards.size() > 1:
-		var remove := _button("×", _remove_current_card)
-		remove.tooltip_text = "Remove the card you're editing"
-		card_tabs.add_child(remove)
+		if card_name.length() > 16:
+			card_name = card_name.left(15) + "…"
+		var tab := PanelContainer.new()
+		tab.mouse_filter = Control.MOUSE_FILTER_STOP
+		tab.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		tab.add_theme_stylebox_override("panel", _tab_box(open, false))
+		if not open:
+			tab.mouse_entered.connect(func(): tab.add_theme_stylebox_override("panel", _tab_box(false, true)))
+			tab.mouse_exited.connect(func(): tab.add_theme_stylebox_override("panel", _tab_box(false, false)))
+		tab.gui_input.connect(func(event):
+			if event is InputEventMouseButton and event.pressed:
+				if event.button_index == MOUSE_BUTTON_LEFT:
+					_open_card(i)
+				elif event.button_index == MOUSE_BUTTON_RIGHT:
+					_open_card_menu(i))
+		var row := HBoxContainer.new()
+		row.add_theme_constant_override("separation", 6)
+		row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		tab.add_child(row)
+		var title := Label.new()
+		title.text = card_name
+		title.add_theme_color_override("font_color", C_TEXT if open else C_MUTED)
+		title.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		row.add_child(title)
+		var remove := Button.new()
+		remove.text = "×"
+		remove.flat = true
+		remove.focus_mode = Control.FOCUS_NONE
+		remove.add_theme_color_override("font_color", C_MUTED)
+		remove.add_theme_color_override("font_hover_color", C_TEXT)
+		remove.pressed.connect(func():
+			if remove.text == "×":
+				remove.text = "Delete?"
+				remove.flat = false
+				for state in ["normal", "hover", "pressed"]:
+					remove.add_theme_stylebox_override(state, _box(C_DANGER if state != "hover" else C_DANGER.lightened(0.1), C_DANGER, 4, 0))
+				for state in ["font_color", "font_hover_color", "font_pressed_color"]:
+					remove.add_theme_color_override(state, Color.WHITE)
+			else:
+				_remove_card(i))
+		remove.mouse_exited.connect(func():
+			if is_instance_valid(remove) and remove.text != "×":
+				remove.text = "×"
+				remove.flat = true
+				for state in ["normal", "hover", "pressed"]:
+					remove.remove_theme_stylebox_override(state)
+				remove.add_theme_color_override("font_color", C_MUTED)
+				remove.add_theme_color_override("font_hover_color", C_TEXT)
+				remove.add_theme_color_override("font_pressed_color", C_TEXT))
+		row.add_child(remove)
+		card_tabs.add_child(tab)
 	if cards.size() < MAX_CARDS:
-		var add := _button("+ Card", _add_card)
-		add.tooltip_text = "Another custom card for the same test puzzle"
+		var add := Button.new()
+		add.text = "+  New card"
+		add.flat = true
+		add.focus_mode = Control.FOCUS_NONE
+		add.add_theme_color_override("font_color", C_MUTED)
+		add.add_theme_color_override("font_hover_color", C_TEXT)
+		add.pressed.connect(_add_card)
 		card_tabs.add_child(add)
+
+## Clicking a card's tab (or Custom Cards): that card, on its own page.
+func _open_card(index: int) -> void:
+	if _current_tab == TEST_TAB:
+		_current_tab = 0
+		_apply_view()
+	if index == current_card:
+		_rebuild_card_tabs()
+	else:
+		_select_card(index)
+
+## A card tab's look: the open one is filled and joined to the page (no bottom edge).
+func _tab_box(open: bool, hover: bool) -> StyleBoxFlat:
+	var box := StyleBoxFlat.new()
+	box.bg_color = C_CARD if open else (Color(C_CARD, 0.5) if hover else Color(0, 0, 0, 0))
+	box.border_color = C_BORDER if open else Color(0, 0, 0, 0)
+	box.border_width_left = 1
+	box.border_width_top = 1
+	box.border_width_right = 1
+	box.corner_radius_top_left = 6
+	box.corner_radius_top_right = 6
+	box.content_margin_left = 12
+	box.content_margin_right = 4
+	box.content_margin_top = 2
+	box.content_margin_bottom = 2
+	if open:
+		box.expand_margin_bottom = 1  # covers the strip's line under it
+	return box
 
 func _select_card(index: int) -> void:
 	if index == current_card or index < 0 or index >= cards.size():
@@ -1507,6 +1916,9 @@ func _select_card(index: int) -> void:
 	_refresh()
 
 func _add_card() -> void:
+	if _current_tab == TEST_TAB:
+		_current_tab = 0
+		_apply_view()
 	cards[current_card] = definition
 	var new_card := _starter_definition()
 	new_card["name"] = "Card %d" % (cards.size() + 1)
@@ -1523,9 +1935,6 @@ func _open_card_menu(index: int) -> void:
 		add_child(card_menu)
 	card_menu.clear()
 	card_menu.add_item("Delete \"%s\"" % str(cards[index].get("name", "card")), 0)
-	card_menu.set_item_disabled(0, cards.size() <= 1)
-	if cards.size() <= 1:
-		card_menu.set_item_tooltip(0, "It's your only card")
 	card_menu.set_meta("card", index)
 	card_menu.popup(Rect2i(Vector2i(get_global_mouse_position()), Vector2i.ZERO))
 
@@ -1535,7 +1944,20 @@ func _remove_current_card() -> void:
 ## Removes cards[index] and its copies in the hand; the card you're editing
 ## stays open (or its neighbour, when it's the one removed).
 func _remove_card(index: int) -> void:
-	if cards.size() <= 1 or index < 0 or index >= cards.size():
+	if index < 0 or index >= cards.size():
+		return
+	if cards.size() == 1:
+		# Your only card: start over with a fresh one (the Lab always has a card open).
+		definition = _starter_definition()
+		cards = [definition]
+		current_card = 0
+		hand = hand.filter(func(entry): return not entry is int)
+		hand.append(0)
+		_open_effect = 0
+		_open_nested.clear()
+		_load_definition_into_ui()
+		_refresh()
+		_save_try_settings()
 		return
 	cards[current_card] = definition
 	var removed := index
@@ -1559,10 +1981,8 @@ func _remove_card(index: int) -> void:
 ## Drops hand entries for cards that are gone; a custom card missing from the
 ## hand goes on the end.
 func _fit_hand() -> void:
+	# Your cards don't all have to be in the hand: a puzzle can use just some of them.
 	hand = hand.filter(func(entry): return (entry is int and entry >= 0 and entry < cards.size()) or entry is String)
-	for i in cards.size():
-		if not hand.has(i):
-			hand.append(i)
 
 ## How many of each custom card the hand has, one count per card.
 func _card_copies() -> Array:
@@ -1579,6 +1999,8 @@ func _other_cards() -> Array:
 	return hand.filter(func(entry): return entry is String)
 
 func _exit_tree() -> void:
+	if _save_queued:
+		_write_lab()  # a change still waiting to be saved
 	for card in _builtin_cards.values():
 		if card != null:
 			card.free()
@@ -1598,15 +2020,23 @@ func _on_main_menu() -> void:
 		return
 	get_tree().change_scene_to_file(MAIN_MENU_SCENE)
 
+## Opens the Library (your work is kept, as when leaving for the main menu).
+func _on_go_to_library() -> void:
+	_save_try_settings()
+	get_tree().change_scene_to_file(get_node("/root/Background").ARCHIVE_SCENE)
+
 # ---------------------------------------------------------------- test hand
 
 ## The Test hand, as the cards themselves, in the order the test puzzle deals
 ## them: each of your cards (one per copy), then the built-in cards, then "+".
 ## Clicking one of your cards opens it for editing; "×" takes a card out (your
 ## cards keep at least one, remove the card itself with "×" above the preview).
+var _hand_dirty := false  # the hand changed while the Custom Puzzle tab was closed
+
 func _rebuild_hand() -> void:
 	if hand_slots == null:
 		return
+	_hand_dirty = false
 	_fit_hand()
 	for child in hand_slots.get_children():
 		hand_slots.remove_child(child)
@@ -1623,8 +2053,8 @@ func _rebuild_hand() -> void:
 		var slot: Control
 		if entry is int:
 			var i: int = entry
-			slot = _hand_slot(at, custom_cards[i], i == current_card, func(): _select_card(i),
-				(func(): _remove_from_hand(at)) if copies[i] > 1 else Callable())
+			slot = _hand_slot(at, custom_cards[i], i == current_card, func(): _open_card(i),
+				func(): _remove_from_hand(at))
 			slot.tooltip_text = "Your card. Click to edit it."
 		else:
 			var card := _builtin_card(str(entry))
@@ -1650,7 +2080,7 @@ func _rebuild_hand() -> void:
 	add.set_drag_forwarding(Callable(), _can_drop_hand_card, func(_pos, data): _move_in_hand(data["hand_slot"], hand.size()))
 	hand_slots.add_child(add)
 	if hand_title != null:
-		hand_title.text = "Hand  ·  %d card%s" % [total, "" if total == 1 else "s"]
+		hand_title.text = "Hand (%d card%s)" % [total, "" if total == 1 else "s"]
 	_save_try_settings()
 
 ## One card in the hand: the card as it looks in game, an outline when it's the
@@ -1747,24 +2177,132 @@ func _ignore_mouse(node: Node) -> void:
 		_ignore_mouse(child)
 
 ## "+": your cards first, then every built-in card.
+var _picker_layer: Control  # the open "Add card" list (closes on a click outside it)
+
+## The "Add card" list: your cards, then the built-in ones; hovering a name shows the card
+## beside the list, clicking adds it to the end of the hand.
 func _open_hand_picker(anchor: Control) -> void:
-	hand_picker.clear()
-	_hand_choices.clear()
-	hand_picker.add_separator("Your cards")
+	_close_hand_picker()
 	_fit_hand()
+	_picker_layer = Control.new()
+	_picker_layer.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_picker_layer.z_index = 50
+	add_child(_picker_layer)
+	var catcher := Control.new()
+	catcher.set_anchors_preset(Control.PRESET_FULL_RECT)
+	catcher.gui_input.connect(func(event):
+		if event is InputEventMouseButton and event.pressed:
+			_close_hand_picker())
+	_picker_layer.add_child(catcher)
+	var panel := PanelContainer.new()
+	panel.add_theme_stylebox_override("panel", _box(C_CARD, C_BORDER, 6, 4))
+	panel.custom_minimum_size = Vector2(220, 0)
+	_picker_layer.add_child(panel)
+	var scroll := ScrollContainer.new()
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.custom_minimum_size = Vector2(0, 340)
+	panel.add_child(scroll)
+	var list := VBoxContainer.new()
+	list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	list.add_theme_constant_override("separation", 0)
+	scroll.add_child(list)
+	var preview_holder := Control.new()
+	preview_holder.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_picker_layer.add_child(preview_holder)
+	var faces := {}  # entry -> its face, made on first hover
+	var copies := _card_copies()
+	list.add_child(_label("YOUR CARDS", 10, C_MUTED, true))
 	for i in cards.size():
-		hand_picker.add_item(str(cards[i].get("name", "Card %d" % (i + 1))), _hand_choices.size())
-		hand_picker.set_item_disabled(hand_picker.item_count - 1, _card_copies()[i] >= ShareCode.MAX_COPIES)
-		_hand_choices.append(i)
-	hand_picker.add_separator("Built-in cards")
+		_picker_item(list, str(cards[i].get("name", "Card %d" % (i + 1))), i, copies[i] >= ShareCode.MAX_COPIES, panel, preview_holder, faces)
+	var gap := Control.new()
+	gap.custom_minimum_size = Vector2(0, 6)
+	list.add_child(gap)
+	list.add_child(_label("BUILT-IN CARDS", 10, C_MUTED, true))
 	var full := _other_cards().size() >= ShareCode.MAX_OTHER_CARDS
+	var used := _released_card_files()
 	for choice in EffectRegistry.get_resource_choices("card"):
-		hand_picker.add_item(choice["label"], _hand_choices.size())
-		hand_picker.set_item_disabled(hand_picker.item_count - 1, full)
-		_hand_choices.append(choice["path"])
-	hand_picker.max_size = Vector2i(260, 360)
-	var at := Vector2i(anchor.global_position) + Vector2i(0, int(anchor.size.y) + 4)
-	hand_picker.popup(Rect2i(at, Vector2i(200, 0)))
+		if str(choice["path"]).get_file() in used:  # test cards no released puzzle uses are left out
+			_picker_item(list, str(choice["label"]), str(choice["path"]), full, panel, preview_holder, faces)
+	# Under the "+" slot, kept on screen.
+	var at := anchor.global_position + Vector2(0, anchor.size.y + 4)
+	var height := 348.0
+	at.y = minf(at.y, size.y - height - 8.0)
+	at.x = minf(at.x, size.x - 220.0 - 8.0)
+	panel.position = at
+
+static var _released_files: Array = []
+
+## The scene files of the built-in cards released puzzles use (like the Library's Cards tab).
+static func _released_card_files() -> Array:
+	if _released_files.is_empty():
+		var names := {}
+		for entry in PuzzleArchive.load_bundled():
+			for card_name in entry.get("cards", []):
+				names[card_name] = true
+		for card_name in names:
+			var file := str(CardFaces.info(card_name).get("file", ""))
+			if not file.is_empty():
+				_released_files.append(file)
+	return _released_files
+
+func _picker_item(list: VBoxContainer, title: String, entry, disabled: bool, panel: Control, preview_holder: Control, faces: Dictionary) -> void:
+	var item := Button.new()
+	item.text = title
+	item.alignment = HORIZONTAL_ALIGNMENT_LEFT
+	item.add_theme_stylebox_override("normal", _box(Color.TRANSPARENT, Color.TRANSPARENT, 4, 4))
+	item.add_theme_stylebox_override("disabled", _box(Color.TRANSPARENT, Color.TRANSPARENT, 4, 4))
+	item.add_theme_stylebox_override("pressed", _box(C_ACCENT, Color.TRANSPARENT, 4, 4))
+	item.disabled = disabled
+	item.focus_mode = Control.FOCUS_NONE
+	item.add_theme_color_override("font_color", C_TEXT)
+	item.add_theme_color_override("font_hover_color", C_TEXT)
+	item.add_theme_stylebox_override("hover", _box(C_ACCENT, Color.TRANSPARENT, 4, 4))
+	item.pressed.connect(func():
+		_close_hand_picker()
+		_add_to_hand(entry))
+	item.mouse_entered.connect(func(): _show_picker_preview(entry, item, panel, preview_holder, faces))
+	list.add_child(item)
+
+## The hovered card, beside the list (on the left when there's no room on the right).
+func _show_picker_preview(entry, item: Control, panel: Control, preview_holder: Control, faces: Dictionary) -> void:
+	for child in preview_holder.get_children():
+		child.hide()
+	if not faces.has(entry):
+		var card: Card = CardFactory.create_card(cards[entry]) if entry is int else _instantiate_card(entry)
+		if card == null:
+			return
+		var face := CardFaces.strip(card)
+		face.scale = Vector2(1.25, 1.25)
+		face.position = Vector2.ZERO  # card scenes keep their own position
+		var nodes: Array = [face]
+		while not nodes.is_empty():  # the preview never takes clicks
+			var node = nodes.pop_back()
+			if node is Control:
+				node.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			nodes.append_array(node.get_children())
+		preview_holder.add_child(face)
+		faces[entry] = face
+	faces[entry].show()
+	var face_size := Vector2(120, 160) * 1.25
+	var at := Vector2(panel.position.x + panel.size.x + 8, item.global_position.y + item.size.y / 2.0 - face_size.y / 2.0)
+	if at.x + face_size.x > size.x:
+		at.x = panel.position.x - face_size.x - 8
+	at.y = clampf(at.y, 8.0, size.y - face_size.y - 8.0)
+	preview_holder.position = at
+
+func _instantiate_card(path: String) -> Card:
+	var scene = load(path) if ResourceLoader.exists(path) else null
+	var node = scene.instantiate() if scene is PackedScene else null
+	if node is Card:
+		return node
+	if node != null:
+		node.free()
+	return null
+
+func _close_hand_picker() -> void:
+	if _picker_layer != null and is_instance_valid(_picker_layer):
+		_picker_layer.queue_free()
+	_picker_layer = null
 
 func _on_hand_pick(id: int) -> void:
 	if id < 0 or id >= _hand_choices.size():
@@ -1785,10 +2323,7 @@ func _add_to_hand(entry) -> void:
 func _remove_from_hand(at: int) -> void:
 	if at < 0 or at >= hand.size():
 		return
-	var entry = hand[at]
-	if entry is int and _card_copies()[entry] <= 1:
-		return
-	hand.remove_at(at)
+	hand.remove_at(at)  # your card stays in the Lab (Custom Cards) even with no copy in the hand
 	_rebuild_hand()
 
 ## Built-in cards for the hand, made once from their scenes (freed with the Card Lab).
@@ -1825,9 +2360,21 @@ static func _saving_allowed() -> bool:
 			return false
 	return true
 
+
+var _save_queued := false
+
+## Saves a moment after the last change (typing makes many changes; each write is costly on
+## the web), and right away when leaving the Puzzle Lab.
 func _save_lab() -> void:
-	if not _saving_allowed() or cards.is_empty():
+	if not _saving_allowed() or cards.is_empty() or _save_queued:
 		return
+	_save_queued = true
+	get_tree().create_timer(0.4).timeout.connect(_write_lab)
+
+func _write_lab() -> void:
+	if not _save_queued:
+		return
+	_save_queued = false
 	cards[current_card] = definition
 	var data := {"version": 1, "cards": cards, "current": current_card, "settings": _try_settings()}
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
@@ -1867,6 +2414,9 @@ func _try_settings() -> Dictionary:
 		"card_copies": _card_copies(),
 		"other_cards": _other_cards(),
 		"order": _hand_order(),
+		"name": puzzle_name_edit.text.strip_edges() if puzzle_name_edit != null else "",
+		"author": author_edit.text.strip_edges() if author_edit != null else "",
+		"difficulty": difficulty_pick.selected if difficulty_pick != null else 0,
 	}
 
 ## The hand's order as ShareCode keeps it: i = cards[i], -1 - k = the k-th
@@ -1888,6 +2438,9 @@ func _load_try_settings() -> void:
 	test_hp.text = str(int(settings.get("hp", 10)))
 	test_energy.text = str(int(settings.get("energy", 5)))
 	test_enemy_hp.text = str(int(settings.get("enemy_hp", 20)))
+	puzzle_name_edit.text = str(settings.get("name", ""))
+	author_edit.text = str(settings.get("author", ""))
+	difficulty_pick.select(clampi(int(settings.get("difficulty", 0)), 0, 5))
 	hand = ShareCode.hand_from(settings, cards.size(), DEFAULT_OTHER_CARDS)
 	_rebuild_hand()
 
@@ -1899,6 +2452,11 @@ func _on_try_it() -> void:
 	_save_try_settings()
 	cards[current_card] = definition
 	_fit_hand()
+	if hand.is_empty():
+		_show_tab(TEST_TAB)
+		share_status.visible = true
+		share_status.text = "The hand is empty. Add cards to it below, then Play test."
+		return
 	# The hand in its order: your cards are C<n> (the n-th in custom_cards),
 	# built-in ones E<n> (the n-th in cards).
 	var dealt: Array = []
@@ -1915,7 +2473,7 @@ func _on_try_it() -> void:
 	var search := "?cards=%s&php=%d&pnrg=%d&ehp=%d&enemy_name=%s&author=%s&card_order=%s&custom_cards=%s" % [
 		Marshalls.utf8_to_base64(",".join(card_names).uri_encode()).uri_encode(),
 		_number_value(test_hp, 10), _number_value(test_energy, 5), _number_value(test_enemy_hp, 20),
-		"Training Dummy".uri_encode(), "You".uri_encode(),
+		_puzzle_name().uri_encode(), (author_edit.text.strip_edges() if not author_edit.text.strip_edges().is_empty() else "You").uri_encode(),
 		Marshalls.utf8_to_base64(JSON.stringify(order)).uri_encode(),
 		Marshalls.utf8_to_base64(JSON.stringify(dealt)).uri_encode(),
 	]
