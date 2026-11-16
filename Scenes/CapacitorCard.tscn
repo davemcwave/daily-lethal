@@ -58,7 +58,7 @@ script = ExtResource("1_4hjeq")
 card_effects = [NodePath("BuffCardEffect"), NodePath("ShowAuthorCardEffect")]
 card_name = "Capacitor"
 energy_cost = 0
-card_description = "Next attack has [color=#256aff]Charge[/color], gaining energy instead of dealing damage"
+card_description = "Next attack has [color=#2565ff]Charge[/color], gaining energy instead of dealing damage"
 
 [node name="TitlePanel" type="Panel" parent="."]
 layout_mode = 1

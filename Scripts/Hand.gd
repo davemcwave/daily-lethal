@@ -13,6 +13,25 @@ enum State {
 }
 var state = State.Normal
 
+func _ready() -> void:
+	# Keep the hand inside its area (clear of the discard pile): cards overlap more as it grows.
+	child_entered_tree.connect(func(_c): _fit_to_area.call_deferred())
+	child_exiting_tree.connect(func(_c): _fit_to_area.call_deferred())
+	get_parent().resized.connect(_fit_to_area)
+
+## The scene's spacing while the hand fits its area; tighter once it wouldn't.
+func _fit_to_area() -> void:
+	if not is_inside_tree():
+		return
+	var cards := get_children().filter(func(c): return c is Control and not c.is_queued_for_deletion())
+	var count := cards.size()
+	var spacing := float(original_separation)
+	if count > 1:
+		var card_width: float = maxf((cards[0] as Control).size.x, 1.0)
+		var room: float = (get_parent() as Control).size.x
+		spacing = minf(spacing, (room - card_width * count) / float(count - 1))
+	add_theme_constant_override("separation", int(floor(spacing)))
+
 func has_playable_cards() -> bool:
 	var energy_left: int = energy.get_energy_amount()
 	

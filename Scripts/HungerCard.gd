@@ -12,14 +12,11 @@ func play():
 	scene.add_card_played(self)
 	set_state(State.Playing)
 	pay_cost(energy_cost)
-	
+	await apply_card_effects()
+	scene.set_last_card_effects(self)
 	await buffs_container.activate_buffs(Buff.ActivationType.OnCardPlay)
 	await enemy.activate_on_card_play_debuffs()
-	scene.set_last_card_effects(self)
-	
 	await discard()
-	
-	await apply_card_effects()
 	scene.check_game_over()
 	finish_play_resolution()
 	

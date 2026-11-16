@@ -24,6 +24,7 @@ var last_card_played: Card = null
 var checking_for_game_over: bool = false
 var game_over: bool = false
 var resolving_cards: int = 0
+var resolving_card_stack: Array[Card] = []  # cards mid-play, outermost first
 var puzzle: Puzzle = null
 var card_play_history_paths: Array[String] = []
 @onready var url_capturer: URLCapturer = $URLCapturer
@@ -67,15 +68,59 @@ func _is_desktop_layout_scene() -> bool:
 
 func notify_card_started_playing(card: Card) -> void:
 	resolving_cards += 1
+	resolving_card_stack.append(card)
 
 func notify_card_finished_playing(card: Card) -> void:
 	resolving_cards = max(resolving_cards - 1, 0)
+	resolving_card_stack.erase(card)
+
+## The card being played right now (the innermost, when one card plays another).
+## Unlike get_last_card_played(), which only updates after a card's effects run.
+func get_resolving_card() -> Card:
+	for i in range(resolving_card_stack.size() - 1, -1, -1):
+		if is_instance_valid(resolving_card_stack[i]):
+			return resolving_card_stack[i]
+	return null
 
 func is_card_resolving() -> bool:
 	return resolving_cards > 0
 
+## Dialog before the fight: always in story mode (once per visit, not on retries),
+## elsewhere only if DialogHandler is enabled. Story dialog comes from the story file
+## and falls back to the puzzle scene's own lines.
 func can_show_initial_dialog() -> bool:
-	return dialog_handler.is_enabled() and has_node("CanvasLayer/DialogFightButton") and puzzle.get_dialogue_lines().size() > 0
+	if OS.has_feature("web"):
+		return false  # no dialog on the web builds (the Windows build has it)
+	if puzzle_resolver.is_active() or not has_node("CanvasLayer/DialogFightButton"):
+		return false
+	if background.is_playing_story_puzzle():
+		return background.attempts <= 1 and _dialogue_lines().size() > 0
+	return dialog_handler.is_enabled() and _dialogue_lines().size() > 0
+
+func _dialogue_lines() -> Array[String]:
+	var story_dialog: Dictionary = background.get_story_dialog()
+	if story_dialog.has("lines"):
+		# DialogHandler plays lines from the back; story lines are written in play order.
+		var lines: Array[String] = []
+		for line in story_dialog["lines"]:
+			lines.push_front(_dialog_bbcode(str(line)))
+		return lines
+	return puzzle.get_dialogue_lines()
+
+func _dialogue_first() -> String:
+	return str(background.get_story_dialog().get("first", puzzle.get_dialogue_first()))
+
+## A story puzzle's hurt and death lines (from the story file) replace the scene's.
+func _apply_story_enemy_lines() -> void:
+	var story_dialog: Dictionary = background.get_story_dialog()
+	if story_dialog.has("hurt"):
+		var hurt: Array[String] = []
+		for line in story_dialog["hurt"]:
+			hurt.append(str(line))
+		$Enemy.set_hurt_lines(hurt)
+		$Enemy.set_hurt_line_chance(float(story_dialog.get("hurt_chance", 0.5)))
+	if story_dialog.has("death"):
+		$Enemy.set_death_line(str(story_dialog["death"]))
 
 func emit_card_preview_signal() -> void:
 	emit_signal('shown_card_preview')
@@ -90,13 +135,13 @@ func handle_initial_dialog() -> bool:
 	black_bg = $CanvasLayer/BlackBG
 	
 	enemy_dialog_panel.set_icon_texture(puzzle.get_enemy_icon_texture())
-	enemy_dialog_panel.set_title_text("[b][color=red]%s[/color][/b]" % puzzle.get_enemy_name())
+	enemy_dialog_panel.set_title_text("[b][color=red]%s[/color][/b]" % _dialog_enemy_name())
 	
 	player_dialog_panel.show()
 	enemy_dialog_panel.show()
 	black_bg.show()
 	
-	await dialog_handler.play_dialog(puzzle.get_dialogue_first(), puzzle.get_dialogue_lines())
+	await dialog_handler.play_dialog(_dialogue_first(), _dialogue_lines())
 	dialog_fight_button.show()
 	audio_handler.play_sfx("HitSFX", 1.2)
 	
@@ -107,6 +152,34 @@ func handle_initial_dialog() -> bool:
 	
 	await get_tree().create_timer(0.5).timeout
 	
+	return true
+
+## Dialog is bold, like the tutorial's (lines that already have BBCode keep theirs).
+func _dialog_bbcode(line: String) -> String:
+	return line if line.begins_with("[") else "[b]%s[/b]" % line
+
+## URL puzzles name their enemy in the URL, not the placeholder puzzle scene.
+func _dialog_enemy_name() -> String:
+	return $URLCapturer.get_enemy_name_from_test_puzzle() if puzzle.is_test_puzzle() else puzzle.get_enemy_name()
+
+## The enemy's last words, in the same box as the pre-fight dialog. Returns false
+## (so the caller can fall back) when this layout has no dialog box.
+func show_enemy_line(line: String) -> bool:
+	if not has_node("CanvasLayer/EnemyDialogPanel"):
+		return false
+	var panel: DialogPanel = $CanvasLayer/EnemyDialogPanel
+	panel.set_icon_texture(puzzle.get_enemy_icon_texture())
+	panel.set_title_text("[b][color=red]%s[/color][/b]" % _dialog_enemy_name())
+	panel.show()
+	await panel.play_dialog_text(_dialog_bbcode(line))  # a click (skip_dialog) finishes the typing
+	# Hold the line a moment; another click moves on right away.
+	var held := 0.0
+	while held < 1.4:
+		await get_tree().process_frame
+		if Input.is_action_just_pressed("skip_dialog"):
+			break
+		held += get_process_delta_time()
+	panel.hide()
 	return true
 
 func hide_dialog_elements() -> void:
@@ -285,7 +358,8 @@ func set_puzzle(new_puzzle: Puzzle) -> void:
 	# "?cards=" with no date in the path = a creator testing a puzzle from /submit-puzzle
 	# (daily URL puzzles are /<date>?cards=...). The placeholder puzzle's own date
 	# ends up in background's puzzle date, so it can't be used to tell them apart.
-	background.set_is_creator_test_puzzle(puzzle.is_test_puzzle() and url_capturer != null and not url_capturer.has_puzzle_date())
+	# Story, Library and Puzzle Lab test puzzles are "?cards=" queries too, but not a creator's test.
+	background.set_is_creator_test_puzzle(puzzle.is_test_puzzle() and url_capturer != null and not url_capturer.has_puzzle_date() and background.get_story_puzzle_id().is_empty() and not background.is_from_archive() and not background.card_builder_trying)
 	$Enemy.set_max_health($URLCapturer.get_energy_health_from_test_puzzle() if puzzle.is_test_puzzle() else puzzle.get_enemy_health())
 	$Enemy.set_health($URLCapturer.get_energy_health_from_test_puzzle() if puzzle.is_test_puzzle() else puzzle.get_enemy_health())
 	$Enemy.set_enemy_name($URLCapturer.get_enemy_name_from_test_puzzle() if puzzle.is_test_puzzle() else puzzle.get_enemy_name())
@@ -293,6 +367,7 @@ func set_puzzle(new_puzzle: Puzzle) -> void:
 	$Enemy.set_hurt_lines(puzzle.get_enemy_hurt_lines())
 	$Enemy.set_hurt_line_chance(puzzle.get_hurt_line_chance())
 	$Enemy.set_death_line(puzzle.get_death_line())
+	_apply_story_enemy_lines()
 	if puzzle.is_nightmare_difficulty() and puzzle.has_eye_positions():
 		$Enemy.set_difficulty(puzzle.get_difficulty())
 		$Enemy.set_eye_positions(puzzle.get_eye_positions())
@@ -324,6 +399,8 @@ func set_puzzle(new_puzzle: Puzzle) -> void:
 	var existing_card_index: int = 0
 	for card_scene in card_scenes:
 		var card: Card = card_scene.instantiate()
+		if puzzle_resolver.is_rebuilding_cards():
+			card = puzzle_resolver.rebuild_card(card)  # test runner: play its data-built twin
 		if puzzle.is_test_puzzle():
 			card.set_meta("card_order_token", "E%d" % existing_card_index)
 			card.set_meta("card_order_source", "existing")

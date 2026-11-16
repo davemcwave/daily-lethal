@@ -18,6 +18,12 @@ func _ready():
 			'puzzle_url': share_url,
 		}
 	)
+	# A custom puzzle from the Library has no page of its own: share its code instead, to
+	# import in the Library.
+	var archive_id: String = str(background.archive_puzzle_id) if background.is_from_archive() else ""
+	if archive_id.begins_with("custom:"):
+		var code := CustomLibrary.share_code([], [archive_id.trim_prefix("custom:")])
+		share_text = share_text.get_slice("\nPlay puzzle", 0) + "\n" + ShareCode.share_message(code)
 
 	$VBoxContainer/AttemptText.set_text("[center][b]IN [color=green]%d[/color] ATTEMPT%s[/b][/center]" % [background.attempts, attempt_plural.to_upper()])
 	$VBoxContainer/BestAttemptText.set_text("[center][b]WITH [color=gold]%d[/color] CARDS PLAYED[/b][/center]" % background.best_card_count)
@@ -35,8 +41,12 @@ func _ready():
 		$ShareButton.add_theme_font_size_override("font_size", 20)
 		$ShareButton.set_text("USE THIS SOLUTION")
 
+	if background.is_from_archive():
+		background.mark_archive_puzzle_completed()
 	if background.is_from_story_view():
-		background.mark_story_puzzle_completed(background.get_puzzle_scene())
+		# Story puzzles are saved by their story id (a scene path for scene puzzles).
+		var story_id: String = background.get_story_puzzle_id()
+		background.mark_story_puzzle_completed(story_id if not story_id.is_empty() else background.get_puzzle_scene())
 
 func get_share_url() -> String:
 	var base_url := "https://playlethal.fun"
@@ -85,6 +95,15 @@ func _return_to_submit_page() -> void:
 	""", true)
 
 func _on_get_tomorrow_button_pressed():
+	if background.is_from_archive():
+		# The next puzzle in the archive's list, else back to the archive.
+		var next_entry: Dictionary = background.get_archive_next_entry()
+		if not next_entry.is_empty():
+			background.start_archive_puzzle(next_entry)
+		else:
+			background.clear()
+			get_tree().change_scene_to_file(background.ARCHIVE_SCENE)
+		return
 	if background.is_from_story_view():
 		background.clear()
 		get_tree().change_scene_to_file("res://Scenes/StoryView.tscn")

@@ -34,7 +34,7 @@ func activate() -> void:
 	if skip_next_activation:
 		skip_next_activation = false
 		return
-	target.hurt(burn_count, true)
+	await target.hurt(burn_count, true)
 	burn_count -= 1
 	if is_instance_valid(debuff_panel):
 		await debuff_panel.blink()
@@ -45,3 +45,7 @@ func activate() -> void:
 		queue_free()
 	else:
 		debuff_panel.update_text()
+
+## X in the text: burn_count.
+func get_description_number() -> int:
+	return burn_count

@@ -20,3 +20,10 @@ func apply() -> bool:
 	var apply_result: bool = await super.apply()
 	set_damage_amount(previous_damage_amount)
 	return apply_result
+
+func get_preview_damage_amount() -> int:
+	# Before it's played, this card is still in hand: count only the others.
+	for card: Card in hand.get_cards():
+		if card != get_parent() and card.get_state() == Card.State.InHand:
+			return 0
+	return damage_amount

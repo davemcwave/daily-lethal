@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Library - Daily Lethal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="Daily Lethal Library" />
+  <meta property="og:description" content="Every Daily Lethal puzzle and card, plus your own custom ones." />
+  <meta property="og:image" content="https://playlethal.fun/banner-1200x630.png" />
+  <meta property="og:url" content="https://playlethal.fun/library" />
+  <link rel="icon" href="/Assets/Textures/letha-180x180.png" type="image/png" />
+  <script>
+    // The Library is part of the game: open the desktop web build (it's laid out for a
+    // wide screen) and tell it to start in the Library (Background._open_card_lab_from_url).
+    // A shared link (/library?import=LETHAL3-...) passes its code on: the Library opens
+    // with it in the Import box.
+    var code = new URLSearchParams(location.search).get("import");
+    location.replace("/desktop/?library=1" + (code ? "&import=" + encodeURIComponent(code) : ""));
+  </script>
+  <style>
+    body { background: #1f2c30; color: #fff; font-family: sans-serif; text-align: center; padding: 3rem 16px; line-height: 1.5; }
+    a { color: #ffce4e; }
+  </style>
+</head>
+<body>
+  <p>Opening the Library&hellip; <a href="/desktop/?library=1">Click here</a> if nothing happens.</p>
+</body>
+</html>

@@ -26,4 +26,4 @@ card_solution = [ExtResource("6_jd1k6"), ExtResource("5_fmaec"), ExtResource("6_
 initial_draw_amount = 5
 
 [node name="RetaliateBuff" parent="." instance=ExtResource("9_0f7g3")]
-activation_type = 3
+activation_type = 7

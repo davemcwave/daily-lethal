@@ -29,9 +29,11 @@ func _ready() -> void:
 	# OnAttack — the only phase that runs before DamageCardEffect checks
 	# context['deal_damage']. Any later (OnHit / OnDealDamage) and the original hit
 	# already landed, so the 1-damage hits stack on top instead of replacing it.
-	# priority = 2 fires it AFTER damage modifiers (Sharp / Critical, priority 0) and
-	# other replacement buffs (Poison / Charge, priority 1). unlimited_uses keeps the
-	# base class from decrementing/freeing — we own uses_amount (see activate()).
+	# priority = 2 fires it AFTER damage modifiers (Sharp 0, Critical 1) and BEFORE
+	# replacement buffs (Charge / Flame / Poison 3): Split, then Convert. It only
+	# marks the pieces (context["hits"]); the attack deals them (DamageCardEffect),
+	# unless a converter turns the damage into something else. unlimited_uses keeps
+	# the base class from decrementing/freeing — we own uses_amount (see activate()).
 	activation_type = Buff.ActivationType.OnAttack
 	priority = 2
 	unlimited_uses = true
@@ -57,10 +59,8 @@ func activate(context: Dictionary = {}) -> bool:
 	if uses_amount <= 0:
 		return true
 
-	# A higher-priority replacement buff (Poison, Charge, ...) already converted this
-	# attack to a non-damage effect — nothing to split. Keep the stack for an attack
-	# that actually deals damage.
-	if not context.get('deal_damage', true):
+	var current_damage_amount: int = context['current_damage_amount']
+	if not context.get('deal_damage', true) or current_damage_amount <= 0 or context.has('hits'):
 		return true
 
 	# Consume the stack NOW, before any await, so concurrent strikes can't all see it
@@ -69,17 +69,35 @@ func activate(context: Dictionary = {}) -> bool:
 	if is_instance_valid(buff_panel):
 		buff_panel.update_text()
 
-	# Replace this single hit with `current_damage_amount` hits of 1.
-	var current_damage_amount: int = context['current_damage_amount']
-	context['deal_damage'] = false
+	# This hit becomes `current_damage_amount` hits of 1. The attack deals them after
+	# Convert (a converter turns the whole amount into Burn, energy or Vulnerable).
+	var hits: Array = []
+	hits.resize(current_damage_amount)
+	hits.fill(1)
+	context['hits'] = hits
 
-	var target_to_hit: Node = get_other_target()
-	for i in range(current_damage_amount):
-		target_to_hit.hurt(1)
-		await get_tree().create_timer(0.07).timeout
-
-	# We own removal (unlimited_uses, so the container won't free us).
-	if uses_amount <= 0 and is_instance_valid(buff_panel):
-		buff_panel.queue_free()
-
+	# Removed by BuffsContainer.release_attack_statuses() once this attack card's
+	# effects are done, so every hit of the card is split.
 	return true
+
+func is_used_up() -> bool:
+	return uses_amount <= 0
+
+func preview_attack(context: Dictionary) -> Dictionary:
+	var amount: int = context["current_damage_amount"]
+	var used: int = context.get("splinter_used", 0)
+	var charged: bool = context.get("charged_now", false)  # a later hit of the same card
+	if not context.get("deal_damage", true) or amount <= 0 or (not charged and used >= uses_amount):
+		return {}
+	if not charged:
+		context["splinter_used"] = used + 1
+	var hits: Array = []
+	hits.resize(amount)
+	hits.fill(1)
+	context["hits"] = hits
+	return {"op": "to", "text": "%d hits of 1" % amount, "name": "splinter"}
+
+## No infinity sign: unlimited_uses only means this buff manages its own count;
+## it uses up its stacks, so it isn't infinite.
+func should_show_unlimited_panel() -> bool:
+	return false

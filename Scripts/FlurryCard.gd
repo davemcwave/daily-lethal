@@ -9,7 +9,8 @@ func apply_card_effects() -> bool:
 		buffs_container.set_repeating(true)
 		if card_effect_delay > 0.0:
 			await get_tree().create_timer(card_effect_delay).timeout
-		card_effect.apply()
 		if card_effect.does_require_player_input():
-			await card_effect.player_input_finished
+			await card_effect.apply()  # (see RepeatBuff: never wait on the signal alone)
+		else:
+			card_effect.apply()
 	return true

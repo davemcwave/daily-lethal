@@ -6,7 +6,7 @@ var enemy_dialog_panel
 @export var enabled: bool = false
 
 func is_enabled() -> bool:
-	return enabled
+	return enabled and not OS.has_feature("web")  # never on the web builds
 	
 func play_dialog(dialogue_first: String, dialogue_lines: Array[String]) -> bool:
 	player_dialog_panel = get_tree().get_root().get_node("Scene/CanvasLayer/PlayerDialogPanel")

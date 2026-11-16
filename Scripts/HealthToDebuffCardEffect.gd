@@ -12,8 +12,10 @@ func set_target(new_target) -> void:
 	
 func apply() -> bool:
 	var health_reduced: int = health.get_health() - 1
-	health.hurt(health_reduced)
+	await health.hurt(health_reduced)
 	
+	if not (debuff_scene is String and ResourceLoader.exists(debuff_scene)):
+		health_reduced = 0  # no debuff chosen: still costs the HP, inflicts nothing
 	for i in range(health_reduced):
 		var debuff: Debuff = load(debuff_scene).instantiate()
 		target.add_debuff(debuff)

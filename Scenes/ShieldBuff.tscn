@@ -5,7 +5,7 @@
 [node name="ShieldBuff" type="Node2D"]
 script = ExtResource("1_clujn")
 buff_name = "Block"
-buff_description = "Prevents the target from taking damage"
+buff_description = "Prevents the target from taking damage [once|X times]"
 activation_type = 4
 color = Color(0, 0.55, 0.0641667, 1)
 activated_once_per_turn = true

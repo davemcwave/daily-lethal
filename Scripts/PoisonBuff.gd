@@ -11,3 +11,7 @@ func activate(context: Dictionary = {}) -> bool:
 	context['deal_damage'] = false
 	
 	return super.activate()
+
+func preview_attack(context: Dictionary) -> Dictionary:
+	context["deal_damage"] = false
+	return {"op": "to", "text": "%d Vulnerable" % context["current_damage_amount"], "name": "poison"}

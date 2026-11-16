@@ -59,7 +59,6 @@ card_effects = [NodePath("ActivateDiscardedCardCardEffect"), NodePath("ShowAutho
 card_name = "Reverberate"
 energy_cost = 3
 card_description = "Activate the card at the bottom of the discard twice. Trash that card. Cannot apply to another Reverberate."
-card_effect_delay = 0.25
 break_effects_on_apply = true
 
 [node name="TitlePanel" type="Panel" parent="."]

@@ -54,6 +54,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_qfa7s")
 script = ExtResource("1_twq11")
+card_name = "Burnout"
 
 [node name="TitlePanel" type="Panel" parent="."]
 layout_mode = 1

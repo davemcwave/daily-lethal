@@ -1,0 +1,3035 @@
+{
+ "note": "Story mode: tiers open in order; a tier opens when every world in the tier before it is finished. Puzzles in a world open one at a time. Puzzle ids are save keys: a scene path, url:<date>, or story:<name>. Generated from the progression web; edit by hand or regenerate.",
+ "tiers": [
+  [
+   "deja"
+  ],
+  [
+   "grow"
+  ],
+  [
+   "revive",
+   "toll"
+  ],
+  [
+   "blood",
+   "grave"
+  ],
+  [
+   "dust",
+   "sharp"
+  ],
+  [
+   "crit",
+   "heal"
+  ],
+  [
+   "plague",
+   "fire"
+  ],
+  [
+   "pyre"
+  ],
+  [
+   "reverb",
+   "arsenal"
+  ],
+  [
+   "soul",
+   "empty"
+  ],
+  [
+   "scales",
+   "grave2"
+  ],
+  [
+   "shards"
+  ],
+  [
+   "finale"
+  ]
+ ],
+ "worlds": [
+  {
+   "id": "deja",
+   "name": "Dead Again",
+   "idea": "Repeat your cards: Echo plays the next card twice, Rebound returns it to your hand",
+   "cards": [
+    "Slash",
+    "Echo",
+    "Rebound",
+    "Wound",
+    "Pound",
+    "Surge",
+    "Flurry",
+    "Rage"
+   ],
+   "story": "The basics of reaping: spend your energy, strike hard, and make every card count.",
+   "puzzles": [
+    {
+     "enemy": "Evil Robot",
+     "author": "",
+     "skulls": 1,
+     "teaches": [
+      "Slash",
+      "Echo",
+      "Wound"
+     ],
+     "id": "res://Scenes/Puzzles/2025-04-23-EvilRobot-Puzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-04-23-EvilRobot-Puzzle.tscn"
+    },
+    {
+     "enemy": "Sea Monster",
+     "author": "",
+     "skulls": 1,
+     "teaches": [
+      "Pound",
+      "Surge"
+     ],
+     "id": "res://Scenes/Puzzles/2025-04-24-SeaMonster-Puzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-04-24-SeaMonster-Puzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Nobody sails these waters and lives!",
+       "I'll change that."
+      ],
+      "death": "Sleeping... with the fishes..."
+     }
+    },
+    {
+     "enemy": "Werewolf",
+     "author": "",
+     "skulls": 2,
+     "teaches": [
+      "Flurry",
+      "Rebound",
+      "Rage"
+     ],
+     "id": "res://Scenes/Puzzles/2025-05-04-Werewolf-Puzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-05-04-Werewolf-Puzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "One bite and you'll howl forever!",
+       "I'm more of a cat person. Unlucky black cats, specifically."
+      ],
+      "death": "Should've... stayed in... tonight..."
+     }
+    }
+   ]
+  },
+  {
+   "id": "grow",
+   "name": "Harvesting Souls",
+   "idea": "Every card you play counts: Overload and Burst grow with each one, Thunderbolt cashes in all your energy",
+   "cards": [
+    "Overload",
+    "Burst",
+    "Thunderbolt",
+    "Scrap"
+   ],
+   "story": "Every card you play feeds the harvest. The more you play, the bigger the final blow.",
+   "puzzles": [
+    {
+     "enemy": "Dust Droid",
+     "author": "",
+     "skulls": 2,
+     "teaches": [
+      "Thunderbolt",
+      "Overload"
+     ],
+     "id": "res://Scenes/Puzzles/2025-08-15-DustDroidPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-08-15-DustDroidPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "CLEANING PROTOCOL ENGAGED. YOU ARE DIRT.",
+       "And you're about to bite the dust."
+      ],
+      "death": "SWEEPING... STOPPED..."
+     }
+    },
+    {
+     "enemy": "Puffball",
+     "author": "mcwavegames",
+     "skulls": 2,
+     "teaches": [
+      "Burst"
+     ],
+     "id": "story:puffball",
+     "search": "?cards=c3VyZ2UtY2FyZC5QTkclMkNzdXJnZS1jYXJkLlBORyUyQ3NsYXNoLWNhcmQuUE5HJTJDZWNoby1jYXJkLlBORyUyQ2J1cnN0LWNhcmQuUE5H&php=3&pnrg=3&ehp=10&enemy_name=Puffball&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Surge"
+      },
+      {
+       "card": "Surge"
+      },
+      {
+       "card": "Slash"
+      },
+      {
+       "card": "Echo"
+      },
+      {
+       "card": "Burst"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I'm all puffed up and ready to fight!",
+       "Let's see how you handle a little pressure."
+      ],
+      "death": "*deflating noises*"
+     }
+    },
+    {
+     "enemy": "Skeleton",
+     "author": "",
+     "skulls": 1,
+     "id": "res://Scenes/Puzzles/2025-05-02-DrBonez-Puzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-05-02-DrBonez-Puzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "You can't kill what's already dead!",
+       "Lucky for you, I'm running a skeleton crew today."
+      ],
+      "death": "Rest... in pieces..."
+     }
+    },
+    {
+     "enemy": "Soul Collector",
+     "author": "mcwavegames",
+     "skulls": 2,
+     "id": "story:soul-collector",
+     "search": "?cards=cmVib3VuZC1jYXJkLlBORyUyQ3JlYm91bmQtY2FyZC5QTkclMkNidXJzdC1jYXJkLlBORyUyQ3NsYXNoLWNhcmQuUE5H&php=10&pnrg=10&ehp=10&enemy_name=Soul+Collector&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Rebound"
+      },
+      {
+       "card": "Rebound"
+      },
+      {
+       "card": "Rebound"
+      },
+      {
+       "card": "Rebound"
+      },
+      {
+       "card": "Rebound"
+      },
+      {
+       "card": "Burst"
+      },
+      {
+       "card": "Burst"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Every soul you take, I take back. Again and again.",
+       "Collecting? I prefer harvesting."
+      ],
+      "death": "My... collection..."
+     }
+    },
+    {
+     "enemy": "Kraken",
+     "author": "",
+     "skulls": 4,
+     "teaches": [
+      "Scrap"
+     ],
+     "id": "res://Scenes/Puzzles/2025-05-13-KrakenPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-05-13-KrakenPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "RELEASE ME!",
+       "Release you? That's literally my job."
+      ],
+      "death": "Back... to the deep..."
+     }
+    }
+   ]
+  },
+  {
+   "id": "revive",
+   "name": "Reanimation",
+   "idea": "Bring cards back and copy them: Revive and Trace",
+   "cards": [
+    "Revive",
+    "Trace"
+   ],
+   "story": "Nothing here stays buried: played cards come back to your hand, and copies rise from the ones you play.",
+   "puzzles": [
+    {
+     "enemy": "Snowman",
+     "author": "",
+     "skulls": 2,
+     "teaches": [
+      "Trace"
+     ],
+     "id": "res://Scenes/Puzzles/2025-09-11-SnowmanPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-09-11-SnowmanPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Brrr-ing it on, Reaper!",
+       "Let it go..."
+      ],
+      "death": "Melting... melting..."
+     }
+    },
+    {
+     "enemy": "Resurrectionist",
+     "author": "mcwavegames",
+     "skulls": 1,
+     "teaches": [
+      "Revive"
+     ],
+     "id": "story:resurrectionist",
+     "search": "?cards=cmV2aXZlLWNhcmQuUE5HJTJDcG91bmQtY2FyZC5QTkclMkNzdXJnZS1jYXJkLlBORw==&php=3&pnrg=5&ehp=8&enemy_name=Resurrectionist&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Pound"
+      },
+      {
+       "card": "Surge"
+      },
+      {
+       "card": "Revive"
+      },
+      {
+       "card": "Surge"
+      },
+      {
+       "card": "Pound"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Whatever you kill, I bring back.",
+       "Then we'll be seeing a lot of each other."
+      ],
+      "death": "I'll... be... back..."
+     }
+    },
+    {
+     "enemy": "Necromancer",
+     "author": "mcwavegames",
+     "skulls": 3,
+     "id": "story:necromancer",
+     "search": "?cards=cmV2aXZlLWNhcmQuUE5HJTJDdHJhY2UtY2FyZC5QTkclMkNidXJzdC1jYXJkLlBORyUyQ2ZsdXJyeS1jYXJkLlBORyUyQ3N1cmdlLWNhcmQuUE5H&php=3&pnrg=2&ehp=8&enemy_name=Necromancer&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Surge"
+      },
+      {
+       "card": "Revive"
+      },
+      {
+       "card": "Surge"
+      },
+      {
+       "card": "Trace"
+      },
+      {
+       "card": "Burst"
+      },
+      {
+       "card": "Burst"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "The dead answer to ME now!",
+       "And who kills your minions?"
+      ],
+      "death": "My minions... avenge... me..."
+     }
+    },
+    {
+     "enemy": "Sword Juggler",
+     "author": "EulersApprentice",
+     "skulls": 2,
+     "id": "url:2026-08-24",
+     "date": "2026-08-24",
+     "search": "?cards=c2xhc2gtY2FyZC5QTkclMkNyZWJvdW5kLWNhcmQuUE5HJTJDcmV2aXZlLWNhcmQuUE5H&php=20&pnrg=13&ehp=12&enemy_name=Sword+Juggler&author=EulersApprentice",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Watch closely! I never drop a single blade!",
+       "Can I borrow one of those?"
+      ],
+      "death": "Dropped... the ball..."
+     }
+    },
+    {
+     "enemy": "Lightning Elemental",
+     "author": "",
+     "skulls": 3,
+     "id": "res://Scenes/Puzzles/2025-07-28-LightningElementalPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-07-28-LightningElementalPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I strike twice in the same place!",
+       "Then you'll find it shocking when I strike back."
+      ],
+      "death": "Grounded... at last..."
+     }
+    },
+    {
+     "enemy": "Cyclops",
+     "author": "",
+     "skulls": 4,
+     "id": "res://Scenes/Puzzles/2025-06-11-CyclopsPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-06-11-CyclopsPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I've got my eye on you, Reaper!",
+       "You still won't see this coming..."
+      ],
+      "death": "Lights... out..."
+     }
+    }
+   ]
+  },
+  {
+   "id": "toll",
+   "name": "Ferryman's Toll",
+   "idea": "Don't pay full price: Gift makes a card free, Bargain discounts the next three",
+   "cards": [
+    "Gift",
+    "Bargain"
+   ],
+   "story": "The Ferryman deals in discounts. Cards get cheaper here, and some cost nothing at all.",
+   "puzzles": [
+    {
+     "enemy": "Haggler",
+     "author": "mcwavegames",
+     "skulls": 1,
+     "teaches": [
+      "Bargain"
+     ],
+     "id": "story:haggler",
+     "search": "?cards=Zmx1cnJ5LWNhcmQuUE5HJTJDZmx1cnJ5LWNhcmQuUE5HJTJDdGh1bmRlcmJvbHQtY2FyZC5QTkclMkNiYXJnYWluLWNhcmQuUE5HJTJDZmx1cnJ5LWNhcmQuUE5H&php=3&pnrg=3&ehp=11&enemy_name=Haggler&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Bargain"
+      },
+      {
+       "card": "Flurry"
+      },
+      {
+       "card": "Flurry"
+      },
+      {
+       "card": "Flurry"
+      },
+      {
+       "card": "Thunderbolt"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Everything's negotiable! What's my life worth to you?",
+       "Your life, final offer."
+      ],
+      "death": "Sold... to the Reaper..."
+     }
+    },
+    {
+     "enemy": "Freeloader",
+     "author": "mcwavegames",
+     "skulls": 1,
+     "teaches": [
+      "Gift"
+     ],
+     "id": "story:freeloader",
+     "search": "?cards=Z2lmdC1jYXJkLlBORyUyQ2VjaG8tY2FyZC5QTkclMkNmbHVycnktY2FyZC5QTkclMkNzdXJnZS1jYXJkLlBORw==&php=3&pnrg=1&ehp=6&enemy_name=Freeloader&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Surge"
+      },
+      {
+       "card": "Gift"
+      },
+      {
+       "card": "Echo"
+      },
+      {
+       "card": "Flurry"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I don't pay for anything. Not even death!",
+       "This one's on the house."
+      ],
+      "death": "Put it... on my tab..."
+     }
+    },
+    {
+     "enemy": "Cutpurse",
+     "author": "mcwavegames",
+     "skulls": 2,
+     "id": "story:cutpurse",
+     "search": "?cards=bHVuZ2UtY2FyZC5QTkclMkNsdW5nZS1jYXJkLlBORyUyQ2dpZnQtY2FyZC5QTkclMkNzbGFzaC1jYXJkLlBORyUyQ2J1cnN0LWNhcmQuUE5H&php=3&pnrg=1&ehp=5&enemy_name=Cutpurse&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Lunge"
+      },
+      {
+       "card": "Lunge"
+      },
+      {
+       "card": "Gift"
+      },
+      {
+       "card": "Burst"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I'll be taking that soul, and your wallet!",
+       "I don't carry cash... can I pay you back?"
+      ],
+      "death": "Caught... red-handed..."
+     }
+    },
+    {
+     "enemy": "Pawnbroker",
+     "author": "mcwavegames",
+     "skulls": 2,
+     "id": "story:pawnbroker",
+     "search": "?cards=YmFyZ2Fpbi1jYXJkLlBORyUyQ2dpZnQtY2FyZC5QTkclMkNlY2hvLWNhcmQuUE5HJTJDYnVyc3QtY2FyZC5QTkclMkNmbHVycnktY2FyZC5QTkc=&php=3&pnrg=3&ehp=11&enemy_name=Pawnbroker&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Bargain"
+      },
+      {
+       "card": "Flurry"
+      },
+      {
+       "card": "Gift"
+      },
+      {
+       "card": "Echo"
+      },
+      {
+       "card": "Burst"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I'll give you three coins for that scythe.",
+       "... is that your final offer?"
+      ],
+      "death": "Everything... must go..."
+     }
+    },
+    {
+     "enemy": "Goblin",
+     "author": "",
+     "skulls": 3,
+     "id": "res://Scenes/Puzzles/2025-05-15-GoblinPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-05-15-GoblinPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Shiny! Mine! Gimme!",
+       "Here. Something sharp and shiny, just for you."
+      ],
+      "death": "Not... the gold..."
+     }
+    }
+   ]
+  },
+  {
+   "id": "blood",
+   "name": "Blood Price",
+   "idea": "Sacrifice life: pay with health, lose it on purpose, get paid for being low",
+   "cards": [
+    "Martyr",
+    "Fang",
+    "Inspiration"
+   ],
+   "story": "Here you pay in blood. Cards cost your health, and the closer you are to death, the stronger you get.",
+   "puzzles": [
+    {
+     "enemy": "Bloodletter",
+     "author": "mcwavegames",
+     "skulls": 1,
+     "teaches": [
+      "Martyr"
+     ],
+     "id": "story:bloodletter",
+     "search": "?cards=bWFydHlyLWNhcmQuUE5HJTJDcG91bmQtY2FyZC5QTkclMkNwb3VuZC1jYXJkLlBORw==&php=6&pnrg=4&ehp=8&enemy_name=Bloodletter&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Pound"
+      },
+      {
+       "card": "Martyr"
+      },
+      {
+       "card": "Pound"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Doc says a little bloodletting is better than medicine!",
+       "Side effects include death."
+      ],
+      "death": "Doctor's... orders..."
+     }
+    },
+    {
+     "enemy": "Mosquito",
+     "author": "mcwavegames",
+     "skulls": 1,
+     "teaches": [
+      "Inspiration",
+      "Fang"
+     ],
+     "id": "story:mosquito",
+     "search": "?cards=ZmFuZy1jYXJkLlBORyUyQ2ZhbmctY2FyZC5QTkclMkNpbnNwaXJhdGlvbi1jYXJkLlBORyUyQ3BvdW5kLWNhcmQuUE5H&php=4&pnrg=0&ehp=6&enemy_name=Mosquito&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Fang"
+      },
+      {
+       "card": "Fang"
+      },
+      {
+       "card": "Inspiration"
+      },
+      {
+       "card": "Pound"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Bzzz! Just a little sip!",
+       "Buzz off, you mooch. The blood's mine."
+      ],
+      "death": "Bzz... z..."
+     }
+    },
+    {
+     "enemy": "Tick",
+     "author": "mcwavegames",
+     "skulls": 2,
+     "id": "story:tick",
+     "search": "?cards=aW5zcGlyYXRpb24tY2FyZC5QTkclMkN0aHVuZGVyYm9sdC1jYXJkLlBORyUyQ21hcnR5ci1jYXJkLlBORyUyQ292ZXJsb2FkLWNhcmQuUE5H&php=3&pnrg=1&ehp=4&enemy_name=Tick&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Martyr"
+      },
+      {
+       "card": "Overload"
+      },
+      {
+       "card": "Inspiration"
+      },
+      {
+       "card": "Thunderbolt"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Once I latch on, I never let go!",
+       "You're worse than the mosquito..."
+      ],
+      "death": "Out... of time..."
+     }
+    },
+    {
+     "enemy": "Mummy",
+     "author": "",
+     "skulls": 3,
+     "id": "res://Scenes/Puzzles/2025-06-15-MummyPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-06-15-MummyPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Disturb my tomb and be cursed forever!",
+       "I've been cursed at by worse."
+      ],
+      "death": "That's... a wrap..."
+     }
+    },
+    {
+     "enemy": "Beholder",
+     "author": "",
+     "skulls": 3,
+     "id": "res://Scenes/Puzzles/2025-07-18-BeholderPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-07-18-BeholderPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Beauty is in the eye of the beholder. I have ELEVEN!",
+       "Take a good look!"
+      ],
+      "death": "I can't... look..."
+     }
+    },
+    {
+     "enemy": "Earth Elemental",
+     "author": "",
+     "skulls": 3,
+     "id": "res://Scenes/Puzzles/2025-07-08-EarthElementalPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-07-08-EarthElementalPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I am the mountain. You cannot move me!",
+       "Good... stay put for a second..."
+      ],
+      "death": "Back... to dust..."
+     }
+    }
+   ]
+  },
+  {
+   "id": "grave",
+   "name": "Six Feet Under",
+   "idea": "Dig through the discard pile: Shovel hits for every card in it",
+   "cards": [
+    "Shovel"
+   ],
+   "story": "Dig deep. The more cards in your discard pile, the harder you hit.",
+   "puzzles": [
+    {
+     "enemy": "Mole",
+     "author": "mcwavegames",
+     "skulls": 1,
+     "teaches": [
+      "Shovel"
+     ],
+     "id": "story:mole",
+     "search": "?cards=c2xhc2gtY2FyZC5QTkclMkNzbGFzaC1jYXJkLlBORyUyQ3N1cmdlLWNhcmQuUE5HJTJDc2hvdmVsLWNhcmQuUE5H&php=3&pnrg=4&ehp=7&enemy_name=Mole&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Slash"
+      },
+      {
+       "card": "Slash"
+      },
+      {
+       "card": "Surge"
+      },
+      {
+       "card": "Shovel"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Down here, I'm the one who digs graves!",
+       "Ok well, just stay down there..."
+      ],
+      "death": "Going... under..."
+     }
+    },
+    {
+     "enemy": "Badger",
+     "author": "mcwavegames",
+     "skulls": 2,
+     "id": "story:badger",
+     "search": "?cards=c2hvdmVsLWNhcmQuUE5HJTJDdHJhY2UtY2FyZC5QTkclMkNsdW5nZS1jYXJkLlBORyUyQ2x1bmdlLWNhcmQuUE5H&php=3&pnrg=4&ehp=9&enemy_name=Badger&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Lunge"
+      },
+      {
+       "card": "Lunge"
+      },
+      {
+       "card": "Trace"
+      },
+      {
+       "card": "Shovel"
+      },
+      {
+       "card": "Shovel"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Badger don't care!",
+       "Grim don't care neither...",
+       "RAAAAAAAAA!"
+      ],
+      "death": "Leave... me alone..."
+     }
+    },
+    {
+     "enemy": "Giftman",
+     "author": "",
+     "skulls": 3,
+     "id": "res://Scenes/Puzzles/2025-10-06-GiftmanPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-10-06-GiftmanPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Ho ho ho, here's a gift!",
+       "How thoughtful. Would you like to see what I got you?"
+      ],
+      "death": "Return... to sender..."
+     }
+    },
+    {
+     "enemy": "Gravedigger",
+     "author": "",
+     "skulls": 3,
+     "id": "res://Scenes/Puzzles/2025-08-01-GravediggerPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-08-01-GravediggerPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I have perfected hole digging...",
+       "Uh... well, pretend this is your last hole to dig."
+      ],
+      "death": "Dug... my own..."
+     }
+    },
+    {
+     "enemy": "Earthworm",
+     "author": "",
+     "skulls": 3,
+     "id": "res://Scenes/Puzzles/2025-07-12-EarthwormPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-07-12-EarthwormPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Cut me in half and there's two of me!",
+       "Okay... well, I'll just kill you twice?"
+      ],
+      "death": "Back... to the soil..."
+     }
+    },
+    {
+     "enemy": "Ooze",
+     "author": "",
+     "skulls": 3,
+     "id": "res://Scenes/Puzzles/2025-06-26-OozePuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-06-26-OozePuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Blorp. I'm oozing with confidence!",
+       "You're oozing, all right."
+      ],
+      "death": "Puddle... time..."
+     }
+    }
+   ]
+  },
+  {
+   "id": "dust",
+   "name": "Dust to Dust",
+   "idea": "Trash cards for good: Haunt trashes your next card and leaves the enemy Vulnerable",
+   "cards": [
+    "Haunt"
+   ],
+   "story": "What's trashed here is gone for good, and it leaves your enemy exposed.",
+   "puzzles": [
+    {
+     "enemy": "Specter",
+     "author": "mcwavegames",
+     "skulls": 2,
+     "teaches": [
+      "Haunt"
+     ],
+     "id": "story:specter",
+     "search": "?cards=aGF1bnQtY2FyZC5QTkclMkNyZWJvdW5kLWNhcmQuUE5HJTJDZmx1cnJ5LWNhcmQuUE5H&php=3&pnrg=4&ehp=24&enemy_name=Specter&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Haunt"
+      },
+      {
+       "card": "Rebound"
+      },
+      {
+       "card": "Flurry"
+      },
+      {
+       "card": "Flurry"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Boo! Scared yet?",
+       "No. Wait, yes. Wait, no. I can't even see you."
+      ],
+      "death": "Fading... away..."
+     }
+    },
+    {
+     "enemy": "Mourner",
+     "author": "mcwavegames",
+     "skulls": 2,
+     "id": "story:mourner",
+     "search": "?cards=aGF1bnQtY2FyZC5QTkclMkNoYXVudC1jYXJkLlBORyUyQ3Nob3ZlbC1jYXJkLlBORyUyQ2x1bmdlLWNhcmQuUE5HJTJDbHVuZ2UtY2FyZC5QTkc=&php=3&pnrg=5&ehp=22&enemy_name=Mourner&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Haunt"
+      },
+      {
+       "card": "Haunt"
+      },
+      {
+       "card": "Lunge"
+      },
+      {
+       "card": "Lunge"
+      },
+      {
+       "card": "Shovel"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I cry for every life you've taken.",
+       "Okay, well, save one more."
+      ],
+      "death": "One... last... tear..."
+     }
+    },
+    {
+     "enemy": "Banshee",
+     "author": "mcwavegames",
+     "skulls": 2,
+     "id": "story:banshee",
+     "search": "?cards=aW5zcGlyYXRpb24tY2FyZC5QTkclMkNidXJzdC1jYXJkLlBORyUyQ2hhdW50LWNhcmQuUE5HJTJDZmFuZy1jYXJkLlBORw==&php=3&pnrg=1&ehp=10&enemy_name=Banshee&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Haunt"
+      },
+      {
+       "card": "Fang"
+      },
+      {
+       "card": "Inspiration"
+      },
+      {
+       "card": "Burst"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "When I scream, someone dies!",
+       "Would you like to scream before or after?"
+      ],
+      "death": "...silence..."
+     }
+    },
+    {
+     "enemy": "Viper",
+     "author": "",
+     "skulls": 2,
+     "id": "res://Scenes/Puzzles/2026-01-26-ViperPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2026-01-26-ViperPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Sssso, the Reaper comes for me?",
+       "Don't take it personally. It's just business."
+      ],
+      "death": "Ssshed... my last..."
+     }
+    },
+    {
+     "enemy": "Kobold",
+     "author": "",
+     "skulls": 3,
+     "id": "res://Scenes/Puzzles/2025-05-29-KoboldPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-05-29-KoboldPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Kobold is mighty! Kobold is strong!",
+       "Kobold is... about to be very quiet."
+      ],
+      "death": "Kobold... sleepy..."
+     }
+    },
+    {
+     "enemy": "Grave Robber",
+     "author": "",
+     "skulls": 4,
+     "id": "res://Scenes/Puzzles/2025-10-21-GraveRobber-Puzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-10-21-GraveRobber-Puzzle.tscn"
+    }
+   ]
+  },
+  {
+   "id": "sharp",
+   "name": "Death's Edge",
+   "idea": "Sharp: Sharpen and Acuminate add to every hit, wearing off by 1 per card played",
+   "cards": [
+    "Sharpen",
+    "Acuminate"
+   ],
+   "story": "Blades are sharpened here, adding to every hit, but the edge dulls with every card you play.",
+   "puzzles": [
+    {
+     "enemy": "Headsman",
+     "author": "mcwavegames",
+     "skulls": 1,
+     "teaches": [
+      "Sharpen"
+     ],
+     "id": "story:headsman",
+     "search": "?cards=cG91bmQtY2FyZC5QTkclMkNzaGFycGVuLWNhcmQuUE5HJTJDZmx1cnJ5LWNhcmQuUE5H&php=3&pnrg=5&ehp=18&enemy_name=Headsman&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Sharpen"
+      },
+      {
+       "card": "Flurry"
+      },
+      {
+       "card": "Pound"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I've taken more heads than you, Reaper.",
+       "I... don't think that's true."
+      ],
+      "death": "I've... lost my head..."
+     }
+    },
+    {
+     "enemy": "Samurai",
+     "author": "EulersApprentice",
+     "skulls": 2,
+     "teaches": [
+      "Acuminate"
+     ],
+     "id": "url:2026-08-03",
+     "date": "2026-08-03",
+     "search": "?cards=c2xhc2gtY2FyZC5QTkclMkNzbGFzaC1jYXJkLlBORyUyQ3NsYXNoLWNhcmQuUE5HJTJDc2xhc2gtY2FyZC5QTkclMkNzbGFzaC1jYXJkLlBORyUyQ3NsYXNoLWNhcmQuUE5HJTJDYWN1bWluYXRlLWNhcmQuUE5H&php=3&pnrg=8&ehp=19&enemy_name=Samurai&author=EulersApprentice",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "My blade is sharp. My honor, sharper.",
+       "Mine's sharper. It's a scythe."
+      ],
+      "death": "With... honor..."
+     }
+    },
+    {
+     "enemy": "Headhunter",
+     "author": "mcwavegames",
+     "skulls": 3,
+     "id": "story:headhunter",
+     "search": "?cards=c2hhcnBlbi1jYXJkLlBORyUyQ2FjdW1pbmF0ZS1jYXJkLlBORyUyQ2ZhbmctY2FyZC5QTkclMkNmYW5nLWNhcmQuUE5HJTJDaW5zcGlyYXRpb24tY2FyZC5QTkclMkNidXJzdC1jYXJkLlBORw==&php=3&pnrg=1&ehp=11&enemy_name=Headhunter&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Sharpen"
+      },
+      {
+       "card": "Fang"
+      },
+      {
+       "card": "Fang"
+      },
+      {
+       "card": "Inspiration"
+      },
+      {
+       "card": "Burst"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Your skull will look great on my wall.",
+       "I'll keep that in mind."
+      ],
+      "death": "Heads... up..."
+     }
+    },
+    {
+     "enemy": "Revenant",
+     "author": "mcwavegames",
+     "skulls": 3,
+     "id": "story:revenant",
+     "search": "?cards=dHJhY2UtY2FyZC5QTkclMkNhY3VtaW5hdGUtY2FyZC5QTkclMkNmbHVycnktY2FyZC5QTkclMkNsdW5nZS1jYXJkLlBORyUyQ2x1bmdlLWNhcmQuUE5HJTJDc3VyZ2UtY2FyZC5QTkc=&php=3&pnrg=3&ehp=29&enemy_name=Revenant&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Lunge"
+      },
+      {
+       "card": "Lunge"
+      },
+      {
+       "card": "Surge"
+      },
+      {
+       "card": "Trace"
+      },
+      {
+       "card": "Acuminate"
+      },
+      {
+       "card": "Acuminate",
+       "copy": true
+      },
+      {
+       "card": "Flurry"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I came back for revenge!",
+       "Just to die again?"
+      ],
+      "death": "Not... again..."
+     }
+    },
+    {
+     "enemy": "Skeleton Archer",
+     "author": "mcwavegames",
+     "skulls": 3,
+     "id": "story:skeleton-archer",
+     "search": "?cards=cmVib3VuZC1jYXJkLlBORyUyQ2FjdW1pbmF0ZS1jYXJkLlBORyUyQ2ZsdXJyeS1jYXJkLlBORyUyQ2x1bmdlLWNhcmQuUE5HJTJDbHVuZ2UtY2FyZC5QTkclMkNzdXJnZS1jYXJkLlBORw==&php=3&pnrg=4&ehp=23&enemy_name=Skeleton+Archer&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Rebound"
+      },
+      {
+       "card": "Flurry"
+      },
+      {
+       "card": "Lunge"
+      },
+      {
+       "card": "Lunge"
+      },
+      {
+       "card": "Surge"
+      },
+      {
+       "card": "Acuminate"
+      },
+      {
+       "card": "Flurry"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I never miss!",
+       "You've got the bones of a good archer. Just the bones."
+      ],
+      "death": "Quiver... empty..."
+     }
+    },
+    {
+     "enemy": "Divine Fletcher",
+     "author": "EulersApprentice",
+     "skulls": 4,
+     "id": "url:2026-06-25",
+     "date": "2026-06-25",
+     "search": "?cards=YWN1bWluYXRlLWNhcmQuUE5HJTJDZmx1cnJ5LWNhcmQuUE5HJTJDcmVib3VuZC1jYXJkLlBORyUyQ3JlYm91bmQtY2FyZC5QTkclMkNyZWJvdW5kLWNhcmQuUE5HJTJDcmVib3VuZC1jYXJkLlBORyUyQ3JlYm91bmQtY2FyZC5QTkc%3D&php=50&pnrg=20&ehp=222&enemy_name=Divine+Fletcher&author=EulersApprentice",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "My arrows are blessed by the heavens!",
+       "Ew, heaven..."
+      ],
+      "death": "Feathers... falling..."
+     }
+    }
+   ]
+  },
+  {
+   "id": "crit",
+   "name": "Coup de Grâce",
+   "idea": "Critical hits: Target and Frenzy double one devastating hit",
+   "cards": [
+    "Target",
+    "Frenzy"
+   ],
+   "story": "One perfect blow decides it. Hits can land for double, and the most desperate strike hardest.",
+   "puzzles": [
+    {
+     "enemy": "Executioner",
+     "author": "mcwavegames",
+     "skulls": 1,
+     "teaches": [
+      "Target"
+     ],
+     "id": "story:executioner",
+     "search": "?cards=cG91bmQtY2FyZC5QTkclMkNmbHVycnktY2FyZC5QTkclMkN0YXJnZXQtY2FyZC5QTkc=&php=3&pnrg=5&ehp=11&enemy_name=Executioner&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Target"
+      },
+      {
+       "card": "Pound"
+      },
+      {
+       "card": "Flurry"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Any last words?",
+       "Funny. That's my line."
+      ],
+      "death": "Execution... complete..."
+     }
+    },
+    {
+     "enemy": "Bloodhound",
+     "author": "mcwavegames",
+     "skulls": 2,
+     "teaches": [
+      "Frenzy"
+     ],
+     "id": "story:bloodhound",
+     "search": "?cards=ZnJlbnp5LWNhcmQuUE5HJTJDZmx1cnJ5LWNhcmQuUE5HJTJDZmFuZy1jYXJkLlBORyUyQ2ZhbmctY2FyZC5QTkc=&php=3&pnrg=2&ehp=8&enemy_name=Bloodhound&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Fang"
+      },
+      {
+       "card": "Fang"
+      },
+      {
+       "card": "Frenzy"
+      },
+      {
+       "card": "Flurry"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "*sniff sniff* I smell death!",
+       "That would be me."
+      ],
+      "death": "Lost... the scent..."
+     }
+    },
+    {
+     "enemy": "Yeti",
+     "author": "",
+     "skulls": 3,
+     "id": "res://Scenes/Puzzles/2025-07-20-YetiPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-07-20-YetiPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Freeze, Grim Reaper!",
+       "I'm already cold-blooded."
+      ],
+      "death": "Snow... more..."
+     }
+    },
+    {
+     "enemy": "Duelist",
+     "author": "mcwavegames",
+     "skulls": 3,
+     "id": "story:duelist",
+     "search": "?cards=ZmFuZy1jYXJkLlBORyUyQ2ZhbmctY2FyZC5QTkclMkNmcmVuenktY2FyZC5QTkclMkNvdmVybG9hZC1jYXJkLlBORyUyQ2x1bmdlLWNhcmQuUE5HJTJDYnVyc3QtY2FyZC5QTkclMkN0aHVuZGVyYm9sdC1jYXJkLlBORw==&php=3&pnrg=1&ehp=13&enemy_name=Duelist&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Fang"
+      },
+      {
+       "card": "Fang"
+      },
+      {
+       "card": "Lunge"
+      },
+      {
+       "card": "Overload"
+      },
+      {
+       "card": "Frenzy"
+      },
+      {
+       "card": "Burst"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "En garde! Only one of us leaves this duel.",
+       "Correct."
+      ],
+      "death": "Bested... with style..."
+     }
+    },
+    {
+     "enemy": "Displacer Beast",
+     "author": "",
+     "skulls": 3,
+     "id": "res://Scenes/Puzzles/2025-07-26-DisplacerBeastPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-07-26-DisplacerBeastPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "You can't hit what isn't there!",
+       "Then hold still, wherever you are."
+      ],
+      "death": "Out of... place..."
+     }
+    },
+    {
+     "enemy": "Assassin",
+     "author": "",
+     "skulls": 4,
+     "id": "res://Scenes/Puzzles/2025-09-03-AssassinPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-09-03-AssassinPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "You never saw me coming.",
+       "I see everyone coming. Eventually."
+      ],
+      "death": "Mission... failed..."
+     }
+    }
+   ]
+  },
+  {
+   "id": "heal",
+   "name": "Second Wind",
+   "idea": "Heal up, then cash it in: Mend, Potion, Shield, Drain and Cauterize patch you up, Heartbeat hits for your HP",
+   "cards": [
+    "Potion",
+    "Drain",
+    "Cauterize",
+    "Heartbeat"
+   ],
+   "story": "Patch yourself up, then turn your own health into a weapon.",
+   "puzzles": [
+    {
+     "enemy": "Heartless",
+     "author": "mcwavegames",
+     "skulls": 1,
+     "teaches": [
+      "Heartbeat"
+     ],
+     "id": "story:heartless",
+     "search": "?cards=bWVuZC1jYXJkLlBORyUyQ21lbmQtY2FyZC5QTkclMkNoZWFydGJlYXQtY2FyZC5QTkc=&php=3&pnrg=5&ehp=5&enemy_name=Heartless&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Mend"
+      },
+      {
+       "card": "Mend"
+      },
+      {
+       "card": "Heartbeat"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "You can't stop a heart I don't have!",
+       "Then this won't hurt a bit."
+      ],
+      "death": "Feeling... empty..."
+     }
+    },
+    {
+     "enemy": "Bloodsucker",
+     "author": "mcwavegames",
+     "skulls": 1,
+     "teaches": [
+      "Drain"
+     ],
+     "id": "story:bloodsucker",
+     "search": "?cards=ZHJhaW4tY2FyZC5QTkclMkNyYWdlLWNhcmQuUE5HJTJDaGVhcnRiZWF0LWNhcmQuUE5H&php=1&pnrg=6&ehp=5&enemy_name=Bloodsucker&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Rage"
+      },
+      {
+       "card": "Drain"
+      },
+      {
+       "card": "Heartbeat"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I vant to suck your blood!",
+       "Good luck with that. I'm all bone."
+      ],
+      "death": "...sucks"
+     }
+    },
+    {
+     "enemy": "Apothecary",
+     "author": "mcwavegames",
+     "skulls": 1,
+     "teaches": [
+      "Potion"
+     ],
+     "id": "story:apothecary",
+     "search": "?cards=aGVhcnRiZWF0LWNhcmQuUE5HJTJDcG90aW9uLWNhcmQuUE5HJTJDZWNoby1jYXJkLlBORw==&php=3&pnrg=7&ehp=10&enemy_name=Apothecary&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Potion",
+       "effect": "heal"
+      },
+      {
+       "card": "Echo"
+      },
+      {
+       "card": "Heartbeat"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I have a potion for every ailment!",
+       "Do you have one for death?"
+      ],
+      "death": "Wrong... prescription..."
+     }
+    },
+    {
+     "enemy": "Living Shadow",
+     "author": "",
+     "skulls": 3,
+     "teaches": [
+      "Cauterize"
+     ],
+     "id": "res://Scenes/Puzzles/2025-12-09-LivingShadowPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-12-09-LivingShadowPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I follow you everywhere, Reaper.",
+       "Then you know where we're going."
+      ],
+      "death": "Into... the light..."
+     }
+    },
+    {
+     "enemy": "Undertaker",
+     "author": "mcwavegames",
+     "skulls": 3,
+     "id": "story:undertaker",
+     "search": "?cards=bWFydHlyLWNhcmQuUE5HJTJDcG90aW9uLWNhcmQuUE5HJTJDaGVhcnRiZWF0LWNhcmQuUE5HJTJDbWVuZC1jYXJkLlBORyUyQ21lbmQtY2FyZC5QTkclMkNzdXJnZS1jYXJkLlBORw==&php=4&pnrg=2&ehp=9&enemy_name=Undertaker&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Mend"
+      },
+      {
+       "card": "Mend"
+      },
+      {
+       "card": "Surge"
+      },
+      {
+       "card": "Martyr"
+      },
+      {
+       "card": "Heartbeat"
+      },
+      {
+       "card": "Potion",
+       "effect": "damage"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I put the dead to rest. You keep stealing my business!",
+       "Think of me as a supplier."
+      ],
+      "death": "Closing... the lid..."
+     }
+    },
+    {
+     "enemy": "Funambulist",
+     "author": "",
+     "skulls": 4,
+     "id": "res://Scenes/Puzzles/2025-08-17-FunambulistPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-08-17-FunambulistPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Life is a tightrope, and I never fall!",
+       "Everyone falls. Watch your step."
+      ],
+      "death": "Losing... my balance..."
+     }
+    },
+    {
+     "enemy": "Hydra",
+     "author": "",
+     "skulls": 3,
+     "id": "res://Scenes/Puzzles/2025-11-18-HydraPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-11-18-HydraPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Cut off one head, two more grow back!",
+       "Then I'll work fast."
+      ],
+      "death": "Two heads... weren't better..."
+     }
+    }
+   ]
+  },
+  {
+   "id": "plague",
+   "name": "Plague",
+   "idea": "Poison and Vulnerable: Venom and Berserk make every hit count more",
+   "cards": [
+    "Venom",
+    "Berserk"
+   ],
+   "story": "Weaken them first: the sicker your enemy, the harder every hit lands.",
+   "puzzles": [
+    {
+     "enemy": "Plague Rat",
+     "author": "mcwavegames",
+     "skulls": 1,
+     "teaches": [
+      "Venom"
+     ],
+     "id": "story:plague-rat",
+     "search": "?cards=ZmFuZy1jYXJkLlBORyUyQ3NsYXNoLWNhcmQuUE5HJTJDdmVub20tY2FyZC5QTkclMkNmYW5nLWNhcmQuUE5HJTJDc2xhc2gtY2FyZC5QTkc=&php=3&pnrg=3&ehp=10&enemy_name=Plague+Rat&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Venom"
+      },
+      {
+       "card": "Slash"
+      },
+      {
+       "card": "Slash"
+      },
+      {
+       "card": "Fang"
+      },
+      {
+       "card": "Fang"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I've carried every plague in history!",
+       "Yuck... maybe I should be thanking you."
+      ],
+      "death": "Quarantined... forever..."
+     }
+    },
+    {
+     "enemy": "Flagellant",
+     "author": "mcwavegames",
+     "skulls": 2,
+     "teaches": [
+      "Berserk"
+     ],
+     "id": "story:flagellant",
+     "search": "?cards=bHVuZ2UtY2FyZC5QTkclMkNiZXJzZXJrLWNhcmQuUE5HJTJDbWVuZC1jYXJkLlBORyUyQ2x1bmdlLWNhcmQuUE5HJTJDbWVuZC1jYXJkLlBORyUyQ2x1bmdlLWNhcmQuUE5H&php=3&pnrg=6&ehp=15&enemy_name=Flagellant&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Mend"
+      },
+      {
+       "card": "Mend"
+      },
+      {
+       "card": "Berserk"
+      },
+      {
+       "card": "Lunge"
+      },
+      {
+       "card": "Lunge"
+      },
+      {
+       "card": "Lunge"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Pain is my penance!",
+       "All sins will be forgiven..."
+      ],
+      "death": "Penance... complete..."
+     }
+    },
+    {
+     "enemy": "Sewer Rat",
+     "author": "mcwavegames",
+     "skulls": 2,
+     "id": "story:sewer-rat",
+     "search": "?cards=c2xhc2gtY2FyZC5QTkclMkNmYW5nLWNhcmQuUE5HJTJDdmVub20tY2FyZC5QTkclMkNzbGFzaC1jYXJkLlBORyUyQ3JhZ2UtY2FyZC5QTkclMkNmYW5nLWNhcmQuUE5H&php=3&pnrg=4&ehp=16&enemy_name=Sewer+Rat&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Rage"
+      },
+      {
+       "card": "Venom"
+      },
+      {
+       "card": "Slash"
+      },
+      {
+       "card": "Slash"
+      },
+      {
+       "card": "Fang"
+      },
+      {
+       "card": "Fang"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Down here, I'm king!",
+       "Long live the king."
+      ],
+      "death": "Down... the drain..."
+     }
+    },
+    {
+     "enemy": "Physician",
+     "author": "mcwavegames",
+     "skulls": 2,
+     "id": "story:physician",
+     "search": "?cards=ZmFuZy1jYXJkLlBORyUyQ21lbmQtY2FyZC5QTkclMkNsdW5nZS1jYXJkLlBORyUyQ2ZhbmctY2FyZC5QTkclMkNiZXJzZXJrLWNhcmQuUE5HJTJDbWVuZC1jYXJkLlBORyUyQ2x1bmdlLWNhcmQuUE5H&php=3&pnrg=5&ehp=12&enemy_name=Physician&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Berserk"
+      },
+      {
+       "card": "Lunge"
+      },
+      {
+       "card": "Lunge"
+      },
+      {
+       "card": "Mend"
+      },
+      {
+       "card": "Mend"
+      },
+      {
+       "card": "Fang"
+      },
+      {
+       "card": "Fang"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Open wide and say \"ahh\"... it's the plague.",
+       "Doctor, I think it's terminal."
+      ],
+      "death": "Physician... heal... thyself..."
+     }
+    },
+    {
+     "enemy": "Termites",
+     "author": "",
+     "skulls": 3,
+     "id": "res://Scenes/Puzzles/2025-12-03-TermitesPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-12-03-TermitesPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "We'll eat through anything!",
+       "Ick, good riddance!!"
+      ],
+      "death": "Colony... collapse..."
+     }
+    },
+    {
+     "enemy": "Wolverine",
+     "author": "",
+     "skulls": 3,
+     "id": "res://Scenes/Puzzles/2026-02-03-WolverinePuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2026-02-03-WolverinePuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "GRRR! I've chased bears off their dinner. You're next!",
+       "I'm much worse than a bear..."
+      ],
+      "death": "Should've... stuck to... bears..."
+     }
+    }
+   ]
+  },
+  {
+   "id": "fire",
+   "name": "Cremation",
+   "idea": "Burn: Scorch sets the enemy on fire, Forge turns your next attacks into Burn",
+   "cards": [
+    "Scorch",
+    "Forge"
+   ],
+   "story": "Set your enemy alight, and they'll burn a little more with every card you play.",
+   "puzzles": [
+    {
+     "enemy": "Pigman",
+     "author": "EulersApprentice",
+     "skulls": 3,
+     "teaches": [
+      "Scorch"
+     ],
+     "id": "url:2026-05-11",
+     "date": "2026-05-11",
+     "search": "?cards=dGh1bmRlcmJvbHQtY2FyZC5QTkclMkNiYXJnYWluLWNhcmQuUE5HJTJDc2NvcmNoLWNhcmQuUE5HJTJDc2NvcmNoLWNhcmQuUE5HJTJDc2NvcmNoLWNhcmQuUE5HJTJDc2NvcmNoLWNhcmQuUE5H&php=1&pnrg=5&ehp=24&enemy_name=Pigman&author=EulersApprentice",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "You'll squeal before I do!",
+       "Oink oink!!!"
+      ],
+      "death": "Smells like bacon..."
+     }
+    },
+    {
+     "enemy": "Salamander",
+     "author": "RadioInactive",
+     "skulls": 3,
+     "id": "url:2026-08-25",
+     "date": "2026-08-25",
+     "search": "?cards=cmVib3VuZC1jYXJkLlBORyUyQ3JlYm91bmQtY2FyZC5QTkclMkNyZWJvdW5kLWNhcmQuUE5HJTJDc2NvcmNoLWNhcmQuUE5HJTJDc2NvcmNoLWNhcmQuUE5HJTJDc2NvcmNoLWNhcmQuUE5H&php=1&pnrg=10&ehp=33&enemy_name=Salamander&author=RadioInactive",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Fire can't hurt me!",
+       "Come here, you slippery thing!"
+      ],
+      "death": "Cooling... down..."
+     }
+    },
+    {
+     "enemy": "Arsonist",
+     "author": "mcwavegames",
+     "skulls": 2,
+     "teaches": [
+      "Forge"
+     ],
+     "id": "story:arsonist",
+     "search": "?cards=Zm9yZ2UtY2FyZC5QTkclMkNmbHVycnktY2FyZC5QTkclMkNsdW5nZS1jYXJkLlBORyUyQ2x1bmdlLWNhcmQuUE5HJTJDc3VyZ2UtY2FyZC5QTkc=&php=3&pnrg=2&ehp=10&enemy_name=Arsonist&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Forge"
+      },
+      {
+       "card": "Lunge"
+      },
+      {
+       "card": "Flurry"
+      },
+      {
+       "card": "Surge"
+      },
+      {
+       "card": "Lunge"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Just one spark and this whole place goes up!",
+       "Let's not play with fire."
+      ],
+      "death": "Burned... out..."
+     }
+    },
+    {
+     "enemy": "Lover",
+     "author": "KirbyCarrot",
+     "skulls": 3,
+     "id": "url:2026-05-13",
+     "date": "2026-05-13",
+     "search": "?cards=Zm9yZ2UtY2FyZC5QTkclMkNzY29yY2gtY2FyZC5QTkclMkNzY29yY2gtY2FyZC5QTkclMkNoZWFydGJlYXQtY2FyZC5QTkclMkNyZXZpdmUtY2FyZC5QTkc%3D&php=7&pnrg=20&ehp=63&enemy_name=Lover&author=KirbyCarrot",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "My heart burns only for you, Reaper!",
+       "That's sweet. It's still over."
+      ],
+      "death": "Heartbroken..."
+     }
+    },
+    {
+     "enemy": "Flesh Golem",
+     "author": "EulersApprentice",
+     "skulls": 4,
+     "id": "url:2026-05-07",
+     "date": "2026-05-07",
+     "search": "?cards=d291bmQtY2FyZC5QTkclMkNzY29yY2gtY2FyZC5QTkclMkNyZWJvdW5kLWNhcmQuUE5HJTJDcmV2aXZlLWNhcmQuUE5H&php=4&pnrg=17&ehp=40&enemy_name=Flesh+Golem&author=EulersApprentice",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I'm made of a dozen dead men. Which one do you want?",
+       "All of them, please."
+      ],
+      "death": "Coming... apart..."
+     }
+    }
+   ]
+  },
+  {
+   "id": "pyre",
+   "name": "Funeral Pyre",
+   "idea": "Sparks: Ignite makes Spark cards, and every Spark you play makes all of them hit harder",
+   "cards": [
+    "Ignite",
+    "Spark"
+   ],
+   "story": "Every spark you play makes the next one hotter. Feed the fire and it becomes a blaze.",
+   "puzzles": [
+    {
+     "enemy": "Candle Wight",
+     "author": "mcwavegames",
+     "skulls": 1,
+     "teaches": [
+      "Ignite",
+      "Spark"
+     ],
+     "id": "story:candle-wight",
+     "search": "?cards=c3BhcmstY2FyZC5QTkclMkNsdW5nZS1jYXJkLlBORyUyQ2lnbml0ZS1jYXJkLlBORyUyQ3NwYXJrLWNhcmQuUE5HJTJDbHVuZ2UtY2FyZC5QTkc=&php=3&pnrg=5&ehp=8&enemy_name=Candle+Wight&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Ignite"
+      },
+      {
+       "card": "Lunge"
+      },
+      {
+       "card": "Lunge"
+      },
+      {
+       "card": "Spark"
+      },
+      {
+       "card": "Spark"
+      },
+      {
+       "card": "Spark"
+      },
+      {
+       "card": "Spark"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I burn so others may see!",
+       "Then let's blow out the candle."
+      ],
+      "death": "Snuffed... out..."
+     }
+    },
+    {
+     "enemy": "Pyre Keeper",
+     "author": "mcwavegames",
+     "skulls": 2,
+     "id": "story:pyre-keeper",
+     "search": "?cards=c3BhcmstY2FyZC5QTkclMkNsdW5nZS1jYXJkLlBORyUyQ3JhZ2UtY2FyZC5QTkclMkNzcGFyay1jYXJkLlBORyUyQ2lnbml0ZS1jYXJkLlBORw==&php=3&pnrg=6&ehp=12&enemy_name=Pyre+Keeper&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Ignite"
+      },
+      {
+       "card": "Rage"
+      },
+      {
+       "card": "Lunge"
+      },
+      {
+       "card": "Spark"
+      },
+      {
+       "card": "Spark"
+      },
+      {
+       "card": "Spark"
+      },
+      {
+       "card": "Spark"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Every fire needs a keeper!",
+       "And every keeper needs a reaper."
+      ],
+      "death": "The fire... goes out..."
+     }
+    },
+    {
+     "enemy": "Flaming Boomerang",
+     "author": "MakoTheMouse",
+     "skulls": 2,
+     "id": "url:2026-05-04",
+     "date": "2026-05-04",
+     "search": "?cards=ZWNoby1jYXJkLlBORyUyQ2VjaG8tY2FyZC5QTkclMkNyZWJvdW5kLWNhcmQuUE5HJTJDaWduaXRlLWNhcmQuUE5H&php=1&pnrg=13&ehp=15&enemy_name=Flaming+Boomerang&author=MakoTheMouse",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I always come back!",
+       "Not this time."
+      ],
+      "death": "Not... coming back..."
+     }
+    },
+    {
+     "enemy": "Scarecrow",
+     "author": "",
+     "skulls": 3,
+     "id": "res://Scenes/Puzzles/2025-08-27-ScarecrowPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-08-27-ScarecrowPuzzle.tscn"
+    },
+    {
+     "enemy": "Firebug",
+     "author": "",
+     "skulls": 3,
+     "id": "res://Scenes/Puzzles/2025-09-24-FirebugPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-09-24-FirebugPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Bzzt! I light up the night!",
+       "Lights out, little bug."
+      ],
+      "death": "Burning... out..."
+     }
+    },
+    {
+     "enemy": "Artificer",
+     "author": "",
+     "skulls": 3,
+     "id": "res://Scenes/Puzzles/2025-09-30-ArtificerPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-09-30-ArtificerPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "My inventions can't be stopped!",
+       "Every machine has an off switch."
+      ],
+      "death": "Back to... the drawing board..."
+     }
+    }
+   ]
+  },
+  {
+   "id": "reverb",
+   "name": "Death Knell",
+   "idea": "Reverberate: play the bottom card of the discard twice",
+   "cards": [
+    "Reverberate"
+   ],
+   "story": "The bell tolls twice: the first card you played rings out again from the bottom of your discard pile.",
+   "puzzles": [
+    {
+     "enemy": "Bell Ringer",
+     "author": "mcwavegames",
+     "skulls": 1,
+     "teaches": [
+      "Reverberate"
+     ],
+     "id": "story:bell-ringer",
+     "search": "?cards=c2xhc2gtY2FyZC5QTkclMkNmYW5nLWNhcmQuUE5HJTJDcmV2ZXJiZXJhdGUtY2FyZC5QTkclMkNzbGFzaC1jYXJkLlBORyUyQ3JhZ2UtY2FyZC5QTkclMkNmYW5nLWNhcmQuUE5H&php=3&pnrg=6&ehp=18&enemy_name=Bell+Ringer&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Rage"
+      },
+      {
+       "card": "Reverberate"
+      },
+      {
+       "card": "Slash"
+      },
+      {
+       "card": "Slash"
+      },
+      {
+       "card": "Fang"
+      },
+      {
+       "card": "Fang"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "The bell tolls for thee, Reaper!",
+       "It tolls for you. I'm just here to collect."
+      ],
+      "death": "Saved... by the bell? No..."
+     }
+    },
+    {
+     "enemy": "Mantis Shrimp",
+     "author": "",
+     "skulls": 1,
+     "id": "res://Scenes/Puzzles/2025-11-24-MantisShrimpPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-11-24-MantisShrimpPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I punch faster than a bullet!",
+       "Shrimp for dinner."
+      ],
+      "death": "Out... punched..."
+     }
+    },
+    {
+     "enemy": "Priest",
+     "author": "mcwavegames",
+     "skulls": 2,
+     "id": "story:priest",
+     "search": "?cards=aGVhcnRiZWF0LWNhcmQuUE5HJTJDbHVuZ2UtY2FyZC5QTkclMkNlY2hvLWNhcmQuUE5HJTJDcG90aW9uLWNhcmQuUE5HJTJDcmV2ZXJiZXJhdGUtY2FyZC5QTkc=&php=3&pnrg=9&ehp=18&enemy_name=Priest&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Potion",
+       "effect": "heal"
+      },
+      {
+       "card": "Echo"
+      },
+      {
+       "card": "Reverberate"
+      },
+      {
+       "card": "Lunge"
+      },
+      {
+       "card": "Heartbeat"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Begone, Reaper! This is holy ground!",
+       "Perfect. I love a good funeral."
+      ],
+      "death": "Last... rites..."
+     }
+    },
+    {
+     "enemy": "Dr. Frankenstein",
+     "author": "",
+     "skulls": 3,
+     "id": "res://Scenes/Puzzles/2025-11-25-DrFrankensteinPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-11-25-DrFrankensteinPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "IT'S ALIVE! ...and so am I!",
+       "Uhh... not for long."
+      ],
+      "death": "My creation... will avenge me..."
+     }
+    },
+    {
+     "enemy": "Charger",
+     "author": "",
+     "skulls": 3,
+     "id": "res://Scenes/Puzzles/2025-10-20-ChargerPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-10-20-ChargerPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Full power, coming through!",
+       "Let's see how long your battery lasts."
+      ],
+      "death": "Battery... low..."
+     }
+    },
+    {
+     "enemy": "Carnivorous Plant",
+     "author": "",
+     "skulls": 3,
+     "id": "res://Scenes/Puzzles/2026-02-02-CarniverousPlantPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2026-02-02-CarniverousPlantPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Feed me, Reaper!",
+       "Here's a little something."
+      ],
+      "death": "Wilting..."
+     }
+    }
+   ]
+  },
+  {
+   "id": "arsenal",
+   "name": "Reaper's Scythe",
+   "idea": "Heavy weapons and Armory's copies of them",
+   "cards": [
+    "Cleave",
+    "Armory"
+   ],
+   "story": "The armory of the dead: heavy weapons, and copies of them forged on demand.",
+   "puzzles": [
+    {
+     "enemy": "Vermillion Slime",
+     "author": "EulersApprentice",
+     "skulls": 1,
+     "teaches": [
+      "Cleave"
+     ],
+     "id": "url:2026-04-20",
+     "date": "2026-04-20",
+     "search": "?cards=bWFydHlyLWNhcmQuUE5HJTJDdGFyZ2V0LWNhcmQuUE5HJTJDcG90aW9uLWNhcmQuUE5HJTJDY2xlYXZlLWNhcmQuUE5H&php=3&pnrg=4&ehp=10&enemy_name=Vermillion+Slime&author=EulersApprentice",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I'm red-hot slime!",
+       "And I'm about to see red."
+      ],
+      "death": "Slimed... out..."
+     }
+    },
+    {
+     "enemy": "Fire Mage",
+     "author": "EulersApprentice",
+     "skulls": 2,
+     "id": "url:2026-08-17",
+     "date": "2026-08-17",
+     "search": "?cards=Y2xlYXZlLWNhcmQuUE5HJTJDc2NvcmNoLWNhcmQuUE5HJTJDZm9yZ2UtY2FyZC5QTkclMkNtZW5kLWNhcmQuUE5HJTJDbWVuZC1jYXJkLlBORyUyQ21lbmQtY2FyZC5QTkc%3D&php=1&pnrg=9&ehp=22&enemy_name=Fire+Mage&author=EulersApprentice",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Feel the burn!",
+       "I don't feel much of anything."
+      ],
+      "death": "My fire... fades..."
+     }
+    },
+    {
+     "enemy": "Fungi",
+     "author": "",
+     "skulls": 3,
+     "teaches": [
+      "Armory"
+     ],
+     "id": "res://Scenes/Puzzles/2025-12-02-FungiPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-12-02-FungiPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I'm a fun-gi, Reaper!",
+       "There's not mushroom for both of us."
+      ],
+      "death": "Decomposing..."
+     }
+    },
+    {
+     "enemy": "Stew",
+     "author": "EulersApprentice",
+     "skulls": 2,
+     "id": "url:2026-03-31",
+     "date": "2026-03-31",
+     "search": "?cards=bWFydHlyLWNhcmQuUE5HJTJDdGFyZ2V0LWNhcmQuUE5HJTJDYXJtb3J5LWNhcmQuUE5HJTJDcG90aW9uLWNhcmQuUE5H&php=5&pnrg=6&ehp=15&enemy_name=Stew&author=EulersApprentice",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I'm a stew that came alive. Don't ask.",
+       "..."
+      ],
+      "death": "Too many cooks..."
+     }
+    },
+    {
+     "enemy": "Headbanger",
+     "author": "EulersApprentice",
+     "skulls": 2,
+     "id": "url:2026-07-27",
+     "date": "2026-07-27",
+     "search": "?cards=dHJpYnV0ZS1jYXJkLlBORyUyQ3Zlbm9tLWNhcmQuUE5HJTJDdGh1bmRlcmJvbHQtY2FyZC5QTkclMkNmbHVycnktY2FyZC5QTkclMkNjbGVhdmUtY2FyZC5QTkc%3D&php=3&pnrg=10&ehp=30&enemy_name=Headbanger&author=EulersApprentice",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "ROCK AND ROLL FOREVER!",
+       "Forever's a long time. Let's wrap up this set."
+      ],
+      "death": "Final... encore..."
+     }
+    },
+    {
+     "enemy": "Black Knight",
+     "author": "",
+     "skulls": 3,
+     "id": "res://Scenes/Puzzles/2026-01-06-BlackKnightPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2026-01-06-BlackKnightPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "None shall pass!",
+       "Can your sword beat my scythe, good sir?"
+      ],
+      "death": "Alright... we'll call it a draw..."
+     }
+    },
+    {
+     "enemy": "Axebeak",
+     "author": "",
+     "skulls": 3,
+     "id": "res://Scenes/Puzzles/2026-01-22-AxebeakPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2026-01-22-AxebeakPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "SQUAWK! I'll chop you down!",
+       "Birds of a feather die together."
+      ],
+      "death": "Plucked..."
+     }
+    }
+   ]
+  },
+  {
+   "id": "soul",
+   "name": "Soul Trade",
+   "idea": "Trade with the enemy and yourself: Cooperation heals them for energy, Exchange swaps your HP and energy",
+   "cards": [
+    "Cooperate",
+    "Exchange"
+   ],
+   "story": "Strike deals with your enemy and yourself: their health for your energy, your health for your energy.",
+   "puzzles": [
+    {
+     "enemy": "Debt Collector",
+     "author": "mcwavegames",
+     "skulls": 1,
+     "teaches": [
+      "Cooperate"
+     ],
+     "id": "story:debt-collector",
+     "search": "?cards=cG91bmQtY2FyZC5QTkclMkNjb29wZXJhdGlvbi1jYXJkLlBORyUyQ3NwZWFyLWNhcmQuUE5HJTJDcmFnZS1jYXJkLlBORw==&php=3&pnrg=3&ehp=5&enemy_name=Debt+Collector&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Rage"
+      },
+      {
+       "card": "Spear"
+      },
+      {
+       "card": "Cooperation"
+      },
+      {
+       "card": "Pound"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "You owe me, Reaper!",
+       "Everyone pays me in the end."
+      ],
+      "death": "Account... closed..."
+     }
+    },
+    {
+     "enemy": "Bandit",
+     "author": "",
+     "skulls": 2,
+     "teaches": [
+      "Exchange"
+     ],
+     "id": "res://Scenes/Puzzles/2025-12-08-BanditPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-12-08-BanditPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Your soul or your life!",
+       "That's the same thing."
+      ],
+      "death": "Robbed..."
+     }
+    },
+    {
+     "enemy": "Soul Broker",
+     "author": "mcwavegames",
+     "skulls": 2,
+     "id": "story:soul-broker",
+     "search": "?cards=YnVyc3QtY2FyZC5QTkclMkNleGNoYW5nZS1jYXJkLlBORyUyQ2hlYXJ0YmVhdC1jYXJkLlBORyUyQ2V4Y2hhbmdlLWNhcmQuUE5HJTJDZXhjaGFuZ2UtY2FyZC5QTkc=&php=5&pnrg=10&ehp=12&enemy_name=Soul+Broker&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Exchange"
+      },
+      {
+       "card": "Heartbeat"
+      },
+      {
+       "card": "Exchange"
+      },
+      {
+       "card": "Burst"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I'll trade you three souls for yours!",
+       "Just 3?? I'm offended."
+      ],
+      "death": "Market... crash..."
+     }
+    },
+    {
+     "enemy": "Flumph",
+     "author": "",
+     "skulls": 3,
+     "id": "res://Scenes/Puzzles/2025-09-07-FlumphPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-09-07-FlumphPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Flumph! Flumph flumph!",
+       "...I'll take that as a yes."
+      ],
+      "death": "Flumph... flumph..."
+     }
+    },
+    {
+     "enemy": "Lich",
+     "author": "",
+     "skulls": 4,
+     "id": "res://Scenes/Puzzles/2025-09-25-LichPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-09-25-LichPuzzle.tscn"
+    }
+   ]
+  },
+  {
+   "id": "empty",
+   "name": "Last Rites",
+   "idea": "Nothing left: Empty Fist hits when you have no energy, Parting Shot and Gambit when your hand is empty, Snipe when your discard pile is",
+   "cards": [
+    "Empty Fist",
+    "Parting Shot",
+    "Gambit"
+   ],
+   "story": "Strength from nothing: these cards hit hardest when your energy, your hand or your discard pile is empty.",
+   "puzzles": [
+    {
+     "enemy": "Decrepit Mouse",
+     "author": "",
+     "skulls": 2,
+     "teaches": [
+      "Empty Fist"
+     ],
+     "id": "res://Scenes/Puzzles/2025-08-11-DecrepitMousePuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-08-11-DecrepitMousePuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Squeak... I've lived a long life...",
+       "...Put this thing out of its misery."
+      ],
+      "death": "Finally... rest..."
+     }
+    },
+    {
+     "enemy": "Loiterer",
+     "author": "EulersApprentice",
+     "skulls": 2,
+     "teaches": [
+      "Parting Shot"
+     ],
+     "id": "url:2026-06-22",
+     "date": "2026-06-22",
+     "search": "?cards=cGFydGluZ3Nob3QtY2FyZC5QTkclMkNyZWJvdW5kLWNhcmQuUE5HJTJDZWNoby1jYXJkLlBORyUyQ2VjaG8tY2FyZC5QTkc%3D&php=20&pnrg=10&ehp=16&enemy_name=Loiterer&author=EulersApprentice",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I'm just hanging around. Not doing anything.",
+       "Then you won't mind if I wrap things up."
+      ],
+      "death": "Moving... along..."
+     }
+    },
+    {
+     "enemy": "Origami",
+     "author": "",
+     "skulls": 2,
+     "id": "res://Scenes/Puzzles/2025-08-13-OrigamiPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-08-13-OrigamiPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I fold under no one!",
+       "A paper cut? I'm terrified."
+      ],
+      "death": "Folded..."
+     }
+    },
+    {
+     "enemy": "Gremlin",
+     "author": "EulersApprentice",
+     "skulls": 2,
+     "id": "url:2026-07-20",
+     "date": "2026-07-20",
+     "search": "?cards=c25pcGUtY2FyZC5QTkclMkNwYXJ0aW5nc2hvdC1jYXJkLlBORyUyQ2J1cnN0LWNhcmQuUE5HJTJDc2hvdmVsLWNhcmQuUE5HJTJDaGF1bnQtY2FyZC5QTkc%3D&php=3&pnrg=7&ehp=20&enemy_name=Gremlin&author=EulersApprentice",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Hehe! I break everything!",
+       "You little menace, get over here!"
+      ],
+      "death": "Malfunction..."
+     }
+    },
+    {
+     "enemy": "Pallbearer",
+     "author": "mcwavegames",
+     "skulls": 2,
+     "teaches": [
+      "Gambit"
+     ],
+     "id": "story:pallbearer",
+     "search": "?cards=cGFydGluZ3Nob3QtY2FyZC5QTkclMkNnYW1iaXQtY2FyZC5QTkclMkNzY3JhcC1jYXJkLlBORyUyQ3JhZ2UtY2FyZC5QTkclMkNyYWdlLWNhcmQuUE5HJTJDcmVib3VuZC1jYXJkLlBORw==&php=10&pnrg=5&ehp=8&enemy_name=Pallbearer&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Rage"
+      },
+      {
+       "card": "Rebound"
+      },
+      {
+       "card": "Rage"
+      },
+      {
+       "card": "Rage"
+      },
+      {
+       "card": "Scrap",
+       "picks": [
+        "Parting Shot"
+       ]
+      },
+      {
+       "card": "Gambit",
+       "picks": [
+        "Rage",
+        "Parting Shot"
+       ]
+      },
+      {
+       "card": "Rage"
+      },
+      {
+       "card": "Parting Shot"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I've carried a hundred coffins.",
+       "Maybe I could use your help then..."
+      ],
+      "death": "Carry... me..."
+     }
+    },
+    {
+     "enemy": "Saboteur",
+     "author": "EulersApprentice",
+     "skulls": 3,
+     "id": "url:2026-07-14",
+     "date": "2026-07-14",
+     "search": "?cards=c2xhc2gtY2FyZC5QTkclMkNpbnNwaXJhdGlvbi1jYXJkLlBORyUyQ2hhdW50LWNhcmQuUE5HJTJDcmVib3VuZC1jYXJkLlBORyUyQ2dhbWJpdC1jYXJkLlBORw%3D%3D&php=2&pnrg=5&ehp=24&enemy_name=Saboteur&author=EulersApprentice",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I've rigged everything. You can't win!",
+       "I always win."
+      ],
+      "death": "Plan... failed..."
+     }
+    }
+   ]
+  },
+  {
+   "id": "scales",
+   "name": "Balance of Power",
+   "idea": "Charge and balance: Capacitor turns an attack into energy, Balance pays off when your HP and energy match, Cleanse wipes your statuses",
+   "cards": [
+    "Capacitor",
+    "Balance",
+    "Cleanse"
+   ],
+   "story": "Keep everything even. Attacks can become energy, and matching your health and energy pays off.",
+   "puzzles": [
+    {
+     "enemy": "Arbiter",
+     "author": "mcwavegames",
+     "skulls": 1,
+     "teaches": [
+      "Balance"
+     ],
+     "id": "story:arbiter",
+     "search": "?cards=YmFsYW5jZS1jYXJkLlBORyUyQ3BvdGlvbi1jYXJkLlBORyUyQ2J1cnN0LWNhcmQuUE5H&php=8&pnrg=10&ehp=13&enemy_name=Arbiter&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Potion",
+       "effect": "damage"
+      },
+      {
+       "card": "Balance"
+      },
+      {
+       "card": "Burst"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I will judge this fight fairly.",
+       "Death is the only fair judge."
+      ],
+      "death": "Case... closed..."
+     }
+    },
+    {
+     "enemy": "Lightning Rod",
+     "author": "mcwavegames",
+     "skulls": 1,
+     "teaches": [
+      "Capacitor"
+     ],
+     "id": "story:lightning-rod",
+     "search": "?cards=Y2FwYWNpdG9yLWNhcmQuUE5HJTJDcG91bmQtY2FyZC5QTkclMkNjbGVhdmUtY2FyZC5QTkclMkN0YXJnZXQtY2FyZC5QTkc=&php=10&pnrg=4&ehp=10&enemy_name=Lightning+Rod&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Capacitor"
+      },
+      {
+       "card": "Pound"
+      },
+      {
+       "card": "Target"
+      },
+      {
+       "card": "Cleave"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Strike me, Reaper! I'll take all of it!",
+       "Ok, sure. But it will definitely kill you."
+      ],
+      "death": "Grounded..."
+     }
+    },
+    {
+     "enemy": "Scorpion",
+     "author": "",
+     "skulls": 2,
+     "teaches": [
+      "Cleanse"
+     ],
+     "id": "res://Scenes/Puzzles/2026-01-19-ScorpionPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2026-01-19-ScorpionPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "My sting is lethal!",
+       "Hehe, that tickles!"
+      ],
+      "death": "Stung... myself..."
+     }
+    },
+    {
+     "enemy": "Equilibrist",
+     "author": "mcwavegames",
+     "skulls": 2,
+     "id": "story:equilibrist",
+     "search": "?cards=Y2FwYWNpdG9yLWNhcmQuUE5HJTJDYmFsYW5jZS1jYXJkLlBORyUyQ2RyYWluLWNhcmQuUE5HJTJDcmFnZS1jYXJkLlBORyUyQ3JlYm91bmQtY2FyZC5QTkclMkNsdW5nZS1jYXJkLlBORw==&php=8&pnrg=14&ehp=12&enemy_name=Equilibrist&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Rebound"
+      },
+      {
+       "card": "Drain"
+      },
+      {
+       "card": "Drain"
+      },
+      {
+       "card": "Capacitor"
+      },
+      {
+       "card": "Lunge"
+      },
+      {
+       "card": "Balance"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I keep everything in perfect balance!",
+       "Death is nature's balance."
+      ],
+      "death": "Off... balance..."
+     }
+    },
+    {
+     "enemy": "Biologist",
+     "author": "MakoTheMouse",
+     "skulls": 2,
+     "id": "url:2026-05-18",
+     "date": "2026-05-18",
+     "search": "?cards=cG90aW9uLWNhcmQuUE5HJTJDZHJhaW4tY2FyZC5QTkclMkNiYWxhbmNlLWNhcmQuUE5HJTJDaGVhcnRiZWF0LWNhcmQuUE5HJTJDZXhjaGFuZ2UtY2FyZC5QTkc%3D&php=11&pnrg=8&ehp=20&enemy_name=Biologist&author=MakoTheMouse",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Fascinating! A real Grim Reaper! Can I take a sample?",
+       "Uh, sure, but I don't have to go right now."
+      ],
+      "death": "Peer... reviewed..."
+     }
+    },
+    {
+     "enemy": "Silk Road Trader",
+     "author": "EulersApprentice",
+     "skulls": 3,
+     "id": "url:2026-08-11",
+     "date": "2026-08-11",
+     "search": "?cards=YmFsYW5jZS1jYXJkLlBORyUyQ3NsYXNoLWNhcmQuUE5HJTJDc3BlYXItY2FyZC5QTkclMkNwb3VuZC1jYXJkLlBORyUyQ2NsZWF2ZS1jYXJkLlBORyUyQ2NhcGFjaXRvci1jYXJkLlBORyUyQ2NhdXRlcml6ZS1jYXJkLlBORw%3D%3D&php=4&pnrg=5&ehp=14&enemy_name=Silk+Road+Trader&author=EulersApprentice",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I've traded with every empire on earth!",
+       "Every empire falls. Hope you have a savings account!"
+      ],
+      "death": "End of... the road..."
+     }
+    }
+   ]
+  },
+  {
+   "id": "grave2",
+   "name": "Unmarked Grave",
+   "idea": "Raise the dead: Seance trashes the first and last cards in your discard pile and gives you back everything in between",
+   "cards": [
+    "Seance"
+   ],
+   "story": "The spirits give back what you played: everything but the first and last cards in your discard pile.",
+   "puzzles": [
+    {
+     "enemy": "Spiritualist",
+     "author": "mcwavegames",
+     "skulls": 1,
+     "teaches": [
+      "Seance"
+     ],
+     "id": "story:spiritualist",
+     "search": "?cards=c2VhbmNlLWNhcmQuUE5HJTJDZW1wdHlmaXN0LWNhcmQuUE5HJTJDY2xlYXZlLWNhcmQuUE5HJTJDc3VyZ2UtY2FyZC5QTkc=&php=10&pnrg=10&ehp=10&enemy_name=Spiritualist&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Surge"
+      },
+      {
+       "card": "Cleave"
+      },
+      {
+       "card": "Empty Fist"
+      },
+      {
+       "card": "Seance"
+      },
+      {
+       "card": "Cleave"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "The spirits told me you'd come!",
+       "Did they tell you how it ends?"
+      ],
+      "death": "Joining... the spirits..."
+     }
+    },
+    {
+     "enemy": "Spirit Medium",
+     "author": "mcwavegames",
+     "skulls": 1,
+     "id": "story:spirit-medium",
+     "search": "?cards=c3BlYXItY2FyZC5QTkclMkNzZWFuY2UtY2FyZC5QTkclMkNsdW5nZS1jYXJkLlBORyUyQ3N1cmdlLWNhcmQuUE5HJTJDbHVuZ2UtY2FyZC5QTkc=&php=3&pnrg=6&ehp=9&enemy_name=Spirit+Medium&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Lunge"
+      },
+      {
+       "card": "Spear"
+      },
+      {
+       "card": "Lunge"
+      },
+      {
+       "card": "Surge"
+      },
+      {
+       "card": "Seance"
+      },
+      {
+       "card": "Lunge"
+      },
+      {
+       "card": "Spear"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I'm a medium. I talk to the dead!",
+       "Ok, tell them hello for me!"
+      ],
+      "death": "Spirits... calling..."
+     }
+    },
+    {
+     "enemy": "Body Snatcher",
+     "author": "mcwavegames",
+     "skulls": 2,
+     "id": "story:body-snatcher",
+     "search": "?cards=YnVyc3QtY2FyZC5QTkclMkNsdW5nZS1jYXJkLlBORyUyQ3NlYW5jZS1jYXJkLlBORyUyQ3N1cmdlLWNhcmQuUE5HJTJDbHVuZ2UtY2FyZC5QTkclMkNzdXJnZS1jYXJkLlBORw==&php=3&pnrg=3&ehp=11&enemy_name=Body+Snatcher&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Surge"
+      },
+      {
+       "card": "Lunge"
+      },
+      {
+       "card": "Lunge"
+      },
+      {
+       "card": "Surge"
+      },
+      {
+       "card": "Seance"
+      },
+      {
+       "card": "Lunge"
+      },
+      {
+       "card": "Lunge"
+      },
+      {
+       "card": "Burst"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I'll take this body. And yours!",
+       "Mine's mostly robe."
+      ],
+      "death": "Snatched..."
+     }
+    },
+    {
+     "enemy": "Guerilla Warrior",
+     "author": "EulersApprentice",
+     "skulls": 3,
+     "id": "url:2026-06-24",
+     "date": "2026-06-24",
+     "search": "?cards=cGFydGluZ3Nob3QtY2FyZC5QTkclMkNidXJzdC1jYXJkLlBORyUyQ3Nob3ZlbC1jYXJkLlBORyUyQ2NsZWF2ZS1jYXJkLlBORyUyQ3JlYm91bmQtY2FyZC5QTkclMkNzZWFuY2UtY2FyZC5QTkc%3D&php=5&pnrg=20&ehp=28&enemy_name=Guerilla+Warrior&author=EulersApprentice",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "You'll never find me in the jungle!",
+       "I always find everyone."
+      ],
+      "death": "Retreat..."
+     }
+    },
+    {
+     "enemy": "Plasmavore",
+     "author": "EulersApprentice",
+     "skulls": 4,
+     "id": "url:2026-07-01",
+     "date": "2026-07-01",
+     "search": "?cards=Zmx1cnJ5LWNhcmQuUE5HJTJDZHJhaW4tY2FyZC5QTkclMkNoZWFydGJlYXQtY2FyZC5QTkclMkNyYWdlLWNhcmQuUE5HJTJDZWNoby1jYXJkLlBORyUyQ3NlYW5jZS1jYXJkLlBORw%3D%3D&php=5&pnrg=20&ehp=43&enemy_name=Plasmavore&author=EulersApprentice",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I feed on the energy of the living!",
+       "Then you're going to starve."
+      ],
+      "death": "Starved... out..."
+     }
+    }
+   ]
+  },
+  {
+   "id": "shards",
+   "name": "Bone Shards",
+   "idea": "Fragment: split one attack into many hits",
+   "cards": [
+    "Fragment"
+   ],
+   "story": "One blow shatters into many small hits, and anything that adds to a hit adds to every shard.",
+   "puzzles": [
+    {
+     "enemy": "Bone Splinter",
+     "author": "mcwavegames",
+     "skulls": 1,
+     "teaches": [
+      "Fragment"
+     ],
+     "id": "story:bone-splinter",
+     "search": "?cards=dGh1bmRlcmJvbHQtY2FyZC5QTkclMkNmcmFnbWVudC1jYXJkLlBORyUyQ3dvdW5kLWNhcmQuUE5HJTJDdGFyZ2V0LWNhcmQuUE5H&php=10&pnrg=10&ehp=28&enemy_name=Bone+Splinter&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Wound"
+      },
+      {
+       "card": "Fragment"
+      },
+      {
+       "card": "Target"
+      },
+      {
+       "card": "Thunderbolt"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Break me and I just get sharper!",
+       "Paper cuts... then splinters... what next?!"
+      ],
+      "death": "Shattered..."
+     }
+    },
+    {
+     "enemy": "Origami Tiger",
+     "author": "EulersApprentice",
+     "skulls": 2,
+     "id": "url:2026-07-06",
+     "date": "2026-07-06",
+     "search": "?cards=c3BlYXItY2FyZC5QTkclMkNwb3VuZC1jYXJkLlBORyUyQ2NsZWF2ZS1jYXJkLlBORyUyQ2ZyYWdtZW50LWNhcmQuUE5HJTJDd291bmQtY2FyZC5QTkc%3D&php=3&pnrg=11&ehp=19&enemy_name=Origami+Tiger&author=EulersApprentice",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "ROAR! I'm a fearsome paper tiger!",
+       "Paper beats rock. Scythe beats paper."
+      ],
+      "death": "Recycled..."
+     }
+    },
+    {
+     "enemy": "Bone Grinder",
+     "author": "mcwavegames",
+     "skulls": 2,
+     "id": "story:bone-grinder",
+     "search": "?cards=dmVub20tY2FyZC5QTkclMkNmcmFnbWVudC1jYXJkLlBORyUyQ2NsZWF2ZS1jYXJkLlBORyUyQ3JhZ2UtY2FyZC5QTkclMkNzbGFzaC1jYXJkLlBORyUyQ2NsZWFuc2UtY2FyZC5QTkc=&php=10&pnrg=8&ehp=24&enemy_name=Bone+Grinder&author=mcwavegames",
+     "solution": [
+      {
+       "card": "Rage"
+      },
+      {
+       "card": "Venom"
+      },
+      {
+       "card": "Slash"
+      },
+      {
+       "card": "Cleanse"
+      },
+      {
+       "card": "Fragment"
+      },
+      {
+       "card": "Cleave"
+      }
+     ],
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I grind bones into dust!",
+       "*grinder noises*"
+      ],
+      "death": "Ground... down..."
+     }
+    },
+    {
+     "enemy": "Giant Toad",
+     "author": "EulersApprentice",
+     "skulls": 3,
+     "id": "url:2026-07-08",
+     "date": "2026-07-08",
+     "search": "?cards=cG91bmQtY2FyZC5QTkclMkNwb3VuZC1jYXJkLlBORyUyQ2ZyYWdtZW50LWNhcmQuUE5HJTJDdmVub20tY2FyZC5QTkclMkNoYXVudC1jYXJkLlBORyUyQ3NlYW5jZS1jYXJkLlBORw%3D%3D&php=5&pnrg=20&ehp=96&enemy_name=Giant+Toad&author=EulersApprentice",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "RIBBIT! I'll swallow you whole!",
+       "Hop to it."
+      ],
+      "death": "Croaked..."
+     }
+    },
+    {
+     "enemy": "Shield man",
+     "author": "potatomato",
+     "skulls": 3,
+     "id": "url:2026-06-23",
+     "date": "2026-06-23",
+     "search": "?cards=ZnJhZ21lbnQtY2FyZC5QTkclMkNyYWdlLWNhcmQuUE5HJTJDcGFydGluZ3Nob3QtY2FyZC5QTkclMkNoYXVudC1jYXJkLlBORyUyQ3JldmVyYmVyYXRlLWNhcmQuUE5HJTJDbWFydHlyLWNhcmQuUE5HJTJDaW5zcGlyYXRpb24tY2FyZC5QTkc%3D&php=5&pnrg=2&ehp=50&enemy_name=Shield+man&author=potatomato",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Nothing gets through my shield!",
+       "Not even my super sharp scythe???"
+      ],
+      "death": "Shield... broken..."
+     }
+    }
+   ]
+  },
+  {
+   "id": "finale",
+   "name": "The Final Audit",
+   "idea": "The hardest puzzles, using every card.",
+   "cards": [],
+   "story": "Every debt comes due: the hardest puzzles in the land, using everything you've learned.",
+   "puzzles": [
+    {
+     "enemy": "Flame Giant",
+     "author": "",
+     "skulls": 5,
+     "id": "res://Scenes/Puzzles/2025-06-24-FlameGiantPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-06-24-FlameGiantPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I've burned down kingdoms, Reaper!",
+       "And I've collected every one of them."
+      ],
+      "death": "Embers... fade..."
+     }
+    },
+    {
+     "enemy": "Specimen",
+     "author": "RadioInactive",
+     "skulls": 4,
+     "id": "url:2026-04-09",
+     "date": "2026-04-09",
+     "search": "?cards=YmFsYW5jZS1jYXJkLlBORyUyQ3BvdGlvbi1jYXJkLlBORyUyQ2NhcGFjaXRvci1jYXJkLlBORyUyQ3N1cmdlLWNhcmQuUE5HJTJDcmVib3VuZC1jYXJkLlBORyUyQ3Jldml2ZS1jYXJkLlBORw%3D%3D&php=1&pnrg=11&ehp=16&enemy_name=Specimen&author=RadioInactive",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "They made me in a lab. I can't die!",
+       "That's... just a theory."
+      ],
+      "death": "Experiment... over..."
+     }
+    },
+    {
+     "enemy": "Mana Imp",
+     "author": "",
+     "skulls": 5,
+     "id": "res://Scenes/Puzzles/2025-08-05-ManaImpPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2025-08-05-ManaImpPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "Hee hee! Infinite mana, infinite tricks!",
+       "Hands off my goods, imp!"
+      ],
+      "death": "Out... of mana..."
+     }
+    },
+    {
+     "enemy": "Terminator",
+     "author": "EulersApprentice",
+     "skulls": 5,
+     "id": "url:2026-08-27",
+     "date": "2026-08-27",
+     "search": "?cards=c3VyZ2UtY2FyZC5QTkclMkNtYXJ0eXItY2FyZC5QTkclMkNvdmVybG9hZC1jYXJkLlBORyUyQ3Jldml2ZS1jYXJkLlBORyUyQ2VjaG8tY2FyZC5QTkclMkNyZXZlcmJlcmF0ZS1jYXJkLlBORyUyQ2JhbGFuY2UtY2FyZC5QTkc%3D&php=50&pnrg=5&ehp=30&enemy_name=Terminator&author=EulersApprentice",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I'll be back.",
+       "No, you won't."
+      ],
+      "death": "Terminated..."
+     }
+    },
+    {
+     "enemy": "Adamantine Golem",
+     "author": "BenMiff",
+     "skulls": 4,
+     "id": "url:2026-04-10",
+     "date": "2026-04-10",
+     "search": "?cards=YXJtb3J5LWNhcmQuUE5HJTJDZm9yZ2UtY2FyZC5QTkclMkNpZ25pdGUtY2FyZC5QTkclMkNvdmVybG9hZC1jYXJkLlBORyUyQ3JldmVyYmVyYXRlLWNhcmQuUE5HJTJDcmV2aXZlLWNhcmQuUE5HJTJDdmVub20tY2FyZC5QTkc%3D&php=1&pnrg=28&ehp=615&author=BenMiff&enemy_name=Adamantine+Golem",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "I am unbreakable!",
+       "Stay still and let me take a few whacks."
+      ],
+      "death": "Crumbling..."
+     }
+    },
+    {
+     "enemy": "Paladin",
+     "author": "",
+     "skulls": 5,
+     "id": "res://Scenes/Puzzles/2026-01-09-PaladinPuzzle.tscn",
+     "scene": "res://Scenes/Puzzles/2026-01-09-PaladinPuzzle.tscn",
+     "dialog": {
+      "first": "Enemy",
+      "lines": [
+       "By the light, I'll smite you, foul Reaper!",
+       "By the light, you'll see me soon."
+      ],
+      "death": "The light... fades..."
+     }
+    }
+   ]
+  }
+ ]
+}

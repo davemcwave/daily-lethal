@@ -70,6 +70,7 @@ card_effects = [NodePath("PlayerChooseEffectCardEffect"), NodePath("ShowAuthorCa
 card_name = "Potion"
 energy_cost = 2
 card_description = "Deal [color=red]%d[/color] damage or Heal 2 HP"
+pay_cost_after_effects = true
 
 [node name="TitlePanel" type="Panel" parent="."]
 layout_mode = 1

@@ -18,6 +18,7 @@ config/icon="uid://iq3ggtrrqtb3"
 config/windows_native_icon="res://Assets/Textures/lethal-last-turn-icon.ico"
 run/main_scene.web_desktop_build="res://Scenes/Scene0Desktop.tscn"
 run/main_scene.web_build="res://Scenes/Scene0.tscn"
+run/main_scene.pc_build="res://Scenes/MainMenu.tscn"
 
 [autoload]
 

@@ -72,7 +72,11 @@ func add_card(new_card: Card) -> void:
 	tween.parallel().tween_property(new_card, "global_position:y", global_position.y + randf_range(-10, 10), 0.50).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 	tween.parallel().tween_property(new_card, "scale", Vector2.ONE*0.75, 0.50).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 	
-	buffs_container.activate_buffs(Buff.ActivationType.OnCardDiscarded)
+	# Copy, Return and Trash act on the card you play, when it leaves play. Cards
+	# discarded by an effect (Scrap, Armory, ...) never trigger them.
+	var scene = get_tree().get_root().get_node_or_null("Scene")
+	if scene == null or not ("resolving_card_stack" in scene) or scene.resolving_card_stack.has(new_card):
+		buffs_container.activate_buffs(Buff.ActivationType.OnCardDiscarded, {"card": new_card})
 	#await tween.finished
 	#if get_child_count() > 0 and $DiscardCenterText.visible:
 		#$DiscardCenterText.hide()

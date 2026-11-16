@@ -18,12 +18,16 @@ func _ready():
 	path_name = JavaScriptBridge.eval("window.location.pathname")
 	search = JavaScriptBridge.eval("window.location.search")
 	# Off the web (editor, desktop, test runner) there is no URL; use the one
-	# Background was given via --url= or by the puzzle test runner.
-	if (search == null or str(search).is_empty()) and not OS.has_feature("web"):
-		var background = get_node_or_null("/root/Background")
-		if background != null and not background.url_override_search.is_empty():
-			path_name = background.url_override_path
-			search = background.url_override_search
+	# Background was given via --url= or by the puzzle test runner. A puzzle started
+	# inside the game (a Puzzle Lab test, a Library puzzle) uses it on the web too: the
+	# page's own address is /desktop/?puzzle_lab=1 or ?library=1. A Library scene puzzle
+	# has none, so Scene falls back to Background's puzzle scene.
+	var background = get_node_or_null("/root/Background")
+	var no_url: bool = (search == null or str(search).is_empty()) and not OS.has_feature("web")
+	var in_game: bool = background != null and (background.card_builder_trying or background.is_from_archive())
+	if background != null and (in_game or (no_url and not background.url_override_search.is_empty())):
+		path_name = background.url_override_path
+		search = background.url_override_search
 	puzzle_creator_name = _get_query_param("puzzle_creator")
 	if puzzle_creator_name.is_empty():
 		puzzle_creator_name = _get_query_param("creator")
@@ -101,14 +105,19 @@ func get_cards_from_test_puzzle() -> Array:
 	var card_path_strings = card_string.split(",")
 	var card_scene_paths = []
 	for card_path_string: String in card_path_strings:
-		# card_path_string = "lunge-card.PNG"
+		# card_path_string = "lunge-card.PNG"; empty when a puzzle has only custom cards
+		if card_path_string.strip_edges().is_empty():
+			continue
 		var card_path_no_png: String = card_path_string.replace(".PNG", "")
 		var card_path_two_words = card_path_no_png.split("-")
 		var card_first_word = card_path_two_words[0].capitalize()
 		var card_second_word = card_path_two_words[1].capitalize()
 		var card_scene_path = "res://Scenes/%s%s.tscn" % [card_first_word, card_second_word]
+		# The link names cards; only the game's own card scenes are dealt.
+		if EffectRegistry.allowed_scene_path("card_scene", card_scene_path).is_empty():
+			continue
 		var card_packed_scene = load(card_scene_path)
-		
+
 		card_scene_paths.append(card_scene_path)
 		cards.append(card_packed_scene)
 		#set_text("[center][b]%s[/b][/center]" % ",".join(card_scene_paths))
@@ -285,66 +294,11 @@ func create_custom_cards() -> Array:
 	return cards
 
 func _configure_card(card: Card, data: Dictionary) -> void:
-	# Set basic card properties
-	card.card_name = data.get("name", "Custom Card")
-	card.energy_cost = int(data.get("energy", 1))
-	var description_text: String = data.get("description", "")
-	var description_template: String = data.get("description_template", description_text)
-	if card.has_method("set_description"):
-		card.set_description(description_text)
-	else:
-		card.card_description = description_text
-
-	# Set card color(s) on the icon panel
-	var colors_array: Array = []
-	if data.has("colors") and data["colors"] is Array:
-		colors_array = data["colors"]
-	var primary_color_hex: String = str(colors_array[0]) if colors_array.size() > 0 else data.get("color", "#002A8C")
-	var card_color = Color.html(primary_color_hex)
-
-	# Apply color to the card's IconPanel stylebox
-	if card.has_node("IconPanel"):
-		var icon_panel = card.get_node("IconPanel")
-		var style = icon_panel.get_theme_stylebox("panel").duplicate()
-		style.bg_color = card_color
-		icon_panel.add_theme_stylebox_override("panel", style)
-		if card.has_gradient_background():
-			var gradient_node = card.get_node("IconPanel/GradientBackground")
-			gradient_node.queue_free()
-		var gradient_colors := PackedColorArray()
-		for color_entry in colors_array:
-			if color_entry is String and not String(color_entry).is_empty():
-				var gradient_color = Color.html(color_entry)
-				gradient_colors.append(gradient_color)
-		if gradient_colors.size() >= 2:
-			card.add_gradient_background(gradient_colors)
-
-	# Set card icon texture if provided
-	var icon_name: String = data.get("icon", "")
-	if icon_name != "" and card.has_node("IconPanel/Icon"):
-		var icon_path = _resolve_icon_resource_path(icon_name)
-		var icon_texture = load(icon_path)
-		if icon_texture:
-			card.get_node("IconPanel/Icon").set_texture(icon_texture)
-
-	# Add effects based on the effects array
-	var effects_data = data.get("effects", [])
-	for effect_data in effects_data:
-		var effect = _create_effect_from_data(effect_data)
-		if effect is Array:
-			for single_effect in effect:
-				if single_effect == null:
-					continue
-				card.add_child(single_effect)
-				card.card_effects.append(single_effect)
-		elif effect != null:
-				card.add_child(effect)
-				card.card_effects.append(effect)
-
-	if card.has_method("set_description_template"):
-		card.set_description_template(description_template)
-	else:
-		card.set("description_template", description_template)
+	# Built the same way as every other card. Effect types from the registry
+	# ("Damage", "Condition", ...) work directly; the Card Lab's original types
+	# ("DamageCardEffect" with "damage", ...) still go through
+	# _create_effect_from_data so existing links behave exactly as before.
+	CardFactory.apply_definition(card, data, _create_effect_from_data)
 
 func _create_effect_from_data(effect_data: Dictionary):
 	var effect_type: String = effect_data.get("type", "")
@@ -449,6 +403,8 @@ func _create_effect_from_data(effect_data: Dictionary):
 				var legacy_card_name: String = params.get("card_name", "")
 				if not legacy_card_name.is_empty():
 					card_scene_path = "res://Scenes/%s.tscn" % legacy_card_name
+			# Only the game's own cards (by name or their path), never any other file.
+			card_scene_path = EffectRegistry.allowed_scene_path("card_to_create_scene", card_scene_path)
 			if not card_scene_path.is_empty():
 				var card_scene = load(card_scene_path)
 				if card_scene is PackedScene:
@@ -540,20 +496,7 @@ func _create_debuff_effect(debuff_name: String, stacks: int = 1, template_values
 	return effects
 
 func _resolve_icon_resource_path(icon_value: String) -> String:
-	if icon_value.begins_with("res://"):
-		return icon_value
-	if icon_value.begins_with("Assets/"):
-		return "res://%s" % icon_value
-	if icon_value.begins_with("../"):
-		return "res://%s" % icon_value.substr(3, icon_value.length() - 3)
-	if icon_value.begins_with("./"):
-		return "res://%s" % icon_value.substr(2, icon_value.length() - 2)
-	var normalized := icon_value
-	var lower := normalized.to_lower()
-	if not (lower.ends_with(".png") or lower.ends_with(".svg") or lower.ends_with(".jpg") \
-		or lower.ends_with(".jpeg") or lower.ends_with(".webp") or lower.ends_with(".gif")):
-		normalized += ".png"
-	return "res://Assets/Textures/%s" % normalized
+	return CardFactory.resolve_icon_path(icon_value)
 
 func _apply_params_to_effect(effect: Object, params: Dictionary, skip_keys: Array = []) -> void:
 	if effect == null or params.is_empty():

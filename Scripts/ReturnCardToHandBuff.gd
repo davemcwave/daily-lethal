@@ -10,7 +10,7 @@ func activate(context: Dictionary = {}) -> bool:
 		print("EARLY RETURN: discard empty")
 		return true  # Don't consume buff if nothing to return
 
-	var discarded_card: Card = discard_panel.get_last_card()
+	var discarded_card: Card = context.get("card", discard_panel.get_last_card())
 	var last_played_card = scene.get_last_card_played()
 
 	if discarded_card == null or not is_instance_valid(discarded_card):

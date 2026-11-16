@@ -55,6 +55,7 @@ script = ExtResource("1_g6xfe")
 card_effects = [NodePath("HealCardEffect")]
 card_name = "Mend"
 card_description = "Heal [color=#008c10]1[/color] HP"
+pay_cost_after_effects = true
 
 [node name="TitlePanel" type="Panel" parent="."]
 layout_mode = 1

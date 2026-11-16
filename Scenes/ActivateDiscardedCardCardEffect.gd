@@ -54,6 +54,9 @@ func apply() -> bool:
 		temporary_card.hide()
 		add_child(temporary_card)
 		
+		# Each activation is a new attack: "your next attack" statuses count it anew.
+		if buffs_container != null:
+			buffs_container.release_attack_statuses()
 		await temporary_card.apply_card_effects()
 		
 		temporary_card.queue_free()

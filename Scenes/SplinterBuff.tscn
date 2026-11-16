@@ -5,6 +5,6 @@
 [node name="SplinterBuff" type="Node2D"]
 script = ExtResource("1_i8gjd")
 buff_name = "Splinter"
-buff_description = "The next time you deal damage, deal 1 damage that many times instead."
+buff_description = "Your [attack splits|next X attacks each split] into many attacks, 1-damage each."
 activation_type = 6
 color = Color(0.764706, 0.32549, 0, 1)

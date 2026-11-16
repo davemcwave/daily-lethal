@@ -4346,13 +4346,16 @@
   "2026-04-06": {
    "kind": "url",
    "enemy_name": "Backstreet Thug",
-   "source": "Sharpen, Venom, Flurry, Flurry",
+   "source": "Venom, Sharpen, Flurry, Flurry, Flurry",
    "steps": [
+    {
+     "card": "Venom"
+    },
     {
      "card": "Sharpen"
     },
     {
-     "card": "Venom"
+     "card": "Flurry"
     },
     {
      "card": "Flurry"
@@ -7027,6 +7030,7 @@
     {
      "card": "Gambit",
      "picks": [
+      "Gambit",
       "Gambit"
      ]
     },
@@ -7036,6 +7040,7 @@
     {
      "card": "Gambit",
      "picks": [
+      "Gambit",
       "Gambit"
      ]
     },

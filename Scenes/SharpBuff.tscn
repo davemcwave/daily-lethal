@@ -5,8 +5,9 @@
 [node name="SharpBuff" type="Node2D"]
 script = ExtResource("1_gwn75")
 buff_name = "Sharp"
-buff_description = "Damage increased by the number of stacks of Sharp you have. Lose 1  Sharp after every card played."
+buff_description = "Damage increased by X. Lose 1 Sharp after every card played."
 activation_type = 1
+priority = 0
 extra_activation_types = [0]
 unlimited_uses = true
 color = Color(0.763655, 0.325858, 9.62615e-08, 1)

@@ -10,8 +10,16 @@ func set_damage_amount(new_damage_amount: int) -> void:
 func get_damage_amount() -> int:
 	return damage_amount
 
+## X in the text: the damage it deals back.
+func get_description_number() -> int:
+	return damage_amount
+
 func activate(context: Dictionary = {}) -> bool:
-	target.hurt(damage_amount)
+	await target.hurt(damage_amount)
 	return super.activate()
 	
 	
+
+## Reacts when it (the enemy) is attacked: lights up for attack cards.
+func would_act_on_card(card: Card) -> bool:
+	return card.is_attack_card()

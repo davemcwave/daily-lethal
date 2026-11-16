@@ -1,0 +1,190 @@
+[
+ {
+  "color": "#c0392bff",
+  "description": "Deal 3 damage.",
+  "description_template": "Deal {{effect0.damage_amount}} damage.",
+  "effects": [
+   {
+    "params": {
+     "damage_amount": 3
+    },
+    "type": "Damage"
+   }
+  ],
+  "energy": 1,
+  "format": 1,
+  "icon": "sword",
+  "name": "Lab Strike"
+ },
+ {
+  "color": "#27ae60ff",
+  "description": "Heal 2. Draw 1.",
+  "effects": [
+   {
+    "params": {
+     "heal_amount": 2
+    },
+    "type": "Heal"
+   },
+   {
+    "type": "Draw"
+   }
+  ],
+  "energy": 0,
+  "format": 1,
+  "gradient": [
+   "#27ae60ff",
+   "#2ecc71ff"
+  ],
+  "icon": "heart-white",
+  "name": "Lab Mend"
+ },
+ {
+  "color": "#f39c12ff",
+  "description": "Gain 2 energy. Lose 1 health.",
+  "effects": [
+   {
+    "params": {
+     "additional_energy_amount": 2
+    },
+    "type": "GainEnergy"
+   },
+   {
+    "type": "ReduceHealth"
+   }
+  ],
+  "energy": 0,
+  "format": 1,
+  "icon": "sword",
+  "name": "Lab Charge"
+ },
+ {
+  "color": "#002a8cff",
+  "description": "Block 1.",
+  "effects": [
+   {
+    "params": {
+     "buff_scene": "Shield",
+     "card_lab_buff_name": "Block",
+     "card_lab_buff_target": "Player"
+    },
+    "type": "Buff"
+   }
+  ],
+  "energy": 1,
+  "format": 1,
+  "icon": "sword",
+  "name": "Lab Guard"
+ },
+ {
+  "color": "#002a8cff",
+  "description": "Sharp 2.",
+  "effects": [
+   {
+    "params": {
+     "buff_params": {
+      "sharp_count": 2.0
+     },
+     "buff_scene": "Sharp",
+     "card_lab_buff_name": "Sharp",
+     "card_lab_buff_stacks": 2,
+     "card_lab_buff_target": "Player",
+     "defer_add_until_after_card_play": true
+    },
+    "type": "Buff"
+   },
+   {
+    "params": {
+     "buff_params": {
+      "sharp_count": 2.0
+     },
+     "buff_scene": "Sharp",
+     "card_lab_buff_name": "Sharp",
+     "card_lab_buff_stacks": 2,
+     "card_lab_buff_target": "Player",
+     "defer_add_until_after_card_play": true
+    },
+    "type": "Buff"
+   }
+  ],
+  "energy": 1,
+  "format": 1,
+  "icon": "sword",
+  "name": "Lab Hone"
+ },
+ {
+  "color": "#002a8cff",
+  "description": "Poison 3.",
+  "effects": [
+   {
+    "params": {
+     "debuff_name": "Poison",
+     "debuff_scene": "Vulnerable",
+     "stacks": 3
+    },
+    "type": "Debuff"
+   },
+   {
+    "params": {
+     "debuff_name": "Poison",
+     "debuff_scene": "Vulnerable",
+     "stacks": 3
+    },
+    "type": "Debuff"
+   },
+   {
+    "params": {
+     "debuff_name": "Poison",
+     "debuff_scene": "Vulnerable",
+     "stacks": 3
+    },
+    "type": "Debuff"
+   }
+  ],
+  "energy": 1,
+  "format": 1,
+  "icon": "sword",
+  "name": "Lab Toxin"
+ },
+ {
+  "color": "#002a8cff",
+  "description": "Discard 1.",
+  "effects": [
+   {
+    "params": {
+     "max_discard_amount": 1
+    },
+    "type": "Discard"
+   }
+  ],
+  "energy": 0,
+  "format": 1,
+  "icon": "sword",
+  "name": "Lab Purge"
+ },
+ {
+  "color": "#002a8cff",
+  "description": "Create a Slash.",
+  "effects": [
+   {
+    "params": {
+     "card_to_create_scene": "Slash"
+    },
+    "type": "CreateCard"
+   }
+  ],
+  "energy": 1,
+  "format": 1,
+  "icon": "sword",
+  "name": "Lab Forge"
+ },
+ {
+  "color": "#002a8cff",
+  "description": "Just text.",
+  "effects": [],
+  "energy": 2,
+  "format": 1,
+  "icon": "sword",
+  "name": "Lab Note"
+ }
+]

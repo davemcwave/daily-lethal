@@ -2,6 +2,11 @@ extends Panel
 
 @onready var original_description_font_size = $DescriptionPanel/Title.get("theme_override_font_sizes/normal_font_size")
 
+func _ready() -> void:
+	# The text is often set before the boxes have their size: fit again once they do.
+	$TitlePanel/Title.resized.connect(_fit_text)
+	$DescriptionPanel/Title.resized.connect(_fit_text)
+
 
 func set_card(new_card: Card) -> void:
 	set_title(new_card.get_card_name())
@@ -15,6 +20,14 @@ func set_card(new_card: Card) -> void:
 		
 	set_icon_texture(new_card.get_icon_texture())
 	set_background_color(new_card.get_background_color())
+
+## The name and description shrink to fit their boxes (long custom cards).
+func _fit_text() -> void:
+	if not is_inside_tree():
+		return
+	TextFit.fit($TitlePanel/Title, 12, 7)
+	var description_size: int = original_description_font_size if original_description_font_size is int else 12
+	TextFit.fit($DescriptionPanel/Title, description_size, 7)
 	
 
 func clear_extra_descriptions() -> void:
@@ -23,12 +36,11 @@ func clear_extra_descriptions() -> void:
 		
 func set_title(new_title: String) -> void:
 	$TitlePanel/Title.set_text("[center]%s[/center]" % new_title)
+	_fit_text.call_deferred()
 	
 func set_description(new_description: String) -> void:
 	$DescriptionPanel/Title.set_text("[center]%s[/center]" % new_description)
-
-	if len($DescriptionPanel/Title.get_parsed_text()) >= 100:
-		$DescriptionPanel/Title.set("theme_override_font_sizes/normal_font_size", original_description_font_size - 2)
+	_fit_text.call_deferred()
 		
 func set_energy_cost(energy_cost: int) -> void:
 	$EnergyPanel/Energy.set_text("[center]%d[/center]" % energy_cost)

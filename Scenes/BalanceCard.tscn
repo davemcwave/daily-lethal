@@ -200,6 +200,7 @@ shape = SubResource("RectangleShape2D_5uxdr")
 
 [node name="EqualResourcesConditionCardEffect" parent="." instance=ExtResource("6_cruij")]
 damage_amount = 0
+increase_damage_effect = false
 effect_name = "Health = Energy Damage Effect"
 effect_description = "Deal Damage if Health = Energy"
 

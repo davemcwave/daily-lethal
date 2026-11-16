@@ -105,12 +105,12 @@ func step_5() -> void:
 func step_6() -> void:
 	set_blur_position(0.55, 0.5)
 	set_blur_scale(0.205,0.115)
-	await say("[b]The 🗲 symbol is energy. The 🗲 symbol on the card is the cost to play it. The 🗲 symbol in the middle of the screen is how much energy you have.[/b]", PanelPosition.Top)
+	await say("[b]The [img width=16 height=16 color=#fcbf56]res://Assets/Textures/bolt-white.png[/img] symbol is energy. The [img width=16 height=16 color=#fcbf56]res://Assets/Textures/bolt-white.png[/img] symbol on the card is the cost to play it. The [img width=16 height=16 color=#fcbf56]res://Assets/Textures/bolt-white.png[/img] symbol in the middle of the screen is how much energy you have.[/b]", PanelPosition.Top)
 	
 func step_7() -> void:
 	set_blur_position(0.55, 0.5)
 	set_blur_scale(0.205,0.115)
-	await say("[b]The ♥ symbol is your health. Death is good unless you die. So make sure this doesn't go to 0.[/b]", PanelPosition.Top)
+	await say("[b]The [img width=16 height=16 color=#c43335]res://Assets/Textures/heart-white.png[/img] symbol is your health. Death is good unless you die. So make sure this doesn't go to 0.[/b]", PanelPosition.Top)
 	
 func step_8() -> void:
 	blur.hide()
@@ -168,15 +168,12 @@ func _on_no_button_pressed():
 	hide_tutorial()
 	get_tree().change_scene_to_file("res://Scenes/StoryView.tscn")
 
+## Tutorial done: on to the story map (its first world opens with the first puzzle).
 func _on_play_button_pressed():
 	enemy.disconnect("died", _on_enemy_died)
 	background.set_show_tutorial(false)
 	hide_tutorial()
-	var next_puzzle_scene = scene.get_puzzle().get_next_puzzle_scene()
-	var background: Background = get_tree().get_root().get_node("/root/Background")
-	background.set_puzzle_scene(next_puzzle_scene)
-	background.set_from_story_view(true)
-	get_tree().change_scene_to_file("res://Scenes/Scene0Desktop.tscn")
+	get_tree().change_scene_to_file("res://Scenes/StoryView.tscn")
 
 
 func _on_restart_button_pressed():
