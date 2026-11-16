@@ -73,10 +73,19 @@ static func encode(cards, puzzle: Dictionary) -> String:
 ## Returns {"cards": [card, ...], "card": the first card,
 ## "puzzle": {..., "copies", "card_copies": [one per card], "other_cards": [scene paths]}}
 ## or {"error": "why it can't be read"}.
-## "Use share code LETHAL3-... at https://playlethal.fun/library": how a shared custom
-## puzzle is posted (the win screen's Share). Import code reads the code back out of it.
+const LIBRARY_URL := "https://playlethal.fun/library"
+
+## How a won custom puzzle is posted (the win screen's Share): a link that opens the Library
+## with the code in its Import box. In <> so Discord doesn't add a preview; Discord doesn't
+## format inside links, so the code's underscores survive. Import code also reads the code out
+## of the whole message (Windows players paste it there).
 static func share_message(code: String) -> String:
-	return "Use share code %s at https://playlethal.fun/library" % code
+	return "Play it 👉 <%s?import=%s>" % [LIBRARY_URL, code]
+
+## A bare code for chat: in backticks, so Discord shows it as code and doesn't turn its
+## underscores into italics (which would break it when copied). Import strips them.
+static func chat_code(code: String) -> String:
+	return "`%s`" % code
 
 ## The share code in a pasted message (words around it are left out), or the text as it is.
 static func find_code(text: String) -> String:

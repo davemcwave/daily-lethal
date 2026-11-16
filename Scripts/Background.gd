@@ -388,6 +388,9 @@ var card_lab_incoming: Array = []
 var card_lab_incoming_puzzle: Dictionary = {}
 ## A note for the Library to show once (e.g. after importing a share code).
 var library_notice: String = ""
+## A share code from the page's address (playlethal.fun/library?import=...): the Library opens
+## its Import box with it.
+var library_import_code: String = ""
 var _builder_back_layer: CanvasLayer = null
 
 ## True only in a browser whose only pointer is a touch screen (phones, tablets,
@@ -416,10 +419,11 @@ func _open_card_lab_from_url() -> void:
 		return
 	var flags := {}
 	for pair in str(search).trim_prefix("?").split("&", false):
-		flags[pair.split("=")[0]] = true
+		flags[pair.split("=")[0]] = pair.split("=", true, 1)[1].uri_decode() if "=" in pair else ""
 	if (flags.has("puzzle_lab") or flags.has("card_lab")) and card_lab_available():
 		get_tree().change_scene_to_file.call_deferred(CARD_BUILDER_SCENE)
-	elif flags.has("library"):
+	elif flags.has("library") or flags.has("import"):
+		library_import_code = str(flags.get("import", ""))
 		get_tree().change_scene_to_file.call_deferred(ARCHIVE_SCENE)
 
 ## The web build's way back to the site (it has no main menu): its home page.

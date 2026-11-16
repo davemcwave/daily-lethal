@@ -12,7 +12,10 @@
   <script>
     // The Library is part of the game: open the desktop web build (it's laid out for a
     // wide screen) and tell it to start in the Library (Background._open_card_lab_from_url).
-    location.replace("/desktop/?library=1");
+    // A shared link (/library?import=LETHAL3-...) passes its code on: the Library opens
+    // with it in the Import box.
+    var code = new URLSearchParams(location.search).get("import");
+    location.replace("/desktop/?library=1" + (code ? "&import=" + encodeURIComponent(code) : ""));
   </script>
   <style>
     body { background: #1f2c30; color: #fff; font-family: sans-serif; text-align: center; padding: 3rem 16px; line-height: 1.5; }

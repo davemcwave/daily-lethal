@@ -222,7 +222,7 @@ func _select(info: Dictionary) -> void:
 		var share := _button("Share code", false)
 		share.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		share.pressed.connect(func():
-			DisplayServer.clipboard_set(CustomLibrary.share_code([info["library_id"]], []))
+			DisplayServer.clipboard_set(ShareCode.chat_code(CustomLibrary.share_code([info["library_id"]], [])))
 			share.text = "Code copied")
 		row.add_child(share)
 		var delete := _button("Delete", false)

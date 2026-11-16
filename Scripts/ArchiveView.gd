@@ -75,6 +75,10 @@ func _ready() -> void:
 	_refresh_card_filter()
 	_apply_filters()
 	LibraryImport.show_notice(self)
+	if not background.library_import_code.is_empty():  # opened from a shared link (?import=)
+		var code: String = background.library_import_code
+		background.library_import_code = ""
+		LibraryImport.open(self, "res://Scenes/ArchiveView.tscn", code)
 	# Dailies released after this build: added when the website answers.
 	if await PuzzleArchive.fetch_newer(self, puzzles) > 0:
 		_refresh_card_filter()
@@ -392,7 +396,7 @@ func _share_selected() -> void:
 	var entry := _selected_entry()
 	if not entry.get("custom", false):
 		return
-	DisplayServer.clipboard_set(CustomLibrary.share_code([], [entry["library_id"]]))
+	DisplayServer.clipboard_set(ShareCode.chat_code(CustomLibrary.share_code([], [entry["library_id"]])))
 	share_button.text = "Code copied"
 	get_tree().create_timer(1.5).timeout.connect(func():
 		if is_instance_valid(share_button):

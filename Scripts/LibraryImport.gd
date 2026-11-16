@@ -14,7 +14,8 @@ const C_DANGER := Color("#dc2626")
 
 ## Opens the box over `parent` (a full-screen Library view). `scene` is the view's scene,
 ## reopened after an import.
-static func open(parent: Control, scene: String) -> void:
+## prefill: a code to start with (from a shared link), else the clipboard's if it holds one.
+static func open(parent: Control, scene: String, prefill: String = "") -> void:
 	var layer := Control.new()
 	layer.set_anchors_preset(Control.PRESET_FULL_RECT)
 	layer.z_index = 60
@@ -54,6 +55,8 @@ static func open(parent: Control, scene: String) -> void:
 	for prefix in [ShareCode.PREFIX_V3, ShareCode.PREFIX, ShareCode.PREFIX_V1]:
 		if found.begins_with(prefix):
 			edit.text = found
+	if not prefill.is_empty():
+		edit.text = ShareCode.find_code(prefill)
 	box.add_child(edit)
 	var status := _label("", FONT_MEDIUM, 12, Color("#f87171"))
 	status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
