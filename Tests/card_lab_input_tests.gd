@@ -223,8 +223,14 @@ func _change(editor: Control, info: Dictionary, current):
 		EffectRegistry.KIND_RESOURCES:
 			var shown: Array = _shown_value(editor, info)
 			var picker: OptionButton = _first(editor, "OptionButton")
-			picker.select(0)
-			shown.append(picker.get_item_text(0))  # read first: adding rebuilds the panel
+			var pick := 0
+			for i in picker.item_count:  # skip the "Your cards" / "Built-in cards" headings and your cards
+				var meta = picker.get_item_metadata(i)
+				if not picker.is_item_separator(i) and (not meta is Dictionary or meta.has("builtin")):
+					pick = i
+					break
+			picker.select(pick)
+			shown.append(picker.get_item_text(pick))  # read first: adding rebuilds the panel
 			for child in _all(editor):
 				if child is Button and child.text == "Add":
 					child.pressed.emit()
@@ -313,9 +319,9 @@ func _test_nested_effects() -> void:
 	else:
 		_check(false, "Choices: %d remove buttons, want 3" % removes.size())
 
-## Several custom cards: "+ Card" adds one, the chips switch between them, each
-## keeps its own effects, the Test hand adds cards on the end and takes them
-## out, and the share code keeps the hand in order.
+## Several custom cards: "+ New card" adds one, the card tabs switch between them, each
+## keeps its own effects, the hand adds cards on the end and takes them out (a card of
+## yours can leave the hand and stay in the Lab), and the share code keeps the hand in order.
 func _test_several_cards() -> void:
 	lab.cards = [{"format": 1, "name": "First", "energy": 1, "description": "x", "effects": [{"type": "Damage"}]}]
 	lab.current_card = 0
@@ -325,13 +331,13 @@ func _test_several_cards() -> void:
 	lab._refresh()
 	await process_frame
 	_check(_slot_names() == ["First", "First", "Slash"], "hand slots: %s, want First, First, Slash" % [_slot_names()])
-	var add := _all(lab.card_tabs).filter(func(n): return n is Button and n.text == "+ Card")
-	_check(add.size() == 1, "several cards: no '+ Card' button")
+	var add := _all(lab.card_tabs).filter(func(n): return n is Button and n.text.begins_with("+") and not n.is_queued_for_deletion())
+	_check(add.size() == 1, "several cards: no '+ New card' button")
 	if add.is_empty():
 		return
 	add[0].pressed.emit()
 	await process_frame
-	_check(lab.cards.size() == 2 and lab.current_card == 1, "several cards: '+ Card' didn't add and open a second card")
+	_check(lab.cards.size() == 2 and lab.current_card == 1, "several cards: '+ New card' didn't add and open a second card")
 	lab.definition["name"] = "Second"
 	lab.definition["effects"] = [{"type": "Heal"}]
 	lab._refresh()
@@ -342,21 +348,24 @@ func _test_several_cards() -> void:
 	_check(plus.size() == 1, "hand: no '+' slot")
 	if plus.is_empty():
 		return
-	plus[0].pressed.emit()
-	await process_frame
-	var ids := {}
-	for i in lab.hand_picker.item_count:
-		ids[lab.hand_picker.get_item_text(i)] = lab.hand_picker.get_item_id(i)
-	lab.hand_picker.hide()
-	_check(ids.has("First") and ids.has("Echo"), "hand '+' doesn't offer First and Echo")
-	if not (ids.has("First") and ids.has("Echo")):
+	var offered := []
+	for wanted in ["Echo", "First"]:  # the Add card list: pick Echo, then open it again and pick First
+		plus = _all(lab.hand_slots).filter(func(n): return n is Button and n.text.begins_with("+") and not n.is_queued_for_deletion())
+		if plus.is_empty():
+			break
+		plus[0].pressed.emit()
+		await process_frame
+		var items := _all(lab._picker_layer).filter(func(n): return n is Button and n.text == wanted) if lab._picker_layer != null else []
+		if not items.is_empty():
+			offered.append(wanted)
+			items[0].pressed.emit()
+		await process_frame
+	_check(offered == ["Echo", "First"], "hand Add card list doesn't offer First and Echo: %s" % [offered])
+	if offered != ["Echo", "First"]:
 		return
-	lab.hand_picker.id_pressed.emit(ids["Echo"])
-	lab.hand_picker.id_pressed.emit(ids["First"])
-	await process_frame
 	_check(_slot_names() == ["First", "First", "Slash", "Second", "Echo", "First"],
 		"hand after adding Echo then First: %s" % [_slot_names()])
-	# "×" takes that card out; your cards keep at least one.
+	# "×" takes that card out, your cards' last copy too (the card stays in the Lab).
 	var slash_slot = _all(lab.hand_slots).filter(func(n): return n.has_meta("card_name") and n.get_meta("card_name") == "Slash" and not n.is_queued_for_deletion())
 	var removes = slash_slot[0].get_children().filter(func(n): return n is Button and n.text == "×") if not slash_slot.is_empty() else []
 	_check(removes.size() == 1, "hand: no × on the Slash slot")
@@ -364,23 +373,30 @@ func _test_several_cards() -> void:
 		removes[0].pressed.emit()
 		await process_frame
 	_check(_slot_names() == ["First", "First", "Second", "Echo", "First"], "hand after removing Slash: %s" % [_slot_names()])
-	lab._remove_from_hand(2)  # Second's only copy stays
+	lab._remove_from_hand(2)  # Second's only copy goes; Second stays in the Lab
 	await process_frame
-	_check(_slot_names() == ["First", "First", "Second", "Echo", "First"], "hand: removed the last copy of Second: %s" % [_slot_names()])
-	var first_chip := _all(lab.card_tabs).filter(func(n): return n is Button and n.text == "First")
-	_check(first_chip.size() == 1, "several cards: no chip for the first card")
-	if first_chip.is_empty():
+	_check(_slot_names() == ["First", "First", "Echo", "First"], "hand after removing Second's last copy: %s" % [_slot_names()])
+	_check(lab.cards.size() == 2, "removing Second from the hand removed the card itself")
+	var first_tab := _all(lab.card_tabs).filter(func(n): return n is PanelContainer and _all(n).any(func(c): return c is Label and c.text == "First"))
+	_check(first_tab.size() == 1, "several cards: no tab for the first card")
+	if first_tab.is_empty():
 		return
-	first_chip[0].pressed.emit()
+	var click := InputEventMouseButton.new()
+	click.button_index = MOUSE_BUTTON_LEFT
+	click.pressed = true
+	first_tab[0].gui_input.emit(click)
 	await process_frame
 	_check(lab.current_card == 0 and lab.definition["name"] == "First",
 		"several cards: switching back shows %s" % [lab.definition.get("name")])
 	_check(lab.cards[1]["name"] == "Second" and lab.cards[1]["effects"][0]["type"] == "Heal", "several cards: the second card lost its edits")
-	var code := ShareCode.decode(ShareCode.encode(lab.cards, lab._try_settings()))
-	_check(not code.has("error") and code["cards"].size() == 2 and code["puzzle"]["card_copies"] == [3, 1],
+	# The share code the Puzzle Lab and Library make (LETHAL3), read back the way Edit in
+	# Puzzle Lab opens it.
+	var shared: Dictionary = lab._lab_as_library()
+	var code := ShareCode.decode(ShareCode.encode_library(shared["cards"], shared["puzzles"]))
+	_check(not code.has("error") and code["cards"].size() == 2 and code["puzzle"]["card_copies"] == [3, 0],
 		"several cards: share code holds %s" % JSON.stringify(code))
 	var shared_hand := ShareCode.hand_from(code.get("puzzle", {}), 2)
-	_check(shared_hand == [0, 0, 1, "res://Scenes/EchoCard.tscn", 0], "share code hand order: %s" % [shared_hand])
+	_check(shared_hand == [0, 0, "res://Scenes/EchoCard.tscn", 0], "share code hand order: %s" % [shared_hand])
 
 ## Dragging a card in the Test hand moves it; the icon picker sets the card's
 ## icon; a long name and description shrink to fit the card.
@@ -461,11 +477,18 @@ func _test_import_adds() -> void:
 		"card menu: after deleting Mine, cards are %s, open is %s" % [lab.cards.map(func(c): return c["name"]), lab.definition.get("name")])
 	_check(_slot_names() == ["Slash", "Theirs", "Theirs"], "card menu: hand after delete is %s" % [_slot_names()])
 	lab._open_card_menu(0)
-	_check(lab.card_menu.is_item_disabled(0), "card menu: can delete your only card")
+	_check(not lab.card_menu.is_item_disabled(0), "card menu: can't delete your only card")
 	lab.card_menu.hide()
+	lab.card_menu.id_pressed.emit(0)
+	await process_frame
+	_check(lab.cards.size() == 1 and lab.definition.get("name") != "Theirs",
+		"card menu: deleting your only card left %s, want one fresh card" % [lab.cards.map(func(c): return c.get("name"))])
 
-## The names on the Test hand's slots, in order ("+" left out).
+## The names on the Test hand's slots, in order ("+" left out), as the Custom Puzzle tab
+## shows them (card edits on the Custom Cards tab rebuild the hand when it opens).
 func _slot_names() -> Array:
+	if lab._hand_dirty:
+		lab._rebuild_hand()
 	var names: Array = []
 	for slot in lab.hand_slots.get_children():
 		if slot.is_queued_for_deletion() or not slot.has_meta("card_name"):
