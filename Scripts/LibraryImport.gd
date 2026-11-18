@@ -155,6 +155,16 @@ static func show_notice(parent: Control) -> void:
 		fade.tween_callback(note.queue_free)
 
 ## The Import code button for a Library view's top bar.
+## The Puzzle Lab button for a Library view's top bar, or null where the Lab isn't offered
+## (phones and tablets on the web).
+static func lab_button(parent: Control) -> Button:
+	var background = parent.get_node("/root/Background")
+	if not background.card_lab_available():
+		return null
+	var lab := _button("Puzzle Lab", false)
+	lab.pressed.connect(func(): parent.get_tree().change_scene_to_file(background.CARD_BUILDER_SCENE))
+	return lab
+
 static func button(parent: Control, scene: String) -> Button:
 	var import_button := _button("Import code", false)
 	import_button.pressed.connect(func(): open(parent, scene))

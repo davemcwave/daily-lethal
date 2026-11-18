@@ -325,4 +325,5 @@ static func make_face(id: String) -> Control:
 			child.free()
 	built.set_script(null)
 	built.size = GENERIC_CARD_SIZE
+	CardFaces.fit_text_when_shown(built)
 	return built

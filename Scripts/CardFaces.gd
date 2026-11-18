@@ -47,7 +47,19 @@ static func strip(card: Card) -> Control:
 			child.free()
 	card.set_script(null)
 	card.size = Vector2(120, 160)
+	fit_text_when_shown(card)
 	return card
+
+## A face has no card script to shrink long text, so its name and description are fitted to
+## their boxes once it's on screen (a custom card's long name would spill otherwise).
+static func fit_text_when_shown(face: Control) -> void:
+	face.tree_entered.connect(func():
+		var fit := func():
+			for path in ["TitlePanel/Title", "DescriptionPanel/Title"]:
+				var label = face.get_node_or_null(path)
+				if label is RichTextLabel:
+					TextFit.fit(label, 12, 7)
+		fit.call_deferred(), CONNECT_ONE_SHOT)
 
 static func _scan() -> void:
 	if not _files.is_empty():

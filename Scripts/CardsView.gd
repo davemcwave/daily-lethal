@@ -280,7 +280,7 @@ func _build_ui() -> void:
 	top.add_child(menu)
 	top.add_child(_library_tabs("Cards"))
 	# Both sides of the tabs the same width, so the tabs stay centered.
-	var side_width := 230.0
+	var side_width := 330.0  # room for Puzzle Lab and Import code
 	var pad := Control.new()
 	pad.custom_minimum_size.x = side_width - menu.get_combined_minimum_size().x
 	top.add_child(pad)
@@ -292,6 +292,9 @@ func _build_ui() -> void:
 	count_label = _label("", FONT_MEDIUM, 12, COLOR_MUTED)
 	count_label.autowrap_mode = TextServer.AUTOWRAP_OFF
 	right.add_child(count_label)
+	var lab := LibraryImport.lab_button(self)
+	if lab != null:
+		right.add_child(lab)
 	right.add_child(LibraryImport.button(self, "res://Scenes/CardsView.tscn"))
 	top.add_child(right)
 
