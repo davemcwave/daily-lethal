@@ -10,6 +10,7 @@ const OPTIONS_PANEL_SCENE = preload("res://Scenes/OptionsPanel.tscn")
 var options_panel: Control = null
 
 func _ready() -> void:
+	_liven_grim()
 	_add_puzzles_button()
 	if not $"/root/Background".card_lab_available():
 		_hide_card_lab_button()
@@ -38,6 +39,10 @@ func _add_puzzles_button() -> void:
 	for hidden in [$TutorialButton, $DiscordButton, $OptionsButton]:
 		hidden.hide()
 		buttons.erase(hidden)
+	# Quit, last (the desktop game; the web builds have no main menu).
+	var quit := _menu_button_like(play, "QuitButton", "Quit", 0)
+	quit.pressed.connect(func(): get_tree().quit())
+	buttons.append(quit)
 	# Play is the primary item: a larger label.
 	var play_text: RichTextLabel = play.get_node("Text")
 	play_text.add_theme_font_size_override("normal_font_size", 42)
@@ -159,3 +164,65 @@ func _on_options_button_pressed():
 
 func _on_options_panel_closed() -> void:
 	options_panel = null
+
+# ---------------------------------------------------------------- Grim
+
+## Where Grim's head and his green eye are on the 960 x 540 menu (the art is one image).
+const GRIM_HEAD := Vector2(735, 300)
+const GRIM_EYE := Vector2(695, 295)  # an oval about 11 x 19 px (measured from the art)
+
+## The background art (SplashArt): a soft green glow behind his head so the hood stands out
+## from the dark background, a slow breathing bob and sway, and a pulse of light on his eye.
+func _liven_grim() -> void:
+	var art: TextureRect = get_node_or_null("SplashArt")
+	if art == null:
+		return
+	# The glow, under the art.
+	var glow := TextureRect.new()
+	glow.texture = _radial_texture(Color(0.25, 0.75, 0.35, 0.30))
+	glow.size = Vector2(640, 640)
+	glow.position = GRIM_HEAD - glow.size / 2.0
+	glow.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(glow)
+	move_child(glow, art.get_index())
+	var glow_pulse := glow.create_tween().set_loops()
+	glow_pulse.tween_property(glow, "modulate:a", 0.65, 3.0).set_trans(Tween.TRANS_SINE)
+	glow_pulse.tween_property(glow, "modulate:a", 1.0, 3.0).set_trans(Tween.TRANS_SINE)
+	# Breathing: a small rise and fall, and a slower slight sway around the bottom of the hood.
+	art.pivot_offset = Vector2(GRIM_HEAD.x - art.position.x, art.size.y)
+	var rest_y := art.position.y
+	var bob := art.create_tween().set_loops()
+	bob.tween_property(art, "position:y", rest_y - 4.0, 2.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	bob.tween_property(art, "position:y", rest_y, 2.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	var sway := art.create_tween().set_loops()
+	sway.tween_property(art, "rotation_degrees", 0.6, 3.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	sway.tween_property(art, "rotation_degrees", -0.6, 3.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	# The eye: a little light on it (part of the art, so it moves with him).
+	var eye := TextureRect.new()
+	eye.texture = _radial_texture(Color(0.45, 1.0, 0.45, 0.9))
+	eye.size = Vector2(18, 28)  # a little larger than the eye, the same oval shape
+	eye.position = GRIM_EYE - art.position - eye.size / 2.0
+	eye.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var add := CanvasItemMaterial.new()
+	add.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
+	eye.material = add
+	eye.use_parent_material = false
+	art.add_child(eye)
+	var eye_pulse := eye.create_tween().set_loops()
+	eye_pulse.tween_property(eye, "modulate:a", 0.25, 1.4).set_trans(Tween.TRANS_SINE)
+	eye_pulse.tween_property(eye, "modulate:a", 0.9, 1.4).set_trans(Tween.TRANS_SINE)
+
+## A round soft light: the color in the middle, fading to nothing at the edge.
+func _radial_texture(color: Color) -> GradientTexture2D:
+	var gradient := Gradient.new()
+	gradient.set_color(0, color)
+	gradient.set_color(1, Color(color, 0.0))
+	gradient.add_point(0.45, Color(color, color.a * 0.45))
+	var texture := GradientTexture2D.new()
+	texture.gradient = gradient
+	texture.fill = GradientTexture2D.FILL_RADIAL
+	texture.fill_from = Vector2(0.5, 0.5)
+	texture.fill_to = Vector2(1.0, 0.5)
+	texture.width = 256
+	texture.height = 256
+	return texture

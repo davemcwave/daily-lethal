@@ -1,0 +1,120 @@
+world_number,world,puzzle_in_world,puzzles_in_world,boss,enemy,puzzle_kind,current_art,status
+1,Dead Again,1,3,,Evil Robot,released daily (scene),Assets/Textures/robot.png,redraw
+1,Dead Again,2,3,,Sea Monster,released daily (scene),Assets/Textures/sea-monster.png,redraw
+1,Dead Again,3,3,yes,Werewolf,released daily (scene),Assets/Textures/ww-removebg-preview.png,redraw
+2,Harvesting Souls,1,5,,Dust Droid,released daily (scene),Assets/Textures/dust-droid.png,redraw
+2,Harvesting Souls,2,5,,Puffball,made for story,placeholder,new art
+2,Harvesting Souls,3,5,,Skeleton,released daily (scene),Assets/Textures/skeleton.png,redraw
+2,Harvesting Souls,4,5,,Soul Collector,made for story,placeholder,new art
+2,Harvesting Souls,5,5,yes,Kraken,released daily (scene),Assets/Textures/kraken.png,redraw
+3,Reanimation,1,6,,Snowman,released daily (scene),Assets/Textures/snowman.png,drawn by Val
+3,Reanimation,2,6,,Resurrectionist,made for story,placeholder,new art
+3,Reanimation,3,6,,Necromancer,made for story,placeholder,new art
+3,Reanimation,4,6,,Sword Juggler,released daily (URL),placeholder,new art
+3,Reanimation,5,6,,Lightning Elemental,released daily (scene),Assets/Textures/lightning-elemental.png,drawn by Val
+3,Reanimation,6,6,yes,Cyclops,released daily (scene),Assets/Textures/cyclops.png,redraw
+4,Ferryman's Toll,1,5,,Haggler,made for story,placeholder,new art
+4,Ferryman's Toll,2,5,,Freeloader,made for story,placeholder,new art
+4,Ferryman's Toll,3,5,,Cutpurse,made for story,placeholder,new art
+4,Ferryman's Toll,4,5,,Pawnbroker,made for story,placeholder,new art
+4,Ferryman's Toll,5,5,yes,Goblin,released daily (scene),Assets/Textures/goblin.png,drawn by Val
+5,Blood Price,1,6,,Bloodletter,made for story,placeholder,new art
+5,Blood Price,2,6,,Mosquito,made for story,placeholder,new art
+5,Blood Price,3,6,,Tick,made for story,placeholder,new art
+5,Blood Price,4,6,,Mummy,released daily (scene),Assets/Textures/mummy.png,redraw
+5,Blood Price,5,6,,Beholder,released daily (scene),Assets/Textures/beholder.png,redraw
+5,Blood Price,6,6,yes,Earth Elemental,released daily (scene),Assets/Textures/earth-elemental.png,redraw
+6,Six Feet Under,1,6,,Mole,made for story,placeholder,new art
+6,Six Feet Under,2,6,,Badger,made for story,placeholder,new art
+6,Six Feet Under,3,6,,Giftman,released daily (scene),Assets/Textures/giftman.png,redraw
+6,Six Feet Under,4,6,,Gravedigger,released daily (scene),Assets/Textures/gravedigger.png,redraw
+6,Six Feet Under,5,6,,Earthworm,released daily (scene),Assets/Textures/earthworm.png,redraw
+6,Six Feet Under,6,6,yes,Ooze,released daily (scene),Assets/Textures/OOZE-TRANS.png,redraw
+7,Dust to Dust,1,6,,Specter,made for story,placeholder,new art
+7,Dust to Dust,2,6,,Mourner,made for story,placeholder,new art
+7,Dust to Dust,3,6,,Banshee,made for story,placeholder,new art
+7,Dust to Dust,4,6,,Viper,released daily (scene),Assets/Textures/viper.png,drawn by Val
+7,Dust to Dust,5,6,,Kobold,released daily (scene),Assets/Textures/kobold.png,redraw
+7,Dust to Dust,6,6,yes,Grave Robber,released daily (scene),Assets/Textures/grave-robber.png,redraw
+8,Death's Edge,1,6,,Headsman,made for story,placeholder,new art
+8,Death's Edge,2,6,,Samurai,released daily (URL),placeholder,new art
+8,Death's Edge,3,6,,Headhunter,made for story,placeholder,new art
+8,Death's Edge,4,6,,Revenant,made for story,placeholder,new art
+8,Death's Edge,5,6,,Skeleton Archer,made for story,placeholder,new art
+8,Death's Edge,6,6,yes,Divine Fletcher,released daily (URL),placeholder,new art
+9,Coup de Grâce,1,6,,Executioner,made for story,placeholder,new art
+9,Coup de Grâce,2,6,,Bloodhound,made for story,placeholder,new art
+9,Coup de Grâce,3,6,,Yeti,released daily (scene),Assets/Textures/yeti.png,redraw
+9,Coup de Grâce,4,6,,Duelist,made for story,placeholder,new art
+9,Coup de Grâce,5,6,,Displacer Beast,released daily (scene),Assets/Textures/displacer.png,redraw
+9,Coup de Grâce,6,6,yes,Assassin,released daily (scene),Assets/Textures/assassin.png,redraw
+10,Second Wind,1,7,,Heartless,made for story,placeholder,new art
+10,Second Wind,2,7,,Bloodsucker,made for story,placeholder,new art
+10,Second Wind,3,7,,Apothecary,made for story,placeholder,new art
+10,Second Wind,4,7,,Living Shadow,released daily (scene),Assets/Textures/living-shadow.png,redraw
+10,Second Wind,5,7,,Undertaker,made for story,placeholder,new art
+10,Second Wind,6,7,,Funambulist,released daily (scene),Assets/Textures/funambulist.png,redraw
+10,Second Wind,7,7,yes,Hydra,released daily (scene),Assets/Textures/hydra.png,redraw
+11,Plague,1,6,,Plague Rat,made for story,placeholder,new art
+11,Plague,2,6,,Flagellant,made for story,placeholder,new art
+11,Plague,3,6,,Sewer Rat,made for story,placeholder,new art
+11,Plague,4,6,,Physician,made for story,placeholder,new art
+11,Plague,5,6,,Termites,released daily (scene),Assets/Textures/termites.png,drawn by Val
+11,Plague,6,6,yes,Wolverine,released daily (scene),Leetha logo (stand-in),new art
+12,Cremation,1,5,,Pigman,released daily (URL),placeholder,new art
+12,Cremation,2,5,,Salamander,released daily (URL),placeholder,new art
+12,Cremation,3,5,,Arsonist,made for story,placeholder,new art
+12,Cremation,4,5,,Lover,released daily (URL),placeholder,new art
+12,Cremation,5,5,yes,Flesh Golem,released daily (URL),placeholder,new art
+13,Funeral Pyre,1,6,,Candle Wight,made for story,placeholder,new art
+13,Funeral Pyre,2,6,,Pyre Keeper,made for story,placeholder,new art
+13,Funeral Pyre,3,6,,Flaming Boomerang,released daily (URL),placeholder,new art
+13,Funeral Pyre,4,6,,Scarecrow,released daily (scene),Assets/Textures/scarecrow.png,redraw
+13,Funeral Pyre,5,6,,Firebug,released daily (scene),Assets/Textures/firebug.svg,redraw
+13,Funeral Pyre,6,6,yes,Artificer,released daily (scene),Assets/Textures/artificer.png,redraw
+14,Death Knell,1,6,,Bell Ringer,made for story,placeholder,new art
+14,Death Knell,2,6,,Mantis Shrimp,released daily (scene),Assets/Textures/mantis-shrimp.png,redraw
+14,Death Knell,3,6,,Priest,made for story,placeholder,new art
+14,Death Knell,4,6,,Dr. Frankenstein,released daily (scene),Assets/Textures/drfrankenstein.png,redraw
+14,Death Knell,5,6,,Charger,released daily (scene),Assets/Textures/charger.png,drawn by Val
+14,Death Knell,6,6,yes,Carnivorous Plant,released daily (scene),Leetha logo (stand-in),new art
+15,Reaper's Scythe,1,7,,Vermillion Slime,released daily (URL),placeholder,new art
+15,Reaper's Scythe,2,7,,Fire Mage,released daily (URL),placeholder,new art
+15,Reaper's Scythe,3,7,,Fungi,released daily (scene),Assets/Textures/fungi.png,redraw
+15,Reaper's Scythe,4,7,,Stew,released daily (URL),placeholder,new art
+15,Reaper's Scythe,5,7,,Headbanger,released daily (URL),placeholder,new art
+15,Reaper's Scythe,6,7,,Black Knight,released daily (scene),Assets/Textures/black-knight.png,redraw
+15,Reaper's Scythe,7,7,yes,Axebeak,released daily (scene),Assets/Textures/axebeak.png,redraw
+16,Soul Trade,1,5,,Debt Collector,made for story,placeholder,new art
+16,Soul Trade,2,5,,Bandit,released daily (scene),Assets/Textures/bandit.png,redraw
+16,Soul Trade,3,5,,Soul Broker,made for story,placeholder,new art
+16,Soul Trade,4,5,,Flumph,released daily (scene),Assets/Textures/flumph.png,redraw
+16,Soul Trade,5,5,yes,Lich,released daily (scene),Assets/Textures/lich.png,redraw
+17,Last Rites,1,6,,Decrepit Mouse,released daily (scene),Assets/Textures/decrepit-mouse.png,redraw
+17,Last Rites,2,6,,Loiterer,released daily (URL),placeholder,new art
+17,Last Rites,3,6,,Origami,released daily (scene),Assets/Textures/origami.png,redraw
+17,Last Rites,4,6,,Gremlin,released daily (URL),placeholder,new art
+17,Last Rites,5,6,,Pallbearer,made for story,placeholder,new art
+17,Last Rites,6,6,yes,Saboteur,released daily (URL),placeholder,new art
+18,Balance of Power,1,6,,Arbiter,made for story,placeholder,new art
+18,Balance of Power,2,6,,Lightning Rod,made for story,placeholder,new art
+18,Balance of Power,3,6,,Scorpion,released daily (scene),Assets/Textures/scorpion.png,redraw
+18,Balance of Power,4,6,,Equilibrist,made for story,placeholder,new art
+18,Balance of Power,5,6,,Biologist,released daily (URL),placeholder,new art
+18,Balance of Power,6,6,yes,Silk Road Trader,released daily (URL),placeholder,new art
+19,Unmarked Grave,1,5,,Spiritualist,made for story,placeholder,new art
+19,Unmarked Grave,2,5,,Spirit Medium,made for story,placeholder,new art
+19,Unmarked Grave,3,5,,Body Snatcher,made for story,placeholder,new art
+19,Unmarked Grave,4,5,,Guerilla Warrior,released daily (URL),placeholder,new art
+19,Unmarked Grave,5,5,yes,Plasmavore,released daily (URL),placeholder,new art
+20,Bone Shards,1,5,,Bone Splinter,made for story,placeholder,new art
+20,Bone Shards,2,5,,Origami Tiger,released daily (URL),placeholder,new art
+20,Bone Shards,3,5,,Bone Grinder,made for story,placeholder,new art
+20,Bone Shards,4,5,,Giant Toad,released daily (URL),placeholder,new art
+20,Bone Shards,5,5,yes,Shield man,released daily (URL),placeholder,new art
+21,The Final Audit,1,6,,Flame Giant,released daily (scene),Assets/Textures/flame-giant.png,redraw
+21,The Final Audit,2,6,,Specimen,released daily (URL),placeholder,new art
+21,The Final Audit,3,6,,Mana Imp,released daily (scene),Assets/Textures/mana-imp.png,redraw
+21,The Final Audit,4,6,,Terminator,released daily (URL),placeholder,new art
+21,The Final Audit,5,6,,Adamantine Golem,released daily (URL),placeholder,new art
+21,The Final Audit,6,6,yes,Paladin,released daily (scene),Assets/Textures/paladin.png,redraw

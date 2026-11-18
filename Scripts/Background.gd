@@ -344,6 +344,33 @@ func set_show_damage_math(on: bool) -> void:
 	settings.set_value("display", "show_damage_math", on)
 	settings.save(SETTINGS_PATH)
 
+## Fullscreen (the Windows build; on by default). Options > Fullscreen, F11 or Alt+Enter.
+var fullscreen: bool = true
+
+## Only the exported Windows build switches: dev runs and tests keep their window, and the
+## web builds fill the browser page themselves.
+func can_go_fullscreen() -> bool:
+	return OS.has_feature("pc_build") and DisplayServer.get_name() != "headless"
+
+func _apply_window_mode() -> void:
+	if can_go_fullscreen():
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if fullscreen else DisplayServer.WINDOW_MODE_WINDOWED)
+
+func set_fullscreen(on: bool) -> void:
+	fullscreen = on
+	var settings := ConfigFile.new()
+	settings.load(SETTINGS_PATH)  # keep any other settings
+	settings.set_value("display", "fullscreen", on)
+	settings.save(SETTINGS_PATH)
+	_apply_window_mode()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not can_go_fullscreen() or not (event is InputEventKey) or not event.pressed or event.echo:
+		return
+	if event.keycode == KEY_F11 or (event.keycode == KEY_ENTER and event.alt_pressed):
+		set_fullscreen(not fullscreen)
+		get_viewport().set_input_as_handled()
+
 ## Whether this player has been shown the tutorial (Play shows it first if not).
 var tutorial_seen: bool = false
 
@@ -358,12 +385,14 @@ func _load_settings() -> void:
 	var settings := ConfigFile.new()
 	if settings.load(SETTINGS_PATH) == OK:
 		show_damage_math = settings.get_value("display", "show_damage_math", true)
+		fullscreen = settings.get_value("display", "fullscreen", true)
 		tutorial_seen = settings.get_value("progress", "tutorial_seen", false)
 	if "--show-damage-math" in OS.get_cmdline_user_args():
 		show_damage_math = true  # dev: on for this run only, not saved
 
 func _ready() -> void:
 	_load_settings()
+	_apply_window_mode()
 	load_story_progress()
 	load_archive_progress()
 	_apply_puzzle_cmdline_arg()

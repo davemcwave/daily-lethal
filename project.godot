@@ -11,6 +11,10 @@ config_version=5
 [application]
 
 config/name="Play Lethal"
+config/name.pc_build="Lethal: Last Turn"
+config/version="1.0.0"
+config/use_custom_user_dir.pc_build=true
+config/custom_user_dir_name.pc_build="Lethal Last Turn"
 run/main_scene="uid://bptsg5npxvovs"
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/show_image=false
@@ -35,6 +39,8 @@ window/size/viewport_height=540
 window/stretch/mode="canvas_items"
 window/size/viewport_width.web_build=360
 window/size/viewport_height.web_build=640
+window/size/window_width_override.pc_build=1600
+window/size/window_height_override.pc_build=900
 
 [editor]
 
